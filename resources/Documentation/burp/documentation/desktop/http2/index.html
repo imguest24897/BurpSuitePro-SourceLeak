@@ -1,0 +1,248 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/http2/index.html">HTTP/2</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Working with HTTP/2 in Burp Suite</h1>
+<p>
+    Many servers now support HTTP/2. This exposes them to potential vulnerabilities that are impossible to test for using tools that only speak HTTP/1. Burp Suite provides unrivaled support for HTTP/2-based testing, allowing you to work with HTTP/2 requests in ways that no other tools can. You can either:
+</p>
+<ul>
+    <li>
+        <p>
+            <strong>Work with an HTTP/1-style representation of the request in the message editor</strong>
+        </p>
+        <p>
+            Burp <a href="http2-normalization-in-the-message-editor.html">normalizes</a> any changes you make and sends an equivalent HTTP/2 request to the server. This is perfect for general testing in cases where the protocol you're using isn't important.
+        </p>
+    </li>
+    <li>
+        <p>
+            <strong>Work with an HTTP/2 view in the Inspector</strong>
+        </p>
+        <p>
+            This shows a more accurate representation of the headers and pseudo-headers that will be sent to the server. As this view doesn't rely on any HTTP/1 syntax, it also enables you to construct attacks using a number of <a href="/burp/documentation/desktop/http2/performing-http2-exclusive-attacks.html">HTTP/2-exclusive vectors</a>.
+        </p>
+    </li>
+</ul>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/vnwxsbmadCo?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    Burp's unique HTTP/2 features give you the opportunity to explore a whole new attack surface that has barely been audited due to the complete lack of any suitable tooling until now. For some real-world examples of what's possible, check out how one of our researchers was able to use these features to identify and exploit a widespread new vector for request smuggling.
+</p>
+<div class="highlightedarea">
+    <h4>PortSwigger Research</h4>
+    <div>
+        <a href="https://portswigger.net/research/http2">HTTP/2: The Sequel Is Always Worse</a>
+    </div>
+</div>
+<h2 id="background-concepts">Background concepts</h2>
+<p>
+    Under the hood, HTTP/2 is very different from HTTP/1. To help you get the most out of these features, we've provided a <a href="http2-basics-for-burp-users.html">brief overview</a> of the background concepts that are relevant.
+</p>
+<h2 id="default-protocol">Default protocol</h2>
+<p>
+    By default, Burp speaks HTTP/2 to all servers that advertise support for it via ALPN during the TLS handshake. This ensures that, even if you're not conducting any protocol-specific testing, you can still take advantage of the performance improvements provided by HTTP/2 where available.
+</p>
+<p>
+    You can also tailor this behavior to suit your current needs by <a href="#changing-the-default-protocol">changing the default protocol</a> for the project. This is useful if you're performing testing where it's necessary to always use HTTP/1. You can still send individual HTTP/2 requests by <a href="#changing-the-protocol-for-a-request">switching the protocol in the Inspector</a> if necessary.
+</p>
+<h2 id="keeping-track-of-which-protocol-you-re-using">Keeping track of which protocol you're using</h2>
+<p>
+    When testing for protocol-level vulnerabilities, it's important that you're aware of which protocol is being used for each request. There are a number of places where this information is displayed:
+</p>
+<ul>
+    <li>
+        <p>
+            In the message editor, the request line and status line contain the protocol version. This is standard for HTTP/1 messages, but also applies to the editor's representation of HTTP/2 messages.
+        </p>
+    </li>
+    <li>
+        <p>
+            In Burp Repeater, the current protocol is displayed in the upper-right corner of the screen, next to the target host.
+        </p>
+    </li>
+    <li>
+        <p>
+            In the Inspector, the <strong>Request Attributes</strong> section displays the protocol version. In non-editable contexts, such as in the proxy history, the highlighted protocol is purely informational. For requests that you've intercepted in Burp Proxy or sent to Burp Repeater, you can <a href="#changing-the-protocol-for-a-request">toggle which protocol you want to use</a> to send the request.
+        </p>
+    </li>
+</ul>
+<h2 id="changing-the-protocol-for-a-request">Changing the protocol for a request</h2>
+<p>
+    Regardless of your <a href="#changing-the-default-protocol">default protocol settings</a>, you can manually choose which protocol is used to send each request. To do this, use the toggle switch under <strong>Inspector &gt; Request Attributes</strong>.
+</p>
+<p>
+    When you change the protocol, Burp performs the necessary transformations to generate an equivalent request in the correct format for the new protocol. This means you can easily upgrade and downgrade individual requests as needed.
+</p>
+<p>
+    By default, you can only upgrade requests to HTTP/2 if the server explicitly advertises support for this via ALPN during the TLS handshake. If you want to try sending HTTP/2 requests anyway to test for hidden HTTP/2 support, you first need to enable the <strong>Allow HTTP/2 ALPN override</strong> option from the <strong>Repeater</strong> menu.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        When working in the Inspector, it's possible to create an HTTP/2 request that cannot be accurately represented using HTTP/1 syntax without losing information. Burp refers to this as a "<a href="#kettled-requests">kettled</a>" request. If you try to downgrade such a request, Burp warns you that the request will have to be normalized so that it can be displayed in the editor.
+    </p>
+</div>
+<h2 id="kettled-requests">Kettled requests</h2>
+<p>
+    The Inspector enables you to create HTTP/2 requests that are impossible to accurately represent using HTTP/1 syntax without losing information. In honor of our infamous Director of Research, James Kettle, we've coined the term "kettled" to describe such requests.
+</p>
+<p>
+    For example, it's technically possible to add a newline character <strong>inside</strong> a header value in HTTP/2. There is no way to show this in HTTP/1 as a newline indicates the end of a header, so anything after it would just appear to be the start of the next header's name.
+</p>
+<p>
+    Once a request is kettled, the message editor no longer attempts to display an HTTP/1 equivalent of it. You will still be able to see the body of the message, but in place of the headers, Burp will display a notification that tells you why the request is considered kettled. If you want to make further changes to the headers of a kettled request, you need to use the Inspector.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Burp Proxy, Repeater, Logger, and Scanner currently support kettled requests. If you send a kettled request to a tool that doesn't support them, such as Intruder, it will be normalized so that it can be displayed in the editor.
+    </p>
+</div>
+<h3 id="what-can-cause-a-request-to-become-kettled">What can cause a request to become kettled?</h3>
+<p>
+    Requests become kettled whenever you make the following changes using the Inspector:
+</p>
+<ul>
+    <li>
+        <p>
+            Adding an uppercase letter or colon to a header name.
+        </p>
+    </li>
+    <li>
+        <p>
+            Adding a newline character to a header name or value.
+        </p>
+    </li>
+    <li>
+        <p>
+            Modifying the value of the <code>:scheme</code> pseudo-header.
+        </p>
+    </li>
+    <li>
+        <p>
+            Adding a space character to the <code>:path</code> or <code>:method</code> pseudo-header.
+        </p>
+    </li>
+    <li>
+        <p>
+            Adding a duplicate pseudo-header.
+        </p>
+    </li>
+    <li>
+        <p>
+            Adding a semicolon and space character to a cookie value.
+        </p>
+    </li>
+</ul>
+<h3 id="unkettling-a-request">Unkettling a request</h3>
+<p>
+    If you accidentally kettle a request, you have a number of options for unkettling it. You can:
+</p>
+<ul>
+    <li>
+        <p>
+            Undo your changes using the <code>Ctrl/Cmd + Z</code> keys.
+        </p>
+    </li>
+    <li>
+        <p>
+            Use the Inspector to manually reverse the specific changes that have caused the request to be kettled. Check the notification in the editor to see which changes you need to make.
+        </p>
+    </li>
+    <li>
+        <p>
+            Downgrade the request to HTTP/1 using the toggle in the Inspector and dismiss the warning telling you that your changes will be lost. Burp will normalize the request, effectively discarding any changes that are incompatible with HTTP/1.
+        </p>
+    </li>
+</ul>
+<h3 id="kettled-requests-and-extensions">Kettled requests and extensions</h3>
+<p>
+    Extensions are able to generate and issue new kettled requests, so you can already develop your own extensions for HTTP/2-based testing. However, extensions are currently unable to modify kettled requests that were originally issued by Burp. This is because they only have access to the normalized, HTTP/1-style representation of Burp's requests.
+</p>
+<h2 id="http-2-settings">HTTP/2 settings</h2>
+<p>
+    There are a number of settings throughout Burp that let you adjust its behavior when working with HTTP/2.
+</p>
+<h3 id="changing-the-default-protocol">Changing the default protocol</h3>
+<p>
+    By default, Burp speaks HTTP/2 to all servers that advertise support for it via ALPN during the TLS handshake. However, you can change the default protocol so that it uses HTTP/1 unless you explicitly tell it to send an HTTP/2 request. To do this, go to <strong>Settings &gt; Network &gt; HTTP</strong> and deselect the <strong>Default to HTTP/2 if the server supports it</strong> option.
+</p>
+<p>
+    You might want to do this if you're focusing on a vulnerability that specifically requires HTTP/1, such as classic <a href="https://portswigger.net/web-security/request-smuggling">CL.TE or TE.CL request smuggling</a>.
+</p>
+<p>
+    You can still override this global setting for individual requests by using the <strong>Protocol</strong> toggle under <strong>Inspector &gt; Request Attributes</strong>.
+</p>
+<h3 id="repeater-options-for-http-2">Repeater options for HTTP/2</h3>
+<p>
+    From the <strong>Repeater</strong> menu at the top of the screen, you can access the following options for controlling Burp Repeater's behavior when handling HTTP/2 requests.
+</p>
+<h4 id="enforce-protocol-choice-on-cross-domain-redirections">Enforce protocol choice on cross-domain redirections</h4>
+<p>
+    By default, Repeater will negotiate the protocol as normal when redirected cross-domain. If you enable this option, it will follow any cross-domain redirections using the same protocol that is selected under <strong>Inspector &gt; Request Attributes</strong>. This is important when testing for HTTP/2-specific vulnerabilities that trigger cross-domain requests.
+</p>
+<h4 id="enable-http-2-connection-reuse">Enable HTTP/2 connection reuse</h4>
+<p>
+    By default, Repeater reuses the same connection for multiple HTTP/2 requests. Some servers treat the first request on each connection differently to subsequent requests, which can lead to vulnerabilities appearing intermittent or even being missed entirely. On other servers, sometimes a request will corrupt a connection without causing the server to tear it down, silently influencing how all subsequent requests get processed.
+</p>
+<p>
+    If you run into either of these problems, you can mitigate them by disabling this option so that the request you send is always the first one on the connection.
+</p>
+<h4 id="strip-connection-header-over-http-2">Strip Connection header over HTTP/2</h4>
+<p>
+    By default, when an HTTP/2 request contains a <code>Connection</code> header, Burp strips this before sending the request to the server. This is because many HTTP/2 servers will reject requests containing this header.
+</p>
+<p>
+    If you want to experiment with sending the <code>Connection</code> header anyway, you can disable this option.
+</p>
+<h4 id="allow-http-2-alpn-override">Allow HTTP/2 ALPN override</h4>
+<p>
+    Enabling this setting allows you to send HTTP/2 requests from Burp Repeater even when the server doesn't advertise HTTP/2 support via ALPN. This lets you explore any "hidden HTTP/2" attack surface reported by Burp Scanner or manually test for hidden HTTP/2 support.
+</p>
+<h3 id="disabling-http-2-for-proxy-listeners">Disabling HTTP/2 for proxy listeners</h3>
+<p>
+    In some rare cases, such as when a client has problems with its HTTP/2 implementation, you may want to disable HTTP/2 on the connection between the client and Burp's proxy listener. To do this, click <strong>Settings <span class="icon-settings"></span></strong> to open the <strong>Settings</strong> dialog. Go to <strong>Tools &gt; Proxy</strong> and select the relevant listener under <strong>Proxy listeners</strong>, then click <strong>Edit</strong>. In the dialog, go to the HTTP/2 tab and deselect the <strong>Support HTTP/2</strong> checkbox. Burp will then only accept HTTP/1 on this connection even if the client wants to use HTTP/2.
+</p>
+<p>
+    Note that this does not affect the connection between Burp and the server.
+</p>
+<h2 id="upcoming-enhancements-for-http-2-in-burp">Upcoming enhancements for HTTP/2 in Burp</h2>
+<p>
+    There are some limitations to Burp's HTTP/2 support. We are currently working on the following enhancements.
+</p>
+<h3 id="increased-support-for-kettled-requests">Increased support for kettled requests</h3>
+<p>
+    At the moment, some of Burp's tools cannot handle kettled requests, most notably, Burp Intruder. We aim to enable you to work with kettled requests in all of Burp's tools in future releases.
+</p>
+</body>
+</html>

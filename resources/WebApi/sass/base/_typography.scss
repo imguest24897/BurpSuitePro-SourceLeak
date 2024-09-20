@@ -1,0 +1,38 @@
+* {
+    font-family: Droid Sans,Arial,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    word-wrap: break-word;
+   line-height: 25px;
+}
+
+body {
+    font-size: 14px;
+    line-height: 14px;
+    color: $charcoal;
+}
+
+h1, h2, h3, h4, h5 {
+    color: $orange;
+    font-weight: normal;
+    line-height: 1.1;
+    margin-top: 0px;
+    margin-bottom: 20px;
+
+}
+
+h1 {
+    font-size: 2.5em;
+}
+
+h2 {
+    font-size: 1.875em;
+}
+
+h3 {
+    font-size: 1.500em;
+}
+
+h4 {
+    font-size: 1.13em;
+    line-height: 1.2;
+}

@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+GraphQL introspection enabled
+<h1>Typical severity</h1>
+Low
+<h1>Issue description</h1>
+
+<p>Introspection uses built-in queries to return information on a GraphQL schema itself. Like regular GraphQL queries, introspection queries are highly customizable, enabling users to specify the content and data shape of the response.</p>
+<p>GraphQL introspection can represent a significant security risk when enabled in production, as it enables attackers to see what operations are available to them within the API, as well as other potentially sensitive information such as type descriptions and private fields.</p>
+
+<h1>Issue remediation</h1>
+
+<p>Ensure that you have disabled introspection on your GraphQL server. Consult your server documentation if you are unsure how to do this.</p>
+
+<h1>References</h1>
+<ul>
+    <li>
+        <a href="https://graphql.org/learn/introspection/">GraphQL Introspection</a>
+    </li>
+    <li>
+        <a href="https://portswigger.net/web-security/graphql">Web Security Academy: GraphQL API vulnerabilities</a>
+    </li>
+</ul>
+<h1>Vulnerability classifications</h1>
+<ul>
+    <li>
+        <a href="https://cwe.mitre.org/data/definitions/200.html">CWE-200: Information Exposure</a>
+    </li>
+</ul>
+<h1>Web intro</h1>
+
+</body>
+</html>

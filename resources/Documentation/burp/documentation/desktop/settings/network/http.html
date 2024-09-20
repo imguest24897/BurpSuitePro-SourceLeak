@@ -1,0 +1,217 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/index.html">Settings</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/network/index.html">Network</a>
+        </li>
+        <li>
+            <a href="http.html">HTTP</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>HTTP settings</h1>
+<p>
+    The HTTP settings enable you to configure:
+</p>
+<ul>
+    <li>
+        <a href="#allowed-redirect-types">Allowed redirect types</a>.
+    </li>
+    <li>
+        <a href="#streaming-responses">Streaming responses</a>.
+    </li>
+    <li>
+        <a href="#status-100-response-handling">Status 100 response handling</a>.
+    </li>
+    <li>
+        <a href="#http-1">HTTP/1 settings</a>.
+    </li>
+    <li>
+        <a href="#http-2">HTTP/2 settings</a>.
+    </li>
+</ul>
+<h2 id="allowed-redirect-types">Allowed redirect types</h2>
+<p>
+    These settings control the redirect types that Burp can use. Select from the following redirect types:
+</p>
+<ul>
+    <li>
+        3xx status code with Location header.
+    </li>
+    <li>
+        Refresh header.
+    </li>
+    <li>
+        Meta refresh tag.
+    </li>
+    <li>
+        JavaScript-driven.
+    </li>
+    <li>
+        Any status code with Location header.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Burp's behavior in following redirects is determined by the configuration of the individual Burp tools (for instance, the <a href="/burp/documentation/desktop/tools/target/scope/index.html">Target scope</a>).
+    </p>
+</div>
+<p>
+    The <strong>Allowed redirect types</strong> settings are project settings. They apply to the current project only.
+</p>
+<h2 id="streaming-responses">Streaming responses</h2>
+<p>
+    These settings enable you to identify URLs that return "streaming" responses - these are responses that do not terminate. Burp handles these responses differently to normal responses.
+</p>
+<p>
+    Streaming responses are often used for functions such as continuously-updating price data in trading applications. Typically, some client side script code makes a request and the server keeps a response stream open, pushing further data in real time as it becomes available.
+</p>
+<p>
+    However, intercepting proxies can break these applications because they use a store-and-forward model. In this case, the Proxy waits indefinitely for the streaming response to finish, and none of the response is ever forwarded to the client.
+</p>
+<p>
+    Burp's tools handle streaming responses in the following ways:
+</p>
+<ul>
+    <li>
+        The Proxy passes these responses straight through to the client in real time.
+    </li>
+    <li>
+        Repeater updates the response panel in real time as data is received.
+    </li>
+    <li>
+        All other tools ignore streaming responses and close the connection.
+    </li>
+</ul>
+<p>
+    To add a URL to the streaming responses list, click <strong>Add</strong> and enter the required details.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Streaming response URLs use Burp's standard URL matching rules. For more information, see <a href="/burp/documentation/desktop/tools/target/scope/index.html#url-matching-rules">URL-matching rules</a>.
+    </p>
+</div>
+<p>
+    You can also edit and reorder the rules in the list if required.
+</p>
+<p>
+    There are two other options available:
+</p>
+<ul>
+    <li>
+        <strong>Store streaming responses</strong> - This setting causes Burp to store streaming responses in full. This option is necessary if you wish to view the contents of streaming responses within the <a href="/burp/documentation/desktop/tools/proxy/http-history/index.html">Proxy history</a> and <a href="/burp/documentation/desktop/tools/repeater/index.html">Repeater response panel</a>. Note that storing streaming responses may result in large temporary files.
+    </li>
+    <li>
+        <strong>Strip chunked encoding metadata in streaming responses</strong> - Streaming responses are generally chunked-encoded over HTTP. If you select this option, Burp removes the chunked encoding metadata which makes the responses more easily readable within Burp. Note that removing this metadata may break the client-side application.
+    </li>
+</ul>
+<p>
+    Streaming responses are often compressed using GZIP encoding. You can configure Burp to decompress GZIP content via options in the Proxy and Repeater configurations.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You can also use Burp's support for streaming responses to handle very large responses that are not strictly streaming responses (such as binary file downloads), in order to bypass the store-and-forward proxy model and improve Burp's performance.
+    </p>
+</div>
+<p>
+    The <strong>Streaming responses</strong> settings are project settings. They apply to the current project only.
+</p>
+<h2 id="status-100-response-handling">Status 100 response handling</h2>
+<p>
+    These settings control how Burp handles status 100 HTTP responses. These responses often occur when a POST request is sent to the server, and the server makes an interim response before the request body is transmitted.
+</p>
+<p>
+    The following settings are available:
+</p>
+<ul>
+    <li>
+        <strong>Understand 100 Continue responses</strong> - Burp skips the interim response and parses the "real" response headers for information such as status code and content type.
+    </li>
+    <li>
+        <strong>Remove 100 Continue headers</strong> - Burp removes any interim headers from the server's response before it is passed to individual tools.
+    </li>
+</ul>
+<p>
+    The <strong>Status 100 response handling</strong> settings are project settings. They apply to the current project only.
+</p>
+<h2 id="http-1">HTTP/1</h2>
+<p>
+    By default, Burp Suite opens a new TCP connection for each HTTP/1.1 request / response pair. If you select <strong>Use keep-alive for HTTP/1 if the server supports it</strong>, the system keeps the same TCP connection open for multiple request / response pairs. This brings significant benefits in speed and request timing.
+</p>
+<p>
+    Burp Suite closes any open TCP connections after five seconds of inactivity.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        This setting affects all Burp Suite tools that send HTTP requests.
+    </p>
+    <ul>
+        <li>
+            You can override this for Repeater using the <strong>Enable HTTP/1 connection reuse</strong> menu setting. For more information, see the <a href="/burp/documentation/desktop/settings/tools/repeater.html#redirects">Repeater settings</a> page.
+        </li>
+        <li>
+            You can override this for Intruder using the <strong>HTTP/1 connection reuse</strong> setting. For more information, see the <a href="/burp/documentation/desktop/tools/intruder/configure-attack/settings.html#http-1-connection-reuse">Intruder HTTP settings</a> page.
+        </li>
+    </ul>
+</div>
+<p>
+    The <strong>HTTP/1</strong> settings are project settings. They apply to the current project only.
+</p>
+<h2 id="http-2">HTTP/2</h2>
+<p>
+    By default, Burp uses HTTP/2 to communicate with all servers that advertise support for it during the TLS handshake. If you deselect <strong>Default to HTTP/2 if the server supports it</strong> then Burp uses HTTP/1 even if the server supports HTTP/2.
+</p>
+<p>
+    You can override this setting for individual tools in Burp:
+</p>
+<ul>
+    <li>
+        Use the <strong>Protocol</strong> toggle in the <strong>Inspector</strong> panel to override this setting. For example, use this in Burp Repeater requests or an intercepted request in Burp Proxy.
+    </li>
+    <li>
+        Use the <strong>HTTP version</strong> Burp Intruder attack setting to override this setting for a specific Intruder attack. For more information, see <a href="/burp/documentation/desktop/tools/intruder/configure-attack/settings.html#http-version">Burp Intruder attack settings</a>.
+    </li>
+</ul>
+<p>
+    Burp provides two options for working with HTTP/2 messages in a human-readable format. For more information, see the <a href="/burp/documentation/desktop/http2/index.html">HTTP/2</a> documentation.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        We have only implemented the features of HTTP/2 that are relevant for use with Burp Suite. Additional features, such as server push, are not supported.
+    </p>
+</div>
+<p>
+    The <strong>HTTP/2</strong> settings are project settings. They apply to the current project only.
+</p>
+</body>
+</html>

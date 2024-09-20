@@ -1,0 +1,206 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/troubleshooting/index.html">Troubleshooting</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/troubleshooting/launch-from-command-line.html">Launch from the command line</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Launching Burp Suite from the command line</h1>
+<p>
+    Burp Suite is a Java application and is distributed via native platform installers. However, Burp is also available as a standalone Java executable file, with the <code>.jar</code> extension. You can choose to download the JAR file from the same download page as the native platform installers.
+</p>
+<p>
+    The Burp JAR file can be executed using a Java Runtime Environment, and there is no need to unpack the contents of the JAR file itself. Launching Burp directly from the command line is beneficial in certain use cases because you can use command line arguments to control Burp's behavior on startup. For example, you can specify exactly how much memory your computer assigns to Burp.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        The native platform installers bundle Burp together with a private Java Runtime Environment, so you don't need to worry about installing or updating Java manually. However, if you choose to launch Burp from the command line, you need to manage your own Java installation and updates. The minimum Java version required to run Burp is Java 21.
+    </p>
+    <p>
+        Note that any extensions written in a version of Java higher than 21 may not run correctly on any installation of Burp Suite.
+    </p>
+</div>
+<h2 id="checking-your-java-version">Checking your Java version</h2>
+<p>
+    To check your Java version:
+</p>
+<ol>
+    <li>
+        At a command prompt, type: <code>java -version</code>
+    </li>
+    <li>
+        If Java is installed, a message indicates which version you have. To run Burp, you need at least Java 21.
+    </li>
+    <li>
+        If Java is not installed, or if your version of Java is older than 21, you need to install a supported version of Java. Download the Java Runtime Environment (JRE) from Oracle and run the installer. Then open a new command prompt and start again.
+    </li>
+</ol>
+<h2 id="launching-the-burp-suite-jar">Launching the Burp Suite JAR</h2>
+<p>
+    Once you have the correct Java version installed, you can launch Burp by entering a command such as the following:
+</p>
+<code class="code-scrollable">java -jar -Xmx4g /path/to/burp.jar</code><p>
+    In this example, the argument <code>-Xmx4g</code> specifies that you want to assign 4GB of memory to Burp. <code>/path/to/burp.jar</code> is the path to the location of the JAR file on your computer.
+</p>
+<p>
+    If everything is working, a splash screen should display for a few seconds, and then the main startup wizard window should appear. If nothing happens, or if an error message appears, please refer to the troubleshooting help.
+</p>
+<h2 id="command-line-arguments">Command line arguments</h2>
+<p>
+    Various command line arguments are available to control Burp's behavior on startup. For example, you can tell Burp to prevent reloading of extensions, open a particular Burp project file, or load a particular configuration file.
+</p>
+<p>
+    You can view a list of available options using the command line argument <code>--help</code>. The following arguments are currently available:
+</p>
+<table class="grid-table grid-table-size-1-2">
+    <tbody><tr>
+            <td class="text-center mobile-hidden">
+                Argument
+            </td>
+            <td class="text-center mobile-hidden">
+                Description
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>--help</code>
+            </td>
+            <td>
+                Print this message.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>--disable-extensions</code>
+            </td>
+            <td>
+                Prevent loading of extensions on startup.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>--diagnostics</code>
+            </td>
+            <td>
+                Print diagnostic information.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>--use-defaults</code>
+            </td>
+            <td>
+                Start Burp with the default settings. Warning: Setting this flag overwrites your saved settings with Burp's default settings and you will not be able to recover them.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>--collaborator-server</code>
+            </td>
+            <td>
+                Run in Collaborator server mode.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>--collaborator-config</code>
+            </td>
+            <td>
+                Specify a Collaborator server configuration file to use. By default, this will load the file <code>collaborator.config</code>.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>--project-file</code>
+            </td>
+            <td>
+                Open the specified project file. This will be created as a new project if the file does not exist.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>--config-file</code>
+            </td>
+            <td>
+                Load the specified project configuration file. This option may be repeated to load multiple files.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>--user-config-file</code>
+            </td>
+            <td>
+                Load the specified user configuration file. This option may be repeated to load multiple files.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>--auto-repair</code>
+            </td>
+            <td>
+                Automatically repair a corrupted project file specified by the <code>--project-file</code> option.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>--unpause-spider-and-scanner</code>
+            </td>
+            <td>
+                Do not pause the Spider or Scanner when opening an existing project.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>-Djava.awt.headless=true</code>
+            </td>
+            <td>
+                Open Burp in headless mode.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>-Xmx4g</code>
+            </td>
+            <td>
+                Limit Burp's heap size to 4GB, for example. You can change this to a different value if you want.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>-50:MaxRAMPercentage</code>
+            </td>
+            <td>
+                Limits the maximum RAM used by Burp, for example to 50% of the total system memory.
+            </td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

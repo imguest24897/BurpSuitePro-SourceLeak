@@ -1,0 +1,203 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms><cms ignore-validation="STACKED_HEADINGS"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/filter.html">Filter settings</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Filter settings</h1>
+<p>
+    You can filter the messages that are shown in various Burp Suite tools. This makes it easier for you to analyze a large number of messages.
+</p>
+<p>
+    The filter bar above the table describes the current display filter. Click the filter bar to view and edit the filter settings. If the filter has a <strong>Settings mode</strong> and a <strong>Bambda mode</strong>, make sure that you've selected <strong>Settings mode</strong>. For more information about <strong>Bambda mode</strong>, see <a href="/burp/documentation/desktop/extensions/bambdas/index.html">Bambdas</a>.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Most filters only control what is displayed. Items hidden by the filter aren't deleted and reappear if you reset the filter. The exception is the Burp Logger capture filter, which controls the messages that are captured in Burp Logger.
+    </p>
+</div>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="filter-settings">Filter settings</h2>
+<p>
+    The table below shows common filter settings that can be found in many Burp tools:
+</p>
+<table class="grid-table grid-table-size-1-2">
+    <tr>
+        <th>
+            Setting
+        </th>
+        <th>
+            Description
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Filter by request type
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Use the following options to filter requests:
+            </p>
+            <p>
+                <ul>
+                    <li>
+                        <p>
+                            Only the items that are in scope.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Only items with responses.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Only requests with parameters.
+                        </p>
+                    </li>
+                </ul>
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Filter by MIME type
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Filter responses by their MIME type.
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Filter by status code
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Filter responses by their HTTP status code.
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Filter by search term
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Use a search term to filter responses. You have the following options:
+            </p>
+            <p>
+                <ul>
+                    <li>
+                        <p>
+                            <strong>Regex</strong> - Use a literal string or a regular expression.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <strong>Case sensitive</strong> - Make your search case-sensitive.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <strong>Negative search</strong> - Only show items that don't match the search term.
+                        </p>
+                    </li>
+                </ul>
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Filter by file extension
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Filter items by their file extension.
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Filter by annotation
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Only show items with notes or highlights.
+            </p>
+        </td>
+    </tr>
+</table>
+<h2 id="managing-the-filter-settings">Managing the filter settings</h2>
+<p>
+    You can use the following functions to manage the filter settings:
+</p>
+<ul>
+    <li>
+        <p>
+            Click <span class="icon-settings"></span> in the filter window to:
+        </p>
+        <ul>
+            <li>
+                <strong>Restore defaults</strong> - Restore Burp's default filter settings.
+            </li>
+            <li>
+                <strong>Load settings</strong> - Load filter settings.
+            </li>
+            <li>
+                <strong>Save settings</strong> - Save your current filter settings.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <strong>Show all</strong> - Show all messages.
+    </li>
+    <li>
+        <strong>Hide all</strong> - Hide all messages.
+    </li>
+    <li>
+        <strong>Revert changes</strong> - Undo any changes you made since opening the current filter window.
+    </li>
+</ul>
+</body>
+</html>

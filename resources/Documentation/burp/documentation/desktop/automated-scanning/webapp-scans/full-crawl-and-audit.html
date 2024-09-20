@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/index.html">Automated scanning</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/webapp-scans/index.html">Scanning web applications</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/webapp-scans/full-crawl-and-audit.html">Running a full crawl and audit</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Running a full crawl and audit</h1>
+<p>
+    Burp Scanner can crawl and audit web applications from one or more start URLs. When scanning, it follows any links from these URLs into the application to map out content.
+</p>
+<p>
+    To run a full crawl and audit of a web application, click <strong>New Scan &gt; Webapp scan</strong> on the <strong>Dashboard</strong> to open the scan launcher. The launcher has tabs that configure various aspects of the scan.
+</p>
+<h2 id="step-1-configure-scan-details" cms-ignore-validation="HEADING_CAPITALIZATION">Step 1: Configure scan details</h2>
+<p>
+    The <strong>Scan Details</strong> tab enables you to configure basic details of the scan, including the type of scan you want to run and the URL from which the scan should start:
+</p>
+<ol>
+    <li>
+        <p>
+            Select a <strong>Scan type</strong>:
+        </p>
+        <ul>
+            <li>
+                <strong>Crawl and audit</strong>.
+            </li>
+            <li>
+                <strong>Crawl</strong>.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <p>
+            Enter a URL into the <strong>URLs to scan</strong> field. This is the URL that the scan starts from. To enter multiple URLs, place each on a new line.
+        </p>
+    </li>
+    <li>
+        <p>
+            Select <strong>Protocol settings</strong>.
+        </p>
+        <ul>
+            <li>
+                <strong>Scan using HTTP & HTTPS</strong>.
+            </li>
+            <li>
+                <strong>Scan using my specified protocols</strong>. If you select this option, make sure you specify the protocols in the <strong>URLs to scan</strong> field.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <p>
+            Optionally, use the settings in the <strong>Detailed scope configuration</strong> section to refine the scan scope. This limits the URLs that Burp Scanner can access during the scan.
+        </p>
+    </li>
+    <li>
+        <p>
+            If you want to isolate the scan, select <strong>Run isolated scan</strong>. Results from isolated scans do not appear in the <strong>Target &gt; Site map</strong>, <strong>Target &gt; Crawl paths</strong>, or <strong>Dashboard &gt; All issues</strong> tabs. It can be useful to isolate a scan if you want to test scan configurations without impacting "live" scan results, for example.
+        </p>
+    </li>
+</ol>
+<p>
+    Once you have specified scan details, select the <strong>Scan configuration</strong> tab.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/desktop/automated-scanning/setting-pro-scope.html">Setting scan scope in Burp Suite Professional</a> - Gives detailed information on how scan scope works in Burp Suite Professional.
+    </p>
+</div>
+<h2 id="step-2-select-a-scan-configuration" cms-ignore-validation="HEADING_CAPITALIZATION">Step 2: Select a scan configuration</h2>
+<p>
+    Scan configurations are groups of settings that define how a scan is performed. You must select a scan configuration before you can run your scan.
+</p>
+<p>
+    The <strong>Scan configuration</strong> tab enables you to either select a preset scan mode or define a custom configuration:
+</p>
+<ul>
+    <li>
+        Preset scan modes are predefined collections of scan settings. They enable you to quickly adjust how the scan balances speed and coverage. To select a preset scan mode, make sure that <strong>Use a preset scan mode</strong> is selected and click one of the available options.
+    </li>
+    <li>
+        <p>
+            Custom scan configurations enable you to fine-tune Burp Scanner's behavior to meet your needs. To manage custom scan configurations, select <strong>Use a custom configuration</strong>. You can perform the following actions:
+        </p>
+        <ul>
+            <li>
+                Create new configurations from scratch.
+            </li>
+            <li>
+                Select existing configurations from your configuration library.
+            </li>
+            <li>
+                Import configurations from other installations of Burp Suite.
+            </li>
+        </ul>
+    </li>
+</ul>
+<p>
+    If you want Burp to remember the selected scan mode next time you open the scan launcher, select <strong>Remember my choice for future scans</strong>.
+</p>
+<p>
+    Once you have selected your configuration, either click <strong>OK</strong> to start the scan or select another tab to configure further details.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/custom-configs.html">Using custom scan configurations</a> - Gives further information on how to create and import your own configurations.
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/scan-configurations/index.html">Scan configurations (Burp Scanner)</a> - Gives reference material on the options available in custom scan configurations.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/library.html">Configuration library</a>.
+        </li>
+    </ul>
+</div>
+<h2 id="step-3-configure-application-logins-optional" cms-ignore-validation="HEADING_CAPITALIZATION">Step 3: Configure application logins (optional)</h2>
+<p>
+    The <strong>Application login</strong> tab enables you to provide credentials for Burp Scanner to submit when it finds login forms. This enables it to discover and audit content that is only accessible to authenticated users.
+</p>
+<p>
+    There are two types of login credential you can add in Burp Suite Professional:
+</p>
+<ul>
+    <li>
+        Username and password pairs are intended for sites that use a basic, single-step login mechanism. To manage username and password pairs, select <strong>Use login credentials</strong>. From here, you can add new credentials or edit your existing ones.
+    </li>
+    <li>
+        Recorded login sequences are intended for sites that use more complex login mechanisms, such as Single Sign-On. You can record login sequences using the Burp Suite Navigation Recorder Chrome extension, which is pre-installed in Burp's browser. To manage your recorded login sequences, select <strong>Use recorded login sequences</strong>. From here, you can add new sequences or edit your existing ones.
+    </li>
+</ul>
+<p>
+    You can only use one of the login mechanisms per site.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/configuring-app-logins/index.html">Managing application logins</a> - Gives further information on using application logins in Burp Suite Professional.
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/authenticated-scanning/index.html">Authenticated scanning (Burp Scanner)</a> - Gives information on how to record login sequences.
+        </li>
+    </ul>
+</div>
+<h2 id="step-4-select-a-resource-pool-optional" cms-ignore-validation="HEADING_CAPITALIZATION">Step 4: Select a resource pool (optional)</h2>
+<p>
+    A resource pool is a group of tasks that share a quota of network resources. You can configure each resource pool with its own throttling settings. These control the number of requests that can be made concurrently, or the rate at which requests can be made, or both.
+</p>
+<p>
+    The <strong>Resource pools</strong> tab enables you to define the pool in which your scan will run. You can select an existing resource pool from the list, or create a new resource pool.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/desktop/automated-scanning/managing-resource-pools.html">Resource pools</a> - Gives information on the use cases for resource pools and how to configure them.
+    </p>
+</div>
+</body>
+</html>

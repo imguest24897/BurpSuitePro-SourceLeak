@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/extensions/index.html">Extensions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/extensions/creating/index.html">Creating</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Creating Burp extensions</h1>
+<p>
+    If you're proficient in Java, you can create your own extensions for Burp Suite using our Montoya API. Note that Burp Suite only supports extensions written in Java 21 or lower.
+</p>
+<p>
+    To get started, create a new Maven or Gradle project and add a dependency for the Montoya API as follows.
+</p>
+<p>
+    <strong>Maven</strong>
+</p>
+<code class="code-scrollable">&lt;dependency&gt;
+    &lt;groupId&gt;net.portswigger.burp.extensions&lt;/groupId&gt;
+    &lt;artifactId&gt;montoya-api&lt;/artifactId&gt;
+    &lt;version&gt;LATEST&lt;/version&gt;
+&lt;/dependency&gt;</code><p>
+    <strong>Gradle</strong>
+</p>
+<code class="code-scrollable">implementation 'net.portswigger.burp.extensions:montoya-api:+'</code><p>
+    Next, create a class that implements the <code>BurpExtension</code> interface. The <code>initialize()</code> method gives you an implementation of the <code>MontoyaApi</code>, which you can use to modify and interact with Burp Suite.
+</p>
+<p>
+    When your extension is complete, you can submit it to the BApp Store to share it with other Burp users. Please refer to <a href="/burp/documentation/desktop/extensions/creating/bapp-store-submitting-extensions.html">Submitting extensions to the BApp Store</a> and <a href="/burp/documentation/desktop/extensions/creating/bapp-store-acceptance-criteria.html">BApp Store acceptance criteria</a>.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Many of the extensions on the BApp Store were written using our <a href="https://portswigger.net/burp/extender/api/" target="_blank">legacy Extender API</a>. Burp Suite will continue to support the Extender API for the time being, but we strongly recommend writing any new extensions using the Montoya API instead.
+    </p>
+</div>
+<h2 id="useful-resources-for-extension-developers">Useful resources for extension developers</h2>
+<p>
+    Although we can't provide detailed instructions on how to write your own extensions, you can refer to the following useful resources:
+</p>
+<ul>
+    <li>
+        The <strong><a href="https://github.com/PortSwigger/burp-extensions-montoya-api">Montoya API GitHub repository</a></strong>, which contains some example implementations of common tasks, such as registering an HTTP handler or Proxy listener.
+    </li>
+    <li>
+        The <strong><a href="https://portswigger.github.io/burp-extensions-montoya-api/javadoc/burp/api/montoya/MontoyaApi.html">Montoya API JavaDoc</a></strong>.
+    </li>
+    <li>
+        A <strong><a href="https://github.com/PortSwigger/burp-extensions-montoya-api/blob/d86f875647ae35ad3647afbc13090f59c5120c8e/api/src/test/java/burp/api/montoya/TestExtension.java">test extension</a></strong> that uses the Montoya API to implement most of the functions from the <a href="https://portswigger.net/burp/extender/api/" target="_blank">legacy Extender API</a>. This provides a useful reference, especially if you're attempting to port an old extension. We've given each method the same name as its equivalent in the Extender API, so you can easily find what you're looking for.
+    </li>
+    <li>
+        The main <strong><a href="https://github.com/PortSwigger">PortSwigger GitHub repository</a></strong> contains a forked version of each extension that is available on the BApp Store, as well as some simple <a href="/burp/documentation/desktop/extensions/creating/extender-api-examples-legacy.html">example</a> extensions. However, note that most of these were written using the <a href="https://portswigger.net/burp/extender/api/" target="_blank">legacy Extender API</a>.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        When you write extensions, make sure that any <code>ExtensionHttpRequestEditor</code> returned does not use an <code>HttpRequestEditor</code> as the UI component when it registers an <code>HttpRequestEditorProvider</code>. This avoids a scenario where the <code>HttpRequestEditor</code> is created within another <code>HttpRequestEditor</code>, potentially creating an infinite loop of <code>HttpRequestEditor</code> components and causing Burp to crash.
+    </p>
+    <p>
+        For the same reason, avoid returning an <code>HttpResponseEditor</code> when registering an <code>HttpResponseEditorProvider</code>.
+    </p>
+</div>
+<h2 id="handling-kettled-http-2-requests-in-extensions">Handling kettled HTTP/2 requests in extensions</h2>
+<p>
+    When issuing new requests from your extension, you're free to send <a href="https://portswigger.net/burp/documentation/desktop/http2#kettled-requests">kettled requests</a> using HTTP/2 formatting. This enables you to develop extensions to test for <a href="/burp/documentation/desktop/http2/performing-http2-exclusive-attacks.html">HTTP/2-exclusive vulnerabilities</a>.
+</p>
+<p>
+    However, it is not currently possible for extensions to modify kettled requests that were issued by Burp. This is because they can only access the normalized, HTTP/1-style representation of them via the API.
+</p>
+</body>
+</html>

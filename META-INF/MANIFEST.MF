@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Implementation-Name: burp
+Implementation-Version: 32146
+Implementation-Vendor: PortSwigger
+Specification-Name: burp
+Specification-Vendor: PortSwigger
+Multi-Release: true
+Burp-JAR-Type: Installer
+Main-Class: burp.StartBurp
+SplashScreen-Image: resources/Media/splash.png
+Add-Opens: java.base/java.lang java.desktop/javax.swing java.desktop/jav
+ a.awt java.desktop/java.awt.color java.base/javax.crypto jdk.crypto.cry
+ ptoki/sun.security.pkcs11
+

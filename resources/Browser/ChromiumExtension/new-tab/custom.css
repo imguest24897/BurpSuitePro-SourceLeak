@@ -1,0 +1,22 @@
+img.centered-with-padding {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 30px; /* Adds padding of 30 pixels on all sides */
+}
+
+.additional-top-padding {
+  padding-top: 22px;
+}
+
+.container-columns-block > a {
+  height: 100%;
+}
+
+.container-columns-block > a > .spacer {
+  flex-grow: 1;
+}
+
+.container-columns-block > a > .chevron-after {
+  margin-top: 10px;
+}

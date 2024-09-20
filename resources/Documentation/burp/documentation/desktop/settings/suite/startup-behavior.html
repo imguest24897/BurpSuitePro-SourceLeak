@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/index.html">Settings</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/suite/index.html">Suite</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/suite/startup-behavior.html">Startup behavior</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1 cms-ignore-validation="DUPLICATE_HEADINGS">Startup behavior</h1>
+<p>
+    The Startup behavior tab enables you to control what happens when you open Burp.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="automated-tasks-on-startup">Automated tasks on startup</h2>
+<p>
+    This checkbox controls the default behavior of the <strong>Pause Automated Tasks</strong> setting in the startup wizard.
+</p>
+<p>
+    This setting protects you by preventing automated tasks from sending requests when you open Burp. This is especially useful if you open project files from unknown or untrusted sources.
+</p>
+<ul>
+    <li>
+        Select <strong>Pause Automated Tasks</strong> if you want Burp to prevent any automated tasks from running when you open projects.
+    </li>
+    <li>
+        Deselect <strong>Pause Automated Tasks</strong> if you want Burp to run automated tasks when you open projects.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        If <strong>Trust this project file</strong> is deselected, automated tasks will be paused by default.
+    </p>
+</div>
+<p>
+    <strong>Pause automated tasks</strong> is a user setting. It applies to all installations of Burp on your machine.
+</p>
+<h2 id="untrusted-project-files">Untrusted project files</h2>
+<p>
+    This checkbox controls the default behavior of the <strong>Trust this project</strong> setting in the startup wizard.
+</p>
+<p>
+    This setting protects you against any potentially harmful project settings. This is especially useful if you open project files from unknown or untrusted sources.
+</p>
+<ul>
+    <li>
+        Select <strong>Trust this project</strong> if you want projects to open with all of their original settings intact, including any potentially harmful ones.
+    </li>
+    <li>
+        Deselect <strong>Trust this project</strong> if you want Burp to remove any potentially harmful project settings from projects before opening them. This will also prevent any automated tasks from running.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Even with these settings removed, we do not recommend proxying traffic through an untrusted project file.
+    </p>
+</div>
+<p>
+    <strong>Trust this project</strong> is a user setting. It applies to all installations of Burp on your machine.
+</p>
+<h2 id="maximum-java-memory-usage">Maximum Java memory usage</h2>
+<p>
+    This setting enables you to adjust the amount of your computer's RAM allocated to Burp's Java Virtual Machine (JVM). The default value is <strong>Set to half of system memory</strong>, but you have the option to specify a custom value using the <strong>Set custom value</strong> text field.
+</p>
+<p>
+    Adjusting this can directly impact Burp's performance and the overall performance of your system:
+</p>
+<ul>
+    <li>
+        Decreasing the RAM allocation means more memory is available for other processes. This can help your system run more efficiently, especially if you're multitasking or have limited memory. However, it can slow Burp down, especially during resource-intensive tasks. The minimum custom value you can specify is 256MB.
+    </li>
+    <li>
+        Increasing the RAM allocation improves Burp's ability to handle resource-intensive tasks. However, it might impact the performance of your system, as it leaves less memory available for other applications. If you choose to increase this value, make sure you specify a value within the limits of your available memory.
+    </li>
+</ul>
+<p>
+    <strong>Maximum Java memory usage</strong> is a user setting. It applies to all installations of Burp on your machine.
+</p>
+</body>
+</html>

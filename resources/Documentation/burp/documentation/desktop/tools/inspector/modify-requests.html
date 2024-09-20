@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/inspector/index.html">Inspector</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/inspector/modify-requests.html">Modifying requests</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Modifying requests using the Inspector</h1>
+<p>
+    The Inspector has several features to make it easier to modify requests and perform basic operations, such as reordering headers:
+</p>
+<h2 id="adding-new-items-to-a-request">Adding new items to a request</h2>
+<p>
+    To add a new item, such as an HTTP header:
+</p>
+<ol>
+    <li>
+        Expand the relevant category in the Inspector panel.
+    </li>
+    <li>
+        Click the <strong>Add</strong> button at the bottom of the list.
+    </li>
+    <li>
+        Enter a name and value and click <strong>Add</strong>.
+    </li>
+</ol>
+<p>
+    The message editor updates to contain the new item.
+</p>
+<h2 id="removing-items-from-a-request">Removing items from a request</h2>
+<p>
+    To remove an item from the request, select the item and click the trash icon <span class="icon-trash"></span> at the bottom of the list.
+</p>
+<p>
+    You can remove multiple items at the same time. To select multiple items, click and drag the mouse.
+</p>
+<h2 id="reordering-items-in-a-request">Reordering items in a request</h2>
+<p>
+    To quickly reorder items in a request, select the item and use the arrow buttons <span class="icon-arrow-head-down"></span><span class="icon-arrow-head-up"></span> at the bottom of the list.
+</p>
+<h2 id="editing-the-name-or-value-of-an-item">Editing the name or value of an item</h2>
+<p>
+    To edit the name or value of an item, double-click the entry in the main Inspector panel.
+</p>
+<p>
+    If the data that you edited was automatically decoded by the Inspector, the same sequence of encodings are applied to your changes before they are injected into the request. This saves time when you work with encoded data.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        If you want to see the sequence of decoding steps that are being applied to your input, click the arrow to the right of the item.
+    </p>
+</div>
+<h2 id="injecting-newlines">Injecting newlines</h2>
+<p>
+    You can inject newlines from the detailed view of the Inspector:
+</p>
+<ol>
+    <li>
+        Click the arrow to the right of the item that you want to edit.
+    </li>
+    <li>
+        Select the location in the <strong>Name</strong> or <strong>Value</strong> field where you want to inject the characters.
+    </li>
+    <li>
+        Press <code>Shift + Return</code>. The carriage return and line feed characters are injected into the entry field, represented by the <code>\r\n</code> icons.
+    </li>
+</ol>
+<p>
+    This is essential for exploiting a number of HTTP/2-exclusive vulnerabilities that were discovered by James Kettle. For more details, see his whitepaper on our research page.
+</p>
+<div class="highlightedarea">
+    <h4>PortSwigger Research</h4>
+    <a href="https://portswigger.net/research/http2">HTTP/2: The Sequel Is Always Worse</a>
+</div>
+<h2 id="injecting-other-non-printing-characters">Injecting other non-printing characters</h2>
+<p>
+    To inject any non-printing character in the Inspector:
+</p>
+<ol>
+    <li>
+        Add a random placeholder character in the appropriate location.
+    </li>
+    <li>
+        Select the placeholder.
+    </li>
+    <li>
+        Use the Inspector's <strong>Selection</strong> widget to change its code point. For example, set the code point to <code>00</code> to replace the character with a null byte.
+    </li>
+</ol>
+<p>
+    To inject non-printing characters without the need to add a placeholder, switch to the message editor's <a href="/burp/documentation/desktop/tools/message-editor/index.html#hex-tab"><strong>Hex</strong> tab</a>.
+</p>
+<h2 id="copying-items-from-the-inspector">Copying items from the Inspector</h2>
+<p>
+    You can copy one or more items from the Inspector panel to paste them elsewhere, such as into another request. You can also copy just the name or value of an item: select the item and choose <strong>Copy name</strong> or <strong>Copy value</strong> from the context menu.
+</p>
+<p>
+    If you copy encoded data, the original encoded value is copied to your clipboard rather than the decoded version that you see in the Inspector.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/tools/inspector/getting-started-inspector.html">Getting started with the Inspector</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/collaborator/index.html">Burp Collaborator</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/collaborator/server/index.html">Server</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/collaborator/server/private/index.html">Deploying a private server</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/collaborator/server/private/troubleshooting.html">Troubleshooting</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-enterprise">Enterprise</label>
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Troubleshooting</h1>
+<p>
+    If you have problems with your Collaborator server, try the following:
+</p>
+<ul>
+    <li>
+        <label class="label-edition is-professional">Professional</label>
+        Run the Collaborator health check.
+    </li>
+    <li>
+        Check that your server domain resolves to your Collaborator server's IP address.
+    </li>
+</ul>
+<h2 id="collaborator-health-check">Collaborator health check</h2>
+<p>
+    To access the Collaborator health check in Burp Suite Professional, go to the <strong>Collaborator</strong> page in the <strong>Settings</strong> dialog, and click <strong>Run health check</strong>.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/desktop/settings/project/collaborator.html">Burp Collaborator settings</a>.
+    </p>
+</div>
+<h2 id="server-domain-resolution">Server domain resolution</h2>
+<p>
+    The health check may fail if the server domain doesn't resolve to your Collaborator server IP address. The following process can help you troubleshoot this:
+</p>
+<ol>
+    <li>
+        <p>
+            Check that the NS record for your domain resolves to the expected name servers. For example:
+        </p>
+        <code class="code-scrollable">dig burpcollaborator.example.com NS +noall +answer +short
+ns1.burpcollaborator.example.com</code>
+    </li>
+    <li>
+        <p>
+            Check that the above entry has a corresponding A/AAAA record that resolves to the Collaborator's IP addresses. For example:
+        </p>
+        <code class="code-scrollable">dig ns1.burpcollaborator.example.com A +noall +answer +short
+192.168.0.1</code>
+    </li>
+    <li>
+        <p>
+            Check that the public IP address returns when you resolve a subdomain of the Collaborator server. For example:
+        </p>
+        <code class="code-scrollable">dig randomsubdomain.burpcollaborator.example.com A +noall +answer +short
+ns1.burpcollaborator.example.com
+192.168.0.1</code>
+    </li>
+    <li>
+        Check the Collaborator's logs and configuration.
+    </li>
+    <li>
+        Check that your DNS port is open for UDP traffic. This is port 53, unless you changed the default ports. For more information, see <a href="/burp/documentation/collaborator/server/private/index.html#setting-up-the-ports-and-firewall">Setting up the ports and firewall</a>.
+    </li>
+</ol>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/extensions/index.html">Extensions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/extensions/monitoring-system-impact.html">Monitoring system impact</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Monitoring the system impact of extensions</h1>
+<p>
+    You can use extensions to make Burp Suite carry out a wide range of tasks. If these tasks are resource-intensive or time-consuming, they can impact how Burp Suite performs.
+</p>
+<p>
+    To see an estimate of the impact on system performance for a particular extension:
+</p>
+<ol>
+    <li>
+        Go to <strong>Extensions &gt; BApp Store</strong> to see the BApp Store.
+    </li>
+    <li>
+        Select the extension and scroll down the right-hand panel to <strong>Estimated system impact</strong>.
+    </li>
+    <li>
+        <p>
+            Review the impact for each category:
+        </p>
+        <ul>
+            <li>
+                <strong>Memory</strong> - the impact the BApp is likely to have on Burp Suite's memory usage.
+            </li>
+            <li>
+                <strong>CPU</strong> - how much additional load the BApp places on the CPU.
+            </li>
+            <li>
+                <strong>Time</strong> - the overall impact on the speed of Burp Suite. This includes the responsiveness of the interface and how long tools take to complete tasks.
+            </li>
+            <li>
+                <strong>Scanner</strong> - the likely impact on how long a scan takes to complete.
+            </li>
+            <li>
+                <strong>Overall</strong> - the highest impact rating across all the categories above.
+            </li>
+        </ul>
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        The system impact ratings are approximate, they may not fully reflect the performance impact of a BApp. We are unable to fully test BApps that add custom tabs or context menu options.
+    </p>
+</div>
+<h2 id="cumulative-impact-of-extensions">Cumulative impact of extensions</h2>
+<p>
+    If you use multiple extensions at the same time, there is a cumulative effect on performance. To see an estimate of this, refer to the <strong>Total estimated system impact</strong>. This is located in the panel above the BApp Store.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You may encounter memory problems if you load several Python or Ruby extensions, or if you unload and reload extensions multiple times. You may see the following error:
+    </p>
+    <p>
+        <code>java.lang.OutOfMemoryError: PermGen space</code>
+    </p>
+    <p>
+        To avoid this issue, configure Java to allocate more PermGen storage by adding a <code>-XX:MaxPermSize</code> option to the <a href="/burp/documentation/desktop/troubleshooting/launch-from-command-line.html">command line</a> when starting Burp Suite. For example:
+    </p>
+    <p>
+        <code>java -XX:MaxPermSize=1G -jar burp.jar</code>
+    </p>
+</div>
+</body>
+</html>

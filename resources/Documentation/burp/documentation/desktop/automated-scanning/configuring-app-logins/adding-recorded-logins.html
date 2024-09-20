@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/index.html">Automated scanning</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/configuring-app-logins/index.html">Configuring application logins</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/configuring-app-logins/adding-recorded-logins.html">Adding recorded login sequences in Burp Suite Professional</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Adding recorded login sequences in Burp Suite Professional</h1>
+<p>
+    To configure application logins for a scan, you can import a recorded login sequence rather than supplying basic user credentials. A recorded login sequence is a set of instructions that tell Burp Scanner how to log in to the target application.
+</p>
+<p>
+    Recorded login sequences enable Burp to handle complex authentication mechanisms, including:
+</p>
+<ul>
+    <li>
+        Single sign-on.
+    </li>
+    <li>
+        Multi-step logins in which the username and password are not entered in the same form.
+    </li>
+    <li>
+        Login forms that contain, for example, extra fields or checkboxes.
+    </li>
+</ul>
+<p>
+    You can manage recorded login sequences from the <strong>Application login</strong> tab of the scan launcher. From here, you can:
+</p>
+<ul>
+    <li>
+        Add new logins to the scan.
+    </li>
+    <li>
+        Edit existing logins.
+    </li>
+    <li>
+        Replay existing logins.
+    </li>
+    <li>
+        Import logins from the configuration library.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Login sequences are recorded using the Burp Suite Navigation Recorder Chrome extension. For more information on how to record a login sequence, see <a href="/burp/documentation/scanner/authenticated-scanning/using-recorded-logins.html#recording-a-login-sequence">Recording login sequences</a>.
+    </p>
+</div>
+<h2 id="adding-login-sequences">Adding login sequences</h2>
+<p>
+    To add a login sequence to your scan:
+</p>
+<ol>
+    <li>
+        From the scan launcher's <strong>Application login</strong> tab, select <strong>Use recorded login sequences</strong>.
+    </li>
+    <li>
+        Click <strong>New</strong> to display the <strong>New Recorded Login</strong> dialog.
+    </li>
+    <li>
+        Enter a descriptive <strong>Label</strong> for the login.
+    </li>
+    <li>
+        Paste the data from your clipboard into the <strong>Paste Script</strong> field.
+    </li>
+    <li>
+        Click <strong>OK</strong>.
+    </li>
+</ol>
+<p>
+    Burp adds the sequence to the list of application logins.
+</p>
+<h2 id="editing-existing-recorded-logins" no-keyword-injection>Editing existing recorded logins</h2>
+<p>
+    To edit an existing recorded login, select it and click <strong>Edit</strong> to display the <strong>Edit Recorded Login</strong> dialog. This dialog shows the events comprising the login sequence in a table.
+</p>
+<p>
+    From here you can:
+</p>
+<ul>
+    <li>
+        <p>
+            <strong>Insert</strong> a new login event.
+        </p>
+    </li>
+    <li>
+        <p>
+            <strong>Edit</strong> an existing event.
+        </p>
+    </li>
+    <li>
+        <p>
+            <strong>Delete</strong> an event.
+        </p>
+    </li>
+</ul>
+<p>
+    Alternatively, click <strong>See as JSON</strong> to view the raw JSON for the recorded login sequence. You can edit this JSON directly. To return to the events table from this view, click <strong>View as Events</strong>.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        For more information on how recorded login events work, see <a href="/burp/documentation/scanner/authenticated-scanning/recorded-login-sequences.html">Recorded login sequences</a>.
+    </p>
+</div>
+<p>
+    To delete an existing recorded login, select it and click <strong>Delete</strong>.
+</p>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/collaborator/index.html">Burp Collaborator</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/collaborator/uses.html">Uses</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-enterprise">Enterprise</label>
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Typical uses for Burp Collaborator</h1>
+<p>
+    Burp Collaborator can be used to detect a wide range of out-of-band vulnerabilities. Some common use cases are described below:
+</p>
+<ul>
+    <li>
+        <a href="#external-service-interaction">External service interaction</a>.
+    </li>
+    <li>
+        <a href="#out-of-band-resource-load">Out-of-band resource load</a>.
+    </li>
+    <li>
+        <a href="#blind-sql-injection">Blind SQL injection</a>.
+    </li>
+    <li>
+        <a href="#blind-cross-site-scripting">Blind cross-site scripting</a>.
+    </li>
+</ul>
+<h2 id="external-service-interaction">External service interaction</h2>
+<p>
+    Burp Collaborator can induce and detect a typical external service interaction as follows:
+</p>
+<ol>
+    <li>
+        When the application receives a payload from Burp Collaborator, it performs a DNS lookup on the payload URL, then performs an HTTP request.
+    </li>
+    <li>
+        The Collaborator server receives the DNS lookup and HTTP request.
+    </li>
+    <li>
+        Burp polls the Collaborator server for payload interactions.
+    </li>
+    <li>
+        Burp reports the external service interaction, including the full interaction messages.
+    </li>
+</ol>
+<img src="/burp/documentation/images/collaborator/collaborator2.png" alt="Detecting external service interaction">
+<p>
+    You can detect some types of service vulnerabilities by analyzing the details of the service interaction with a collaborating instance of that service. For example, mail header injection can be detected in this way.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        The ability to induce an external service interaction doesn't always indicate a vulnerability. You need to determine whether this is intended behavior. For more information about external service interaction vulnerabilities, see the <strong>External service interaction</strong> issues in <a href="/burp/documentation/scanner/vulnerabilities-list.html">Vulnerabilities detected by Burp Scanner</a>.
+    </p>
+</div>
+<h2 id="out-of-band-resource-load">Out-of-band resource load</h2>
+<p>
+    This is when an application can be induced to load content from an external source and include it in its own response.
+</p>
+<p>
+    To detect this vulnerability, the Collaborator server returns specific data in its responses to the application's interactions. Burp then analyzes the application's in-band response for the data.
+</p>
+<img src="/burp/documentation/images/collaborator/collaborator3.png" alt="Detecting out-of-band resource load">
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        For more information, see the <strong>Out-of-band resource load</strong> issue in <a href="/burp/documentation/scanner/vulnerabilities-list.html">Vulnerabilities detected by Burp Scanner</a>.
+    </p>
+</div>
+<h2 id="blind-sql-injection">Blind SQL injection</h2>
+<p>
+    This is when an application is vulnerable to SQL injection, but its HTTP responses don't contain the results of the relevant SQL query or the details of any database errors.
+</p>
+<p>
+    To detect this vulnerability, Burp sends injection-based payloads that trigger an external interaction when the injection is successful.
+</p>
+<p>
+    The following example uses an Oracle-specific API to trigger an interaction when injected into a SQL statement.
+</p>
+<img src="/burp/documentation/images/collaborator/collaborator4.png" alt="Detecting blind SQL injection">
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        For more information, see the Web Security Academy documentation on <a href="/web-security/sql-injection/blind/index.html">Blind SQL injection</a>.
+    </p>
+</div>
+<h2 id="blind-cross-site-scripting">Blind cross-site scripting</h2>
+<p>
+    The Collaborator server can notify Burp of deferred interactions that occur asynchronously when the relevant in-band payload is submitted to the target. This enables the detection of various stored vulnerabilities, such as second-order SQL injection and blind XSS.
+</p>
+<p>
+    In the example below:
+</p>
+<ol>
+    <li>
+        Burp sends a stored XSS payload that triggers a Collaborator interaction if it is rendered to a user.
+    </li>
+    <li>
+        An admin user views the payload later. Their browser performs the interaction.
+    </li>
+    <li>
+        Burp polls the Collaborator server. Burp receives details of the interaction and reports the stored XSS vulnerability.
+    </li>
+</ol>
+<img src="/burp/documentation/images/collaborator/collaborator5.png" alt="Detecting blind cross-site scripting">
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+Client-side desync
+<h1>Typical severity</h1>
+High
+<h1>Issue description</h1>
+<p>
+    Client-side desync (CSD) vulnerabilities occur when a web server fails to correctly process the Content-Length of POST requests. By exploiting this behavior, an attacker can force a victim's browser to desynchronize its connection with the website, typically leading to XSS.
+</p>
+
+<h1>Issue remediation</h1>
+<p>
+    You can resolve this vulnerability by patching the server so that it either processes POST requests correctly, or closes the connection after handling them. You could also disable connection reuse entirely, but this may reduce performance.
+
+    You can also resolve this issue by enabling HTTP/2.
+</p>
+<h1>References</h1>
+<ul>
+    <li><a href="https://portswigger.net/web-security/request-smuggling">HTTP Request Smuggling</a></li>
+    <li><a href="https://portswigger.net/research/browser-powered-desync-attacks">Browser-Powered Desync Attacks</a></li>
+</ul>
+<h1>Vulnerability classifications</h1>
+<ul>
+    <li><a href="https://cwe.mitre.org/data/definitions/444.html">CWE-444: Inconsistent Interpretation of HTTP Requests ('HTTP Request Smuggling')</a></li>
+    <li><a href="https://capec.mitre.org/data/definitions/33.html">CAPEC-33: HTTP Request Smuggling</a></li>
+</ul>
+<h1>Web intro</h1>
+
+</body>
+</html>

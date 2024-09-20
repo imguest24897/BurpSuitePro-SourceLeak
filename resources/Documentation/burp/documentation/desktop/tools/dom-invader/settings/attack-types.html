@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/index.html">DOM Invader</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/settings/index.html">Settings</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/settings/attack-types.html">Attack types</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>DOM Invader attack types</h1>
+<p>
+    By default, DOM Invader automatically probes for ordinary DOM XSS sources and sinks, but you can optionally configure DOM Invader to attempt other attacks.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/dom-invader-prototype-pollution-enabling.png" alt="DOM Invader attack types settings">
+</div>
+<h2 id="prototype-pollution">Prototype pollution</h2>
+<p>
+    When this setting is enabled, DOM Invader automatically tries to identify sources for client-side prototype pollution in addition to the usual DOM XSS sources and sinks.
+</p>
+<p>
+    For more information on DOM Invader's prototype pollution features, see <a href="/burp/documentation/desktop/tools/dom-invader/prototype-pollution.html">Testing for client-side prototype pollution</a>.
+</p>
+<p>
+    You can click the cog icon next to this setting to access some additional settings for fine-tuning this behavior. For more information on configuration settings specific to prototype pollution, see <a href="/burp/documentation/desktop/tools/dom-invader/settings/prototype-pollution.html">Prototype pollution settings</a>.
+</p>
+<h2 id="dom-clobbering">DOM clobbering</h2>
+<p>
+    When this setting is enabled, DOM Invader automatically tries to identify DOM clobbering vulnerabilities.
+</p>
+<p>
+    For more information, see <a href="/burp/documentation/desktop/tools/dom-invader/dom-clobbering.html">Testing for DOM clobbering with DOM Invader</a>.
+</p>
+</body>
+</html>

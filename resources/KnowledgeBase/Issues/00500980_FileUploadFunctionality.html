@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+File upload functionality
+<h1>Typical severity</h1>
+
+Information
+
+<h1>Issue description</h1>
+
+<p>File upload functionality is commonly associated with a number of vulnerabilities, including:</p>
+<ul>
+<li>File path traversal</li><li>Persistent cross-site scripting</li><li>Placing of other client-executable code into the domain</li><li>Transmission of viruses and other malware</li><li>Denial of service</li></ul>
+<p>You should review file upload functionality to understand its purpose, and establish whether uploaded content is ever returned to other application users, either through their normal usage of the application or by being fed a specific link by an attacker.</p>
+<p>Some factors to consider when evaluating the security impact of this functionality include:</p>
+<ul>
+<li>Whether uploaded content can subsequently be downloaded via a URL within the application.</li><li>What Content-type and Content-disposition headers the application returns when the file's content is downloaded.</li><li>Whether it is possible to place executable HTML/JavaScript into the file, which executes when the file's contents are viewed.</li><li>Whether the application performs any filtering on the file extension or MIME type of the uploaded file.</li><li>Whether it is possible to construct a hybrid file containing both executable and non-executable content, to bypass any content filters - for example, a file containing both a GIF image and a Java archive (known as a GIFAR file).</li><li>What location is used to store uploaded content, and whether it is possible to supply a crafted filename to escape from this location.</li><li>Whether archive formats such as ZIP are unpacked by the application.</li><li>How the application handles attempts to upload very large files, or decompression bomb files.</li></ul>
+
+<h1>Issue remediation</h1>
+
+<p>File upload functionality is not straightforward to implement securely. Some recommendations to consider in the design of this functionality include:</p>
+<ul>
+<li>Use a server-generated filename if storing uploaded files on disk.</li><li>Inspect the content of uploaded files, and enforce a whitelist of accepted, non-executable content types. Additionally, enforce a blacklist of common executable formats, to hinder hybrid file attacks.</li><li>Enforce a whitelist of accepted, non-executable file extensions.</li>
+<li>If uploaded files are downloaded by users, supply an accurate non-generic Content-Type header, the X-Content-Type-Options: nosniff header, and also a Content-Disposition header that specifies that browsers should handle the file as an attachment.</li>
+<li>Enforce a size limit on uploaded files (for defense-in-depth, this can be implemented both within application code and in the web server's configuration).</li><li>Reject attempts to upload archive formats such as ZIP.</li></ul>
+
+<h1>References</h1>
+
+<ul><li><a href="https://github.com/cure53/H5SC/tree/master/attachments">Various proof-of-concept files</a></li>
+<li><a href="http://labs.detectify.com/post/120088174539/building-an-xss-polyglot-through-swf-and-csp">An XSS polyglot attack</a></li>
+</ul>
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+<li><a href="https://cwe.mitre.org/data/definitions/434.html">CWE-434: Unrestricted Upload of File with Dangerous Type</a></li>
+    <li><a href="https://capec.mitre.org/data/definitions/17.html">CAPEC-17: Using Malicious Files</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

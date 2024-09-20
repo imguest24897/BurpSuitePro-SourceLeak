@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/ssrf/index.html">Testing for SSRF vulnerabilities</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/ssrf/testing-for-ssrf.html">Testing for SSRF</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Testing for SSRF with Burp Suite</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/UdKolNn_FOk?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    Server-side request forgery (SSRF) is a web security vulnerability that allows an attacker to induce the server-side application to make requests to an unintended location.
+</p>
+<p>
+    SSRF vulnerabilities may enable you to communicate with back-end systems that are not normally publicly available via a compromised server. This is often done via non-routable private IP addresses. You can use Intruder to enumerate these IP addresses and potentially gain access to these back-end systems.
+</p>
+<p>
+    Before you test for SSRF, you need to identify a suitable attack vector. This could be a request with a parameter that contains a full or partial URL, for example. To learn more about identifying SSRF attack surface, see <a href="/web-security/ssrf/index.html#finding-hidden-attack-surface-for-ssrf-vulnerabilities">Finding hidden attack surface for SSRF vulnerabilities</a>.
+</p>
+<h2 id="steps" cms-ignore-validation="DUPLICATE_HEADINGS">Steps</h2>
+<p>
+    You can follow along with the process below using the <a href="https://portswigger.net/web-security/ssrf/lab-basic-ssrf-against-backend-system">Basic SSRF against a backend system lab from our Web Security Academy.</a>
+</p>
+<ol>
+    <li>
+        <p>
+            Identify a request that appears to both:
+        </p>
+        <ul>
+            <li>
+                Cause data to be fetched from another backend system
+            </li>
+            <li>
+                Use a user-controllable input to determine where this data is fetched from
+            </li>
+        </ul>
+        <p>
+            In the lab, you can use the stock check feature and its <code>stockApi</code> parameter.
+        </p>
+    </li>
+    <li>
+        Send the relevant request to Intruder.
+    </li>
+    <li>
+        Add a suitable payload position that will allow you to probe for internal IP addresses or private hostnames. In the case of the lab, you know that the IP address falls within the range <code>192.168.0.0/24</code>. You can add the payload to the last octet in the IP address as follows: <code>192.168.0.§0§:8080</code>
+    </li>
+    <li>
+        Modify the path to point to the root and remove the query and fragment strings if present. In the lab, this would result in <code>stockApi=192.168.0.§0§:8080/</code>
+    </li>
+    <li>
+        <p>
+            Use Intruder to look for internal IP addresses or private host names that give a different response. In the lab, you can do this as follows:
+        </p>
+        <ul>
+            <li>
+                Set the <strong>Attack type</strong> to <strong>Sniper</strong>.
+            </li>
+            <li>
+                Go to the <strong>Payloads</strong> tab and set the <strong>Payload type</strong> to <strong>Numbers</strong>.
+            </li>
+            <li>
+                Set <strong>From</strong> to <code>1</code>, <strong>To</strong> to <code>255</code>, and <strong>Step</strong> to <code>1</code>.
+            </li>
+            <li>
+                Click <strong>Start attack</strong>.
+            </li>
+            <li>
+                Check the results, and look for payloads that return a different status code or length.
+            </li>
+        </ul>
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        You can also use Intruder to look for directories, if you find an interesting internal IP address or private host name. For more information, see <a href="/burp/documentation/desktop/tools/intruder/index.html">Burp Intruder</a>.
+    </p>
+</div>
+</body>
+</html>

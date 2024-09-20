@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+Local file path manipulation (reflected DOM-based)
+<h1>Typical severity</h1>
+
+High
+
+<h1>Issue description</h1>
+
+
+<p>Reflected DOM-based vulnerabilities arise when data is copied from a request and echoed into the application's immediate response within a part of the DOM that is then processed in an unsafe way by a client-side script. An attacker can leverage the reflection to control a part of the response (for example, a JavaScript string) that can be used to trigger the DOM-based vulnerability.</p>
+
+<p>Local file path manipulation  arises when a script uses controllable data as the filename parameter to a file handling API. An attacker may be able to use the vulnerability to construct a URL that, if visited by another application user, will cause the user's browser to open an arbitrary local file.</p>
+<p>The potential impact of the vulnerability depends on the application's usage of the opened file. If the application reads data from the file, then the attacker may be able to retrieve this data. If the application writes data to the file, then the attacker may be able to write specific data to a sensitive file, such as an operating system configuration file. In both these cases, the actual exploitability of the potential vulnerability may depend on other suitable functionality being present in the application.</p>
+<p>Burp Suite automatically identifies this issue using dynamic and static code analysis. Static analysis can lead to false positives that are not actually exploitable. If Burp Scanner has not provided any evidence resulting from dynamic analysis, you should review the relevant code and execution paths  to determine whether this vulnerability is indeed present, or whether mitigations are in place that would prevent exploitation.</p>
+<h1>Issue remediation</h1>
+
+<p>The most effective way to avoid DOM-based local file path manipulation vulnerabilities is not to dynamically pass a filename to a file handling API using data that originated from any untrusted source. If the desired functionality of the application means that this behavior is unavoidable, then defenses must be implemented within the client-side code to prevent malicious data from accessing arbitrary files. In general, this is best achieved by using a whitelist of permitted filenames, and strictly validating the filename against this list before invoking the file handling API. </p>
+
+<h1>References</h1>
+
+<ul>
+    <li><a href="https://portswigger.net/web-security/dom-based/local-file-path-manipulation">Web Security Academy: Local file path manipulation (DOM-based)</a></li>
+</ul>
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+<li><a href="https://cwe.mitre.org/data/definitions/22.html">CWE-22: Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')</a></li>
+<li><a href="https://cwe.mitre.org/data/definitions/73.html">CWE-73: External Control of File Name or Path</a></li>
+    <li><a href="https://capec.mitre.org/data/definitions/126.html">CAPEC-126: Path Traversal</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

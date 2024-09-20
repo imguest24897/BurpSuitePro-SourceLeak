@@ -1,0 +1,24 @@
+{
+  "typeIndex": 5245953,
+  "name": "Ajax request header manipulation (reflected DOM-based)",
+  "description": "<p>Reflected DOM-based vulnerabilities arise when data is copied from a request and echoed into the application's immediate response within a part of the DOM that is then processed in an unsafe way by a client-side script. An attacker can leverage the reflection to control a part of the response (for example, a JavaScript string) that can be used to trigger the DOM-based vulnerability.</p>\n<p>Ajax request header manipulation  arises when a script writes controllable data into a header of an Ajax request that is issued using XmlHttpRequest. An attacker may be able to use the vulnerability to construct a URL that, if visited by another application user, will set an arbitrary header in the subsequent Ajax request.</p>\n<p>The potential impact of the vulnerability depends on the role of specific HTTP headers in the server-side application's processing of the Ajax request. If the header is used to control the behavior that results from the Ajax request, then the attacker may be able to cause the user to perform unintended actions by manipulating the header.</p>\n<p>Burp Suite automatically identifies this issue using dynamic and static code analysis. Static analysis can lead to false positives that are not actually exploitable. If Burp Scanner has not provided any evidence resulting from dynamic analysis, you should review the relevant code and execution paths  to determine whether this vulnerability is indeed present, or whether mitigations are in place that would prevent exploitation.</p>",
+  "remediation": "<p>The most effective way to avoid DOM-based Ajax request header manipulation vulnerabilities is not to dynamically set Ajax request headers using data that originated from any untrusted source. This behavior should never be implemented for headers that have any role in controlling the effects of privileged actions within the application. </p>",
+  "webIntro": null,
+  "typicalSeverity": "LOW",
+  "references": [
+    {
+      "title": "Web Security Academy: Ajax request header manipulation (DOM-based)",
+      "url": "https://portswigger.net/web-security/dom-based/ajax-request-header-manipulation"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-116: Improper Encoding or Escaping of Output",
+      "url": "https://cwe.mitre.org/data/definitions/116.html"
+    },
+    {
+      "title": "CAPEC-6: Argument Injection",
+      "url": "https://capec.mitre.org/data/definitions/6.html"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+Client-side prototype pollution
+<h1>Typical severity</h1>
+
+Information
+
+<h1>Issue description</h1>
+
+<p>
+    A client-side prototype pollution source is any user-controlled JSON property, query string, or hash parameter that is converted to a JavaScript object and then merged with another object. This enables an attacker to use property keys, such as __proto__, to assign properties to the Object.prototype or other global prototypes.
+</p>
+<p>
+    Client-side prototype pollution is not a vulnerability in its own right. However, when paired with a gadget, this may lead to vulnerabilities such as DOM XSS, which could enable the attacker to control JavaScript on the page.
+</p>
+
+<h1>Issue remediation</h1>
+
+<p>
+    Ensure that property keys, such as __proto__, constructor, and prototype are correctly filtered when merging objects. When creating objects, we recommend using the Object.create(null) API to ensure that your object does not inherit from the Object.prototype and, therefore, won't be vulnerable to prototype pollution.
+</p>
+
+<h1>References</h1>
+
+<ul>
+    <li><a href="https://portswigger.net/burp/documentation/desktop/tools/dom-invader/prototype-pollution.html">Testing for client-side prototype pollution in DOM Invader</a></li>
+    <li><a href="https://portswigger.net/web-security/prototype-pollution">Web Security Academy: Prototype pollution</a></li>
+</ul>
+
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+    <li><a href="https://cwe.mitre.org/data/definitions/1321.html">CWE-1321: Improperly Controlled Modification of Object Prototype Attributes ('Prototype Pollution')</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+</body>
+</html>

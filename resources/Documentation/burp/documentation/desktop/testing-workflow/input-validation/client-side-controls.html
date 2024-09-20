@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/index.html">Testing input validation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/client-side-controls.html">Bypassing client-side controls</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Bypassing client-side controls</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/znstcw4wMNg?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    Some applications rely on measures on the client side to control the data that they submit to the server. This can lead to significant security flaws, as the user has full control over the client. To restrict user input, applications use a range of mechanisms that prevent the user from directly seeing and modifying data.
+</p>
+<p>
+    You can use Burp Proxy to intercept a request, then modify data in the HTTP request before forwarding it to the server. This enables you to change data in a way that may not have been possible in the application.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="steps">Steps</h2>
+<p>
+    You can follow the processes below using the lab <a href="/web-security/logic-flaws/examples/lab-logic-flaws-excessive-trust-in-client-side-controls.html">Excessive trust in client-side controls</a>.
+</p>
+<p>
+    To view and modify data in Burp in order to bypass client-side controls:
+</p>
+<ol>
+    <li>
+        In Burp's browser, access the page for the function that you want to test. If you're using the lab, access the leather jacket product page.
+    </li>
+    <li>
+        In <strong>Proxy &gt; Intercept</strong>, set the intercept toggle to <strong>Intercept on</strong>.
+    </li>
+    <li>
+        In Burp's browser, click through the function. Burp intercepts each request. The message details are shown in the <strong>Intercept</strong> tab.
+    </li>
+    <li>
+        <p>
+            In the <strong>Intercept</strong> tab, review each request for interesting content. For example, look for parameters that are hidden on the web page. In the lab example, there is a hidden price parameter.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/tutorials/bypassing-client-side-controls-1.png" alt="Hidden price parameter" class="center-block">
+        </div>
+    </li>
+    <li>
+        <p>
+            Edit the message. If you're following the lab, edit the price.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/tutorials/bypassing-client-side-controls-2.png" alt="Edit the hidden price parameter" class="center-block">
+        </div>
+    </li>
+    <li>
+        Select the request and click <strong>Forward</strong> to send it.
+    </li>
+    <li>
+        <p>
+            Determine whether the modification successfully updated on the server-side:
+        </p>
+        <ul>
+            <li>
+                In <strong>Proxy &gt; HTTP history</strong>, select the request you edited from the <strong>Edited</strong> column. Review the response.
+            </li>
+            <li>
+                Review the website. In the lab example, view the cart to see that the price has successfully changed to $0.01.
+            </li>
+        </ul>
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You can also use Burp Repeater to modify data in a request before forwarding it to the server. Send any message to Repeater from the HTTP history or Target site map. You can use Repeater to modify and send the message over and over.
+    </p>
+</div>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/tools/burps-browser.html">Burp's browser</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/proxy/intercept-messages.html">Proxy intercept</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/repeater/index.html">Burp Repeater</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/proxy/http-history/index.html">HTTP history</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

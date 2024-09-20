@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+HTML5 web message manipulation (stored DOM-based)
+<h1>Typical severity</h1>
+
+Information
+
+<h1>Issue description</h1>
+
+
+<p>Stored DOM-based vulnerabilities arise when user input is stored and later embedded into a response within a part of the DOM that is then processed in an unsafe way by a client-side script. An attacker can leverage the data storage to control a part of the response (for example, a JavaScript string) that can be used to trigger the DOM-based vulnerability.</p>
+<p>HTML5 web message manipulation arises when a script sends controllable data as a web message to another document within the browser. An attacker may be able to use the vulnerability to construct a URL that, if visited by another application user, will cause the user's browser to send a web message containing data that is under the attacker's control.</p>
+<p>The potential impact of the vulnerability depends on the destination document's handling of the incoming message. If the destination document trusts the sender not to transmit malicious data in the message, and handles the data in an unsafe manner, then the joint behavior of the two documents may allow an attacker to compromise the application user.
+</p>
+
+<p>Burp Suite automatically identifies this issue using dynamic and static code analysis. Static analysis can lead to false positives that are not actually exploitable. If Burp Scanner has not provided any evidence resulting from dynamic analysis, you should review the relevant code and execution paths  to determine whether this vulnerability is indeed present, or whether mitigations are in place that would prevent exploitation.</p>
+<h1>Issue remediation</h1>
+
+<p>The most effective way to avoid DOM-based HTML5 web message manipulation vulnerabilities is not to send a web message containing data that originated from any untrusted source. If the desired functionality of the application means that this behavior is unavoidable, then defenses must be implemented within the client-side code to prevent malicious data from compromising the user. This validation can be carried out by the document that sends the message, or by the document that receives the message, or both, depending on the trust relationship between the two documents.</p>
+
+<h1>References</h1>
+
+<ul>
+    <li><a href="https://portswigger.net/web-security/dom-based/web-message-manipulation">Web Security Academy: Web message manipulation (DOM-based)</a></li>
+</ul>
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+<li><a href="https://cwe.mitre.org/data/definitions/20.html">CWE-20: Improper Input Validation</a></li>
+    <li><a href="https://capec.mitre.org/data/definitions/153.html">CAPEC-153: Input Data Manipulation</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

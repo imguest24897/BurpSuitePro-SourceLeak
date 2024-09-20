@@ -1,0 +1,193 @@
+.modal-open {
+    overflow: hidden;
+
+    .modal {
+        position: fixed;
+        top: 15px;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1050;
+        outline: 0;
+
+        .modal-dialog {
+            position: relative;
+            width: auto;
+            margin: 10px;
+            box-shadow: 0 3px 9px $dark_grey;
+            transition: .3s ease,-webkit- .3s ease,-o- .3s ease;
+            visibility: hidden;
+            opacity: 0;
+
+            .modal-content {
+                 position: relative;
+                 display: -webkit-box;
+                 display: -webkit-flex;
+                 display: -ms-flexbox;
+                 display: flex;
+                 -webkit-box-orient: vertical;
+                 -webkit-box-direction: normal;
+                 -webkit-flex-direction: column;
+                 -ms-flex-direction: column;
+                 flex-direction: column;
+                 background-color: $white;
+                 -webkit-background-clip: padding-box;
+                 background-clip: padding-box;
+                 outline: 0;
+
+                 .modal-header {
+                      display: -webkit-box;
+                      display: -webkit-flex;
+                      display: -ms-flexbox;
+                      display: flex;
+                      -webkit-box-align: center;
+                      -webkit-align-items: center;
+                      -ms-flex-align: center;
+                      align-items: center;
+                      -webkit-box-pack: justify;
+                      -webkit-justify-content: space-between;
+                      -ms-flex-pack: justify;
+                      justify-content: space-between;
+                      padding: 5px;
+                      height: 25px;
+                      color: $white;
+                      background: $orange;
+
+                         h4 {
+                          color: $white;
+                          margin: 0;
+
+                          &:before {
+                            font-family: 'enterprise';
+                            padding-right: 8px;
+                            vertical-align: bottom;
+                            font-size: 17px;
+                          }
+                      }
+                 }
+
+                 .modal-body {
+                     position: relative;
+                     -webkit-box-flex: 1;
+                     -webkit-flex: 1 1 auto;
+                     -ms-flex: 1 1 auto;
+                     flex: 1 1 auto;
+                     padding: 30px;
+                     max-height: calc(100vh - 30px);
+                     overflow: auto;
+                 }
+
+                 .modal-footer {
+                     display: -webkit-box;
+                     display: -webkit-flex;
+                     display: -ms-flexbox;
+                     display: flex;
+                     -webkit-box-align: center;
+                     -webkit-align-items: center;
+                     -ms-flex-align: center;
+                     align-items: center;
+                     -webkit-box-pack: end;
+                     -webkit-justify-content: flex-end;
+                     -ms-flex-pack: end;
+                     justify-content: flex-end;
+                     padding: 15px
+
+                     &:not(:first-child) {
+                         margin-left: .25rem
+                     }
+
+                     &:not(:last-child) {
+                         margin-right: .25rem
+                     }
+                 }
+             }
+         }
+
+        &.show {
+            .modal-dialog {
+                -webkit-transform: translateY(20px);
+                -o-transform: translateY(20px);
+                transform: translateY(20px);
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+    }
+
+    .tk-modal {
+      .modal-header {
+        h4 {
+          &:before {
+            content: $icon-toolbox;
+          }
+        }
+      }
+    }
+
+    .td-modal {
+      .modal-header {
+        h4 {
+          &:before {
+            content: $icon-information;
+          }
+        }
+      }
+    }
+}
+
+.modal-backdrop {
+     position: fixed;
+     top: 0;
+     right: 0;
+     bottom: 0;
+     left: 0;
+     z-index: 1040;
+     background-color: $charcoal;
+
+    &.fade {
+        opacity: 0;
+    }
+
+    &.show {
+        opacity: .7;
+        transition: .3s ease,-webkit-transform .3s ease,-o-transform .3s ease;
+    }
+}
+
+
+.modal-scrollbar-measure {
+    position: absolute;
+    top: -9999px;
+    width: 50px;
+    height: 50px;
+    overflow: scroll
+}
+
+@media (min-width:576px) {
+    .modal-open {
+        .modal {
+            top: 25px;
+
+            .modal-dialog {
+                max-width: 80%;
+                margin: 30px auto;
+
+                .modal-content {
+                    .modal-body {
+                         max-height: calc(100vh - 210px);
+                     }
+                }
+            }
+        }
+    }
+
+    .modal-sm {
+        max-width: 300px
+    }
+}
+
+@media (min-width:992px) {
+    .modal-lg {
+        max-width: 800px
+    }
+}

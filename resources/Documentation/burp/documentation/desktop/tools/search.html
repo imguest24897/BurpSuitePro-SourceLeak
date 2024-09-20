@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms><cms ignore-validation="STACKED_HEADINGS"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/search.html">Search</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Search</h1>
+<div class="highlightedarea">
+    <h4>In this section</h4>
+    <ul>
+        <li>
+            <a href="#text-search">Simple text search</a>
+        </li>
+        <li>
+            <a href="#find-comments-and-scripts">Find comments</a>
+        </li>
+        <li>
+            <a href="#find-comments-and-scripts">Find scripts</a>
+        </li>
+        <li>
+            <a href="#find-references">Find references (links) to a particular URL</a>
+        </li>
+    </ul>
+</div>
+<h2 id="text-search">Text search</h2>
+<p>
+    You can perform suite-wide searches in the search dialog. To access the search dialog, click <strong><span class="icon-search21"></span> Search</strong> on the tab bar.
+</p>
+<p>
+    You can also search within selected branches in the Target <a href="/burp/documentation/desktop/tools/target/site-map/index.html">site map</a>, by selecting <strong>Search</strong> within <strong>Engagement tools</strong> in the context menu.
+</p>
+<p>
+    The search dialog lets you configure the following options:
+</p>
+<ul>
+    <li>
+        The expression to search for
+    </li>
+    <li>
+        Whether the search is case sensitive
+    </li>
+    <li>
+        Whether the search term is a literal string or a regular expression
+    </li>
+    <li>
+        Whether the search should show <strong>negative</strong> matches (i.e. items that do not contain the search expression)
+    </li>
+    <li>
+        Whether the search is restricted to <a href="/burp/documentation/desktop/tools/target/scope/index.html">in-scope</a> items only
+    </li>
+    <li>
+        Whether the search results should dynamically update as new HTTP messages are processed by Burp tools
+    </li>
+    <li>
+        Which locations to search within HTTP messages (requests versus responses, headers versus body)
+    </li>
+    <li>
+        Which tools to search in. You can choose from Target, Repeater, Proxy, or Organizer.
+    </li>
+</ul>
+<p>
+    When you click <strong>Go</strong>, Burp searches in all issued requests, using the options you configured. The search results are shown in a table containing the following columns:
+</p>
+<ul>
+    <li>
+        <strong>Source</strong> - The tool the search result is located in. If the search result is in Repeater, Burp displays the relevant Repeater tab number and history item number.
+    </li>
+    <li>
+        <strong>Host</strong> - The protocol and server hostname.
+    </li>
+    <li>
+        <strong>URL</strong> - The URL file path and query string.
+    </li>
+    <li>
+        <strong>Status code</strong> - The HTTP status code of the response.
+    </li>
+    <li>
+        <strong>Length</strong> - The length of the response in bytes.
+    </li>
+    <li>
+        <strong>Time requested</strong> - The time the request was made.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        If the search result is found in Repeater, you can quickly switch to the relevant request / response pair using the context menu. Right-click the search result in the table and select <strong>Go to Repeater tab</strong>. Burp takes you directly to the correct history item in the tab.
+    </p>
+</div>
+<p>
+    You can customize and sort the table contents. For more information, see <a href="/burp/documentation/desktop/burps-layout/customize-tables.html">Customizing Burp's tables</a>.
+</p>
+<p>
+    The preview pane shows the full request and response for the selected item, including highlighted matches for your search expression. The context menu can be used to send requests to Burp tools and carry out other actions.
+</p>
+<h2 id="find-comments-and-scripts">Find comments and scripts</h2>
+<p>
+    You can use these functions to search part or all of the Target <a href="/burp/documentation/desktop/tools/target/site-map/index.html">site map</a> for comments and scripts. You can start the search by selecting part or all of the site map tree, and choosing <strong>Find comments</strong> or <strong>Find scripts</strong> within <strong>Engagement tools</strong> in the site map context menu.
+</p>
+<p>
+    In the search dialog, use the <strong>Search</strong> button to perform the search (or re-perform it later). Details of the discovered items are shown in a sortable table. The preview pane shows the full request and response for the selected item, with relevant items automatically highlighted, and also extracted into their own tab. The context menu can be used to send requests to Burp tools and carry out other actions.
+</p>
+<p>
+    Selecting the <strong>Dynamic update</strong> option will cause Burp to dynamically update the results as new HTTP messages are processed by Burp tools. You can use the <strong>Export</strong> button to save all of the scripts or comments to file or to the clipboard, optionally consolidating duplicated items.
+</p>
+<h2 id="find-references">Find references</h2>
+<p>
+    You can use this function to search all of Burp's tools for HTTP responses that link to a particular item. To access the function, select an HTTP request anywhere within Burp, or any part of the Target <a href="/burp/documentation/desktop/tools/target/site-map/index.html">site map</a>, and choose <strong>Find references</strong> within <strong>Engagement tools</strong> in the context menu.
+</p>
+<p>
+    The search results window shows responses (from all Burp tools) that link to the selected item. When you view an individual search result, the response is automatically highlighted to show where the linking reference occurs.
+</p>
+<p>
+    Note that this feature treats the original URL as a prefix when searching for links, so if you select a host, you will find all references to that host; if you select a folder, you will find all references to items within that folder or deeper.
+</p>
+</body>
+</html>

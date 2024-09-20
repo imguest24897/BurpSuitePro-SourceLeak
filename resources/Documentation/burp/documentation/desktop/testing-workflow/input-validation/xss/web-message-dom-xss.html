@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE" ignore-validation="OTHER_PAGE_KEYWORD_TOO_FREQUENT"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/index.html">Testing input validation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/xss/index.html">Cross-site scripting</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/xss/web-message-dom-xss.html">Testing for web message DOM XSS with DOM Invader</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Testing for web message DOM XSS with DOM Invader</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/_9toDUF1jV4?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    Web message DOM XSS occurs if the destination origin for a web message trusts the sender not to transmit malicious data in the message, and handles the data in an unsafe way by passing it into a sink.
+</p>
+<p>
+    You can use DOM Invader to test applications for web message DOM XSS. DOM Invader enables you to log any messages that are sent via the <code>postMessage()</code> method, and modify and resend web messages.
+</p>
+<p>
+    To learn more about sources and sinks, see <a href="/web-security/dom-based/index.html">DOM-based vulnerabilities</a>.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        DOM Invader is pre-installed in Burp's browser. It's disabled by default as some of its features may interfere with your other testing activities.
+    </p>
+</div>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="before-you-start">Before you start</h2>
+<ul>
+    <li>
+        Enable DOM Invader. For more information, see <a href="/burp/documentation/desktop/tools/dom-invader/enabling.html">Enabling DOM Invader</a>.
+    </li>
+    <li>
+        Enable <strong>Postmessage interception</strong> from the DOM Invader settings menu. For more information, see <a href="/burp/documentation/desktop/tools/dom-invader/settings/main.html">Main DOM Invader settings</a>.
+    </li>
+</ul>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="steps">Steps</h2>
+<p>
+    You can follow the processes below using the lab <a href="/web-security/dom-based/controlling-the-web-message-source/lab-dom-xss-using-web-messages.html">DOM XSS using web messages</a>.
+</p>
+<ol>
+    <li>
+        Use Burp's browser to visit your target website.
+    </li>
+    <li>
+        Right-click the browser window and select <strong>Inspect</strong>.
+    </li>
+    <li>
+        Select the <strong>DOM Invader</strong> tab and then select <strong>Messages</strong> from the right-hand panel. You can see the messages that DOM invader has flagged as exploitable.
+    </li>
+    <li>
+        <p>
+            Click each message to review it, and see if the <code>origin</code>, <code>data</code>, or <code>source</code> properties of the message are accessed by the client-side JavaScript:
+        </p>
+        <ul>
+            <li>
+                If the <code>origin</code> property isn't accessed, it's likely that the origin isn't being validated.
+            </li>
+            <li>
+                If the <code>data</code> property isn't accessed, the message can't be exploited.
+            </li>
+            <li>
+                If the <code>source</code> property isn't accessed, it's likely the source (usually an iframe) isn't being validated.
+            </li>
+        </ul>
+    </li>
+</ol>
+<p>
+    You can use the message information to craft an exploit. Use DOM Invader to send a modified web message:
+</p>
+<ol>
+    <li>
+        From the <strong>Messages</strong> view, click on any message to open the message details dialog.
+    </li>
+    <li>
+        Review the message information to identify the type of sink the data ends up in.
+    </li>
+    <li>
+        <p>
+            Edit the <strong>Data</strong> field with an exploit that matches the sink type.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/tutorials/dom-invader-web-message-xss.png" alt="Reviewing messages in DOM Invader" class="center-block">
+        </div>
+    </li>
+    <li>
+        Click <strong>Send</strong>.
+    </li>
+    <li>
+        <p>
+            If you find an exploitable vulnerability, use DOM Invader to generate a proof of concept:
+        </p>
+        <ul>
+            <li>
+                Select the vulnerable message to open the message details dialog.
+            </li>
+            <li>
+                Modify the values as required for your exploit.
+            </li>
+            <li>
+                Click <strong>Build PoC</strong> to save the HTML to your clipboard.
+            </li>
+        </ul>
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4 id="related-pages">Related pages</h4>
+    <ul>
+        <li>
+            <a href="https://portswigger.net/burp/documentation/desktop/tools/dom-invader/web-messages.html">Testing for DOM XSS using web messages</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/index.html">DOM Invader</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

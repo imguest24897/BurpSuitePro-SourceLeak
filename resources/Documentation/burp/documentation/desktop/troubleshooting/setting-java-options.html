@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/troubleshooting/index.html">Troubleshooting</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/troubleshooting/setting-java-options.html">Setting Java options</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Setting Java options</h1>
+<p>
+    You can use a <code>user.vmoptions</code> file to configure options for Burp's Java Virtual Machine (JVM). This enables you to resolve certain issues or customize your experience when using Burp Suite.
+</p>
+<p>
+    Unlike the default <code>vmoptions</code> file, the <code>user.vmoptions</code> file persists when you upgrade Burp Suite.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You can only use the <code>user.vmoptions</code> file to configure standard Java options for the virtual machine that Burp Suite runs in, such as heap size and RAM usage. You can't use the file to configure any options for Burp Suite itself.
+    </p>
+</div>
+<h2 id="creating-a-user-vmoptions-file">Creating a user.vmoptions file</h2>
+<p>
+    To specify custom Java options, create a <code>user.vmoptions</code> file:
+</p>
+<ol>
+    <li>
+        <p>
+            Open the directory that the <code>vmoptions</code> file is located in. The location of the file depends on your operating system:
+        </p>
+        <ul>
+            <li>
+                <p>
+                    For Windows / Linux, open the Burp Suite installation directory.
+                </p>
+            </li>
+            <li>
+                <p>
+                    For MacOS, right-click on the <strong>Burp Suite</strong> icon, select <strong>Show Package Contents</strong>, and then open the <strong>Contents</strong> directory.
+                </p>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <p>
+            Copy and paste the default <code>vmoptions</code> file. This file is called either <code>BurpSuitePro.vmoptions</code> or <code>BurpSuiteCommunity.vmoptions</code> on Windows and Linux, and <code>vmoptions.txt</code> on Mac.
+        </p>
+    </li>
+    <li>
+        <p>
+            Rename the copied file to <code>user.vmoptions</code>.
+        </p>
+    </li>
+</ol>
+<h2 id="specifying-options">Specifying options</h2>
+<p>
+    To specify an option, add it to the <code>user.vmoptions</code> file on a new line. For example, the following configuration limits its maximum RAM to 50% of the total system memory:
+</p>
+<code>-XX:MaxRAMPercentage=50</code>
+</body>
+</html>

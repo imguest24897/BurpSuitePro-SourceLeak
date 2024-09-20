@@ -1,0 +1,13 @@
+package net.portswigger.devtools.client.impl;
+
+import net.portswigger.browser.Zd;
+
+public interface Zx {
+  Zd Zh();
+}
+
+
+/* Location:              C:\Program Files\BurpSuitePro\burpsuite_pro.jar!\net\portswigger\devtools\client\impl\Zx.class
+ * Java compiler version: 21 (65.0)
+ * JD-Core Version:       1.1.3
+ */

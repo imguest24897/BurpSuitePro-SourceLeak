@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+TLS cookie without secure flag set
+<h1>Typical severity</h1>
+
+Medium
+
+<h1>Issue description</h1>
+
+<p>If the secure flag is set on a cookie, then browsers will not submit the cookie in any requests that use an unencrypted HTTP connection, thereby preventing the cookie from being trivially intercepted by an attacker monitoring network traffic. If the secure flag is not set, then the cookie will be transmitted in clear-text if the user visits any HTTP URLs within the cookie's scope. An attacker may be able to induce this event by feeding a user suitable links, either directly or via another web site. Even if the domain that issued the cookie does not host any content that is accessed over HTTP, an attacker may be able to use links of the form http://example.com:443/ to perform the same attack.</p>
+<p>To exploit this vulnerability, an attacker must be suitably positioned to eavesdrop on the victim's network traffic. This scenario typically occurs when a client communicates with the server over an insecure connection such as public Wi-Fi, or a corporate or home network that is shared with a compromised computer. Common defenses such as switched networks are not sufficient to prevent this. An attacker situated in the user's ISP or the application's hosting infrastructure could also perform this attack. Note that an advanced adversary could potentially target any connection made over the Internet's core infrastructure.</p>
+
+<h1>Issue remediation</h1>
+
+<p>The secure flag should be set on all cookies that are used for transmitting sensitive data when accessing content over HTTPS. If cookies are used to transmit session tokens, then areas of the application that are accessed over HTTPS should employ their own session handling mechanism, and the session tokens used should never be transmitted over unencrypted communications.</p>
+
+<h1>References</h1>
+
+
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+<li><a href="https://cwe.mitre.org/data/definitions/614.html">CWE-614: Sensitive Cookie in HTTPS Session Without 'Secure' Attribute</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

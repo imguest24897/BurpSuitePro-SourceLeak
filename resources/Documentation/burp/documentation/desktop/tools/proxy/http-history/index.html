@@ -1,0 +1,267 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/proxy/index.html">Burp Proxy</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/proxy/http-history/index.html">HTTP history</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>HTTP history</h1>
+<p>
+    You can use the <strong>HTTP history</strong> to see a record of the HTTP traffic that has passed through Burp Proxy. You can also see any modifications that you made to intercepted messages.
+</p>
+<p>
+    The HTTP history contains the following information:
+</p>
+<ul>
+    <li>
+        <strong>#</strong> - The request index number.
+    </li>
+    <li>
+        <strong>Host</strong> - The protocol and server hostname.
+    </li>
+    <li>
+        <strong>Method</strong> - The HTTP method.
+    </li>
+    <li>
+        <strong>URL</strong> - The URL file path and query string.
+    </li>
+    <li>
+        <strong>Params</strong> - Flag whether the request contains any parameters.
+    </li>
+    <li>
+        <strong>Edited</strong> - Flag whether the request or response were modified by the user.
+    </li>
+    <li>
+        <strong>Status code</strong> - The HTTP status code of the response.
+    </li>
+    <li>
+        <strong>Length</strong> - The length of the response in bytes.
+    </li>
+    <li>
+        <strong>MIME type</strong> - The MIME type of the response.
+    </li>
+    <li>
+        <strong>Extension</strong> - The URL file extension.
+    </li>
+    <li>
+        <strong>Title</strong> - The page title (for HTML responses).
+    </li>
+    <li>
+        <strong>Notes</strong> - Any user-applied <a href="/burp/documentation/desktop/tools/proxy/http-history/filter-settings.html#adding-annotations">note</a>.
+    </li>
+    <li>
+        <strong>TLS</strong> - Flag whether TLS is used.
+    </li>
+    <li>
+        <strong>IP</strong> - The IP address of the destination server.
+    </li>
+    <li>
+        <strong>Cookies</strong> - Any cookies that were set in the response.
+    </li>
+    <li>
+        <strong>Time</strong> - The time the request was made.
+    </li>
+    <li>
+        <strong>Listener port</strong> - The <a href="/burp/documentation/desktop/settings/tools/proxy.html#binding">listener port</a> on which the request was received.
+    </li>
+    <li>
+        <strong>Start response timer</strong> - The time in milliseconds from when the request was sent until the first byte of the response is received.
+    </li>
+    <li>
+        <strong>End response timer</strong> - The time in milliseconds from when the request was sent until the complete response was received.
+    </li>
+</ul>
+<p>
+    The HTTP history is always updated, even if <a href="/burp/documentation/desktop/tools/proxy/intercept-messages.html#controls">Intercept is off</a>. This enables you to browse without interruption while you monitor key details about application traffic.
+</p>
+<p>
+    Right-click any item in the table to access further options, such as sending requests to other Burp tools.
+</p>
+<h2 id="changing-the-http-history-layout">Changing the HTTP history layout</h2>
+<p>
+    You can customize the HTTP history table in the following ways:
+</p>
+<ul>
+    <li>
+        <p>
+            <strong>Hide columns</strong> - Right-click the header of the column you want to hide, then select <strong>Hide column</strong>.
+        </p>
+    </li>
+    <li>
+        <p>
+            <strong>Show hidden columns</strong> - Click the options menu <strong><span class="icon-more-vertical"></span> &gt; Table layout</strong>, then select the columns you want to display.
+        </p>
+    </li>
+    <li>
+        <p>
+            <strong>Move columns</strong> - Drag and drop the header of the column you want to move to its new location.
+        </p>
+    </li>
+    <li>
+        <p>
+            <strong>Add custom columns</strong> - Click the options menu <strong><span class="icon-more-vertical"></span> &gt; Add custom column</strong> to create a personalized column that displays the data you want to see. Learn more about <a href="/burp/documentation/desktop/tools/proxy/http-history/index.html#adding-a-custom-column">Adding custom columns to your HTTP history</a>.
+        </p>
+    </li>
+    <li>
+        <p>
+            <strong>Sort the table</strong> - Click the header of the column you want to sort by. You can sort by ascending, descending, or unsorted.
+        </p>
+    </li>
+    <li>
+        <p>
+            <strong>Filter the data</strong> - Click the <strong>Filter settings</strong> bar, then choose either:
+        </p>
+        <ul>
+            <li>
+                <p>
+                    <strong>Settings mode</strong> - Use predefined checkboxes and fields to set your criteria. Learn more about <a href="/burp/documentation/desktop/tools/proxy/http-history/filter-settings.html">filtering the HTTP history with Settings mode</a>.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <strong>Bambda mode</strong> - Write a Java-based Bambda to define your custom filter. Learn more about <a href="/burp/documentation/desktop/tools/proxy/http-history/bambdas.html">filtering the HTTP history with Bambdas</a>.
+                </p>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <p>
+            <strong>Restore the default layout</strong> - To return the table to its original state, click <strong><span class="icon-more-vertical"></span> &gt; Table layout</strong>, then select <strong>Restore default table</strong>.
+        </p>
+    </li>
+</ul>
+<h2 id="viewing-a-request">Viewing a request</h2>
+<p>
+    If you select an item from the HTTP history, the lower pane shows the request and response messages for the item. Any modified messages are shown separately. The message may have been modified through:
+</p>
+<ul>
+    <li>
+        <a href="/burp/documentation/desktop/tools/proxy/intercept-messages.html">User interception</a>.
+    </li>
+    <li>
+        <a href="/burp/documentation/desktop/settings/tools/proxy.html#request-and-response-interception-rules">Automatic response modification</a>.
+    </li>
+    <li>
+        <a href="/burp/documentation/desktop/settings/tools/proxy.html#http-and-websocket-match-and-replace-rules">Match and replace rules</a>.
+    </li>
+</ul>
+<p>
+    In addition to the main history view, you can also:
+</p>
+<ul>
+    <li>
+        Double-click an item to open it in a pop-up window.
+    </li>
+    <li>
+        Right-click a request and select <strong>Show new history window</strong> to open a new history window with its own display filter.
+    </li>
+    <li>
+        Access the <a href="/burp/documentation/desktop/tools/inspector/index.html">Inspector</a>, to easily view and edit interesting items.
+    </li>
+    <li>
+        View and edit your notes. To do this, click <strong><span class="icon-document"></span> Notes</strong>.
+    </li>
+</ul>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="adding-a-custom-column">Adding a custom column</h2>
+<p>
+    <label class="label-edition is-professional">Professional</label>
+    You can create your own custom columns using Bambdas.
+</p>
+<p>
+    Custom columns enable you to see more detail about the items in your HTTP history for a more focused analysis of what's important to you.
+</p>
+<p>
+    Two objects of the Montoya API are available to help you write these Bambdas:
+</p>
+<ul>
+    <li>
+        <p>
+            <code>ProxyHttpRequestResponse</code>
+        </p>
+    </li>
+    <li>
+        <p>
+            <code>Utilities</code>
+        </p>
+    </li>
+</ul>
+<p>
+    To create a custom column for your HTTP history table:
+</p>
+<ol>
+    <li>
+        <p>
+            In <strong>Proxy &gt; HTTP history</strong>, click the options menu <strong><span class="icon-more-vertical"></span> &gt; Add custom column</strong>. The <strong>Add custom column</strong> window opens.
+        </p>
+    </li>
+    <li>
+        <p>
+            Enter a name for your custom column in the <strong>Column header</strong> field.
+        </p>
+    </li>
+    <li>
+        <p>
+            Write a Bambda to specify the data that the custom column displays.
+        </p>
+    </li>
+</ol>
+<h3 cms-ignore-validation="DUPLICATE_HEADINGS">Example Bambda</h3>
+<p>
+    In the example below, we'll write a Bambda to create a custom column containing the <strong>Server</strong> header value of the response.
+</p>
+<code class="code-scrollable">
+        if (!requestResponse.hasResponse()) {
+        return "";
+        }
+
+        var response = requestResponse.response();
+
+        return response.hasHeader("Server")
+        ? response.headerValue("Server")
+        : "";
+    </code>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/tools/proxy/http-history/filter-settings.html">Filtering the HTTP history with Settings mode</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/proxy/http-history/bambdas.html">Filtering the HTTP history with Bambdas</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/extensions/bambdas/index.html">Bambdas</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

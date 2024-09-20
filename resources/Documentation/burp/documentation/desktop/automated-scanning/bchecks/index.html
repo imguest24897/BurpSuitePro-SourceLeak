@@ -1,0 +1,193 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms ignore-validation="HEADING_CAPITALIZATION" page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/index.html">Automated scanning</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/bchecks/index.html">Adding custom scan checks</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1 cms-ignore-validation="HEADING_CAPITALIZATION">Adding custom scan checks</h1>
+<p>
+    You can create and import custom scan checks using BChecks. Burp Scanner runs these checks in addition to its built-in scanning routine, helping you to target your scans and make your testing workflow as efficient as possible.
+</p>
+<p>
+    BChecks are listed in a table in the <strong>Extensions &gt; BChecks</strong> tab. Click on any BCheck in the table to preview the definition.
+</p>
+<p>
+    The table contains the following columns:
+</p>
+<ul>
+    <li>
+        <strong>Enabled</strong> - Whether the BCheck is enabled. When you enable a BCheck, by default Burp Scanner will use it when you next perform an audit. Note that you can't enable BChecks that contain errors. These are identified by a warning icon <span class="icon-alert-white"></span>.
+    </li>
+    <li>
+        <strong>Name</strong> - The name of the BCheck.
+    </li>
+    <li>
+        <strong>Author</strong> - The name of BCheck creator.
+    </li>
+    <li>
+        <strong>Tags</strong> - Any tags that are applied to the BCheck.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        The <strong>Name</strong>, <strong>Author</strong>, and <strong>Tags</strong> columns are automatically populated from the BCheck definition. To modify these, edit the BCheck definition directly. For more information on editing BChecks definitions, see <a href="/burp/documentation/scanner/bchecks/bcheck-definition-reference.html">BCheck definition reference</a> and <a href="/burp/documentation/scanner/bchecks/worked-examples/index.html">BChecks worked examples</a>.
+    </p>
+</div>
+<h2 id="managing-bchecks" cms-ignore-validation="HEADING_CAPITALIZATION">Managing BChecks</h2>
+<p>
+    You can perform the following actions on your BChecks:
+</p>
+<ul>
+    <li>
+        To enable or disable a BCheck, use the checkbox in the <strong>Enabled</strong> column.
+    </li>
+    <li>
+        To create a new BCheck, click <strong><span class="icon-add-in-circle"></span> New</strong>. For more information, see <a href="/burp/documentation/desktop/automated-scanning/bchecks/creating.html">Creating BChecks</a>.
+    </li>
+    <li>
+        To import BChecks from a folder or text file, click <strong>Import</strong> and select the relevant file. Files that you want to import should be in plain text format with the <code>.bcheck</code> extension.
+    </li>
+    <li>
+        To export BChecks, click <strong>Export <span class="icon-undock-window"></span></strong>. For more information, see <a href="/burp/documentation/desktop/automated-scanning/bchecks/creating.html#exporting-bchecks">Exporting BChecks</a>.
+    </li>
+    <li>
+        To edit a BCheck definition, double-click the BCheck.
+    </li>
+    <li>
+        To remove BChecks, select the BChecks that you want to delete, then click <span class="icon-trash"></span>.
+    </li>
+    <li>
+        To copy BChecks, select the BChecks that you want to copy, then click <span class="icon-file-copy"></span>.
+    </li>
+    <li>
+        To search in the BChecks table, click <strong><span class="icon-search-right"></span> Search</strong>.
+    </li>
+    <li>
+        To search within the BCheck definition, select the BCheck, then use the search bar below the definition preview. For more information on the quick search function, see <a href="/burp/documentation/desktop/tools/message-editor/text-editor.html#quick-search">Text editor - Quick search</a>.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You can also import and export BChecks as part of a project file. For more information, see <a href="/burp/documentation/desktop/projects/index.html">Project files</a>.
+    </p>
+</div>
+<h2 id="testing-bchecks">Testing BChecks</h2>
+<p>
+    You can test your BChecks using the BS Code editor's built-in test function. When you run a test, Burp Scanner runs the BCheck on a group of pre-selected HTTP messages and reports the results.
+</p>
+<p>
+    Alternatively, you can test multiple BChecks at once by running a scan with the <strong>Audit checks - BChecks only</strong> built-in scan configuration selected. This scan uses your enabled checks only.
+</p>
+<div class="highlightedarea">
+    <h4>More information</h4>
+    <p>
+        <a href="/burp/documentation/desktop/automated-scanning/bchecks/testing.html">Testing BChecks</a>
+    </p>
+</div>
+<h2 id="troubleshooting-bchecks">Troubleshooting BChecks</h2>
+<p>
+    If you're creating or editing a BCheck, you can use the BS Code Logger to help you to troubleshoot any unexpected behaviors:
+</p>
+<ol>
+    <li>
+        <p>
+            Go to <strong>Extensions &gt; BChecks</strong> and select a BCheck.
+        </p>
+    </li>
+    <li>
+        <p>
+            Click <span class="icon-edit"></span><strong>Edit</strong>. The <strong>BS Code</strong> window opens.
+        </p>
+    </li>
+    <li>
+        <p>
+            To send a message from anywhere in Burp to the BChecks editor, right-click the message and select <strong>Send to BChecks editor</strong>.
+        </p>
+    </li>
+    <li>
+        <p>
+            In the <strong>BS Code</strong> window, select the <strong>Logger</strong> tab and click <strong>Run test</strong>.
+        </p>
+    </li>
+    <li>
+        <p>
+            Select a message to see the request and response.
+        </p>
+    </li>
+</ol>
+<p>
+    Requests generated by BChecks may be modified by session handling rules or extensions. If the message doesn't look as you expected, try disabling session handling rules or extensions, and run the test again.
+</p>
+<h2 id="managing-bchecks-for-a-specific-scan" cms-ignore-validation="HEADING_CAPITALIZATION">Managing BChecks for a specific scan</h2>
+<p>
+    You can prevent Burp from using BChecks when scanning. To do this:
+</p>
+<ol>
+    <li>
+        Open an audit scan configuration and expand the <strong>Issues reported</strong> section.
+    </li>
+    <li>
+        Select <strong>Select individual issues</strong>.
+    </li>
+    <li>
+        Deselect <strong>BCheck generated issue</strong>.
+    </li>
+</ol>
+<p>
+    You can also specify whether Burp should run BChecks for passive scans, active scans, or both. To do this:
+</p>
+<ol>
+    <li>
+        Open an audit scan configuration and expand the <strong>Issues reported</strong> section.
+    </li>
+    <li>
+        Select <strong>Select individual issues</strong>.
+    </li>
+    <li>
+        Right-click <strong>BCheck generated issue</strong>, then select <strong>Edit detection methods</strong>.
+    </li>
+    <li>
+        Select <strong>Passive checks</strong> and <strong>Active checks</strong> as required.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/custom-configs.html">Using custom scan configurations in Burp Suite Professional</a> - For information on how to create a new audit scan configuration.
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/scan-configurations/audit-options.html#issues-reported">Audit options - Issues reported</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

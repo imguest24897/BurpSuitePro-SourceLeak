@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+ASP.NET ViewState without MAC enabled
+<h1>Typical severity</h1>
+ High
+<h1>Issue description</h1>
+
+<p>The ViewState is a mechanism built in to the ASP.NET platform for persisting elements of the user interface and other data across successive requests. The data to be persisted is serialized by the server and transmitted via a hidden form field. When it is posted back to the server, the ViewState parameter is deserialized and the data is retrieved.</p>
+<p>By default, the serialized value is signed by the server to prevent tampering by the user; however, this behavior can be disabled by setting the Page.EnableViewStateMac property to false. If this is done, then an attacker can modify the contents of the ViewState and cause arbitrary data to be deserialized and processed by the server. An attacker may be able to execute arbitrary code on the server by supplying a gadget chain. Also, if the ViewState contains any items that are critical to the server's processing of the request, then this may result in a direct security exposure.</p>
+<p>You should try to identify a valid gadget chain to take control of the server and, failing that, review the contents of the ViewState to determine whether it contains any critical items that can be manipulated to attack the application. </p>
+
+<h1>Issue remediation</h1>
+
+<p>There is no good reason to disable the default ASP.NET behavior in which the ViewState is signed to prevent tampering. To ensure that this occurs, you should set the Page.EnableViewStateMac property to true on any pages where the ViewState is not currently signed.</p>
+
+<h1>References</h1>
+
+<ul>
+    <li><a href="https://soroush.secproject.com/blog/2019/04/exploiting-deserialisation-in-asp-net-via-viewstate/">Exploiting Deserialisation in ASP.NET via ViewState</a></li>
+    <li><a href="https://portswigger.net/web-security/deserialization">Web Security Academy: Insecure deserialization</a></li>
+</ul>
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+<li><a href="https://cwe.mitre.org/data/definitions/642.html">CWE-642: External Control of Critical State Data</a></li>
+<li><a href="https://capec.mitre.org/data/definitions/586.html">CAPEC-586: Object Injection</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

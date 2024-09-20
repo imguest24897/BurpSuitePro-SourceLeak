@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/repeater/index.html">Repeater</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/repeater/managing-tabs.html">Managing tabs</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Managing Burp Repeater tabs</h1>
+<p>
+    Burp Repeater opens each new HTTP or WebSocket message in a new tab. This enables you to work on multiple messages at once.
+</p>
+<p>
+    You can use the controls on the tab header to create new tabs and make various changes to existing ones:
+</p>
+<ul>
+    <li>
+        Create a request from scratch - To open a new tab, click the <span class="icon-add"></span> button. Select either <strong>HTTP</strong> or <strong>WebSocket</strong>. You can also send a request to Repeater from elsewhere in Burp to create a new tab.
+    </li>
+    <li>
+        Rename tabs - Double-click the tab header and enter a new name for the tab.
+    </li>
+    <li>
+        <p>
+            Duplicate tabs - Right-click a grouped tab, then select <strong>Duplicate tab</strong>. This option is only available for tabs that are part of a group. Note that each tab consumes system resources, so opening large numbers of tabs may impact performance.
+        </p>
+    </li>
+    <li>
+        <p>
+            Switch tab view - Right-click a tab and select <strong>Tab view settings</strong>. You can choose from two different views:
+        </p>
+        <ul>
+            <li>
+                Scrolling view - Tabs are displayed in a single, scrollable row. Click on the search icon <span class="icon-search21"></span> to view a drop-down list of all open tabs.
+            </li>
+            <li>
+                Wrapped view - Tabs wrap onto multiple rows that are all displayed on screen.
+            </li>
+        </ul>
+    </li>
+    <li>
+        Add a tab to a group - Right-click a tab and click <strong>Add tab to group</strong>, then select a group.
+    </li>
+    <li>
+        <p>
+            Close tabs - You can close tabs in multiple ways:
+        </p>
+        <ul>
+            <li>
+                Close a single tab - Click the close icon <span class="icon-close"></span> by the tab header.
+            </li>
+            <li>
+                Close all tabs other than the selected tab - Right-click the tab and select <strong>Close other tabs</strong>.
+            </li>
+            <li>
+                Close all tabs to one side of the selected tab - Right-click the tab and select <strong>Close tabs to the left</strong> or <strong>Close tabs to the right</strong>.
+            </li>
+        </ul>
+    </li>
+    <li>
+        Reopen the last tab you closed - Right-click any tab and select <strong>Reopen closed tab</strong>.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You can send a request to Repeater from a request that is already in Repeater - a new tab is created with another instance of the same request.
+    </p>
+</div>
+<h2 id="tab-groups">Tab groups</h2>
+<p>
+    You can use Repeater's tab group feature to group related tabs together and send groups of HTTP requests in sequence.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            For more information on grouping Repeater tabs, see <a href="/burp/documentation/desktop/tools/repeater/groups.html">Managing tab groups</a>.
+        </li>
+        <li>
+            For more information on sending Repeater HTTP tabs in sequence, see <a href="/burp/documentation/desktop/tools/repeater/send-group.html">Sending HTTP requests in sequence</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

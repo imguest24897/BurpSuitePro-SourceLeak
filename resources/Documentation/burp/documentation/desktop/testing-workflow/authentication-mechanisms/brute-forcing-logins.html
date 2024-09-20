@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/authentication-mechanisms/index.html">Testing authentication mechanisms</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/authentication-mechanisms/brute-forcing-logins.html">Brute-forcing logins</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Brute-forcing logins with Burp Suite</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/KFzvAiyjMp8?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    Although it's far more efficient to first <a href="/burp/documentation/desktop/testing-workflow/authentication-mechanisms/enumerating-usernames.html">enumerate a valid username</a> and then attempt to guess the matching password, this may not always be possible. Using Burp Intruder, you can attempt to brute-force both usernames and passwords in a single attack.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        The example below is simplified to demonstrate how to use the relevant features of Burp Suite. To run this kind of attack on real websites, you usually need to also bypass defenses such as rate limiting. For some ideas on how to do this, see the <a href="/web-security/authentication/index.html">Authentication</a> topic on the Web Security Academy.
+    </p>
+</div>
+<h2 id="before-you-start" cms-ignore-validation="DUPLICATE_HEADINGS">Before you start</h2>
+<p>
+    Obtain lists of potential usernames and passwords. For the example below, you can use the following lists:
+</p>
+<ul>
+    <li>
+        <a href="/web-security/authentication/auth-lab-usernames.html">Usernames</a>
+    </li>
+    <li>
+        <a href="/web-security/authentication/auth-lab-passwords.html">Passwords</a>
+    </li>
+</ul>
+<p>
+    In practice, we recommend sorting the list in order of how likely you think the username or password is to be correct.
+</p>
+<h2 id="steps">Steps</h2>
+<p>
+    You can follow along with the process below using the <a href="/web-security/authentication/password-based/lab-username-enumeration-via-subtly-different-responses.html">Username enumeration via subtly different responses</a> lab from our Web Security Academy.
+</p>
+<ol>
+    <li>
+        Send the request for submitting the login form to Burp Intruder.
+    </li>
+    <li>
+        Go to the <strong>Intruder &gt; Positions</strong> tab and select the <strong>Cluster bomb</strong> attack type.
+    </li>
+    <li>
+        <p>
+            In the request, highlight the username value and click <strong>Add §</strong> to mark it as a payload position. Do the same for the password.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/testing-workflow/images/brute-forcing-logins/positions.png" alt="Setting the payload positions for brute-forcing a login">
+        </div>
+    </li>
+    <li>
+        Go to the <strong>Payloads</strong> tab and select <strong>Payload set 1</strong>.
+    </li>
+    <li>
+        <p>
+            Under <strong>Payload settings [Simple list]</strong>, paste the list of usernames.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/testing-workflow/images/brute-forcing-logins/payloads-one.png" alt="Setting the payloads for brute-forcing a login">
+        </div>
+    </li>
+    <li>
+        Select <strong>Payload set 2</strong>, and paste the list of passwords.
+    </li>
+    <li>
+        Click <strong>Start attack</strong>. The attack starts running in the new dialog. Intruder sends a request for every possible combination of the provided usernames and passwords.
+    </li>
+    <li>
+        <p>
+            When the attack is finished, study the responses to look for any behavior that may indicate a valid login. For example, look for any anomalous error messages, response times, or status codes. In the example below, one of the requests has received a 302 response.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/testing-workflow/images/brute-forcing-logins/results.png" alt="Viewing the results of a login brute-force attempt">
+        </div>
+    </li>
+    <li>
+        To investigate the contents of a response in detail, right-click and select <strong>Send to Comparer (response)</strong>. Do the same for the original response.
+    </li>
+    <li>
+        Go to the <strong>Comparer</strong> tab. Select the two responses and click <strong>Words</strong> or <strong>Bytes</strong> to compare the responses. Any differences are highlighted.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/index.html">Burp Intruder</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/configure-attack/payload-lists.html">Predefined payload lists</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/configure-attack/settings.html#grep-match">Grep - match</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/configure-attack/settings.html#grep-extract">Grep - extract</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/comparer.html">Burp Comparer</a>
+        </li>
+        <li>
+            Academy: <a href="/web-security/authentication/password-based/index.html">Vulnerabilities in password-based login mechanisms</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

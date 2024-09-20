@@ -1,0 +1,329 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/message-editor/index.html">Message editor</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Burp Suite message editor</h1>
+<p>
+    You can view HTTP and WebSocket messages in various places throughout Burp Suite. Wherever you can see messages, Burp provides a number of functions to help you quickly analyze them. This drives Burp's core <a href="/burp/documentation/desktop/testing-workflow/index.html">workflow</a>, and helps you to carry out other useful tasks.
+</p>
+<p>
+    In some of Burp's tools, such as Burp Repeater and Burp Intruder, you can also edit the HTTP and WebSocket messages and resend them.
+</p>
+<p>
+    The message editor primarily consists of the following panels:
+</p>
+<ul>
+    <li>
+        The <a href="/burp/documentation/desktop/tools/message-editor/text-editor.html">text editor</a>, which contains the messages. This is read-only in certain tools.
+    </li>
+    <li>
+        The side panel, including the <a href="/burp/documentation/desktop/tools/inspector/index.html">Inspector</a>. The Inspector provides quick access to key details of HTTP messages and WebSockets, and allows you to perform some basic operations without having to switch to the <strong>Decoder</strong> tab. In Burp Organizer, the side panel includes an <strong>Inspector</strong> and <strong>Notes</strong> tab. You can switch between them as required.
+    </li>
+</ul>
+<p>
+    For an introduction to the Inspector, refer to <a href="/burp/documentation/desktop/tools/inspector/getting-started-inspector.html">Getting started with the Inspector</a>.
+</p>
+<p>
+    In the upper-right corner of the message editor, there are three icons that adjust the screen layout. You can choose from the following options:
+</p>
+<ul>
+    <li>
+        <strong>Horizontal layout</strong><span class="icon-editor-2-column"></span> - The request and response are arranged side-by-side.
+    </li>
+    <li>
+        <strong>Vertical layout</strong><span class="icon-editor-vertical"></span> - The request and response are stacked one on top of the other.
+    </li>
+    <li>
+        <strong>Combined view</strong><span class="icon-editor-tabbed"></span> - Either the request or response fills the message editor pane. You can use the tabs to alternate between the two.
+    </li>
+</ul>
+<h2 id="message-analysis-toolbar">Message analysis toolbar</h2>
+<p>
+    At the top of each request or response is the message analysis toolbar. This provides different tabs that show alternative views of the message content and provide some additional features for performing common operations.
+</p>
+<p>
+    By default, the <strong>Pretty</strong>, <strong>Raw</strong>, <strong>Hex</strong>, and <strong>Render</strong> tabs are displayed, but you can remove or reorder the tabs, and <a href="#additional-tabs">add some extra ones</a> from the <a href="/burp/documentation/desktop/settings/ui/message-editor.html">settings menu</a>.
+</p>
+<h3 id="raw-tab">Raw tab</h3>
+<p>
+    In this tab, the <a href="/burp/documentation/desktop/tools/message-editor/text-editor.html">text editor</a> displays the full message in its raw form. The text editor includes various useful functions including <a href="/burp/documentation/desktop/tools/message-editor/text-editor.html#syntax-analysis">syntax analysis</a>, <a href="/burp/documentation/desktop/tools/message-editor/text-editor.html#text-editor-hotkeys">hotkeys</a>, and <a href="/burp/documentation/desktop/tools/message-editor/text-editor.html#quick-search">text search</a>. You can use the <strong>\n</strong> button to toggle whether <a href="/burp/documentation/desktop/tools/message-editor/text-editor.html#non-printing-characters">non-printing characters</a> are displayed
+</p>
+<p>
+    In some of Burp's tools, such as Burp Repeater, you can also make changes to requests directly in the text editor.
+</p>
+<p>
+    You can access a wide range of <a href="#context-specific-actions">context-specific actions</a> for both requests and responses either from the <strong>Actions</strong> menu or by right-clicking anywhere on the relevant message. By selecting one or more characters in a message, you can also work with specific values in the <a href="/burp/documentation/desktop/tools/inspector/index.html">Inspector</a>.
+</p>
+<h3 id="pretty-tab">Pretty tab</h3>
+<p>
+    In this tab, you can access all the same functionality as in the <strong>Raw</strong> tab. The key difference is that the text editor's <a href="/burp/documentation/desktop/tools/message-editor/text-editor.html#pretty-printing">pretty printing</a> feature is enabled. This improves the readability of data, markup, and code in HTTP messages by displaying them with standardized indentation and line breaks.
+</p>
+<p>
+    In editable messages, supported text formats are dynamically prettified as you type wherever possible. Otherwise, the text is prettified when you send the request.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        This tab is only available if the message contains content in one of the <a href="/burp/documentation/desktop/tools/message-editor/text-editor.html#pretty-printing">supported formats</a>.
+    </p>
+</div>
+<h3 id="hex-tab">Hex tab</h3>
+<p>
+    This tab displays messages in raw form in a hexadecimal editor. It shows messages arranged into lines of 16 bytes, and displays the hex value of each byte. You can edit messages in the hex tab. Any values that you insert can be given as characters or in two-digit hexadecimal form, from 00 through FF.
+</p>
+<p>
+    Any selected bytes appear in the Inspector. You can edit individual bytes directly in the Inspector or by double-clicking values in the table. You can select rows of bytes by clicking the row number, and view the selection in the Inspector.
+</p>
+<p>
+    The hex tab is useful when you want to:
+</p>
+<ul>
+    <li>
+        View or edit the code point for individual characters.
+    </li>
+    <li>
+        View or insert non-printing characters.
+    </li>
+    <li>
+        Insert or delete individual bytes or strings.
+    </li>
+</ul>
+<p>
+    The context menu for this tab has the following items:
+</p>
+<ul>
+    <li>
+        <strong>Insert byte:</strong> This inserts a single new byte before the selected byte.
+    </li>
+    <li>
+        <strong>Insert bytes:</strong> This inserts the requested number of new bytes before the selected byte.
+    </li>
+    <li>
+        <strong>Insert string:</strong> This inserts the specified string before the selected byte.
+    </li>
+    <li>
+        <strong>Delete selected byte:</strong> This deletes the selected byte.
+    </li>
+    <li>
+        <strong>Delete selected bytes:</strong> This deletes the selected bytes.
+    </li>
+</ul>
+<h3 id="render-tab">Render tab</h3>
+<p>
+    This tab applies to HTTP responses containing HTML or image content. It attempts to render the contents of the message body in the form it would appear when displayed in a browser.
+</p>
+<h3 id="graphql-tab">GraphQL tab</h3>
+<p>
+    This tab appears when Burp detects a GraphQL query. It separates the GraphQL query from the rest of the request, and formats it in a way that makes it easy to view and edit the query structure (displayed in the <strong>Query</strong> panel) and its associated variables (displayed in the <strong>Variables</strong> panel).
+</p>
+<h3 id="additional-tabs">Additional tabs</h3>
+<p>
+    You can also choose to add the following tabs to the message editor:
+</p>
+<ul>
+    <li>
+        Headers.
+    </li>
+    <li>
+        Query params.
+    </li>
+    <li>
+        Body params.
+    </li>
+    <li>
+        Cookies.
+    </li>
+    <li>
+        Attributes.
+    </li>
+</ul>
+<p>
+    These tabs provide the same functionality as the widgets in the <strong>Inspector</strong>. For more information, see <a href="/burp/documentation/desktop/tools/inspector/index.html">Inspector</a>.
+</p>
+<p>
+    To add tabs to the message editor, click the settings icon <span class="icon-settings"></span> in the upper-right corner of the side panel. For more information, see <a href="/burp/documentation/desktop/settings/ui/message-editor.html#message-editor-request-and-response-views">Message editor settings</a>.
+</p>
+<h3 id="extension-specific-tabs">Extension-specific tabs</h3>
+<p>
+    Some Burp extensions provide additional tabs for the message editor.
+</p>
+<h3 id="actions-menu">Actions menu</h3>
+<p>
+    The <strong>Actions</strong> menu provides quick access to the full range of <a href="#context-specific-actions">context-specific actions</a> that are available for the current request.
+</p>
+<h2 id="other-ways-of-using-the-message-editor">Other ways of using the message editor</h2>
+<p>
+    You can do the following things with the message editor:
+</p>
+<ul>
+    <li>
+        Toggle whether non-printing characters are displayed directly in the normal HTTP message editor tabs. To do this, press the <strong>\n</strong> button in the message editor toolbar.
+    </li>
+    <li>
+        To view the code point for a character, select a character, either printing or non-printing, in the HTTP message. An entry will appear in the Inspector that indicates the decimal and hex code points for the character. In editable contexts, such as a request in Burp Repeater, you can edit this value to overwrite the selected character.
+    </li>
+    <li>
+        Insert a non-printing character, such as a null byte, carriage return, or newline character, by editing the code point of an existing byte using the Inspector.
+    </li>
+    <li>
+        Insert a CLRF by placing the cursor in the appropriate position in the request and press the Enter / Return key.
+    </li>
+    <li>
+        To insert a byte, place the cursor in the desired position in the request and enter an arbitrary placeholder character. Edit its code point accordingly using the Inspector.
+    </li>
+    <li>
+        To delete a byte, delete the corresponding character directly in the request. To delete non-printing characters, we recommend using the <strong>\n</strong> button to display them first.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Instead of using the Inspector to edit code points for a character, some users may find it quicker to URL-encode a selection and edit the relevant hex codes in-line before decoding the selection back to its original form. This is particularly effective if you use the corresponding hotkeys.
+    </p>
+</div>
+<h2 id="http-2-messages-in-the-message-editor">HTTP/2 messages in the message editor</h2>
+<p>
+    The message editor displays a representation of HTTP/2 messages using HTTP/1 syntax, essentially showing you what the equivalent HTTP/1 request would look like. Whenever you make changes, Burp automatically converts these to their HTTP/2 equivalent behind the scenes and updates the underlying HTTP/2 request. In many cases the protocol you use is irrelevant, this enables you to use the message editor with HTTP/2 as normal.
+</p>
+<p>
+    As this HTTP/1-style view is bound by the limitations of HTTP/1 syntax and requires some lightweight normalization to ensure that a valid HTTP/2 request is produced, it may not be suitable to test for protocol-level issues that are exclusive to HTTP/2. In this case, we recommend you use the Inspector to work with HTTP/2.
+</p>
+<p>
+    For more detailed information, please refer to the <a href="/burp/documentation/desktop/http2/index.html">HTTP/2 documentation</a>.
+</p>
+<h2 id="context-specific-actions">Context-specific actions</h2>
+<p>
+    Right-click a request or response to access the context menu. The available actions depend on the message type. These are described below.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        The menu may also include additional items that are specific to the tool in which the editor appears. For example, in <a href="/burp/documentation/desktop/tools/repeater/index.html">Repeater</a>, the context menu has options to paste a URL as a request and add the current item to the site map.
+    </p>
+</div>
+<h4>Scan / send to ...</h4>
+<p>
+    You can send any message, or a selected portion of the message, to other Burp tools. The ability to send requests between tools forms the core of Burp's <a href="/burp/documentation/desktop/testing-workflow/index.html">user-driven workflow</a>.
+</p>
+<h4>Show response in browser</h4>
+<p>
+    You can render the selected response in Burp's browser, to avoid the limitations of Burp's built-in <a href="#render-tab">HTML renderer</a>. When you select this option, Burp gives you a unique URL that you can paste into Burp's browser, to render the response. The resulting browser request is served by Burp with the exact response that you selected (the request is not forwarded to the original web server), and yet the response is processed by the browser in the context of the originally requested URL. This means that relative links within the response are handled properly by the browser. As a result, the browser may make additional requests in the course of rendering the response, for images or CSS, for example. These are handled by Burp in the usual way.
+</p>
+<h4>Request in browser</h4>
+<p>
+    You can re-issue the selected request in Burp's browser. The following sub-options are available:
+</p>
+<ul>
+    <li>
+        <strong>In original session</strong> - Burp issues the request using the exact Cookie header that appeared in the original request.
+    </li>
+    <li>
+        <strong>In current browser session</strong> - Burp issues the request using the cookies supplied by Burp's browser.
+    </li>
+</ul>
+<p>
+    You can use the <strong>In current browser session</strong> option to test access controls:
+</p>
+<ol>
+    <li>
+        Select requests within Burp that were generated within one user context. An administrator, for example.
+    </li>
+    <li>
+        Log in with a different user context. An ordinary user, for example.
+    </li>
+    <li>
+        Reissue the requests.
+    </li>
+</ol>
+<p>
+    When you work with complex, multi-stage processes, this method is normally a lot easier than repeating a multi-stage process over and over, and modifying cookies manually using the Proxy.
+</p>
+<h4>Engagement tools</h4>
+<p>
+    <label class="label-edition is-professional">Professional</label>
+    This submenu contains useful functions to perform engagement-related tasks. For more information, see the <a href="/burp/documentation/desktop/tools/engagement-tools/index.html">Engagement tools</a> section.
+</p>
+<h4>Change request method</h4>
+<p>
+    For requests, you can automatically switch the request method between GET and POST, with all relevant request parameters suitably relocated within the request. Use this option to quickly test the application&#39;s tolerance of parameter location. For example, to bypass input filters, or fine-tune a cross-site scripting attack.
+</p>
+<h4>Change body encoding</h4>
+<p>
+    For requests, you can switch the encoding of any message body between standard URL-encoded and multipart.
+</p>
+<h4>Copy URL</h4>
+<p>
+    This function copies the full current URL to the clipboard.
+</p>
+<h4>Copy as curl command</h4>
+<p>
+    This function copies to the clipboard a curl command that can be used to generate the current request.
+</p>
+<h4>Copy to file</h4>
+<p>
+    This function allows you to select a file and copy the contents of the current message to the file. This is handy for binary content, when copying via the clipboard may cause problems. Copying operates on the selected text or, if nothing is selected, the whole message.
+</p>
+<h4>Paste from file</h4>
+<p>
+    This function allows you to select a file and paste the contents of the file into the message. This is handy for binary content, when pasting via the clipboard may cause problems. Pasting replaces the selected text or, if nothing is selected, inserts at the cursor position.
+</p>
+<h4>Save item</h4>
+<p>
+    This function lets you specify a file to save the selected request and response in XML format, including all relevant metadata such as response length, HTTP status code and MIME type.
+</p>
+<h4>Convert selection</h4>
+<p>
+    This applies to the <a href="#raw-tab">Raw view</a> only. The submenu items enable you to perform quick encoding or decoding of the selected text in a variety of schemes. If the message is editable, then the conversion is performed in-place to the selected text. If the message is not editable, then the result of the conversion is shown in a dialog. The following types of conversion are available:
+</p>
+<ul>
+    <li>
+        <strong>URL</strong> - These options perform URL encoding or decoding. You can optionally encode just key HTTP metacharacters, or all characters, or all characters using 2-byte Unicode-encoding (e.g. %u0041 for A).
+    </li>
+    <li>
+        <strong>HTML</strong> - These options perform HTML encoding or decoding. You can optionally encode just key HTML metacharacters, or all characters, or all characters using numeric entities (e.g. &amp;#65; for A), or all characters using hex entities (e.g. &amp;#x41; for A).
+    </li>
+    <li>
+        <strong>Base64</strong> - These options perform Base64 encoding or decoding.
+    </li>
+    <li>
+        <strong>Base64 URL</strong> - These options perform Base64 URL encoding or decoding.
+    </li>
+    <li>
+        <strong>Construct string</strong> - These options generate code in various interpreted languages to dynamically construct the selected string. It can be useful for delivering certain attacks like SQL injection, where it is necessary to dynamically build a string to evade input filters. The available options are JavaScript, and SQL on the Microsoft, Oracle and MySQL platforms.
+    </li>
+</ul>
+<h4>URL-encode as you type</h4>
+<p>
+    This applies to the <a href="#raw-tab">Raw view</a> only. If this option is turned on then characters like <code>&amp;</code> and <code>=</code> are automatically replaced with their URL-encoded equivalents as you type.
+</p>
+</body>
+</html>

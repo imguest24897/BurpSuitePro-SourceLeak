@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/index.html">Settings</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/suite/index.html">Suite</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/suite/temp-files-location.html">Temporary files location</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Temporary file location settings</h1>
+<p>
+    These settings let you configure where Burp stores its temporary files.
+</p>
+<p>
+    By default, Burp creates a directory in the temporary file location provided by the platform. If required, you can specify a custom directory instead. For example, you might want to use a different volume, or a location that is not externally readable.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        On MacOS, you may find that the operating system sometimes clears the default temporary file location following system hibernation, causing Burp to lose any temporary files. To resolve this problem, configure a custom location for Burp to store temporary files.
+    </p>
+</div>
+<p>
+    Changes to this setting take effect the next time that Burp starts up.
+</p>
+<p>
+    The <strong>Temporary files location</strong> settings are user settings. They apply to all installations of Burp on your machine.
+</p>
+</body>
+</html>

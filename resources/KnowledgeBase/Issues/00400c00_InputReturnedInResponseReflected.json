@@ -1,0 +1,19 @@
+{
+  "typeIndex": 4197376,
+  "name": "Input returned in response (reflected)",
+  "description": "<p>Reflection of input arises when data is copied from a request and echoed into the application's immediate response.</p><p>Input being returned in application responses is not a vulnerability in its own right. However, it is a prerequisite for many client-side vulnerabilities, including cross-site scripting, open redirection, content spoofing, and response header injection. Additionally, some server-side vulnerabilities such as SQL injection are often easier to identify and exploit when input is returned in responses. In applications where input retrieval is rare and the environment is resistant to automated testing (for example, due to a web application firewall), it might be worth subjecting instances of it to focused manual testing. </p>",
+  "remediation": null,
+  "webIntro": null,
+  "typicalSeverity": "INFO",
+  "references": [],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-20: Improper Input Validation",
+      "url": "https://cwe.mitre.org/data/definitions/20.html"
+    },
+    {
+      "title": "CWE-116: Improper Encoding or Escaping of Output",
+      "url": "https://cwe.mitre.org/data/definitions/116.html"
+    }
+  ]
+}

@@ -1,0 +1,747 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/index.html">Intruder</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/configure-attack/index.html">Configure attack</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/configure-attack/payload-types.html">Payload types</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Burp Intruder payload types</h1>
+<p>
+    You can set the type of payload that you want to inject into the base request. Burp Intruder provides a range of options for auto-generating different types of payload, or you can use a simple wordlist.
+</p>
+<p>
+    You can select a payload type under the <strong>Payload Sets</strong> field, in the <strong>Intruder &gt; Payloads</strong> tab.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <label class="label-edition is-professional">Professional</label>
+        You can use predefined payload lists with many of the payload types. For more information, see <a href="/burp/documentation/desktop/tools/intruder/configure-attack/payload-lists.html">Predefined payload lists</a>.
+    </p>
+</div>
+<h2 id="payload-settings">Payload settings</h2>
+<p>
+    You can customize each payload type in the <strong>Payload settings</strong> field. Many types offer the following base configuration settings:
+</p>
+<ul>
+    <li>
+        <strong>Paste</strong> - Insert a list from your clipboard.
+    </li>
+    <li>
+        <strong>Load</strong> - Load a list from a file.
+    </li>
+    <li>
+        <strong>Remove</strong> - Delete the highlighted item.
+    </li>
+    <li>
+        <strong>Clear</strong> - Delete all items in the list.
+    </li>
+    <li>
+        <strong>Deduplicate</strong> - Remove duplicate entries from your list. This increases the efficiency of your attacks by reducing the number of requests that are sent.
+    </li>
+    <li>
+        <strong>Add</strong> - Enter a new item.
+    </li>
+    <li>
+        <strong>Add from list</strong> - Add a predefined payload list.
+    </li>
+</ul>
+<h2 id="simple-list">Simple list</h2>
+<p>
+    This enables you to configure a simple list of strings that are used as payloads.
+</p>
+<h2 id="runtime-file">Runtime file</h2>
+<p>
+    This enables you to configure a file from which to read payload strings at runtime.
+</p>
+<p>
+    You can use this payload type when a very large list of payloads is needed, to avoid holding the entire list in memory. One payload is read from each line of the file, hence payloads may not contain newline characters.
+</p>
+<h2 id="custom-iterator">Custom iterator</h2>
+<p>
+    This enables you to generate payloads using permutations of characters or other items according to a given template.
+</p>
+<p>
+    You can define up to eight different positions in the template, and set each position with a list of items. You can use a separator between any positions. For example, you could set up an attack to iterate through all possible permutations of the template AA/11, with the first two positions cycling through A - Z, and the second two positions cycling through 0 - 9. This could be useful if, for example, a payroll application identifies individuals using a number of the form AA/11.
+</p>
+<p>
+    There are various ways to edit the list items:
+</p>
+<ul>
+    <li>
+        To remove configuration from all positions of the custom iterator, click <strong>Clear all</strong>.
+    </li>
+    <li>
+        <p>
+            To select a preconfigured setup for the custom iterator, click on the <strong>Preset schemes</strong> drop-down menu and select a scheme. The scheme can then be modified. You can choose from:
+        </p>
+        <ul>
+            <li>
+                <strong>Directories / file . extensions</strong> - Generate URLs.
+            </li>
+            <li>
+                <strong>Two-digit hex</strong> - Generate hexadecimal numbers.
+            </li>
+            <li>
+                <strong>Passwords + digit</strong> - Generate an extended wordlist for password guessing attacks.
+            </li>
+        </ul>
+    </li>
+</ul>
+<h2 id="character-substitution">Character substitution</h2>
+<p>
+    This enables you to apply character substitutions to each item in a list of strings.
+</p>
+<p>
+    You can use character substitution in password guessing attacks, for generating common variations on dictionary words.
+</p>
+<p>
+    The subsequent attack uses all permutations of substituted characters for each list item in turn. For example, for the substitutions e &gt; 3 and t &gt; 7, the item "peter" will generate the following payloads:
+</p>
+<code class="code-scrollable">peter
+p3ter
+pe7er
+p37er
+pet3r
+p3t3r
+pe73r
+p373r</code>
+<h2 id="case-modification">Case modification</h2>
+<p>
+    This enables you to apply case modifications to each item in a list of strings.
+</p>
+<p>
+    You can use case modification in password guessing attacks, for generating case variations on dictionary words.
+</p>
+<p>
+    The subsequent attack adjusts the case of characters within each item in turn. Duplicate payloads are discarded. You can select from a range of case modification options:
+</p>
+<ul>
+    <li>
+        <strong>No change</strong> - No modification.
+    </li>
+    <li>
+        <strong>To lower case</strong> - All letters are converted to lower case.
+    </li>
+    <li>
+        <strong>To upper case</strong> - All letters are converted to upper case.
+    </li>
+    <li>
+        <strong>To Propername</strong> - The first letter is converted to upper case, and subsequent letters are converted to lower case.
+    </li>
+    <li>
+        <strong>To ProperName</strong> - The first letter is converted to upper case, and subsequent letters are not changed.
+    </li>
+</ul>
+<p>
+    For example, if all modification options are selected, the item "Peter Wiener" will generate the following payloads:
+</p>
+<code class="code-scrollable">Peter Wiener
+peter wiener
+PETER WIENER
+Peter wiener</code>
+<h2 id="recursive-grep">Recursive grep</h2>
+<p>
+    This enables you to extract text from the response to the previous request, and use it as the payload for the current request.
+</p>
+<p>
+    You can use this payload type when you need to work recursively to extract useful data or deliver an exploit. For example, to extract the contents of a database via SQL injection by recursively injecting queries of the form:
+</p>
+<code class="code-scrollable">UNION SELECT name FROM sysobjects WHERE name &gt; &#39;a&#39;</code><p>
+    The server&#39;s error message discloses the name of the first database object:
+</p>
+<code class="code-scrollable">Syntax error converting the varchar value &#39;accounts&#39; to a column of data type int.</code><p>
+    The query is then repeated using "accounts" to identify the next object. This task can be easily automated using recursive grep payloads to quickly list all objects within the database.
+</p>
+<p>
+    The following settings must be configured:
+</p>
+<ul>
+    <li>
+        <strong>Initial payload for first request</strong> - Enter an initial payload. This is used to generate the first request and response.
+    </li>
+    <li>
+        <strong>Extract grep item</strong> - Select an extract grep item. This is used to extract an interesting part of the previous response, which is then used to derive further payloads. For instructions on how to define an extract grep item, see <a href="/burp/documentation/desktop/tools/intruder/configure-attack/settings.html#grep-extract">Burp Intruder attack settings</a>.
+    </li>
+    <li>
+        <strong>Stop if duplicate payload found</strong> - Stop the attack when the same payload is derived twice in succession. This normally indicates that the exercise is complete.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Attacks using the recursive grep payload type must use a resource pool with a max concurrent request of 1. For more information on resource pools, see <a href="/burp/documentation/desktop/tools/intruder/configure-attack/resource-pool.html">Intruder resource pools</a>.
+    </p>
+</div>
+<h2 id="illegal-unicode">Illegal Unicode</h2>
+<p>
+    This enables you to generate payloads from a list of items by replacing a specified character with illegal Unicode-encodings of another character.
+</p>
+<p>
+    You can use this payload type to attempt to bypass filters designed to block certain characters. For example, defenses against file path traversal attacks which match on expected encodings of the ../ and ..\ sequences.
+</p>
+<p>
+    The available settings are described below:
+</p>
+<h3>Overlong UTF-8 encodings</h3>
+<p>
+    You can specify whether overlong encoding is used, and set a maximum length of up to 6 bytes.
+</p>
+<p>
+    This allows you to represent basic ASCII characters (0x00 - 0x7F) in the Unicode scheme. They are usually correctly represented using a single byte.
+</p>
+<h3>Illegal UTF-8 continuation bytes</h3>
+<ul>
+    <li>
+        <p>
+            <strong>Do illegal UTF-8</strong> - Generate three additional encodings for each continuation byte in turn, when the maximum overlong UTF-8 length is set to two bytes or more.
+        </p>
+        <ul>
+            <li>
+                Three illegal variants of each continuation byte are possible, with the binary forms 00xxxxxx, 01xxxxxx and 11xxxxxx. This is because, when a character is encoded with more than one byte, the bytes following the first take the binary form 10xxxxxx, to designate that they are continuation bytes. However, the most significant bits of the first byte also identify how many continuation bytes will follow, so Unicode decoding routines may ignore the first two bits of continuation bytes.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <strong>Maximize permutations in multi-byte encodings</strong> - Modify more than one continuation byte simultaneously, when you have selected <strong>Do illegal UTF-8</strong> and a maximum overlong UTF length of three bytes or more. This generates all permutations of illegal variants for continuation bytes. You can use this to attempt to circumvent advanced pattern-matching controls, by generating a much larger number of different illegal encodings.
+    </li>
+</ul>
+<h3>Illegal hex characters</h3>
+<p>
+    These settings control how the generated byte sequences are represented using hexadecimal notation:
+</p>
+<ul>
+    <li>
+        <strong>Do illegal hex</strong> - When the list of illegally-encoded items has been generated using overlong encodings and illegal variants of continuation bytes (if selected), it is possible to modify the hexadecimal encoding of the resulting byte sequences to confuse certain pattern-matching controls. Hex encoding uses the characters A - F to represent the decimal values 10 - 15. However, some hex decoders interpret, for example, G as decimal 16 and H as decimal 17. So <code>0x1G</code> may be interpreted as decimal 32. Further, if illegal hex characters are used in the first position of a two digit hex code, then the resulting decoding overflows the maximum value of a single byte, and in this situation some hex decoders only use the 8 least significant bits of the resulting number. So <code>0xG1</code> may be decoded as decimal 257, which is then interpreted as decimal 1. Each legal two-digit hex code has between 4 and 6 corresponding illegal hex representations which are interpreted as that same hex code if decoded as described above. If the <strong>Do illegal hex</strong> setting is selected, then Burp will generate all possible illegal hex encodings of each byte in the list of illegally-encoded items.
+    </li>
+    <li>
+        <strong>Maximize permutations in multi-byte encodings</strong> - Modify more than one byte simultaneously, when you have selected <strong>Do illegal hex</strong>, and a maximum overlong UTF-8 length of two bytes or more. This generates all permutations of illegal hex for all bytes. You can use this to attempt to circumvent advanced pattern-matching controls, by generating a much larger number of different illegal encodings.
+    </li>
+</ul>
+<h3>Hex formatting</h3>
+<p>
+    These settings control the appearance of hex-encoded payloads:
+</p>
+<ul>
+    <li>
+        <strong>Use lower case alpha characters</strong> - Specify whether lower or upper case alphabet characters are used in hex codes.
+    </li>
+    <li>
+        <strong>Add % prefix before each byte</strong> - Insert the % character before each two-digit hex code, to effectively URL-encode the generated payloads.
+    </li>
+</ul>
+<h3>Total encodings</h3>
+<p>
+    This setting enables you to:
+</p>
+<ul>
+    <li>
+        View a best estimate for the number of encodings, based on the rest of the configuration.
+    </li>
+    <li>
+        Specify a ceiling on the number of illegal encodings that will be generated.
+    </li>
+</ul>
+<p>
+    This can be useful if large overlong encodings are being used or maximum permutations have been selected, as these settings may generate huge numbers of illegal encodings.
+</p>
+<h3>Match / replace in list items</h3>
+<p>
+    These settings control the replacement of characters within list items:
+</p>
+<ul>
+    <li>
+        <strong>Match character</strong> - Specify the character that will be replaced within each list item. Use a dummy character such as * in your list items, to indicate where replacements should occur.
+    </li>
+    <li>
+        <strong>Replace with encodings of</strong> - Specify the character for which illegal encodings will be derived, to replace the original match character within each list item. This setting can be specified using the ASCII character itself, or the two-digit hex code for the character. This is useful for specifying non-printable ASCII characters, such as null.
+    </li>
+</ul>
+<h2 id="character-blocks">Character blocks</h2>
+<p>
+    This enables you to generate payloads based on blocks of a specified character or string.
+</p>
+<p>
+    You can use this payload type to:
+</p>
+<ul>
+    <li>
+        Detect buffer overflow and other boundary condition vulnerabilities in software running in a native (unmanaged) context.
+    </li>
+    <li>
+        Exploit some logic flaws where input of a particular length bypasses input filters or triggers an unexpected code path.
+    </li>
+</ul>
+<p>
+    The following settings are available:
+</p>
+<ul>
+    <li>
+        <strong>Base string</strong> - The input string, from which the character blocks will be generated..
+    </li>
+    <li>
+        <strong>Min length</strong> - The base string is multiplied by this number to generate the smallest block.
+    </li>
+    <li>
+        <strong>Max length</strong> - The base string is multiplied by this number to generate the largest block.
+    </li>
+    <li>
+        <strong>Step</strong> - The increment in the length of each character block.
+    </li>
+</ul>
+<h2 id="numbers">Numbers</h2>
+<p>
+    This enables you to generate numeric payloads within a given range and in a specified format.
+</p>
+<h4>Number range</h4>
+<p>
+    You can configure various aspects of the number range:
+</p>
+<ul>
+    <li>
+        <strong>Type</strong> - Specify whether numbers are generated sequentially, or at random.
+    </li>
+    <li>
+        <strong>From</strong> - Specify the first number that is generated sequentially. Otherwise, the smallest number that may be randomly generated.
+    </li>
+    <li>
+        <strong>To</strong> - Specify the last number that is generated sequentially, or nearest lower increment of the step value. Otherwise, the largest number that may be randomly generated.
+    </li>
+    <li>
+        <strong>Step</strong> - Specify the increment between sequentially generated successive numbers. The value may be negative, in which case the numbers generated will step downwards.
+    </li>
+    <li>
+        <strong>How many</strong> - The number of payloads that will be randomly generated. Note that duplicate payloads may be generated.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        If you need to cycle through a range of numbers containing many total digits (more than approximately 12), then it is more reliable to use your <a href="/burp/documentation/desktop/tools/intruder/configure-attack/positions.html">payload markers</a> to highlight a sub-portion of the larger number within the attack template, and generate numeric payloads containing correspondingly fewer digits.
+    </p>
+    <p>
+        This is because Burp uses double-precision floating point numbers for both the number range configuration and the internal state of the payload generator at runtime. Some loss of precision is to be expected when dealing with very large numbers or very precise fractional numbers.
+    </p>
+</div>
+<h4>Number format</h4>
+<p>
+    You can also configure various aspects of the number format:
+</p>
+<ul>
+    <li>
+        <strong>Base</strong> - Specify whether numbers are generated in decimal or hexadecimal form.
+    </li>
+    <li>
+        <strong>Min integer digits</strong> - Set the minimum number of integer digits each number will have. Numbers with fewer integer digits are padded with zeros on the left hand side.
+    </li>
+    <li>
+        <strong>Max integer digits</strong> - Set the maximum number of integer digits each number will have. Numbers with more integer digits are truncated, losing their most significant integer digits.
+    </li>
+    <li>
+        <strong>Min fraction digits</strong> - Set the minimum number of fraction digits (after the decimal point) each number will have. Numbers with fewer fraction digits are padded with zeros on the right hand side. Only available when generating decimal numbers.
+    </li>
+    <li>
+        <strong>Max fraction digits</strong> - Set the maximum number of fraction digits (after the decimal point) each number will have. Numbers with more fraction digits are truncated, losing their least significant fraction digits. Only available when generating decimal numbers.
+    </li>
+</ul>
+<p>
+    To indicate that no minimum or maximum size should be enforced, leave any of the digit settings blank.
+</p>
+<p>
+    As you edit the number format, example numbers with the minimum and maximum number of digits are shown.
+</p>
+<h2 id="dates">Dates</h2>
+<p>
+    This enables you to generate date payloads within a given range and in a specified format.
+</p>
+<p>
+    You can use this payload type for:
+</p>
+<ul>
+    <li>
+        Data mining, for example, trawling an order book for entries placed on different days.
+    </li>
+    <li>
+        Brute forcing, for example, guessing the date of birth component of a user's credentials.
+    </li>
+</ul>
+<p>
+    The following settings are available:
+</p>
+<ul>
+    <li>
+        <strong>From</strong> - Set the first (and earliest) date that will be generated.
+    </li>
+    <li>
+        <strong>To</strong> - Set the value of the last (and latest) date that will be generated (or the nearest lower increment of the step value).
+    </li>
+    <li>
+        <strong>Step</strong> - Set the increment between successive dates, in days, weeks, months or years. It must be a positive value.
+    </li>
+    <li>
+        <strong>Format</strong> - Set the format in which the dates should be represented. Several predefined date formats can be selected, or a custom format can be entered. The examples below illustrate the syntax that can be used to specify custom date formats.
+    </li>
+</ul>
+<table class="is-nonresponsive-table">
+    <tr>
+        <td>
+            <code>
+                    E
+				</code>
+        </td>
+        <td>
+            <code>
+                    Sat
+                </code>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <code>
+                    EEEE
+                </code>
+        </td>
+        <td>
+            <code>
+                    Saturday
+                </code>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <code>
+                    d
+                </code>
+        </td>
+        <td>
+            <code>
+                    7
+                </code>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <code>
+                    dd
+                </code>
+        </td>
+        <td>
+            <code>
+                    07
+                </code>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <code>
+                    M
+                </code>
+        </td>
+        <td>
+            <code>
+                    6
+                </code>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <code>
+                    MM
+                </code>
+        </td>
+        <td>
+            <code>
+                    06
+                </code>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <code>
+                    MMM
+                </code>
+        </td>
+        <td>
+            <code>
+                    Jun
+                </code>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <code>
+                    MMMM
+                </code>
+        </td>
+        <td>
+            <code>
+                    June
+                </code>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <code>
+                    yy
+                </code>
+        </td>
+        <td>
+            <code>
+                    03
+                </code>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <code>
+                    yyyy
+                </code>
+        </td>
+        <td>
+            <code>
+                    2003
+                </code>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <code>
+                    / . :
+                </code>
+        </td>
+        <td>
+            <code>
+                    / . :
+                </code>
+        </td>
+    </tr>
+</table>
+<h2 id="brute-forcer">Brute forcer</h2>
+<p>
+    This enables you to generate payloads of specified lengths that contain all permutations of a specified character set.
+</p>
+<p>
+    The following settings are available:
+</p>
+<ul>
+    <li>
+        <strong>Character set</strong> - Specify the set of characters to be used in the payloads. Note that the total number of payloads increases exponentially with the size of this set.
+    </li>
+    <li>
+        <strong>Min length</strong> - Set the length of the shortest payload.
+    </li>
+    <li>
+        <strong>Max length</strong> - Set the length of the longest payload.
+    </li>
+</ul>
+<h2 id="null-payloads">Null payloads</h2>
+<p>
+    This enables you to generate payloads whose value is an empty string. You can use this to repeatedly issue the base request unmodified - you don't need to configure payload positions.
+</p>
+<p>
+    You can use this payload type for a variety of attacks, for example:
+</p>
+<ul>
+    <li>
+        Harvesting cookies for sequencing analysis.
+    </li>
+    <li>
+        Application-layer denial-of-service attacks where requests are repeatedly sent which initiate high-workload tasks on the server.
+    </li>
+    <li>
+        Keeping alive a session token that is being used in other intermittent tests.
+    </li>
+</ul>
+<p>
+    You can generate a specified number of null payloads, or continue indefinitely.
+</p>
+<h2 id="character-frobber">Character frobber</h2>
+<p>
+    This enables you to modify the value of each character position of an input. The input could be the base value of each payload position, or a specified string. The attack cycles through each item in turn, one character at a time, incrementing the ASCII code of that character by one.
+</p>
+<p>
+    You can use this payload type to test which parameter values, or parts of values, have an effect on the application's response. For example, you can use it to test which parts of a session token track session state. If you modify the value of an individual character within the token, and your request is still processed within your session, then it is likely that this character is not used to track your session.
+</p>
+<h2 id="bit-flipper">Bit flipper</h2>
+<p>
+    This enables you to modify the value of each bit position of an input. The input could be the base value of each payload position, or a specified string. It cycles through each item, one character at a time, flipping each specified bit in turn.
+</p>
+<p>
+    The following settings are available:
+</p>
+<ul>
+    <li>
+        <strong>Operate on</strong> - Specify whether to operate on the base value of the payload position, or on another string.
+    </li>
+    <li>
+        <strong>Format of original data</strong> -Specify whether the generator should operate on the literal value of the original data, or treat it as ASCII hex (explained further below).
+    </li>
+    <li>
+        <strong>Select bits to flip</strong> - Specify which bits in each byte should be flipped, through from the least significant bit (0000000X) through to the most significant bit (X0000000).
+    </li>
+</ul>
+<p>
+    For example, if the base value is &quot;ab&quot; then operating on the literal string and flipping all bits will result in the following payloads:
+</p>
+<code>
+            `b<br>
+    cb<br>
+    eb<br>
+    ib<br>
+    qb<br>
+    Ab<br>
+    !b<br>
+    &#xE1;b<br>
+    ac<br>
+    a`<br>
+    af<br>
+    aj<br>
+    ar<br>
+    aB<br>
+    a&quot;<br>
+    a&#xE2;<br>
+</code><p>
+    Whereas treating &quot;ab&quot; as an ASCII hex string and flipping all bits will result in the following payloads:
+</p>
+<code>
+            aa<br>
+    a9<br>
+    af<br>
+    a3<br>
+    bb<br>
+    8b<br>
+    eb<br>
+    2b<br>
+</code><p>
+    You can use the <strong>Bit flipper</strong> in similar situations to the <strong><a href="#character-frobber">Character frobber</a></strong>, but where you need finer-grained control. For example, if session tokens or other parameter values contain meaningful data encrypted with a block cipher in CBC mode, it may be possible to change parts of the decrypted data systematically by modifying bits within the preceding cipher block. You can use this payload type to determine the effects of modifying individual bits within the encrypted value.
+</p>
+<h2 id="username-generator">Username generator</h2>
+<p>
+    This enables you to derive potential usernames from a list of names or email addresses, using various common schemes.
+</p>
+<p>
+    This payload type is useful if you are targeting a particular human user, and you do not know the username or email address scheme in use within an application.
+</p>
+<p>
+    For example, supplying the name &quot;peter wiener&quot; results in up to 115 possible usernames:
+</p>
+<code class="code-scrollable">peterweiner
+peter.wiener
+wienerpeter
+wiener.peter
+peter
+wiener
+peterw
+peter.w
+wpeter
+w.peter
+pwiener
+p.wiener
+wienerp
+wiener.p
+...
+</code><p>
+    You can configure a maximum number of payloads to generate per item in the list.
+</p>
+<h2 id="ecb-block-shuffler">ECB block shuffler</h2>
+<p>
+    This enables you to shuffle blocks of ciphertext in ECB-encrypted data, to modify the decrypted cleartext and potentially interfere with application logic.
+</p>
+<p>
+    Because ECB ciphers encrypt each block of plaintext independently of others, identical blocks of plaintext encrypt into identical blocks of ciphertext (provided the same key is used), and vice versa. Hence, it is possible to shuffle blocks within a large piece of ciphertext with the effect of shuffling the corresponding blocks of decrypted plaintext. In some data (such as a structured session token with fields for username, user ID, role, and a timestamp) it may be possible to meaningfully alter the content of the decrypted data so as to interfere with application processing, and carry out unauthorized actions.
+</p>
+<p>
+    The following settings are available:
+</p>
+<ul>
+    <li>
+        <strong>Encrypted data to shuffle</strong> - Select whether to operate on the base value of the payload position, or on another string.
+    </li>
+    <li>
+        <strong>Format of original data</strong> - Select whether the generator should operate on the literal value of the original data, or should treat it as ASCII hex (see the <a href="#bit-flipper"><strong>Bit flipper</strong></a> payload type for more details).
+    </li>
+    <li>
+        <strong>Block size</strong> - Set the size of the encrypted blocks in bytes. In most cases, the blocks are 8 or 16 bytes in size. If you are unsure, run the attack multiple times using each block size that might be in use.
+    </li>
+    <li>
+        <strong>Additional encrypted strings</strong> - Supply a list of encrypted strings that use the same cipher and key, to provide additional blocks for shuffling into the encrypted data. Because successful attacks of this type often require a considerable degree of luck, in terms of finding a block with a suitable plaintext value that can be shuffled into the correct point in the structure, the odds of success are frequently improved by obtaining a large sample of strings that have been encrypted by the same application function. For example, if you are attacking a session token using this payload type, it would be beneficial to harvest a large number of other session tokens from the application, to provide additional blocks of ciphertext.
+    </li>
+</ul>
+<h2 id="extension-generated">Extension-generated</h2>
+<p>
+    This enables you to invoke a <a href="/burp/documentation/desktop/extensions/index.html">Burp extension</a> to generate payloads.
+</p>
+<p>
+    Click <strong>Select generator ...</strong> to select an extension-provided payload generator from the list. The extension must be registered as an Intruder payload generator.
+</p>
+<h2 id="copy-other-payload">Copy other payload</h2>
+<p>
+    This enables you to copy the value of the current payload to another payload position.
+</p>
+<p>
+    This payload type can be useful in various situations, for example:
+</p>
+<ul>
+    <li>
+        When two different parameters must always have the same value in order to hit a target code path (for example, fields for new and confirm passwords), and you want to use the cluster bomb attack type to manipulate other parameters at the same time.
+    </li>
+    <li>
+        When one parameter value in the request contains a checksum of another parameter value, which is normally computed by a client-side script based on user input.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        This payload type enables you to copy the literal value of the payload, but you can also systematically derive the current payload from the value of a payload at another position. To do this, define an appropriate <a href="/burp/documentation/desktop/tools/intruder/configure-attack/processing.html">payload processing rule</a>.
+    </p>
+</div>
+<h2 id="collaborator-payloads">Collaborator payloads</h2>
+<p>
+    This generates and injects <a href="/burp/documentation/collaborator/index.html">Burp Collaborator</a> payloads. Each Collaborator payload includes a unique identifier that is a subdomain of the Collaborator server's domain. When certain vulnerabilities occur, the target application may use the injected payload to interact with the Collaborator server.
+</p>
+<p>
+    Select <strong>Include Collaborator server location</strong> to include the full Collaborator server address in your payloads. If this is not selected, only the Collaborator identifier is included.
+</p>
+<p>
+    If you use this payload type, you can view the details of any interactions with the Collaborator server in the attack results window.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Interactions are not shown in the <strong>Collaborator</strong> tab. To identify any deferred interactions with the Collaborator server, save the attack and monitor the <strong>Event log</strong> on the <strong>Dashboard</strong>.
+    </p>
+</div>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/index.html">Automated scanning</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/live-tasks/index.html">Live tasks</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Live tasks</h1>
+<p>
+    Live tasks are scans that run in the background while you manually explore the target website using Burp's browser or when you send requests from Burp Repeater and Intruder. They enable you to perform some scanning operations, such as auditing for vulnerabilities or adding resources to Burp's <strong>Target</strong> site map, automatically.
+</p>
+<h2 id="types-of-live-task">Types of live task</h2>
+<p>
+    When you set up a live task, you specify a scanning operation and a scope for items to be scanned. When the task encounters an item that meets the scope criteria, it performs the selected scanning operation on that item automatically.
+</p>
+<p>
+    There are two types of live task available in Burp Suite:
+</p>
+<ul>
+    <li>
+        <strong>Live audit</strong> - Scans each identified request for vulnerabilities.
+    </li>
+    <li>
+        <strong>Live passive crawl</strong> - Populates the Target site map with items derived from the identified request.
+    </li>
+</ul>
+<h2 id="live-task-scope">Live task scope</h2>
+<p>
+    You can specify items to be scanned by the live task based on the following criteria:
+</p>
+<ul>
+    <li>
+        Tools scope - Specify the tools whose traffic is inspected. Live tasks can include traffic from Burp Proxy, Repeater, and Intruder.
+    </li>
+    <li>
+        URL scope - Specify which items from the selected tools are processed by the task, based on their URL.
+    </li>
+</ul>
+<p>
+    You can also specify whether ay duplicate items should be removed. If you enable deduplication, any items that share URL and parameter names are consolidated to reduce the amount of items scanned.
+</p>
+<h2 id="scan-configuration-and-resource-pools">Scan configuration and resource pools</h2>
+<p>
+    You can set scan configurations for all live tasks. The selected configurations apply when scanning any in-scope items.
+</p>
+<p>
+    For live audit tasks, you can also specify a resource pool. This option is not available for passive crawl tasks.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/live-tasks/creating-live-tasks.html">Creating a live task</a> - Explains how to create a new live task in Burp Suite.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/live-tasks/task-execution-settings.html">Task execution settings</a> - Explains how to manage the execution of tasks and the assignment of resources.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/custom-configs.html">Using custom scan configurations</a> - Gives further information on creating custom scan configurations in Burp Suite Professional.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/managing-resource-pools.html">Managing resource pools</a> - Gives information on the use cases for resource pools and how to configure them.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

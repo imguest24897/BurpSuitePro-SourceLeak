@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+Long redirection response
+<h1>Typical severity</h1>
+
+Information
+
+<h1>Issue description</h1>
+
+<p>The application returned a redirection response containing a "long" message body. Ordinarily, this content is not displayed to the user, because the browser automatically follows the redirection.</p>
+<p>Occasionally, redirection responses contain sensitive data. For example, if the user requests a page that they are not authorized to view, then an application might issue a redirection to a different page, but also include the contents of the prohibited page.</p>
+<p>You should review the contents of the response to determine whether it contains anything sensitive. </p>
+
+<h1>Issue remediation</h1>
+
+<p>In cases where the application handles requests for unauthorized content by redirecting to a different URL, the application should ensure that no sensitive content is included within the redirection response. Depending on the application and the platform, this might involve checking for proper authorization earlier in the request handling logic, or using a different API to perform the redirection.</p>
+
+<h1>References</h1>
+
+<ul>
+    <li><a href="https://portswigger.net/web-security/information-disclosure">Web Security Academy: Information disclosure</a></li>
+</ul>
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+<li><a href="https://cwe.mitre.org/data/definitions/698.html">CWE-698: Execution After Redirect (EAR)</a></li>
+    <li><a href="https://capec.mitre.org/data/definitions/37.html">CAPEC-37: Retrieve Embedded Sensitive Data</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

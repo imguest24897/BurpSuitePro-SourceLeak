@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/mobile/index.html">Mobile testing</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/mobile/troubleshooting.html">Troubleshooting for mobile devices</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Troubleshooting for mobile devices</h1>
+<p>
+    In this section, we'll provide some simple steps you can take to resolve common issues when trying to test mobile apps using Burp Suite.
+</p>
+<h4 id="i-can-t-access-https-urls-on-ios-even-after-installing-burp-s-ca-certificate">I can't access HTTPS URLs on iOS even after installing Burp's CA certificate</h4>
+<p>
+    In Burp, go to the <strong>Dashboard</strong> tab and look at the event log. If you see a large number of <code>Connection reset</code> or <code>Remote host terminated the handshake</code> errors, the problem may be due to compatibility issues with TLS 1.3.
+</p>
+<p>
+    You can prevent the proxy from using TLS 1.3 by disabling it in the proxy listener settings as follows:
+</p>
+<ol>
+    <li>
+        <p>
+            In Burp, click on <strong>Settings <span class="icon-settings"></span></strong> to open the <strong>Settings</strong> dialog.
+        </p>
+    </li>
+    <li>
+        <p>
+            Go to the <strong>Tools &gt; Proxy</strong> tab.
+        </p>
+    </li>
+    <li>
+        <p>
+            Select the proxy listener that you use for your mobile device and click <strong>Edit</strong>.
+        </p>
+    </li>
+    <li>
+        <p>
+            In the <strong>Edit proxy listener</strong> dialog, go to the <strong>TLS Protocols</strong> tab.
+        </p>
+    </li>
+    <li>
+        <p>
+            Select <strong>Use custom protocols</strong>, then deselect <strong>TLSv1.3</strong> from the list.
+        </p>
+    </li>
+</ol>
+<p>
+    If this was the problem, you should now be able to access HTTPS URLs as normal and will see fewer errors in the event log. If you're still having issues, please contact our <a href="https://portswigger.net/support">support team</a>.
+</p>
+</body>
+</html>

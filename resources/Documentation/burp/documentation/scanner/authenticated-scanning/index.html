@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/index.html">Scanner</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/authenticated-scanning/index.html">Authenticated scanning</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-enterprise">Enterprise</label>
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Authenticated scanning</h1>
+<p>
+    When crawling a target application, Burp Scanner attempts to cover as much of the application's attack surface as possible. Authenticated scanning enables Burp to crawl privileged content that requires a login to access, such as user dashboards and admin panels.
+</p>
+<p>
+    Burp Scanner can authenticate with target applications in two ways:
+</p>
+<ul>
+    <li>
+        <strong>Login credentials</strong> are simple username and password pairs. They are intended for sites that use a single-step login mechanism.
+    </li>
+    <li>
+        <strong>Recorded login sequences</strong> are user-defined sequences of instructions. They are intended for sites that use complex login mechanisms such as Single Sign-On.
+    </li>
+</ul>
+<p>
+    You can only use one authentication method per scan. If you enter both login credentials and a recorded login sequence, Burp Scanner ignores the provided login credentials.
+</p>
+<div class="highlightedarea">
+    <h4>In this section</h4>
+    <ul>
+        <li>
+            <p>
+                <a href="/burp/documentation/scanner/authenticated-scanning/login-credentials.html">Login credentials</a>
+            </p>
+        </li>
+        <li>
+            <p>
+                <a href="/burp/documentation/scanner/authenticated-scanning/identifying-login-forms.html">Identifying login and registration forms</a>
+            </p>
+        </li>
+        <li>
+            <p>
+                <a href="/burp/documentation/scanner/authenticated-scanning/recorded-login-sequences.html">Recorded login sequences</a>
+            </p>
+            <ul>
+                <li>
+                    <p>
+                        <a href="/burp/documentation/scanner/authenticated-scanning/recorded-login-best-practice.html">Best practice for recording login sequences</a>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <a href="/burp/documentation/scanner/authenticated-scanning/using-recorded-logins.html">Recording login sequences</a>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <a href="/burp/documentation/scanner/authenticated-scanning/troubleshooting-recorded-logins.html">Troubleshooting recorded login sequences</a>
+                    </p>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

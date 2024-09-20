@@ -1,0 +1,36 @@
+{
+    "name": "Burp Suite Navigation Recorder",
+    "version": "1.5.6",
+    "description": "Improve your Burp Suite scan coverage by manually capturing how to perform complex actions on your website.",
+    "background": {
+        "page": "./background/background.html",
+        "persistent": true
+    },
+    "content_scripts": [
+        {
+            "run_at": "document_start",
+            "matches": ["http://*/*", "https://*/*"],
+            "js": ["./content-scripts/classes/Recorder.js"],
+            "all_frames": true,
+            "match_about_blank": true
+        }
+    ],
+    "browser_action": {        
+        "default_title": "Burp Suite Navigation Recorder",   
+        "default_popup": "./popup/popup.html",
+        "default_icon": {
+            "16": "images/WebApp-Recorder-16.png",
+            "32": "images/WebApp-Recorder-32.png",
+            "48": "images/WebApp-Recorder-48.png",
+            "128": "images/WebApp-Recorder-128.png"              
+        }
+      },
+    "permissions": ["activeTab","storage","https://*/*","http://*/*","tabs","clipboardWrite","webNavigation","privacy","notifications","webRequest"],
+    "icons": {
+        "16": "images/WebApp-Recorder-16.png",
+        "32": "images/WebApp-Recorder-32.png",
+        "48": "images/WebApp-Recorder-48.png",
+        "128": "images/WebApp-Recorder-128.png"
+    },
+    "manifest_version": 2
+}

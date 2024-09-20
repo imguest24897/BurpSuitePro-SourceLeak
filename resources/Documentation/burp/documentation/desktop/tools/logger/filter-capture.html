@@ -1,0 +1,249 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/logger/index.html">Logger</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/logger/filter-capture.html">Logger capture filter</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Burp Logger capture filter</h1>
+<p>
+    You can use the capture filter settings to control which types of items are captured in Burp Logger.
+</p>
+<p>
+    You can configure the Logger capture filter in two different ways:
+</p>
+<ul>
+    <li>
+        <p>
+            <strong>Settings mode</strong> enables you to configure a capture filter using checkboxes and drop-downs.
+        </p>
+    </li>
+    <li>
+        <p>
+            <strong>Bambda mode</strong> enables you to write a powerful custom capture filter using Burp's Java-based Bambdas.
+        </p>
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Items that are not captured will be discarded from Logger. Burp can't retrieve these items even if the capture filter is removed.
+    </p>
+</div>
+<p>
+    To filter the items that Logger captures, click on the <strong>Capture filter</strong> bar in the <strong>Logger</strong> tab. This opens the <strong>Logger capture filter</strong> window.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/logger-capture-filter.png" alt="The capture filter bar in Logger" class="center-block">
+</div>
+<h2 id="settings-mode" cms-ignore-validation="DUPLICATE_HEADINGS">Settings mode</h2>
+<p>
+    On the <strong>Settings mode</strong> tab, you can apply a capture filter using the following options:
+</p>
+<h3 id="capture-limit" cms-ignore-validation="DUPLICATE_HEADINGS">Capture limit</h3>
+<p>
+    You can specify a limit to the memory used by Logger. Once the limit is reached, Logger discards the oldest entries as new entries are created. The default limit is 50MB (or 100MB, if you give Burp Suite access to at least 1GB of memory).
+</p>
+<p>
+    To change the capture limit, select a preset option from the drop-down, or type a specific value.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Allocating a large amount of memory to Logger can cause performance issues.
+    </p>
+    <p>
+        We recommend that you only increase the amount of memory when you have a specific issue that requires a large number of entries.
+    </p>
+</div>
+<h3 id="capture-by-request-type" cms-ignore-validation="DUPLICATE_HEADINGS">Capture by request type</h3>
+<p>
+    Choose which request types Logger captures. You can select from:
+</p>
+<ul>
+    <li>
+        <strong>Capture only in-scope items</strong>. For more information on how to set your scope, see <a href="/burp/documentation/desktop/tools/target/scope/index.html">Target scope</a>.
+    </li>
+    <li>
+        <strong>Discard items without responses</strong>.
+    </li>
+    <li>
+        <strong>Capture only parameterized requests</strong>.
+    </li>
+</ul>
+<h3 id="capture-by-mime-type" cms-ignore-validation="DUPLICATE_HEADINGS">Capture by MIME type</h3>
+<p>
+    Choose which MIME type Logger captures, such as HTML or XML.
+</p>
+<h3 id="capture-by-status-code" cms-ignore-validation="DUPLICATE_HEADINGS">Capture by status code</h3>
+<p>
+    Choose which status codes Logger captures.
+</p>
+<h3 id="capture-by-tool" cms-ignore-validation="DUPLICATE_HEADINGS">Capture by tool</h3>
+<p>
+    Choose which other Burp tools Logger captures items from. This enables you to discard traffic from a noisy tool, or direct Logger to capture traffic from one tool only. By default, all tools are selected.
+</p>
+<h3 id="capture-by-search-term" cms-ignore-validation="DUPLICATE_HEADINGS">Capture by search term</h3>
+<p>
+    <label class="label-edition is-professional">Professional</label>
+    Choose to capture only records that contain a specific search term:
+</p>
+<ul>
+    <li>
+        <strong>Regex</strong>. Specify whether the search term is a literal string or a regular expression.
+    </li>
+    <li>
+        <strong>Case sensitive</strong>. Specify whether the search term is case-sensitive.
+    </li>
+    <li>
+        <strong>Negative search</strong>. Capture only items that do not match the search term.
+    </li>
+</ul>
+<h3 id="session-handling" cms-ignore-validation="DUPLICATE_HEADINGS">Session handling</h3>
+<p>
+    Choose whether or not to discard <a href="/burp/documentation/desktop/settings/sessions/index.html">session handling requests</a>.
+</p>
+<h3 id="limit-request-response-size" cms-ignore-validation="DUPLICATE_HEADINGS">Limit request/response size</h3>
+<p>
+    Limit the size of requests or responses that Logger captures. The default maximum size for items is 1MB. To change the maximum size of items Logger captures, select a preset option from the drop-down.
+</p>
+<h2 id="bambda-mode" cms-ignore-validation="DUPLICATE_HEADINGS">Bambda mode</h2>
+<p>
+    On the <strong>Bambda mode</strong> tab, you can write Java-based Bambdas to apply custom capture filters to Logger.
+</p>
+<p>
+    Two objects of the Montoya API are available to help you write your Bambdas:
+</p>
+<ul>
+    <li>
+        <p>
+            <code>LoggerCaptureHttpRequestResponse</code>
+        </p>
+    </li>
+    <li>
+        <p>
+            <code>Utilities</code>
+        </p>
+    </li>
+</ul>
+<p>
+    To filter which types of items Logger captures:
+</p>
+<ol>
+    <li>
+        <p>
+            In <strong>Logger</strong>, click the <strong>Capture filter</strong> bar to open the <strong>Logger capture filter</strong> window.
+        </p>
+    </li>
+    <li>
+        <p>
+            In the <strong>Logger capture filter</strong> window, click the <strong>Bambda mode</strong> tab.
+        </p>
+    </li>
+    <li>
+        <p>
+            Write your Bambda using Java.
+        </p>
+    </li>
+    <li>
+        <p>
+            Click <strong>Apply</strong>.
+        </p>
+    </li>
+</ol>
+<p>
+    Burp compiles your Bambda and applies it to any future traffic generated in this project.
+</p>
+<div class="highlightedarea">
+    <h4>Warning</h4>
+    <p>
+        Capture filter Bambdas may slow down Burp's performance as they run against all outgoing HTTP messages. Using slow running or resource-intensive Bambdas can slow down Burp even further. Write your Bambda carefully to minimize performance implications.
+    </p>
+</div>
+<h3>Example Bambda</h3>
+<p>
+    In the example below, we'll create a Bambda that filters Logger to capture only items that meet the following criteria:
+</p>
+<ul>
+    <li>
+        <p>
+            The item must not have a <strong>MIME type</strong> of WOFF or WOFF2.
+        </p>
+    </li>
+</ul>
+<p>
+    In this example, our Bambda is:
+</p>
+<code class="code-scrollable">var mimeType = requestResponse.mimeType();
+return mimeType != MimeType.FONT_WOFF && mimeType != MimeType.FONT_WOFF2;
+</code>
+<h3 id="converting-filter-settings-to-bambdas" cms-ignore-validation="DUPLICATE_HEADINGS">Converting filter settings to Bambdas</h3>
+<p>
+    If you have already used <strong>Settings mode</strong> to configure a Logger capture filter, you can convert this to a Bambda.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Converting your filter settings overwrites any existing Bambda applied to your Logger capture.
+    </p>
+</div>
+<p>
+    To convert your capture filter settings to a Bambda:
+</p>
+<ol>
+    <li>
+        <p>
+            In the <strong>Logger</strong> tab, click the <strong>Capture filter</strong> bar to open the <strong>Logger capture filter</strong> window.
+        </p>
+    </li>
+    <li>
+        <p>
+            Make changes to the filter settings (if necessary).
+        </p>
+    </li>
+    <li>
+        <p>
+            At the bottom of the <strong>Logger capture filter</strong> window, click <strong>Convert to Bambda</strong>.
+        </p>
+    </li>
+</ol>
+<p>
+    Your filter is now converted into a Bambda, enabling you to customize it further using Java.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        For more information on how to load Bambdas, save your Bambda, or troubleshoot errors with your Bambda, see our <a href="/burp/documentation/desktop/extensions/bambdas/index.html">Bambdas documentation</a>.
+    </p>
+</div>
+</body>
+</html>

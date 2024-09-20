@@ -1,0 +1,164 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms ignore-validation="HEADING_CAPITALIZATION" page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/index.html">Automated scanning</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/bchecks/index.html">Adding custom scan checks</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/bchecks/testing.html">Testing BChecks</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS">Testing BChecks</h1>
+<p>
+    You can test your BChecks using the BS Code editor's built-in test function. This enables you to confirm whether your checks are working as expected.
+</p>
+<p>
+    BCheck tests use pre-selected requests and responses as test cases. When you run a test, Burp Scanner runs the BCheck on the selected HTTP messages and reports the results.
+</p>
+<h2 id="running-a-bcheck-test">Running a BCheck test</h2>
+<p>
+    To test a BCheck:
+</p>
+<ol>
+    <li>
+        <p>
+            Click <strong>Extensions &gt; BChecks</strong> to open the BChecks editor.
+        </p>
+    </li>
+    <li>
+        <p>
+            Select the HTTP messages that you want to use as test cases. You can select messages from anywhere that they are displayed in Burp. To select a message, either:
+        </p>
+        <ul>
+            <li>
+                Right-click the message and click <strong>Send to BChecks editor</strong>. This option is only available if you have previously opened the BChecks editor in the current session.
+            </li>
+            <li>
+                Select the message and press the <strong>Send to BChecks editor</strong> hotkey, if configured. For more information on configuring hotkeys, see <a href="/burp/documentation/desktop/settings/ui/hotkeys.html">Hotkey settings</a>.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <p>
+            In the BChecks editor, open the BCheck you want to test:
+        </p>
+        <ul>
+            <li>
+                To create and test a BCheck, follow the process described in <a href="/burp/documentation/desktop/automated-scanning/bchecks/creating.html">Creating BChecks</a> up to the point that your check passes validation.
+            </li>
+            <li>
+                To test an existing BCheck, select it from the list.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <p>
+            Make sure that the <strong>BS Code</strong> tab is selected. Note that the HTTP test cases you sent to the BChecks editor are displayed in the <strong>Select BCheck test cases</strong> panel.
+        </p>
+    </li>
+    <li>
+        <p>
+            If required, use the checkboxes to select specific messages to use in this test.
+        </p>
+    </li>
+    <li>
+        <p>
+            Click <strong>Run test</strong>. Burp Scanner runs the BCheck against the selected test cases. Note that the test does not run if there are validation errors in the BCheck definition.
+        </p>
+    </li>
+    <li>
+        <p>
+            Review the results of the test. The editor displays the number of requests sent, issue raised, and errors found on the bottom panel. It also displays the following tabs, which work in the same way as when viewing ordinary scan results:
+        </p>
+        <ul>
+            <li>
+                <strong>Audit items</strong>
+            </li>
+            <li>
+                <strong>Issues</strong>
+            </li>
+            <li>
+                <strong>Event log</strong>
+            </li>
+            <li>
+                <strong>Logger</strong>
+            </li>
+        </ul>
+        <p>
+            For more information on reviewing scans, see <a href="/burp/documentation/desktop/automated-scanning/results/index.html">Viewing scan results</a>.
+        </p>
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        To stop a running test, click <strong>Cancel test</strong>.
+    </p>
+</div>
+<h2 id="managing-bcheck-test-cases">Managing BCheck test cases</h2>
+<p>
+    You can enable, disable, duplicate, and remove your selected test case messages using the right-click context menu on the <strong>Select BCheck text cases</strong> panel.
+</p>
+<p>
+    You can edit the content of the messages using the <strong>Request</strong> and <strong>Response</strong> tabs. You need to re-run any tests to see the impact of these changes.
+</p>
+<p>
+    If required, you can hide the <strong>Select BCheck text cases</strong> panel by clicking the <strong>Test cases</strong> tab in the sidebar.
+</p>
+<h2 id="configuring-test-scans">Configuring test scans</h2>
+<p>
+    You can also test BChecks by configuring Burp Scanner to only use your active checks when scanning. This enables you to test and debug your entire collection of BChecks at once, rather than testing them one at a time. To do this, run a scan with the <strong>Audit checks - BChecks only</strong> built-in scan configuration.
+</p>
+<p>
+    Alternatively, you can create a custom scan configuration that uses BChecks only. To do this:
+</p>
+<ol>
+    <li>
+        <p>
+            Open an audit scan configuration and expand the <strong>Issues reported</strong> section.
+        </p>
+    </li>
+    <li>
+        <p>
+            Select <strong>Select individual issues</strong>.
+        </p>
+    </li>
+    <li>
+        <p>
+            Deselect all issues, except for <strong>BCheck generated issue</strong>.
+        </p>
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>More information</h4>
+    <p>
+        <a href="/burp/documentation/desktop/automated-scanning/custom-configs.html">Using custom scan configurations</a>
+    </p>
+</div>
+</body>
+</html>

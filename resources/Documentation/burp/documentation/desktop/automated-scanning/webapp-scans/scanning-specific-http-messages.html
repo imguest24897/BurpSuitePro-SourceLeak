@@ -1,0 +1,172 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/index.html">Automated scanning</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/webapp-scans/index.html">Scanning web applications</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/webapp-scans/scanning-specific-http-messages.html">Scanning specific HTTP messages</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Scanning specific HTTP messages</h1>
+<p>
+    Scanning specific HTTP messages makes it easy to run focused scans on a particular set of requests or responses.
+</p>
+<p>
+    You can scan HTTP messages from most places that display HTTP traffic in Burp Suite. In tools that display lists of HTTP requests (such as the <strong>Site map</strong> and <strong>HTTP history</strong> tabs) you can select multiple entries to scan.
+</p>
+<p>
+    To scan the selected HTTP messages, right-click and select one of the scan options from the context menu. There are three options available:
+</p>
+<ul>
+    <li>
+        <p>
+            <strong>Scan</strong>. This menu item has two options:
+        </p>
+        <ul>
+            <li>
+                <strong>Open scan launcher</strong>. This opens a scan launcher window from where you can configure the scan.
+            </li>
+            <li>
+                <strong>Add to task</strong>. This enables you to add a scan of the message to a pre-existing task.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <p>
+            <strong>Do passive scan</strong>. Burp Scanner analyzes the contents of the base request and response, rather than sending its own requests.
+        </p>
+    </li>
+    <li>
+        <p>
+            <strong>Do active scan</strong>. Burp Scanner sends its own requests to the target to probe for vulnerabilities.
+        </p>
+    </li>
+</ul>
+<h2 id="configuring-the-scan">Configuring the scan</h2>
+<p>
+    The scan launcher window used to configure scans of specific HTTP messages is similar to that displayed when you click the <strong>New Scan</strong> button, but with some key differences.
+</p>
+<p>
+    To configure a scan of specific HTTP messages:
+</p>
+<ol>
+    <li>
+        <p>
+            Right-click the messages required and select <strong>Scan &gt; Open scan launcher</strong>.
+        </p>
+    </li>
+    <li>
+        <p>
+            From the <strong>Scan details</strong> tab, select the <strong>Scan type</strong> you want to run:
+        </p>
+        <ul>
+            <li>
+                <strong>Crawl and audit</strong>.
+            </li>
+            <li>
+                <strong>Crawl</strong>.
+            </li>
+            <li>
+                <strong>Audit selected items</strong>. This is the default option, and is only available when scanning specific HTTP messages.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <p>
+            Select the task that you want the scan to run under:
+        </p>
+        <ul>
+            <li>
+                To add the scan to an existing task, select <strong>Add to task</strong> and select the required task from the list.
+            </li>
+            <li>
+                To have the scan run under its own task, select <strong>Create new task</strong>.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <p>
+            Optionally, select <strong>Consolidate items</strong> to remove unnecessary messages from the scan. You can consolidate items using the following criteria:
+        </p>
+        <ul>
+            <li>
+                Duplicates (messages that have the same URLs and parameters).
+            </li>
+            <li>
+                Out-of-scope messages based on the current suite scope.
+            </li>
+            <li>
+                Messages with no parameters.
+            </li>
+            <li>
+                Messages with a specified file extension.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <p>
+            Optionally, specify details for the remaining launcher tabs:
+        </p>
+        <ul>
+            <li>
+                <strong>Scan configuration</strong>. Preset scan modes are not available when scanning specific HTTP messages. You can use scan configurations from the library as usual.
+            </li>
+            <li>
+                <strong>Application login</strong>. You cannot specify application logins if you are using the <strong>Audit selected items</strong> scan mode.
+            </li>
+            <li>
+                <strong>Resource pool</strong>.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <p>
+            Click <strong>OK</strong> to start the scan.
+        </p>
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/setting-pro-scope.html">Setting the scope in Burp Suite Professional</a> - Gives detailed information on the scope options available to you in Burp Suite Professional.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/custom-configs.html">Configuring scans</a> - Gives further information on creating custom scan configurations in Burp Suite Professional.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/configuring-app-logins/index.html">Configuring application logins</a> - Gives further information on using application logins in Burp Suite Professional.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/managing-resource-pools.html">Resource pools</a> - Gives information on the use cases for resource pools and how to configure them.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

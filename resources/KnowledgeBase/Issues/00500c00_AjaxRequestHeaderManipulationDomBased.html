@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+Ajax request header manipulation (DOM-based)
+<h1>Typical severity</h1>
+
+Low
+
+<h1>Issue description</h1>
+
+
+<p>DOM-based vulnerabilities arise when a client-side script reads data from a controllable part of the DOM (for example, the URL) and processes this data in an unsafe way.</p>
+<p>Ajax request header manipulation  arises when a script writes controllable data into a header of an Ajax request that is issued using XmlHttpRequest. An attacker may be able to use the vulnerability to construct a URL that, if visited by another application user, will set an arbitrary header in the subsequent Ajax request.</p>
+<p>The potential impact of the vulnerability depends on the role of specific HTTP headers in the server-side application's processing of the Ajax request. If the header is used to control the behavior that results from the Ajax request, then the attacker may be able to cause the user to perform unintended actions by manipulating the header.</p>
+<p>Burp Suite automatically identifies this issue using dynamic and static code analysis. Static analysis can lead to false positives that are not actually exploitable. If Burp Scanner has not provided any evidence resulting from dynamic analysis, you should review the relevant code and execution paths  to determine whether this vulnerability is indeed present, or whether mitigations are in place that would prevent exploitation.</p>
+<h1>Issue remediation</h1>
+
+<p>The most effective way to avoid DOM-based Ajax request header manipulation vulnerabilities is not to dynamically set Ajax request headers using data that originated from any untrusted source. This behavior should never be implemented for headers that have any role in controlling the effects of privileged actions within the application. </p>
+
+<h1>References</h1>
+
+<ul>
+    <li><a href="https://portswigger.net/web-security/dom-based/ajax-request-header-manipulation">Web Security Academy: Ajax request header manipulation (DOM-based)</a></li>
+</ul>
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+<li><a href="https://cwe.mitre.org/data/definitions/116.html">CWE-116: Improper Encoding or Escaping of Output</a></li>
+<li><a href="https://capec.mitre.org/data/definitions/6.html">CAPEC-6: Argument Injection</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

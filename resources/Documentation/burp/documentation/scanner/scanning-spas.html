@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms ignore-validation="OTHER_PAGE_KEYWORD_TOO_FREQUENT" page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/index.html">Scanner</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/scanning-spas.html">Scanning single-page apps</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-enterprise">Enterprise</label>
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Scanning single-page apps</h1>
+<p>
+    Burp Scanner can handle virtually all types of modern web application, including single-page applications (SPAs). The dynamic nature of SPAs means that you may need to use a custom configuration in order to scan them accurately.
+</p>
+<h2 id="configuring-scans-of-spas">Configuring scans of SPAs</h2>
+<p>
+    To configure SPA scans, you will need to add a custom scan configuration to the scan configuration library. You can then apply this configuration to your SPA sites (in Burp Suite Enterprise Edition) or select it when launching a scan of an SPA (in Burp Suite Professional).
+</p>
+<div class="highlightedarea">
+    <h4>More information</h4>
+    <p>
+        For more information on using custom scan configurations, see:
+    </p>
+    <ul>
+        <li>
+            <a href="https://portswigger.net/burp/documentation/enterprise/user-guide/working-with-sites/site-settings/scan-configurations/custom-configs.html">Using custom scan configurations</a> (Burp Suite Enterprise Edition).
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/custom-configs.html">Using custom scan configurations</a> (Burp Suite Professional).
+        </li>
+    </ul>
+</div>
+<p>
+    When you create a scan configuration to use with SPAs, consider the following:
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="crawl-strategy">Crawl strategy</h2>
+<p>
+    If the scan's coverage is not as expected, change the crawl strategy to <strong>More Complete</strong>. If this does not have an effect, change it to <strong>Most complete</strong>. The <strong>Most complete</strong> crawl strategy is best suited for SPAs but significantly increases crawl time.
+</p>
+<p>
+    We do not recommend the <strong>Fastest</strong> crawl strategy to scan SPAs, as this configuration is only suitable for static sites without any stateful functionality. Also, the <strong>Fastest</strong> crawl strategy does not support links that require the scanner to click (for example, anything that uses <code>onClick</code> or <code>element.addEventListener('click', fn)</code>).
+</p>
+<p>
+    You can use the <strong>Crawling &gt; Crawl Optimization &gt; Crawl Strategy</strong> scan configuration setting to change the crawl strategy.
+</p>
+<h2 id="routing-fragments">Routing fragments</h2>
+<p>
+    SPAs often use URL fragments for client-side routing. This enables them to display what appear to be several distinct pages without the browser making additional requests to the server. Burp Scanner needs to know whether the target application uses fragments in this way in order to crawl it effectively. By default, if a fragment contains any of the following characters, the crawler assumes that it is used for client-side routing: <code>/ \ ? = &</code>.
+</p>
+<p>
+    If an app that uses fragments for client-side routing does not perform as expected, make sure that the <strong>Crawling &gt; Miscellaneous &gt; Application uses fragments for routing</strong> scan configuration option is selected.
+</p>
+<h2 id="non-standard-clickable-elements">Non-standard clickable elements</h2>
+<p>
+    If the app uses non-standard clickable elements, select the <strong>Crawling &gt; Crawl Optimization &gt; Crawl Strategy &gt; Settings &gt; Click all clickable elements</strong> scan configuration option. Note that this is a work-in-progress feature that is only available when you scan via Burp Suite Professional, and results may be varied.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        We continually look to improve our crawl coverage. If you encounter an application you think we should be better at scanning, and can provide us with access to the application and permission to scan it, we would be happy to test it remotely in our environment.
+    </p>
+</div>
+<div class="highlightedarea">
+    <h4>Related pages:</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/scanner/scan-configurations/crawl-options.html">Custom Crawl Options</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/scan-configurations/audit-options.html">Custom Audit Options</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "typeIndex": 6291584,
+  "name": "Database connection string disclosed",
+  "description": "<p>A database connection string specifies information about a data source and the means of connecting to it. In web applications, connection strings are generally used by the application tier to connect to the back database used for storing application data. They are usually read from server-side configuration files or hard-coded into application source code.</p>",
+  "remediation": "<p>It is almost never necessary for applications to disclose database connection strings to clients. The reason for the disclosure should be reviewed and addressed.</p>",
+  "webIntro": null,
+  "typicalSeverity": "MEDIUM",
+  "references": [
+    {
+      "title": "Web Security Academy: Information disclosure",
+      "url": "https://portswigger.net/web-security/information-disclosure"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-15: External Control of System or Configuration Setting",
+      "url": "https://cwe.mitre.org/data/definitions/15.html"
+    },
+    {
+      "title": "CWE-497: Exposure of System Data to an Unauthorized Control Sphere",
+      "url": "https://cwe.mitre.org/data/definitions/497.html"
+    },
+    {
+      "title": "CAPEC-37: Retrieve Embedded Sensitive Data",
+      "url": "https://capec.mitre.org/data/definitions/37.html"
+    }
+  ]
+}

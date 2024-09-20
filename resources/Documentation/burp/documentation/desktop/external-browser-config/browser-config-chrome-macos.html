@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/external-browser-config/index.html">External browser configuration</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/external-browser-config/browser-config-chrome-macos.html">Configuring Chrome to work with Burp Suite - MacOS</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Configuring Chrome to work with Burp Suite - MacOS</h1>
+<p>
+    If you want to use Chrome with Burp Suite, you need to configure the proxy settings.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        These steps are only necessary if you want to use an external browser for manual testing with Burp. If you prefer, you can just use <a href="/burp/documentation/desktop/tools/burps-browser.html">Burp's browser</a>, which is preconfigured to work with Burp Proxy already. To access Burp's browser, go to the <strong>Proxy &gt; Intercept</strong> tab, and click <strong>Open Browser</strong>.
+    </p>
+</div>
+<p>
+    To configure Chrome to work with Burp Suite, follow these steps:
+</p>
+<ol>
+    <li>
+        Open Chrome and go to the <strong>Customize</strong> (hamburger) menu.
+    </li>
+    <li>
+        Select <strong>Settings</strong> and open the <strong>System</strong> menu.
+    </li>
+    <li>
+        <p>
+            Click <strong>Open your computer's proxy settings</strong>. The <strong>Proxy Settings</strong> window enables you to set up the proxy server.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/chrome-proxy-settings.png" alt="Chrome proxy settings - MacOS" class="center-block">
+        </div>
+    </li>
+    <li>
+        <p>
+            Configure the Web Proxy (HTTP) protocol:
+        </p>
+        <ul>
+            <li>
+                Check the <strong>Web Proxy (HTTP)</strong> box.
+            </li>
+            <li>
+                Enter your Burp Proxy listener address in the <strong>Web Proxy Server</strong> field (<code>127.0.0.1</code> in this example).
+            </li>
+            <li>
+                Enter your Burp Proxy listener port in the adjacent field (<code>8080</code> in this example).
+            </li>
+        </ul>
+    </li>
+    <li>
+        Repeat these steps for the <strong>Secure Web Proxy (HTTPS)</strong> checkbox.
+    </li>
+    <li>
+        <p>
+            Make sure that the <strong>Bypass proxy settings for these Hosts & Domains</strong> field is empty.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/mac-proxy-setting.png" alt="Chrome proxy settings for MacOS" class="center-block">
+        </div>
+    </li>
+    <li>
+        Click <strong>OK</strong> and <strong>Apply</strong> to close the open dialogs.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Next step</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/external-browser-config/check-browser-configuration.html">Check your browser proxy configuration</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

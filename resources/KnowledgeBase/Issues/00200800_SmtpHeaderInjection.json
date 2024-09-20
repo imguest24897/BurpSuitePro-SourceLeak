@@ -1,0 +1,28 @@
+{
+  "typeIndex": 2099200,
+  "name": "SMTP header injection",
+  "description": "<p>SMTP header injection vulnerabilities arise when user input is placed into email headers without adequate sanitization, allowing an attacker to inject additional headers with arbitrary values. This behavior can be exploited to send copies of emails to third parties, attach viruses, deliver phishing attacks, and often alter the content of emails. It is typically exploited by spammers looking to leverage the vulnerable company's reputation to add legitimacy to their emails.\n</p>\n<p>\nThis issue is particularly serious if the email contains sensitive information not intended for the attacker, such as a password reset token.\n</p>",
+  "remediation": "<p>Validate that user input conforms to a whitelist of safe characters before placing it into email headers. In particular, input containing newlines and carriage returns should be rejected.\nAlternatively, consider switching to an email library that automatically prevents such attacks.\n</p>",
+  "webIntro": null,
+  "typicalSeverity": "MEDIUM",
+  "references": [
+    {
+      "title": "Burp Collaborator",
+      "url": "https://portswigger.net/blog/introducing-burp-collaborator"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-93: Improper Neutralization of CRLF Sequences ('CRLF Injection')",
+      "url": "https://cwe.mitre.org/data/definitions/93.html"
+    },
+    {
+      "title": "CWE-159: Failure to Sanitize Special Element",
+      "url": "https://cwe.mitre.org/data/definitions/159.html"
+    },
+    {
+      "title": "CAPEC-183: IMAP/SMTP Command Injection",
+      "url": "https://capec.mitre.org/data/definitions/183.html"
+    }
+  ]
+}

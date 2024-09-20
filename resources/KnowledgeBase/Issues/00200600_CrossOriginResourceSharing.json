@@ -1,0 +1,24 @@
+{
+  "typeIndex": 2098688,
+  "name": "Cross-origin resource sharing",
+  "description": "<p>An HTML5 cross-origin resource sharing (CORS) policy controls whether and how content running on other domains can perform two-way interaction with the domain that publishes the policy. The policy is fine-grained and can apply access controls per-request based on the URL and other features of the request.</p><p>If another domain is allowed by the policy, then that domain can potentially attack users of the application. If a user is logged in to the application, and visits a domain allowed by the policy, then any malicious content running on that domain can potentially retrieve content from the application, and sometimes carry out actions within the security context of the logged in user.</p>\n<p>Even if an allowed domain is not overtly malicious in itself, security vulnerabilities within that domain could potentially be leveraged by an attacker to exploit the trust relationship and attack the application that allows access. CORS policies on pages containing sensitive information should be reviewed to determine whether it is appropriate for the application to trust both the intentions and security posture of any domains granted access.</p>",
+  "remediation": "<p>Any inappropriate domains should be removed from the CORS policy.</p>",
+  "webIntro": null,
+  "typicalSeverity": "INFO",
+  "references": [
+    {
+      "title": "Web Security Academy: Cross-origin resource sharing (CORS)",
+      "url": "https://portswigger.net/web-security/cors"
+    },
+    {
+      "title": "Exploiting CORS Misconfigurations",
+      "url": "https://portswigger.net/research/exploiting-cors-misconfigurations-for-bitcoins-and-bounties"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-942: Overly Permissive Cross-domain Whitelist",
+      "url": "https://cwe.mitre.org/data/definitions/942.html"
+    }
+  ]
+}

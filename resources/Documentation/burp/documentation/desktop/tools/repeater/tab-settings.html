@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/repeater/index.html">Repeater</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/repeater/tab-settings.html">Configuring tab-specific settings</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Configuring tab-specific settings</h1>
+<p>
+    You can override the global <a href="/burp/documentation/desktop/settings/tools/repeater.html">Repeater settings</a> selected in the Settings dialog for an individual tab.
+</p>
+<p>
+    To configure tab-specific settings:
+</p>
+<ol>
+    <li>
+        Select the tab you want to configure.
+    </li>
+    <li>
+        Click the settings icon <span class="icon-settings"></span> next to the <strong>Send</strong> button to display a context menu containing <strong>Repeater</strong> settings. The available settings are the same as those found in the <a href="/burp/documentation/desktop/settings/index.html"><strong>Settings</strong> dialog</a>.
+    </li>
+    <li>
+        Select the required settings from the menu.
+    </li>
+</ol>
+<p>
+    If you select a setting on the tab-specific menu then Repeater ignores all global settings for that tab. Make sure that all settings are configured correctly on the tab-specific menu before you send requests from the tab. For example, if you select <strong>Process cookies in redirections</strong> on the global Repeater menu, and <strong>Enable HTTP/1 connection reuse</strong> on a tab-specific menu, the global <strong>Process cookies in redirections</strong> setting is ignored.
+</p>
+<p>
+    If you modify settings for a tab, the tab's settings icon turns blue. To return a tab to the global Repeater settings, click its settings icon <span class="icon-settings"></span> next to the <strong>Send</strong> button and select <strong>Restore global default</strong> from the context menu.
+</p>
+<p>
+    If you use a project file, any tab-specific settings you configure for open tabs are retained when you re-open Burp Suite.
+</p>
+</body>
+</html>

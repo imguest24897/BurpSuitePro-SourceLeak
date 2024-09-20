@@ -1,0 +1,222 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/index.html">Automated scanning</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/api-scans/index.html">Scanning APIs</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/api-scans/authentication.html">Configuring authentication</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Configuring authentication for API scans</h1>
+<p>
+    You can configure endpoint authentication for API scans. This enables Burp Scanner to access authenticated endpoints, increasing your scanning coverage. Burp Scanner currently supports the following authentication types:
+</p>
+<ul>
+    <li>
+        Basic authentication
+    </li>
+    <li>
+        API key authentication
+    </li>
+    <li>
+        Bearer authentication
+    </li>
+</ul>
+<p>
+    When you upload an OpenAPI definition, Burp Scanner automatically detects authentication methods that are linked to specific endpoints. You can add credentials for these methods. You can also add authentication methods that aren't detected in the API definition.
+</p>
+<h2 id="viewing-authentication-details">Viewing authentication details</h2>
+<p>
+    Authentication methods are listed in the following details in the <strong>API details &gt; Authentication</strong> tab:
+</p>
+<ul>
+    <li>
+        <strong>Type</strong> - The authentication mechanism. For example, basic or API key.
+    </li>
+    <li>
+        <strong>Label</strong> - The identifier for the authentication method.
+    </li>
+    <li>
+        <strong>Credentials</strong> - Credentials that you've added for the authentication method. For example, the username and password for basic authentication, or the key for API key authentication.
+    </li>
+</ul>
+<p>
+    Authentication methods that were detected in the definition are labeled as either <strong>Detected</strong> or <strong>Unsupported</strong> on the list:
+</p>
+<ul>
+    <li>
+        <strong>Detected</strong> - Authentication types that can be used by Burp Scanner. These are: <ul>
+            <li>
+                Basic authentication
+            </li>
+            <li>
+                API key authentication
+            </li>
+            <li>
+                Bearer authentication
+            </li>
+        </ul>
+    </li>
+    <li>
+        <strong>Unsupported</strong> - Authentication types that Burp Scanner can't use. For example, OAuth authentication.
+    </li>
+</ul>
+<h2 id="managing-authentication-details">Managing authentication details</h2>
+<p>
+    You can perform the following actions on the authentication methods listed in the table:
+</p>
+<ul>
+    <li>
+        Add credentials for the detected authentication methods. For more information, see <a href="#adding-credentials-for-detected-authentication-methods">Adding credentials for detected authentication methods</a>.
+    </li>
+    <li>
+        Add new, non-detected authentication methods. For more information, see <a href="#adding-new-authentication-methods">Adding new authentication methods</a>.
+    </li>
+    <li>
+        Edit the authentication method credentials. To do this, double-click a list item.
+    </li>
+    <li>
+        Remove authentication methods. To do this, select a list item, then click <strong>Delete</strong>. You can't delete entries that were detected in the API definition.
+    </li>
+</ul>
+<h3 id="adding-credentials-for-detected-authentication-methods">Adding credentials for detected authentication methods</h3>
+<p>
+    Burp automatically identifies the authentication type and label for detected authentication methods, but you'll need to add credentials to use them in the scan. To add credentials:
+</p>
+<ol>
+    <li>
+        In the <strong>Credentials</strong> column, click <strong>Add credentials</strong>. The <strong>Edit authentication type</strong> dialog opens.
+    </li>
+    <li>
+        Enter the credentials, depending on the authentication type: <ul>
+            <li>
+                For API keys, enter the API key.
+            </li>
+            <li>
+                For basic authentication, enter the username and password.
+            </li>
+            <li>
+                For bearer authentication, enter the full bearer token.
+            </li>
+        </ul>
+    </li>
+    <li>
+        Click <strong>Save</strong>.
+    </li>
+</ol>
+<p>
+    The credentials are added to the <strong>Credentials</strong> column in the list. When you start the scan, they are added to API requests to the endpoints that they're linked to in the API definition.
+</p>
+<h3 id="adding-new-authentication-methods">Adding new authentication methods</h3>
+<p>
+    To add new, non-detected authentication methods:
+</p>
+<ol>
+    <li>
+        Click <strong>New</strong>. The <strong>Add authentication method</strong> dialog opens.
+    </li>
+    <li>
+        From the <strong>Select authentication method</strong> drop-down, choose the authentication type you want to add. If you select <strong>API key</strong>, use the <strong>Add to</strong> drop-down to select whether to add the key to the request header, cookie, or query parameter.
+    </li>
+    <li>
+        Add a unique <strong>Label</strong> for the authentication method.
+    </li>
+    <li>
+        Enter the credentials, depending on the authentication type: <ul>
+            <li>
+                For API keys, enter the name of the header, cookie, or query parameter, and provide the key value.
+            </li>
+            <li>
+                For basic authentication, enter the username and password.
+            </li>
+            <li>
+                For bearer authentication, enter the full bearer token.
+            </li>
+        </ul>
+    </li>
+    <li>
+        Click <strong>Save</strong>.
+    </li>
+</ol>
+<p>
+    The new authentication method is added to the list. When you start the scan, the authentication credentials are added to all API requests, except for requests with conflicting authentication credentials from a detected method. For more information, see <a href="#conflicting-authentication-methods">Conflicting authentication methods</a>.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        If you add authentication credentials that are the same authentication type, and have the same label, as a detected method then Burp updates the existing detected method with the new credentials instead of adding a separate authentication method.
+    </p>
+</div>
+<h2 id="how-burp-scanner-applies-authentication-credentials">How Burp Scanner applies authentication credentials</h2>
+<p>
+    When you start a scan, Burp Scanner adds the authentication credentials to requests as follows:
+</p>
+<ul>
+    <li>
+        Credentials for detected authentication methods are added to requests to endpoints that they're linked to in the API definition.
+    </li>
+    <li>
+        Credentials for added authentication methods are applied to all other requests. They're also added to requests that include credentials for detected methods, so long as the two sets of credentials aren't in conflict.
+    </li>
+</ul>
+<h3 id="conflicting-authentication-methods">Conflicting authentication methods</h3>
+<p>
+    In some situations, authentication methods may conflict. If conflicting credentials are sent in the same request, then the server may receive mixed or incorrect authentication information, potentially invalidating the request.
+</p>
+<p>
+    For example, this occurs when:
+</p>
+<ul>
+    <li>
+        Multiple basic or bearer methods are used, as they both use the <code>Authorization</code> header.
+    </li>
+    <li>
+        Multiple API key methods use the same header or cookie name.
+    </li>
+</ul>
+<p>
+    Burp Scanner manages these situations in the following ways:
+</p>
+<ul>
+    <li>
+        You can't save a new authentication method that conflicts with an earlier added method.
+    </li>
+    <li>
+        You can add methods that conflict with detected methods. However, Burp Scanner only uses one method per request: <ul>
+            <li>
+                For requests to endpoints that are linked to the detected method, the detected method is used.
+            </li>
+            <li>
+                For all other requests, the added method is used.
+            </li>
+        </ul>
+    </li>
+</ul>
+</body>
+</html>

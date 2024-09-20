@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/index.html">DOM Invader</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>DOM Invader</h1>
+<p>
+    DOM Invader is a browser-based tool that helps you test for DOM XSS vulnerabilities using a variety of sources and sinks, including both web message and prototype pollution vectors. It is available exclusively via Burp's built-in browser, where it comes preinstalled as an extension.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/dom-invader-innerHTML-sink.png" alt="DOM Invader tab for the browser DevTools">
+</div>
+<h2 id="key-features">Key features</h2>
+<p>
+    When enabled, DOM Invader adds a new tab to the browser's DevTools panel. This enables you to perform the following key tasks:
+</p>
+<ul>
+    <li>
+        <p>
+            Test for DOM XSS like reflected XSS. The augmented DOM view enables you to instantly identify controllable sinks on the page, showing you both the XSS context and how your input is being sanitized. For more information, see <a href="/burp/documentation/desktop/tools/dom-invader/dom-xss.html">Testing for DOM XSS</a>.
+        </p>
+    </li>
+    <li>
+        <p>
+            Log, modify, and resend web messages that are sent on a page via the <code>postMessage()</code> method. This enables you to test for DOM XSS via web messages. You can also let DOM Invader probe for vulnerabilities on your behalf by sending its own specially crafted web messages. For more information, see <a href="/burp/documentation/desktop/tools/dom-invader/web-messages.html">Testing for DOM XSS using web messages</a>.
+        </p>
+    </li>
+    <li>
+        <p>
+            Automatically identify sources of client-side prototype pollution and scan for controllable gadgets that are passed to dangerous sinks. For more information, see <a href="/burp/documentation/desktop/tools/dom-invader/prototype-pollution.html">Testing for client-side prototype pollution</a>.
+        </p>
+    </li>
+    <li>
+        <p>
+            Automatically identify <a href="/burp/documentation/desktop/tools/dom-invader/dom-clobbering.html">DOM clobbering</a> vulnerabilities.
+        </p>
+    </li>
+</ul>
+<p>
+    For more information on how to enable DOM Invader, see <a href="/burp/documentation/desktop/tools/dom-invader/enabling.html">Enabling DOM Invader</a>.
+</p>
+<p>
+    DOM Invader is highly configurable, so you can fine-tune its behavior to suit different websites and use cases. For more information, see <a href="/burp/documentation/desktop/tools/dom-invader/settings/index.html">DOM Invader settings</a>.
+</p>
+</body>
+</html>

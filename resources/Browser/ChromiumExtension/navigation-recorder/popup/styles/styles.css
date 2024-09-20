@@ -1,0 +1,118 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 10px;
+  margin: 0 auto;
+  font-size: 85%;
+}
+
+.popup, .completePopup {
+  width: 450px;
+  height: 375px;
+}
+
+.rounded {
+  border-radius: 10px;
+}
+
+button {
+  border-radius: 40px;
+  touch-action: manipulation;
+  user-select: none;
+  background: #f63;
+  background-image: none;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 12px;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none !important;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 200px;
+}
+
+button:active, button:hover {
+  transition: background-color 0.2s ease,color 0.2s ease !important;
+  background-color: #333332 !important;
+  border-color: #333332 !important;
+  color: #fff !important
+}
+
+#helpBtn {
+  width: 32px;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background-color: white;
+  color: #f63;
+  border: 2px solid #f63 !important;
+  font-size: 19px;
+  padding: 8px 6px;
+}
+
+button#helpBtn:hover, button#helpBtn:active {
+  background-color: #f63 !important;
+  color: white !important;
+}
+
+button#helpBtn:focus {
+  outline: none;
+}
+
+.logo {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+h1 {
+  color: #f63 !important;
+  text-align: center;
+}
+
+.Aligner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.Aligner-item {
+  max-width: 70%;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-top:20px;
+}
+
+ul li {
+  margin-bottom: 5px;
+}
+
+#newRecordingBtn, #clearClipboardBtn {
+  background-color: white;
+  border:1px solid #f63;
+  color: #f63;
+}
+
+#continueWithoutIncogitoLink:any-link {
+  color: #000;
+}
+
+#version {
+  position: absolute;
+  right: 55px;
+  top: 25px;
+}
+
+.hide {
+  display: none;
+}

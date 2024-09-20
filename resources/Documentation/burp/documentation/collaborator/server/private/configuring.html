@@ -1,0 +1,348 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/collaborator/index.html">Burp Collaborator</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/collaborator/server/index.html">Server</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/collaborator/server/private/index.html">Deploying a private server</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/collaborator/server/private/configuring.html">Configuring your private server</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-enterprise">Enterprise</label>
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Configuring your private Collaborator server</h1>
+<p>
+    You can configure many options for your private Collaborator server in the configuration file. For example, you can use the configuration file to:
+</p>
+<ul>
+    <li>
+        <a href="#configure-tls-certificates">Configure TLS certificates</a>.
+    </li>
+    <li>
+        <a href="#add-a-polling-interface">Add a polling interface</a>.
+    </li>
+    <li>
+        <a href="#use-cname-settings">Use CNAME settings</a>.
+    </li>
+    <li>
+        <a href="#truncate-interaction-messages">Truncate interaction messages</a>.
+    </li>
+    <li>
+        <a href="#collect-usage-metrics">Collect usage metrics</a>.
+    </li>
+    <li>
+        <a href="#log-interaction-information">Log interaction information</a>.
+    </li>
+    <li>
+        <a href="#add-custom-http-content">Add custom HTTP content</a>.
+    </li>
+    <li>
+        <a href="#add-custom-dns-records">Add custom DNS records</a>.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        The configurations that are described on this page are examples. You can adapt them to suit your needs. If you need any further details or have any questions please contact our <a href="https://portswigger.net/support">Support team</a>.
+    </p>
+</div>
+<h2 id="configure-tls-certificates">Configure TLS certificates</h2>
+<p>
+    You need to use a wildcard TLS certificate for your domain name to make TLS connections to the Collaborator server.
+</p>
+<p>
+    If you don't configure a TLS certificate in the configuration file, then a self-signed certificate is automatically generated for you. This is generally sufficient in the following situations:
+</p>
+<ul>
+    <li>
+        You can install the certificate as trusted on the target server.
+    </li>
+    <li>
+        The target application does not validate TLS certificates.
+    </li>
+</ul>
+<p>
+    To configure the domain on the self-signed wildcard certificate, use the following configuration:
+</p>
+<code class="code-scrollable">"ssl": {
+        "hostname": "burpcollaborator.example.com"
+}</code>
+<h3>Configuring a valid TLS certificate</h3>
+<p>
+    If you have purchased a valid wildcard TLS certificate for your domain, you can obtain the certificate from your Certificate Authority (CA), and install it in your Collaborator server.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        If you are using certificates signed by an internal CA, then you will need to make sure that Java's trust store has the right certificates.
+    </p>
+</div>
+<p>
+    You also need to update your configuration file to load the certificate. Two example configurations are outlined below:
+</p>
+<h4 cms-ignore-validation="HEADING_CAPITALIZATION">OpenSSL</h4>
+<p>
+    Use this configuration when OpenSSL generates the Certificate Signing Request and the CA provides the certificate and intermediate certificate:
+</p>
+<code class="code-scrollable">"ssl": {
+    "certificateFiles": [
+        "keys/burpcollaborator.example.com.key.pkcs8",
+        "keys/burpcollaborator.example.com.crt",
+        "keys/intermediate.crt"
+    ]
+}</code><p>
+    Make sure you specify the configuration in the correct order: private key, certificate, intermediate certificate(s). You can view this configuration in our <a href="/burp/documentation/collaborator/server/private/example.html">example configuration file</a>.
+</p>
+<p>
+    You also need to convert the keys from the SSLeay format to PKCS8. Use the following OpenSSL command:
+</p>
+<code class="code-scrollable">openssl pkcs8 -topk8 -inform PEM -in keys/burpcollaborator.example.com.key -outform PEM -out keys/burpcollaborator.example.com.key.pkcs8 -nocrypt</code>
+<h4>Java keytool</h4>
+<p>
+    Use this configuration when the Java keytool generates the Certificate Signing Request, and you import the certificate into the Java keystore of the server:
+</p>
+<code class="code-scrollable">"ssl": {
+    "keystore": {
+        "path": "myKeystore.jks",
+        "password": "myPassword"
+    }</code>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You may need to prove domain ownership to obtain a valid certificate. To do this, use the <a href="#add-custom-http-content">custom HTTP</a> and <a href="#add-custom-dns-records">custom DNS</a> configuration options.
+    </p>
+</div>
+<h2 id="add-a-polling-interface">Add a polling interface</h2>
+<p>
+    By default, the Collaborator server handles both interaction events and polling requests on the same network interface:
+</p>
+<ul>
+    <li>
+        <strong>Interaction events</strong> - When a target application initiates an interaction with the Collaborator server. For example, a DNS lookup or an HTTP request.
+    </li>
+    <li>
+        <strong>Polling requests</strong> - When Burp asks the Collaborator server whether any interaction events have occurred due to the Collaborator payloads.
+    </li>
+</ul>
+<p>
+    You can configure the server to serve polling requests on a different interface. This enables you to work around firewall restrictions, or control access to the polling function at the network level.
+</p>
+<p>
+    To configure a separate polling interface, add a <code>polling</code> field to your configuration file. For example:
+</p>
+<code class="code-scrollable">"polling": {
+    "publicAddress": "&lt;External_IP&gt;"
+},</code><p>
+    You can fully customize the polling interface, for example to configure ports or a TLS certificate. If you don't include an option, the options in the <code>eventCapture</code> field are used.
+</p>
+<p>
+    You can use a single <a href="#configure-tls-certificates">TLS certificate</a> for both the interaction and polling interfaces. To do this, repeat the <code>ssl</code> configuration under both <code>eventCapture</code> and <code>polling</code> in your configuration file. The Collaborator server's DNS service directs polling requests to the correct interface.
+</p>
+<p>
+    You can view a configuration for a polling interface with customized ports in our <a href="/burp/documentation/collaborator/server/private/example.html">example configuration file</a>.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Collaborator automatically prepends <code>polling.</code> to the server domain when it performs polling requests.
+    </p>
+</div>
+<h2 id="use-cname-settings">Use CNAME settings</h2>
+<p>
+    You can configure the Collaborator server to use CNAME settings. To do this, add the following sections to the event and polling interfaces:
+</p>
+<code class="code-scrollable">"eventCapture": {
+    "canonicalName": "&lt;FQDN&gt;"
+},
+    "polling": {
+    "canonicalName": "&lt;FQDN&gt;"
+}</code>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        If CNAME settings are used, the CNAME record will be returned if the label in the domain matches, regardless of the DNS query type.
+    </p>
+</div>
+<h2 id="truncate-interaction-messages">Truncate interaction messages</h2>
+<p>
+    You can configure the Collaborator server to restrict the size of stored interaction messages. This reduces the load on the Collaborator server. It may be useful if you have a large team concurrently using Collaborator. Smaller teams or single testers are unlikely to find it helpful, as their load on the server is already low.
+</p>
+<p>
+    Use the following configuration to truncate SMTP and HTTP messages. The limit is set in bytes:
+</p>
+<code class="code-scrollable">"interactionLimits": {
+    "http": 8192,
+    "smtp": 8192
+},</code><p>
+    You can view this configuration in our <a href="/burp/documentation/collaborator/server/private/example.html">example configuration file</a>.
+</p>
+<h2 id="collect-usage-metrics">Collect usage metrics</h2>
+<p>
+    You can configure Burp Collaborator to collect usage metrics on the performance and load of the server. This enables you to check that the Collaborator machine is sufficiently powerful.
+</p>
+<p>
+    You can access metrics data via the Collaborator server's polling interface. You can control access with a shared secret URL path and a client IP address whitelist. The data does not include any information about specific interaction events or polling requests.
+</p>
+<p>
+    The following configuration collects usage metrics on the <code>21.10.23.0/24</code> network at <code>https://10.20.0.159/jnaicmez8/metrics</code>:
+</p>
+<code class="code-scrollable">"metrics": {
+    "path": "jnaicmez8",
+    "addressWhitelist": [
+        "21.10.23.0/24"
+    ]
+},</code><p>
+    You can view this configuration in our <a href="/burp/documentation/collaborator/server/private/example.html">example configuration file</a>.
+</p>
+<h2 id="log-interaction-information">Log interaction information</h2>
+<p>
+    You can configure Collaborator to log exceptions and other information to standard output. To do this, use the <code>logLevel</code> field in your configuration file. The available values are:
+</p>
+<ul>
+    <li>
+        <code>OFF</code> - Nothing is logged.
+    </li>
+    <li>
+        <code>ERROR</code> - Unexpected exceptions are logged.
+    </li>
+    <li>
+        <code>INFO</code> - Information about configuration and services is logged at startup. This is the default value. You can view this configuration in our <a href="/burp/documentation/collaborator/server/private/example.html">example configuration file</a>.
+    </li>
+    <li>
+        <code>DEBUG</code> - Details of Collaborator interactions and polling are logged, including source IP address and interaction IDs. Note that this might disclose sensitive information in the log output.
+    </li>
+</ul>
+<h2 id="add-custom-http-content">Add custom HTTP content</h2>
+<p>
+    You can define custom URLs for your Collaborator server that point to bespoke content. This enables you to, for example:
+</p>
+<ul>
+    <li>
+        Point to an index page that identifies your organization and the purpose of the service.
+    </li>
+    <li>
+        Host files at arbitrary URLs. For example, in order to validate TLS certificate requests, a CA might ask you to host a file at a specific URL to prove that you own the domain. Hosting custom <code>robots.txt</code> and <code>crossdomain.xml</code> files is also supported.
+    </li>
+</ul>
+<p>
+    To define custom URLs:
+</p>
+<ol>
+    <li>
+        Add the array <code>customHttpContent</code> to the top level of the configuration file.
+    </li>
+    <li>
+        In the array, create an object for each URL.
+    </li>
+    <li>
+        <p>
+            For each object, specify the following properties:
+        </p>
+        <ul>
+            <li>
+                <code>path</code> - The path from which this resource can be accessed on your Collaborator server.
+            </li>
+            <li>
+                <code>contentType</code> - The MIME type of the resource.
+            </li>
+            <li>
+                <code>base64Content</code> - The actual content that you want to host at this URL, encoded using Base64.
+            </li>
+        </ul>
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        By default, most URLs on your private Collaborator server point to a generic page that provides basic information about Burp Collaborator.
+    </p>
+</div>
+<h3 cms-ignore-validation="DUPLICATE_HEADINGS">Example configuration</h3>
+<p>
+    The following configuration sets a custom index page to the root path and adds a <code>readme</code> file at <code>/info/readme.txt</code>:
+</p>
+<code class="code-scrollable">"customHttpContent": [
+    {
+        "path": "/",
+        "contentType": "text/html",
+        "base64Content": "PCFkb2N0eXBlIGh0bWw+Cgo8aHRtbCBsYW5nPSJlbiI+CjxoZWFkPgogIDxtZXRhIGNoYXJzZXQ9InV0Zi04Ij4KICA8dGl0bGU+RXhhbXBsZSBQYWdlPC90aXRsZT4KCiAgPGxpbmsgcmVsPSJzdHlsZXNoZWV0IiBocmVmPSJjc3MvbXlzdHlsZXNoZWV0LmNzcyI+CjwvaGVhZD4KPGJvZHk+CjxoMT5XZWxjb21lIHRvIG15IGV4YW1wbGUgcGFnZTwvaDE+CjxwPlRoYW5rcyBmb3IgdmlzaXRpbmcgbXkgZXhhbXBsZSBwYWdlLjwvcD4KPC9ib2R5Pgo8L2h0bWw+"
+    },
+    {
+        "path": "/info/readme.txt",
+        "contentType": "text/plain",
+        "base64Content": "VGhpcyBpcyB0aGUgcmVhZG1lIGZpbGUgZm9yIG15IGNvbGxhYm9yYXRvciBzZXJ2ZXIu"
+    }
+]</code><p>
+    You can view this configuration in our <a href="/burp/documentation/collaborator/server/private/example.html">example configuration file</a>.
+</p>
+<h2 id="add-custom-dns-records">Add custom DNS records</h2>
+<p>
+    You can add multiple custom TXT records and a single CNAME record. This enables the Collaborator server to respond to DNS challenges as part of domain validation.
+</p>
+<h3 cms-ignore-validation="DUPLICATE_HEADINGS">Example configuration</h3>
+<p>
+    If you add this configuration for <code>burpcollaborator.example.com</code>, then TXT type queries to the name server for <code>_acme-challenge.burpcollaborator.example.com</code> would receive a response of <code>275fe5b909adb10e41c78066e9485f7d</code>.
+</p>
+<p>
+    The following fields are included:
+</p>
+<ul>
+    <li>
+        <code>label</code> - the subdomain being queried.
+    </li>
+    <li>
+        <code>record</code> - the value that the server responds with.
+    </li>
+    <li>
+        <code>type</code> - the type of record, either TXT or CNAME.
+    </li>
+    <li>
+        <code>ttl</code> - the time for the record in seconds. It is optional.
+    </li>
+</ul>
+<code class="code-scrollable">"customDnsRecords": [
+    {
+        "label": "_acme-challenge",
+        "record": "275fe5b909adb10e41c78066e9485f7d",
+        "type": "TXT",
+        "ttl": 60
+    },
+    {
+        "label": "queried_subdomain",
+        "record": "reponse",
+        "type": "TXT"
+    },
+    {
+        "label": "queried_subdomain",
+        "record": "response",
+        "type": "CNAME"
+    }
+]</code><p>
+    You can view this configuration in our <a href="/burp/documentation/collaborator/server/private/example.html">example configuration file</a>.
+</p>
+</body>
+</html>

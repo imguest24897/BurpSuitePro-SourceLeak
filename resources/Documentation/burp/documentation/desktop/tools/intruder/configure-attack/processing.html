@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/index.html">Intruder</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/configure-attack/index.html">Configure attack</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/configure-attack/processing.html">Processing</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Burp Intruder payload processing</h1>
+<p>
+    You can configure payload processing rules so that Burp Intruder modifies payloads before it inserts them into the request. This is useful for a variety of purposes, such as when you need to:
+</p>
+<ul>
+    <li>
+        Generate unusual payloads.
+    </li>
+    <li>
+        Wrap payloads up within a wider structure or encoding scheme prior to use.
+    </li>
+    <li>
+        Apply a sequence of encodings to each payload in a predefined wordlist.
+    </li>
+</ul>
+<h2 id="configuring-processing-rules">Configuring processing rules</h2>
+<p>
+    You can define rules to perform various processing tasks on each payload before it is used:
+</p>
+<ol>
+    <li>
+        Go to <strong>Intruder &gt; Payloads</strong>, and scroll down to the <strong>Payload Processing</strong> field.
+    </li>
+    <li>
+        Click <strong>Add</strong>. A window opens with a drop-down list of processing rules.
+    </li>
+    <li>
+        Select a rule type from the list. Fill in any further requirements to configure the rule.
+    </li>
+</ol>
+<p>
+    Processing rules are executed in sequence. Modify the sequence using the <strong>Up</strong> and <strong>Down</strong> buttons. You can also toggle each rule on and off, this can help you debug any problems with the configuration.
+</p>
+<h2 id="types-of-processing-rules">Types of processing rules</h2>
+<p>
+    The following types of processing rules are available:
+</p>
+<ul>
+    <li>
+        <strong>Add prefix</strong> - Add a literal prefix before the payload.
+    </li>
+    <li>
+        <strong>Add suffix</strong> - Add a literal suffix after the payload.
+    </li>
+    <li>
+        <strong>Match / replace</strong> - Replace any parts of the payload that match a specific regular expression with a literal string.
+    </li>
+    <li>
+        <strong>Substring</strong> - Extract a sub-portion of the payloads, starting from a specified offset (0-indexed) and up to a specified length.
+    </li>
+    <li>
+        <strong>Reverse substring</strong> - This functions as for the substring rule, but the end offset is specified counting backwards from the end of the payload, and the length is counted backwards from the end offset.
+    </li>
+    <li>
+        <strong>Modify case</strong> - Modify the case of the payload, if applicable. The same settings are available as for the <a href="/burp/documentation/desktop/tools/intruder/configure-attack/payload-types.html#case-modification">case modification</a> payload type.
+    </li>
+    <li>
+        <strong>Encode</strong> - Encode the payload using various schemes: URL, HTML, Base64, ASCII hex or constructed strings for various platforms.
+    </li>
+    <li>
+        <strong>Decode</strong> - Decode the payload using various schemes: URL, HTML, Base64 or ASCII hex.
+    </li>
+    <li>
+        <strong>Hash</strong> - Carry out a hashing operation on the payload.
+    </li>
+    <li>
+        <strong>Add raw payload</strong> - Add the raw payload value before or after the current processed value. It is useful, for example, if you need to submit the same payload in both raw and hashed form.
+    </li>
+    <li>
+        <strong>Skip if matches regex</strong> - Skip the payload if the current processed value matches a specified regular expression. This is useful, for example, if you know that a parameter value must have a minimum length and want to skip any values in a list that are shorter than this length.
+    </li>
+    <li>
+        <strong>Invoke Burp extension</strong> - Invoke a <a href="/burp/documentation/desktop/extensions/index.html">Burp extension</a> to process the payloads. The extension must have registered an Intruder payload processor. You can select the required processor from the list of available processors that have been registered by currently loaded extensions.
+    </li>
+    <li>
+        <strong>Replace placeholder with base value</strong> - Replace any parts of the payload that match <code>{base}</code> with the base value of the payload position.
+    </li>
+    <li>
+        <strong>Replace placeholder with collaborator payload</strong> - Replace any parts of the payload that match a specific regular expression with a Collaborator payload. You can choose whether to include the Collaborator server location in the Collaborator payload.
+    </li>
+</ul>
+<h2 id="configuring-payload-encoding">Configuring payload encoding</h2>
+<p>
+    You can URL-encode selected characters for safe transmission within HTTP requests. As this setting is applied after payload processing rules have executed, you should use it for final URL-encoding. This enables you to apply encoding after the payload grep setting has checked for echoed payloads.
+</p>
+<p>
+    To configure final URL-encoding:
+</p>
+<ol>
+    <li>
+        Go to <strong>Intruder &gt; Payloads</strong>, and scroll down to the <strong>Payload encoding</strong> field.
+    </li>
+    <li>
+        Select <strong>URL-encode these characters</strong>.
+    </li>
+    <li>
+        Enter the characters you want to encode.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        For more information on the payload grep setting, see <a href="/burp/documentation/desktop/tools/intruder/configure-attack/settings.html#grep-payloads">Burp Intruder attack settings</a>.
+    </p>
+</div>
+</body>
+</html>

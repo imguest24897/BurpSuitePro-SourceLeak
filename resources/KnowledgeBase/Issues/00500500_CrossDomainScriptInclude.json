@@ -1,0 +1,20 @@
+{
+  "typeIndex": 5244160,
+  "name": "Cross-domain script include",
+  "description": "<p>When an application includes a script from an external domain, this script is executed by the browser within the security context of the invoking application. The script can therefore do anything that the application's own scripts can do, such as accessing application data and performing actions within the context of the current user.</p>\n<p>If you include a script from an external domain, then you are trusting that domain with the data and functionality of your application, and you are trusting the domain's own security to prevent an attacker from modifying the script to perform malicious actions within your application. </p>",
+  "remediation": "<p>Scripts should ideally not be included from untrusted domains. Applications that rely on static third-party scripts should consider using Subresource Integrity to make browsers verify them, or copying the contents of these scripts onto their own domain and including them from there. If that is not possible (e.g. for licensing reasons) then consider reimplementing the script's functionality within application code.</p>",
+  "webIntro": null,
+  "typicalSeverity": "INFO",
+  "references": [
+    {
+      "title": "Subresource Integrity",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-829: Inclusion of Functionality from Untrusted Control Sphere",
+      "url": "https://cwe.mitre.org/data/definitions/829.html"
+    }
+  ]
+}

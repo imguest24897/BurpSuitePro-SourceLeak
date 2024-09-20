@@ -1,0 +1,1861 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE" ignore-validation="KEYWORD_APPEARANCES_MORE_THAN_DEFINING_PAGE,OTHER_PAGE_KEYWORD_TOO_FREQUENT,STACKED_HEADINGS,WORD_COUNT"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/index.html">Scanner</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/bchecks/index.html">BCheck definitions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/bchecks/bcheck-definition-reference.html">BCheck definition reference</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-enterprise">Enterprise</label>
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>BCheck definition reference</h1>
+<p>
+    This page details the keywords available when writing a BCheck. Mandatory properties are marked with an asterisk (*).
+</p>
+<div class="highlightedarea">
+    <h4 cms-ignore-validation="HEADING_CAPITALIZATION">On this page</h4>
+    <ul>
+        <li>
+            <a href="#metadata">Metadata</a>
+        </li>
+        <li>
+            <a href="#control-flow">Control flow</a>
+        </li>
+        <li>
+            <a href="#conditionals">Conditionals</a>
+        </li>
+        <li>
+            <a href="#actions">Actions</a>
+        </li>
+        <li>
+            <a href="#reserved-variables">Reserved variables</a>
+        </li>
+        <li>
+            <a href="#functions">Functions</a>
+        </li>
+        <li>
+            <a href="#misc">Misc</a>
+        </li>
+        <li>
+            <a href="#bcheck-structure">BCheck structure</a>
+        </li>
+    </ul>
+</div>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="metadata">Metadata</h2>
+<p>
+    Contains information about the check itself. The metadata object is mandatory for all BChecks and must be placed at the very start of the definition.
+</p>
+<div class="expandable-container">
+    <details><summary>
+            <h4 cms-ignore-validation="HEADING_CAPITALIZATION">metadata</h4>
+        </summary>
+        <div class="content">
+            <code class="pre-wrap">
+metadata:
+  language: v2-beta
+  name: "Simple SQLi"
+  description: "Tests insertion points for basic SQLi"
+  author: "Peter Wiener"
+  tags: "sql", "active", "sql-injection"
+                </code><table class="grid-table grid-table-size-1-2-1">
+                <tr>
+                    <th>
+                        Property
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        Type
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>language</code>*
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            The version of the BCheck definition language used.
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            <code>enum [v2-beta]</code>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>name</code>*
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            The BCheck's name. This is displayed in the Burp Suite UI when the check reports an issue.
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            <code>String</code>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>description</code>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            A description of the BCheck.
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            <code>String</code>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>author</code>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            The author's name.
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            <code>String</code>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>tags</code>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Identifying tags.
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            <code>List of strings</code>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </details>
+</div>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="control-flow">Control flow</h2>
+<p>
+    These keywords control the flow of execution for the definition.
+</p>
+<div class="expandable-container">
+    <details><summary>
+            <h4 cms-ignore-validation="HEADING_CAPITALIZATION">run for each</h4>
+        </summary>
+        <div class="content">
+            <p>
+                Declares an array variable that can be iterated over. When the variable is called the check runs once for each item in the array. The variable declared has outer scope.
+            </p>
+            <p>
+                The <code>run for each</code> keyword is optional. If used, you must place it before the <code>given...then</code> statement in your definition.
+            </p>
+            <code class="pre-wrap">
+run for each:
+variable_name = "variable value 1", "variable value 2", etc.
+                </code>
+            <div class="highlightedarea">
+                <h4 cms-ignore-validation="HEADING_CAPITALIZATION">Example</h4>
+                <p>
+                    The example declares a variable called <code>url_array</code> listing three URLs. This could be useful if you are writing a check that needs to run the same test against multiple URLs (for example, adding each in turn as the <code>Origin</code> header in a CORS misconfiguration check).
+                </p>
+                <code class="pre-wrap">
+run for each:
+url_array =
+null,
+"http://example.com",
+`https://{random_str(5)}{base.response.url}`
+                    </code>
+            </div>
+        </div>
+    </details>
+</div>
+<div class="expandable-container">
+    <details><summary>
+            <h4 cms-ignore-validation="HEADING_CAPITALIZATION">define</h4>
+        </summary>
+        <div class="content">
+            <p>
+                Declares variables with inner scope. The <code>define</code> keyword is optional. If used, you must place it before the <code>given...then</code> statement in your definition.
+            </p>
+            <code class="pre-wrap">
+define:
+  variable_name = "variable_content"
+                </code>
+            <div class="highlightedarea">
+                <h4 cms-ignore-validation="HEADING_CAPITALIZATION">Example</h4>
+                <p>
+                    The example calls the <code>generate_collaborator_address()</code> function to generate a new Burp Collaborator address, and stores it in a variable called collaborator_address.
+                </p>
+                <code class="pre-wrap">
+define:
+  collaborator_address = {generate_collaborator_address()}
+                    </code>
+            </div>
+        </div>
+    </details>
+</div>
+<div class="expandable-container">
+    <details><summary>
+            <h4 cms-ignore-validation="HEADING_CAPITALIZATION">given...then</h4>
+        </summary>
+        <div class="content">
+            <p>
+                Defines when the check runs, based on the content being audited.
+            </p>
+            <code>given [response|request|host|path] | [ [any|query|header|body|cookie]* + insertion point] then</code><p>
+                Each BCheck must have a single <code>given / then</code> statement containing:
+            </p>
+            <p>
+                EITHER one of the following:
+            </p>
+            <ul>
+                <li>
+                    <code>given response then</code> - The check runs once for each response audited.
+                </li>
+                <li>
+                    <code>given request then</code> - The check runs once for each request audited.
+                </li>
+                <li>
+                    <code>given host then</code> - The check runs once for each host audited.
+                </li>
+                <li>
+                    <code>given path then</code> - The check runs once for each unique path audited.
+                </li>
+            </ul>
+            <p>
+                OR one of the following insertion point keywords:
+            </p>
+            <ul>
+                <li>
+                    <code>given any insertion point then</code> - The check runs once for each insertion point (of any type) audited. Burp Scanner also uses this default option if you do not specify an insertion point type (i.e. you use <code>given insertion point</code>).
+                </li>
+                <li>
+                    <code>given query insertion point then</code> - The check runs once for each query audited.
+                </li>
+                <li>
+                    <code>given header insertion point then</code> - The check runs once for each header audited.
+                </li>
+                <li>
+                    <code>given body insertion point then</code> - The check runs once for each body content audited.
+                </li>
+                <li>
+                    <code>given cookie insertion point then</code> - The check runs once for each cookie audited.
+                </li>
+            </ul>
+            <p>
+                You can use the <code>or</code> keyword to combine insertion points. For example:
+            </p>
+            <ul>
+                <li>
+                    <code>given query or body insertion point</code> then - The check runs once for each query or body content audited.
+                </li>
+                <li>
+                    <code>given header or cookie insertion point then</code> - The check runs once for each header or cookie audited.
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="conditionals">Conditionals</h2>
+<p>
+    These keywords control actions that happen as a result of a set condition. You can only use conditional keywords inside a <code>given...then</code> statement.
+</p>
+<div class="expandable-container">
+    <details><summary>
+            <h4 cms-ignore-validation="HEADING_CAPITALIZATION">if... then</h4>
+        </summary>
+        <div class="content">
+            <p>
+                Executes an action if a set condition is met. Requires the following:
+            </p>
+            <ul>
+                <li>
+                    A condition.
+                </li>
+                <li>
+                    An action.
+                </li>
+                <li>
+                    An <code>end if</code> keyword.
+                </li>
+            </ul>
+            <code class="pre-wrap">
+if [condition] then
+  [action]
+end if
+                </code>
+            <div class="highlightedarea">
+                <h4 cms-ignore-validation="HEADING_CAPITALIZATION">Example</h4>
+                <p>
+                    If the latest response contains an Apache Struts version number then report an issue:
+                </p>
+                <code class="pre-wrap">
+if {latest.response} matches "Apache Struts [\d\s\.]+" then
+  report issue:
+    severity: info
+    confidence: certain
+    detail: "Disclosed Apache Server"
+    remediation: "Do not reveal error messages"
+end if
+                    </code>
+            </div>
+        </div>
+    </details>
+</div>
+<div class="expandable-container">
+    <details><summary>
+            <h4 cms-ignore-validation="HEADING_CAPITALIZATION">else if... then</h4>
+        </summary>
+        <div class="content">
+            <p>
+                Used within an <code>if</code> statement. Executes an action if the preceding condition is false and the <code>else if</code> condition is true. You can use multiple <code>else if</code> statements within a BCheck.
+            </p>
+            <code class="pre-wrap">
+    if [condition 1] then
+      [action 1]
+      else if [condition 2] then
+       [action 2]
+    end if
+                </code>
+            <div class="highlightedarea">
+                <h4 cms-ignore-validation="HEADING_CAPITALIZATION">Example</h4>
+                <p>
+                    If the check results in the Collaborator receiving DNS interactions then report an issue with firm confidence. Otherwise, check whether the Collaborator has received any SMTP interactions. If it has, report an issue with tentative confidence.
+                </p>
+                <code class="pre-wrap">
+    if dns interactions then
+      report issue:
+        severity: high
+        confidence: firm
+      else if smtp interactions then
+        report issue:
+          severity: high
+          confidence: tentative
+    end if
+                    </code>
+            </div>
+        </div>
+    </details>
+</div>
+<div class="expandable-container">
+    <details><summary>
+            <h4 cms-ignore-validation="HEADING_CAPITALIZATION">else then</h4>
+        </summary>
+        <div class="content">
+            <p>
+                Used within an <code>if</code> statement. Executes an action if the statement's condition and the condition of any preceding <code>else / if</code> statements are not met.
+            </p>
+            <code class="pre-wrap">
+    if [condition] then
+      [action]
+      else then
+        [action 2]
+    end if
+                </code>
+            <div class="highlightedarea">
+                <h4 cms-ignore-validation="HEADING_CAPITALIZATION">Example</h4>
+                <p>
+                    If the latest response is not identical to the base response but does have the same HTTP status code, report an issue with firm confidence. Otherwise, report an issue with tentative confidence.
+                </p>
+                <code class="pre-wrap">
+    if {latest.response} differs from {base.response} and {latest.response.status_code} is {base.response.status_code} then
+      report issue:
+        severity: high
+        confidence: firm
+      else then
+        report issue:
+          severity: high
+          confidence: tentative
+    end if
+                    </code>
+            </div>
+        </div>
+    </details>
+</div>
+<div class="expandable-container">
+    <details><summary>
+            <h4 cms-ignore-validation="HEADING_CAPITALIZATION">end if</h4>
+        </summary>
+        <div class="content">
+            <p>
+                Denotes the end of an if statement.
+            </p>
+            <code class="pre-wrap">
+if [condition] then
+  [action]
+end if
+                </code>
+        </div>
+    </details>
+</div>
+<h3 cms-ignore-validation="HEADING_CAPITALIZATION">Conditions</h3>
+<p>
+    You can use the following conditions in <code>if</code> statements:
+</p>
+<ul>
+    <li>
+        <code>{X} matches "[regex]"</code> - True if X matches the regex provided.
+    </li>
+    <li>
+        <code>{X} differs from {Y}</code> - True if response X differs from response Y.
+    </li>
+    <li>
+        <code>{X} in {Y}</code> - True if Y contains X (for example, Y could be a response and X could be a header to search for within that response).
+    </li>
+    <li>
+        <code>{X} is {Y}</code> - True if the provided parameters are identical.
+    </li>
+    <li>
+        <code>any interactions</code> - True if Burp Collaborator has received any interactions.
+    </li>
+    <li>
+        <code>dns interactions</code> - True if Burp Collaborator has received any DNS interactions.
+    </li>
+    <li>
+        <code>http interactions</code> - True if Burp Collaborator has received any HTTP interactions.
+    </li>
+    <li>
+        <code>smtp interactions</code> - True if Burp Collaborator has received any SMTP interactions.
+    </li>
+</ul>
+<p>
+    You can also combine and modify conditions:
+</p>
+<ul>
+    <li>
+        <code>{condition} and {condition}</code> - True if both conditions are true.
+    </li>
+    <li>
+        <code>{condition} or {condition}</code> - True if one or both of the conditions is true.
+    </li>
+    <li>
+        <code>not({condition})</code> - True if the condition is not true.
+    </li>
+</ul>
+<h3>Brackets</h3>
+<p>
+    You can use brackets in conditions to refine the flow of logic on your checks.
+</p>
+<p>
+    For example, <code>A or B and C</code> creates a condition that evaluates to true if one of the following conditions is met:
+</p>
+<ul>
+    <li>
+        <code>A</code> is true.
+    </li>
+    <li>
+        Both <code>B</code> and <code>C</code> are true.
+    </li>
+</ul>
+<p>
+    However, <code>(A or B) and C</code> creates a condition that evaluates to true if both of the following conditions is met:
+</p>
+<ul>
+    <li>
+        Either <code>A</code> or <code>B</code> is true.
+    </li>
+    <li>
+        <code>C</code> is true.
+    </li>
+</ul>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="actions">Actions</h2>
+<p>
+    These keywords prompt Burp Scanner to perform a particular action.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Some of these keywords can only be used in conjunction with certain insertion points. For more information on defining which insertion points the check logic is used on, see <a href="#control-flow">given...then</a>.
+    </p>
+</div>
+<div class="expandable-container">
+    <details><summary>
+            <h4 cms-ignore-validation="HEADING_CAPITALIZATION">send request</h4>
+        </summary>
+        <div class="content">
+            <p>
+                Sends a request including the specified information. Can be used with all scan check modes except <code>given response</code>.
+            </p>
+            <div class="highlightedarea">
+                <h4>Note</h4>
+                <p>
+                    All request properties default to <code>replacing</code> if an action keyword is not provided. For example:
+                </p>
+                <code class="pre-wrap">
+headers:
+  "name_of_header1": "value of header1",
+  "name_of_header2": "value of header2"
+                    </code><p>
+                    is the same as
+                </p>
+                <code class="pre-wrap">
+replacing headers:
+  "name_of_header1": "value of header1",
+  "name_of_header2": "value of header2"
+                    </code>
+            </div>
+            <code class="pre-wrap">
+send request [called request_name]:
+  [appending|replacing] headers:
+    "name_of_header1": "value of header1",
+    "name_of_header2": "value of header2"
+  removing headers:
+    "name_of_header1",
+    "name_of_header2"
+  [appending|replacing] queries:
+    "name_of_query_1=http://portswigger.net",
+    "name_of_query_2=https://portswigger.net"
+  removing queries:
+    "name_of_query_1",
+    "name_of_query_2"
+  [appending|replacing] path: "/test"
+  removing path
+  [appending|replacing] method: "GET"
+  removing method
+  [appending|replacing] body: "contents of body"
+  removing body
+                </code><table class="grid-table grid-table-size-1-2-1">
+                <tr>
+                    <th>
+                        Keyword
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        Example
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>called</code>
+                        </p>
+                        <p class="text-left">
+                            (string)
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Names the request so that it can be referred to later in the check
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            <code>"Example request"</code>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>appending headers:</code>
+                        </p>
+                        <p class="text-left">
+                            (1-n name:value pairs)
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Adds the specified header(s) to the request. If a header with the same name already exists in the request then a second header with the new value is added. You can list multiple header / value pairs
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            <code>"Origin": "http://example.com"</code>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>replacing headers:</code>
+                        </p>
+                        <p class="text-left">
+                            (1-n name:value pairs)
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Replaces the value of the specified header(s) with a new value. If there are no headers with the specified name then a new header is appended. You can list multiple header / value pairs
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            <code>"Origin": "http://example.com"</code>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>removing headers:</code>
+                        </p>
+                        <p class="text-left">
+                            (1-n header names)
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Removes the specified header(s) from the request. You can list multiple header names
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            <code>"Origin"</code>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>appending queries:</code>
+                        </p>
+                        <p class="text-left">
+                            (1-n query names and values)
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Adds the specified query parameter(s) to the request URL. If a query with the same name already exists in the request then a second header with the new value is added. You can list multiple parameters
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            <code>"title=example_query"</code>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>replacing queries:</code>
+                        </p>
+                        <p class="text-left">
+                            (1-n query names and values)
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Replaces the value of the specified query parameter(s) with a new value. If there are no queries with the specified name then a new query is appended. You can list multiple parameters
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            <code>"title=example_query"</code>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>removing queries:</code>
+                        </p>
+                        <p class="text-left">
+                            (1-n query names)
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Removes the value of the specified query parameter(s) from the request. You can list multiple parameters
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            <code>"title"</code>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>appending query_string:</code>
+                        </p>
+                        <p class="text-left">
+                            (string)
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Appends the specified query string to the existing query. Alternatively, if there is no existing query, adds the query string to the request
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            <code>"title=value&example_title=example_value"</code>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>replacing query_string:</code>
+                        </p>
+                        <p class="text-left">
+                            (string)
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Replaces the entire query string with a specified value
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            <code>"example_title=example_query"</code>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>removing query_string:</code>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Removes the query string from the request
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>appending path:</code>
+                        </p>
+                        <p class="text-left">
+                            (string)
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Adds the specified path parameter(s) to the request URL
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            <code>"/admin"</code>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>replacing path:</code>
+                        </p>
+                        <p class="text-left">
+                            (string)
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Replaces the path parameters in the URL with the specified values. Any query parameters are preserved
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            <code>"/admin"</code>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>removing path</code>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Removes all path parameters from the request.
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>appending method:</code>
+                        </p>
+                        <p class="text-left">
+                            (string)
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Adds the specified HTTP method to the request
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            <code>"GET"</code>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>replacing method:</code>
+                        </p>
+                        <p class="text-left">
+                            (string)
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Replaces the request method with the specified value
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            <code>"GET"</code>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>removing method</code>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Removes the request method
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>appending body:</code>
+                        </p>
+                        <p class="text-left">
+                            (string)
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Appends the specified body content to the request
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            <code>"body content"</code>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>replacing body:</code>
+                        </p>
+                        <p class="text-left">
+                            (string)
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Replaces the request body with the specified content
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            <code>"body content"</code>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>removing body</code>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Removes the request body
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </details>
+</div>
+<div class="expandable-container">
+    <details><summary>
+            <h4 cms-ignore-validation="HEADING_CAPITALIZATION">send request (raw)</h4>
+        </summary>
+        <div class="content">
+            <p>
+                Sends a request including the specified information as a raw HTTP request. Can be used with all scan check modes except <code>given response</code>.
+            </p>
+            <div class="highlightedarea">
+                <h4 cms-ignore-validation="HEADING_CAPITALIZATION">Example</h4>
+                <code class="pre-wrap">
+send request [called request_name]:
+  "GET /catalog/product?productId=2 HTTP/2
+  Host: ginandjuice.shop
+  Cookie: session=qwertyuiop
+  Content-Length: 2"
+                    </code>
+            </div>
+        </div>
+    </details>
+</div>
+<div class="expandable-container">
+    <details><summary>
+            <h4 cms-ignore-validation="HEADING_CAPITALIZATION">send payload</h4>
+        </summary>
+        <div class="content">
+            <p>
+                Sends a new request with the specified payload appended or replaced. Can be used with <code>given insertion point</code> only.
+            </p>
+            <code class="pre-wrap">
+send payload [called payload_name]:
+  appending: "payload"
+  replacing: "payload"
+                </code><table class="grid-table grid-table-size-1-2-1">
+                <tr>
+                    <th>
+                        Property
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        Type
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>appending:</code>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Appends the specified payload to the request's payload set.
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            string / variable
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>replacing:</code>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Replaces the request's existing payload set with the specified payload.
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            string / variable
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </details>
+</div>
+<div class="expandable-container">
+    <details><summary>
+            <h4 cms-ignore-validation="HEADING_CAPITALIZATION">report issue</h4>
+        </summary>
+        <div class="content">
+            <p>
+                Causes Burp Scanner to report an issue. This terminates the BCheck, even if there are parts of the check that have not yet run.
+            </p>
+            <p>
+                For example, consider the following BCheck:
+            </p>
+            <code class="pre-wrap">
+given host:
+    send request:
+        method: `GET`
+        headers: `Host`: `{collaborator_address}`
+
+    if dns interactions then
+        report issue:
+            severity: info
+            confidence: certain
+    end if
+
+    if http interactions then
+        report issue:
+        severity: high
+        confidence: certain
+    end if
+                </code><p>
+                This check looks for first DNS and then HTTP interactions resulting from its Burp Collaborator payload. However, if the check finds a DNS interaction then it performs its first report issue action and does not subsequently report any HTTP interactions, even if there are HTTP interactions present.
+            </p>
+        </div>
+    </details>
+</div>
+<div class="expandable-container">
+    <details><summary>
+            <h4 cms-ignore-validation="HEADING_CAPITALIZATION">report issue and continue</h4>
+        </summary>
+        <div class="content">
+            <p>
+                Causes Burp Scanner to report an issue, then continue to run the BCheck. For example, consider the following BCheck:
+            </p>
+            <code class="pre-wrap">
+given host:
+    send request:
+        method: `GET`
+        headers: `Host`: `{collaborator_address}`
+
+    if dns interactions then
+        report issue and continue:
+            severity: info
+            confidence: certain
+    end if
+
+    if http interactions then
+        report issue:
+        severity: high
+        confidence: certain
+    end if
+            </code><p>
+                This check looks for first DNS and then HTTP interactions resulting from its Burp Collaborator payload. If the check finds a DNS interaction then it performs its first report issue action. It then continues to run the check, and reports any subsequent HTTP interactions.
+            </p>
+        </div>
+    </details>
+</div>
+<h3 cms-ignore-validation="HEADING_CAPITALIZATION">Reporting issues</h3>
+<p>
+    You can report issues in BChecks using either the <code>report issue</code> or <code>report issue and continue</code> keywords. Both of these keyword blocks have the same properties.
+</p>
+<code class="code-scrollable">
+name:
+severity:
+confidence
+remediation:
+detail:
+    </code>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You must use all of the below properties in the order specified. If you attempt to change the order (for example, by using a <code>name</code> property after a <code>severity</code> property), then your BCheck will fail validation.
+    </p>
+</div>
+<table class="grid-table grid-table-size-1-2-2">
+    <tr>
+        <th>
+            Property
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Type
+        </th>
+    </tr>
+    <tr>
+        <td class="text-left">
+            <code>name</code>
+        </td>
+        <td class="text-left">
+            The name of the issue.
+        </td>
+        <td class="text-left">
+            String
+        </td>
+    </tr>
+    <tr>
+        <td class="text-left">
+            <code>severity*</code>
+        </td>
+        <td class="text-left">
+            The severity of the issue
+        </td>
+        <td class="text-left">
+            <code>[info|low|medium|high]</code>
+        </td>
+    </tr>
+    <tr>
+        <td class="text-left">
+            <code>confidence*</code>
+        </td>
+        <td class="text-left">
+            The level of confidence that the issue is present
+        </td>
+        <td class="text-left">
+            <code>[certain|firm|tentative]</code>
+        </td>
+    </tr>
+    <tr>
+        <td class="text-left">
+            <code>remediation</code>
+        </td>
+        <td class="text-left">
+            Remediation advice
+        </td>
+        <td class="text-left">
+            String
+        </td>
+    </tr>
+    <tr>
+        <td class="text-left">
+            <code>detail</code>
+        </td>
+        <td class="text-left">
+            Further information on the issue
+        </td>
+        <td class="text-left">
+            String
+        </td>
+    </tr>
+</table>
+<h3 id="issue-naming">Issue naming</h3>
+<p>
+    All issues reported by BChecks have an issue type of <code>Declarative Scan Check Generated</code>. The name of the issue is calculated as follows:
+</p>
+<ul>
+    <li>
+        <p>
+            If the relevant <code>report issue</code> or <code>report issue and continue</code> block has a <code>name</code> keyword, then this value is displayed in Burp as the issue name.
+        </p>
+    </li>
+    <li>
+        <p>
+            If the relevant <code>report issue</code> or <code>report issue and continue</code> block does not have a <code>name</code> keyword, then the issue name is taken from the BCheck's name metadata property.
+        </p>
+    </li>
+</ul>
+<p>
+    Adding a <code>name</code> keyword to the <code>report issue</code> block enables you to override the name used to report the issue in specific cases, which is useful when reporting different issue types from the same BCheck. For example, you might have a single BCheck that can report several different variations of similar bugs.
+</p>
+<h3 id="issue-consolidation">Issue consolidation</h3>
+<p>
+    Consolidation is a process by which Burp aggregates duplicate issues to reduce noise in the UI.
+</p>
+<p>
+    Burp applies its normal consolidation rules to issues returned by BChecks if both of the following conditions are true:
+</p>
+<ul>
+    <li>
+        <p>
+            Both issues are reported by the same BCheck.
+        </p>
+    </li>
+    <li>
+        <p>
+            Both issues have the same name, regardless of whether this name is derived from metadata or the parameter in the <code>report issue</code> block.
+        </p>
+    </li>
+</ul>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="reserved-variables">Reserved variables</h2>
+<p>
+    These keywords refer to specific request or response properties.
+</p>
+<div class="highlightedarea">
+    <h4 cms-ignore-validation="HEADING_CAPITALIZATION">Note</h4>
+    <p>
+        Make sure that you do not use these reserved property names when naming your own variables, as this will result in an error when the BCheck runs.
+    </p>
+</div>
+<div class="expandable-container">
+    <details><summary>
+            <h4 cms-ignore-validation="HEADING_CAPITALIZATION">request / response</h4>
+        </summary>
+        <div class="content">
+            <p>
+                These keywords refer to specific request or response properties. You can refer to either:
+            </p>
+            <ul>
+                <li>
+                    <code>base</code> - The request sent and response received by Burp Scanner for the specified scan mode during crawling.
+                </li>
+                <li>
+                    <code>latest</code> - The most recent request / response pair for this scan mode.
+                </li>
+                <li>
+                    <code>{request_name}</code> - A specific request / response pair, named using the called keyword.
+                </li>
+            </ul>
+            <code class="pre-wrap">
+base|latest|{request_name} {
+  response {
+    status_code
+    headers
+    body
+    http_version
+  }
+  request {
+    method
+    url {
+      protocol
+      host
+      port
+      path
+      file
+      query
+    }
+    http_version
+    headers
+    body
+  }
+}
+                </code>
+            <h3 cms-ignore-validation="HEADING_CAPITALIZATION">Response</h3>
+            <table class="grid-table grid-table-size-1-2">
+                <tr>
+                    <th>
+                        Property
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>response</code>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Returns the entire content of the response.
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>response.status_code</code>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Returns the response's HTTP status code.
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>response.headers</code>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Returns a list of the response's headers.
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>response.body</code>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Returns the body content of the response.
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>response.http_version</code>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Returns the HTTP version used in the response.
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <h3 cms-ignore-validation="HEADING_CAPITALIZATION">Request</h3>
+            <table class="grid-table grid-table-size-1-2">
+                <tr>
+                    <th>
+                        Property
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>request</code>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Returns the entire content of the request.
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>request.method</code>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Returns the HTTP method used in the request.
+                        </p>
+                        <p>
+                            Example: <code>GET</code>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>request.url</code>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Returns the URL that the request was sent to.
+                        </p>
+                        <p>
+                            Example: <code>https://ginandjuice.shop:443/catalog/product?productId=1</code>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>request.url.protocol</code>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Returns the request URL's protocol.
+                        </p>
+                        <p>
+                            Example: <code>https</code>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>request.url.host</code>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Returns the host that the request was sent to.
+                        </p>
+                        <p>
+                            Example: <code>ginandjuice.shop</code>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>request.url.port</code>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Returns the port that the request was sent over.
+                        </p>
+                        <p>
+                            Example: <code>443</code>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>request.url.path</code>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Returns the request URL path.
+                        </p>
+                        <p>
+                            Example: <code>/catalog/product</code>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>request.url.file</code>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Returns the URL file (the portion of the URL after the initial slash).
+                        </p>
+                        <p>
+                            Example: <code>/catalog/product?productId=1</code>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>request.url.query</code>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Returns the query string used in the request URL.
+                        </p>
+                        <p>
+                            Example: <code>productId=1</code>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>request.http_version</code>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Returns the HTTP version used in the request.
+                        </p>
+                        <p>
+                            Example: <code>HTTP/2</code>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>request.headers</code>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Returns a list of request headers.
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="text-left">
+                            <code>request.body</code>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-left">
+                            Returns the body content of the request.
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </details><details><summary>
+            <h4 cms-ignore-validation="HEADING_CAPITALIZATION">user_agent</h4>
+        </summary>
+        <div class="content">
+            <p>
+                Returns Burp's user agent.
+            </p>
+        </div>
+    </details><details><summary>
+            <h4 cms-ignore-validation="HEADING_CAPITALIZATION">insertion_point_base_value</h4>
+        </summary>
+        <div class="content">
+            <p>
+                Returns the base value of the specified insertion point.
+            </p>
+        </div>
+        <div class="highlightedarea">
+            <h4>Note</h4>
+            <p>
+                The <code>insertion_point_base_value</code> variable must be used with an <a href="#control-flow">insertion point control flow keyword</a>.
+            </p>
+        </div>
+    </details>
+</div>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="functions">Functions</h2>
+<p>
+    These keywords perform a specific task when called.
+</p>
+<p>
+    Note that all BCheck functions are denoted with curly braces <code>{}</code>.
+</p>
+<div class="expandable-container">
+    <details><summary>
+            <h4 cms-ignore-validation="HEADING_CAPITALIZATION">random_str</h4>
+        </summary>
+        <div class="content">
+            <p>
+                <code>{random_str(int)}</code>
+            </p>
+            <p>
+                Returns a random string of the specified length. The length must be between <code>0</code> and <code>9,999,999</code>. Entering 0 returns an empty string.
+            </p>
+            <div class="highlightedarea">
+                <h4 cms-ignore-validation="HEADING_CAPITALIZATION">Example</h4>
+                <p>
+                    <code>{random_str(13)}  //  "qpald95nbjkig"</code>
+                </p>
+            </div>
+        </div>
+    </details>
+</div>
+<div class="expandable-container">
+    <details><summary>
+            <h4 cms-ignore-validation="HEADING_CAPITALIZATION">regex_replace</h4>
+        </summary>
+        <div class="content">
+            <p>
+                <code>regex_replace (String source, String regex, String replacement)</code>
+            </p>
+            <p>
+                Takes the source string and replaces any content matching the specified regex pattern with the replacement string.
+            </p>
+            <div class="highlightedarea">
+                <h4 cms-ignore-validation="HEADING_CAPITALIZATION">Example</h4>
+                <p>
+                    <code>regex_replace ({var}, "[a-z]*@", "abc@")</code>
+                </p>
+                <p>
+                    In this example, assume that the value of <code>{var}</code> is <code>"xyz@portswigger.net"</code>. The regex pattern matches the first part of the email address and replaces it with the replacement string to create a final output of <code>abc@portswigger.net</code>.
+                </p>
+            </div>
+        </div>
+    </details>
+</div>
+<div class="expandable-container">
+    <details><summary>
+            <h4 cms-ignore-validation="HEADING_CAPITALIZATION">to_lower</h4>
+        </summary>
+        <div class="content">
+            <p>
+                <code>{to_lower(string)}</code>
+            </p>
+            <p>
+                Converts the specified string to lowercase.
+            </p>
+            <div class="highlightedarea">
+                <h4 cms-ignore-validation="HEADING_CAPITALIZATION">Example</h4>
+                <p>
+                    <code>{to_lower("Carlos MONTOYA")} // carlos montoya</code>
+                </p>
+            </div>
+        </div>
+    </details>
+</div>
+<div class="expandable-container">
+    <details><summary>
+            <h4 cms-ignore-validation="HEADING_CAPITALIZATION">to_upper</h4>
+        </summary>
+        <div class="content">
+            <p>
+                <code>{to_upper(string)}</code>
+            </p>
+            <p>
+                Converts the specified string to uppercase.
+            </p>
+            <div class="highlightedarea">
+                <h4 cms-ignore-validation="HEADING_CAPITALIZATION">Example</h4>
+                <p>
+                    <code>{to_lower("Peter weiner")} // PETER WEINER</code>
+                </p>
+            </div>
+        </div>
+    </details>
+</div>
+<div class="expandable-container">
+    <details><summary>
+            <h4 cms-ignore-validation="HEADING_CAPITALIZATION">base64_encode</h4>
+        </summary>
+        <div class="content">
+            <p>
+                <code>{base64_encode(string)}</code>
+            </p>
+            <p>
+                Encodes the specified string with base64.
+            </p>
+            <div class="highlightedarea">
+                <h4 cms-ignore-validation="HEADING_CAPITALIZATION">Example</h4>
+                <p>
+                    <code>hello world // aGVsbG8gd29ybGQ=</code>
+                </p>
+            </div>
+        </div>
+    </details>
+</div>
+<div class="expandable-container">
+    <details><summary>
+            <h4 cms-ignore-validation="HEADING_CAPITALIZATION">base64_decode</h4>
+        </summary>
+        <div class="content">
+            <p>
+                <code>{base64_decode(string)}</code>
+            </p>
+            <p>
+                Decodes the specified string from base64.
+            </p>
+            <div class="highlightedarea">
+                <h4 cms-ignore-validation="HEADING_CAPITALIZATION">Example</h4>
+                <p>
+                    <code>hello world // aGVsbG8gd29ybGQ=</code>
+                </p>
+            </div>
+        </div>
+    </details>
+</div>
+<div class="expandable-container">
+    <details><summary>
+            <h4 cms-ignore-validation="HEADING_CAPITALIZATION">generate_collaborator_address</h4>
+        </summary>
+        <div class="content">
+            <p>
+                <code>{generate_collaborator_address}</code>
+            </p>
+            <p>
+                Generates a new Burp Collaborator address for use within a request. You can generate multiple addresses within the same BCheck by calling <code>{generate_collaborator_address}</code> multiple times.
+            </p>
+        </div>
+    </details>
+</div>
+<div class="expandable-container">
+    <details><summary>
+            <h4 cms-ignore-validation="HEADING_CAPITALIZATION">SHA1</h4>
+        </summary>
+        <div class="content">
+            <p>
+                <code>sha1(String)</code>
+            </p>
+            <p>
+                Hashes the provided input using the SHA1 hash function.
+            </p>
+            <div class="highlightedarea">
+                <h4 cms-ignore-validation="HEADING_CAPITALIZATION">Example</h4>
+                <p>
+                    <code>sha1("Hello") // aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d</code>
+                </p>
+            </div>
+        </div>
+    </details>
+</div>
+<div class="expandable-container">
+    <details><summary>
+            <h4 cms-ignore-validation="HEADING_CAPITALIZATION">SHA256</h4>
+        </summary>
+        <div class="content">
+            <p>
+                <code>sha256(String)</code>
+            </p>
+            <p>
+                Hashes the provided input using the SHA256 hash function.
+            </p>
+            <div class="highlightedarea">
+                <h4 cms-ignore-validation="HEADING_CAPITALIZATION">Example</h4>
+                <p>
+                    <code>sha256("Hello") // 2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824</code>
+                </p>
+            </div>
+        </div>
+    </details>
+</div>
+<div class="expandable-container">
+    <details><summary>
+            <h4 cms-ignore-validation="HEADING_CAPITALIZATION">MD5</h4>
+        </summary>
+        <div class="content">
+            <p>
+                <code>md5(String)</code>
+            </p>
+            <p>
+                Hashes the provided input using the MD5 hash function.
+            </p>
+            <div class="highlightedarea">
+                <h4 cms-ignore-validation="HEADING_CAPITALIZATION">Example</h4>
+                <p>
+                    <code>MD5("Hello") // 5d41402abc4b2a76b9719d911017c592</code>
+                </p>
+            </div>
+        </div>
+    </details>
+</div>
+<h3 cms-ignore-validation="HEADING_CAPITALIZATION" id="combining-functions">Combining functions</h3>
+<p>
+    These functions can be nested if required. For example, the following function converts a variable to lowercase and then encodes it as base64 in one action:
+</p>
+<p>
+    <code>{base64_encode(to_lower(my_variable))}</code>
+</p>
+<div class="highlightedarea">
+    <h4 cms-ignore-validation="HEADING_CAPITALIZATION">Note</h4>
+    <p>
+        Make sure that you do not use these function names when naming variables, as this will result in an error when the BCheck runs.
+    </p>
+</div>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="misc">Misc</h2>
+<h3 cms-ignore-validation="HEADING_CAPITALIZATION" id="strings">Strings</h3>
+<p>
+    Both interpolatable and literal strings are accepted:
+</p>
+<ul>
+    <li>
+        Use double quotes (<code>""</code>) to denote literal strings - <code>"delete carlos"</code>
+    </li>
+    <li>
+        Use backticks (<code>``</code>) to denote interpolatable strings - <code>`https://{random_str(5)}.com`</code>
+    </li>
+</ul>
+<p>
+    When processing multiline strings, Burp Scanner replaces line endings with <code>\r\n</code> and trims trailing and leading whitespaces on each line (except for spaces right after the opening quote and before the closing quote).
+</p>
+<p>
+    For example:
+</p>
+<code class="pre-wrap">
+"__GET / HTTP/1.1__
+___Host: portswigger.net_"
+    </code><p>
+    becomes
+</p>
+<code class="pre-wrap">
+"__GET / HTTP/1.1
+Host: portswigger.net__"
+    </code><p>
+    To explicitly specify trailing/leading whitespaces in interpolatable strings, use the <code>\s</code> character instead.
+</p>
+<h3 cms-ignore-validation="HEADING_CAPITALIZATION" id="character-escaping">Character escaping</h3>
+<p>
+    Use the <code>\</code> character within strings to escape characters.
+</p>
+<p>
+    For example, <code>\{var}</code> is escaped, but <code>{var}</code> prints the value of <code>var</code>.
+</p>
+<h3 cms-ignore-validation="HEADING_CAPITALIZATION" id="regex">Regex</h3>
+<p>
+    BChecks support Java-style regex.
+</p>
+<p>
+    <code>"2[0-9][0-9]"</code>
+</p>
+<h3 cms-ignore-validation="HEADING_CAPITALIZATION" id="comments">Comments</h3>
+<p>
+    Use <code>#</code> to denote comment lines.
+</p>
+<p>
+    <code>#Hello</code>
+</p>
+<h3 cms-ignore-validation="HEADING_CAPITALIZATION" id="special-characters">Special characters</h3>
+<p>
+    These characters can be used as part of an interpolatable string. For example, <code>'\s'</code> is interpreted as a space, but the literal string <code>"\s"</code> is interpreted as two separate characters.
+</p>
+<ul>
+    <li>
+        <code>\n</code> - new line
+    </li>
+    <li>
+        <code>\r</code> - carriage return
+    </li>
+    <li>
+        <code>\s</code> - space
+    </li>
+    <li>
+        <code>\t</code> - tab
+    </li>
+    <li>
+        <code>\b</code> - backspace
+    </li>
+    <li>
+        <code>\f</code> - form feed
+    </li>
+</ul>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="bcheck-structure">BCheck structure</h2>
+<p>
+    There are some structure rules you need to follow in order to create valid BChecks:
+</p>
+<ul>
+    <li>
+        Each definition must start with a <code>metadata</code> object.
+    </li>
+    <li>
+        Each definition must have exactly one <code>given... then</code> statement.
+    </li>
+    <li>
+        Conditional statements can only appear in a <code>given... then</code> statement.
+    </li>
+    <li>
+        Any <code>define</code> or <code>run for each</code> statement used must be placed after the <code>metadata</code> block but before the <code>given... then</code> statement.
+    </li>
+    <li>
+        Variables declared using <code>run for each</code> have outer scope while those declared using define have inner scope. This means that you can't use a variable declared via <code>define</code> in a subsequent <code>run for each</code> statement.
+    </li>
+</ul>
+</body>
+</html>

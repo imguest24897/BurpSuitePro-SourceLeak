@@ -1,0 +1,289 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/index.html">Intruder</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/configure-attack/index.html">Configure attack</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/configure-attack/settings.html">Settings</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Burp Intruder attack settings</h1>
+<p>
+    You can configure Burp Intruder attack settings before you launch an attack under <strong>Settings</strong> in the attack tab. You can modify many of the settings while the attack is running. Edit these in the cloned <strong>Settings</strong> tab in the results window.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        To configure Burp Intruder user settings for startup and closing behavior, and to upload payload lists, go to the <strong>Intruder</strong> page in the <strong>Settings</strong> dialog. Click on <strong>Settings <span class="icon-settings"></span></strong> to access the dialog. For more information, see <a href="/burp/documentation/desktop/settings/tools/intruder.html">Intruder settings</a>.
+    </p>
+</div>
+<h2 id="save-attack">Save attack</h2>
+<p>
+    <label class="label-edition is-professional">Professional</label>
+    By default, attacks are saved in-memory, so they are lost if you close Burp Suite. However, you can save them to your project file. Select <strong>Save attack to project file</strong>.
+</p>
+<p>
+    We recommend that you only save attacks when you find something interesting. If you save too many attacks to project files it can result in large files.
+</p>
+<h2 id="request-headers">Request headers</h2>
+<p>
+    These settings control whether Intruder updates the configured request headers during attacks:
+</p>
+<ul>
+    <li>
+        <strong>Update Content-Length header</strong> - Add or update the <code>Content-Length</code> header in each request with the correct length of the request's HTTP body. This is useful for attacks that insert variable-length payloads into the body of the template HTTP request. If the correct length is not specified, then the target server may return an error, respond to an incomplete request, or wait indefinitely for further data to be received in the request.
+    </li>
+    <li>
+        <strong>Set Connection header</strong> - Add or update the <code>Connection</code> header with the value <code>close</code>. This may mean attacks are performed more quickly when the server does not itself return a valid <code>Content-Length</code> or <code>Transfer-Encoding</code> header.
+    </li>
+</ul>
+<h2 id="error-handling">Error handling</h2>
+<p>
+    These settings control how Intruder handles network errors during an attack:
+</p>
+<ul>
+    <li>
+        <strong>Number of retries on network failure</strong> - Specify the number of times Burp retries a request when a failure occurs. Intermittent network failures are common when testing, so it is best to retry the request several times.
+    </li>
+    <li>
+        <strong>Pause before retry</strong> - Specify the time (in milliseconds) that Burp waits before retrying a failed request. If the server is being overwhelmed with traffic, or an intermittent problem is occurring, it is best to wait a short time before retrying.
+    </li>
+</ul>
+<h2 id="attack-results">Attack results</h2>
+<p>
+    These settings control what information is captured in the attack results:
+</p>
+<ul>
+    <li>
+        <p>
+            <strong>Store requests / responses</strong> - Specify whether the attack saves the contents of individual requests and responses. This consumes disk space in your temporary directory, but enables you to:
+        </p>
+        <ul>
+            <li>
+                View requests and responses in full during an attack.
+            </li>
+            <li>
+                Repeat individual requests if necessary.
+            </li>
+            <li>
+                Send requests or responses to other Burp tools.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <strong>Make unmodified baseline request</strong> - Set the attack to issue the template request with all payload positions set to their base values, in addition to the configured attack requests. The request shows as item 0 in the results table. This is useful to provide a base response against which to compare the attack responses.
+    </li>
+    <li>
+        <strong>Use denial-of-service mode</strong> - Set the attack to not process any responses received from the server. As soon as each request is issued, the TCP connection is closed. This is useful for application-layer denial-of-service attacks against vulnerable applications, as it repeatedly sends requests that initiate high-workload tasks on the server, while avoiding locking up local resources by holding sockets open for the server to respond.
+    </li>
+    <li>
+        <strong>Store full payloads</strong> - Store the full payload values for each result. This consumes additional memory but may be required to perform certain actions at runtime, such as modifying payload grep settings, or resending requests with a modified request template.
+    </li>
+</ul>
+<h2 id="grep-match">Grep - match</h2>
+<p>
+    These settings flag result items that contain specified expressions in the response.
+</p>
+<ul>
+    <li>
+        <strong>Flag result items with responses matching these expressions</strong> - Specify a list of expressions to flag. By default, the expressions list shows some common error strings that are useful when fuzzing.
+    </li>
+    <li>
+        <strong>Match type</strong> - Specify whether the expressions are simple strings or regular expressions.
+    </li>
+    <li>
+        <strong>Case sensitive match</strong> - Specify whether the check for the expression is case-sensitive.
+    </li>
+    <li>
+        <strong>Exclude HTTP headers</strong> - Specify whether the HTTP response headers are excluded from the check.
+    </li>
+</ul>
+<p>
+    During the attack, Burp adds a results column for each expression in the list. This records the number of times the expression is found in the response. To identify results with the expression, click on the column header to sort the results.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/intruder-grep-match.png" alt="Intruder grep match" class="center-block">
+</div>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        You can use the <strong>Grep - match</strong> settings to quickly identify interesting items from large sets of results. For more information, and some common use cases, see:
+    </p>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/uses/fuzzing.html">Fuzzing for vulnerabilities</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/uses/enumerating.html">Enumerating identifiers</a>.
+        </li>
+    </ul>
+</div>
+<h2 id="grep-extract">Grep - extract</h2>
+<p>
+    These settings extract information from responses.
+</p>
+<p>
+    To specify an interesting string for information extraction, select <strong>Extract the following items from responses</strong>, and click <strong>Add</strong>. A new window opens in which you can define the location of the item to be extracted.
+</p>
+<div class="section-small">
+    <img src="/burp/documentation/desktop/images/intruder-results-extract-select-940.png" alt="Confirming the selection" class="center-block">
+</div>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        To extract information from multiple occurrences of an item, add the item multiple times in succession. This is useful, for example, when an HTML table contains useful information but there are no unique prefixes with which to automatically pick out each item.
+    </p>
+</div>
+<p>
+    To configure a maximum length that Burp captures for each item, enter a value in the <strong>Maximum capture length</strong> field.
+</p>
+<p>
+    During the attack, Burp adds a results column for the extracted information. Click the column header to sort the results.
+</p>
+<div class="section-small">
+    <img src="/burp/documentation/desktop/images/intruder-results-extract-column-940.png" alt="Extract grep results" class="center-block">
+</div>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            For more information on how to configure the details of items to extract, see <a href="/burp/documentation/desktop/settings/response-extraction.html">Response extraction rules</a>.
+        </li>
+        <li>
+            You can use the <strong>Grep - extract</strong> settings to mine data from an application. For more information and some common use cases, see <a href="/burp/documentation/desktop/tools/intruder/uses/harvesting.html">Harvesting useful data</a>.
+        </li>
+    </ul>
+</div>
+<h2 id="grep-payloads">Grep - payloads</h2>
+<p>
+    These settings can be used to flag result items containing reflections of the submitted payload:
+</p>
+<ul>
+    <li>
+        <strong>Case sensitive match</strong> - Specify whether the check for the payload is case-sensitive.
+    </li>
+    <li>
+        <strong>Exclude HTTP headers</strong> - Specify whether the HTTP response headers should be excluded from the check.
+    </li>
+    <li>
+        <strong>Match against pre-URL-encoded payloads</strong> - Check responses for payloads in their pre-encoded form. This may be necessary if you have configured Intruder to URL-encode payloads within requests. These are normally decoded by the application and echoed in their original form.
+    </li>
+</ul>
+<p>
+    During the attack, Burp adds a results column that records the number of times the payload is found in the response. If more than one payload set is used, a separate column is added for each payload set.
+</p>
+<p>
+    You can use the <strong>Grep - payloads</strong> settings to detect <a href="/web-security/cross-site-scripting/index.html">cross-site scripting</a> and other response injection vulnerabilities, which can arise when user input is dynamically inserted into the application's response.
+</p>
+<h2 id="redirections">Redirections</h2>
+<p>
+    These settings control how Burp handles redirections when performing attacks. It is often necessary to follow redirections to achieve the objectives of your attack. For example:
+</p>
+<ul>
+    <li>
+        In a password guessing attack, the result of each attempt might only be displayed by following a redirection.
+    </li>
+    <li>
+        When fuzzing, relevant feedback might only appear in an error message that is returned after an initial redirection response.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Automatically following redirections may sometimes cause problems for your attack. For example, if the application responds to a malicious request with a redirection to the logout page, then your session may be terminated.
+    </p>
+</div>
+<p>
+    The following settings are available:
+</p>
+<ul>
+    <li>
+        <p>
+            <strong>Follow redirections</strong> - Control the targets of redirections. You can choose from:
+        </p>
+        <ul>
+            <li>
+                <strong>Never</strong>.
+            </li>
+            <li>
+                <strong>On-site only</strong>.
+            </li>
+            <li>
+                <strong>In-scope only</strong>.
+            </li>
+            <li>
+                <strong>Always</strong>.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <strong>Process cookies in redirections</strong> - Resubmit any cookies set in the redirection response when the redirection target is followed. This may be necessary, for example, if you are attempting to brute force a login challenge that always returns a redirection to a page indicating the login result, and a new session is created in response to each login attempt.
+    </li>
+</ul>
+<p>
+    Burp follows up to 10 chained redirections. A column in the results table indicates whether a redirect was followed for each individual result. The full requests and responses in the redirection chain are stored with each result item.
+</p>
+<p>
+    You can configure the types of redirection that Burp processes in the suite-wide redirection settings. These are found under <strong>Proxy</strong> in the <strong>Settings</strong> dialog. Click on <strong>Settings <span class="icon-settings"></span></strong> to open the dialog. For more information, see <a href="/burp/documentation/desktop/settings/network/http.html#allowed-redirect-types">HTTP Settings</a>.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        It may be necessary to use only a single-threaded attack when following redirections. For example, when the application stores the result of the initial request within your session, and retrieves this when delivering the redirection response.
+    </p>
+</div>
+<h2 id="http-1-connection-reuse">HTTP/1 connection reuse</h2>
+<p>
+    Use this setting to control whether Burp Intruder reuses connections to issue multiple HTTP/1 requests. This can greatly increase the speed of your attacks.
+</p>
+<p>
+    If you deselect <strong>HTTP/1 connection reuse</strong>, Burp opens a new connection for each request and closes it after receiving a response.
+</p>
+<h2 id="http-version">HTTP version</h2>
+<p>
+    Use this setting to control whether Burp Intruder uses HTTP/2 or HTTP/1 for the current attack.
+</p>
+<p>
+    If you enable <strong>Override the project-level HTTP/2</strong> setting, then Burp ignores the current project-level HTTP/2 setting configuration.
+</p>
+<p>
+    You can then choose whether to use HTTP/2 or HTTP/1 for the current attack. Select <strong>Default to HTTP/2 if the server supports it</strong> to use HTTP/2 with all servers that advertise support for it during the TLS handshake. Deselect this option to use HTTP/1 even if the server supports HTTP/2.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        <a href="/burp/documentation/desktop/settings/network/http.html#http-2">HTTP settings - HTTP/2</a> - Gives more information about the project-level HTTP/2 setting.
+    </p>
+</div>
+</body>
+</html>

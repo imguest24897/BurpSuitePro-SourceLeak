@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE" ignore-validation="OTHER_PAGE_KEYWORD_TOO_FREQUENT"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/index.html">Testing input validation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/xss/index.html">Cross-site scripting</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/xss/dom-xss.html">Testing for DOM XSS with DOM Invader</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Testing for DOM XSS with DOM Invader</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/nDUjp4m39hg?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    DOM-based XSS (DOM XSS) arises when an application contains client-side JavaScript that processes data from an untrusted source in an unsafe way, usually by writing the data back to the DOM.
+</p>
+<p>
+    DOM Invader makes it much easier for you to test applications for DOM XSS. DOM Invader injects a unique string into different sources, and then shows you the sinks that your input flows into. It also shows you the surrounding context. This replaces the need to manually follow the flow through complex JavaScript, which could have thousands of lines of code.
+</p>
+<p>
+    To learn more about sources and sinks, see <a href="/web-security/dom-based/index.html">DOM-based vulnerabilities</a>.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        DOM Invader is pre-installed in Burp's browser. It's disabled by default as some of its features may interfere with your other testing activities.
+    </p>
+</div>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="before-you-start">Before you start</h2>
+<p>
+    Enable DOM Invader. For more information, see <a href="/burp/documentation/desktop/tools/dom-invader/enabling.html">Enabling DOM Invader</a>.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="steps">Steps</h2>
+<p>
+    You can follow the processes below using the lab <a href="/web-security/cross-site-scripting/dom-based/lab-document-write-sink.html">DOM XSS in <code>document.write</code> sink using source <code>location.search</code></a>.
+</p>
+<p>
+    Use DOM Invader to inject a canary into the client-side JavaScript:
+</p>
+<ol>
+    <li>
+        Use Burp's browser to visit your target website.
+    </li>
+    <li>
+        Right-click the browser window and select <strong>Inspect</strong>.
+    </li>
+    <li>
+        Select the <strong>DOM Invader</strong> tab and click <strong>Copy canary</strong>.
+    </li>
+    <li>
+        Inject the canary into a potential source.
+    </li>
+    <li>
+        <p>
+            Identify any controllable sinks from the list in the DOM view.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/tutorials/dom-invader-xss.png" alt="Use DOM Invader to identify sinks" class="center-block">
+        </div>
+    </li>
+    <li>
+        Examine the <strong>Value</strong> column to determine the XSS context.
+    </li>
+    <li>
+        Input a string into the source that takes into account the XSS context, to see if you can exploit the vulnerability.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4 id="related-pages">Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/dom-xss.html">Testing for DOM XSS</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/index.html">DOM Invader</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

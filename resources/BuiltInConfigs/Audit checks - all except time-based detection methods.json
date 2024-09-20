@@ -1,0 +1,155 @@
+{
+  "description": {
+    "featured": false,
+    "uuid": "29d06242-ac55-42da-a53e-491628331ebf"
+  },
+  "scanner": {
+    "issues_reported": {
+      "scan_type_intrusive_active": true,
+      "scan_type_light_active": true,
+      "scan_type_medium_active": true,
+      "scan_type_passive": true,
+      "scan_type_javascript_analysis": true,
+      "select_individual_issues": true,
+      "selected_issues": [
+        {
+          "detection_methods": [
+            {
+              "enabled": true,
+              "name": "Error messages"
+            },
+            {
+              "enabled": false,
+              "name": "Time delays"
+            },
+            {
+              "enabled": true,
+              "name": "Boolean conditions"
+            },
+            {
+              "enabled": true,
+              "name": "Oracle specific"
+            },
+            {
+              "enabled": true,
+              "name": "MySQL specific"
+            },
+            {
+              "enabled": true,
+              "name": "SQL Server specific"
+            },
+            {
+              "enabled": true,
+              "name": "Burp Collaborator"
+            }
+          ],
+          "enabled": true,
+          "type_index": "0x00100210"
+        },
+        {
+          "detection_methods": [
+            {
+              "enabled": true,
+              "name": "String echo"
+            },
+            {
+              "enabled": false,
+              "name": "Time delays"
+            },
+            {
+              "enabled": true,
+              "name": "Burp Collaborator"
+            },
+            {
+              "enabled": true,
+              "name": "Burp Infiltrator"
+            }
+          ],
+          "enabled": true,
+          "type_index": "0x00100100"
+        },
+        {
+          "detection_methods": [
+            {
+              "enabled": true,
+              "name": "Error messages"
+            },
+            {
+              "enabled": false,
+              "name": "Time delays"
+            },
+            {
+              "enabled": true,
+              "name": "Boolean conditions"
+            },
+            {
+              "enabled": true,
+              "name": "Oracle specific"
+            },
+            {
+              "enabled": true,
+              "name": "MySQL specific"
+            },
+            {
+              "enabled": true,
+              "name": "SQL Server specific"
+            },
+            {
+              "enabled": true,
+              "name": "Burp Collaborator"
+            },
+            {
+              "enabled": true,
+              "name": "Burp Infiltrator"
+            }
+          ],
+          "enabled": true,
+          "type_index": "0x00100200"
+        },
+        {
+          "detection_methods": [
+            {
+              "enabled": true,
+              "name": "String echo"
+            },
+            {
+              "enabled": false,
+              "name": "Time delays"
+            },
+            {
+              "enabled": true,
+              "name": "Burp Collaborator"
+            }
+          ],
+          "enabled": true,
+          "type_index": "0x00100c00"
+        },
+        {
+          "detection_methods":[],
+          "enabled":false,
+          "type_index":"0x00100f10"
+        },
+        {
+          "detection_methods":[],
+          "enabled":false,
+          "type_index":"0x00100f00"
+        },
+        {
+          "detection_methods":[],
+          "enabled":false,
+          "type_index":"0x00100e00"
+        },
+        {
+          "detection_methods":[],
+          "enabled":false,
+          "type_index":"0x00100d00"
+        },
+        {
+          "detection_methods":[],
+          "enabled":false,
+          "type_index":"0x00101000"
+        }
+      ]
+    }
+  }
+}

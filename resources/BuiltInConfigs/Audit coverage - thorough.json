@@ -1,0 +1,16 @@
+{
+  "description": {
+    "featured": false,
+    "uuid": "6d02cd5c-5e33-445d-a806-9fb1670a2142"
+  },
+  "scanner": {
+    "audit_optimization": {
+      "consolidate_passive_issues": true,
+      "follow_redirections": true,
+      "maintain_session": true,
+      "scan_accuracy": "minimise_false_negatives",
+      "scan_speed": "thorough",
+      "skip_ineffective_checks": true
+    }
+  }
+}

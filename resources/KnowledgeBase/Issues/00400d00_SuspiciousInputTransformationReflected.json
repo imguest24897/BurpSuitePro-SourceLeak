@@ -1,0 +1,24 @@
+{
+  "typeIndex": 4197632,
+  "name": "Suspicious input transformation (reflected)",
+  "description": "<p>Suspicious input transformation arises when an application receives user input, transforms it in some way, and then performs further processing on the result. The types of transformations that can lead to problems include decoding common formats, such as UTF-8 and URL-encoding, or processing of escape sequences, such as backslash escaping. </p>\n<p>Performing these input transformations does not constitute a vulnerability in its own right, but might lead to problems in conjunction with other application behaviors. An attacker might be able to bypass input filters by suitably encoding their payloads, if the input is decoded after the input filters have been applied. Or an attacker might be able to interfere with other data that is concatenated onto their input, by finishing their input with the start of a multi-character encoding or escape sequence, the transformation of which will consume the start of the following data.</p>",
+  "remediation": "<p>Review the transformation that is being applied, to understand whether this is intended and desirable behavior given the nature of the application functionality, and whether it gives rise to any vulnerabilities in relation to  bypassing of input filters or character consumption.</p>",
+  "webIntro": null,
+  "typicalSeverity": "INFO",
+  "references": [
+    {
+      "title": "Backslash Powered Scanning: Hunting Unknown Vulnerability Classes",
+      "url": "https://portswigger.net/research/backslash-powered-scanning-hunting-unknown-vulnerability-classes"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-20: Improper Input Validation",
+      "url": "https://cwe.mitre.org/data/definitions/20.html"
+    },
+    {
+      "title": "CAPEC-153: Input Data Manipulation",
+      "url": "https://capec.mitre.org/data/definitions/153.html"
+    }
+  ]
+}

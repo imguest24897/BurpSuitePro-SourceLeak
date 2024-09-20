@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+GraphQL suggestions enabled
+<h1>Typical severity</h1>
+Low
+<h1>Issue description</h1>
+
+<p>GraphQL suggestions are an Apollo feature in which the server is configured to respond to invalid queries with suggestions for valid queries that have a similar syntax.</p>
+<p>Suggestions can represent a significant security risk, as they enable attackers to glean information about a GraphQL schema even if introspection is disabled. By sending intentionally invalid queries and collating suggestions in responses, attackers can learn the names and structures of valid queries and mutations.</p>
+
+<h1>Issue remediation</h1>
+
+<p>Ensure that you have disabled or otherwise masked error messages containing suggestions on your GraphQL server.</p>
+
+<h1>References</h1>
+<ul>
+    <li>
+        <a href="https://github.com/apollographql/apollo-server/issues/3919">Disabling Apollo suggestions</a>
+    </li>
+    <li>
+        <a href="https://github.com/nikitastupin/clairvoyance">Clairvoyance: A tool to gather information from suggestions</a>
+    </li>
+    <li>
+        <a href="https://portswigger.net/web-security/graphql">Web Security Academy: GraphQL API vulnerabilities</a>
+    </li>
+</ul>
+<h1>Vulnerability classifications</h1>
+<ul>
+    <li>
+        <a href="https://cwe.mitre.org/data/definitions/200.html">CWE-200: Information Exposure</a>
+    </li>
+</ul>
+<h1>Web intro</h1>
+
+</body>
+</html>

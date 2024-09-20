@@ -1,0 +1,503 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms ignore-validation="OTHER_PAGE_KEYWORD_TOO_FREQUENT" page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/index.html">Scanner</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/scan-configurations/index.html">Scan configurations</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/scan-configurations/audit-options.html">Audit options</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-enterprise">Enterprise</label>
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Audit options</h1>
+<p>
+    Burp Scanner offers numerous settings that control how scans behave during the audit phase. You can select these settings when you create or edit scan configurations in Burp Suite Professional or Burp Suite Enterprise Edition.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="https://portswigger.net/burp/documentation/enterprise/user-guide/working-with-sites/site-settings/scan-configurations/custom-configs.html">Using custom scan configurations (Burp Suite Enterprise Edition)</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/library.html">Configuration library (Burp Suite Professional)</a>.
+        </li>
+    </ul>
+</div>
+<h2 id="audit-optimization">Audit optimization</h2>
+<p>
+    These settings enable you to tune Burp Scanner's behavior during the audit phase, to reflect the objectives of the audit and the nature of the target application.
+</p>
+<p>
+    The following settings are available.
+</p>
+<h3>Audit speed</h3>
+<p>
+    This setting determines how thoroughly Burp Scanner undertakes certain audit checks:
+</p>
+<ul>
+    <li>
+        <strong>Fast</strong> makes fewer requests, and checks for fewer derivations of some vulnerabilities.
+    </li>
+    <li>
+        <strong>Thorough</strong> makes many more requests and checks for more derivative types of vulnerabilities.
+    </li>
+    <li>
+        <strong>Normal</strong> is mid-way between the two, and represents a suitable trade-off between speed and thoroughness for many applications.
+    </li>
+</ul>
+<h3>Audit accuracy</h3>
+<p>
+    This option determines the amount of evidence that the Scanner requires before it can report certain vulnerability types.
+</p>
+<p>
+    Some issues can only be detected using blind techniques, in which Burp infers the probable existence of a vulnerability based on observed behavior, such as a time delay or a differential response. Because these behaviors can also occur in the absence of the associated vulnerability, blind techniques are inherently more prone to false positives than other detection methods.
+</p>
+<p>
+    To attempt to reduce false positives, Burp repeats certain tests a number of times when it first infers a potential issue. Use the <strong>Audit accuracy</strong> setting controls to set how many times Burp retries these tests:
+</p>
+<ul>
+    <li>
+        <strong>Minimize false negatives</strong> performs fewer retries, and so is more likely to report false positives but less likely to miss genuine issues.
+    </li>
+    <li>
+        <strong>Minimize false positives</strong> performs many more retries, and so is less likely to report false positives. However this setting may result in Burp Scanner missing some genuine issues, because some of the retry requests might not return the result being tested for.
+    </li>
+    <li>
+        <strong>Normal</strong> is mid-way between the two, and represents a suitable trade-off between false positive and false negative issues for many applications.
+    </li>
+</ul>
+<h3>Maximum total crawl and audit time</h3>
+<p>
+    This setting defines the maximum total run time for each scan, in minutes. It is not available for audit-only scans, or scans that are currently in progress. If a scan reaches the specified maximum crawl and audit time then it pauses and an entry is added to the event log.
+</p>
+<h3>Skip checks unlikely to be effective due to insertion point's base value</h3>
+<p>
+    This setting makes scans more efficient by omitting checks that appear irrelevant given the base value of the parameter at each insertion point.
+</p>
+<p>
+    For example, if a parameter's value contains characters that do not normally appear in filenames, Burp skips <a href="/web-security/file-path-traversal/index.html">file path traversal</a> checks for this parameter. Use this option to speed up your scans, with a relatively low risk that you will miss vulnerabilities.
+</p>
+<h3>Consolidate frequently occurring passive issues</h3>
+<p>
+    Use this setting to control whether Burp consolidates frequently-occurring passive issues. This option reduces noise when the same issue (for example, <a href="/web-security/clickjacking/index.html">Clickjacking</a>) appears in many locations or even throughout an entire application.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/scanner/auditing.html#consolidation-of-frequently-occurring-passive-issues">Auditing: Consolidation of frequently occurring passive issues</a>.
+    </p>
+</div>
+<h3>Automatically maintain session</h3>
+<p>
+    This setting controls whether Burp maintains session automatically during the audit phase of the scan. This is only applicable to crawl-driven audits where the navigational pathways identified during the crawl phase can be used to maintain session during the audit phase.
+</p>
+<p>
+    In modern applications, it is normally essential to maintain session to achieve good audit coverage. However, there is an overhead to maintaining session in terms of numbers of requests made. You can disable this option if you know it is not necessary.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/scanner/auditing.html#automatic-session-handling">Auditing: Automatic session handling</a>.
+    </p>
+</div>
+<h3>Follow redirects where necessary</h3>
+<p>
+    Some vulnerabilities (for example, cross-site scripting in an error message that is only returned after following a redirect) can only be detected by following redirects.
+</p>
+<p>
+    Burp does not follow all redirects by default, because some applications issue redirects that contain parameter values that you submitted to third-party URLs. This protects you against inadvertently attacking third-party applications.
+</p>
+<p>
+    If the request being scanned is within the defined target scope, Burp only follows redirects that are within that same scope. If the request being scanned is not in scope, Burp only follows redirects that are:
+</p>
+<ul>
+    <li>
+        To the same host/port as the request being scanned.
+    </li>
+    <li>
+        Not explicitly covered by a suite-wide scope exclusion rule, for example "logout.aspx".
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/desktop/tools/target/scope/index.html">Target scope</a>.
+    </p>
+</div>
+<h2 id="issues-reported">Issues reported</h2>
+<p>
+    These settings control which issue types Burp checks for during the scan.
+</p>
+<p>
+    Each check that Burp Scanner performs increases the number of requests made and the overall audit time. You may want to disable scanning for some issue types based on your knowledge of an application's technologies.
+</p>
+<p>
+    For example, if you know that an application does not use any LDAP, you could turn off LDAP injection. Likewise, if you know which back-end database the application uses, you can turn off <a href="/web-security/sql-injection/index.html">SQL injection</a> detection methods that are specific to other database types.
+</p>
+<p>
+    You can select issue types in two ways:
+</p>
+<ul>
+    <li>
+        <p>
+            <strong>Scan type</strong> - Select issues by the nature of the audit activity involved in detecting them. You can select from the following options:
+        </p>
+        <ul>
+            <li>
+                <strong>Passive</strong>.
+            </li>
+            <li>
+                <strong>Light active</strong>.
+            </li>
+            <li>
+                <strong>Medium active</strong>.
+            </li>
+            <li>
+                <strong>Intrusive active</strong>.
+            </li>
+            <li>
+                <strong>JavaScript analysis</strong>.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <strong>Individual issues</strong> - Use the checkboxes on the side of the issue type list to select the issue types you want Burp to scan. You can filter issues by scan type.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        For active issue types, Burp Scanner sends requests to the application designed to detect those issues. Depending on the issues selected, these requests might be reasonably viewed as malicious, or might damage the application and its data.
+    </p>
+</div>
+<h2 id="handling-application-errors-during-audit">Handling application errors during audit</h2>
+<p>
+    These settings control how Burp Scanner handles application errors (connection failures and transmission timeouts) that arise during the audit phase of the scan.
+</p>
+<p>
+    You can configure the following options:
+</p>
+<ul>
+    <li>
+        The number of consecutive failed audit checks that can occur before Burp Scanner skips the remaining checks in the current insertion point.
+    </li>
+    <li>
+        The number of consecutive failed insertion points that can occur before Burp Scanner skips the remaining insertion points and flags the audit item as failed.
+    </li>
+    <li>
+        The number of consecutive failed audit items, or the overall percentage of failed audit items, that can occur before Burp Scanner pauses the task.
+    </li>
+    <li>
+        The number of follow-up passes that Burp Scanner performs on completion of each audit phase to retry failed operations.
+    </li>
+</ul>
+<p>
+    To disable any of these functions, leave the corresponding setting blank.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/scanner/auditing.html#handling-application-errors">Auditing: Handling application errors</a>
+    </p>
+</div>
+<h2 id="insertion-point-types">Insertion point types</h2>
+<p>
+    These settings control the types of insertion point that Burp Scanner can use during the audit.
+</p>
+<p>
+    Burp Scanner can add the following types of insertion point:
+</p>
+<ul>
+    <li>
+        <strong>URL parameter values</strong> - Standard parameter values within the URL query string.
+    </li>
+    <li>
+        <p>
+            <strong>Body parameter values</strong> - Parameter values in the message body, including:
+        </p>
+        <ul>
+            <li>
+                Standard form-generated parameters.
+            </li>
+            <li>
+                Attributes of multipart-encoded parameters, such as uploaded file names.
+            </li>
+            <li>
+                XML parameter values and attributes.
+            </li>
+            <li>
+                JSON values.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <strong>Cookie values</strong> - The values of HTTP cookies.
+    </li>
+    <li>
+        <strong>Parameter name</strong> - The name of an arbitrarily added parameter. Burp Scanner always adds a URL parameter. It also adds a body parameter to all POST requests. Testing an added parameter name can often detect unusual bugs that are not detected if only parameter values are tested.
+    </li>
+    <li>
+        <strong>HTTP headers</strong> - HTTP header values. Burp Scanner can test the <code>Referer</code> and <code>User-Agent</code> headers, as well as any custom header beginning with <code>x-</code>. Testing these insertion points can often detect issues such as SQL injection or persistent XSS within logging functionality.
+    </li>
+    <li>
+        <strong>Entire body</strong> - The whole of the request body. This applies to requests with XML or JSON content in the request body.
+    </li>
+    <li>
+        <strong>URL path filename</strong> - The value of the filename part of the URL path. This is the portion of the URL after the final path folder and before the query string.
+    </li>
+    <li>
+        <strong>URL path folders</strong> - The values of all folder tokens within the URL path, before the filename.
+    </li>
+</ul>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="modifying-parameter-locations">Modifying parameter locations</h2>
+<p>
+    These settings enable you to configure the Scanner to move parameters to other locations within the request, so that they can be re-tested in locations other than their original position. For example, you could move each URL parameter into the message body and retest it there.
+</p>
+<p>
+    The following options are available for changing parameter locations:
+</p>
+<ul>
+    <li>
+        <strong>URL to body</strong>.
+    </li>
+    <li>
+        <strong>URL to cookie</strong>.
+    </li>
+    <li>
+        <strong>Body to URL</strong>.
+    </li>
+    <li>
+        <strong>Body to cookie</strong>.
+    </li>
+    <li>
+        <strong>Cookie to URL</strong>.
+    </li>
+    <li>
+        <strong>Cookie to body</strong>.
+    </li>
+</ul>
+<p>
+    Moving parameters in this way can often bypass defensive filters. Many applications and firewalls perform per-parameter input validation. This assumes that each parameter is in its expected location within the request. If you move the parameter to a different location, you can evade this validation.
+</p>
+<p>
+    When the application code later retrieves the parameter to implement its main logic, it may use an API that does not factor the parameter's location. If this is the case, moving the parameter may enable you to reach vulnerable code paths by using input that would normally be filtered before being processed.
+</p>
+<p>
+    Changing parameter locations results in many more scan requests, because each request parameter is effectively scanned multiple times.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/scanner/auditing.html#modifying-parameter-locations">Modifying parameter locations</a>.
+    </p>
+</div>
+<h2 id="ignored-insertion-points">Ignored insertion points</h2>
+<p>
+    These settings enable you to specify request parameters for which Burp Scanner skips audit checks. You can choose to either skip server-side injection checks (such as SQL injection) or skip all checks for a given parameter.
+</p>
+<p>
+    Skipping all checks may be useful if a parameter is handled by an application component that you do not wish to test, or if modifying a parameter is known to cause application instability.
+</p>
+<p>
+    Server-side injection checks mean that Burp needs to send multiple requests to probe for various blind vulnerabilities on the server. If you believe that certain parameters that appear within requests are not vulnerable (for example, built-in parameters used only by the platform or web server), you can tell Burp not to test them.
+</p>
+<p>
+    To add a parameter to the ignored insertion point lists:
+</p>
+<ol>
+    <li>
+        Click <strong>Add</strong> on the list you want to add the parameter to (either <strong>Skip server-side injection tests</strong> or <strong>Skip all tests</strong>) to display a dialog.
+    </li>
+    <li>
+        Select a <strong>Match item</strong>. This is the type of parameter you want to skip.
+    </li>
+    <li>
+        Select whether you want to match the parameter on <strong>Name</strong> or <strong>Value</strong>.
+    </li>
+    <li>
+        Select a <strong>Match type</strong>. This can be either a literal string or a regex.
+    </li>
+    <li>
+        Enter the <strong>Match expression</strong> that you want to match the parameter on.
+    </li>
+    <li>
+        Click <strong>OK</strong> to add the parameter to the selected list.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You can identify parameters within URL path folders either by their position (slash-delimited) within the URL path or the folder name.
+    </p>
+    <p>
+        To filter by URL path position:
+    </p>
+    <ol>
+        <li>
+            Select <code>URL path folder</code> from the <strong>Match item</strong> drop-down.
+        </li>
+        <li>
+            Select <code>Name</code> from the <strong>Name or value</strong> drop-down.
+        </li>
+        <li>
+            Select <code>is</code> from the <strong>Match type</strong> drop-down.
+        </li>
+        <li>
+            Enter the index number (1-based) of the position within the URL path that you wish to exclude from testing in the <strong>Match expression</strong> drop-down.
+        </li>
+    </ol>
+    <p>
+        To filter by folder name, select the following:
+    </p>
+    <ol>
+        <li>
+            Select <code>URL path folder</code> from the <strong>Match item</strong> drop-down.
+        </li>
+        <li>
+            Select <code>Value</code> from the <strong>Name or value</strong> drop-down.
+        </li>
+        <li>
+            Select <code>is</code> from the <strong>Match type</strong> drop-down to match an exact string, or select <code>matches expression</code> to match regex.
+        </li>
+        <li>
+            Enter the folder name or regex you want to match in the <strong>Match expression</strong> drop-down.
+        </li>
+    </ol>
+</div>
+<h2 id="frequently-occurring-insertion-points">Frequently occurring insertion points</h2>
+<p>
+    These settings enable you to configure whether Burp Scanner avoids duplication in frequently occurring insertion points. You can select to apply this optimization to the following insertion points:
+</p>
+<ul>
+    <li>
+        URL parameter values.
+    </li>
+    <li>
+        Body parameter values.
+    </li>
+    <li>
+        Cookie parameter values.
+    </li>
+    <li>
+        Parameter name.
+    </li>
+    <li>
+        HTTP headers.
+    </li>
+    <li>
+        Entire body.
+    </li>
+    <li>
+        URL path filename.
+    </li>
+    <li>
+        URL path folders.
+    </li>
+</ul>
+<p>
+    When configured, Burp identifies insertion points that have proven to be uninteresting (that is, occurring frequently without any issues generated) and performs a more lightweight audit of those insertion points.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/scanner/auditing.html#handling-of-frequently-occurring-insertion-points">Auditing: Handling of frequently occurring insertion points</a>.
+    </p>
+</div>
+<h2 id="misc-insertion-point-options">Misc insertion point options</h2>
+<p>
+    The <strong>Misc insertion point options</strong> section contains settings that relate to insertion points.
+</p>
+<h3 id="nested-insertion-points">Nested insertion points</h3>
+<p>
+    Some applications apply multiple layers of encoding to the same data, effectively nesting one format within another. For example, a URL parameter might contain Base64-encoded data, and the decoded value might in turn contain JSON or XML data.
+</p>
+<p>
+    If you select <strong>Use nested insertion points</strong>, Burp Scanner detects this behavior, and automatically applies the same layers of encoding to payloads. Burp creates suitable insertion points for each separate item of input at each level of nesting.
+</p>
+<p>
+    Nested insertion points impose no overhead when you scan requests that contain only conventional request parameters. Despite this, they enable Burp to reach more of the attack surface of complex applications where data is encapsulated within different formats.
+</p>
+<h3>Maximum insertion points per base request</h3>
+<p>
+    You can set a limit on the number of insertion points that can be generated for each base request. This prevents your scans from stalling if they encounter requests containing huge numbers of parameters.
+</p>
+<p>
+    When Burp needs to curtail the number of insertion points, the item's entry in the audit indicates the number of insertion points that were skipped. This enables you to review the base request manually and decide if it is worth performing a full scan of all its possible insertion points.
+</p>
+<h2 id="javascript-analysis-options">JavaScript analysis options</h2>
+<p>
+    These settings control how Burp Scanner detects DOM-based vulnerabilities in JavaScript. The following settings are available:
+</p>
+<ul>
+    <li>
+        <strong>Make requests for missing site resources</strong> - Controls whether Burp Scanner makes HTTP requests for any missing dependencies, such as JavaScript files.
+    </li>
+    <li>
+        <p>
+            <strong>Fetch previously undiscovered resources and data from out-of-scope hosts</strong> - Controls whether resources and data that are referenced by a page but were not discovered by Burp Scanner during crawling are loaded from locations that are out of scope for the scan. You may encounter this scenario if you run an audit-only scan on:
+        </p>
+        <ul>
+            <li>
+                Items that you discovered while manually exploring the site.
+            </li>
+            <li>
+                Items that were added to the site map by a previous scan but have since been changed on the live website.
+            </li>
+        </ul>
+        <p>
+            If you disable this option, the scan does not load these resources during auditing and may miss vulnerabilities as a result. For example, a page may be safe until it loads an external JavaScript file that introduces vulnerabilities on execution.
+        </p>
+    </li>
+    <li>
+        <strong>Use static/dynamic analysis techniques</strong> - Controls whether Burp Scanner uses static or dynamic techniques, or both, for JavaScript analysis. To configure whether to use static or dynamic techniques for individual issue types, edit the enabled detection methods for DOM-based issues.
+    </li>
+    <li>
+        <strong>Maximum static/dynamic analysis time per item</strong> - Controls the maximum time that Burp spends on static or dynamic analysis for each item that is scanned. This setting is useful if Burp encounters items containing very large or complex scripts, which may cause the static analysis engine to consume excessive system resources. If Burp Scanner truncates analysis because the maximum time is reached, it shows an alert identifying the item affected. You can specify zero or a blank value to indicate that there is no time limit.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        JavaScript analysis can consume large amounts of system resource. As a result, you may want to restrict the analysis to key targets. It may also be necessary to launch Burp with greater amounts of memory when performing JavaScript analysis. To do so, <a href="/burp/documentation/desktop/troubleshooting/launch-from-command-line.html">launch Burp from the command line</a>.
+    </p>
+</div>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/web-security/dom-based/index.html">DOM-based vulnerabilities</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/auditing.html#javascript-analysis">JavaScript analysis</a>.
+        </li>
+    </ul>
+</div>
+<h2 id="audit-project-option-overrides">Audit project option overrides</h2>
+<p>
+    These settings enable you to specify timeout values for the audit. These values override any you may have configured in the global settings.
+</p>
+</body>
+</html>

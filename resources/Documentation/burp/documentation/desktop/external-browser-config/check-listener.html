@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/external-browser-config/index.html">External browser configuration</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/external-browser-config/check-listener.html">Check proxy listener is active</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Check that Burp's proxy listener is active</h1>
+<p>
+    Burp's proxy listener is a local HTTP proxy server that listens for incoming connections from your browser. It allows you to monitor and intercept all HTTP requests and responses sent and received by your browser. This lies at the heart of Burp's user-driven workflow.
+</p>
+<p>
+    By default, Burp creates a single listener on port 8080 of the loopback interface. The first time you start Burp, you need to check that this listener is active and running.
+</p>
+<p>
+    In Burp, go to the <strong>Tools &gt; Proxy</strong> tab in the <strong>Settings</strong> dialog.
+</p>
+<p>
+    In the <strong>Proxy listeners</strong> panel, you should see an entry for the interface <code>127.0.0.1:8080</code> with the <strong>Running</strong> checkbox selected, indicating that the listener is active and running. If so, everything is fine and you can move on to <a href="/burp/documentation/desktop/external-browser-config/index.html">configuring your browser</a>.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/check-proxy-listener-running-940.png" alt="Check the proxy listener is running" class="center-block">
+</div>
+<p>
+    If not, click the <span class="icon-settings"></span> icon in the <strong>Proxy listeners</strong> field and select <strong>Restore defaults</strong>. Look at the <strong>Running</strong> checkbox again to see if the proxy listener is now running. If the checkbox is now selected, the listener is active. Otherwise, continue with the following steps.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/ca-check-proxy-restore-defaults-940.png" alt="Proxy listener restore defaults" class="center-block">
+</div>
+<p>
+    If it is still not running, the default port 8080 might not be available, for example, because it is already being used by another application. In this case, you need to try using a different port. Select the entry <code>127.0.0.1:8080</code> and click the <strong>Edit</strong> button. The <strong>Edit proxy listener</strong> dialog opens.
+</p>
+<p>
+    In the <strong>Bind to port</strong> field, enter the number of a new port that you think is free and click <strong>OK</strong>.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/check-proxy-bind-port-940.png" alt="Bind to port" class="center-block">
+</div>
+<p>
+    Try to activate the listener by selecting the <strong>Running</strong> checkbox. If you still can't activate it, then the new port that you selected is probably also blocked. Repeat this process to try a different port.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/check-proxy-port-8081-940.png" alt="Activate listener with a new port" class="center-block">
+</div>
+</body>
+</html>

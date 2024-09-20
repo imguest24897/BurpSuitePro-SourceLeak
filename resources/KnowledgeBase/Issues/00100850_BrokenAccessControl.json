@@ -1,0 +1,24 @@
+{
+  "typeIndex": 1050704,
+  "name": "Broken access control",
+  "description": "<p>Access control is the application of constraints on who or what is authorized to perform actions or access resources.</p>\n<p>Broken access controls often present a serious security vulnerability as they can allow attackers to access resources or perform actions they should not be able to.</p>",
+  "remediation": "<p>\n    If this endpoint is intended to be restricted to authenticated users, implement access controls that enforce this.\n</p>",
+  "webIntro": null,
+  "typicalSeverity": "INFO",
+  "references": [
+    {
+      "title": "Web Security Academy: Access Control",
+      "url": "https://portswigger.net/web-security/access-control"
+    },
+    {
+      "title": "OWASP A01:2021 - Broken Access Control",
+      "url": "https://owasp.org/Top10/A01_2021-Broken_Access_Control/"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-284: Improper Access Control",
+      "url": "https://cwe.mitre.org/data/definitions/284.html"
+    }
+  ]
+}

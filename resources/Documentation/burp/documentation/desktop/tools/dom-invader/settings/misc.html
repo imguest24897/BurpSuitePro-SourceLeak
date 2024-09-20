@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/index.html">DOM Invader</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/settings/index.html">Settings</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/settings/misc.html">Misc</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Miscellaneous DOM Invader settings</h1>
+<p>
+    To access the DOM Invader settings menu, click the Burp Suite logo in the upper-right corner of the browser, then switch to the <strong>DOM Invader</strong> tab.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/dom-invader-settings-misc.png" alt="Miscellaneous DOM Invader settings">
+</div>
+<p>
+    From the <strong>Misc</strong> section, you can control the following options.
+</p>
+<h2 id="message-filtering-by-stack-trace">Message filtering by stack trace</h2>
+<p>
+    Some websites trigger a large number of messages, which can make testing difficult due to the amount of noise. When this setting is enabled, DOM Invader compares the stack trace of each entry and hides any that point to the same location in the code as an existing entry.
+</p>
+<h2 id="auto-fire-events">Auto-fire events</h2>
+<p>
+    When this setting is enabled, DOM Invader automatically triggers a click and mouseover event on every element as soon as the page loads. This is useful in cases where your injected payload only reaches a sink when one of these events occurs.
+</p>
+<h2 id="redirection-prevention">Redirection prevention</h2>
+<p>
+    You may find that some of your actions cause a client-side redirect to another page. This can interfere with testing because the sources and sinks found by DOM Invader will be cleared and updated with sources and sinks found on the new page instead.
+</p>
+<p>
+    When this setting is enabled, DOM Invader blocks any client-side redirects so that you remain on the same page. However, redirects to <code>javascript:</code> URLs, or any redirects initiated by the <strong>Inject URL</strong> button, still work as normal.
+</p>
+<h2 id="add-breakpoint-before-redirect">Add breakpoint before redirect</h2>
+<p>
+    Instead of blocking client-side redirects altogether using the <strong>Redirection prevention</strong> setting, you can enable this feature to set a breakpoint just before the code that triggers a redirect. Currently, this isn't possible using Chrome's standard DevTools.
+</p>
+<p>
+    Adding a breakpoint enables you to look at the call stack in the browser's DevTools to see where the redirect is happening, which can be useful for debugging.
+</p>
+<h2 id="inject-canary-into-all-sources">Inject canary into all sources</h2>
+<p>
+    When this setting is enabled, DOM Invader automatically injects the canary in any identified sources on the page. It appends a unique string to the canary for each source so that you can easily identify which sources flow into each sink.
+</p>
+<p>
+    In practice, injecting the canary everywhere is likely to just prevent the site from working correctly. DOM Invader lets you customize which parameters and sources are used to inject the canary, so you can fine-tune this behavior as needed. If you click the cog icon next to this setting, you can make the following adjustments:
+</p>
+<ul>
+    <li>
+        <p>
+            Disable specific sources so that DOM Invader skips them. You might want to gradually eliminate problematic sources in order to use this feature more effectively. You might also want to disable sources in order to focus on a specific one. This saves you having to manually paste the canary into the source every time you load a new page.
+        </p>
+    </li>
+    <li>
+        <p>
+            Provide a comma-separated list of specific parameters that DOM Invader should inject the canary into.
+        </p>
+    </li>
+</ul>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/dom-invader-settings-sources.png" alt="Configuring DOM Invader sources">
+</div>
+<h2 id="configuring-callbacks">Configuring callbacks</h2>
+<p>
+    You can configure DOM Invader to execute custom callback functions whenever it identifies sources, sinks, or web messages. You can create your own custom callback or use the default, which enables you to export results by simply logging them to the console.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/dom-invader-callback-configuration.png" alt="Configuring callbacks">
+</div>
+<p>
+    Another useful callback might contain a debugger statement to pause script execution whenever DOM Invader identifies a controllable sink. This would enable you to study the call stack.
+</p>
+<p>
+    The default callback function is ready to use, but you need to enable it as follows:
+</p>
+<ol>
+    <li>
+        <p>
+            From the DOM Invader settings menu, click the cog icon next to the main DOM Invader switch to open the sources and sink settings.
+        </p>
+    </li>
+    <li>
+        <p>
+            Select either the <strong>Sources</strong>, <strong>Sinks</strong>, or <strong>Messages</strong> tab, depending on which type of result you want to configure a callback for.
+        </p>
+    </li>
+    <li>
+        <p>
+            Click the <strong>Callback configuration</strong> button to view DOM Invader's default callback function. Initially, this is deactivated.
+        </p>
+    </li>
+    <li>
+        <p>
+            Click the text field containing the script to activate it.
+        </p>
+    </li>
+    <li>
+        <p>
+            Either leave the script as it is, or make the changes you want, then click <strong>Save</strong>.
+        </p>
+    </li>
+    <li>
+        <p>
+            Click <strong>Reload</strong> to refresh the browser. This is necessary for your changes to take effect.
+        </p>
+    </li>
+    <li>
+        <p>
+            Use DOM Invader as normal and check that the callback works as expected.
+        </p>
+    </li>
+</ol>
+<h2 id="remove-permissions-policy-header">Remove Permissions-Policy header</h2>
+<p>
+    When this setting is enabled, DOM Invader automatically strips the <code>Permissions-Policy</code> header from responses when present.
+</p>
+<p>
+    Some websites set directives via the <code>Permissions-Policy</code> header that block features that are essential to DOM Invader's functionality, such as synchronous XHR. In this case, DOM Invader informs you via the console and prompts you to enable this setting.
+</p>
+</body>
+</html>

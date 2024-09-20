@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/ssrf/index.html">Testing for SSRF vulnerabilities</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/ssrf/testing-for-blind-ssrf.html">Testing for blind SSRF</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Testing for blind SSRF with Burp Suite</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/ie0QObO1znA?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    Blind server-side request forgery (SSRF) is a vulnerability that allows an attacker to induce an application to send HTTP requests to a specified URL, but no response is returned to them.
+</p>
+<p>
+    To detect blind SSRF vulnerabilities with out-of-band testing, you can use Collaborator to inject a domain into a request that attempts to trigger an out-of-band interaction with your target application. Burp then monitors the Collaborator server for any out-of-band interactions with that domain.
+</p>
+<p>
+    If Collaborator detects that your application has sent a request to the inserted domain, that means it's vulnerable to SSRF.
+</p>
+<h2 id="steps" cms-ignore-validation="DUPLICATE_HEADINGS">Steps</h2>
+<p>
+    You can follow the tutorial below by using the <a href="https://portswigger.net/web-security/ssrf/blind/lab-out-of-band-detection">Blind SSRF with out-of-band detection lab</a> from our Web Security Academy.
+</p>
+<p>
+    To test for blind SSRF with Burp Suite:
+</p>
+<ol>
+    <li>
+        Go to <strong>Proxy &gt; HTTP history</strong>. Identify a request in which you want to insert a Collaborator payload. For the lab, use a request that includes the <code>productId</code> parameter.
+    </li>
+    <li>
+        Right-click the request and select <strong>Send to Repeater</strong>.
+    </li>
+    <li>
+        Go to the <strong>Repeater</strong> tab.
+    </li>
+    <li>
+        Right-click where you want to insert a Collaborator payload and select <strong>Insert Collaborator payload</strong>. In the lab, replace the domain in the <code>Referer</code> header with a Collaborator payload.
+    </li>
+    <li>
+        Click <strong>Send</strong>.
+    </li>
+    <li>
+        Go to the <strong>Collaborator</strong> tab and click <strong>Poll now</strong>. The <strong>Collaborator</strong> tab lists any interactions your target application initiated with the Collaborator server.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/web-security/ssrf/index.html">What is SSRF?</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/collaborator/index.html">Burp Collaborator</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/collaborator/server/private/index.html">Deploying a private collaborator server</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

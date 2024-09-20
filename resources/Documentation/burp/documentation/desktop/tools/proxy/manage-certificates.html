@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/proxy/index.html">Burp Proxy</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/proxy/manage-certificates.html">Managing CA certificates</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Managing CA certificates</h1>
+<p>
+    Each installation of Burp generates its own CA certificate that Proxy listeners use to negotiate TLS connections. This section explains how to export, import, and create CA certificates.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You only need to manage CA certificates in the following cases:
+    </p>
+    <ul>
+        <li>
+            You want to use an external browser, instead of Burp's browser. For the vast majority of users, this isn't necessary.
+        </li>
+        <li>
+            You want to test certain types of network devices or applications.
+        </li>
+    </ul>
+</div>
+<h2 id="exporting-and-importing-the-ca-certificate">Exporting and importing the CA certificate</h2>
+<p>
+    You can export your installation-specific CA certificate for use in other tools or other instances of Burp, and import a certificate to use in the current instance of Burp:
+</p>
+<ol>
+    <li>
+        From the <strong>Proxy</strong> tab, select <strong><span class="icon-settings"></span> Proxy Settings</strong>.
+    </li>
+    <li>
+        Go to the <strong>Proxy listeners</strong> field and click the <strong>Import / export CA certificate</strong> button.
+    </li>
+    <li>
+        Configure the <strong>Export</strong> or <strong>Import</strong> settings. Click <strong>Next</strong>.
+    </li>
+    <li>
+        Enter the file details, and keystore password if necessary. Click <strong>Next</strong>.
+    </li>
+    <li>
+        At the prompt, click <strong>Close</strong>.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You should not disclose the private key for your certificate to any untrusted party. A malicious attacker in possession of your certificate and key may be able to intercept your browser's HTTPS traffic even when you are not using Burp.
+    </p>
+</div>
+<p>
+    To regenerate a CA certificate:
+</p>
+<ol>
+    <li>
+        From the <strong>Proxy</strong> tab, select <strong><span class="icon-settings"></span> Proxy settings</strong>.
+    </li>
+    <li>
+        Go to the <strong>Proxy listeners</strong> field and click the <strong>Regenerate CA certificate</strong> button.
+    </li>
+    <li>
+        At the prompt, click <strong>Yes</strong>.
+    </li>
+    <li>
+        Restart Burp for the change to take effect.
+    </li>
+    <li>
+        Install the new certificate in your browser.
+    </li>
+</ol>
+<h2 id="creating-a-custom-ca-certificate">Creating a custom CA certificate</h2>
+<p>
+    You can use OpenSSL to create a CA certificate with your own details:
+</p>
+<ol>
+    <li>
+        <p>
+            Enter the following OpenSSL command to create a self-signed certificate with an unencrypted 2048-bit RSA key, which is valid for 730 days:
+        </p>
+        <code class="code-scrollable">openssl req -x509 -days 730 -nodes -newkey rsa:2048 -outform der -keyout server.key -out ca.der</code>
+    </li>
+    <li>
+        <p>
+            Enter the following OpenSSL command to convert the key from PEM to DER:
+        </p>
+        <code class="code-scrollable">openssl rsa -in server.key -inform pem -out server.key.der -outform der</code>
+    </li>
+    <li>
+        <p>
+            Enter the following OpenSSL command to convert the key to a PKCS8 that contains the key:
+        </p>
+        <code class="code-scrollable">openssl pkcs8 -topk8 -in server.key.der -inform der -out server.key.pkcs8.der -outform der -nocrypt</code>
+    </li>
+    <li>
+        Click the <strong>Import / export CA certificate</strong> button in Burp, and select <strong>Certificate and private key in DER format</strong>.
+    </li>
+    <li>
+        Select <code>ca.der</code> as the certificate file, and <code>server.key.pkcs8.der</code> as the key file.
+    </li>
+</ol>
+<p>
+    Burp loads the custom CA certificate and uses it to generate per-host certificates.
+</p>
+</body>
+</html>

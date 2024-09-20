@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/index.html">Intruder</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/configure-attack/index.html">Configure attack</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/configure-attack/attack-types.html">Attack types</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1 id="burp-intruder-attack-types">Burp Intruder attack types</h1>
+<p>
+    To determine the way in which payloads are assigned to payload positions, you can specify an attack type. Attack types enable you to configure whether:
+</p>
+<ul>
+    <li>
+        Payloads are taken from a single set, or multiple sets (up to 20).
+    </li>
+    <li>
+        Payloads are assigned to payload positions in turn, or simultaneously.
+    </li>
+</ul>
+<p>
+    To select an attack type, go to <strong>Intruder &gt; Positions</strong>, and click on the drop-down list under <strong>Choose an attack type</strong>.
+</p>
+<h2 id="sniper">Sniper</h2>
+<p>
+    This attack places each payload into each payload position in turn. It uses a single payload set.
+</p>
+<p>
+    The total number of requests generated in the attack is the product of the number of positions and the number of payloads in the payload set.
+</p>
+<p>
+    The Sniper attack is useful for fuzzing a number of request parameters individually for common vulnerabilities.
+</p>
+<h2 id="battering-ram">Battering ram</h2>
+<p>
+    This attack places the same payload into all of the defined payload positions simultaneously. It uses a single payload set.
+</p>
+<p>
+    The total number of requests generated in the attack is the number of payloads in the payload set.
+</p>
+<p>
+    The Battering ram attack is useful where an attack requires the same input to be inserted in multiple places within the request. For example, a username within a cookie and a body parameter.
+</p>
+<h2 id="pitchfork">Pitchfork</h2>
+<p>
+    This attack iterates through a different payload set for each defined position. Payloads are placed into each position simultaneously. For example, the first three requests would be:
+</p>
+<ul>
+    <li>
+        <p>
+            Request one:
+        </p>
+        <ul>
+            <li>
+                Position 1 = First payload from Set 1.
+            </li>
+            <li>
+                Position 2 = First payload from Set 2.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <p>
+            Request two:
+        </p>
+        <ul>
+            <li>
+                Position 1 = Second payload from Set 1.
+            </li>
+            <li>
+                Position 2 = Second payload from Set 2.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <p>
+            Request three:
+        </p>
+        <ul>
+            <li>
+                Position 1 = Third payload from Set 1.
+            </li>
+            <li>
+                Position 2 = Third payload from Set 2.
+            </li>
+        </ul>
+    </li>
+</ul>
+<p>
+    The total number of requests generated in the attack is the number of payloads in the smallest payload set.
+</p>
+<p>
+    The Pitchfork attack is useful where an attack requires different but related input to be inserted in multiple places within the request. For example, to place a username in one parameter, and a known ID number corresponding to that username in another parameter.
+</p>
+<h2 id="cluster-bomb">Cluster bomb</h2>
+<p>
+    This attack iterates through a different payload set for each defined position. Payloads are placed from each set in turn, so that all payload combinations are tested. For example, the first three requests would be:
+</p>
+<ul>
+    <li>
+        <p>
+            Request one:
+        </p>
+        <ul>
+            <li>
+                Position 1 = First payload from Set 1.
+            </li>
+            <li>
+                Position 2 = First payload from Set 2.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <p>
+            Request two:
+        </p>
+        <ul>
+            <li>
+                Position 1 = First payload from Set 1.
+            </li>
+            <li>
+                Position 2 = Second payload from Set 2.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <p>
+            Request three:
+        </p>
+        <ul>
+            <li>
+                Position 1 = First payload from Set 1.
+            </li>
+            <li>
+                Position 2 = Third payload from Set 2.
+            </li>
+        </ul>
+    </li>
+</ul>
+<p>
+    The total number of requests generated in the attack is the product of the number of payloads in all defined payload sets - this may be extremely large.
+</p>
+<p>
+    The Cluster bomb attack is useful where an attack requires unrelated or unknown input to be inserted in multiple places within the request. For example, when guessing both a username and password.
+</p>
+<p>
+    For a tutorial that uses a Cluster bomb attack, see <a href="/burp/documentation/desktop/testing-workflow/authentication-mechanisms/brute-forcing-logins.html">Brute-forcing a login mechanism using Burp Intruder</a>.
+</p>
+</body>
+</html>

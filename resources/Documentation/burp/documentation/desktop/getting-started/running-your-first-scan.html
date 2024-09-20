@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Learn how to run a web vulnerability scan and generate a report - using Burp Scanner in Burp Suite Professional.">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE" ignore-validation="STACKED_HEADINGS,ALLOWED_CHARACTERS"></cms><title>Running your first scan with Burp Suite Professional</title>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/getting-started/index.html">Getting started</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/getting-started/running-your-first-scan.html">Running your first scan</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1 cms-ignore-validation="HEADING_CAPITALIZATION" no-keyword-injection>Run your first scan</h1>
+<div no-keyword-injection>
+    <p>
+        Burp Scanner can be used as both a fully automated scanner and a powerful means of augmenting your manual testing workflow. The list of vulnerabilities that Burp Scanner can detect is constantly growing. We work closely with our world-class research team to make sure that it stays up to speed with the latest techniques for finding both classic bugs and newly discovered vulnerabilities alike.
+    </p>
+    <p>
+        Scanning a website involves two phases:
+    </p>
+    <ul>
+        <li>
+            <strong>Crawling for content and functionality:</strong> Burp Scanner first navigates around the target site, closely mirroring the behavior of real users. It catalogs the structure and content of the site, and the paths used to navigate it, in order to build a comprehensive map of the site.
+        </li>
+        <li>
+            <strong>Auditing for vulnerabilities:</strong> The audit phase of a scan involves analyzing the website's behavior to identify security vulnerabilities and other issues. Burp Scanner employs a wide range of techniques to deliver a high-coverage, accurate audit of the target.
+        </li>
+    </ul>
+    <div class="highlightedarea">
+        <h4>Note</h4>
+        <p>
+            Burp Scanner is only available in Burp Suite Professional and Burp Suite Enterprise Edition. If you're using Burp Suite Community Edition, then you won't be able to follow this tutorial.
+        </p>
+        <p>
+            Burp Suite Enterprise Edition users should see our tutorial on <a href="https://portswigger.net/burp/documentation/enterprise/setup/trial-deployment/run-your-first-scan.html">running your first scan with Burp Suite Enterprise Edition</a>.
+        </p>
+    </div>
+    <h2 id="scanning-a-website">Scanning a website</h2>
+    <p>
+        In this section, you'll learn how to launch your first automated vulnerability scan.
+    </p>
+    <h3 cms-ignore-validation="HEADING_CAPITALIZATION">Step 1: Open the scan launcher</h3>
+    <p>
+        Go to the <strong>Dashboard</strong> tab and select <strong>New scan</strong>.
+    </p>
+    <div class="rounded-dropshadow">
+        <img src="/burp/documentation/desktop/images/getting-started/Pro-QSG-1-open-scan-launcher.png" alt="Starting a new scan">
+    </div>
+    <p>
+        The <strong>Scan launcher</strong> dialog opens. This is where you can adjust various settings to control Burp Scanner's behavior.
+    </p>
+    <h3 cms-ignore-validation="HEADING_CAPITALIZATION">Step 2: Enter the URL of the target site</h3>
+    <p>
+        In the <strong>URLs to scan</strong> field, enter <code>ginandjuice.shop</code>. If necessary, remove the URL for the website that you set as a target scope in the earlier tutorial <a href="/burp/documentation/desktop/getting-started/setting-target-scope.html">Set the target scope</a>. Leave all the other settings as their default for now.
+    </p>
+    <div class="rounded-dropshadow">
+        <img src="/burp/documentation/desktop/images/getting-started/Pro-QSG-2-scan-details.png" alt="Enter the site URL">
+    </div>
+    <div class="highlightedarea">
+        <h4>Note</h4>
+        <p>
+            Using Burp Scanner may have unexpected effects on some applications. Until you are fully familiar with its functionality and settings, you should only use Burp Scanner against non-production systems. Do not run scans against third-party websites unless you have been authorized to do so by the owner.
+        </p>
+    </div>
+    <h3 cms-ignore-validation="HEADING_CAPITALIZATION">Step 3: Configure the scan</h3>
+    <p>
+        Select <strong>Scan configuration</strong>. From here, you can fine-tune many aspects of Burp Scanner's behavior to suit different use cases and target sites.
+    </p>
+    <p>
+        Make sure that <strong>Use a preset scan mode</strong> is selected and click <strong>Lightweight</strong>. The <strong>Lightweight</strong> scan mode is intended to give a very high-level overview of a target as quickly as possible. Scans using this mode run for a maximum of 15 minutes.
+    </p>
+    <div class="rounded-dropshadow">
+        <img src="/burp/documentation/desktop/images/getting-started/Pro-QSG-3-scan-configuration.png" alt="Configure the scan">
+    </div>
+    <h3 cms-ignore-validation="HEADING_CAPITALIZATION">Step 4: Launch the scan</h3>
+    <p>
+        Click <strong>OK</strong> to launch the scan. Burp Scanner begins crawling from the URL you entered in the previous step.
+    </p>
+    <p>
+        Notice that a new task has been added to the <strong>Dashboard</strong> to represent this scan. You can select the task to view more details about its status and what it's currently doing.
+    </p>
+    <div class="rounded-dropshadow">
+        <img src="/burp/documentation/desktop/images/getting-started/Pro-QSG-4-crawl-and-audit.png" alt="Launch the scan">
+    </div>
+    <p>
+        While your scan is running, proceed to Step 5.
+    </p>
+    <h3 cms-ignore-validation="HEADING_CAPITALIZATION">Step 5: See the crawl in action</h3>
+    <p>
+        Go to the <strong>Target > Site map</strong> tab and notice the new entry for <code>ginandjuice.shop</code>. Expand this node to see all of the content that the crawler has managed to discover so far. If you wait a few seconds, you'll see the map being updated in real time.
+    </p>
+    <div class="rounded-dropshadow">
+        <img src="/burp/documentation/desktop/images/getting-started/Pro-QSG-5-site-map.png" alt="See the crawl in action">
+    </div>
+    <h3 cms-ignore-validation="HEADING_CAPITALIZATION">Step 6: View the identified issues</h3>
+    <p>
+        Monitor the scan's status in the <strong>Dashboard</strong> tab. After a minute or two, the crawl will finish and Burp Scanner will begin auditing for vulnerabilities. To monitor the scan for any issues it finds, select the scan from the <strong>Tasks</strong> list. In the main panel, go to the <strong>Issues</strong> tab.
+    </p>
+    <div class="rounded-dropshadow">
+        <img src="/burp/documentation/desktop/images/getting-started/Pro-QSG-6-view-issues.png" alt="View identified issues">
+    </div>
+    <p>
+        If you select an issue, you can see an <strong>Advisory</strong> tab, which contains key information about the issue type, including a detailed description and some remediation advice. Next to this are several tabs that provide evidence that Burp Scanner found for this issue. This is typically a <strong>Request</strong> and <strong>Response</strong> but will differ depending on the issue type.
+    </p>
+    <p>
+        You've just performed your first scan.
+    </p>
+    <div class="callout theme-community-6">
+        <div class="container-columns-3 align-vertically-center">
+            <p class="heading-navy-1">
+                <strong>Next step -</strong> Generate a report
+            </p>
+            <a href="/burp/documentation/desktop/getting-started/generate-reports.html" class="button-orange">CONTINUE</a>
+        </div>
+    </div>
+    <div class="highlightedarea">
+        <h4 cms-ignore-validation="DUPLICATE_HEADINGS">In this tutorial</h4>
+        <ol>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/download-and-install.html">Downloading and installing Burp Suite.</a>
+            </li>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/intercepting-http-traffic.html">Intercepting HTTP traffic with Burp Proxy.</a>
+            </li>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/modifying-http-requests.html">Modifying requests in Burp Proxy.</a>
+            </li>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/setting-target-scope.html">Setting the target scope.</a>
+            </li>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/reissuing-http-requests.html">Manually reissuing requests with Burp Repeater.</a>
+            </li>
+            <li>
+                Running your first scan.
+            </li>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/generate-reports.html">Generating a report.</a>
+            </li>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/what-next.html">What next?</a>
+            </li>
+        </ol>
+    </div>
+</div>
+</body>
+</html>

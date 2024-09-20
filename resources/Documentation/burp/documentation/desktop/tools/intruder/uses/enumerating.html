@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/index.html">Intruder</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/uses/index.html">Uses</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/uses/enumerating.html">Enumerating identifiers</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Enumerating identifiers</h1>
+<p>
+    Web applications often use identifiers to refer to items of data or resources, such as:
+</p>
+<ul>
+    <li>
+        Usernames and passwords.
+    </li>
+    <li>
+        Document IDs.
+    </li>
+    <li>
+        Account numbers.
+    </li>
+</ul>
+<p>
+    You can use Burp Intruder to enumerate valid or interesting identifiers from a large number of potential items.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-1-find-a-request">Step 1: Find a request</h2>
+<p>
+    Find a request that contains an identifier in a parameter, and that has a response with interesting data about the identifier.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-2-set-a-payload-position">Step 2: Set a payload position</h2>
+<p>
+    Configure a single payload position at the parameter's value.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/intruder-enumerating-positions-940.png" alt="Setting the payload positions">
+</div>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-3-set-a-payload-type">Step 3: Set a payload type</h2>
+<p>
+    Use a suitable <a href="/burp/documentation/desktop/tools/intruder/configure-attack/payload-types.html">payload type</a> to generate potential identifiers to test, using the correct format or scheme. Start the attack.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/intruder-enumerating-payloads-940.png" alt="Setting the payload type enumerating">
+</div>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-4-analyze-the-results">Step 4: Analyze the results</h2>
+<p>
+    Sort the attack results based on various attributes to identify any anomalous results. This will allow you to infer valid identifiers. For example, a valid identifier may return a different HTTP status code.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/intruder-enumerating-sorting-results.png" alt="Setting the payload type">
+</div>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        If a valid identifier returns a response containing a specific expression, you can define a match grep item to identify responses that contain this expression. For example, you could search for phrases such as "password incorrect" or "login successful" to locate successful logins. For more information, see <a href="/burp/documentation/desktop/tools/intruder/configure-attack/settings.html">Burp Intruder attack settings</a>.
+    </p>
+</div>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="use-cases">Use cases</h2>
+<p>
+    You can configure your attack to enumerate a huge variety of identifiers, for example:
+</p>
+<ul>
+    <li>
+        Enumerate usernames - Use the username generator payload type to insert a long list of possible usernames into an application's login failure message.
+    </li>
+    <li>
+        Enumerate passwords - Use the simple list payload type to insert a set of common passwords into an application's login failure message, alongside known valid usernames.
+    </li>
+    <li>
+        Enumerate order IDs - Use the custom iterator payload type to cycle through potential order IDs in a known format. You can then use these to view order details.
+    </li>
+    <li>
+        Enumerate session tokens - Use the bit flipper payload type to systematically modify a token that has been encrypted using a CBC cipher, to try to meaningfully tamper with its decrypted value.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            For more information on the payload types listed above, see <a href="/burp/documentation/desktop/tools/intruder/configure-attack/payload-types.html">Payload types</a>.
+        </li>
+        <li>
+            For a basic tutorial that demonstrates how to enumerate login details, see <a href="/burp/documentation/desktop/tools/intruder/getting-started.html">Getting started with Burp Intruder</a>.
+        </li>
+        <li>
+            For a more advanced tutorial, see <a href="/burp/documentation/desktop/testing-workflow/mapping/hidden-content/enumerating-subdomains.html">Enumerating subdomains using Burp Intruder</a>.
+        </li>
+        <li>
+            For a tutorial that requires you to use a cluster bomb attack type to simultaneously enumerate username and password details, see <a href="/burp/documentation/desktop/testing-workflow/authentication-mechanisms/brute-forcing-logins.html">Brute-forcing a login mechanism using Burp Intruder</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

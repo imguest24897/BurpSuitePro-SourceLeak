@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/inspector/index.html">Inspector</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/inspector/getting-started-inspector.html">Getting started with the Inspector</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Getting started with the Inspector</h1>
+<p>
+    The Inspector makes it easy to view and edit interesting items in HTTP messages. It automatically groups items from the selected request and response pair by category, such as HTTP headers, cookies, and parameters.
+</p>
+<p>
+    The Inspector has the following useful features:
+</p>
+<ul>
+    <li>
+        <p>
+            It automatically decodes values so that you can read them more easily.
+        </p>
+    </li>
+    <li>
+        <p>
+            It lets you edit encoded values in their plain text form, and then automatically re-applies the relevant sequence of encodings to the request.
+        </p>
+    </li>
+    <li>
+        <p>
+            It lets you easily add, remove, and reorder items, without having to manually clean up the rest of the request afterward.
+        </p>
+    </li>
+</ul>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/kLWz1_zeshc?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    You can find the <strong>Inspector</strong> in the side panel on many of the tabs in Burp Suite, next to the message editor.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/inspector.png" alt="The message editor and Inspector">
+</div>
+<p>
+    We recommend following the tutorial below to learn how to use the Inspector.
+</p>
+<p>
+    For more detailed information, please see the <a href="/burp/documentation/desktop/tools/inspector/index.html">Inspector documentation</a>.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="tutorial">Tutorial</h2>
+<p>
+    In this tutorial, you'll use the Inspector to work with encoded values more easily.
+</p>
+<h3 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-1-access-the-lab">Step 1: Access the lab</h3>
+<p>
+    Open Burp's browser and use it to access the following URL:
+</p>
+<code class="code-scrollable">https://portswigger.net/web-security/deserialization/exploiting/lab-deserialization-modifying-serialized-objects</code><p>
+    Click <strong>Access the lab</strong> and log in to your PortSwigger account if prompted. This opens your own instance of a deliberately vulnerable blog website.
+</p>
+<h3 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-2-log-in-to-a-user-account">Step 2: Log in to a user account</h3>
+<p>
+    Click <strong>My account</strong> and log in using the following credentials: <code>wiener:peter</code>
+</p>
+<h3 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-3-use-the-inspector-to-examine-the-request">Step 3: Use the Inspector to examine the request</h3>
+<p>
+    Go to the <strong>Proxy &gt; HTTP history</strong> tab, and select the <code>GET /my-account</code> request.
+</p>
+<p>
+    In the <strong>Inspector</strong>, expand the <strong>Request Cookies</strong> section.
+</p>
+<p>
+    To drill down into the <code>session</code> cookie, click <strong>&gt;</strong>. Notice that the Inspector automatically performs the correct sequence of decoding steps to the value of the cookie. In this case, it shows the result after URL decoding, and then after the subsequent Base64 decoding.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/inspector-cookie-decoding.png" alt="Decoding a cookie">
+</div>
+<p>
+    Right-click the <code>GET /my-account</code> request and select <strong>Send to Repeater</strong>.
+</p>
+<p>
+    Go to the <strong>Repeater</strong> tab, and drill down into the <code>session</code> cookie again.
+</p>
+<h3 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-4-use-the-inspector-to-edit-the-cookie">Step 4: Use the Inspector to edit the cookie</h3>
+<p>
+    In Repeater, you can modify the decoded value. For example, in the <strong>Decoded from Base64</strong> field, change <code>wiener</code> to <code>administrator</code>, then click <strong>Apply changes</strong>.
+</p>
+<p>
+    Notice that the Inspector automatically re-applies the correct sequence of encodings when inserting the modified value into the request.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/inspector-edit-cookie.png" alt="Using the inspector to edit a cookie">
+</div>
+<h3 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-5-using-the-selection-widget">Step 5: Using the selection widget</h3>
+<p>
+    You can also select arbitrary strings in the message editor to examine them in the Inspector.
+</p>
+<p>
+    Go back to the Inspector and highlight the value of the <code>session</code> cookie manually. Notice that the Inspector automatically decodes your selection in the same way as before.
+</p>
+<p>
+    This is especially useful for working with substrings and non-standard data structures that the Inspector is unable to parse automatically.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/inspector-selector-widget.png" alt="Inspector selection widget">
+</div>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="learn-more-about-the-inspector">Learn more about the Inspector</h2>
+<p>
+    You have now learned how to use the Inspector to work with encoded values more easily. To learn more, refer to the links below:
+</p>
+<ul>
+    <li>
+        <p>
+            <a href="/burp/documentation/desktop/settings/ui/side-panel.html">Side panel settings</a>.
+        </p>
+    </li>
+    <li>
+        <p>
+            <a href="/burp/documentation/desktop/tools/inspector/index.html">Full documentation for the Inspector</a>.
+        </p>
+    </li>
+</ul>
+<p>
+    For more advanced users, the Inspector also provides some unique features for <a href="/burp/documentation/desktop/http2/index.html">working with HTTP/2 requests</a> in a way that lets you exploit a number of HTTP/2-exclusive request smuggling vulnerabilities. We've covered these extensively on the <a href="https://portswigger.net/web-security/request-smuggling/advanced">Web Security Academy</a>.
+</p>
+</body>
+</html>

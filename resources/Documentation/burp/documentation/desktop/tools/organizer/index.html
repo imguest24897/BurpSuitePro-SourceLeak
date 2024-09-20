@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/organizer/index.html">Organizer</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1 cms-ignore-validation="HEADING_CAPITALIZATION">Burp Organizer</h1>
+<p>
+    Burp Organizer is a tool that enables you to store and annotate copies of HTTP messages that you want to come back to later. Use Burp Organizer to better organize your penetration testing workflow, for example to:
+</p>
+<ul>
+    <li>
+        Store messages that you want to investigate later.
+    </li>
+    <li>
+        Save messages that you've already identified as interesting.
+    </li>
+    <li>
+        Save messages that you want to add to a report later.
+    </li>
+</ul>
+<h2 id="sending-messages-to-organizer">Sending messages to Organizer</h2>
+<p>
+    You can send HTTP messages to Burp Organizer from other Burp tools. Right-click the message and select <strong>Send to Organizer</strong>, or use the default hotkey Ctrl + O. Each message that you sent to Organizer is a read-only copy of the original message, saved at the point you sent it to Organizer. If you added notes in another Burp tool, these are copied across into Organizer.
+</p>
+<p>
+    Once you've sent a message to Organizer, you can edit any notes and update the status of the message. You can also send the message to other Burp tools for further investigation.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/desktop/tools/organizer/annotate.html">Annotating Organizer items</a>.
+    </p>
+</div>
+<h2 id="organizer-table">Organizer table</h2>
+<p>
+    Messages are stored in a table, which contains the following columns:
+</p>
+<ul>
+    <li>
+        <strong>#</strong> - The request index number.
+    </li>
+    <li>
+        <strong>Time</strong> - The time the request was made.
+    </li>
+    <li>
+        <strong>Status</strong> - The workflow status that you have applied to the message, for example <strong>Done</strong> or <strong>Paused</strong>.
+    </li>
+    <li>
+        <strong>Tool</strong> - The Burp tool that the message was sent from, such as Burp Repeater or Burp Intruder. If the message is sent from Burp Logger or from an item that is already in Organizer, then the tool identified here is the tool that originally generated the HTTP request.
+    </li>
+    <li>
+        <strong>Method</strong> - The HTTP method.
+    </li>
+    <li>
+        <strong>Host</strong> - The server hostname.
+    </li>
+    <li>
+        <strong>Path</strong> - The URL file path.
+    </li>
+    <li>
+        <strong>Query</strong> - The URL query string.
+    </li>
+    <li>
+        <strong>Param count</strong> - The number of parameters in the request.
+    </li>
+    <li>
+        <strong>Status code</strong> - The HTTP status code of the response.
+    </li>
+    <li>
+        <strong>Length</strong> - The length of the response in bytes.
+    </li>
+    <li>
+        <strong>Notes</strong> - Any notes that you have made.
+    </li>
+</ul>
+<p>
+    You can customize and sort the table contents. For more information, see <a href="/burp/documentation/desktop/burps-layout/customize-tables.html">Customizing Burp's tables</a>.
+</p>
+<p>
+    Right-click any item in the table to view the context menu. This enables you to perform actions that can drive your testing workflow. For example, you can send an item to another Burp tool.
+</p>
+<p>
+    You can search in the table and choose which messages are shown in the table. For more information, see <a href="/burp/documentation/desktop/tools/organizer/filter.html">Filtering Burp Organizer</a>.
+</p>
+<p>
+    You can also import and export Organizer items as part of a project file. For more information, see <a href="/burp/documentation/desktop/projects/index.html">Project files</a>.
+</p>
+<h2 id="viewing-http-messages">Viewing HTTP messages</h2>
+<p>
+    To view the request and response, click on any Organizer item. The request and response are both read-only.
+</p>
+<p>
+    To search within the request or response, select the message, then use the search bar below the message. For more information, see <a href="/burp/documentation/desktop/tools/message-editor/text-editor.html#quick-search">Text editor - Quick search</a>.
+</p>
+<p>
+    You can choose to view either the <strong>Inspector</strong> panel or <strong>Notes</strong> panel beside the request and response. To toggle between these, click on the tabs.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/organizer-inspector-notes-tabs.png" alt="Organizer inspector / notes tabs">
+</div>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/tools/message-editor/index.html">Burp Suite message editor</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/inspector/index.html">Inspector</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

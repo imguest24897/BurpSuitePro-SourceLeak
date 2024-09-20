@@ -1,0 +1,24 @@
+{
+  "typeIndex": 4196096,
+  "name": "XML entity expansion",
+  "description": "<p>XML entity expansion vulnerabilities arise because the XML specification allows XML documents to define entities that reference other entities defined within the document. If this is done recursively to a significant depth, then the XML parser will consume exponentially increasing amounts of memory and processor resources as each level of recursion is processed. This might result in a denial-of-service condition, causing the entire application to stop functioning.</p>\n<p><b>Note:</b> To avoid causing an actual denial-of-service, Burp Suite merely verifies that entities are being recursively expanded to a modest depth. It is possible that reported applications are not actually vulnerable because they are designed to prevent entity expansion beyond a given depth.\n</p>",
+  "remediation": "<p>XML entity expansion makes use of the DOCTYPE tag to define the injected entities. XML parsers can usually be configured to disable support for this tag. You should consult the documentation for your XML parsing library to determine how to disable this feature.</p>\n<p>It may also be possible to use input validation to block input containing a DOCTYPE tag. </p>",
+  "webIntro": null,
+  "typicalSeverity": "MEDIUM",
+  "references": [
+    {
+      "title": "Web Security Academy: XXE injection",
+      "url": "https://portswigger.net/web-security/xxe"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-776: Improper Restriction of Recursive Entity References in DTDs ('XML Entity Expansion')",
+      "url": "https://cwe.mitre.org/data/definitions/776.html"
+    },
+    {
+      "title": "CAPEC-197: XML Entity Expansion",
+      "url": "https://capec.mitre.org/data/definitions/197.html"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "typeIndex": 2097984,
+  "name": "WebSocket URL poisoning (DOM-based)",
+  "description": "<p>DOM-based vulnerabilities arise when a client-side script reads data from a controllable part of the DOM (for example, the URL) and processes this data in an unsafe way.</p>\n<p>WebSocket URL poisoning occurs when a  script uses controllable  data as the target URL of a WebSocket connection. An attacker may be able to use the vulnerability to construct a URL that, if visited by another application user, will cause the user's browser to open a WebSocket connection to a URL that is under the attacker's control.</p>\n<p>The potential impact of the vulnerability depends on the application's usage of WebSockets. If the application transmits sensitive data from the user's browser to the WebSocket server, then the attacker may be able to capture this data. If the application reads data from the WebSocket server and performs processing on this data, then the attacker may be able to subvert the application's logic or deliver additional client-side attacks against the user.</p>\n\n<p>Burp Suite automatically identifies this issue using dynamic and static code analysis. Static analysis can lead to false positives that are not actually exploitable. If Burp Scanner has not provided any evidence resulting from dynamic analysis, you should review the relevant code and execution paths  to determine whether this vulnerability is indeed present, or whether mitigations are in place that would prevent exploitation.</p>",
+  "remediation": "<p>The most effective way to avoid DOM-based WebSocket URL poisoning vulnerabilities is not to dynamically set the target URL of a WebSocket connection using data that originated from any untrusted source. If the desired functionality of the application means that this behavior is unavoidable, then defenses must be implemented within the client-side code to prevent malicious data from introducing an arbitrary URL as a target of a WebSocket. In general, this is best achieved by using a whitelist of URLs that are permitted WebSocket targets, and strictly validating the target against this list before creating the WebSocket. </p>",
+  "webIntro": null,
+  "typicalSeverity": "HIGH",
+  "references": [
+    {
+      "title": "Web Security Academy: WebSocket URL poisoning (DOM-based)",
+      "url": "https://portswigger.net/web-security/dom-based/websocket-url-poisoning"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-345: Insufficient Verification of Data Authenticity",
+      "url": "https://cwe.mitre.org/data/definitions/345.html"
+    },
+    {
+      "title": "CWE-346: Origin Validation Error",
+      "url": "https://cwe.mitre.org/data/definitions/346.html"
+    },
+    {
+      "title": "CWE-441: Unintended Proxy or Intermediary ('Confused Deputy')",
+      "url": "https://cwe.mitre.org/data/definitions/441.html"
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/index.html">DOM Invader</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/settings/index.html">Settings</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/settings/canary.html">Canary</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>DOM Invader canary settings</h1>
+<p>
+    From the DOM Invader settings menu, you can modify and update the canary string that DOM Invader injects into the target site.
+</p>
+<p>
+    To access the DOM Invader settings menu, click the Burp Suite logo in the upper-right corner of the browser, then switch to the <strong>DOM Invader</strong> tab.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/dom-invader-settings-misc.png" alt="Canary settings">
+</div>
+<p>
+    At the bottom of the settings menu, you can see the current canary string that DOM Invader is tracking. You have the following options.
+</p>
+<h2 id="copying-the-canary">Copying the canary</h2>
+<p>
+    You can click <strong>Copy</strong> to copy the current canary string to your clipboard. This is useful for manually injecting the string into different sources.
+</p>
+<h2 id="changing-the-canary">Changing the canary</h2>
+<p>
+    You can replace the randomly generated default canary at any time and instead track your own custom canary string.
+</p>
+<p>
+    To change the canary:
+</p>
+<ol>
+    <li>
+        <p>
+            Enter the string that you want to use in place of the default canary. Alternatively, click <strong>Randomize</strong> to generate a new random string.
+        </p>
+    </li>
+    <li>
+        <p>
+            Click <strong>Update canary</strong>.
+        </p>
+    </li>
+    <li>
+        <p>
+            Click <strong>Reload</strong> to refresh the browser. This is necessary for your changes to take effect. DOM Invader will now track the new canary string instead.
+        </p>
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        To avoid false positives, make sure that the string you use doesn't occur naturally on the page.
+    </p>
+</div>
+</body>
+</html>

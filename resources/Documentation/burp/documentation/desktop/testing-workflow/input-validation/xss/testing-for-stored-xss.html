@@ -1,0 +1,167 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE" ignore-validation="OTHER_PAGE_KEYWORD_TOO_FREQUENT"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/index.html">Testing input validation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/xss/index.html">Cross-site scripting</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/xss/testing-for-stored-xss.html">Testing for stored XSS</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Testing for stored XSS with Burp Suite</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/1SGfhslf0-Q?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    Stored XSS arises when an application receives data from an untrusted source and includes that data within its later HTTP responses in an unsafe way. In a stored XSS attack, the attacker places their exploit into the application, but the exploit only executes when a user visits a particular location. For example, an attacker may place an exploit in a blog post comment that later executes when a victim user visits the blog post.
+</p>
+<p>
+    While Burp Scanner can detect stored XSS, you can also use Burp to manually identify linked input and output points in the application, then test these links to determine whether a stored XSS vulnerability is present.
+</p>
+<h2 id="steps" cms-ignore-validation="DUPLICATE_HEADINGS">Steps</h2>
+<p>
+    You can follow along with the steps below using the <a href="/web-security/cross-site-scripting/stored/lab-html-context-nothing-encoded.html">Stored XSS into HTML context with nothing encoded</a> Web Security Academy lab.
+</p>
+<h3>Identifying linked input and output points</h3>
+<p>
+    To test for stored XSS with Burp Suite, you first need to identify points where user input is stored and then later displayed by the application:
+</p>
+<ol>
+    <li>
+        Go to <strong>Proxy &gt; Intercept</strong> and set the intercept toggle to <strong>Intercept on</strong>. Burp will now intercept each request and display the message details in the <strong>Intercept</strong> tab.
+    </li>
+    <li>
+        <p>
+            In Burp's browser, click around the website. As you browse, review each request in the <strong>Intercept</strong> tab:
+        </p>
+        <ol>
+            <li>
+                Identify data entry points that may be vulnerable to stored XSS.
+            </li>
+            <li>
+                Submit a unique value into each of the identified data entry points.
+            </li>
+            <li>
+                Click <strong>Forward</strong> to send the request.
+            </li>
+        </ol>
+    </li>
+    <li>
+        <p>
+            In <strong>Proxy &gt; HTTP history</strong>, filter the messages to identify any responses that include the unique values:
+        </p>
+        <ol>
+            <li>
+                Click on the filter bar.
+            </li>
+            <li>
+                Under <strong>Filter</strong> by search term, enter the unique value.
+            </li>
+            <li>
+                Click <strong>Apply</strong>. The <strong>HTTP history</strong> tab now only shows messages that include the unique value.
+            </li>
+            <li>
+                Review the messages in the <strong>HTTP history</strong> tab to identify any linked input and output points.
+            </li>
+        </ol>
+    </li>
+</ol>
+<h3>Testing for stored XSS</h3>
+<p>
+    Once you've found linked input and output points, you can test these for stored XSS:
+</p>
+<ol>
+    <li>
+        In <strong>Proxy &gt; HTTP history</strong>, right-click the request that results in the input being stored. Select <strong>Send to Repeater</strong>. Do the same for the later request that results in the input being displayed.
+    </li>
+    <li>
+        Go to the <strong>Repeater</strong> tab.
+    </li>
+    <li>
+        <p>
+            Create a group in Repeater that includes the two messages:
+        </p>
+        <ol>
+            <li>
+                Right-click a message tab in Repeater and select <strong>Add tab to group &gt; <span class="icon-folder-add"></span> Create tab group</strong>.
+            </li>
+            <li>
+                Add both messages to the folder.
+            </li>
+            <li>
+                Click <strong>Create</strong>.
+            </li>
+            <li>
+                Drag the messages to place the input message before the output message.
+            </li>
+        </ol>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/tutorials/stored-xss-1.png" alt="Stored XSS Repeater group" class="center-block">
+        </div>
+    </li>
+    <li>
+        In the input request, change the data entry point to a proof-of-concept XSS payload. For example, <code>&lt;script&gt;alert(1)&lt;/script&gt;</code>.
+    </li>
+    <li>
+        Click the <strong>Send</strong> drop-down menu, then select <strong>Send group in sequence (separate connections)</strong>.
+    </li>
+    <li>
+        Click <strong>Send group (separate connections)</strong> to send the request.
+    </li>
+    <li>
+        Right-click on the output and select <strong>Show response in browser</strong>. Burp Suite displays a dialog containing a URL.
+    </li>
+    <li>
+        Copy and paste this URL into your browser to see if the proof of concept ran successfully. If you used the <code>alert()</code> function in your payload, you should see an alert pop-up.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            Academy: <a href="/web-security/cross-site-scripting/stored/index.html">Stored XSS</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/proxy/intercept-messages.html">Proxy intercept</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/repeater/index.html">Burp Repeater</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/xss/bypassing-filters.html">Bypassing XSS filters by enumerating permitted tags and attributes</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

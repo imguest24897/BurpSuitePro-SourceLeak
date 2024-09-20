@@ -1,0 +1,395 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms ignore-validation="OTHER_PAGE_KEYWORD_TOO_FREQUENT" page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/index.html">Scanner</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/auditing.html">Auditing</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-enterprise">Enterprise</label>
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Auditing</h1>
+<p>
+    When Burp Scanner audits during a scan, it analyzes the application's traffic and behavior to identify security vulnerabilities and other issues. Burp Scanner employs a wide range of techniques to audit the target application accurately.
+</p>
+<h2 id="audit-phases">Audit phases</h2>
+<p>
+    Each audit comprises several phases. There are three types of audit phase:
+</p>
+<ul>
+    <li>
+        Passive phases.
+    </li>
+    <li>
+        Active phases.
+    </li>
+    <li>
+        JavaScript analysis phases.
+    </li>
+</ul>
+<p>
+    Burp performs multiple phases within each area to allow it to:
+</p>
+<ul>
+    <li>
+        Find and exploit functions that store and return user input.
+    </li>
+    <li>
+        Handle frequently occurring issues and insertion points efficiently, to avoid duplication.
+    </li>
+    <li>
+        Execute applicable work in parallel to make best use of system resources.
+    </li>
+</ul>
+<h2 id="issue-types-found">Issue types found</h2>
+<p>
+    Burp can detect a wide variety of issues of varying severity.
+</p>
+<p>
+    The issues available are grouped by the type of action Burp Scanner must take to detect them:
+</p>
+<ul>
+    <li>
+        <strong>Passive</strong> - Issues that can be detected purely by inspecting the application's normal requests and responses. For example, <a href="https://portswigger.net/kb/issues/00400900_serialized-object-in-http-message">serialized objects in HTTP messages</a>.
+    </li>
+    <li>
+        <strong>Light active</strong> - Issues that can be detected by making a small number of benign additional requests. For example, <a href="https://portswigger.net/kb/issues/00200601_cross-origin-resource-sharing-arbitrary-origin-trusted">cross-origin resource sharing (CORS) that trusts arbitrary origins</a>.
+    </li>
+    <li>
+        <strong>Medium active</strong> - Issues that can be detected by making requests that the application might reasonably view as malicious. For example, <a href="https://portswigger.net/kb/issues/00100100_os-command-injection">OS command injection</a>.
+    </li>
+    <li>
+        <strong>Intrusive active</strong> - Issues that can be detected by making requests that carry a significant risk of damaging the application or its data. For example, <a href="https://portswigger.net/kb/issues/00100200_sql-injection">SQL injection</a>.
+    </li>
+    <li>
+        <strong>JavaScript analysis</strong> - Issues that can be detected by analyzing the JavaScript that the application executes on the client side, such as <a href="https://portswigger.net/web-security/cross-site-scripting/dom-based">DOM-based cross-site scripting</a>. Detecting these issues can require a significant amount of system resource. These issues can also be categorized as "passive" (for self-contained DOM-based issues) or "medium active" (for reflected and stored variants).
+    </li>
+</ul>
+<p>
+    Issues can also be grouped by the level at which they are found:
+</p>
+<ul>
+    <li>
+        <strong>Host level</strong> - Issues that arise as part of the host HTTP service that the application is running on. For example, a permissive <a href="https://portswigger.net/kb/issues/00200400_flash-cross-domain-policy">flash cross-domain policy</a>.
+    </li>
+    <li>
+        <strong>Request level</strong> - Issues that arise at the level of an individual request. For example, <a href="https://portswigger.net/kb/issues/00200700_cross-site-request-forgery">cross-site request forgery</a>.
+    </li>
+    <li>
+        <strong>Insertion point level</strong> - Issues that arise at the level of an insertion point within a request. For example, <a href="https://portswigger.net/kb/issues/00100300_file-path-traversal">file path traversal</a>.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>More information</h4>
+    <p>
+        For a full list of vulnerabilities that Burp Scanner can find, see <a href="https://portswigger.net/burp/documentation/scanner/vulnerabilities-list">Vulnerabilities detected by Burp Scanner</a>.
+    </p>
+</div>
+<h2 id="insertion-points">Insertion points</h2>
+<p>
+    Burp Scanner uses insertion points to place payloads into various locations within requests. In general, an insertion point represents a piece of data within a request that might be processed by the server-side application. The following example shows a request, and highlights some common types of insertion point:
+</p>
+<img src="/burp/documentation/images/auditing/auditing-1.svg" alt="Scan insertion points">
+<p>
+    Burp Scanner audits insertion points individually, sending payloads to each insertion point in turn to test the application's handling of that input.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        In Burp Suite Professional, you can view a list of all the insertion points for each audited request. For more information, see <a href="/burp/documentation/desktop/automated-scanning/results/audit-items/insertion-points.html">Viewing insertion points</a>.
+    </p>
+</div>
+<h3 id="encoding-data-within-insertion-points">Encoding data within insertion points</h3>
+<p>
+    Each insertion point typically requires a type of data encoding. Burp Scanner automatically applies encoding to payloads based on the insertion point type to make sure that the raw payloads reach the relevant application functions.
+</p>
+<p>
+    For example, Burp Suite applies the following encoding to parameters in the following insertion points:
+</p>
+<ul>
+    <li>
+        <p>
+            Standard body parameters:
+        </p>
+        <img src="/burp/documentation/images/auditing/auditing-2.svg" alt="URL-encoding of a scan payload within a body parameter">
+    </li>
+    <li>
+        <p>
+            Parameters within JSON data:
+        </p>
+        <img src="/burp/documentation/images/auditing/auditing-3.svg" alt="Encoding of a scan payload within JSON data">
+    </li>
+    <li>
+        <p>
+            Parameters within XML data:
+        </p>
+        <img src="/burp/documentation/images/auditing/auditing-4.svg" alt="Encoding of a scan payload within XML data">
+    </li>
+</ul>
+<p>
+    Burp Scanner also detects when an application uses an encoding type that is not tied to the insertion point type, such as Base64:
+</p>
+<img src="/burp/documentation/images/auditing/auditing-5.svg" alt="Encoding of a scan payload within Base64 data">
+<h3 cms-ignore-validation="DUPLICATE_HEADINGS" id="nested-insertion-points">Nested insertion points</h3>
+<p>
+    Some applications apply multiple layers of encoding to the same data, to nest one format within another. Burp Scanner detects this behavior, and automatically applies the same layers of encoding to its payloads.
+</p>
+<img src="/burp/documentation/images/auditing/auditing-6.svg" alt="Encoding of a scan payload within nested insertion points">
+<h3 id="modifying-parameter-locations">Modifying parameter locations</h3>
+<p>
+    Some applications place an input into one type of parameter, but still process the input if it is submitted in a different type of parameter. This happens because some of the platform APIs that applications use to retrieve input from requests do not process the type of parameter that holds the input. However, some application security measures, such as firewalls, might apply to the original parameter type only.
+</p>
+<p>
+    To exploit this behavior, Burp Scanner can change the insertion point parameter types. This creates requests that might bypass protections and reach vulnerable application functionality. For example, if a payload is submitted within a URL query string parameter, Burp can also submit corresponding payloads within a body parameter and a cookie.
+</p>
+<img src="/burp/documentation/images/auditing/auditing-7.svg" alt="Modifying a parameter location within an HTTP request">
+<h2 id="audit-prioritization">Audit prioritization</h2>
+<p>
+    Before the audit begins, Burp Scanner lists the audit items in order of priority. This prioritization process ensures that the most relevant and potentially vulnerable areas of the application are audited first, improving the effectiveness of security assessments.
+</p>
+<p>
+    Burp Scanner calculates a score for each audit item based on two properties, interest level and attack surface exposure:
+</p>
+<h3 id="interest-level">Interest level</h3>
+<p>
+    Interest level reflects the likelihood that an audit item will require further investigation, focusing on its potential to alter the state of the application or expose sensitive data. It's calculated by combining the contribution of an audit item's action type (40%), content type (40%), and authentication requirement (20%):
+</p>
+<ul>
+    <li>
+        <p>
+            Action type. Certain types of HTTP action, such as off-spec interactions or mutations (<code>POST</code>, <code>PUT</code>, <code>PATCH</code>, <code>DELETE</code>), are considered more interesting because they are more likely to affect the application's state or expose vulnerabilities. The action type corresponds to 40% of the overall interest level.
+        </p>
+    </li>
+    <li>
+        <p>
+            Content type. Content types such as HTML, JSON, and XML are deemed more interesting because they are often used in data exchange. This makes them potentially more susceptible to certain types of attacks, and makes it more likely that they contain sensitive information. The content type corresponds to 40% of the overall interest level.
+        </p>
+    </li>
+    <li>
+        <p>
+            Authentication requirement. Burp Scanner prioritizes paths that require authentication, as they potentially lead to areas of the application that are meant to be protected or contain sensitive information. Authentication corresponds to 20% of the overall interest level.
+        </p>
+    </li>
+</ul>
+<h3 id="attack-surface-exposure">Attack surface exposure</h3>
+<p>
+    Burp Scanner prioritizes items with the highest number of unique insertion points when auditing, as these items expose the most attack surface.
+</p>
+<p>
+    Before the audit begins, Burp Scanner uses the following process to rank audit items by the amount of attack surface they expose:
+</p>
+<ol>
+    <li>
+        <p>
+            List all unique insertion points identified across all potential audit items.
+        </p>
+    </li>
+    <li>
+        <p>
+            Select the audit item that encompasses the highest number of unique insertion points and add it to a separate ranking list.
+        </p>
+    </li>
+    <li>
+        <p>
+            Eliminate the insertion points encompassed by that audit item from the original list of insertion points.
+        </p>
+    </li>
+    <li>
+        <p>
+            Repeat steps 2 and 3 until either all unique insertion points are covered or the remaining insertion points are already included in higher-priority items.
+        </p>
+    </li>
+    <li>
+        <p>
+            Add any remaining audit items to the list.
+        </p>
+    </li>
+</ol>
+<h3 id="prioritization-process">Prioritization process</h3>
+<p>
+    The prioritization process itself is as follows:
+</p>
+<ol>
+    <li>
+        <p>
+            Crawl the application and determine the items to be audited.
+        </p>
+    </li>
+    <li>
+        <p>
+            Calculate the interest score.
+        </p>
+    </li>
+    <li>
+        <p>
+            Calculate the attack surface exposure score.
+        </p>
+    </li>
+    <li>
+        <p>
+            Calculate the overall score. The scores are weighted 80/20 in favor of attack surface exposure over interest. This prioritizes items offering new and unique insights into the application's security.
+        </p>
+    </li>
+    <li>
+        <p>
+            Sort the list of audit items by their overall score.
+        </p>
+    </li>
+</ol>
+<h2 id="automatic-session-handling">Automatic session handling</h2>
+<p>
+    Audits that follow on from an automated crawl are able to use the crawl results to automatically maintain session during the audit, with no user configuration required.
+</p>
+<p>
+    When Burp audits an individual request, it identifies the shortest path to reach that request from the starting location of the crawl:
+</p>
+<img src="/burp/documentation/images/auditing/auditing-8.png" alt="The full path from the start URL to the request being audited">
+<p>
+    Burp determines the most efficient way to deliver that same request repeatedly within a valid session. It re-walks the path to obtain a fresh sample of session tokens. Next, it tests various simplifications of the path to see if the session is maintained even if not all of the steps in the path are followed.
+</p>
+<p>
+    In many cases, it is possible to simply reissue the final request over and over. This can happen for several reasons:
+</p>
+<ul>
+    <li>
+        <p>
+            The request doesn't contain session tokens.
+        </p>
+        <img src="/burp/documentation/images/auditing/auditing-9.png" alt="Issuing the final request repeatedly when it doesn't contain any session tokens">
+    </li>
+    <li>
+        <p>
+            The application uses reusable cookies as session tokens.
+        </p>
+        <img src="/burp/documentation/images/auditing/auditing-10.png" alt="Issuing the final request repeatedly when the only session tokens are cookies">
+    </li>
+    <li>
+        <p>
+            The request contains both cookies and CSRF tokens, but the CSRF tokens can be used repeatedly:
+        </p>
+        <img src="/burp/documentation/images/auditing/auditing-11.png" alt="Issuing the final request repeatedly when the CSRF token can be used multiple times">
+    </li>
+</ul>
+<p>
+    Burp Scanner may need to issue the previous request before it issues the request that is being audited. This normally happens if the application uses single-use CSRF tokens. This makes it necessary to reissue the previous request on each occasion, to obtain a fresh token.
+</p>
+<img src="/burp/documentation/images/auditing/auditing-12.png" alt="Issuing the preceding request prior to each final request to obtain a fresh single-use CSRF token">
+<p>
+    In extreme cases, every transition between requests is protected by a single-use token. This can happen in high-security applications where navigation is tightly controlled. In this situation, the most reliable way to repeatedly issue the request is to return to the starting location and walk the full path to the request.
+</p>
+<img src="/burp/documentation/images/auditing/auditing-13.png" alt="Walking the full path from the start URL to ensure that a valid sequence of CSRF tokens is used">
+<p>
+    Once Burp has determined the most efficient way to repeatedly issue the request that is to be audited, it carries out the audit.
+</p>
+<p>
+    While Burp performs its audit checks, it periodically monitors the application's responses to confirm that its session is still valid. If the session is still valid, Burp sets a checkpoint on the audit checks that are complete.
+</p>
+<p>
+    If Burp identifies that the session is no longer valid, it rolls back to the latest checkpoint and resumes from there. This helps to minimize the overhead of session management and avoids indefinite loops if sessions are frequently lost. For example:
+</p>
+<img src="/burp/documentation/images/auditing/auditing-14.png" alt="Automatically maintaining session during the vulnerability scan by rolling back to the last checkpoint">
+<h2 id="avoiding-duplication">Avoiding duplication</h2>
+<p>
+    Burp Scanner uses various techniques to minimize duplicated effort and reporting of duplicate issues.
+</p>
+<h3 id="consolidation-of-frequently-occurring-passive-issues">Consolidation of frequently occurring passive issues</h3>
+<p>
+    Some passively-detected issues may exist at different locations within an application. This may be due to architecture choices or the reuse of a common page template.
+</p>
+<p>
+    Some issues may exist across the entire application due to platform-level configuration (for example, if strict transport security is not enforced).
+</p>
+<p>
+    By default, Burp Scanner aggregates any duplicates and reports a single issue at the relevant level, to avoid returning duplicated issues. This may be the web root of the host or a particular folder beneath which all of the issues are found.
+</p>
+<h3 id="handling-of-frequently-occurring-insertion-points">Handling of frequently occurring insertion points</h3>
+<p>
+    Some insertion points may exist within many or all requests used by the application, but do not represent an interesting attack surface. For example, some cookies may be submitted within every request once set.
+</p>
+<p>
+    Fully auditing these insertion points in every request creates a lot of redundant work. Burp Scanner by default identifies insertion points that occur frequently but do not generate any issues, and performs a more lightweight audit of those insertion points. If the lightweight audit identifies any interesting behavior that indicates server-side processing, Burp reverts to a full audit of the insertion point.
+</p>
+<h2 id="javascript-analysis">JavaScript analysis</h2>
+<p>
+    Burp Scanner analyzes JavaScript within application responses to identify DOM-based vulnerabilities. To do this, Burp uses a combination of static and dynamic analysis:
+</p>
+<ul>
+    <li>
+        <strong>Static analysis</strong> - Burp Scanner parses the JavaScript code to construct an abstract syntax tree (AST). It identifies the tainted sources that are potentially controllable by an attacker, and the dangerous sinks that could be used to perform an attack. It also analyzes data flows through the code, to find potential paths for malicious data to be propagated from a tainted source to a dangerous sink.
+    </li>
+    <li>
+        <strong>Dynamic analysis</strong> - Burp Scanner loads the response into an embedded headless browser. It injects payloads into the DOM at locations that are potentially controllable by an attacker, and executes the JavaScript within the response. It also creates mouse events to achieve as much code coverage as possible (for example, in <code>onclick</code> event handlers). It monitors the dangerous sinks that could be used to perform an attack and identifies any injected payloads that reach those sinks.
+    </li>
+</ul>
+<p>
+    These static and dynamic approaches have different strengths and weaknesses.
+</p>
+<h3>Static analysis</h3>
+<p>
+    Static analysis finds some vulnerabilities that dynamic analysis cannot. This is because static analysis can identify code paths that could be executed in the right circumstances, but which are not executed during the dynamic analysis.
+</p>
+<p>
+    For example, a branch in execution might be controlled by a number of parameters that the attacker controls. The static analysis is able to identify and analyze this branch and find taint paths within it, while the dynamic analysis might not trigger the relevant execution due to the combination of parameters required.
+</p>
+<p>
+    However, static analysis is prone to false positive results. These occur because the scan sees some combinations of code branches as executable when they are not. In addition, it doesn't understand custom data validation logic that means that tainted paths from sources to sinks are not in fact exploitable.
+</p>
+<h3>Dynamic analysis</h3>
+<p>
+    Dynamic analysis has the opposite characteristics. It is much less prone to false positives because it observes tainted data being propagated from source to sink during execution. This provides concrete evidence of a vulnerability.
+</p>
+<p>
+    However, dynamic analysis can suffer from false negatives in situations where the tainted data that it injects doesn't reach a sink. This can be due to the current state of the application or the values of other data, which an attacker might be able to control.
+</p>
+<p>
+    Burp Scanner harnesses the joint benefits of the static and dynamic approaches. Where possible, the system reports issues with evidence obtained from both techniques. Issues that are detected using both approaches are treated as certain. Issues that are only detected by static analysis are given a lower confidence rating.
+</p>
+<h2 id="handling-application-errors">Handling application errors</h2>
+<p>
+    Performing a full audit of a web application is an invasive process. It is common to encounter problems like connection failures, transmission timeouts, or back-end component outages while a scan is in progress. Additionally, protections such as web application firewalls might drop connections based on factors such as specific payloads or unexpected values in certain parameters.
+</p>
+<p>
+    While auditing, Burp tracks error conditions in a granular way. If a particular action causes an error, Burp marks that action as failed and moves on to the next action. You can configure scans so that if repeated actions fail at the same level of activity, then the whole level is marked as failed. If errors continue to occur, Burp marks progressively more of the scan as failed, as follows:
+</p>
+<ul>
+    <li>
+        Individual audit checks.
+    </li>
+    <li>
+        Individual insertion points.
+    </li>
+    <li>
+        The entire request that is being audited.
+    </li>
+    <li>
+        The entire scan.
+    </li>
+</ul>
+<p>
+    Burp initially captures details and continues to scan when it encounters an error, as isolated errors are common. Once it completes the audit, Burp performs a number of follow-up passes to retry failed operations. This is useful in cases where a particular application component (such as a back-end database) experienced a problem for part of the scan.
+</p>
+<p>
+    Burp can also pause or abort the scan if too many errors are observed, so that you can investigate the problem. You can resume or repeat the scan once the application is stable.
+</p>
+</body>
+</html>

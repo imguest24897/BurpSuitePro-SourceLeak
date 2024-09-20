@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/index.html">Intruder</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/configure-attack/index.html">Configure attack</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/configure-attack/positions.html">Positions</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Burp Intruder payload positions</h1>
+<p>
+    To determine where payloads are placed by Burp Intruder during an attack, you can specify payload positions in the request.
+</p>
+<h2 id="payload-positions-field">Payload positions field</h2>
+<p>
+    You can set payload positions anywhere in the <strong>Payload positions</strong> field under <strong>Intruder &gt; Positions</strong>. When you send a request to Intruder, this field is automatically populated with the request and target details:
+</p>
+<ul>
+    <li>
+        URL query string parameters.
+    </li>
+    <li>
+        Body parameters.
+    </li>
+    <li>
+        Cookies.
+    </li>
+    <li>
+        Multipart parameter attributes, such as the filename in file uploads.
+    </li>
+    <li>
+        XML data and element attributes.
+    </li>
+    <li>
+        JSON parameters.
+    </li>
+</ul>
+<h3 id="target-field">Target field</h3>
+<p>
+    Burp Intruder enables you to set payload positions in the target field. This specifies where Intruder attacks are sent, and includes:
+</p>
+<ul>
+    <li>
+        Protocol - HTTP or HTTPS.
+    </li>
+    <li>
+        Host - IP address or hostname of the target server.
+    </li>
+    <li>
+        Port - port number of the HTTP/S service.
+    </li>
+</ul>
+<p>
+    By default, <strong>Update Host header to match target</strong> is selected. Any changes to the target are automatically mirrored in the host details in the base request. You can deselect this to amend the target only. This enables you to send an arbitrary <code>Host</code> header to a fixed target, for example to craft an <a href="/web-security/host-header/index.html">HTTP host header attack</a>.
+</p>
+<h2 id="configuring-payload-positions">Configuring payload positions</h2>
+<p>
+    Each payload position is enclosed by a pair of payload markers §, and highlighted for ease of identification.
+</p>
+<p>
+    You can automatically set a single payload position when you send a request to Burp Intruder. Highlight the position value in a message editor anywhere in Burp, then right-click the message and select <strong>Send to Intruder</strong>.
+</p>
+<p>
+    To set multiple payload positions and modify the payload positions, use the buttons beside the <strong>Payload positions</strong> field in the <strong>Intruder &gt; Positions</strong> tab:
+</p>
+<ul>
+    <li>
+        Insert a single payload marker - click <strong>Add §</strong>.
+    </li>
+    <li>
+        Insert a pair of markers - select any text and click <strong>Add §</strong>. This inserts markers on either side of the selected text.
+    </li>
+    <li>
+        <p>
+            Remove all payload markers - click <strong>Clear §</strong>.
+        </p>
+        <ul>
+            <li>
+                If you have selected some text, markers are removed from within the selected area only.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <p>
+            Apply automatic payload markers - click <strong>Auto §</strong>. Burp inserts automatic payload positions. You can configure whether these replace or append to the base parameter value in the <a href="/burp/documentation/desktop/settings/tools/intruder.html">Settings dialog</a>.
+        </p>
+        <ul>
+            <li>
+                If you have selected some text, automatic markers are placed within the selected area only. For example, if a multipart parameter value contains data in XML or JSON format, you can highlight the formatted data and click <strong>Auto §</strong> to position payloads within it.
+            </li>
+        </ul>
+    </li>
+    <li>
+        Refresh syntax colorizing - click <strong>Refresh</strong> to return to the default colorizing.
+    </li>
+    <li>
+        Clear the request template - click <strong>Clear</strong>.
+    </li>
+</ul>
+<p>
+    During the attack, both the payload markers and any enclosed text are replaced with the payload. If the payload position does not have an assigned payload, the enclosed text is unchanged but the markers are removed.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You can also use Intruder's payload positions as insertion points for Burp Scanner. Configure your payload positions, then click on the top-level <strong>Intruder</strong> menu and select <strong>Scan defined insertion points</strong>.
+    </p>
+    <p>
+        For more information on Burp Scanner insertion points, see <a href="/burp/documentation/scanner/auditing.html#insertion-points">Auditing</a>.
+    </p>
+</div>
+</body>
+</html>

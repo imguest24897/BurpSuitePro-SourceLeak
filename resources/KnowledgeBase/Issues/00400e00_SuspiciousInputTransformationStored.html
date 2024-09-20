@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+Suspicious input transformation (stored)
+<h1>Typical severity</h1>
+
+Information
+
+<h1>Issue description</h1>
+
+<p>Suspicious input transformation arises when an application receives user input, transforms it in some way, and then performs further processing on the result. The types of transformations that can lead to problems include decoding common formats, such as UTF-8 and URL-encoding, or processing of escape sequences, such as backslash escaping. </p>
+<p>Performing these input transformations does not constitute a vulnerability in its own right, but might lead to problems in conjunction with other application behaviors. An attacker might be able to bypass input filters by suitably encoding their payloads, if the input is decoded after the input filters have been applied. Or an attacker might be able to interfere with other data that is concatenated onto their input, by finishing their input with the start of a multi-character encoding or escape sequence, the transformation of which will consume the start of the following data.</p>
+
+<p>Stored suspicious input transformation arises when the transformed input is stored and later embedded into the application's responses.</p>
+
+<h1>Issue remediation</h1>
+
+<p>Review the transformation that is being applied, to understand whether this is intended and desirable behavior given the nature of the application functionality, and whether it gives rise to any vulnerabilities in relation to  bypassing of input filters or character consumption.</p>
+
+<h1>References</h1>
+
+<ul>
+<li><a href="https://portswigger.net/research/backslash-powered-scanning-hunting-unknown-vulnerability-classes">Backslash Powered Scanning: Hunting Unknown Vulnerability Classes</a></li>
+</ul>
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+<li><a href="https://cwe.mitre.org/data/definitions/20.html">CWE-20: Improper Input Validation</a></li>
+    <li><a href="https://capec.mitre.org/data/definitions/153.html">CAPEC-153: Input Data Manipulation</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

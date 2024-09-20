@@ -1,0 +1,24 @@
+{
+  "typeIndex": 2098689,
+  "name": "Cross-origin resource sharing: arbitrary origin trusted",
+  "description": "<p>An HTML5 cross-origin resource sharing (CORS) policy controls whether and how content running on other domains can perform two-way interaction with the domain that publishes the policy. The policy is fine-grained and can apply access controls per-request based on the URL and other features of the request.</p><p>\nTrusting arbitrary origins effectively disables the same-origin policy, allowing two-way interaction by third-party web sites. Unless the response consists only of unprotected public content, this policy is likely to present a security risk.</p>\n<p>If the site  specifies the header Access-Control-Allow-Credentials: true, third-party sites may be able to carry out privileged actions and retrieve sensitive information. Even if it does not, attackers may be able to  bypass any IP-based access controls by proxying through users'  browsers.</p>",
+  "remediation": "<p>Rather than using a wildcard or programmatically verifying supplied origins, use a whitelist of trusted domains.</p>",
+  "webIntro": null,
+  "typicalSeverity": "HIGH",
+  "references": [
+    {
+      "title": "Web Security Academy: Cross-origin resource sharing (CORS)",
+      "url": "https://portswigger.net/web-security/cors"
+    },
+    {
+      "title": "Exploiting CORS Misconfigurations",
+      "url": "https://portswigger.net/research/exploiting-cors-misconfigurations-for-bitcoins-and-bounties"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-942: Overly Permissive Cross-domain Whitelist",
+      "url": "https://cwe.mitre.org/data/definitions/942.html"
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/external-browser-config/index.html">External browser configuration</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/external-browser-config/browser-config-firefox.html">Firefox</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Configuring Firefox to work with Burp Suite</h1>
+<p>
+    You need to configure Firefox so that you can use it for testing with Burp Suite.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        These steps are only necessary if you want to use an external browser for manual testing with Burp. If you prefer, you can just use <a href="/burp/documentation/desktop/tools/burps-browser.html">Burp's browser</a>, which is preconfigured to work with Burp Proxy already. To access Burp's browser, go to the <strong>Proxy &gt; Intercept</strong> tab, and click <strong>Open Browser</strong>.
+    </p>
+</div>
+<p>
+    To configure Firefox, follow these steps:
+</p>
+<ol>
+    <li>
+        <p>
+            In Firefox, go to the Firefox Menu and select <strong>Preferences &gt; Options</strong>.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/support/InstallingandConfiguring_ConfiguringyourBrowser_FF_1.jpg" alt="Firefox browser preferences" class="center-block">
+        </div>
+    </li>
+    <li>
+        <p>
+            Select the <strong>General</strong> tab and scroll to the <strong>Network Proxy</strong> settings. Click the <strong>Settings</strong> button.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/support/InstallingandConfiguring_ConfiguringyourBrowser_FF_2.jpg" alt="Firefox network settings" class="center-block">
+        </div>
+    </li>
+    <li>
+        Select the <strong>Manual proxy configuration</strong> option.
+    </li>
+    <li>
+        Enter your Burp Proxy listener address in the <strong>HTTP Proxy</strong> field (by default this is set to <code>127.0.0.1</code>).
+    </li>
+    <li>
+        <p>
+            Enter your Burp Proxy listener port in the <strong>Port</strong> field (by default, <code>8080</code>). Make sure the <strong>Use this proxy server for all protocols</strong> box is checked.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/support/InstallingandConfiguring_ConfiguringyourBrowser_FF_3.jpg" alt="Firefox proxy configuration" class="center-block">
+        </div>
+    </li>
+    <li>
+        <p>
+            Delete anything that appears in the <strong>No proxy for</strong> field. Click <strong>OK</strong> to close all the options dialogs.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/support/InstallingandConfiguring_ConfiguringyourBrowser_FF_4.jpg" alt="Firefox clear &quot;no proxy for&quot; field" class="center-block">
+        </div>
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Next step</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/external-browser-config/check-browser-configuration.html">Check your browser proxy configuration</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

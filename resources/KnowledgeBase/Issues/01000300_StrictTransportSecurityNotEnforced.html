@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+Strict transport security not enforced
+<h1>Typical severity</h1>
+
+Low
+
+<h1>Issue description</h1>
+
+<p> The application fails to prevent users from connecting  to it over unencrypted connections.  An attacker able to modify a legitimate user's network traffic could bypass the application's use of SSL/TLS encryption, and use the application as a platform for attacks against its users. This attack is performed by rewriting HTTPS links as HTTP, so that if a targeted user follows a link to the site from an HTTP page, their browser never attempts to use an encrypted connection. The sslstrip tool  automates this process. </p>
+<p>
+To exploit this vulnerability, an attacker must be suitably positioned to intercept and modify the victim's network traffic.This scenario typically occurs when a client communicates with the server over an insecure connection such as public Wi-Fi, or a corporate or home network that is shared with a compromised computer. Common defenses such as switched networks are not sufficient to prevent this. An attacker situated in the user's ISP or the application's hosting infrastructure could also perform this attack. Note that an advanced adversary could potentially target any connection made over the Internet's core infrastructure. </p>
+
+<h1>Issue remediation</h1>
+
+<p>The application should instruct web browsers to only access the application using HTTPS. To do this, enable HTTP Strict Transport Security (HSTS) by adding a response header with the name 'Strict-Transport-Security' and the value 'max-age=expireTime', where expireTime is the time in seconds that browsers should remember that the site should only be accessed using HTTPS. Consider adding the 'includeSubDomains' flag if appropriate.</p>
+<p>Note that because HSTS is a &quot;trust on first use&quot; (TOFU) protocol, a user who has never accessed the application will never have seen the HSTS header, and will therefore still be vulnerable to SSL stripping attacks. To mitigate this risk, you can optionally add the 'preload' flag to the HSTS header, and submit the domain for review by browser vendors.</p>
+
+<h1>References</h1>
+
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security">HTTP Strict Transport Security</a></li>
+<li><a href="https://github.com/moxie0/sslstrip">sslstrip</a></li>
+<li><a href="https://hstspreload.appspot.com/">HSTS Preload Form</a></li>
+</ul>
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+<li><a href="https://cwe.mitre.org/data/definitions/523.html">CWE-523: Unprotected Transport of Credentials</a></li>
+    <li><a href="https://capec.mitre.org/data/definitions/94.html">CAPEC-94: Man in the Middle Attack</a></li>
+    <li><a href="https://capec.mitre.org/data/definitions/157.html">CAPEC-157: Sniffing Attacks</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

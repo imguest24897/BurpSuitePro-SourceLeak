@@ -1,0 +1,22 @@
+{
+  "description": {
+    "featured": false,
+    "uuid": "bc3b5507-5067-48ae-a293-7ec2c9845b4f"
+  },
+  "crawler": {
+    "live_passive_crawl": {
+      "add_links": false,
+      "add_form_submissions": false,
+      "add_all_urls": false,
+      "add_item_itself": true,
+      "add_same_domain": false,
+      "add_urls_in_scope": false,
+      "custom_scope": {
+        "advanced_mode": false,
+        "exclude": [],
+        "include": []
+      },
+      "scope_type": "suite"
+    }
+  }
+}

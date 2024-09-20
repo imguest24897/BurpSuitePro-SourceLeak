@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/proxy/index.html">Burp Proxy</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/proxy/http-history/index.html">HTTP history</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/proxy/http-history/bambdas.html">Bambdas</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Filtering the HTTP history with Bambdas</h1>
+<p>
+    You can write Java-based Bambdas to create custom filters for your HTTP history.
+</p>
+<p>
+    Two objects of the Montoya API are available to help you write your Bambdas:
+</p>
+<ul>
+    <li>
+        <p>
+            <code>ProxyHttpRequestResponse</code>
+        </p>
+    </li>
+    <li>
+        <p>
+            <code>Utilities</code>
+        </p>
+    </li>
+</ul>
+<p>
+    To create a Bambda to filter your HTTP history:
+</p>
+<ol>
+    <li>
+        <p>
+            In the <strong>Proxy &gt; HTTP history</strong> tab, click the filter bar to open the <strong>HTTP history filter</strong> window.
+        </p>
+        <p>
+            The filter bar only appears when there is one or more messages in your HTTP history.
+        </p>
+    </li>
+    <li>
+        <p>
+            In the <strong>HTTP history filter</strong> window, click the <strong>Bambda mode</strong> tab.
+        </p>
+    </li>
+    <li>
+        <p>
+            Write your Bambda using Java.
+        </p>
+    </li>
+    <li>
+        <p>
+            Click <strong>Apply</strong>.
+        </p>
+    </li>
+</ol>
+<p>
+    Burp compiles your Bambda and applies it to every item already logged in your HTTP history, and to any future HTTP traffic generated in this project.
+</p>
+<div class="highlightedarea">
+    <h4>Warning</h4>
+    <p>
+        Using slow running or resource-intensive Bambdas can slow down Burp. Write your Bambda carefully to minimize performance implications.
+    </p>
+</div>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="example-bambda">Example Bambda</h2>
+<p>
+    In the example below, we'll create a Bambda that filters the HTTP history to show only items that meet the following criteria:
+</p>
+<ul>
+    <li>
+        <p>
+            The request must have a response.
+        </p>
+    </li>
+    <li>
+        <p>
+            The response must have a <code>3XX</code> status code.
+        </p>
+    </li>
+    <li>
+        <p>
+            The response must have a cookie set with the name <code>session</code>.
+        </p>
+    </li>
+</ul>
+<p>
+    In this example, our Bambda is:
+</p>
+<code class="code-scrollable">if (!requestResponse.hasResponse()) {
+    return false;
+    }
+
+    var response = requestResponse.response();
+    return response.isStatusCodeClass(StatusCodeClass.CLASS_3XX_REDIRECTION) && response.hasCookie("session");</code>
+<h2 id="converting-http-history-filter-settings-to-bambdas">Converting HTTP history filter settings to Bambdas</h2>
+<p>
+    If you have already used <a href="/burp/documentation/desktop/tools/proxy/http-history/filter-settings.html#settings-mode">Settings mode</a> to configure an HTTP history filter, you can convert these settings to a Bambda.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Converting your filter settings overwrites any existing Bambda in your HTTP history.
+    </p>
+</div>
+<p>
+    To convert your filter settings to a Bambda:
+</p>
+<ol>
+    <li>
+        <p>
+            In the <strong>Proxy &gt; HTTP history</strong> tab, click the filter bar to open the <strong>HTTP history filter</strong> window.
+        </p>
+    </li>
+    <li>
+        <p>
+            Make changes to the filter settings (if necessary).
+        </p>
+    </li>
+    <li>
+        <p>
+            At the bottom of the <strong>HTTP history filter</strong> window, click <strong>Convert to Bambda</strong>.
+        </p>
+    </li>
+</ol>
+<p>
+    Your filter is now converted into a Bambda, enabling you to customize it further using Java.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        For more information on how to load Bambdas, save your Bambda, or troubleshoot errors with your Bambda, see our <a href="/burp/documentation/desktop/extensions/bambdas/index.html">Bambdas documentation</a>.
+    </p>
+</div>
+</body>
+</html>

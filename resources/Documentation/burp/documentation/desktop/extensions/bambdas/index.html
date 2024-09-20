@@ -1,0 +1,265 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/extensions/index.html">Extensions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/extensions/bambdas/index.html">Bambdas</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Bambdas</h1>
+<p>
+    Bambdas enable you to run Java-based code to customize Burp Suite directly from the UI.
+</p>
+<div class="highlightedarea">
+    <h4>Warning</h4>
+    <p>
+        Bambdas can run arbitrary code. For security reasons, please be cautious when using Bambdas from unverified sources.
+    </p>
+</div>
+<h2 id="creating-bambdas">Creating Bambdas</h2>
+<p>
+    You can currently create Bambdas to help filter the following:
+</p>
+<ul>
+    <li>
+        Proxy HTTP history filter
+    </li>
+    <li>
+        Proxy WebSockets history filter
+    </li>
+    <li>
+        Logger view filter
+    </li>
+    <li>
+        Logger capture filter
+    </li>
+</ul>
+<p>
+    <label class="label-edition is-professional">Professional</label>
+    You can also use Bambdas to create custom columns in the following tables:
+</p>
+<ul>
+    <li>
+        <p>
+            Proxy HTTP history
+        </p>
+    </li>
+    <li>
+        <p>
+            Proxy WebSockets history
+        </p>
+    </li>
+    <li>
+        <p>
+            Logger
+        </p>
+    </li>
+</ul>
+<p>
+    The Montoya API makes various objects available to help you write your Bambdas.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        To learn what a Bambda is and see a couple of examples, watch the <a href="https://www.youtube.com/watch?v=neQpukwW43g">Burp Suite Shorts | Bambdas</a> video on YouTube.
+    </p>
+    <p>
+        For feature-specific instructions on how to create Bambdas for filtering tables, see the following pages:
+    </p>
+    <ul>
+        <li>
+            <p>
+                <a href="/burp/documentation/desktop/tools/proxy/http-history/bambdas.html">Filtering the HTTP history with Bambdas</a>
+            </p>
+        </li>
+        <li>
+            <p>
+                <a href="/burp/documentation/desktop/tools/proxy/websockets-history/bambdas.html">Filtering the WebSockets history with Bambdas</a>
+            </p>
+        </li>
+        <li>
+            <p>
+                <a href="/burp/documentation/desktop/tools/logger/filter-view.html#bambda-mode">Burp Logger view filter - Bambda mode</a>
+            </p>
+        </li>
+        <li>
+            <p>
+                <a href="/burp/documentation/desktop/tools/logger/filter-capture.html#bambda-mode">Burp Logger capture filter - Bambda mode</a>
+            </p>
+        </li>
+    </ul>
+    <p>
+        <label class="label-edition is-professional">Professional</label>
+        For feature-specific instructions on how to create Bambdas for adding custom columns to tables, see the following pages:
+    </p>
+    <ul>
+        <li>
+            <p>
+                <a href="/burp/documentation/desktop/tools/proxy/http-history/index.html#adding-a-custom-column">Adding a custom column in HTTP history</a>
+            </p>
+        </li>
+        <li>
+            <p>
+                <a href="/burp/documentation/desktop/tools/proxy/websockets-history/index.html#adding-a-custom-column">Adding a custom column in WebSockets history</a>
+            </p>
+        </li>
+        <li>
+            <p>
+                <a href="/burp/documentation/desktop/tools/logger/entries.html#adding-a-custom-column">Adding a custom column in Logger</a>
+            </p>
+        </li>
+    </ul>
+</div>
+<div class="highlightedarea">
+    <h4>Warning</h4>
+    <p>
+        Using slow running or resource-intensive Bambdas can slow down Burp. Write your Bambda carefully to minimize performance implications.
+    </p>
+</div>
+<h2 id="saving-bambdas">Saving Bambdas</h2>
+<p>
+    You can save Bambdas as a JSON file. This makes it easy for you to migrate your configuration to other projects.
+</p>
+<p>
+    To save a Bambda:
+</p>
+<ol>
+    <li>
+        In a feature that enables Bambdas, go to the <strong>Bambda mode</strong> tab.
+    </li>
+    <li>
+        Click settings <span class="icon-settings"></span>.
+    </li>
+    <li>
+        Click <strong>Save settings</strong>.
+    </li>
+</ol>
+<p>
+    Your Bambda downloads as a JSON file.
+</p>
+<h2 id="loading-bambdas">Loading Bambdas</h2>
+<p>
+    You can load a saved Bambda into other projects.
+</p>
+<p>
+    To load a Bambda:
+</p>
+<ol>
+    <li>
+        In a feature that enables Bambdas, go to the <strong>Bambda mode</strong> tab.
+    </li>
+    <li>
+        Click settings <span class="icon-settings"></span>.
+    </li>
+    <li>
+        Click <strong>Load settings</strong>, then select your Bambda JSON file via the system dialogue.
+    </li>
+    <li>
+        Click <strong>Apply</strong>.
+    </li>
+</ol>
+<p>
+    Your Bambda is now loaded in Burp.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Bambdas are only compatible with the tool that they were exported from. For example, a Bambda created for filtering the HTTP history cannot be loaded in a different Burp tool.
+    </p>
+</div>
+<h2 id="troubleshooting-bambdas">Troubleshooting Bambdas</h2>
+<p>
+    There are two types of error you may encounter when working with Bambdas: compilation and runtime.
+</p>
+<h3 id="compilation-errors">Compilation errors</h3>
+<p>
+    Burp highlights compilation errors in real time by underlining them in red in the Bambda mode editor. You must resolve any compilation errors before Burp can apply your Bambda.
+</p>
+<p>
+    To display details of the error, hover over the red underline. If you click <strong>Apply</strong> while your Bambda contains compilation errors, the error details are shown in the <strong>Compilation errors</strong> tab.
+</p>
+<h3 id="runtime-errors">Runtime errors</h3>
+<p>
+    Runtime errors can occur after a Bambda has been applied. If Burp detects any runtime errors, a warning appears on the filter bar. Click on the filter bar to view the error details, and make changes to the code.
+</p>
+<h2 id="submitting-bambdas-to-the-community" cms-ignore-validation="HEADING_CAPITALIZATION">Submitting Bambdas to the community</h2>
+<p>
+    When you write a Bambda, you can share it with the community. This collaboration enables the community to access an ever-growing library of Bambdas through our <a href="https://github.com/PortSwigger/bambdas">Bambdas repository on GitHub</a>.
+</p>
+<h3 id="before-you-submit" cms-ignore-validation="HEADING_CAPITALIZATION">Before you submit</h3>
+<p>
+    Before you contribute your Bambda, please make sure it meets our <a href="https://github.com/PortSwigger/bambdas/blob/main/CONTRIBUTING.md">submission guidelines</a>.
+</p>
+<p>
+    We also recommend that you run the Bambda Checker before submitting. The Bambda Checker is a Java tool that verifies Bambdas and generates README.md files before submission.
+</p>
+<h3 id="submitting-your-bambda" cms-ignore-validation="HEADING_CAPITALIZATION">Submitting Your Bambda</h3>
+<p>
+    After you've confirmed your Bambda meets our guidelines, please follow these steps to submit it:
+</p>
+<ul>
+    <li>
+        <p>
+            Fork the <a href="https://github.com/PortSwigger/bambdas">Bambdas repository on GitHub</a>, then clone this fork to your local machine.
+        </p>
+    </li>
+    <li>
+        <p>
+            Create a new branch for your changes.
+        </p>
+    </li>
+    <li>
+        <p>
+            Place a new <code>.bambda</code> file in the appropriate directory. The directory structure of the repo is broken down by Bambda type and tool. For example, a custom column Bambda for Logger would be placed in the <strong>Custom Columns &gt; Logger</strong> directory.
+        </p>
+    </li>
+    <li>
+        <p>
+            Make any necessary changes.
+        </p>
+    </li>
+    <li>
+        <p>
+            Push the changes to your fork.
+        </p>
+    </li>
+    <li>
+        <p>
+            Open a pull request. Make sure to include a concise description of your Bambda in the request.
+        </p>
+    </li>
+</ul>
+<h3 id="review-and-merge">Review and merge</h3>
+<p>
+    Your submission will be reviewed by both the community and our team. We encourage you to actively and constructively engage with any feedback received during this process.
+</p>
+<p>
+    If your submission includes multiple Bambdas, you may be asked to split it into multiple pull requests. This could happen if some Bambdas require further feedback, while others are ready to merge.
+</p>
+</body>
+</html>

@@ -1,0 +1,667 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/index.html">Settings</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/tools/proxy.html">Proxy</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Proxy settings</h1>
+<p>
+    The <strong>Proxy</strong> page in the <strong>Settings</strong> dialog contains settings for the following:
+</p>
+<ul>
+    <li>
+        <a href="#proxy-listeners">Proxy listeners</a>.
+    </li>
+    <li>
+        <a href="#request-and-response-interception-rules">Request and response interception rules</a>.
+    </li>
+    <li>
+        <a href="#websocket-interception-rules">WebSocket interception rules</a>.
+    </li>
+    <li>
+        <a href="#response-modification-rules">Response modification rules</a>.
+    </li>
+    <li>
+        <a href="#http-and-websocket-match-and-replace-rules">HTTP and WebSocket match and replace rules</a>.
+    </li>
+    <li>
+        <a href="#tls-pass-through">TLS pass through</a>.
+    </li>
+    <li>
+        <a href="#proxy-history-logging">Proxy history logging</a>.
+    </li>
+    <li>
+        <a href="#default-proxy-interception-state">Default Proxy interception state</a>.
+    </li>
+    <li>
+        <a href="#miscellaneous">Miscellaneous</a>.
+    </li>
+</ul>
+<h2 id="proxy-listeners">Proxy listeners</h2>
+<p>
+    A proxy listener is a local HTTP proxy server that listens for incoming connections from the browser. It enables you to monitor and intercept all requests and responses.
+</p>
+<p>
+    By default, Burp creates a single listener on port 8080 of the loopback interface. The default listener enables you to use Burp's browser to test virtually all browser-based web applications.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Penetration testing workflow</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/external-browser-config/index.html">Configuring Burp to work with an external browser</a>.
+        </li>
+    </ul>
+</div>
+<p>
+    You may need to create or configure listeners when you test unusual applications, or work with non-browser-based HTTP clients. Use the <strong>Add</strong> and <strong>Edit</strong> buttons to open the <strong>Add a new proxy listener</strong> dialog. You can configure the proxy listener settings in the dialog tabs.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/settings-proxy-listeners.png" alt="Proxy listener settings" class="center-block">
+</div>
+<p>
+    The <strong>Proxy listeners</strong> settings are project settings. They apply to the current project only.
+</p>
+<h3 id="binding">Binding</h3>
+<p>
+    These settings control how Burp binds the proxy listener to a local network interface:
+</p>
+<ul>
+    <li>
+        <strong>Bind to port</strong> - Specify a port on the local interface. Burp opens the port to listen for incoming connections. Make sure you use a free port that has not been bound by another application.
+    </li>
+    <li>
+        <p>
+            <strong>Bind to address</strong> - Specify an IP address of the local interface for Burp to bind to. You have the following options:
+        </p>
+        <ul>
+            <li>
+                The loopback interface only.
+            </li>
+            <li>
+                All interfaces.
+            </li>
+            <li>
+                A specific local IP address.
+            </li>
+        </ul>
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        If the listener is bound to all interfaces or to a specific non-loopback interface, other computers may be able to connect to the listener.
+    </p>
+</div>
+<h3 id="request-handling">Request handling</h3>
+<p>
+    These settings control whether Burp redirects the requests received by the listener:
+</p>
+<ul>
+    <li>
+        <p>
+            <strong>Redirect to host</strong> - Specify a host. Burp forwards every request to the host, regardless of the target requested by the browser.
+        </p>
+        <ul>
+            <li>
+                If you redirect requests to a server that expects a different <code>Host</code> header to the one sent by the browser, you may need to configure a <a href="#http-and-websocket-match-and-replace-rules">match and replace rule</a> to rewrite the <code>Host</code> header in requests.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <strong>Redirect to port</strong> - Specify a port. Burp forwards every request to the port, regardless of the target requested by the browser.
+    </li>
+    <li>
+        <p>
+            <strong>Force use of TLS</strong> - Enable this setting to use HTTPS in all outgoing connections, even if the incoming request uses HTTP.
+        </p>
+        <ul>
+            <li>
+                To carry out sslstrip-like attacks, use this option with the TLS-related <a href="#response-modification-rules">response modification</a> settings. This type of attack downgrades an application that enforces HTTPS to plain HTTP, for a victim whose traffic is unwittingly being proxied through Burp.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <strong>Support invisible proxying</strong> - This setting enables non-proxy-aware clients to connect directly to the listener. For more details, see <a href="/burp/documentation/desktop/tools/proxy/invisible.html">Burp Proxy: invisible proxying</a>.
+    </li>
+</ul>
+<p>
+    The redirection options can be used individually. For example, you can redirect all requests to a particular host while preserving the request's port and protocol.
+</p>
+<h3 id="certificate">Certificate</h3>
+<p>
+    These settings control the server TLS certificate that is presented to TLS clients. You can use these settings to resolve some TLS issues that arise when you use an intercepting proxy.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        In <a href="/burp/documentation/desktop/tools/proxy/index.html">Burp's browser</a>, you may notice that HTTPS is struck-through in the address bar as a TLS alert. This alert arises because the browser detects that it is not communicating directly with the authentic web server. This isn't an issue: it's a result of deliberately proxying your traffic through Burp. You can ignore it and continue to use the browser as usual.
+    </p>
+</div>
+<p>
+    The following options are available:
+</p>
+<ul>
+    <li>
+        <strong>Use a self-signed certificate</strong> - If this option is selected, Burp presents a self-signed certificate to your browser. This always causes a TLS alert.
+    </li>
+    <li>
+        <strong>Generate CA-signed per-host certificates</strong> - This is the default option. If selected, Burp creates a unique, self-signed Certificate Authority (CA) certificate on installation. The certificate is stored on your computer for use each time Burp is run. When your browser makes a TLS connection, Burp generates a TLS certificate for the host, signed by the CA certificate.
+    </li>
+    <li>
+        <strong>Generate a CA-signed certificate with a specific hostname</strong> - Specify a hostname, which Burp uses to generate a single host certificate to use with every TLS connection. Use this option if you perform <a href="/burp/documentation/desktop/tools/proxy/invisible.html">invisible proxying</a>, as the client does not send a CONNECT request, so Burp can't identify the required hostname prior to the TLS negotiation.
+    </li>
+    <li>
+        <strong>Use a custom certificate</strong> - Load a specific certificate to present to your browser. Note that the certificate must be in in PKCS#12 format with a <code>.p12</code> file extension; certificates in <code>.psx</code> format are not supported. Use this option if the application uses a client that requires a specific server certificate with, for example, a given serial number or certification chain.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/external-browser-config/certificate/index.html">Installing Burp's CA certificate</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/proxy/manage-certificates.html">Managing CA certificates</a>.
+        </li>
+    </ul>
+</div>
+<h3 cms-ignore-validation="HEADING_CAPITALIZATION" id="tls-protocols">TLS Protocols</h3>
+<p>
+    These settings control the TLS protocols that Burp uses to perform TLS negotiation with the browser.
+</p>
+<p>
+    The following options are available:
+</p>
+<ul>
+    <li>
+        <strong>Use the default protocols of your Java installation</strong>.
+    </li>
+    <li>
+        <strong>Use custom protocols</strong>. Select the required protocols from the list.
+    </li>
+</ul>
+<h3 id="http">HTTP</h3>
+<p>
+    This setting controls whether the proxy listener allows clients to use HTTP/2. It is enabled by default.
+</p>
+<p>
+    You may want to disable this in certain cases, such as when a client has problems with its HTTP/2 implementation.
+</p>
+<p>
+    This setting does not change the connection between Burp and the server. To learn how to change the connection between Burp and the server, see <a href="/burp/documentation/desktop/settings/network/http.html#http-2">HTTP settings</a>.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="request-and-response-interception-rules">Request and response interception rules</h2>
+<p>
+    The <strong>Request interception rules</strong> and <strong>Response interception rules</strong> settings control which messages are stalled for you to view and edit in the <strong>Proxy</strong> &gt; <strong>Intercept</strong> tab.
+</p>
+<h3 id="adding-an-interception-rule">Adding an interception rule</h3>
+<p>
+    To add an interception rule:
+</p>
+<ol>
+    <li>
+        Select <strong>Intercept requests / responses based on the following rules</strong> to configure rules that determine which messages are intercepted.
+    </li>
+    <li>
+        Click <strong>Add</strong> to open the <strong>Add request interception rule</strong> dialog.
+    </li>
+    <li>
+        <p>
+            Specify the details of the interception rule:
+        </p>
+        <ul>
+            <li>
+                <strong>Boolean operator</strong> - The operator that Burp uses to combine the rule to the rule above. You can choose from <strong>AND</strong> and <strong>OR</strong>.
+            </li>
+            <li>
+                <strong>Match type</strong> - The attribute of the message that the rule attempts to match on. For example, the domain name, IP address, or protocol.
+            </li>
+            <li>
+                <strong>Match relationship</strong> - This can be either Matches or Does not match.
+            </li>
+            <li>
+                <strong>Match condition</strong> - The value that the rule uses when matching. You can use regular expressions to define complex matching conditions.
+            </li>
+        </ul>
+    </li>
+    <li>
+        Click OK to create the rule.
+    </li>
+</ol>
+<p>
+    Burp applies the enabled rules to the message to determine whether it should be intercepted. Each rule is combined to the rules above in order, using the selected boolean operator.
+</p>
+<p>
+    Use the checkbox on the left of each rule to activate or deactivate it. You can also <strong>Edit</strong> and <strong>Remove</strong> rules, or reorder them using the <strong>Up</strong> and <strong>Down</strong> buttons.
+</p>
+<h3 id="modifying-intercepted-messages">Modifying intercepted messages</h3>
+<p>
+    These settings enable you to avoid invalid requests and responses being issued when you modify an intercepted message.
+</p>
+<ul>
+    <li>
+        <strong>Automatically update Content-Length header when the request / response is edited</strong> - Enable this setting to automatically update the <code>Content-Length</code> header with the correct length of the message's HTTP body. This is normally essential when the HTTP body is modified.
+    </li>
+    <li>
+        <p>
+            <strong>Automatically fix missing or superfluous new lines at end of request</strong> - Enable this setting to automatically correct common mistakes that are made when requests are edited in the interception view:
+        </p>
+        <ul>
+            <li>
+                Burp adds a blank line following the headers if there is not one already present.
+            </li>
+            <li>
+                Burp removes any newline characters at the end of a body containing URL-encoded parameters.
+            </li>
+        </ul>
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/desktop/tools/proxy/intercept-messages.html">Intercepting messages</a>.
+    </p>
+</div>
+<p>
+    The <strong>Request and response interception rules</strong> settings are project settings. They apply to the current project only.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="websocket-interception-rules">WebSocket interception rules</h2>
+<p>
+    These settings control which WebSocket messages Burp holds for viewing and editing in the <strong>Intercept</strong> tab:
+</p>
+<ul>
+    <li>
+        <strong>Intercept client-to-server messages</strong>.
+    </li>
+    <li>
+        <strong>Intercept server-to-client messages</strong>.
+    </li>
+    <li>
+        <strong>Only intercept in-scope messages</strong>. Select this setting if you only want to intercept WebSocket messages where the <code>upgrade</code> request is within the target scope of the project. Out-of-scope messages will not be held. Deselect this setting if you want to intercept all WebSocket messages, regardless whether they are within your project's target scope or not.
+    </li>
+</ul>
+<p>
+    The WebSocket interception rules settings are project settings. They apply to the current project only.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="response-modification-rules">Response modification rules</h2>
+<p>
+    These settings control whether Burp automatically rewrites the HTML in application responses.
+</p>
+<p>
+    You can use the following settings to remove client-side controls over data:
+</p>
+<ul>
+    <li>
+        <strong>Unhide hidden form fields</strong>. You can also select <strong>Prominently highlight unhidden fields</strong>, for easy identification on-screen.
+    </li>
+    <li>
+        <strong>Enable disabled form fields</strong>.
+    </li>
+    <li>
+        <strong>Remove input field length limits</strong>.
+    </li>
+    <li>
+        <strong>Remove JavaScript form validation</strong>.
+    </li>
+</ul>
+<p>
+    You can use the following settings to disable client-side logic for testing purposes:
+</p>
+<ul>
+    <li>
+        <strong>Remove all JavaScript</strong>.
+    </li>
+    <li>
+        <strong>Remove &lt;object&gt; tags</strong>.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        These features are not designed to be used as a security defense in the manner of, for example, NoScript.
+    </p>
+</div>
+<p>
+    You can use the following settings to deliver sslstrip-like attacks against a victim user whose traffic is unwittingly being proxied via Burp. Use these settings with the listener's <a href="#request-handling"><strong>Force use of TLS setting</strong></a> to effectively strip TLS from the user's connection:
+</p>
+<ul>
+    <li>
+        <strong>Convert HTTPS links to HTTP</strong>.
+    </li>
+    <li>
+        <strong>Remove secure flag from cookies</strong>.
+    </li>
+</ul>
+<p>
+    The <strong>Response modification rules</strong> settings are project settings. They apply to the current project only.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="http-and-websocket-match-and-replace-rules">HTTP and WebSocket match and replace rules</h2>
+<p>
+    The <strong>HTTP match and replace rules</strong> and <strong>WebSocket match and replace rules</strong> settings automatically replace parts of messages as they pass through the Proxy.
+</p>
+<p>
+    The HTTP match and replace rules include various predefined rules which you can enable to assist with common tasks. These are disabled by default.
+</p>
+<p>
+    To only apply match and replace rules to items that are in the project scope, select <strong>Only apply to in-scope items</strong>. For more information on how to set a scope for your work, see <a href="/burp/documentation/desktop/settings/project/scope.html#target-scope">Scope settings - Target scope</a>.
+</p>
+<h3 id="adding-a-match-and-replace-rule">Adding a match and replace rule</h3>
+<p>
+    Each match and replace rule specifies a literal string or regex pattern to match, and a string to replace it with. To add a new rule:
+</p>
+<ol>
+    <li>
+        Click <strong>Add</strong> to open the <strong>Add match/replace rule</strong> dialog.
+    </li>
+    <li>
+        <p>
+            Specify the details of the match/replace rule:
+        </p>
+        <ul>
+            <li>
+                <strong>Type</strong> - For HTTP requests, specify the type of rule you want to define. For example, <strong>Request header</strong> or <strong>Response body</strong>.
+            </li>
+            <li>
+                <strong>Direction</strong> - For WebSocket messages, specify the direction of the message you want the rule to apply to. Choose from <strong>Client to server</strong>, <strong>Server to client</strong>, or <strong>Both directions</strong>.
+            </li>
+            <li>
+                <strong>Match</strong> - The string or regex pattern you want the rule to match. If you leave this blank for an HTTP rule with the <strong>Request header</strong> or <strong>Response header</strong> type, the replacement string is added as a new header.
+            </li>
+            <li>
+                <strong>Replace</strong> - The string you want the rule to replace. If you leave this blank for an HTTP rule with the <strong>Request header</strong> or <strong>Response header</strong> type, then any header that matches is removed.
+            </li>
+            <li>
+                <strong>Comment</strong> - An optional description of the rule.
+            </li>
+        </ul>
+    </li>
+    <li>
+        If you want Burp to treat the match parameter as a regex, select <strong>Regex match</strong>.
+    </li>
+    <li>
+        Click <strong>OK</strong>. The new rule is automatically enabled.
+    </li>
+</ol>
+<p>
+    Burp executes the enabled match and replace rules in turn for each message, and makes any applicable replacements.
+</p>
+<p>
+    You can also <strong>Edit</strong> and <strong>Remove</strong> rules, or reorder them using the <strong>Up</strong> and <strong>Down</strong> buttons.
+</p>
+<h3 id="matching-multi-line-regions">Matching multi-line regions</h3>
+<p>
+    You can use regex syntax to match multi-line regions of a message body. For example, if a response body contains only:
+</p>
+<code class="code-scrollable">Now is the time for all good men
+        to come to the aid of the party</code><p>
+    then using the regex:
+</p>
+<code>Now.*the</code><p>
+    will match:
+</p>
+<code class="code-scrollable">Now is the time for all good men
+        to come to the aid of the</code><p>
+    If you want to match only within a single line, you can modify the regex to:
+</p>
+<code>Now[^\n]*the</code><p>
+    which will match:
+</p>
+<code>Now is the</code>
+<h3 id="using-regex-groups-in-back-references-and-replacement-strings">Using regex groups in back-references and replacement strings</h3>
+<p>
+    In a <strong>Match</strong> expression you can:
+</p>
+<ul>
+    <li>
+        Define groups using parentheses. Burp assigns groups a 1-indexed reference number in order from left to right (with group 0 representing the entire match).
+    </li>
+    <li>
+        Back-reference groups. Use a backslash followed by the group's index.
+    </li>
+</ul>
+<p>
+    For example, to match a pair of opening and closing tags with no other tags between, you could use the regex:
+</p>
+<code>&lt;([^/]\w*)[^&gt;]*&gt;[^&gt;]*?&lt;/\1[^&gt;]*&gt;</code><p>
+    You can reference groups in the replacement string by using a $ followed by the group index. For example, the following replacement string would include the name of the tag that matched the above regex:
+</p>
+<code>Replaced: $1</code><p>
+    The <strong>Match and replace rules</strong> settings are project settings. They apply to the current project only.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="tls-pass-through">TLS pass through</h2>
+<p>
+    TLS passthrough sends traffic through Burp Suite without decrypting it or altering it in any way. This has three major benefits:
+</p>
+<ul>
+    <li>
+        Performance improves dramatically.
+    </li>
+    <li>
+        Servers see the browser's original TLS fingerprint, which enables you to bypass some anti-bot defenses.
+    </li>
+    <li>
+        You can eliminate TLS errors on the client. For example, in mobile applications that perform TLS certificate pinning.
+    </li>
+</ul>
+<p>
+    If the application accesses multiple domains or uses both HTTP and HTTPS connections, you can pass through TLS connections to specific problematic hosts, and still work on other traffic as normal.
+</p>
+<p>
+    You can use TLS passthrough in two different ways:
+</p>
+<ul>
+    <li>
+        Add specific TLS passthrough targets.
+    </li>
+    <li>
+        Apply TLS passthrough to all out-of-scope items.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        The Proxy intercept view and Proxy history do not display any details about requests or responses made via these connections.
+    </p>
+</div>
+<h3 id="adding-tls-passthrough-targets">Adding TLS passthrough targets</h3>
+<p>
+    To add a new TLS passthrough target, copy the URL and then click <strong>Paste URL</strong> to add the relevant web server to the list. You can also configure the target manually:
+</p>
+<ol>
+    <li>
+        Click <strong>Add</strong> to display the <strong>Add TLS passthrough target dialog</strong>.
+    </li>
+    <li>
+        <p>
+            Specify the target details:
+        </p>
+        <ul>
+            <li>
+                <strong>Host or IP range</strong> - This can be a regex or an IP range. Leave blank to match any item.
+            </li>
+            <li>
+                <strong>Port</strong> - The port that TLS passthrough should apply on. Leave blank to match any item.
+            </li>
+        </ul>
+    </li>
+    <li>
+        Click <strong>OK</strong> to add the target to the list.
+    </li>
+</ol>
+<p>
+    You can <strong>Edit</strong> and <strong>Remove</strong> targets from the list. To upload a CSV or text list of targets, click <strong>Load</strong> and select the relevant file from the dialog.
+</p>
+<p>
+    Select <strong>Automatically add entries on client TLS negotiation failure</strong> to add the relevant server to the TLS pass through list when a client fails a TLS negotiation. A TLS negotiation may fail, for example, if Burp's CA certificate is not recognized.
+</p>
+<h3 id="applying-tls-passthrough-to-out-of-scope-items">Applying TLS passthrough to out-of-scope items</h3>
+<p>
+    You can apply TLS passthrough for out-of-scope items automatically when you <a href="/burp/documentation/desktop/getting-started/setting-target-scope.html">set the target scope</a>:
+</p>
+<ol>
+    <li>
+        From <strong>Target &gt; Site map</strong> or <strong>Proxy &gt; HTTP history</strong>, select the hosts you want to add to the target scope.
+    </li>
+    <li>
+        Right-click your selection and select <strong>Add to scope</strong>. The <strong>Proxy history logging</strong> window appears.
+    </li>
+    <li>
+        Click <strong>Yes</strong> to apply TLS passthrough for out-of-scope items.
+    </li>
+</ol>
+<p>
+    This enables the following settings in the <strong>Settings &gt; Proxy</strong> menu:
+</p>
+<ol>
+    <li>
+        <strong>Miscellaneous &gt; Don't send items to Proxy history or live tasks, if out of scope</strong>.
+    </li>
+    <li>
+        <strong>TLS pass through &gt; Apply to out-of-scope items</strong> - this can only be enabled when the setting above is enabled.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/tools/proxy/intercept-messages.html">Intercepting messages</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/proxy/http-history/index.html">Burp Proxy history</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/external-browser-config/certificate/index.html">Installing Burp's CA certificate</a>.
+        </li>
+    </ul>
+</div>
+<p>
+    The <strong>TLS pass through</strong> settings are project settings. They apply to the current project only.
+</p>
+<h2 id="proxy-history-logging">Proxy history logging</h2>
+<p>
+    Use this setting to manage whether Burp Proxy sends out-of-scope items to the history or live tasks when new items are added to the target scope. This enables you to avoid accumulating project data for out-of-scope items.
+</p>
+<p>
+    There are three options available:
+</p>
+<ul>
+    <li>
+        <strong>Stop logging out-of-scope items</strong>.
+    </li>
+    <li>
+        <strong>Ask me what to do each time</strong>.
+    </li>
+    <li>
+        <strong>Do nothing</strong>.
+    </li>
+</ul>
+<p>
+    The <strong>Proxy history logging</strong> settings are user settings. They apply to all installations of Burp on your machine.
+</p>
+<h2 id="default-proxy-interception-state">Default Proxy interception state</h2>
+<p>
+    Use this setting to choose whether Burp Proxy interception is enabled by default when you start Burp.
+</p>
+<p>
+    There are three options available:
+</p>
+<ul>
+    <li>
+        <strong>Enable interception</strong>.
+    </li>
+    <li>
+        <strong>Disable interception</strong>.
+    </li>
+    <li>
+        <strong>Restore the setting that was selected in the Proxy &gt; Intercept tab when Burp closed</strong>.
+    </li>
+</ul>
+<p>
+    The <strong>Default Proxy interception state</strong> settings are user settings. They apply to all installations of Burp on your machine.
+</p>
+<h2 id="miscellaneous">Miscellaneous</h2>
+<p>
+    These settings control various aspects of Burp Proxy's behavior:
+</p>
+<ul>
+    <li>
+        <strong>Use HTTP/1.0 in requests to server</strong> - Enable this setting to use HTTP version 1.0 in requests to destination servers. This may be useful when working with legacy servers or applications that require version 1.0 to function correctly.
+    </li>
+    <li>
+        <strong>Use HTTP/1.0 in responses to client</strong> - Enable this setting to use HTTP version 1.0 in responses. All current browsers support both version 1.0 and 1.1 of HTTP, however version 1.0 has a reduced feature set. A reduced feature set can help you to control aspects of a browsers' behavior, for example to prevent attempts to perform HTTP pipelining.
+    </li>
+    <li>
+        <strong>Use keep-alive for HTTP/1 if the server supports it</strong> - By default, Burp reuses HTTP/1 connections for outbound requests from the proxy. This may improve browser load times.
+    </li>
+    <li>
+        <strong>Set response header "Connection: close"</strong> - Enable this setting to add or update the response <code>Connection</code> header with the value <code>close</code>. This can enable you to prevent HTTP pipelining in some situations.
+    </li>
+    <li>
+        <strong>Set "Connection: close" on incoming requests</strong> - By default, Burp adds or updates the request <code>Connection</code> header with the value <code>close</code>. This can enable you to prevent HTTP pipelining in some situations.
+    </li>
+    <li>
+        <strong>Strip Proxy-* headers in incoming requests</strong> - By default, Burp strips <code>Proxy-*</code> headers from incoming requests. This prevents leakage of any information, as browsers sometimes send request headers containing information intended for the proxy server. A malicious website may attempt to induce a browser to include sensitive data within these headers.
+    </li>
+    <li>
+        <strong>Remove unsupported encodings from Accept-Encoding headers in incoming requests</strong> - By default, Burp removes encodings that cause problems when Burp processes responses. This reduces the chance that they are used. You may need to de-select this setting if a server requires an unsupported encoding.
+    </li>
+    <li>
+        <strong>Strip Sec-WebSocket-Extensions headers in incoming requests</strong> - By default, Burp removes this header. This reduces the chance that extensions relating to WebSocket connections are used, as some encodings cause problems when processing responses in Burp. You may need to de-select this setting if a server requires a particular extension.
+    </li>
+    <li>
+        <strong>Unpack compressed requests</strong> - Enable this setting to automatically unpack compressed request bodies, which are often present in applications using custom client components. Burp can unpack requests that have been compressed using gzip, Deflate, or Brotli. Note that some applications may experience issues if they expect a compressed body but the compression has been removed.
+    </li>
+    <li>
+        <strong>Unpack compressed in responses</strong> - Enable this setting to automatically unpack compressed response bodies. Burp can unpack responses that have been compressed using gzip, Deflate, or Brotli. Note that you can often prevent servers from compressing responses - use a <a href="#http-and-websocket-match-and-replace-rules">match and replace rule</a> to remove the <code>Accept-Encoding</code> header from requests.
+    </li>
+    <li>
+        <strong>Disable web interface at http://burpsuite</strong> - This setting may be useful if you need to configure your <a href="#proxy-listeners">listener</a> to accept connections on an unprotected interface, and wish to prevent others gaining access to Burp's in-browser interface.
+    </li>
+    <li>
+        <strong>Suppress Burp error messages in browser</strong> - Enable this setting to suppress the messages that are usually sent to the browser when errors occur. This may be useful if you wish to run Burp in stealth mode in order to perform man-in-the-middle attacks against a victim user.
+    </li>
+    <li>
+        <strong>Don't send items to Proxy history or live tasks</strong> - If you enable this setting, Burp can't log requests in the Proxy history or send them to live tasks. This enables you to limit the memory and storage overhead. This may be useful, for example, if you are using Burp to authenticate upstream servers or perform match-and-replace operations.
+    </li>
+    <li>
+        <strong>Don't send items to Proxy history or live tasks, if out of scope</strong> - If you enable this setting, Burp doesn't log any out-of-scope requests in the Proxy history or send them to live tasks. This enables you to avoid accumulating project data for out-of-scope items. This option is selected automatically when you <a href="/burp/documentation/desktop/getting-started/setting-target-scope.html">set the target scope</a>, and stop logging the proxy history for out-of-scope items.
+    </li>
+</ul>
+<p>
+    The <strong>Miscellaneous</strong> settings are project settings. They apply to the current project only.
+</p>
+</body>
+</html>

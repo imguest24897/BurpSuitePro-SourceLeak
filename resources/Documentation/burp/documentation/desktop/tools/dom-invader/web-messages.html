@@ -1,0 +1,230 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/index.html">DOM Invader</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/web-messages.html">Testing for DOM XSS using web messages</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Testing for DOM XSS using web messages</h1>
+<p>
+    DOM Invader provides a number of features that let you test for DOM XSS using web messages. These include:
+</p>
+<ul>
+    <li>
+        <p>
+            Logging any web messages that are sent via the <code>postMessage()</code> method on the page, along with useful details about them. This is similar to how Burp Proxy shows the history of your HTTP requests and responses.
+        </p>
+    </li>
+    <li>
+        <p>
+            Enabling you to modify and resend web messages to manually probe for DOM XSS vulnerabilities. This is similar to how Burp Repeater reissues modified HTTP requests.
+        </p>
+    </li>
+    <li>
+        <p>
+            Automatically modifying and sending web messages to probe for DOM XSS on your behalf.
+        </p>
+    </li>
+</ul>
+<p>
+    You can access all of these features from DOM Invader's <strong>Messages</strong> view.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/dom-invader-messages-overview.png" alt="Testing for web messages with DOM Invader">
+</div>
+<p>
+    Note that you first need to enable <strong>Postmessage interception</strong> from the DOM Invader settings menu in order to use these features. For more information, see <a href="/burp/documentation/desktop/tools/dom-invader/settings/main.html">Main settings</a>.
+</p>
+<div class="highlightedarea">
+    <h4>Web Security Academy</h4>
+    <p>
+        If you need to brush up on web message-based DOM XSS, check out the Web Security Academy, where you can also find some deliberately vulnerable labs to practice on.
+    </p>
+    <p>
+        <a href="/web-security/dom-based/controlling-the-web-message-source/index.html">Controlling the web message source</a>
+    </p>
+</div>
+<h2 id="enabling-web-message-interception">Enabling web message interception</h2>
+<p>
+    To avoid interfering with your target site's functionality, DOM Invader's web message features are disabled by default.
+</p>
+<p>
+    To enable these features:
+</p>
+<ol>
+    <li>
+        <p>
+            Go to the DOM Invader settings menu.
+        </p>
+    </li>
+    <li>
+        <p>
+            Select the <strong>Postmessage interception</strong> switch.
+        </p>
+    </li>
+    <li>
+        <p>
+            Click <strong>Reload</strong> to reload the browser. This is necessary for your changes to take effect.
+        </p>
+    </li>
+</ol>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/dom-invader-settings-messages.png" alt="Enabling web message interception">
+</div>
+<h2 id="identifying-interesting-web-messages">Identifying interesting web messages</h2>
+<p>
+    Once you enable web message interception, DOM Invader automatically logs any web messages that are sent on the page via the <code>postMessage()</code> method. By default, it also generates and sends its own messages to any message event handlers that it detects.
+</p>
+<p>
+    You can see these in the <strong>Messages</strong> view.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/dom-invader-messages-view.png" alt="DOM Invader Message view">
+</div>
+<h2 id="automated-web-message-analysis">Automated web message analysis</h2>
+<p>
+    By default, DOM Invader tries to identify and flag interesting messages on your behalf. It does this by modifying the messages in the following ways:
+</p>
+<ul>
+    <li>
+        <p>
+            Injecting your canary via the message's <code>data</code> property. DOM Invader can use this to identify any sinks that this data flows into, just like it does with other sources in the <strong>DOM</strong> view.
+        </p>
+    </li>
+    <li>
+        <p>
+            Replacing the origin of the message with a fake origin that starts and ends with the expected domain name. This enables DOM Invader to automatically identify event handlers that rely on flawed logic or regular expressions to validate the origin of incoming messages.
+        </p>
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You can disable both of these features from the DOM Invader's settings menu. For more information, see <a href="/burp/documentation/desktop/tools/dom-invader/settings/web-messages.html">Web message settings</a>.
+    </p>
+</div>
+<p>
+    Based on the observed behavior, DOM Invader automatically flags messages that it thinks are exploitable by displaying an estimated issue severity and confidence level. All messages sent on the page are listed with at least an <strong>Information</strong> severity rating, as they may contain vulnerabilities that DOM Invader can't detect automatically.
+</p>
+<h2 id="message-details">Message details</h2>
+<p>
+    You can click each message to view more detailed information about it, including whether the <code>origin</code>, <code>data</code>, or <code>source</code> properties of the message are accessed by the client-side JavaScript.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/dom-invader-messages-details.png" alt="Viewing message details">
+</div>
+<p>
+    This information can provide clues that help you to determine whether the message is useful, and how you might craft a suitable exploit.
+</p>
+<h3 id="origin-accessed">Origin accessed</h3>
+<p>
+    If the client-side code never accesses the <code>origin</code> property of the message, it is likely that the origin is not being validated. As a result, you may be able to send cross-origin messages to the event handler from an arbitrary external domain.
+</p>
+<p>
+    However, even messages in which the client-side code does access the <code>origin</code> property may still be insecure. You may still be able to bypass the validation. To help you find ways to do this, DOM Invader provides a link to relevant line in the code via a stack trace. For more information, see <a href="/burp/documentation/desktop/tools/dom-invader/dom-xss.html#studying-the-client-side-code">Studying the client-side code</a>.
+</p>
+<div class="highlightedarea">
+    <h4>Web Security Academy</h4>
+    <p>
+        <a href="/web-security/cors/index.html#errors-parsing-origin-headers">Bypassing flawed origin validation</a>
+    </p>
+</div>
+<h3 id="data-accessed">Data accessed</h3>
+<p>
+    The <code>data</code> property of the message is where you inject potential payloads. If the JavaScript never accesses this property, it cannot be passed to a sink. In this case, the message is of no interest.
+</p>
+<h3 id="source-accessed">Source accessed</h3>
+<p>
+    The <code>source</code> property of the message is a reference to the <code>window</code> object from which it was sent. In practice, this is usually a reference to an iframe. Websites often validate the <code>source</code> property instead of the origin as this is a more robust way of ensuring that the message came from a specific, trusted iframe.
+</p>
+<p>
+    As with the origin, keep in mind that client-side code accessing this property does not guarantee that the source is being validated, or that this validation cannot be bypassed.
+</p>
+<h2 id="replaying-web-messages">Replaying web messages</h2>
+<p>
+    DOM Invader enables you to modify and replay web messages, much like you can with HTTP requests in Burp Repeater. This makes it much simpler to probe for DOM XSS using web messages as the source.
+</p>
+<p>
+    To send a modified web message:
+</p>
+<ol>
+    <li>
+        <p>
+            From the <strong>Messages</strong> view, click on any message to open the message details dialog.
+        </p>
+    </li>
+    <li>
+        <p>
+            Edit the <strong>Data</strong> field as required.
+        </p>
+    </li>
+    <li>
+        <p>
+            Click <strong>Send</strong>.
+        </p>
+    </li>
+</ol>
+<p>
+    For example, you might identify a message where the event handler does not validate the origin and passes the data into the <code>element.innerHTML</code> sink. In this case, you could send messages to test whether characters like <code>&lt;</code>, <code>&gt;</code>, and <code>&quot;</code> are escaped, then use these characters to create and send a proof-of-concept payload.
+</p>
+<h2 id="generating-a-proof-of-concept">Generating a proof of concept</h2>
+<p>
+    Once you successfully identify an exploitable vulnerability using a web message, DOM Invader can generate an HTML proof of concept that you can include in your reports.
+</p>
+<p>
+    To generate a proof of concept:
+</p>
+<ol>
+    <li>
+        <p>
+            Select the vulnerable message to open the message details dialog.
+        </p>
+    </li>
+    <li>
+        <p>
+            Modify the values as required for your exploit.
+        </p>
+    </li>
+    <li>
+        <p>
+            Click <strong>Build PoC</strong>. The HTML is saved to your clipboard.
+        </p>
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Read more</h4>
+    <p>
+        DOM Invader is highly configurable. For more information about DOM Invader's advanced features and how you can fine-tune its behavior for a particular site, see <a href="/burp/documentation/desktop/tools/dom-invader/settings/web-messages.html">Web message settings</a>.
+    </p>
+</div>
+</body>
+</html>

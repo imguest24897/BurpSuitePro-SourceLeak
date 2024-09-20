@@ -1,0 +1,32 @@
+{
+  "typeIndex": 4195456,
+  "name": "SQL statement in request parameter",
+  "description": "<p>HTTP requests sometimes contain SQL syntax. If this is incorporated into a SQL query and executed by the server, then the application is almost certainly vulnerable to SQL injection.</p>\n<p>When SQL-like syntax is observed, you should verify whether the request contains a genuine SQL query and whether this is being executed by the server. </p>",
+  "remediation": "<p>Applications should not incorporate any user-controllable data directly into SQL queries. Parameterized queries (also known as prepared statements) should be used to safely insert data into predefined queries. In no circumstances should users be able to control or modify the structure of the SQL query itself.</p>",
+  "webIntro": null,
+  "typicalSeverity": "MEDIUM",
+  "references": [
+    {
+      "title": "Web Security Academy: SQL injection",
+      "url": "https://portswigger.net/web-security/sql-injection"
+    },
+    {
+      "title": "Using Burp to Test for Injection Flaws",
+      "url": "https://support.portswigger.net/customer/portal/articles/1965677-using-burp-to-test-for-injection-flaws"
+    },
+    {
+      "title": "Web Security Academy: SQL Injection Cheat Sheet",
+      "url": "https://portswigger.net/web-security/sql-injection/cheat-sheet"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-598: Information Exposure Through Query Strings in GET Request",
+      "url": "https://cwe.mitre.org/data/definitions/598.html"
+    },
+    {
+      "title": "CAPEC-66: SQL Injection",
+      "url": "https://capec.mitre.org/data/definitions/66.html"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "typeIndex": 6291968,
+  "name": "Email addresses disclosed",
+  "description": "<p>The presence of email addresses within application responses does not necessarily constitute a security vulnerability. Email addresses may appear intentionally within contact information, and many applications (such as web mail) include arbitrary third-party email addresses within their core content.</p>\n<p>However, email addresses of developers and other individuals (whether appearing on-screen or hidden within page source) may disclose information that is useful to an attacker; for example, they may represent usernames that can be used at the application's login, and they may be used in social engineering attacks against the organization's personnel. Unnecessary or excessive disclosure of email addresses may also lead to an increase in the volume of spam email received.</p>",
+  "remediation": "<p>Consider removing any email addresses that are unnecessary, or replacing personal addresses with anonymous mailbox addresses (such as helpdesk@example.com).</p>\n<p>To reduce the quantity of spam sent to anonymous mailbox addresses, consider hiding the email address and instead providing a form that generates the email server-side, protected by a CAPTCHA if necessary. </p>",
+  "webIntro": null,
+  "typicalSeverity": "INFO",
+  "references": [
+    {
+      "title": "Web Security Academy: Information disclosure",
+      "url": "https://portswigger.net/web-security/information-disclosure"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-200: Information Exposure",
+      "url": "https://cwe.mitre.org/data/definitions/200.html"
+    },
+    {
+      "title": "CAPEC-37: Retrieve Embedded Sensitive Data",
+      "url": "https://capec.mitre.org/data/definitions/37.html"
+    }
+  ]
+}

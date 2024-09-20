@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/websockets/index.html">Testing for WebSocket vulnerabilities</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/websockets/manipulating-websocket-messages.html">Manipulating WebSocket messages</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Manipulating WebSocket messages with Burp Suite</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/Wcd1Lskvj4c?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    Finding vulnerabilities in WebSockets generally involves manipulating messages in ways that the application doesn't expect. For example, if you can modify existing messages or create new ones you may be able to deliver SQL injection or cross-site scripting exploits.
+</p>
+<p>
+    This tutorial explains how to modify and resend WebSocket messages in Repeater. You can follow along with the steps below using the <a href="https://portswigger.net/web-security/websockets/lab-manipulating-messages-to-exploit-vulnerabilities">Manipulating WebSocket messages to exploit vulnerabilities</a> Web Security Academy lab.
+</p>
+<h2 id="steps" cms-ignore-validation="DUPLICATE_HEADINGS">Steps</h2>
+<p>
+    To modify and re-send WebSocket messages:
+</p>
+<ol>
+    <li>
+        Browse around your target application to map its attack surface.
+    </li>
+    <li>
+        Go to <strong>Proxy &gt; WebSockets history</strong>. This tab displays a table of any WebSocket messages that Burp's browser has exchanged with the target host.
+    </li>
+    <li>
+        Right-click a message that you want to re-send or modify (for example, an outbound chat message) and select <strong>Send to Repeater</strong>. Burp creates a new WebSocket tab in Repeater.
+    </li>
+    <li>
+        Go to Repeater, select the new tab, and click <strong>Send</strong>.
+    </li>
+    <li>
+        Check the <strong>History</strong> panel to confirm that the message was re-sent.
+    </li>
+    <li>
+        In the <strong>Send WebSocket message</strong> panel, modify the message. For example, you could send a proof-of-concept XSS attack at this point.
+    </li>
+    <li>
+        Click <strong>Send</strong> again.
+    </li>
+    <li>
+        Confirm that the modified message appears in the <strong>History</strong> panel as sent.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/web-security/websockets/index.html">Web Security Academy: Testing for WebSockets security vulnerabilities</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/repeater/websocket-messages.html">Working with WebSocket messages in Burp Repeater</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/proxy/websockets-history/index.html">WebSockets history</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/tools/proxy.html#websocket-interception-rules">Proxy settings: WebSocket interception rules</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

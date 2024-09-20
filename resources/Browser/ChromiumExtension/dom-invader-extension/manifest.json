@@ -1,0 +1,42 @@
+{
+    "name": "DOM Invader",
+    "version": "1.3.1",
+    "description": "DOM Invader is a browser extension that adds functionality to Chrome to help with security testing.",
+    "content_scripts": [
+        {
+          "run_at": "document_start",
+          "matches": ["http://*/*", "https://*/*"],        
+          "js": ["./content-scripts/read-settings.js","./content-scripts/connection.js","./content-scripts/postmessage.js","./content-scripts/augmented-dom.js"],
+          "all_frames": true,
+          "match_about_blank": false
+        }
+    ],
+    "background": {
+        "page": "./background/background.html",
+        "persistent": true
+    },
+    "web_accessible_resources": [
+        "settings.json",
+        "images/domInvader.png"
+    ],
+    "devtools_page": "./devtools/devtools.html",
+    "browser_action": {        
+        "default_title": "DOM Invader",
+        "default_popup": "./settings/settings.html",  
+        "default_icon": {
+            "16": "images/DomInvader-16.png",
+            "32": "images/DomInvader-32.png",
+            "48": "images/DomInvader-48.png",
+            "128": "images/DomInvader-128.png"
+        }
+      },
+    "permissions": ["activeTab","https://*/*","http://*/*","tabs","webNavigation","storage","clipboardWrite","webRequest","webRequestBlocking"],
+    "icons": {
+        "16": "images/DomInvader-16.png",
+        "32": "images/DomInvader-32.png",
+        "48": "images/DomInvader-48.png",
+        "128": "images/DomInvader-128.png"
+    },
+    "manifest_version": 2,
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; default-src 'self';img-src 'self' data:; style-src 'unsafe-inline' 'self'; font-src data:"
+}

@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms ignore-validation="OTHER_PAGE_KEYWORD_TOO_FREQUENT" page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/index.html">Scanner</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/browser-powered-scanning.html">Browser-powered scanning</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-enterprise">Enterprise</label>
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Browser-powered scanning</h1>
+<p>
+    By default, Burp Scanner uses an embedded Chromium browser to navigate during both the crawl and audit phases of a scan. This enables it to accurately handle virtually any client-side technology that a modern browser can, which offers dramatically increased coverage compared to a regular crawler engine.
+</p>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/tMw-hw7D9uw?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<h2 id="use-cases-for-browser-powered-scanning">Use cases for browser-powered scanning</h2>
+<p>
+    Browser-powered scanning enables you to test modern websites comprehensively. For example, some websites have a dynamically generated UI that is not present in raw HTML. A regular crawler engine would miss key vulnerabilities as it would be unable to render the full content. Burp Scanner is able to load the page and execute any scripts required to build the UI, before continuing to crawl as normal.
+</p>
+<p>
+    Browser-powered scans can also handle websites that send requests on-the-fly using JavaScript event handlers. Burp Scanner uses its browser to trigger the relevant events and execute the corresponding script, issuing any requests as needed.
+</p>
+<p>
+    When using browser-powered scanning, you can also record and upload full login sequences. This means that Burp Scanner can handle complex login mechanisms, including single sign-on.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="https://portswigger.net/burp/documentation/enterprise/user-guide/reference/browser-powered.html">Browser-powered scanning for Burp Suite Enterprise Edition</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/authenticated-scanning/recorded-login-sequences.html">Recorded login sequences</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

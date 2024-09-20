@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/index.html">Settings</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/key-settings.html">Key settings</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Key settings</h1>
+<p>
+    Burp Suite contains a wide range of settings, enabling you to configure the system to work with almost any workflow or target application.
+</p>
+<p>
+    This page gives a brief overview of some key settings that are useful in most projects.
+</p>
+<h2 id="target-scope" cms-ignore-validation="DUPLICATE_HEADINGS">Target scope</h2>
+<p>
+    The target scope configuration tells Burp which hosts and URLs you are currently interested in and willing to attack. We recommend that you set a suite-wide target scope early in your testing in order to ensure that Burp does not target any inappropriate items.
+</p>
+<p>
+    Selecting a scope enables you to fine-tune the behavior of many of Burp's tools. For example:
+</p>
+<ul>
+    <li>
+        You can filter the target site map and Proxy history to show only those items that are in-scope.
+    </li>
+    <li>
+        You can configure the Proxy to intercept only in-scope requests and responses.
+    </li>
+    <li>
+        <label class="label-edition is-professional">Professional</label>
+        You can configure Burp Scanner to scan in-scope items automatically.
+    </li>
+    <li>
+        You can configure Intruder and Repeater to follow redirects to any in-scope URLs.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/scope/index.html">Target scope</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/proxy/http-history/index.html">Proxy history</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/site-map/index.html">Site map</a>.
+        </li>
+    </ul>
+</div>
+<h2 id="platform-level-authentication">Platform-level authentication</h2>
+<p>
+    Burp can carry out platform-level authentication for any application servers that require it. You can configure different authentication types and credentials for individual hosts if needed.
+</p>
+<p>
+    Burp supports the following authentication types:
+</p>
+<ul>
+    <li>
+        Basic
+    </li>
+    <li>
+        NTLMv1
+    </li>
+    <li>
+        NTLMv2
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/desktop/settings/network/connections.html#platform-authentication">Platform authentication</a>.
+    </p>
+</div>
+<h2 id="session-handling-rules-and-macros">Session handling rules and macros</h2>
+<p>
+    Some applications contain security features that can hinder automated or manual testing, such as reactive session termination, use of per-request tokens, and stateful multi-stage processes.
+</p>
+<p>
+    Burp enables you to configure session handling rules and macros to deal with any session-related issues in the background, helping you to continue your testing uninterrupted.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/desktop/settings/sessions/index.html">Sessions settings</a>.
+    </p>
+</div>
+<h2 id="schedule-tasks">Schedule tasks</h2>
+<p>
+    The task scheduler enables you to configure certain tasks to run automatically at defined times. You can use the task scheduler to start and stop certain automated tasks out of hours while you are not working, and to save your work periodically or at a specific time.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/desktop/settings/project/tasks.html#schedule-tasks">Schedule tasks</a>.
+    </p>
+</div>
+<h2 id="http-message-appearance">HTTP message appearance</h2>
+<p>
+    You can configure the font and character set that Burp uses to display HTTP messages, and also specify the font used in Burp's own UI.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/settings/ui/message-editor.html">Message editor settings</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/ui/display.html">Display settings</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

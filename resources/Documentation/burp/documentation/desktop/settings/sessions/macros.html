@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/index.html">Settings</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/sessions/index.html">Sessions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/sessions/macros.html">Macros</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Macro editor</h1>
+<p>
+    The macro editor enables you to add and edit macros. You can open the macro editor from <strong>Settings &gt; Sessions &gt; Macros</strong>. Either select <strong>Add</strong> to add a new macro in the Editor, or <strong>Edit</strong> to edit an existing one.
+</p>
+<h2 id="record-macro">Record macro</h2>
+<p>
+    Macros are made up of requests taken from the Proxy history. The first step in adding a macro is to select these requests. To do so:
+</p>
+<ul>
+    <li>
+        Click <strong>Add</strong> to open the <strong>Macro Recorder</strong> dialog.
+    </li>
+    <li>
+        Select the items you need from the Proxy history list. If required, you can use Burp's browser to add new requests.
+    </li>
+    <li>
+        Click <strong>OK</strong> to add the items to the <strong>Macro Editor</strong>.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You cannot record new items using the browser if Proxy interception is turned on. You can disable interception by clicking <strong>Intercept is on</strong> in the corner of the macro recorder.
+    </p>
+</div>
+<h2 id="configure-item">Configure item</h2>
+<p>
+    The macro editor displays an editable list of items in the macro. You can modify macro items directly by selecting them in the list and then editing them in the request viewer.
+</p>
+<p>
+    Each macro specifies how items in the sequence should be handled, and any interdependencies between items. To edit this configuration, select the relevant item in the list and click <strong>Configure item</strong> to open the <strong>Configure Macro Item</strong> dialog.
+</p>
+<h3>Cookie handling</h3>
+<p>
+    You can configure:
+</p>
+<ul>
+    <li>
+        Whether cookies received in the response should be added to the session handling cookie jar.
+    </li>
+    <li>
+        Whether cookies from the session handling cookie jar should be added to the request.
+    </li>
+</ul>
+<h3 id="parameter-handling">Parameter handling</h3>
+<p>
+    You can configure the values of the request parameters in the macro. The available options are:
+</p>
+<ul>
+    <li>
+        <strong>Use preset value</strong> - The parameter always takes the specified value.
+    </li>
+    <li>
+        <strong>Derive from prior response</strong> - The parameter takes the value of an equivalent parameter from an earlier response.
+    </li>
+</ul>
+<p>
+    The ability to derive a request parameter's value from a previous response is particularly useful in some multi-stage processes, and in situations where applications make aggressive use of CSRF tokens.
+</p>
+<p>
+    Parameter derivation is based on the parameter name and the URL requested. If you specify that a parameter's value should be derived from a previous response, Burp examines that response for instances where the named parameter was submitted to the relevant URL. For example, a form that uses the given action URL and contains a field with the given name. If Burp finds a suitable source, it extracts the parameter's value from that response and updates it in the request.
+</p>
+<p>
+    When you define a new macro, Burp automatically tries to find any relationships of this kind by identifying parameters whose values can be determined from the preceding response. For example: form field values, redirection targets, or query strings in links. You can override the automatic analysis if required.
+</p>
+<h3 id="custom-parameter-locations-in-response">Custom parameter locations in response</h3>
+<p>
+    Automatic parameter matching works for standard parameter locations within responses, such as form field values and query strings in links. In some cases, you may need to manually specify the location within a response that contains a parameter. For example, an application might define a CSRF token within a JavaScript string, and dynamically add this token to a script-generated request. To create a macro capable of deriving this parameter, you need to add a custom parameter location. Custom parameter locations tell Burp the location of the parameter within the response that contains the script, and the name used for that parameter in subsequent requests.
+</p>
+<p>
+    To add a custom parameter, click <strong>Add</strong> in the <strong>Custom parameter locations in response</strong> section to display the <strong>Define custom parameter</strong> dialog.
+</p>
+<p>
+    From here you can specify the following:
+</p>
+<ul>
+    <li>
+        The <strong>Parameter name</strong>.
+    </li>
+    <li>
+        Whether the value extracted from the response is URL-encoded. This setting ensures that Burp can correctly encode the value when it is used in subsequent requests.
+    </li>
+    <li>
+        The location of the parameter within the response item being configured. You can specify this location using Burp's standard response extraction rules.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>More information</h4>
+    <p>
+        For information on using Burp's response extraction rules, see the <a href="/burp/documentation/desktop/settings/response-extraction.html">Response extraction rules</a> page.
+    </p>
+</div>
+<p>
+    Burp makes the configured parameter available for use in subsequent macro requests, or the request being processed by a session handling rule, as described in the <a href="#parameter-handling">Parameter Handling section</a>.
+</p>
+<h2 id="re-analyze-macro">Re-analyze macro</h2>
+<p>
+    When you add a new macro, Burp automatically tries to find any relationships between macro items by identifying parameters whose values can be determined from the preceding response. You can repeat this automatic analysis using the <strong>Re-analyze macro</strong> button. This is useful if you have modified the items in the macro manually.
+</p>
+<h2 id="test-macro">Test macro</h2>
+<p>
+    The <strong>Test macro</strong> feature enables you to verify that your macro configuration works as intended. Burp issues the macro requests in sequence and attempts to derive any parameter values.
+</p>
+<p>
+    Once the macro has run, Burp displays the following:
+</p>
+<ul>
+    <li>
+        All requests and responses.
+    </li>
+    <li>
+        The values of any cookies received.
+    </li>
+    <li>
+        The details of any parameters that Burp attempted to derive values for.
+    </li>
+</ul>
+</body>
+</html>

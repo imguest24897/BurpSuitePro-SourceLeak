@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Learn how to use Burp Repeater to modify and manually resend HTTP requests in Burp Suite Professional / Burp Suite Community Edition.">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE" ignore-validation="STACKED_HEADINGS,ALLOWED_CHARACTERS"></cms><title>Reissuing requests with Burp Repeater</title>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/getting-started/index.html">Getting started</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/getting-started/reissuing-http-requests.html">Reissuing requests with Burp Repeater</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1 cms-ignore-validation="HEADING_CAPITALIZATION" no-keyword-injection>Reissue requests with Burp Repeater</h1>
+<div no-keyword-injection>
+    <p>
+        In this tutorial, you'll use Burp Repeater to send an interesting request over and over again. This lets you study the target website's response to different input without having to intercept the request each time. This makes it much simpler to probe for vulnerabilities, or confirm ones that were identified by Burp Scanner, for example.
+    </p>
+    <div class="highlightedarea">
+        <h4>Web Security Academy</h4>
+        <p>
+            To follow along, you'll need an account on <code>portswigger.net</code>. If you don't have one already, <a href="https://portswigger.net/users/register">registration is free</a> and it grants you full access to the Web Security Academy.
+        </p>
+    </div>
+    <p>
+        If you haven't completed our previous tutorial on setting the target scope, you'll need to do so before continuing. See <a href="/burp/documentation/desktop/getting-started/setting-target-scope.html">Set the target scope</a>.
+    </p>
+    <h2 id="sending-a-request-to-burp-repeater">Sending a request to Burp Repeater</h2>
+    <p>
+        The most common way of using Burp Repeater is to send it a request from another of Burp's tools. In this example, we'll send a request from the HTTP history in Burp Proxy.
+    </p>
+    <h3 cms-ignore-validation="HEADING_CAPITALIZATION">Step 1: Identify an interesting request</h3>
+    <p>
+        In the previous tutorial, you browsed a fake shopping website. Notice that each time you accessed a product page, the browser sent a <code>GET /product</code> request with a <code>productId</code> query parameter.
+    </p>
+    <img src="/burp/documentation/desktop/images/getting-started/quick-start-pro-product-page-request.png" alt="Identifying an interesting request">
+    <p>
+        Let's use Burp Repeater to look at this behavior more closely.
+    </p>
+    <h3 cms-ignore-validation="HEADING_CAPITALIZATION">Step 2: Send the request to Burp Repeater</h3>
+    <p>
+        Right-click on any of the <code>GET /product?productId=[...]</code> requests and select <strong>Send to Repeater</strong>.
+    </p>
+    <img src="/burp/documentation/desktop/images/getting-started/quick-start-pro-send-to-repeater.png" alt="Sending a request to Burp Repeater">
+    <p>
+        Go to the <strong>Repeater</strong> tab to see that your request is waiting for you in its own numbered tab.
+    </p>
+    <h3 cms-ignore-validation="HEADING_CAPITALIZATION">Step 3: Send the request and view the response</h3>
+    <p>
+        Click <strong>Send</strong> and view the response from the server. You can resend this request as many times as you like and the response will be updated each time.
+    </p>
+    <img src="/burp/documentation/desktop/images/getting-started/quick-start-pro-repeater.png" alt="Reissuing a request in Burp Repeater">
+    <hr>
+    <h2 id="testing-different-input-with-burp-repeater">Testing different input with Burp Repeater</h2>
+    <p>
+        By resending the same request with different input each time, you can identify and confirm a variety of input-based vulnerabilities. This is one of the most common tasks you will perform during manual testing with Burp Suite.
+    </p>
+    <h3 cms-ignore-validation="HEADING_CAPITALIZATION">Step 1: Resend the request with different input</h3>
+    <p>
+        Change the number in the <code>productId</code> parameter and resend the request. Try this with a few arbitrary numbers, including a couple of larger ones.
+    </p>
+    <img src="/burp/documentation/desktop/images/getting-started/quick-start-pro-repeater-invalid-productid.png" alt="Experimenting with different input">
+    <h3 cms-ignore-validation="HEADING_CAPITALIZATION">Step 2: View the request history</h3>
+    <p>
+        Use the arrows to step back and forth through the history of requests that you've sent, along with their matching responses. The drop-down menu next to each arrow also lets you jump to a specific request in the history.
+    </p>
+    <img src="/burp/documentation/desktop/images/getting-started/quick-start-pro-repeater-history.png" alt="Stepping through the request history in Burp Repeater">
+    <p>
+        This is useful for returning to previous requests that you've sent in order to investigate a particular input further.
+    </p>
+    <p>
+        Compare the content of the responses, notice that you can successfully request different product pages by entering their ID, but receive a <code>Not Found</code> response if the server was unable to find a product with the given ID. Now we know how this page is supposed to work, we can use Burp Repeater to see how it responds to unexpected input.
+    </p>
+    <h3 cms-ignore-validation="HEADING_CAPITALIZATION">Step 3: Try sending unexpected input</h3>
+    <p>
+        The server seemingly expects to receive an integer value via this <code>productId</code> parameter. Let's see what happens if we send a different data type.
+    </p>
+    <p>
+        Send another request where the <code>productId</code> is a string of characters.
+    </p>
+    <img src="/burp/documentation/desktop/images/getting-started/quick-start-pro-repeater-string-productid.png" alt="Submitting unexpected input">
+    <h3 cms-ignore-validation="HEADING_CAPITALIZATION">Step 4: Study the response</h3>
+    <p>
+        Observe that sending a non-integer <code>productId</code> has caused an exception. The server has sent a verbose error response containing a stack trace.
+    </p>
+    <img src="/burp/documentation/desktop/images/getting-started/quick-start-pro-repeater-error.png" alt="Studying the error message in the response">
+    <p>
+        Notice that the response tells you that the website is using the Apache Struts framework - it even reveals which version.
+    </p>
+    <img src="/burp/documentation/desktop/images/getting-started/quick-start-pro-repeater-apache-struts.png" alt="Discovering the leaked framework version">
+    <p>
+        In a real scenario, this kind of information could be useful to an attacker, especially if the named version is known to contain additional vulnerabilities.
+    </p>
+    <p>
+        Go back to the lab in Burp's browser and click the <strong>Submit solution</strong> button. Enter the Apache Struts version number that you discovered in the response (2 2.3.31).
+    </p>
+    <img src="/burp/documentation/desktop/images/getting-started/quick-start-pro-solution.png" alt="Submitting the solution">
+    <p>
+        Congratulations, that's another lab under your belt! You've used Burp Repeater to audit part of a website and successfully discovered an information disclosure vulnerability.
+    </p>
+    <div class="callout theme-community-6">
+        <div class="container-columns-3 align-vertically-center">
+            <p class="heading-navy-1">
+                <strong>Next step - </strong>Running your first scan (Pro users only)
+            </p>
+            <a href="/burp/documentation/desktop/getting-started/running-your-first-scan.html" class="button-orange">CONTINUE</a>
+        </div>
+    </div>
+    <div class="highlightedarea">
+        <h4 cms-ignore-validation="DUPLICATE_HEADINGS">In this tutorial</h4>
+        <ol>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/download-and-install.html">Downloading and installing Burp Suite.</a>
+            </li>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/intercepting-http-traffic.html">Intercepting HTTP traffic with Burp Proxy.</a>
+            </li>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/modifying-http-requests.html">Modifying requests in Burp Proxy.</a>
+            </li>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/setting-target-scope.html">Setting the target scope.</a>
+            </li>
+            <li>
+                Manually reissuing requests with Burp Repeater.
+            </li>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/running-your-first-scan.html">Running your first scan.</a>
+            </li>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/generate-reports.html">Generating a report.</a>
+            </li>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/what-next.html">What next?</a>
+            </li>
+        </ol>
+    </div>
+</div>
+</body>
+</html>

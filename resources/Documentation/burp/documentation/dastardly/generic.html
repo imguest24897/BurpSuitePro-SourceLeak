@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE" ignore-validation="STACKED_HEADINGS,OFFSITE_LINKS,OTHER_PAGE_KEYWORD_TOO_FREQUENT"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/dastardly/index.html">Dastardly</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/dastardly/generic.html">Platform independent</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-dastardly">Dastardly</label>
+</section>
+<h1 cms-ignore-validation="HEADING_CAPITALIZATION">Integrating Dastardly with your CI/CD platform (generic instructions)</h1>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Specific instructions are available for integrating Dastardly with the following CI/CD platforms:
+    </p>
+    <ul>
+        <li>
+            <a href="/burp/documentation/dastardly/jenkins.html">Jenkins</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/dastardly/teamcity.html">TeamCity</a>.
+        </li>
+        <li>
+            <a href="https://github.com/PortSwigger/dastardly-github-action">GitHub Actions</a>.
+        </li>
+    </ul>
+</div>
+<p>
+    You can integrate Dastardly with any CI/CD platform. Integration enables you to run Dastardly web vulnerability scans as a stage in your existing CI/CD pipeline.
+</p>
+<p>
+    For information on the machine specification required to run Dastardly scans, see the <a href="/burp/documentation/dastardly/index.html#dastardly-system-and-network-requirements">Dastardly system requirements</a>.
+</p>
+<p>
+    To integrate Dastardly with your CI/CD pipeline, include the following <code>docker run</code> command in your pipeline script:
+</p>
+<code class="code-scrollable">docker run --user $(id -u) --rm -v $(pwd):/dastardly -e \
+BURP_START_URL=https://ginandjuice.shop -e \
+BURP_REPORT_FILE_PATH=/dastardly/dastardly-report.xml \
+public.ecr.aws/portswigger/dastardly:latest</code>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You can set <code>BURP_START_URL</code> to a <a href="/burp/documentation/dastardly/index.html#scanning">seed URL</a> for any application you want to scan.
+    </p>
+    <p>
+        In this example, <code>BURP_START_URL</code> is set to <code>https://ginandjuice.shop/</code> - this is a deliberately vulnerable web application designed for testing web vulnerability scanners.
+    </p>
+    <p>
+        The next time your pipeline runs, Dastardly will scan the application you have set under <code>BURP_START_URL</code>.
+    </p>
+</div>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You need to set <code>BURP_REPORT_FILE_PATH</code> to a location mapped to a directory on your machine - as in the example above.
+    </p>
+    <p>
+        The example above uses <code>$(pwd)</code> to map the <code>/dastardly</code> volume to your present working directory.
+    </p>
+    <p>
+        The Dastardly output file is a JUnit XML report that can be parsed by any JUnit XML parser.
+    </p>
+    <p>
+        If you run the command above multiple times, you will overwrite the JUnit report written by Dastardly.
+    </p>
+</div>
+<h2 id="dastardly-scan-results">Dastardly scan results</h2>
+<p>
+    Dastardly scan results are available as a JUnit XML file when a scan is complete. Scans run for a maximum of ten minutes.
+</p>
+<h3 cms-ignore-validation="DUPLICATE_HEADINGS">Remediation advice</h3>
+<p>
+    Dastardly scan results include remediation advice for any security issues they find. This advice includes links to relevant sections of the free Web Security Academy resource, which provide further detail on web security vulnerabilities.
+</p>
+<h3 cms-ignore-validation="DUPLICATE_HEADINGS">Evidence</h3>
+<p>
+    Dastardly scan results include evidence for any security issues found. This evidence includes the request sent by Dastardly to produce the issue, as well as the response sent by the application.
+</p>
+</body>
+</html>

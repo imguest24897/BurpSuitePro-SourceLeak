@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/index.html">Intruder</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/results/index.html">Results</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/results/workflow.html">Workflow</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Burp Intruder workflow tools</h1>
+<p>
+    You can carry out actions on the attack results as part of your workflow. Right-click on any item in the results table to access the actions in the context menu.
+</p>
+<h2 id="scan">Scan</h2>
+<p>
+    <label class="label-edition is-professional">Professional</label>
+    Send selected items to Burp's scanner, to scan for content or vulnerabilities.
+</p>
+<h2 id="send-to">Send to...</h2>
+<p>
+    Send selected items to other Burp tools. This enables you to perform further analysis and use Burp to drive your workflow. For example, you can send HTTP messages that you want to store for later investigation to <a href="/burp/documentation/desktop/tools/organizer/index.html">Burp Organizer</a>.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        The ability to send requests between tools forms the core of Burp's user-driven workflow. For more information, see <a href="/burp/documentation/desktop/testing-workflow/index.html">How to use Burp Suite for penetration testing</a>.
+    </p>
+</div>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="show-response-in-browser">Show response in browser</h2>
+<p>
+    Generate a unique URL for the response. Copy this and paste it into Burp's browser to render the response without the limitations of Burp's built-in HTML renderer.
+</p>
+<p>
+    Burp serves the resulting browser request with the exact response that you select: the request is not forwarded to the original web server. Burp's browser processes the response in the context of the originally requested URL. This means that relative links within the response are handled properly.
+</p>
+<p>
+    When Burp's browser renders the response it may make additional requests, for example for images or CSS. These are handled by Burp in the usual way.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="request-in-browser">Request in browser</h2>
+<p>
+    Resend requests in Burp's browser:
+</p>
+<ul>
+    <li>
+        <strong>In original session</strong> - Resend the request using the cookie header that appeared in the original request.
+    </li>
+    <li>
+        <strong>In current session</strong> - Resend the request using the cookies supplied by the browser.
+    </li>
+</ul>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="generate-csrf-poc">Generate CSRF PoC</h2>
+<p>
+    Create HTML which causes the selected request to be issued when viewed in a browser. For more information, see <a href="/burp/documentation/desktop/tools/engagement-tools/generate-csrf-poc.html">Generate CSRF PoC</a>.
+</p>
+<h2 id="add-to-site-map">Add to site map</h2>
+<p>
+    Add the selected items to the <a href="/burp/documentation/desktop/tools/target/site-map/index.html">Target site map</a>. This is useful when you identify new resources on the server which have not been added to the site map.
+</p>
+<h2 id="request-item-again">Request item again</h2>
+<p>
+    Queue the selected items to be requested again by the attack engine. When the items are re-requested, the table entry for the items, and associated HTTP messages, are updated based on the new request. This is useful when:
+</p>
+<ul>
+    <li>
+        Attack requests have failed due to network errors, or received an anomalous server response due to some intermittent problem.
+    </li>
+    <li>
+        You have modified the base request or other relevant configuration during the attack, and want to re-request items that were based on the original configuration.
+    </li>
+</ul>
+<h2 id="define-extract-grep-from-response">Define extract grep from response</h2>
+<p>
+    Open the response extraction rule dialog, and create a new extract grep item from the response. This enables you to extract the interesting part of the response. This is useful when an attack request generates a different type of response than the base request, as it enables you to quickly review the contents of similar responses. For example:
+</p>
+<ul>
+    <li>
+        A particular format of error message when fuzzing. For more information, see <a href="/burp/documentation/desktop/tools/intruder/uses/fuzzing.html">Fuzzing for vulnerabilities</a>.
+    </li>
+    <li>
+        A different login message when guessing credentials. For more information, see <a href="/burp/documentation/desktop/tools/intruder/uses/enumerating.html">Enumerating identifiers</a>.
+    </li>
+</ul>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="copy-as-curl-command">Copy as curl command</h2>
+<p>
+    This copies a curl command to the clipboard, that can be used to generate the current request.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="add-comment">Add comment</h2>
+<p>
+    Add a comment to the selected items.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="highlight">Highlight</h2>
+<p>
+    Apply a highlight to the selected items.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="copy-links">Copy links</h2>
+<p>
+    Parse the selected items for links, and copy these to the clipboard.
+</p>
+<h2 id="save-item">Save item</h2>
+<p>
+    Save the details of selected items in XML format. This includes full requests and responses, and all relevant metadata such as response length, HTTP status code, and MIME type.
+</p>
+</body>
+</html>

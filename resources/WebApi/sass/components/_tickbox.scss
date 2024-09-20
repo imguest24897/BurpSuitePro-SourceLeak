@@ -1,0 +1,23 @@
+input[type='checkbox'] {
+  height: 14px;
+  width: 14px;
+  -webkit-appearance: none;
+  font-family: 'enterprise';
+  border: none;
+  color: $grey;
+  margin: 5px;
+
+  &:after {
+    content: $icon-empty-checkbox;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:checked:after {
+    color: $green;
+    font-family: 'enterprise';
+    content: $icon-tick-checkbox;
+  }
+}

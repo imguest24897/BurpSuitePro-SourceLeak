@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE" ignore-validation="STACKED_HEADINGS"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/dastardly/index.html">Dastardly</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/dastardly/faqs.html">FAQs</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-dastardly">Dastardly</label>
+</section>
+<h1 cms-ignore-validation="HEADING_CAPITALIZATION">Dastardly FAQs</h1>
+<h2 id="authentication">Authentication</h2>
+<p>
+    Dastardly cannot navigate login mechanisms. If your application uses authentication, you should consider disabling this functionality when scanning with Dastardly. If you want to scan authenticated areas of an application while authentication functionality is in place, you can use either Burp Suite Enterprise Edition or Burp Suite Professional to do this.
+</p>
+<div class="highlightedarea">
+    <h4>Read more</h4>
+    <ul>
+        <li>
+            <a href="/burp/vulnerability-scanner/authenticated-scanning/index.html">Authenticated scanning with Burp Suite</a>.
+        </li>
+    </ul>
+</div>
+<h2 id="browser-sandbox">Browser sandbox</h2>
+<p>
+    Dastardly is deployed inside a Docker container, and uses a Chromium-based browser to scan your target application. To allow this, Dastardly's browser sandbox is disabled.
+</p>
+<p>
+    Because Dastardly is designed for scanning only trusted internal applications, its browser sandbox should not be necessary.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="scanning-apis">Scanning APIs</h2>
+<p>
+    Dastardly attempts to parse and scan any API definitions that are OpenAPI v2.0 or v3.0.x specification, and based on either JSON or YAML. If the target application makes an API call to an endpoint that is on the same domain as the seed URL, then this API call is scanned by Dastardly. If the target application makes an API call to an endpoint that is not on the same domain as the seed URL, then this API call is not scanned, as it is considered to be out of scope.
+</p>
+<div class="highlightedarea">
+    <h4>Read more</h4>
+    <ul>
+        <li>
+            <a href="/burp/vulnerability-scanner/api-security-testing/index.html">Scanning APIs with Burp Suite</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

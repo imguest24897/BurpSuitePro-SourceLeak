@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+Input returned in response (stored)
+<h1>Typical severity</h1>
+
+Information
+
+<h1>Issue description</h1>
+
+<p>Retrieval of stored input arises when user input is stored and later embedded into the application's responses. </p><p>Input being returned in application responses is not a vulnerability in its own right. However, it is a prerequisite for many client-side vulnerabilities, including cross-site scripting, open redirection, content spoofing, and response header injection. Additionally, some server-side vulnerabilities such as SQL injection are often easier to identify and exploit when input is returned in responses. In applications where input retrieval is rare and the environment is resistant to automated testing (for example, due to a web application firewall), it might be worth subjecting instances of it to focused manual testing. </p>
+
+<p>Vulnerabilities resulting from retrieval of stored input  are typically more serious than the equivalent reflected vulnerabilities because they do not require a separate delivery mechanism in order to reach target users. Depending on the affected functionality, ordinary users may be exploited during normal use of the application. Note that automated detection of stored data retrieval cannot reliably determine whether input that is persisted within the application can be retrieved by any other user, only by authenticated users, or only by the attacker themselves. You should review the functionality in which the vulnerability appears to determine whether the application's behavior can feasibly be used to compromise other application users. </p>
+
+<h1>Issue remediation</h1>
+
+<h1>References</h1>
+
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+<li><a href="https://cwe.mitre.org/data/definitions/20.html">CWE-20: Improper Input Validation</a></li>
+<li><a href="https://cwe.mitre.org/data/definitions/116.html">CWE-116: Improper Encoding or Escaping of Output</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

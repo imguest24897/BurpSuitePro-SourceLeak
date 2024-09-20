@@ -1,0 +1,211 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/index.html">Target</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/site-map/index.html">Site map</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1 cms-ignore-validation="DUPLICATE_HEADINGS">Site map</h1>
+<p>
+    The site map shows the information that Burp collects as you explore your target application. You can toggle between the <strong>URL view</strong>, and <a href="/burp/documentation/desktop/tools/target/crawl-paths.html"><strong>Crawl paths view</strong></a>. The URL view creates a hierarchical representation of the information, organizing it alphabetically by root domain then by subdomain. Content comes from various sources, including scan results and the URLs you discover as you browse the target manually. You can also see:
+</p>
+<ul>
+    <li>
+        A list of the contents.
+    </li>
+    <li>
+        Full requests and responses for individual items.
+    </li>
+    <li>
+        Full information about any security issues that Burp discovers.
+    </li>
+</ul>
+<p>
+    You can <a href="/burp/documentation/desktop/tools/target/site-map/site-map-filter.html">filter</a> and <a href="/burp/documentation/desktop/tools/target/site-map/site-map-filter.html#site-map-annotations">annotate</a> this information to help you to manage it. You can use the site map to send content to Burp's other tools, and to drive your <a href="/burp/documentation/desktop/tools/target/site-map/workflow-tools.html">testing workflow</a>.
+</p>
+<h2 id="accessing-the-site-map">Accessing the site map</h2>
+<p>
+    You can access the site map in two locations:
+</p>
+<ul>
+    <li>
+        To view a combined map containing information from all regular, non-isolated scans in the current project, go to <strong>Target &gt; Site map</strong>. Any new non-isolated scans that you run add to the information displayed in this tab.
+    </li>
+    <li>
+        To view the site map information found by an isolated scan, go to the <strong>Dashboard</strong> and select the scan from the <strong>Tasks</strong> list. In the main panel, go to the <strong>Target &gt; Site map</strong> tab. This tab doesn't include information from any other scans. It is only displayed for scans that have the <strong>Run isolated scan</strong> setting selected.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>More information</h4>
+    <p>
+        For information on running isolated web application scans, see <a href="/burp/documentation/desktop/automated-scanning/webapp-scans/full-crawl-and-audit.html">Running a full crawl and audit</a>.
+    </p>
+</div>
+<h2 id="url-view">URL view</h2>
+<p>
+    The <strong>URL view</strong> in the left-hand pane contains a hierarchical representation of content. The URLs are shown as:
+</p>
+<ul>
+    <li>
+        Domains.
+    </li>
+    <li>
+        <span class="icon-folder"></span> Directories.
+    </li>
+    <li>
+        <span class="icon-document"></span> Files.
+    </li>
+    <li>
+        <span class="icon-cog"></span> Parameterized requests.
+    </li>
+</ul>
+<p>
+    The <strong>URL view</strong> is organized alphabetically, first by root domain and then by subdomain.
+</p>
+<p>
+    You can expand interesting branches to see more details. If you select one or more parts of the <strong>URL view</strong>, you can see details about the items in the <strong>Contents</strong> and <strong>Issues</strong> panes. The panes also show items that are in child branches of your selection.
+</p>
+<h3 id="url-view-icons">URL view icons</h3>
+<p>
+    <label class="label-edition is-professional">Professional</label>
+    When <a href="/burp/documentation/desktop/automated-scanning/live-tasks/index.html">Live audit</a> or <a href="/burp/documentation/desktop/automated-scanning/index.html">Burp Scanner</a> detect issues, they display colored circles on the relevant icons in the tree view. The color of the circle indicates the most significant security issue within each branch or item. Click on the icon to show the relevant issues in the <strong>Issues</strong> window. We use the same color circles on the <strong>URL view</strong> and the <strong>Issues</strong> window.
+</p>
+<p>
+    If the text next to an icon is black, the URL has been requested. If the text is grayed out, the URL has not yet been requested. You can edit the <a href="/burp/documentation/desktop/tools/target/site-map/site-map-layout.html">site map layout</a>.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/tree-view-icons.png" alt="Icons in the tree view" class="center-block">
+</div>
+<h2 id="contents-pane">Contents pane</h2>
+<p>
+    The <strong>Contents</strong> pane lists information for any items selected in the tree view:
+</p>
+<ul>
+    <li>
+        All the resources directly requested via the <a href="/burp/documentation/desktop/tools/proxy/index.html">Proxy</a>.
+    </li>
+    <li>
+        Content that is likely to exist, based on Burp's analysis of responses to proxy requests.
+    </li>
+    <li>
+        Content that the <a href="/burp/documentation/desktop/automated-scanning/index.html">Scanner</a> or <a href="/burp/documentation/desktop/tools/engagement-tools/content-discovery.html">content discovery</a> functions discover.
+    </li>
+    <li>
+        Any items that you manually add, from the output of other tools.
+    </li>
+</ul>
+<p>
+    If an item is black, the URL has been requested. If the item is gray, the URL has not yet been requested. When you make requests, Burp uses any links to discover other content, which it shows in gray.
+</p>
+<p>
+    To help you to analyze the target application, you can use the <a href="/burp/documentation/desktop/tools/target/site-map/site-map-filter.html">site map filters</a> and the <a href="/burp/documentation/desktop/tools/target/scope/index.html">target scope</a> to hide content that you're not interested in. You can also customize and sort the table contents. For more information, see <a href="/burp/documentation/desktop/burps-layout/customize-tables.html">Customizing Burp's tables</a>.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        If you deselect <a href="/burp/documentation/desktop/automated-scanning/live-tasks/index.html">passive crawling</a>, the Contents pane doesn't show linked content or content that is only likely to exist.
+    </p>
+</div>
+<h2 id="requests-and-responses">Requests and responses</h2>
+<p>
+    Select an item in the <strong>Contents</strong> pane to see the related <strong>Request</strong> and <strong>Response</strong> in the lower pane. You can use the <a href="/burp/documentation/desktop/tools/inspector/index.html">Inspector</a> to analyze the messages. Right-click a message if you want to send it to another of Burp's tools.
+</p>
+<p>
+    Burp includes a large number of functions to help you quickly analyze the messages further, drive Burp's core <a href="/burp/documentation/desktop/tools/target/site-map/workflow-tools.html">workflow</a>, and carry out other useful tasks. For more information, see <a href="/burp/documentation/desktop/tools/message-editor/index.html">Burp Suite message editor</a>.
+</p>
+<h2 id="issues-pane">Issues pane</h2>
+<p>
+    The <strong>Issues</strong> pane shows any issues that Burp Scanner identifies, for items selected in the tree view. Select an issue to see more details in the tabs:
+</p>
+<ul>
+    <li>
+        <strong>Advisory</strong> - View a description of the issue type and its remediation.
+    </li>
+    <li>
+        <strong>Request / Response</strong> - View the full requests and responses that are the basis for reporting the issue. Where applicable, the parts of the request and response that are relevant to the issue are highlighted.
+    </li>
+    <li>
+        If relevant, you can see details of any interactions with the <a href="/burp/documentation/collaborator/index.html">Burp Collaborator</a> server that were the basis for reporting the issue.
+    </li>
+</ul>
+<p>
+    To quickly reproduce and verify an issue, right-click the message in the <strong>Contents</strong> pane and send the request to Burp Repeater. Alternatively, for GET requests, you can copy the URL and paste it into Burp's browser. Then you can reissue the request, and if necessary fine-tune the proof-of-concept attack that was generated by Burp.
+</p>
+<p>
+    Every issue that Burp Scanner reports is rated for severity (high, medium, low, informational) and confidence (certain, firm, tentative). If Burp uses a technique that is inherently less reliable (such as for <a href="/web-security/sql-injection/blind/index.html">blind SQL injection</a>) to identify an issue, the confidence level reduces.
+</p>
+<p>
+    These ratings are indicative, you should review them based on your knowledge of the application's functionality and business context.
+</p>
+<h3 cms-ignore-validation="HEADING_CAPITALIZATION" id="editing-the-issues-pane">Editing the Issues pane</h3>
+<p>
+    You can use the context menu to perform the following actions:
+</p>
+<ul>
+    <li>
+        <strong>Report selected issues</strong> - Use Burp Scanner's <a href="/burp/documentation/desktop/automated-scanning/reporting/index.html">reporting wizard</a>, to generate a formal report of the selected issues.
+    </li>
+    <li>
+        <strong>Set severity</strong> - Change the severity level to high, medium, low, or informational. You can also flag the issue as a false positive.
+    </li>
+    <li>
+        <strong>Set confidence</strong> - Change the confidence level of the issue to certain, firm or tentative.
+    </li>
+    <li>
+        <strong>Delete selected issues</strong> - Delete the selected issues. If Burp rediscovers the issue (for example, if you rescan the same request), the issue is reported again. You can mark the issue as a false positive to avoid this. We recommend this tool if you want to remove hosts or paths you are not interested in. If you want to remove issues for hosts or paths you are still working on, use the false positive option.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/site-map/getting-started.html">Getting started with the site map</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/site-map/workflow-tools.html">Workflow tools</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/site-map/site-map-filter.html">Site map filter</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/site-map/comparing.html">Comparing site maps</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/site-map/comparison-results.html">Site map comparison results</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/site-map/site-map-layout.html">Editing the site map layout</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

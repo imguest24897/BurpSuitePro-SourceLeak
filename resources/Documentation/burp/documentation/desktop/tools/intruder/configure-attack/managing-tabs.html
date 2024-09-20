@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/index.html">Intruder</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/configure-attack/index.html">Configure attack</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/configure-attack/managing-tabs.html">Managing tabs</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Managing Burp Intruder attack tabs</h1>
+<p>
+    When you send a request to Burp Intruder, this creates a new attack tab, which is automatically populated with details of the request.
+</p>
+<p>
+    You can use the controls on the tab header to create new tabs and make various changes to existing ones:
+</p>
+<ul>
+    <li>
+        Create an attack tab - click the add tab button <span class="icon-add"></span> to open a new tab. You can also send a request to Intruder from elsewhere in Burp to create a new tab. Set the opening attack configuration for new tabs in the <a href="/burp/documentation/desktop/settings/tools/intruder.html#new-tab-configuration"><strong>Settings</strong> dialog</a>.
+    </li>
+    <li>
+        Rename tabs - double-click the tab header and enter a new name for the tab.
+    </li>
+    <li>
+        <p>
+            Switch tab view - right-click a tab and select <strong>Tab view settings</strong>. You can choose from two different views:
+        </p>
+        <ul>
+            <li>
+                <strong>Scrolling view</strong> - tabs are displayed in a single, scrollable row. To view a drop-down list of all open tabs, click the search icon <span class="icon-search21"></span>.
+            </li>
+            <li>
+                <strong>Wrapped view</strong> - tabs wrap onto multiple rows so that they're all displayed on screen at once.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <p>
+            Close tabs - you can close tabs in multiple ways:
+        </p>
+        <ul>
+            <li>
+                Close a single tab - click the close button <span class="icon-close"></span> by the tab header.
+            </li>
+            <li>
+                Close all tabs - click the <strong>Tabs options</strong> menu and select <strong>Close all tabs</strong>.
+            </li>
+            <li>
+                Close all tabs other than the selected tab - right-click the tab and select <strong>Close other tabs</strong>.
+            </li>
+            <li>
+                Close all tabs to one side of the selected tab - right-click the tab and select <strong>Close tabs to the left</strong> or <strong>Close tabs to the right</strong>.
+            </li>
+        </ul>
+    </li>
+    <li>
+        Reopen the last tab you closed - right-click any tab and select <strong>Reopen closed tab</strong>.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You can send a request to Intruder from a request that is already in Intruder - a new tab is created with another instance of the same request. This can help you organize your testing.
+    </p>
+</div>
+</body>
+</html>

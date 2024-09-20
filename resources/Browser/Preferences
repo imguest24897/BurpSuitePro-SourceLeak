@@ -1,0 +1,13 @@
+{
+  "profile": {
+    "password_manager_leak_detection":false
+  },
+  "search": {
+    "suggest_enabled": false
+  },
+  "devtools":{
+    "preferences":{
+      "currentDockState":"\"bottom\""
+    }
+  }
+}

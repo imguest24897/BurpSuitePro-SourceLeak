@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+Content type incorrectly stated
+<h1>Typical severity</h1>
+ Low
+<h1>Issue description</h1>
+
+<p>If a  response specifies an incorrect content type then browsers may process the response in unexpected ways. If the  content type is specified to be a renderable text-based format, then the browser will usually attempt to interpret the response as being in that format, regardless of the actual contents of the response. Additionally, some other specified content types might sometimes be interpreted as HTML due to quirks in particular browsers. This behavior might lead to otherwise &quot;safe&quot; content such as images  being rendered as HTML, enabling cross-site scripting attacks in certain conditions.</p>
+<p>The presence of an incorrect content type statement typically only constitutes a security flaw when the affected resource is dynamically generated, uploaded by a user, or otherwise contains user input. You should review the contents of affected responses, and the context in which they appear, to determine whether any vulnerability exists.</p>
+
+<h1>Issue remediation</h1>
+
+<p>For every response containing a message body, the application should include a single Content-type header that correctly and unambiguously states the MIME type of the content in the response body.</p>
+<p>Additionally, the response header &quot;X-content-type-options: nosniff&quot; should be returned in all responses to reduce the likelihood that browsers will interpret content in a way that disregards the Content-type header.</p>
+
+<h1>References</h1>
+
+<ul>
+    <li><a href="https://portswigger.net/web-security/cross-site-scripting">Web Security Academy: Cross-site scripting</a></li>
+</ul>
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+<li><a href="https://cwe.mitre.org/data/definitions/16.html">CWE-16: Configuration</a></li>
+<li><a href="https://cwe.mitre.org/data/definitions/436.html">CWE-436: Interpretation Conflict</a></li>
+    <li><a href="https://capec.mitre.org/data/definitions/63.html">CAPEC-63: Cross-Site Scripting (XSS)</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

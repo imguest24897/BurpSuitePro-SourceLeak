@@ -1,0 +1,28 @@
+{
+  "typeIndex": 5244416,
+  "name": "Cookie without HttpOnly flag set",
+  "description": "<p>If the HttpOnly attribute is set on a cookie, then the cookie's value cannot be read or set by client-side JavaScript. This measure makes certain client-side attacks, such as cross-site scripting, slightly harder to exploit by preventing them from trivially capturing the cookie's value via an injected script.</p>",
+  "remediation": "<p>There is usually no good reason not to set the HttpOnly flag on all cookies. Unless you specifically require legitimate client-side scripts within your application to read or set a cookie's value, you should set the HttpOnly flag by including this attribute within the relevant Set-cookie directive.</p>\n<p>You should be aware that the restrictions imposed by the HttpOnly flag can potentially be circumvented in some circumstances, and that numerous other serious attacks can be delivered by client-side script injection, aside from simple cookie stealing. </p>",
+  "webIntro": null,
+  "typicalSeverity": "LOW",
+  "references": [
+    {
+      "title": "Web Security Academy: Exploiting XSS vulnerabilities",
+      "url": "https://portswigger.net/web-security/cross-site-scripting/exploiting"
+    },
+    {
+      "title": "HttpOnly effectiveness",
+      "url": "https://portswigger.net/research/web-storage-the-lesser-evil-for-session-tokens#httponly"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-16: Configuration",
+      "url": "https://cwe.mitre.org/data/definitions/16.html"
+    },
+    {
+      "title": "CAPEC-31: Accessing/Intercepting/Modifying HTTP Cookies",
+      "url": "https://capec.mitre.org/data/definitions/31.html"
+    }
+  ]
+}

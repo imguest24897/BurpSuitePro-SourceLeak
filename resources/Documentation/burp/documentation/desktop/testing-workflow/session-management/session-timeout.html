@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/session-management/index.html">Testing session management mechanisms</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/session-management/session-timeout.html">Determining the session timeout</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Determining the session timeout</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/NU8REmpuAnE?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    When a user doesn't use an application for a certain amount of time, most applications will automatically log out the user and destroy their session.
+</p>
+<p>
+    To determine how long it takes for a session to timeout, you can use Burp Intruder to issue the same request multiple times with increasing delays. This enables you to test compliance with security standards that require applications to timeout within a specified period. A longer timeout gives an attacker more time to use or guess a session token.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="steps">Steps</h2>
+<p>
+    You can follow along with the process below using <a href="https://ginandjuice.shop">ginandjuice.shop</a>, our deliberately vulnerable demonstration site.
+</p>
+<p>
+    To determine the session timeout:
+</p>
+<ol>
+    <li>
+        In Burp's browser, log in to your target website. If you're using <code>ginandjuice.shop</code>, the correct credentials are <code>carlos:hunter2</code>.
+    </li>
+    <li>
+        Go to <strong>Proxy &gt; HTTP history</strong>. Identify a logged-in request and send it to Intruder.
+    </li>
+    <li>
+        Go to the <strong>Intruder</strong> tab.
+    </li>
+    <li>
+        Go to the <strong>Intruder &gt; Payloads</strong> tab. Under <strong>Payload type</strong>, select <strong>Null payloads</strong>.
+    </li>
+    <li>
+        Under <strong>Payload settings [Null payloads]</strong>, select <strong>Continue indefinitely</strong>.
+    </li>
+    <li>
+        Go to the <strong>Intruder &gt; Resource pool</strong> tab. Select <strong>Create new resource pool</strong>.
+    </li>
+    <li>
+        <p>
+            In the resource pool settings, select <strong>Delay between requests</strong>, then <strong>Increase delay in increments of ___ milliseconds</strong>. Add a delay time.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/tutorials/determining-session-timeout-1.png" alt="Resource pool for session timeout" class="center-block">
+        </div>
+    </li>
+    <li>
+        Click <strong>Start attack</strong>. The attack starts running in a new dialog. Intruder repeatedly sends the requests, with an increasing delay between requests.
+    </li>
+    <li>
+        With the attack results dialog open, click <strong>Columns</strong> on the top-level menu and select <strong>Time of day</strong>. A <strong>Time of day</strong> column is added to the results table. Sort the results by this column.
+    </li>
+    <li>
+        Review the responses as the attack progresses. Identify the first request that indicates the session is invalid. For example, look for a redirection to a login page.
+    </li>
+    <li>
+        To determine the session timeout, identify the time difference between the logged-out request and the previous request.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        This attack may take some time. To continue the attack in the background, close the results dialog and click <strong>Continue attack in background</strong>. The attack is added to the <strong>Tasks</strong> panel on the <strong>Dashboard</strong>.
+    </p>
+</div>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/desktop/tools/intruder/index.html">Burp Intruder</a>
+    </p>
+</div>
+</body>
+</html>

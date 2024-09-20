@@ -1,0 +1,201 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/index.html">Settings</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/tools/repeater.html">Repeater</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Repeater settings</h1>
+<p>
+    The <strong>Repeater</strong> page in the <strong>Settings</strong> dialog contains settings for the following:
+</p>
+<ul>
+    <li>
+        <a href="#connections">Connections</a>.
+    </li>
+    <li>
+        <a href="#message-modification">Message modification</a>.
+    </li>
+    <li>
+        <a href="#redirects">Redirects</a>.
+    </li>
+    <li>
+        <a href="#default-tab-group">Default tab group</a>.
+    </li>
+    <li>
+        <a href="#tab-view">Tab view</a>.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You can override the settings selected in the <strong>Settings</strong> dialog for an individual Repeater tab. For more information, see <a href="/burp/documentation/desktop/tools/repeater/tab-settings.html">Configuring tab-specific settings</a>.
+    </p>
+    <p>
+        Otherwise, these global settings apply to all Repeater tabs.
+    </p>
+</div>
+<h2 id="connections">Connections</h2>
+<p>
+    These settings control whether Repeater reuses TCP connections, and whether it can send HTTP/2 requests when the server doesn't advertise HTTP/2 support.
+</p>
+<p>
+    The following settings are available:
+</p>
+<ul>
+    <li>
+        <strong>HTTP/1 connection reuse</strong> - Enable this setting to reuse the same connection for HTTP/1 requests, instead of opening a new connection for each HTTP 1.1 request / response pair. This increases speed and benefits request timing. Burp closes any open connection after five seconds of inactivity.
+    </li>
+    <li>
+        <strong>HTTP/2 connection reuse</strong> - By default, Repeater reuses the same TCP connection for multiple HTTP/2 requests. You may want to disable this setting if the server treats the first request on a connection differently to subsequent requests.
+    </li>
+    <li>
+        <strong>Allow HTTP/2 ALPN override</strong> - Enable this setting to use ALPN to send HTTP/2 requests when the server doesn't advertise HTTP/2 support. This enables you to test for hidden HTTP/2 support, and explore hidden HTTP/2 attack surfaces.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/desktop/http2/index.html#enable-http-2-connection-reuse">Working with HTTP/2 in Burp Suite</a>.
+    </p>
+</div>
+<p>
+    The <strong>Connections</strong> settings are project settings. They apply to the current project only.
+</p>
+<h2 id="message-modification">Message modification</h2>
+<p>
+    These settings control Repeater's behavior when sending or receiving messages. The following settings are available:
+</p>
+<ul>
+    <li>
+        <strong>Update Content-Length</strong> - By default, Burp automatically updates the Content-Length header of the request. This is usually necessary when the request message contains a body.
+    </li>
+    <li>
+        <strong>Unpack compressed responses</strong> - By default, Burp automatically unpacks any gzip, deflate, and Brotli-compressed content received in responses.
+    </li>
+    <li>
+        <strong>Normalize HTTP/1 line endings</strong> - By default, Burp normalizes HTTP/1 line endings by appending a carriage return <code>(\r)</code> to any lines that end with a newline character <code>(\n)</code>. The carriage return appends immediately before the newline, which reduces the risk of sending an invalid request. You can disable this setting when you intentionally omit the newline to test for vulnerabilities such as request smuggling.
+    </li>
+    <li>
+        <strong>Strip Connection header over HTTP/2</strong> - By default, Burp strips the <code>Connection</code> header from HTTP/2 requests before the requests are sent. Many HTTP/2 servers reject requests that contain this header. You can disable this setting to see how the server responds when it receives a HTTP/2 request with a <code>Connection</code> header.
+    </li>
+</ul>
+<p>
+    The <strong>Message modification</strong> settings are project settings. They apply to the current project only.
+</p>
+<h2 id="redirects">Redirects</h2>
+<p>
+    These settings control how Repeater handles redirection responses.
+</p>
+<h3 id="follow-redirects">Follow redirects</h3>
+<p>
+    You can control whether Repeater follows redirects automatically. The following options are available:
+</p>
+<ul>
+    <li>
+        <strong>Never</strong> - Never follow redirects.
+    </li>
+    <li>
+        <strong>On-site only</strong> - Follow redirects that point to a destination in the same domain.
+    </li>
+    <li>
+        <strong>In-scope only</strong> - Follow redirects that point to a destination that is in-scope.
+    </li>
+    <li>
+        <strong>Always</strong> - Always follow redirects.
+    </li>
+</ul>
+<p>
+    Repeater displays a <strong>Follow redirection</strong> button if it receives a redirect response that it is not configured to follow automatically. Click this button to follow the redirect. This enables you to manually step through a redirection sequence.
+</p>
+<h3 id="process-cookies-in-redirects">Process cookies in redirects</h3>
+<p>
+    If you enable this setting, Burp resubmits any cookies set in the redirect response when it follows the redirection target.
+</p>
+<h3 id="use-selected-protocol-for-cross-domain-redirects">Use selected protocol for cross-domain redirects</h3>
+<p>
+    This setting controls whether Repeater uses the protocol selected under the <strong>Request Attributes</strong> field in Burp Inspector to follow any cross-domain redirects. By default, this setting is disabled and Repeater negotiates protocol as normal.
+</p>
+<p>
+    You may wish to enable this setting when you test for HTTP/2-specific vulnerabilities that trigger cross-domain requests.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/desktop/http2/index.html#enable-http-2-connection-reuse">Working with HTTP/2 in Burp Suite</a>.
+    </p>
+</div>
+<p>
+    The <strong>Redirects</strong> settings are project settings. They apply to the current project only.
+</p>
+<h2 id="default-tab-group">Default tab group</h2>
+<p>
+    This setting enables you to specify the tab group that new requests are added to when you send them to Repeater.
+</p>
+<p>
+    Use the drop-down menu to specify the tab group that you want to add new requests to.
+</p>
+<p>
+    Before you use this setting, create a tab group in Repeater. For more information, see <a href="/burp/documentation/desktop/tools/repeater/groups.html">Managing tab groups</a>.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        This setting doesn't influence new request tabs that you create within Repeater. These aren't allocated to a group when they're created.
+    </p>
+</div>
+<p>
+    The <strong>Default tab group</strong> setting is a project setting. It applies to the current project only.
+</p>
+<h2 id="tab-view">Tab view</h2>
+<p>
+    This setting controls the default tab view in Repeater. The following options are available:
+</p>
+<ul>
+    <li>
+        <strong>Scrolling view</strong> - Tabs are displayed in a single, scrollable row. Click on the search icon <span class="icon-search21"></span> to view a drop-down list of all open tabs.
+    </li>
+    <li>
+        <strong>Wrapped view</strong> - Tabs wrap into multiple rows.
+    </li>
+</ul>
+<p>
+    The <strong>Tab view</strong> setting is a user setting. It applies to all installations of Burp on your machine.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/desktop/tools/repeater/managing-tabs.html">Managing Burp Repeater tabs</a>.
+    </p>
+</div>
+</body>
+</html>

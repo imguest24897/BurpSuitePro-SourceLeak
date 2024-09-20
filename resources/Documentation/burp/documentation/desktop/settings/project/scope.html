@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/index.html">Settings</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/project/index.html">Project</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/project/scope.html">Scope</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Scope settings</h1>
+<p>
+    The Scope settings page enables you to configure the following:
+</p>
+<ul>
+    <li>
+        <a href="#target-scope">Target scope</a>.
+    </li>
+    <li>
+        <a href="#out-of-scope-request-handling">Out-of-scope request handling</a>.
+    </li>
+</ul>
+<p>
+    The <strong>Scope</strong> settings are project settings. They apply to the current project only.
+</p>
+<h2 id="target-scope">Target scope</h2>
+<p>
+    These settings determine which hosts and URLs are in scope for your current project. This changes the behavior of tools throughout Burp.
+</p>
+<p>
+    For more information, see <a href="/burp/documentation/desktop/tools/target/scope/index.html">Setting the target scope</a>
+</p>
+<h2 id="out-of-scope-request-handling">Out-of-scope request handling</h2>
+<p>
+    These settings determine whether Burp issues out-of-scope requests.
+</p>
+<p>
+    Select <strong>Drop all out-of-scope requests</strong> to prevent Burp from issuing any out-of-scope requests. With this setting enabled, out-of-scope outgoing requests are dropped by Burp even if the browser explicitly requests them.
+</p>
+<p>
+    You can select how Burp defines an out-of-scope request:
+</p>
+<ul>
+    <li>
+        <strong>Use suite scope</strong> - Select this option to use the <a href="#target-scope">suite target scope</a> to determine which requests to drop.
+    </li>
+    <li>
+        <strong>Use custom scope</strong> - Select this option to define a custom scope to determine which requests to drop.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        For more information on setting the suite-wide scope, see <a href="/burp/documentation/desktop/tools/target/scope/index.html">Setting the target scope</a>.
+    </p>
+</div>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/access-controls/index.html">Testing access controls</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/access-controls/testing-for-idors.html">Testing for IDORs</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Testing for IDORs</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/7U8pfuqpuBQ?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    Insecure Direct Object References (IDORs) are a type of access control vulnerability in which an application uses user-supplied input to access objects such as files, directories, or database records directly.
+</p>
+<p>
+    If suitable access controls are not in place, this enables attackers to manipulate these references and gain access to other objects without authorization.
+</p>
+<p>
+    IDORs are sometimes confused with other types of access control vulnerability. Note that the term "IDOR" specifically refers to vulnerabilities in which an application exposes references to its own internal implementation objects.
+</p>
+<h2 id="steps" cms-ignore-validation="DUPLICATE_HEADINGS">Steps</h2>
+<p>
+    These steps use the <a href="https://portswigger.net/web-security/access-control/lab-user-id-controlled-by-request-parameter">User ID controlled by request parameter</a> Web Security Academy lab to demonstrate the process. However, the principle of running a Sniper attack in Burp Intruder should apply to any application in which you find exposed object references in a URL.
+</p>
+<ol>
+    <li>
+        <p>
+            Identify parameters or other locations in which you suspect an IDOR vulnerability exists.
+        </p>
+        <p>
+            In the example lab you would select <strong>My account</strong> and log in using username <code>wiener</code> and password <code>peter</code>. Note that the URL now shows the query parameter <code>id=wiener</code>. This strongly indicates that, on this site, the user ID is used to retrieve the relevant user's data in order to render the account page.
+        </p>
+    </li>
+    <li>
+        <p>
+            Forward the relevant request to Burp Intruder. In the example lab, this is the <code>GET /my-account?id=wiener</code> request from the <strong>HTTP History</strong> tab.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/testing-workflow/images/testing-for-idors/idors-request.png" alt="IDORs request" class="center-block">
+        </div>
+    </li>
+    <li>
+        <p>
+            Select the <strong>Intruder</strong> tab and make sure the attack type is set to <strong>Sniper</strong>.
+        </p>
+    </li>
+    <li>
+        <p>
+            Highlight the parameter that you want to test and click <strong>Add §</strong> to set this as a payload position.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/testing-workflow/images/testing-for-idors/idors-payload-position.png" alt="IDORs payload position" class="center-block">
+        </div>
+    </li>
+    <li>
+        <p>
+            Select the <strong>Payloads</strong> tab and add a list of the test values you want to use in the attack. The example lab requires a list of usernames. If you're using Burp Suite Professional, you can open the <strong>Add from list</strong> drop-down menu and select the <strong>Usernames</strong> list.
+        </p>
+    </li>
+    <li>
+        <p>
+            Click <strong>Start attack</strong>. Burp Intruder sends a series of new requests, replacing the selected payload positions with each username in the list.
+        </p>
+    </li>
+    <li>
+        <p>
+            Study the responses to look for indications that some of the requests sent in the attack were successful.
+        </p>
+        <p>
+            In this case, requests sent to <code>/my-account?id=administrator</code> and <code>/my-account?id=carlos</code> received a <code>200 OK</code> response. This indicates that you may be able to access the account pages for these usernames without authorization. If the responses to these requests show that the page was retrieved then the IDOR vulnerability is confirmed.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/testing-workflow/images/testing-for-idors/idors-results.png" alt="IDORs results" class="center-block">
+        </div>
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/web-security/access-control/idor.html">Web Security Academy: Insecure direct object references (IDOR)</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/index.html">Burp Intruder documentation</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

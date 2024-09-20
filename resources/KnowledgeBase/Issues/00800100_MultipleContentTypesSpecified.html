@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+Multiple content types specified
+<h1>Typical severity</h1>
+
+Information
+
+<h1>Issue description</h1>
+
+<p>If a  response specifies multiple incompatible content types, then the browser will usually analyze the response and attempt to determine the actual MIME type of its content. This can have unexpected results, and if the content contains any user-controllable data may lead to cross-site scripting or other client-side vulnerabilities.</p>
+<p>In most cases, the presence of multiple incompatible content type statements does not constitute a security flaw, particularly if the response contains static content. You should review the contents of affected responses, and the context in which they appear, to determine whether any vulnerability exists. </p>
+
+<h1>Issue remediation</h1>
+
+<p>For every response containing a message body, the application should include a single Content-type header that correctly and unambiguously states the MIME type of the content in the response body.</p>
+
+<h1>References</h1>
+
+<ul>
+    <li><a href="https://portswigger.net/web-security/cross-site-scripting">Web Security Academy: Cross-site scripting</a></li>
+</ul>
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+<li><a href="https://cwe.mitre.org/data/definitions/436.html">CWE-436: Interpretation Conflict</a></li>
+    <li><a href="https://capec.mitre.org/data/definitions/63.html">CAPEC-63: Cross-Site Scripting (XSS)</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

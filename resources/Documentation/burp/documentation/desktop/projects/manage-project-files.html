@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/projects/index.html">Project files</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/projects/manage-project-files.html">Managing project files</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Managing project files</h1>
+<p>
+    Once you create a project file, you can share it with other people. This section explains how to:
+</p>
+<ul>
+    <li>
+        <a href="#saving-a-copy-of-a-project">Save a copy of a project file</a>.
+    </li>
+    <li>
+        <a href="#importing-project-files">Import a project file</a>.
+    </li>
+    <li>
+        <a href="#recovering-data-from-corrupted-project-files">Recover data from a corrupted project file</a>.
+    </li>
+</ul>
+<h2 id="saving-a-copy-of-a-project">Saving a copy of a project</h2>
+<p>
+    This feature can help you to create a smaller project file after you refine your project scope, or delete unwanted data.
+</p>
+<p>
+    You can continue to use Burp while the project saves. You may experience delays if you try to perform an operation on data while it is being saved. This is intended to prevent data corruption.
+</p>
+<p>
+    To save a copy of the project file:
+</p>
+<ol>
+    <li>
+        From the top menu bar, select <strong>Project &gt; Save copy</strong>.
+    </li>
+    <li>
+        Select the tools you want to include data for, and whether you want to <strong>Save in-scope items only</strong>. Click <strong>Next</strong>.
+    </li>
+    <li>
+        Select whether to include Dashboard data and Burp Collaborator identifiers. Click <strong>Next</strong>.
+    </li>
+    <li>
+        Enter a filename, and click <strong>Save</strong>.
+    </li>
+    <li>
+        Close the wizard.
+    </li>
+</ol>
+<h3 id="saving-the-burp-collaborator-identifier">Saving the Burp Collaborator identifier</h3>
+<p>
+    When you save a copy of a project file, you can include the <a href="/burp/documentation/collaborator/index.html">Burp Collaborator</a> identifier. This enables Burp to retrieve ongoing Burp Collaborator interactions for the project.
+</p>
+<p>
+    We recommend that you don't include the Burp Collaborator identifier in the following circumstances:
+</p>
+<ul>
+    <li>
+        You plan to share the project file with someone but you don't want them to receive details of ongoing Burp Collaborator interactions.
+    </li>
+    <li>
+        You plan to run the project on two instances of Burp at the same time. This can cause some issues to be missed or reported incorrectly.
+    </li>
+</ul>
+<h2 id="importing-project-files">Importing project files</h2>
+<p>
+    If you use a disk-based project, you can import another project file into your current project.
+</p>
+<div class="highlightedarea">
+    <h4>Warning</h4>
+    <p>
+        You can import project and configuration files from other users. However, for security reasons, we recommend only importing project and configuration files from trusted sources.
+    </p>
+</div>
+<p>
+    You can continue to use Burp while the project file is being imported. You may experience delays if you try to perform an operation on data while it is being imported. This is intended to prevent data corruption.
+</p>
+<p>
+    To import a project:
+</p>
+<ol>
+    <li>
+        From the top menu bar, select <strong>Project &gt; Import project file</strong>.
+    </li>
+    <li>
+        Select the project file you want to import, and click <strong>Open</strong>.
+    </li>
+    <li>
+        Select the tools you want to import data for, and whether you want to <strong>Pause Automated Tasks</strong> and <strong>Trust this project file</strong>. Click <strong>Next</strong>.
+    </li>
+    <li>
+        Wait for the file to import, then click <strong>Close</strong>.
+    </li>
+</ol>
+<h2 id="recovering-data-from-corrupted-project-files">Recovering data from corrupted project files</h2>
+<p>
+    Project files can become corrupted if Burp crashes, or if you open project files created in newer versions of Burp.
+</p>
+<p>
+    If you try to open a corrupted project file, Burp automatically opens the project file recovery tool:
+</p>
+<ol>
+    <li>
+        Select a location and filename for the data recovery file.
+    </li>
+    <li>
+        Click <strong>Recover data</strong> and wait for Burp to recover the data.
+    </li>
+    <li>
+        When prompted, click <strong>Open recovered data file</strong>.
+    </li>
+</ol>
+<p>
+    Burp recovers as much data as possible from the damaged project file and stores it in a recovery file. The recovery file may be larger than the original project file.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        If you need to recover data from a corrupted project file, we recommend that you treat the recovery file as read only. If you continue to use the recovery file as a project file, you risk an increased chance of crashes and data loss.
+    </p>
+    <p>
+        It is not always possible for the project file recovery tool to recover your data from a corrupted file.
+    </p>
+</div>
+</body>
+</html>

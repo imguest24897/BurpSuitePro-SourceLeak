@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Settings</title>
+        <link href="../css/bootstrap/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/bootstrap/bootstrap-icons.css" rel="stylesheet">
+        <script src="../js/bootstrap/bootstrap.bundle.min.js"></script>
+        <script src="../js/jquery/jquery-3.6.0.min.js"></script>
+        <link rel="Stylesheet" href="../css/styles.css" />
+        <link rel="Stylesheet" href="../css/bootstrap-overrides.css" />
+    </head>
+    <body class="settings">
+        <div class="logo-and-help">
+            <button id="helpBtn">?</button>
+            <img src="../images/DomInvader-32.png" alt="DomInvader Logo"/>
+        </div>
+        <div class="container">
+            <h1>Settings</h1>
+            <div id="version">Version: 1.3.1</div>
+            <form>
+
+                <div class="accordion" id="accordionSettings">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="mainSettings">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Main settings
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="mainSettings" data-bs-parent="#accordionSettings">
+                            <div class="accordion-body">
+                                <div class="form-check form-switch">
+
+                                    <div class="modal fade" id="generalConfiguration" tabindex="-1" aria-labelledby="sinksConfigurationLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <nav>
+                                                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                            <button class="nav-link active" id="nav-sinks-tab" data-bs-toggle="tab" data-bs-target="#nav-sinks" type="button" role="tab" aria-controls="nav-sinks" aria-selected="true">Sinks</button>
+                                                            <button class="nav-link" id="nav-custom-sinks-tab" data-bs-toggle="tab" data-bs-target="#nav-custom-sinks" type="button" role="tab" aria-controls="nav-custom-sinks" aria-selected="true">Custom Sinks</button>
+                                                            <button class="nav-link" id="nav-sources-tab" data-bs-toggle="tab" data-bs-target="#nav-sources" type="button" role="tab" aria-controls="nav-sources" aria-selected="false">Sources</button>
+                                                            <button class="nav-link" id="nav-messages-tab" data-bs-toggle="tab" data-bs-target="#nav-messages" type="button" role="tab" aria-controls="nav-messages" aria-selected="false">Messages</button>
+                                                        </div>
+                                                    </nav>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="tab-content" id="nav-tabContent">
+                                                        <div class="tab-pane fade show active" id="nav-sinks" role="tabpanel" aria-labelledby="nav-sinks-tab">
+                                                            <h5 class="modal-title" id="sinksConfigurationLabel">Show/hide sinks</h5>
+                                                            <div id="sinksConfigurationContainer"></div>
+                                                        </div>
+                                                        <div class="tab-pane fade show" id="nav-custom-sinks" role="tabpanel" aria-labelledby="nav-custom-sinks-tab">
+                                                            <h5 class="modal-title" id="customSinksConfigurationLabel">Custom sinks</h5>
+                                                            <div id="customSinksConfigurationContainer"></div>
+                                                        </div>
+                                                        <div class="tab-pane fade" id="nav-sources" role="tabpanel" aria-labelledby="nav-sources-tab">
+                                                            <h5 class="modal-title" id="sourcesLabel">Show/hide sources</h5>
+                                                            <div id="sourcesTrackingContainer"></div>
+                                                        </div>
+                                                        <div class="tab-pane fade" id="nav-messages" role="tabpanel" aria-labelledby="nav-messages-tab">
+                                                            <h5 class="modal-title" id="messagesLabel">Messages configuration</h5>
+                                                            <div id="messagesContainer"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <div id="sinkControls">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-secondary" id="selectNoSinks">None</button>
+                                                        <button type="button" class="btn btn-secondary" id="selectAllSinks">All</button>
+                                                        <button type="button" class="btn btn-secondary" id="selectInterestingSinks">Interesting</button>
+                                                        <button type="button" class="btn btn-secondary" id="resetSinksConfiguration">Reset</button>
+                                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="saveSinksConfiguration">Save</button>
+                                                    </div>
+                                                    <div id="customSinkControls">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    </div>
+                                                    <div class="d-none" id="sourceControls">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-secondary" id="selectNoSources">None</button>
+                                                        <button type="button" class="btn btn-secondary" id="selectAllSources">All</button>
+                                                        <button type="button" class="btn btn-secondary" id="resetSourcesTracking">Reset</button>
+                                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="saveSourcesTracking">Save</button>
+                                                    </div>
+                                                    <div class="d-none" id="messageControls">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal fade" id="sinksCallbackConfiguration" tabindex="-1" aria-labelledby="sinksCallbackConfigurationLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="sinksCallbackConfigurationLabel">Sinks callback configuration</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="alert alert-warning d-flex align-items-center" role="alert">
+
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+                                                            <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+                                                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                                                            </symbol>
+                                                            <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+                                                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                                                            </symbol>
+                                                            <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+                                                                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                                            </symbol>
+                                                        </svg>
+
+                                                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"></use></svg>
+                                                        <div>
+                                                            This is for advanced users only. Please ensure this is valid JavaScript.
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="sinkCallbackElement">Sink callback</label>
+                                                        <textarea class="form-control" id="sinkCallbackElement"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="resetSinksCallbackConfiguration">Reset</button>
+                                                    <button type="button" class="btn btn-primary" id="saveSinksCallbackConfiguration">Save</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal fade" id="addSinkConfiguration" tabindex="-1" aria-labelledby="addSinkConfigurationLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="addSinkConfigurationLabel">Add custom sink</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row row-cols-1 pb-2 mb-2 pt-2 mt-2 border-bottom">
+                                                        <div class="col-6"><label class="col-form-label">Sink name:</label></div>
+                                                        <div class="col-6"><input class="form-control" id="sinkName"></div>
+                                                    </div>
+                                                    <div class="row row-cols-1 pb-2 mb-2 pt-2 mt-2 border-bottom">
+                                                        <div class="col-6"><label class="col-form-label">Object to instrument:</label></div>
+                                                        <div class="col-6"><input class="form-control" id="objectToInstrument" value="window.yourObject"></div>
+                                                    </div>
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input" type="checkbox" id="lookForCanary" checked="checked" />
+                                                        <label class="form-check-label" for="lookForCanary">Look for canary?</label>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary" id="saveCustomSinkConfiguration">Add</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal fade" id="sourcesCallbackConfiguration" tabindex="-1" aria-labelledby="sourcesCallbackConfigurationLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="sourcesCallbackConfigurationLabel">Sources callback configuration</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="alert alert-warning d-flex align-items-center" role="alert">
+
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+                                                            <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+                                                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                                                            </symbol>
+                                                            <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+                                                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                                                            </symbol>
+                                                            <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+                                                                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                                            </symbol>
+                                                        </svg>
+
+                                                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"></use></svg>
+                                                        <div>
+                                                            This is for advanced users only. Please ensure this is valid JavaScript.
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="sourceCallbackElement">Source callback</label>
+                                                        <textarea class="form-control" id="sourceCallbackElement"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="resetSourcesCallbackConfiguration">Reset</button>
+                                                    <button type="button" class="btn btn-primary" id="saveSourcesCallbackConfiguration">Save</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal fade" id="messagesCallbackConfiguration" tabindex="-1" aria-labelledby="messagesCallbackConfigurationLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="messagesCallbackConfigurationLabel">Messages callback configuration</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="alert alert-warning d-flex align-items-center" role="alert">
+
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+                                                            <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+                                                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                                                            </symbol>
+                                                            <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+                                                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                                                            </symbol>
+                                                            <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+                                                                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                                            </symbol>
+                                                        </svg>
+
+                                                        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"></use></svg>
+                                                        <div>
+                                                            This is for advanced users only. Please ensure this is valid JavaScript.
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="messageCallbackElement">Message callback</label>
+                                                        <textarea class="form-control" id="messageCallbackElement"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="resetMessagesCallbackConfiguration">Reset</button>
+                                                    <button type="button" class="btn btn-primary" id="saveMessagesCallbackConfiguration">Save</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input class="form-check-input" type="checkbox" id="onOffSwitch" />
+                                    <label class="form-check-label" for="onOffSwitch" id="switchLabel">DOMInvader is on</label>
+                                    <button type="button" class="btn btn-primary configure-btn float-end" id="generalConfigurationBtn">
+                                        <i class="bi bi-gear-fill"></i>
+                                    </button>
+                                </div>
+                                <fieldset class="extensionDependent">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="onOffPostmessageSwitch" />
+                                        <label class="form-check-label" for="onOffPostmessageSwitch" id="switchPostmessageLabel">Postmessage interception is off</label>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset id="postMessageDependent" class="extensionDependent">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="spoofOriginSwitch" />
+                                        <label class="form-check-label" for="spoofOriginSwitch" id="spoofOriginLabel">Postmessage origin spoofing is off</label>
+                                    </div>
+
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="injectCanarySwitch" />
+                                        <label class="form-check-label" for="injectCanarySwitch" id="injectCanaryLabel">Canary injection into intercepted messages is off</label>
+                                    </div>
+
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="duplicateValuesSwitch" />
+                                        <label class="form-check-label" for="duplicateValuesSwitch" id="duplicateValuesLabel">Filter messages with duplicate values is off</label>
+                                    </div>
+
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="guessStringsSwitch" />
+                                        <label class="form-check-label" for="guessStringsSwitch" id="guessStringsLabel">Generate automated messages is off</label>
+                                    </div>
+
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="crossDomainLeaksSwitch" />
+                                        <label class="form-check-label" for="crossDomainLeaksSwitch" id="crossDomainLeaksLabel">Detect cross domain leaks is off</label>
+                                    </div>
+                                </fieldset>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="attackTypes">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Attack types
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="attackTypes" data-bs-parent="#accordionSettings">
+                            <div class="accordion-body">
+                                <fieldset class="extensionDependent">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="domClobberingSwitch" />
+                                        <label class="form-check-label" for="domClobberingSwitch" id="domClobberingLabel">DOM clobbering is off</label>
+                                        <div id="clobber-warning" class="alert alert-warning d-none">
+                                            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"></use></svg>
+                                            Warning: Site functionality is likely to break
+                                        </div>
+                                    </div>
+                                    <div class="form-check form-switch">
+
+                                        <div class="modal fade" id="techniquesConfiguration" tabindex="-1" aria-labelledby="techniquesConfigurationLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="techniquesConfigurationLabel">Techniques configuration</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div id="techniquesConfigurationContainer"></div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-secondary" id="selectNoTechniques">None</button>
+                                                        <button type="button" class="btn btn-secondary" id="resetTechniques">Reset</button>
+                                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="saveTechniques">Save</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal fade" id="prototypePollutionConfiguration" tabindex="-1" aria-labelledby="prototypePollutionConfigurationLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="prototypePollutionConfigurationLabel">Prototype pollution configuration</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="form-check form-switch">
+                                                            <input checked="checked" data-setting="prototypePollutionDiscoverProperties" class="form-check-input" type="checkbox" id="discoverPrototypePollutionPropertiesSwitch" />
+                                                            <label class="form-check-label" for="discoverPrototypePollutionPropertiesSwitch" id="discoverPrototypePollutionPropertiesLabel">Scan for gadgets is on</label>
+                                                        </div>
+                                                        <div class="form-check form-switch">
+                                                            <label for="propertiesPerFrameRange" class="form-label">Amount of properties to scan per iframe</label>
+                                                            <div class="row">
+                                                                <div class="col-5 text-start"><i class="bi bi-arrow-left"></i> Slower more accurate</div>
+                                                                <div class="col-2 text-center"><output disabled id="propertiesPerFrameOutput"></output></div>
+                                                                <div class="col-5 text-end">Faster less accurate <i class="bi bi-arrow-right"></i></div>
+                                                            </div>
+                                                            <input type="range" data-setting="prototypePollutionPropertiesPerFrame" class="form-range" min="1" max="500" id="propertiesPerFrameRange">
+                                                        </div>
+                                                        <div class="form-check form-switch">
+                                                            <input checked="checked" data-setting="prototypePollutionAutoScale" class="form-check-input" type="checkbox" id="autoScalePrototypePollutionSwitch" />
+                                                            <label class="form-check-label" for="autoScalePrototypePollutionSwitch" id="autoScalePrototypePollutionLabel">Auto scale amount of properties per frame is on</label>
+                                                        </div>
+                                                        <div class="form-check form-switch">
+                                                            <input checked="checked" data-setting="prototypePollutionNested" class="form-check-input" type="checkbox" id="nestedPrototypePollutionSwitch" />
+                                                            <label class="form-check-label" for="nestedPrototypePollutionSwitch" id="nestedPrototypePollutionLabel">Scan nested properties is on</label>
+                                                        </div>
+                                                        <div class="form-check form-switch">
+                                                            <input checked="checked" data-setting="prototypePollutionQueryString" class="form-check-input" type="checkbox" id="queryStringPrototypePollutionSwitch" />
+                                                            <label class="form-check-label" for="queryStringPrototypePollutionSwitch" id="queryStringPrototypePollutionLabel">Query string injection is on</label>
+                                                        </div>
+                                                        <div class="form-check form-switch">
+                                                            <input checked="checked" data-setting="prototypePollutionHash" class="form-check-input" type="checkbox" id="hashPrototypePollutionSwitch" />
+                                                            <label class="form-check-label" for="hashPrototypePollutionSwitch" id="hashPrototypePollutionLabel">Hash injection is on</label>
+                                                        </div>
+                                                        <div class="form-check form-switch">
+                                                            <input checked="checked" data-setting="prototypePollutionJson" class="form-check-input" type="checkbox" id="jsonPrototypePollutionSwitch" />
+                                                            <label class="form-check-label" for="jsonPrototypePollutionSwitch" id="jsonPrototypePollutionLabel">JSON injection is on</label>
+                                                        </div>
+                                                        <div class="form-check form-switch">
+                                                            <input checked="checked" data-setting="prototypePollutionVerify" class="form-check-input" type="checkbox" id="verifyPrototypePollutionSwitch" />
+                                                            <label class="form-check-label" for="verifyPrototypePollutionSwitch" id="verifyPrototypePollutionLabel">Verify onload is on</label>
+                                                        </div>
+                                                        <div class="form-check form-switch">
+                                                            <input data-setting="prototypePollutionCSP" class="form-check-input" type="checkbox" id="cspPrototypePollutionSwitch" />
+                                                            <label class="form-check-label" for="cspPrototypePollutionSwitch" id="cspPrototypePollutionLabel">Remove CSP header is off</label>
+                                                        </div>
+                                                        <div class="form-check form-switch">
+                                                            <input data-setting="prototypePollutionXFrameOptions" class="form-check-input" type="checkbox" id="xFrameOptionsPrototypePollutionSwitch" />
+                                                            <label class="form-check-label" for="xFrameOptionsPrototypePollutionSwitch" id="xFrameOptionsPrototypePollutionLabel">Remove X-Frame-Options header is off</label>
+                                                        </div>
+                                                        <div class="form-check form-switch">
+                                                            <input data-setting="prototypePollutionSeparateFrame" class="form-check-input" type="checkbox" id="separateFramePrototypePollutionSwitch" />
+                                                            <label class="form-check-label" for="separateFramePrototypePollutionSwitch" id="separateFramePrototypePollutionLabel">Scan each technique in separate frame is off</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="showPrototypePollutionTechniquesBtn">Techniques</button>
+                                                        <button type="button" class="btn btn-secondary" id="resetPrototypePollutionConfiguration">Reset</button>
+                                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="savePrototypePollutionConfiguration">Save</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <input class="form-check-input" type="checkbox" id="prototypePollutionSwitch" />
+                                        <label class="form-check-label" for="prototypePollutionSwitch" id="prototypePollutionLabel">Prototype pollution is off</label>
+                                        <button type="button" class="btn btn-primary configure-btn float-end" id="prototypePollutionConfigurationBtn">
+                                            <i class="bi bi-gear-fill"></i>
+                                        </button>
+                                    </div>
+                                </fieldset>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="misc">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Misc
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="misc" data-bs-parent="#accordionSettings">
+                            <div class="accordion-body">
+                                <fieldset class="extensionDependent">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="filterStackSwitch" />
+                                        <label class="form-check-label" for="filterStackSwitch" id="filterStackLabel">Message filtering by stack trace is off</label>
+                                    </div>
+
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="fireEventsSwitch" />
+                                        <label class="form-check-label" for="fireEventsSwitch" id="fireEventsLabel">Auto fire events are off</label>
+                                    </div>
+
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="preventRedirectionSwitch" />
+                                        <label class="form-check-label" for="preventRedirectionSwitch" id="preventRedirectionLabel">Redirection prevention is off</label>
+                                    </div>
+
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="redirectBreakpointSwitch" />
+                                        <label class="form-check-label" for="redirectBreakpointSwitch" id="redirectBreakpointLabel">Add breakpoint before redirect is off</label>
+                                    </div>
+
+                                    <div class="form-check form-switch">
+
+                                        <div class="modal fade" id="sourcesConfiguration" tabindex="-1" aria-labelledby="sourcesConfigurationLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="sourcesConfigurationLabel">Inject into sources configuration</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="container">
+                                                            <div class="row pb-2 mb-2 pt-2 mt-2 border-bottom">
+
+                                                                <div class="col-4">
+                                                                    <p>Inject into:</p>
+                                                                </div>
+
+                                                                <div class="col-8">
+
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio" id="allParams">
+                                                                        <label class="form-check-label" for="allParams">
+                                                                            All parameters
+                                                                        </label>
+                                                                    </div>
+
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio" id="specificParams">
+                                                                        <label class="form-check-label" for="specificParams">
+                                                                            The following parameters only
+                                                                        </label>
+                                                                    </div>
+
+                                                                    <input class="form-control" id="injectedParams" placeholder="[Enter params separated by commas]">
+
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-secondary" id="resetSourcesConfiguration">Reset</button>
+                                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="saveSourcesConfiguration">Save</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <input class="form-check-input" type="checkbox" id="sourcesInjectionSwitch">
+                                        <label class="form-check-label" for="sourcesInjectionSwitch" id="sourcesInjectionLabel">Inject canary into all sources is off</label>
+                                        <button disabled type="button" class="btn btn-primary configure-btn float-end" id="sourcesConfigurationBtn">
+                                            <i class="bi bi-gear-fill"></i>
+                                        </button>
+                                    </div>
+
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="permissionsPolicySwitch" />
+                                        <label class="form-check-label" for="permissionsPolicySwitch" id="permissionsPolicyLabel">Remove permissions policy header is off</label>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <fieldset class="extensionDependent">
+                    <div class="form-group" id="canaryForm">
+                       <div class="container">
+                           <div class="row row-cols-auto g-1">
+                            <div class="col"><input class="form-control" id="canary" placeholder="Canary"></div>
+                            <div class="col"><button type="button" class="btn btn-secondary" id="randomizeBtn">Randomize</button></div>
+                            <div class="col"><button type="button" class="btn btn-secondary" id="copyCanaryBtn">Copy</button></div>
+                            <div class="col"><button type="button" class="btn btn-primary" id="updateSettingsBtn">Update canary</button></div>
+                          </div>
+                       </div>
+                    </div>
+
+                 </fieldset>
+                <div id="reloadBrowserAlert" class="d-none" role="alert">
+                    <div class="info">In order for changed settings to take effect, you must reload your browser.</div>  <button type="button" class="btn btn-primary" id="reloadBtn">Reload</button>
+                </div>
+
+                <div id="openDevtoolsAlert" class="d-none" role="alert">
+                    <div class="info">Open devtools to use the extension. A DOM Invader tab has been added to devtools.</div>
+                </div>
+              </form>
+        </div>
+        <script src="../js/settings.js" type="module"></script>
+    </body>
+</html>

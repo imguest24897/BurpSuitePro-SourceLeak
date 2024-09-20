@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/index.html">Intruder</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/configure-attack/index.html">Configure attack</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Configuring Burp Intruder attacks</h1>
+<p>
+    When you send an HTTP request to Burp Intruder, it opens in a new attack tab. Burp Intruder enables you to insert payloads into defined positions in an HTTP request, then send each version of the request to the target server. You can configure various aspects of the attack:
+</p>
+<ul>
+    <li>
+        <a href="/burp/documentation/desktop/tools/intruder/configure-attack/positions.html">Payload positions</a> - The locations in the base request where payloads are placed.
+    </li>
+    <li>
+        <a href="/burp/documentation/desktop/tools/intruder/configure-attack/attack-types.html">Attack type</a> - The algorithm for placing payloads into your defined payload positions.
+    </li>
+    <li>
+        <a href="/burp/documentation/desktop/tools/intruder/configure-attack/payload-types.html">Payload type</a> - The type of payload that you want to inject into the base request. You can use a simple wordlist, but Burp Suite also provides a range of options for auto-generating payloads. Burp Suite Professional includes a range of <a href="/burp/documentation/desktop/tools/intruder/configure-attack/payload-lists.html">predefined payload lists</a> for use with compatible payload types.
+    </li>
+    <li>
+        <a href="/burp/documentation/desktop/tools/intruder/configure-attack/processing.html">Payload processing</a> - Rules to manipulate each payload before it is used.
+    </li>
+    <li>
+        <a href="/burp/documentation/desktop/tools/intruder/configure-attack/resource-pool.html">Resource pool</a> - The allocation of resources to the attack.
+    </li>
+    <li>
+        <a href="/burp/documentation/desktop/tools/intruder/configure-attack/settings.html">Attack settings</a> - Burp Intruder attack settings.
+    </li>
+</ul>
+<p>
+    You can use the top-level <strong>Intruder</strong> menu to save the attack configuration, or load it in a future attack. Alternatively you can copy the attack configuration into any open tab. For each function you can choose whether to include the payload positions.
+</p>
+<p>
+    Once you have configured the attack, click <strong>Start attack</strong> to send the request to the target server.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            For more information on using attack tabs, see <a href="/burp/documentation/desktop/tools/intruder/configure-attack/managing-tabs.html">Managing attack tabs</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

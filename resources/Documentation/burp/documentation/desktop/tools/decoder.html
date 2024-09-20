@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/decoder.html">Decoder</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Burp Decoder</h1>
+<p>
+    Burp Decoder enables you to transform data using common encoding and decoding formats. You can use Decoder to:
+</p>
+<ul>
+    <li>
+        Manually decode data.
+    </li>
+    <li>
+        Automatically identify and decode recognizable encoding formats, such as URL-encoding.
+    </li>
+    <li>
+        Transform raw data into various encoded and hashed formats.
+    </li>
+</ul>
+<p>
+    Decoder enables you to apply layers of transformations to the same data. This enables you to unpack or apply complex encoding schemes. For example, to generate modified data in the correct format for an attack, you could:
+</p>
+<ol>
+    <li>
+        Apply URL-decoding, then HTML-decoding.
+    </li>
+    <li>
+        Edit the decoded data.
+    </li>
+    <li>
+        Reapply the HTML-encoding, then the URL-encoding.
+    </li>
+</ol>
+<h2 id="carrying-out-transformations">Carrying out transformations</h2>
+<p>
+    You can send data to Burp Decoder from the message editor in various Burp tools, such as HTTP history. To carry out a data transformation using Burp Decoder:
+</p>
+<ol>
+    <li>
+        Locate the data that you want to analyze.
+    </li>
+    <li>
+        Right-click the data in the message editor and select <strong>Send to Decoder</strong>.
+    </li>
+    <li>
+        Go to the <strong>Decoder</strong> tab. The data is in the top panel.
+    </li>
+    <li>
+        Select the <a href="#operations">operation</a> you want to perform on the data from the controls beside the data panel. For example, <strong>Encode as</strong> or <strong>Smart decode</strong>.
+    </li>
+</ol>
+<p>
+    You can view the data in either <strong>Text</strong> or <strong>Hex</strong> form.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        To send a portion of a message from Burp, select the relevant section before you send it to Decoder.
+    </p>
+    <p>
+        You can also type or paste data directly into the Decoder editor panel.
+    </p>
+</div>
+<p>
+    When you carry out a transformation, a new editor panel opens with the transformed data. You can then apply further transformations as required. For each transformation, the following applies:
+</p>
+<ul>
+    <li>
+        The transformation applies to the whole data set. To apply the transformation to only a portion of the data, select the relevant section before you choose an operation.
+    </li>
+    <li>
+        The data is color-coded to indicate the type of encoding or decoding that is applied.
+    </li>
+    <li>
+        Any parts of the data that aren't transformed are copied into the new panel in their raw form.
+    </li>
+</ul>
+<h2 id="operations">Operations</h2>
+<ul>
+    <li>
+        <strong>Decode as</strong> - Apply a decoding function to the data.
+    </li>
+    <li>
+        <strong>Encode as</strong> - Apply an encoding function to the data.
+    </li>
+    <li>
+        <strong>Hash</strong> - Apply a hash function to the data. The available functions depend upon the capability of your Java platform.
+    </li>
+    <li>
+        <strong>Smart decode</strong> - Burp looks for encoded data, and applies layers of decoding until there aren't any further recognizable data formats. This is often useful as an automated first decoding step.
+    </li>
+</ul>
+<p>
+    The following decode and encode functions are available:
+</p>
+<ul>
+    <li>
+        URL.
+    </li>
+    <li>
+        HTML.
+    </li>
+    <li>
+        Base64.
+    </li>
+    <li>
+        ASCII hex.
+    </li>
+    <li>
+        Hex.
+    </li>
+    <li>
+        Octal.
+    </li>
+    <li>
+        Binary.
+    </li>
+    <li>
+        GZIP.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        The smart decode operation uses heuristic techniques to recognize common encoding formats, and can therefore make mistakes. You can quickly identify and fix incorrect transformations, as each layer of decoding is shown in a separate panel, and the type of decoding is indicated using color-coding.
+    </p>
+</div>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/session-management/index.html">Testing session management mechanisms</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/session-management/jwts.html">Working with JWTs</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Working with JWTs in Burp Suite</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/nKmvKZHwf4s?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    JSON web tokens (JWTs) are a standard format for sending cryptographically signed JSON data between systems. They're commonly used in authentication, session management, and access control mechanisms. This means that if an attacker can successfully modify a JWT, they may be able to escalate their own privileges or impersonate other users.
+</p>
+<p>
+    You can use Burp Inspector to view and decode JWTs. You can then use the JWT Editor extension to:
+</p>
+<ol>
+    <li>
+        Generate cryptographic signing keys.
+    </li>
+    <li>
+        Edit the JWT.
+    </li>
+    <li>
+        Resign the token with a valid signature that corresponds to the edited JWT.
+    </li>
+</ol>
+<p>
+    You can follow along with the process below using our <a href="/web-security/jwt/lab-jwt-authentication-bypass-via-unverified-signature.html">JWT authentication bypass via unverified signature</a> lab.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="before-you-start">Before you start</h2>
+<p>
+    Install the <a href="https://portswigger.net/bappstore/26aaa5ded2f74beea19e2ed8345a93dd">JWT Editor</a> extension. For more information, see <a href="/burp/documentation/desktop/extensions/installing-extensions.html">Installing extensions</a>.
+</p>
+<h2 id="viewing-jwts">Viewing JWTs</h2>
+<ol>
+    <li>
+        <p>
+            Identify a request with a JWT that you want to investigate further. Look for the highlighted requests in <strong>Proxy &gt; HTTP history</strong>, these are automatically flagged by the JWT Editor extension.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/tutorials/working-with-jwts-1.png" alt="Identify a request with a JWT" class="center-block">
+        </div>
+    </li>
+    <li>
+        <p>
+            To view the JWT contents, highlight sections of the token in turn. Notice that the content is automatically decoded in the <strong>Inspector</strong> panel.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/tutorials/working-with-jwts-2.png" alt="Viewing JWTs" class="center-block">
+        </div>
+    </li>
+    <li>
+        Review the contents of the JWT in the <strong>Inspector</strong> panel, to identify interesting information and determine any modifications that you want to make.
+    </li>
+</ol>
+<h2 id="editing-jwts">Editing JWTs</h2>
+<p>
+    To edit a JWT using the JWT Editor extension:
+</p>
+<ol>
+    <li>
+        Right-click the request with the JWT and select <strong>Send to Repeater</strong>.
+    </li>
+    <li>
+        In the request panel, go to the <strong>JSON Web Token</strong> tab.
+    </li>
+    <li>
+        Edit the JSON data as required in the <strong>Header</strong> and <strong>Payload</strong> fields.
+    </li>
+    <li>
+        Click <strong>Sign</strong>. A new dialog opens.
+    </li>
+    <li>
+        In the dialog, select the appropriate signing key, then click <strong>OK</strong>. The JWT is re-signed to correspond with the new values in the header and payload. If you haven't added a signing key, follow the instructions below.
+    </li>
+</ol>
+<h2 id="adding-a-jwt-signing-key">Adding a JWT signing key</h2>
+<p>
+    To add a signing key to Burp using the JWT Editor extension:
+</p>
+<ol>
+    <li>
+        Go to the <strong>JWT Editor Keys</strong> tab.
+    </li>
+    <li>
+        Click the button for the type of key that you want to add. For example, <strong>New Symmetric Key</strong>. A new dialog opens.
+    </li>
+    <li>
+        <p>
+            In the dialog, add the new key:
+        </p>
+        <ul>
+            <li>
+                Click <strong>Generate</strong> to create a new key.
+            </li>
+            <li>
+                Alternatively, paste an existing key into the dialog.
+            </li>
+        </ul>
+    </li>
+    <li>
+        Edit the key as required.
+    </li>
+    <li>
+        Click <strong>OK</strong> to save the key.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            Academy: <a href="/web-security/jwt/index.html">JWT attacks</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

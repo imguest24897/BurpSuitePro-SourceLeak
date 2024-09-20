@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/http2/index.html">HTTP/2</a>
+        </li>
+        <li>
+            <a href="http2-basics-for-burp-users.html">HTTP/2 basics for Burp users</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>HTTP/2 basics for Burp users</h1>
+<p>
+    In this section, we'll provide a brief overview of some of the fundamentals of HTTP/2. We'll focus exclusively on the parts that are relevant to Burp. A basic understanding of these background concepts will help you get the most out of Burp's <a href="/burp/documentation/desktop/http2/index.html">one-of-a-kind features</a> for working with <a href="/burp/documentation/desktop/http2/performing-http2-exclusive-attacks.html">HTTP/2-exclusive attack vectors</a>.
+</p>
+<h2 id="binary-protocol">Binary protocol</h2>
+<p>
+    As an HTTP/1 request is a single, text-based entity, servers have to use string operations to identify and extract the data they need based on a series of special delimiter characters. For example, each header is separated by a newline, while the name and value are separated by a colon.
+</p>
+<p>
+    Although Burp displays HTTP/2 requests in two different, <a href="/burp/documentation/desktop/http2/index.html">human-readable forms</a>, under the hood, they actually use a binary format. This means that servers can read the data from the request based on predetermined offsets. In other words, the point where each piece of information starts and ends is clearly defined, so there's no need for delimiter characters.
+</p>
+<p>
+    As a result, newlines, colons, and the like have no special meaning within an HTTP/2 request and can be injected in ways that are not possible in HTTP/1. For example, HTTP/2 header names and values are technically able to hold newline characters. Although this is officially prohibited according to the specification, by working with the Inspector, you can take advantage of the fact that some servers tolerate this anyway. This is the foundation for a number of <a href="/burp/documentation/desktop/http2/performing-http2-exclusive-attacks.html">HTTP/2-exclusive attacks</a> and some of our <a href="https://portswigger.net/research/http2">latest research</a>.
+</p>
+<h2 id="frames">Frames</h2>
+<p>
+    On the wire, HTTP/2 messages are sent as one or more separate "frames". The headers frame is equivalent to the request line and headers section of an HTTP/1 request. This may be followed by a number of data frames that contain the message body data.
+</p>
+<p>
+    For simplicity, we don't display the individual frames of HTTP/2 messages in Burp. We combine them to form a single request or response for you to work with.
+</p>
+<h2 id="message-length">Message length</h2>
+<p>
+    Each frame of an HTTP/2 message is preceded by an explicit length field that tells the server how many bytes to read in. Therefore, servers can easily work out the overall length of the message by simply calculating the sum of its frame lengths.
+</p>
+<p>
+    This is far simpler and more robust than the <code>Content-Length</code> or <code>Transfer-Encoding</code> mechanism used in HTTP/1.
+</p>
+<h2 id="header-capitalization">Header capitalization</h2>
+<p>
+    In HTTP/1, header names are typically case insensitive. In HTTP/2, sending uppercase letters in a header name is technically possible, but it may lead to the request being rejected by the server as this does not conform to the HTTP/2 specification.
+</p>
+<h2 id="pseudo-headers">Pseudo-headers</h2>
+<p>
+    In HTTP/2, a series of "pseudo-headers" is used to send key information about the message. Most notably, several pseudo-headers effectively replace the HTTP/1 request line and status line.
+</p>
+<p>
+    In total, there are five pseudo-headers:
+</p>
+<ul>
+    <li>
+        <p>
+            <code>:method</code> - The HTTP method of the request, such as <code>GET</code> or <code>POST</code>.
+        </p>
+    </li>
+    <li>
+        <p>
+            <code>:path</code> - The request path. Note that this includes the query string.
+        </p>
+    </li>
+    <li>
+        <p>
+            <code>:authority</code> - Roughly equivalent to the <code>Host</code> header in HTTP/1.
+        </p>
+    </li>
+    <li>
+        <p>
+            <code>:scheme</code> - The request scheme, typically <code>http</code> or <code>https</code>. Note that there is no equivalent in HTTP/1.
+        </p>
+    </li>
+    <li>
+        <p>
+            <code>:status</code> - The response status code.
+        </p>
+    </li>
+</ul>
+<p>
+    According to the specification, all pseudo-headers should be sent before any ordinary headers. Burp sends these pseudo-headers in a fixed order unless you manually override this in the Inspector.
+</p>
+<p>
+    When referring to pseudo-headers, it's common practice to prefix their names with a colon to help differentiate them from normal headers. Note that this is just one way of presenting this information in a human-readable format. On the wire, these names are just binary bytes and don't actually contain a colon.
+</p>
+</body>
+</html>

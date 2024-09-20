@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE" ignore-validation="OTHER_PAGE_KEYWORD_TOO_FREQUENT"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/index.html">Scanner</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/bchecks/index.html">BCheck definitions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/bchecks/worked-examples/index.html">Worked examples</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/bchecks/worked-examples/host.html">Example host check</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-enterprise">Enterprise</label>
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Example host check</h1>
+<p>
+    This check enables Burp Scanner to see whether the target application exposes a Git directory. It is an example of a per-host check (that is, a check that runs once for each host scanned).
+</p>
+<p>
+    The example scan check works by attempting to locate the host's <code>git-config</code> file. If the file is returned, Burp Scanner reports an issue.
+</p>
+<code class="pre-wrap">
+metadata:
+    language: v2-beta
+    name: "Host-level"
+    description: "Checks for an exposed git directory"
+    author: "Carlos Montoya"
+
+run for each:
+    potential_path =
+        "/.git/config",
+        "/.git/config~"
+
+given host then
+    send request called check:
+        method: "GET"
+        path: {potential_path}
+
+    if "[core]" in {check.response.body} then
+        report issue:
+            severity: info
+            confidence: certain
+            detail: `Git directory found at {potential_path}.`
+            remediation: "Ensure your git directories are not exposed."
+    end if
+        </code>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-1-add-metadata">Step 1: Add metadata</h2>
+<code class="pre-wrap">
+metadata:
+    language: v2-beta
+    name: "Host-level"
+    description: "Checks for an exposed git directory"
+    author: "Carlos Montoya"
+        </code><p>
+    The definition starts with a <code>metadata</code> block. For more information on available metadata properties, see the reference documentation.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-2-configure-potential-paths">Step 2: Configure potential paths</h2>
+<code class="pre-wrap">
+run for each:
+    potential_path =
+        "/.git/config",
+        "/.git/config~"
+        </code><p>
+    The next step is to configure the paths that Burp Scanner should send requests to when trying to locate the <code>git-config</code> file.
+</p>
+<p>
+    The example code declares a variable called <code>potential_path</code>, which contains a list of potential locations for the file. Burp Scanner will iterate through this list, performing one full check for each entry before moving on to the next one.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-3-configure-the-request">Step 3: Configure the request</h2>
+<code class="pre-wrap">
+given host then
+    send request called check:
+        method: "GET"
+        path: {potential_path}
+        </code><p>
+    The next step is to configure the request that Burp Scanner will send. In this case, Burp Scanner sends a GET request to one of the locations named in the <code>potential_path</code> variable.
+</p>
+<p>
+    Note that this request is named using the <code>called</code> keyword. The request name is used in the next step to identify the correct response body.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-4-report-issues">Step 4: Report issues</h2>
+<code class="pre-wrap">
+if "[core]" in {check.response.body} then
+    report issue:
+        severity: info
+        confidence: certain
+        detail: `Git directory found at {potential_path}.`
+        remediation: "Ensure your git directories are not exposed."
+        </code><p>
+    The next step is to report issues where appropriate. Burp Scanner uses an <code>if</code> statement to look for the string <code>[core]</code> in the body of both responses received. This string can be found in all <code>git-config</code> files.
+</p>
+<p>
+    If Burp Scanner finds the <code>[core]</code> string on a response, it reports an informational issue with certain confidence.
+</p>
+<p>
+    If there are more entries in the <code>potential_path</code> list that have not been checked, Burp Scanner re-runs the check for the next entry in the list.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <p>
+                <a href="/burp/documentation/scanner/bchecks/bcheck-definition-reference.html">BCheck definition reference</a>.
+            </p>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

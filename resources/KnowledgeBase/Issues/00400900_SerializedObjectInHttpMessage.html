@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+Serialized object in HTTP message
+<h1>Typical severity</h1>
+
+High
+
+<h1>Issue description</h1>
+
+<p>Applications may submit a serialized object in a request parameter. This behavior can expose the application in various ways, including:</p>
+<ul>
+<li>Any sensitive data contained within the object can be viewed by the user.</li><li>An attacker may be able to interfere with server-side logic by tampering with the contents of the object and re-serializing it.</li><li>An attacker may be able to cause unauthorized code execution on the server, by controlling the server-side function that is invoked when the object is processed.</li></ul>
+<p>Actual exploitation of any code execution vulnerabilities arising from the application's use of serialized objects will typically require the attacker to have access to the source code of the server-side application. This may mitigate the practical impact of this issue in many situations. However, it is still highly recommended to fix the underlying vulnerability. Vulnerabilities in native deserialization functions often allow practical exploitation without source code access.</p>
+
+<h1>Issue remediation</h1>
+
+<p>The best way to avoid vulnerabilities that arise from the use of serialized objects is not to pass these in request parameters, or expose them in any other way to the client. Generally, it is possible to transmit application data in plain non-serialized form, and handle it with the same precautions that apply to all client-submitted data. If it is considered unavoidable to place serialized objects into request parameters, then it may be possible to prevent attacks by also placing a server-generated cryptographic signature of the object into the same request, and validating the signature before performing deserialization or other processing on the object.</p>
+
+<h1>References</h1>
+
+<ul>
+    <li><a href="https://portswigger.net/web-security/deserialization">Web Security Academy: Insecure deserialization</a></li>
+</ul>
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+<li><a href="https://cwe.mitre.org/data/definitions/502.html">CWE-502: Deserialization of Untrusted Data</a></li>
+    <li><a href="https://capec.mitre.org/data/definitions/586.html">CAPEC-586: Object Injection</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

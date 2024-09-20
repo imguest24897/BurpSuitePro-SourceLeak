@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/extensions/index.html">Extensions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/extensions/creating/index.html">Creating</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/extensions/creating/bapp-store-submitting-extensions.html">Submitting extensions to the BApp Store</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Submitting extensions to the BApp Store</h1>
+<p>
+    If you write an extension for Burp Suite, you can submit it to us to become a BApp. If your extension meets the acceptance criteria, we'll make it available through the <a href="https://portswigger.net/bappstore">BApp Store</a>.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="step-1-check-the-acceptance-criteria">Step 1 - Check the acceptance criteria</h2>
+<p>
+    To make sure that your extension has the best chance of being accepted, check that it meets the <a href="/burp/documentation/desktop/extensions/creating/bapp-store-acceptance-criteria.html">acceptance criteria</a>.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="step-2-submit-your-extension">Step 2 - Submit your extension</h2>
+<p>
+    To submit your extension, you need:
+</p>
+<ul>
+    <li>
+        A link to the GitHub repository where all the relevant source code is stored.
+    </li>
+    <li>
+        A name and a good description of what your extension does.
+    </li>
+    <li>
+        A description of how your extension works, how to use it, and any setup information needed to use the extension.
+    </li>
+</ul>
+<p>
+    Once you have all this, <a href="mailto:support@portswigger.net">contact us</a> to request a review.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="step-3-we-review-your-extension">Step 3 - We review your extension</h2>
+<p>
+    We compile and review your extension to make sure it's suitable for the BApp Store:
+</p>
+<ul>
+    <li>
+        We make sure that the extension does not replicate any existing functionality or available extensions.
+    </li>
+    <li>
+        We review the code to check compliance with the guidelines.
+    </li>
+    <li>
+        We run an automated review to check for the usage of any key functions.
+    </li>
+    <li>
+        We run a scan to see if your extension triggers antivirus or malware software. For example, unencrypted payloads can sometimes cause a false positive.
+    </li>
+    <li>
+        We manually test the extension.
+    </li>
+</ul>
+<p>
+    We aim to stay in touch with you throughout the process, with any questions we might have or suggestions for improvements.
+</p>
+<p>
+    Once the review is complete, we'll let you know whether the extension will go into the BApp Store.
+</p>
+<h2 id="updating-your-bapp">Updating your BApp</h2>
+<p>
+    To update your BApp:
+</p>
+<ol>
+    <li>
+        Create a pull request against PortSwigger's fork of your repository. Please note that we only accept pull requests from the forked repository.
+    </li>
+    <li>
+        Send us an email with a link to your pull request.
+    </li>
+    <li>
+        We review the changes and merge them into the PortSwigger fork.
+    </li>
+    <li>
+        After we test the extension, we publish the updated version to the BApp Store and let you know when it's live.
+    </li>
+</ol>
+</body>
+</html>

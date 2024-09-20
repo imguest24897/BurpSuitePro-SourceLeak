@@ -1,0 +1,19 @@
+{
+  "typeIndex": 2099456,
+  "name": "JWT signature not verified",
+  "description": "<p>\n  The JSON Web Token specification provides several ways for developers to digitally sign payload claims.\n  This ensures data integrity and robust user authentication. However, some servers fail to properly verify the signature,\n  which can result in them accepting tokens with invalid signatures.\n</p>\n<p>\n  A malicious user can exploit this vulnerability by supplying an arbitrary claim in the JWT payload to obtain new privileges or impersonate other users.\n  For example, if the token contains a \"username\": \"joe\" claim, an attacker could potentially change this to  \"username\": \"admin\" to grant themselves higher privileges.\n</p>\n<p>\n  Burp Suite detects this vulnerability by comparing responses to multiple requests with proper and improper signatures.\n  Although this is a reliable detection method, it is not bulletproof. When this issue is reported, we recommend manually checking that the difference in responses was\n  indeed caused by the different JWT permutations.\n</p>",
+  "remediation": "<p>\n  Ensure that the signature of the JWT is properly verified for all supported algorithms.\n</p>",
+  "webIntro": null,
+  "typicalSeverity": "HIGH",
+  "references": [],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-345: Insufficient Verification of Data Authenticity",
+      "url": "https://cwe.mitre.org/data/definitions/345.html"
+    },
+    {
+      "title": "CWE-347: Improper Verification of Cryptographic Signature",
+      "url": "https://cwe.mitre.org/data/definitions/347.html"
+    }
+  ]
+}

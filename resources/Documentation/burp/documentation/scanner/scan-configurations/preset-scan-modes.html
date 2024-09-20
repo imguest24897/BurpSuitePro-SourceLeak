@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/index.html">Scanner</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/scan-configurations/index.html">Scan configurations</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/scan-configurations/preset-scan-modes.html">Preset scan modes</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-enterprise">Enterprise</label>
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Preset scan modes</h1>
+<p>
+    Burp Scanner's scan modes are predefined collections of scan settings. They offer a quick way to adjust how the scan balances speed and coverage.
+</p>
+<p>
+    There are four preset scan modes:
+</p>
+<ul>
+    <li>
+        <strong>Lightweight</strong> is the fastest scan mode, with scans capped at 15 minutes in length. It is useful in situations where you need fast feedback on a target.
+    </li>
+    <li>
+        <strong>Fast</strong> is intended to give you a general overview of a site's security posture quickly.
+    </li>
+    <li>
+        <strong>Balanced</strong> is useful for general-purpose scanning. It is designed to give a good balance between coverage and speed.
+    </li>
+    <li>
+        <strong>Deep</strong> is intended to give you an in-depth look at a site's security posture. The time taken to run a scan using the Deep configuration depends heavily on the site's size and complexity.
+    </li>
+</ul>
+<p>
+    You can only select one preset scan mode for a site in Burp Suite Enterprise Edition and Burp Suite Professional. If you want to combine different configurations together on a single site, use a custom configuration instead.
+</p>
+<h2 id="setting-preset-scan-modes-for-folders">Setting preset scan modes for folders</h2>
+<p>
+    In Burp Suite Enterprise Edition, it's possible to select a preset scan mode for folders, subfolders, and sites. If you select a preset scan mode at multiple levels, Burp Scanner only runs the preset scan mode that you set at the lowest level. For more information, see <a href="https://portswigger.net/burp/documentation/enterprise/user-guide/working-with-sites/site-settings/scan-configurations/folder-configs.html">Defining the scan configuration for a folder</a>.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/scanner/scan-configurations/burp-scanner-built-in-configs.html">Burp Scanner built-in configurations</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/scan-configurations/custom-scan-configurations.html">Custom scan configuration options</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

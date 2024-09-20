@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/index.html">Scanner</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/authenticated-scanning/index.html">Authenticated scanning</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/authenticated-scanning/recorded-login-best-practice.html">Best practice for recording login sequences</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-enterprise">Enterprise</label>
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Best practice for recording login sequences</h1>
+<p>
+    Burp Suite Enterprise Edition's recorded login sequence feature enables you to specify login details that Burp Scanner can use when performing authenticated scanning on applications with complex login mechanisms.
+</p>
+<p>
+    While the <a href="https://chrome.google.com/webstore/detail/burp-suite-navigation-rec/anpapjclbjicacakeoggghfldppbkepg?hl=en-GB">Burp Suite Navigation Recorder</a> Chrome extension is easy to use in itself, successfully recording a login sequence for a sophisticated authentication mechanism can be a complex process.
+</p>
+<p>
+    We have compiled some advice that should help you record login sequences successfully.
+</p>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/DBvM9pdPiZ4?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<h2 id="limitations-of-recorded-login-sequences">Limitations of recorded login sequences</h2>
+<p>
+    Although recorded login sequences are intended to handle a wide variety of login mechanisms, they do have some limitations:
+</p>
+<ul>
+    <li>
+        Recorded logins are only compatible with browser-powered scans. If Burp Scanner cannot initialize its browser then the authenticated scan cannot start.
+    </li>
+    <li>
+        Burp Scanner cannot self-register users or deliberately trigger login failures by submitting invalid credentials in conjunction with a recorded login sequence. As a result, Burp Scanner ignores any <strong>Login functions</strong> crawl settings from your scan configuration when using recorded logins.
+    </li>
+    <li>
+        Your authentication system may flag repeated logins made during the scan as suspicious. This in turn could trigger additional authentication steps or anti-robot measures that the crawler is unable to handle. In this case, we recommend running the scan on a test instance with these checks disabled.
+    </li>
+    <li>
+        Recorded logins are not compatible with two-factor authentication, character-select passwords, or CAPTCHA.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Recorded logins do not support CAPTCHA because CAPTCHA systems are specifically designed to deny automated systems such as our recorded login tool. Adding support would likely result in CAPTCHA providers patching the methods we would use to bypass the CAPTCHA mechanism, potentially creating a cycle of us finding CAPTCHA vulnerabilities and providers patching them out.
+    </p>
+</div>
+<h3 id="tips-for-recording-successful-login-sequences">Tips for recording successful login sequences</h3>
+<p>
+    These tips will help you to create recorded login sequences that work first time:
+</p>
+<ul>
+    <li>
+        Read the above list of limitations to make sure that the authentication process for your target application is compatible with Burp Suite's recorded logins.
+    </li>
+    <li>
+        If the application uses a basic, single-step HTML login form, consider adding login credentials rather than using a recorded login sequence. Using simple login credentials wherever possible can result in faster scanning.
+    </li>
+    <li>
+        After the login process is complete, end the sequence without clicking on any other links or logging out. The recorded login sequence is designed to perform the login process only. Any additional navigation is automatically handled by Burp Scanner as part of its crawl phase.
+    </li>
+    <li>
+        Wait for pages and elements to finish loading completely before performing the next action.
+    </li>
+    <li>
+        Avoid any unnecessary actions such as additional mouse clicks. Burp Scanner repeats all the actions you record.
+    </li>
+    <li>
+        Use mouse clicks (rather than keyboard shortcuts) to interact with all elements on the page. This tip applies even for fields that are automatically selected.
+    </li>
+    <li>
+        Recorded login sequences are intended to handle web application authentication only. If the destination server requires platform authentication, such as Microsoft NTLM, then you should enter these credentials separately. You can set platform authentication credentials as part of a custom scan configuration.
+    </li>
+    <li>
+        Make sure that the login sequence finishes on a page that is in scope for scans of this site. Although the crawler can follow out-of-scope links during the login process, the login sequence must end on a page that is in scope.
+    </li>
+</ul>
+<h3 id="troubleshooting-recorded-login-sequences-for-burp-suite-enterprise-edition">Troubleshooting recorded login sequences for Burp Suite Enterprise Edition</h3>
+<p>
+    If Burp Scanner is unable to replay a recorded login sequence during a scan then it cannot perform an authenticated crawl. However, the scan will still run.
+</p>
+<p>
+    If your login sequence does not break any of the limitations for recorded login and you have followed all of the best practice tips listed above, then you should download the event log for the scan. The log error messages could tell you whether the issue was with the login sequence itself or whether there was a general issue with the browser.
+</p>
+<p>
+    Some log entries may represent temporary failures that were later resolved. For example, if the target site imposes rate limits, you might see entries saying that the crawler was unable to log in. However, it may have logged in successfully later in the scan.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/scanner/authenticated-scanning/recorded-login-sequences.html">Recorded login sequences</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/authenticated-scanning/using-recorded-logins.html">Recording login sequences</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/authenticated-scanning/troubleshooting-recorded-logins.html">Troubleshooting recorded login sequences</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

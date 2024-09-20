@@ -1,0 +1,52 @@
+{
+  "typeIndex": 2098435,
+  "name": "Content security policy: allowlisted script resources",
+  "description": "<p>Content Security Policy (CSP) is a security mechanism designed to mitigate cross-site scripting attacks by disabling dangerous behaviours such as untrusted JavaScript execution.\n    Websites can specify their security policy in a response header or meta tag, enabling fine-grained control over dangerous features like scripts and stylesheets.\n</p>",
+  "remediation": "<p>To prevent untrusted JavaScript execution, replace allowlisted resources in script-based directives with a secure, random nonce of at least 8 characters 'nonce-RANDOM'.</p>",
+  "webIntro": null,
+  "typicalSeverity": "INFO",
+  "references": [
+    {
+      "title": "Web Security Academy: What is CSP?",
+      "url": "https://portswigger.net/web-security/cross-site-scripting/content-security-policy"
+    },
+    {
+      "title": "Web Security Academy: What is XSS?",
+      "url": "https://portswigger.net/web-security/cross-site-scripting#what-is-cross-site-scripting-xss"
+    },
+    {
+      "title": "Web Security Academy: Mitigating XSS attacks using CSP",
+      "url": "https://portswigger.net/web-security/cross-site-scripting/content-security-policy#mitigating-xss-attacks-using-csp"
+    },
+    {
+      "title": "Web Security Academy: Preventing XSS",
+      "url": "https://portswigger.net/web-security/cross-site-scripting/preventing"
+    },
+    {
+      "title": "Content Security Policy (CSP)",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+      "url": "https://cwe.mitre.org/data/definitions/79.html"
+    },
+    {
+      "title": "CWE-80: Improper Neutralization of Script-Related HTML Tags in a Web Page (Basic XSS)",
+      "url": "https://cwe.mitre.org/data/definitions/80.html"
+    },
+    {
+      "title": "CWE-116: Improper Encoding or Escaping of Output",
+      "url": "https://cwe.mitre.org/data/definitions/116.html"
+    },
+    {
+      "title": "CWE-159: Failure to Sanitize Special Element",
+      "url": "https://cwe.mitre.org/data/definitions/159.html"
+    },
+    {
+      "title": "CAPEC-588: DOM-Based XSS",
+      "url": "https://capec.mitre.org/data/definitions/588.html"
+    }
+  ]
+}

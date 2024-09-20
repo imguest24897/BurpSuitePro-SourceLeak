@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+Content security policy: allows clickjacking
+<h1>Typical severity</h1>
+
+Information
+
+<h1>Issue description</h1>
+
+<p>
+    Content Security Policy (CSP) is a security mechanism designed to mitigate cross-site scripting attacks by disabling dangerous behaviours such as untrusted JavaScript execution.
+    Websites can specify their security policy in a response header or meta tag, enabling fine-grained control over dangerous features like scripts and stylesheets.
+</p>
+
+<h1>Issue remediation</h1>
+
+<p>
+    We recommend that you set the frame-ancestors directive to 'none' if you do not want your site to be framed, or 'self' if you want to allow it to frame itself. In addition,
+    use the X-Frame-Options header with DENY or SAMEORIGIN, based on your needs.
+</p>
+
+<h1>References</h1>
+
+<ul>
+    <li><a href="https://portswigger.net/web-security/clickjacking">Web Security Academy: Clickjacking</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options">X-Frame-Options</a></li>
+    <li><a href="https://portswigger.net/web-security/cross-site-scripting/content-security-policy">Web Security Academy: What is CSP?</a></li>
+    <li><a href="https://portswigger.net/web-security/cross-site-scripting/content-security-policy#protecting-against-clickjacking-using-csp">Web Security Academy: Protecting against clickjacking using CSP</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP">Content Security Policy (CSP)</a></li>
+</ul>
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+    <li><a href="https://cwe.mitre.org/data/definitions/693.html">CWE-693: Protection Mechanism Failure</a></li>
+    <li><a href="https://cwe.mitre.org/data/definitions/1021.html">CWE-1021: Improper Restriction of Rendered UI Layers or Frames</a></li>
+    <li><a href="https://capec.mitre.org/data/definitions/103.html">CAPEC-103: Clickjacking</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

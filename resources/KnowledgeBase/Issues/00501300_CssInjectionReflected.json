@@ -1,0 +1,32 @@
+{
+  "typeIndex": 5247744,
+  "name": "CSS injection (reflected)",
+  "description": "<p>CSS injection vulnerabilities arise when an application imports a style sheet from a user-supplied URL, or embeds user input in CSS blocks without adequate escaping. They are closely related to cross-site scripting (XSS) vulnerabilities but often trickier to exploit. </p>\n<p>Being able to inject arbitrary CSS into the victim's browser may enable various attacks, including:</p>\n<ul>\n  <li>Executing arbitrary JavaScript using IE's expression() function.</li><li>Using CSS selectors to read parts of the HTML source, which may include sensitive data such as anti-CSRF tokens.</li>\n<li>Capturing any sensitive data within the URL query string by making a further style sheet import to a URL on the attacker's domain, and monitoring the incoming Referer header.</li></ul>",
+  "remediation": "<p>Ensure that user input is adequately escaped before embedding it in CSS blocks, and consider using a whitelist to prevent loading of arbitrary style sheets.</p>",
+  "webIntro": null,
+  "typicalSeverity": "MEDIUM",
+  "references": [
+    {
+      "title": "Malicious CSS",
+      "url": "https://portswigger.net/research/detecting-and-exploiting-path-relative-stylesheet-import-prssi-vulnerabilities#badcss"
+    },
+    {
+      "title": "Abusing unicode-range of @font-face",
+      "url": "http://mksben.l0.cm/2015/10/css-based-attack-abusing-unicode-range.html"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-73: External Control of File Name or Path",
+      "url": "https://cwe.mitre.org/data/definitions/73.html"
+    },
+    {
+      "title": "CWE-20: Improper Input Validation",
+      "url": "https://cwe.mitre.org/data/definitions/20.html"
+    },
+    {
+      "title": "CAPEC-468: Generic Cross-Browser Cross-Domain Theft",
+      "url": "https://capec.mitre.org/data/definitions/468.html"
+    }
+  ]
+}

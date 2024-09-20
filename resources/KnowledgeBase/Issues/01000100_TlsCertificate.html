@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+TLS certificate
+<h1>Typical severity</h1>
+
+Medium
+
+<h1>Issue description</h1>
+
+<p>TLS (or SSL) helps to protect the confidentiality and integrity of information in transit between the browser and server, and to provide authentication of the server's identity. To serve this purpose, the server must present an TLS certificate that is valid for the server's hostname, is issued by a trusted authority and is valid for the current date. If any one of these requirements is not met, TLS connections to the server will not provide the full protection for which TLS is designed.</p>
+<p>It should be noted that various attacks exist against TLS in general, and in the context of HTTPS web connections in particular. It may be possible for a determined and suitably-positioned attacker to compromise TLS connections without user detection even when a valid TLS certificate is used. </p>
+
+<h1>Issue remediation</h1>
+
+
+
+<h1>References</h1>
+
+<ul><li><a href="https://wiki.mozilla.org/Security/Server_Side_TLS">SSL/TLS Configuration Guide</a></li></ul>
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+<li><a href="https://cwe.mitre.org/data/definitions/295.html">CWE-295: Improper Certificate Validation</a></li>
+<li><a href="https://cwe.mitre.org/data/definitions/326.html">CWE-326: Inadequate Encryption Strength</a></li>
+<li><a href="https://cwe.mitre.org/data/definitions/327.html">CWE-327: Use of a Broken or Risky Cryptographic Algorithm</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

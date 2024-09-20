@@ -1,0 +1,36 @@
+{
+  "typeIndex": 16777728,
+  "name": "Unencrypted communications",
+  "description": "<p>The application allows users to connect to it over unencrypted connections. An attacker suitably positioned to view a legitimate user's network traffic could record and monitor their interactions with the application and obtain any information the user supplies. Furthermore, an attacker able to modify traffic could use the application as a platform for attacks against its users and third-party websites. Unencrypted connections have been exploited by ISPs and governments to track users, and to inject adverts and malicious JavaScript. Due to these concerns, web browser vendors are planning to visually flag unencrypted connections as hazardous.</p><p>To exploit this vulnerability, an attacker must be suitably positioned to eavesdrop on the victim's network traffic. This scenario typically occurs when a client communicates with the server over an insecure connection such as public Wi-Fi, or a corporate or home network that is shared with a compromised computer. Common defenses such as switched networks are not sufficient to prevent this. An attacker situated in the user's ISP or the application's hosting infrastructure could also perform this attack. Note that an advanced adversary could potentially target any connection made over the Internet's core infrastructure.</p><p>Please note that using a mixture of encrypted and unencrypted communications is an ineffective defense against active attackers, because they can easily remove references to encrypted resources when these references are transmitted over an unencrypted connection.</p>",
+  "remediation": "<p>Applications should use transport-level encryption (SSL/TLS) to protect all communications passing between the client and the server. The Strict-Transport-Security HTTP header should be used to ensure that clients refuse to access the server over an insecure connection.</p>",
+  "webIntro": null,
+  "typicalSeverity": "LOW",
+  "references": [
+    {
+      "title": "Marking HTTP as non-secure",
+      "url": "https://www.chromium.org/Home/chromium-security/marking-http-as-non-secure"
+    },
+    {
+      "title": "Configuring Server-Side SSL/TLS",
+      "url": "https://wiki.mozilla.org/Security/Server_Side_TLS"
+    },
+    {
+      "title": "HTTP Strict Transport Security",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/Security/HTTP_strict_transport_security"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-326: Inadequate Encryption Strength",
+      "url": "https://cwe.mitre.org/data/definitions/326.html"
+    },
+    {
+      "title": "CAPEC-94: Man in the Middle Attack",
+      "url": "https://capec.mitre.org/data/definitions/94.html"
+    },
+    {
+      "title": "CAPEC-157: Sniffing Attacks",
+      "url": "https://capec.mitre.org/data/definitions/157.html"
+    }
+  ]
+}

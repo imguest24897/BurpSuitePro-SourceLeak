@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/getting-started/index.html">Getting started</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/getting-started/system-requirements.html">System requirements</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Burp Suite system requirements</h1>
+<p>
+    The system requirements for Burp Suite are largely dependent on your intended use for the software. While you can generally perform most tasks on a relatively low-spec machine, some use cases (for example, running multiple scans concurrently) may require significantly more power to run without a noticeable effect on performance.
+</p>
+<h2 id="cpu-cores-memory">CPU cores / memory</h2>
+<ul>
+    <li>
+        <strong>Minimum: 2x cores, 4GB RAM</strong> - This spec is suitable for basic tasks such as proxying web traffic and simple Intruder attacks. While Burp Suite may run on a machine with a lower specification than this, we do not recommend doing so for performance reasons.
+    </li>
+    <li>
+        <strong>Recommended: 2x cores, 16GB RAM</strong> - This is a good general-purpose spec.
+    </li>
+    <li>
+        <strong>Advanced: 4x cores, 32GB RAM</strong> - This spec is suitable for more intensive tasks, such as complex Intruder attacks or large automated scans.
+    </li>
+</ul>
+<h2 id="free-disk-space">Free disk space</h2>
+<ul>
+    <li>
+        Basic installation: <strong>1GB</strong>
+    </li>
+    <li>
+        Per project file: <strong>2GB</strong>
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note:</h4>
+    <p>
+        While 2GB is the recommended minimum free disk space for a project, note that project files can get significantly larger than this (potentially up to many tens of GB), depending on factors such as the amount of proxy history included, the number of scans run, and the number of Repeater tabs open.
+    </p>
+</div>
+<h2 id="operating-system-and-architecture">Operating system and architecture</h2>
+<p>
+    Burp Suite supports the latest versions of the following operating systems:
+</p>
+<ul>
+    <li>
+        Windows (Intel 64-bit)
+    </li>
+    <li>
+        Linux (Intel and ARM 64-bit)
+    </li>
+    <li>
+        OS X (Intel 64-bit and Apple M1)
+    </li>
+</ul>
+<h3 id="embedded-browser">Embedded browser</h3>
+<p>
+    Burp's browser has some additional operating system and architecture requirements. It is not compatible with the following:
+</p>
+<ul>
+    <li>
+        <p>
+            Older versions of Windows, including Windows 7, Windows 8/8.1, Windows Server 2012, and Windows Server 2012 R2.
+        </p>
+    </li>
+    <li>
+        <p>
+            Instances of Burp Suite that run via the JAR file on Apple Silicon and ARM 64-bit based systems. If you want to use Burp's browser on systems with these chip sets, make sure that you install Burp using the native platform installers.
+        </p>
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You can still run multiple instances of Burp simultaneously when using the platform installer versions. This functionality is not limited to instances of Burp run from the JAR file.
+    </p>
+</div>
+</body>
+</html>

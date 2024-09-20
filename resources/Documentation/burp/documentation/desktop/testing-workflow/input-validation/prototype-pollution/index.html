@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/index.html">Testing input validation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/prototype-pollution/index.html">Testing for prototype pollution with DOM Invader</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Testing for prototype pollution with DOM Invader</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/xQ8poeX1_dI?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    Prototype pollution is a JavaScript vulnerability. It enables an attacker to add arbitrary properties to global object prototypes, which may then be inherited by user-defined objects. This enables attackers to control object properties that would otherwise be inaccessible.
+</p>
+<p>
+    You can test for client-side prototype pollution vulnerabilities using DOM Invader. DOM Invader can automatically detect prototype pollution sources and scan for gadgets that you can use to craft an exploit. It can use the prototype pollution sources it discovers to pollute the <code>Object.prototype</code> as a proof of concept.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="before-you-start">Before you start</h2>
+<p>
+    Enable DOM Invader. For more information, see <a href="https://portswigger.net/burp/documentation/desktop/tools/dom-invader/enabling.html">Enabling DOM Invader</a>.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="steps">Steps</h2>
+<p>
+    You can follow along with this process in the <a href="/web-security/prototype-pollution/client-side/lab-prototype-pollution-dom-xss-via-client-side-prototype-pollution.html">DOM XSS via client-side prototype pollution</a> Web Security Academy lab.
+</p>
+<h3>Enabling prototype pollution detection in DOM Invader</h3>
+<ol>
+    <li>
+        In the upper-right corner of Burp's browser, click the Burp Suite logo and select the <strong>DOM Invader</strong> tab. The <strong>Settings</strong> menu is displayed.
+    </li>
+    <li>
+        Toggle the <strong>DOM Invader</strong> switch so that <strong>DOM Invader is on</strong>.
+    </li>
+    <li>
+        Click <strong>Attack types</strong> and toggle the switch so that <strong>Prototype pollution is on</strong>.
+    </li>
+    <li>
+        Click <strong>Reload</strong> to reload the browser and make your changes take effect.
+    </li>
+</ol>
+<h3>Finding potential sources for prototype pollution</h3>
+<ol>
+    <li>
+        <p>
+            Right-click in the browser window and select <strong>Inspect</strong> to open the devtools panel.
+        </p>
+    </li>
+    <li>
+        <p>
+            Click the <strong>DOM Invader</strong> tab.
+        </p>
+    </li>
+    <li>
+        <p>
+            Browse around your target site to identify potential sources for prototype pollution. DOM Invader displays any sources found in the <strong>Sources</strong> list.
+        </p>
+    </li>
+</ol>
+<h3>Testing sources manually</h3>
+<ol>
+    <li>
+        While on the page in which the source was found, expand the <strong>Sources</strong> list and click <strong>Test</strong>. DOM Invader opens the same page in a new browser tab.
+    </li>
+    <li>
+        From the new tab, open the devtools panel and select the <strong>Console</strong> tab.
+    </li>
+    <li>
+        Expand the <strong>Object</strong> node to display the <code>Object.prototype</code>.
+    </li>
+    <li>
+        Confirm that the <code>Object.prototype</code> output now contains a property called <code>testproperty</code>.
+    </li>
+    <li>
+        Create a new object in the console using the command <code>let myObject = {};</code>.
+    </li>
+    <li>
+        Use the command <code>console.log(myObject.testproperty);</code> to view the new object. Confirm that this new object has inherited <code>testproperty</code>.
+    </li>
+</ol>
+<h3>Creating a proof of concept exploit</h3>
+<ol>
+    <li>
+        Select the source from the <strong>Sources</strong> list and click <strong>Scan for gadgets</strong>. DOM Invader opens a new tab and starts scanning.
+    </li>
+    <li>
+        Once the scan has finished, right-click in the new tab's browser window and select <strong>Inspect</strong> to open the devtools panel.
+    </li>
+    <li>
+        Click the <strong>DOM invader</strong> tab and check the contents of the <strong>Sinks</strong> list. These are sinks that DOM Invader was able to access via the identified gadgets.
+    </li>
+    <li>
+        Click <strong>Exploit</strong> next to a sink to test the sink with a proof-of-concept exploit. DOM Invader opens a new window in which it attempts to call the <code>alert()</code> function. If it is able to call the function, then an exploitable prototype pollution vulnerability is confirmed.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/index.html">DOM Invader</a> - Gives further information on how to use DOM Invader.
+        </li>
+        <li>
+            <a href="/web-security/dom-based/index.html">DOM-based vulnerabilities</a> - Explains what the DOM is and how insecure processing of DOM data can introduce vulnerabilities.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

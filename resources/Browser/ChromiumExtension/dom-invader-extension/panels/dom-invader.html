@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>DOM Invader Postmessage</title>
+    <link href="../css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <script src="../js/bootstrap/bootstrap.bundle.min.js"></script>
+    <link rel="Stylesheet" href="../css/styles.css"/>
+    <link rel="Stylesheet" href="../css/bootstrap-overrides.css"/>
+    <link rel="Stylesheet" href="../css/dom-invader.css"/>
+</head>
+<body>
+    <div class="row vw-100 vh-100">
+        <div class="col-auto dom-invader-tabs">
+            <nav>
+                <div class="nav nav-tabs flex-column" id="nav-tab" role="tablist">
+                    <button class="nav-link active position-relative" id="nav-augmented-dom-tab" data-bs-toggle="tab" data-bs-target="#nav-augmented-dom" type="button" role="tab" aria-controls="nav-augmented-dom" aria-selected="true">DOM <span id="augmented-dom-count" class="position-absolute top-20 start-100 translate-middle badge rounded-pill bg-secondary">0</span></button>
+                    <button class="nav-link position-relative" id="nav-postmessage-tab" data-bs-toggle="tab" data-bs-target="#nav-postmessage" type="button" role="tab" aria-controls="nav-postmessage" aria-selected="false">Messages <span id="postmessage-count" class="position-absolute top-20 start-100 translate-middle badge rounded-pill bg-secondary">0</span></button>
+                </div>
+            </nav>
+        </div>
+        <div class="col dom-invader-content">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-augmented-dom" role="tabpanel" aria-labelledby="nav-augmented-dom-tab"><iframe src="augmented-dom.html"></iframe></div>
+                <div class="tab-pane fade" id="nav-postmessage" role="tabpanel" aria-labelledby="nav-postmessage-tab"><iframe src="postmessage.html"></iframe></div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/jquery/jquery-3.6.0.min.js"></script>
+    <script src="../js/dom-invader.js"></script>
+</body>
+</html>

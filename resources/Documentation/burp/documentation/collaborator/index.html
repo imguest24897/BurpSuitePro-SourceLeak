@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/collaborator/index.html">Burp Collaborator</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-enterprise">Enterprise</label>
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1 cms-ignore-validation="DUPLICATE_HEADINGS">Burp Collaborator</h1>
+<p>
+    Burp Collaborator is a network service that enables you to detect invisible vulnerabilities. These are vulnerabilities that don't:
+</p>
+<ul>
+    <li>
+        Trigger error messages.
+    </li>
+    <li>
+        Cause differences in application output.
+    </li>
+    <li>
+        Cause detectable time delays.
+    </li>
+</ul>
+<p>
+    Burp Collaborator uses its own server to identify invisible vulnerabilities, as part of <a href="/burp/application-security-testing/oast/index.html">Out-of-band Application Security Testing (OAST)</a>. The general process is as follows:
+</p>
+<ul>
+    <li>
+        Burp sends Collaborator payloads in a request to the target application. These are subdomains of the Collaborator server's domain. When certain vulnerabilities occur, the target application may use the injected payload to interact with the Collaborator server.
+    </li>
+    <li>
+        Burp polls the server, to see whether interactions have occurred.
+    </li>
+</ul>
+<img src="/burp/documentation/images/collaborator/collaborator1.png" alt="Burp Collaborator OAST">
+<p>
+    Burp Collaborator is used in both Burp Suite Professional and Burp Suite Enterprise Edition:
+</p>
+<ul>
+    <li>
+        Burp Scanner automates the Collaborator process as part of various scan checks. Scanner reports on issues identified in this process.
+    </li>
+    <li>
+        Some extensions and BApps use automated Collaborator functionality.
+    </li>
+</ul>
+<p>
+    In Burp Suite Professional, you can use Burp Collaborator to <a href="/burp/documentation/desktop/tools/collaborator/index.html">manually test for vulnerabilities</a>.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/collaborator/uses.html">Typical uses for Burp Collaborator</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/collaborator/server/index.html">Burp Collaborator server</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/collaborator/server/private/index.html">Deploying a private Burp Collaborator server</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

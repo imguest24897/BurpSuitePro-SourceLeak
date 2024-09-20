@@ -1,0 +1,32 @@
+code, kbd, pre, pre span {
+    font-family: Courier, monospace;
+}
+
+.code-box, code {
+    @include border-radius(7px);
+    margin: 15px 0;
+    padding: 5px 10px;
+    border: 2px solid $light_grey;
+    display: inline-block;
+    width: 100%;
+    white-space: -moz-pre-wrap;
+    white-space: pre-wrap;
+    -ms-word-break: break-all;
+}
+
+pre, p code {
+    white-space: -moz-pre-wrap;
+    white-space: pre-wrap;
+    -ms-word-break: break-all;
+    margin: 0 0 10px 0;
+    background: none;
+    border: none;
+    display: inline;
+    padding: 0;
+    font-weight: normal;
+}
+
+.code-indent {
+    padding-left: 40px;
+    display: block;
+}

@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/index.html">Intruder</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/results/index.html">Results</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/results/analyzing-results.html">Analyzing results</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Analyzing attack results</h1>
+<p>
+    Burp Intruder has a range of functions to help you to systematically examine a large number of results, and understand where different kinds of interesting requests appear.
+</p>
+<h2 id="sorting-results">Sorting results</h2>
+<p>
+    You can sort the results quickly identify anomalous items, for example an item with HTTP status code or response length that differs from the remaining results.
+</p>
+<p>
+    To sort the table's contents, click on any column header. You can cycle through ascending, descending, and unsorted.
+</p>
+<h2 id="copying-results">Copying results</h2>
+<p>
+    <label class="label-edition is-professional">Professional</label>
+    To copy the contents of a column, control-click the header. This enables you to extract an aspect of the results for further analysis.
+</p>
+<h2 id="filtering-results">Filtering results</h2>
+<p>
+    The display filter enables you to hide results from view. This makes it easier to work on the content you are interested in. The current display filter is described in the filter bar above the results table. Click this to open the <strong>Intruder attack results filter</strong> window.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/intruder-filter-settings.png" alt="Intruder filter settings" class="center-block">
+</div>
+<p>
+    In the <strong>Intruder attack results filter</strong> window you can:
+</p>
+<ul>
+    <li>
+        <p>
+            <strong>Filter by search term</strong> - Show or hide responses containing a specified term. You have the following options:
+        </p>
+        <ul>
+            <li>
+                <strong>Regex</strong> - Specify whether the search term is a literal string or a regular expression.
+            </li>
+            <li>
+                <strong>Case sensitive</strong> - Specify whether the search term is case-sensitive.
+            </li>
+            <li>
+                <strong>Negative search</strong> - Show or hide items that do not match the search term.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <strong>Filter by status code</strong> - Show or hide responses based on their HTTP status code.
+    </li>
+    <li>
+        <strong>Filter by annotation</strong> - Only show items with comments or highlights.
+    </li>
+</ul>
+<p>
+    The filters only control what is displayed. If you hide items, they are not deleted: they reappear if you reset the filter.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="adding-annotations">Adding annotations</h2>
+<p>
+    You can add comments and highlights to results. This enables you to flag interesting results for further investigation.
+</p>
+<p>
+    To highlight a result:
+</p>
+<ol>
+    <li>
+        In the results table, select one or more items from the list.
+    </li>
+    <li>
+        Right-click the item and select <strong>Highlight</strong>.
+    </li>
+    <li>
+        Select a color from the list.
+    </li>
+</ol>
+<p>
+    To add a comment:
+</p>
+<ol>
+    <li>
+        In the results table, select one or more items from the list.
+    </li>
+    <li>
+        Double-click the <strong>Comment</strong> column.
+    </li>
+    <li>
+        Enter your comment in the cell.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        You can perform further actions on any results item to drive your testing workflow. For more information, see <a href="/burp/documentation/desktop/tools/intruder/results/workflow.html">Intruder testing workflow</a>.
+    </p>
+</div>
+</body>
+</html>

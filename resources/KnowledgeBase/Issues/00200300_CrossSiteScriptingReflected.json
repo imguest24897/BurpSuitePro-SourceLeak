@@ -1,0 +1,44 @@
+{
+  "typeIndex": 2097920,
+  "name": "Cross-site scripting (reflected)",
+  "description": "<p>Reflected cross-site scripting vulnerabilities arise when data is copied from a request and echoed into the application's immediate response in an unsafe way. An attacker can use the vulnerability to construct a request that, if issued by another application user, will cause JavaScript code supplied by the attacker to execute within the user's browser in the context of that user's session with the application.</p>\n<p>The attacker-supplied code can perform a wide variety of actions, such as stealing the victim's session token or login credentials, performing arbitrary actions on the victim's behalf, and logging their keystrokes.</p>\n<p>Users can be induced to issue the attacker's crafted request in various ways. For example, the attacker can send a victim a link containing a malicious URL in an email or instant message. They can submit the link to popular web sites that allow content authoring, for example in blog comments. And they can create an innocuous looking web site that causes anyone viewing it to make arbitrary cross-domain requests to the vulnerable application (using either the GET or the POST method).</p>\n<p>The security impact of cross-site scripting vulnerabilities is dependent upon the nature of the vulnerable application, the kinds of data and functionality that it contains, and the other applications that belong to the same domain and organization. If the application is used only to display non-sensitive public content, with no authentication or access control functionality, then a cross-site scripting flaw may be considered low risk. However, if the same application resides on a domain that can access cookies for other more security-critical applications, then the vulnerability could be used to attack those other applications, and so may be considered high risk. Similarly, if the organization that owns the application is a likely target for phishing attacks, then the vulnerability could be leveraged to lend credibility to such attacks, by injecting Trojan functionality into the vulnerable application and exploiting users' trust in the organization in order to capture credentials for other applications that it owns. In many kinds of application, such as those providing online banking functionality, cross-site scripting should always be considered high risk. </p>",
+  "remediation": "<p>In most situations where user-controllable data is copied into application responses, cross-site scripting \n  attacks can be prevented using two layers of defenses:</p>\n<ul>\n  <li>Input should be validated as strictly as possible on arrival, given the kind of content that \nit is expected to contain. For example, personal names should consist of alphabetical \nand a small range of typographical characters, and be relatively short; a year of birth \nshould consist of exactly four numerals; email addresses should match a well-defined \nregular expression. Input which fails the validation should be rejected, not sanitized.</li>\n<li>User input should be HTML-encoded at any point where it is copied into \napplication responses. All HTML metacharacters, including &lt; &gt; \" ' and =, should be \nreplaced with the corresponding HTML entities (&amp;lt; &amp;gt; etc).</li></ul>\n<p>In cases where the application's functionality allows users to author content using \n  a restricted subset of HTML tags and attributes (for example, blog comments which \n  allow limited formatting and linking), it is necessary to parse the supplied HTML to \n  validate that it does not use any dangerous syntax; this is a non-trivial task.</p>",
+  "webIntro": "<h2>What is cross-site scripting?</h2>\n<p>Cross-site scripting (or XSS) is a common vulnerability that typically allows attackers to hijack other users' online accounts on the affected website. </p>\n<p>An attacker can use a cross-site scripting vulnerability to inject some malicious script into the vulnerable application. When a victim user encounters the script, it executes in the victim's browser. The XSS script can then perform any action that the victim is able to perform, and access all of the victim's data. If the victim has special privileges within the application, or has access to sensitive data, this can constitute a serious vulnerability.</p>\n<p>Cross-site scripting vulnerabilities normally arise when an application makes use of unvalidated or unencoded data in the responses that it generates. An attacker can manipulate the data to cause their own script code to appear in the application's output to other users.</p>\n<p>Note that an attacker does not necessarily need to have direct access to a website in order to exploit it. XSS can sometimes be used to compromise privileged users within an internal application to which the attacker has no direct access.</p>",
+  "typicalSeverity": "HIGH",
+  "references": [
+    {
+      "title": "Web Security Academy: Cross-site scripting",
+      "url": "https://portswigger.net/web-security/cross-site-scripting"
+    },
+    {
+      "title": "Web Security Academy: Reflected cross-site scripting",
+      "url": "https://portswigger.net/web-security/cross-site-scripting/reflected"
+    },
+    {
+      "title": "Using Burp to Find XSS issues",
+      "url": "https://support.portswigger.net/customer/portal/articles/1965737-Methodology_XSS.html"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+      "url": "https://cwe.mitre.org/data/definitions/79.html"
+    },
+    {
+      "title": "CWE-80: Improper Neutralization of Script-Related HTML Tags in a Web Page (Basic XSS)",
+      "url": "https://cwe.mitre.org/data/definitions/80.html"
+    },
+    {
+      "title": "CWE-116: Improper Encoding or Escaping of Output",
+      "url": "https://cwe.mitre.org/data/definitions/116.html"
+    },
+    {
+      "title": "CWE-159: Failure to Sanitize Special Element",
+      "url": "https://cwe.mitre.org/data/definitions/159.html"
+    },
+    {
+      "title": "CAPEC-591: Reflected XSS",
+      "url": "https://capec.mitre.org/data/definitions/591.html"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+PHP code injection
+<h1>Typical severity</h1>
+
+High
+
+<h1>Issue description</h1>
+
+<p>Server-side code injection vulnerabilities arise when an application 
+  incorporates user-controllable data into a string that is dynamically evaluated by 
+  a code interpreter. If the user data is not strictly validated, an attacker 
+  can use crafted input to modify the code to be executed, and inject 
+  arbitrary code that will be executed by the server.</p>
+<p>Server-side code injection vulnerabilities are usually very serious and lead to 
+  complete compromise of the application's 
+  data and functionality, and often of the server that is hosting the application.
+  It may also be possible to use the server as a platform for further attacks against other systems.</p>
+
+<h1>Issue remediation</h1>
+
+<p>Whenever possible, applications should avoid incorporating user-controllable data into 
+  dynamically evaluated code. In almost every situation, there are safer alternative 
+  methods of implementing application functions, which cannot be 
+  manipulated to inject arbitrary code into the server's processing.</p>
+<p>If it is considered unavoidable to incorporate user-supplied data into 
+  dynamically evaluated code, then the data should be strictly validated. Ideally, a whitelist of specific accepted 
+  values should be used. Otherwise, only short alphanumeric strings should be accepted. 
+  Input containing any other data, including any conceivable code metacharacters, should be rejected. </p>
+
+<h1>References</h1>
+
+
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+<li><a href="https://cwe.mitre.org/data/definitions/94.html">CWE-94: Improper Control of Generation of Code ('Code Injection')
+</a></li>
+<li><a href="https://cwe.mitre.org/data/definitions/116.html">CWE-116: Improper Encoding or Escaping of Output</a></li>
+<li><a href="https://cwe.mitre.org/data/definitions/159.html">CWE-159: Failure to Sanitize Special Element</a></li>
+  <li><a href="https://capec.mitre.org/data/definitions/193.html">CAPEC-193: PHP Remote File Inclusion</a></li>
+  <li><a href="https://capec.mitre.org/data/definitions/242.html">CAPEC-242: Code Injection</a></li>
+  <li><a href="https://capec.mitre.org/data/definitions/252.html">CAPEC-252: PHP Local File Inclusion</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

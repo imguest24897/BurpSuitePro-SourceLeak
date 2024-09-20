@@ -1,0 +1,20 @@
+{
+  "typeIndex": 6293760,
+  "name": "OpenAPI definition found (active scan check)",
+  "description": "<p>A publicly available OpenAPI definition was found.</p>\n<p>An OpenAPI definition describes the structure of an HTTP-based API in YAML or JSON format, according to the OpenAPI specification. It enables humans to discover and understand the service's capabilities, and is also designed to be processed by software for automating tasks like API integration and validation.</p>\n<p>A publicly-available OpenAPI definition does not necessarily present a security vulnerability. However, the API definition can be valuable to attackers as it may include information about the API structure, potentially enabling targeted attacks. For example it may include detailed explanations, examples, and usage scenarios.</p>",
+  "remediation": "<p>Make sure that your API documentation only contains necessary information before you deploy it to production. This prevents attackers from using the definition to discover details about the API's available operations and other potentially sensitive information, including administrative functions.</p>",
+  "webIntro": null,
+  "typicalSeverity": "INFO",
+  "references": [
+    {
+      "title": "Web Security Academy: Identifying API endpoints",
+      "url": "https://portswigger.net/web-security/api-testing#identifying-api-endpoints"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-200: Information Exposure",
+      "url": "https://cwe.mitre.org/data/definitions/200.html"
+    }
+  ]
+}

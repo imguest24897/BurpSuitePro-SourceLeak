@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/proxy/index.html">Burp Proxy</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/proxy/websockets-history/index.html">WebSockets history</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/proxy/websockets-history/filter-settings.html">Filter settings</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Filtering the WebSockets history</h1>
+<p>
+    You can filter the WebSockets history to make it easier to analyze. This enables you to systematically examine a large Proxy history and understand where different kinds of interesting requests appear.
+</p>
+<p>
+    The filter bar above the list of interactions describes the current display filter. To configure this, click the filter bar to open the <strong>WebSockets history filter</strong> window.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/filter-settings-websockets.png" alt="WebSocket history filters" class="center-block">
+</div>
+<p>
+    The <strong>WebSockets history filter</strong> window has two tabs - <strong>Settings mode</strong> and <strong>Bambda mode</strong>.
+</p>
+<p>
+    The filters only control what is displayed. If you hide items, they are not deleted: they reappear if you reset the filter.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="settings-mode">Settings mode</h2>
+<p>
+    Settings mode enables you to filter your WebSockets history quickly, using the following settings:
+</p>
+<ul>
+    <li>
+        <p>
+            <strong>Filter by request type</strong> - You can choose to show:
+        </p>
+        <ul>
+            <li>
+                Only the items that are <a href="/burp/documentation/desktop/tools/target/scope/index.html">in-scope</a>.
+            </li>
+            <li>
+                Only incoming messages.
+            </li>
+            <li>
+                Only outgoing messages.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <p>
+            <strong>Filter by search term</strong> - You can:
+        </p>
+        <ul>
+            <li>
+                Filter responses that contain a specified search term.
+            </li>
+            <li>
+                Use a literal string or a regular expression.
+            </li>
+            <li>
+                Make your search case-sensitive.
+            </li>
+            <li>
+                Select <strong>Negative search</strong>, so only items that don't match the search term are shown.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <strong>Filter by annotation</strong> - This enables you to only show items with notes or highlights.
+    </li>
+    <li>
+        <strong>Filter by listener</strong> - You can show items received on a specific <a href="/burp/documentation/desktop/settings/tools/proxy.html#binding">listener port</a>. This can be useful when testing access controls.
+    </li>
+</ul>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="bambda-mode">Bambda mode</h2>
+<p>
+    Bambda mode enables you to write powerful, custom filters for your WebSockets history using Java. <a href="/burp/documentation/desktop/tools/proxy/websockets-history/bambdas.html">Learn more about Bambdas</a>.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="adding-annotations">Adding annotations</h2>
+<p>
+    You can add notes and highlights to history items. This enables you to describe the purpose of different items, and to flag interesting items for further investigation.
+</p>
+<p>
+    To highlight a WebSockets history item:
+</p>
+<ol>
+    <li>
+        In the <strong>WebSockets history</strong> tab, select the history item from the list.
+    </li>
+    <li>
+        Right-click the item and select <strong>Highlight</strong>.
+    </li>
+    <li>
+        Select a color from the list.
+    </li>
+</ol>
+<p>
+    To add a note:
+</p>
+<ol>
+    <li>
+        In the <strong>WebSockets history</strong> tab, select the history item from the list.
+    </li>
+    <li>
+        Click <strong><span class="icon-document"></span> Notes</strong>.
+    </li>
+    <li>
+        Enter your comment in the <strong>Notes</strong> panel.
+    </li>
+</ol>
+<p>
+    You can also annotate items as they appear in the <a href="/burp/documentation/desktop/tools/proxy/intercept-messages.html">Intercept</a> tab. These automatically appear in the WebSockets history.
+</p>
+</body>
+</html>

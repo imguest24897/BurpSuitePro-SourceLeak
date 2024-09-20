@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dashboard/index.html">Dashboard</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Dashboard</h1>
+<p>
+    Burp's Dashboard tab provides a central location for monitoring and controlling all of the automated tasks in your project. These can include:
+</p>
+<ul>
+    <li>
+        <label class="label-edition is-professional">Professional</label>
+        Crawl tasks that automate the process of mapping the available attack surface by browsing the target website just like a real user. For more information, see <a href="/burp/documentation/scanner/crawling.html">Crawling</a>.
+    </li>
+    <li>
+        <label class="label-edition is-professional">Professional</label>
+        Full vulnerability scans that both crawl the target website and audit the discovered attack surface for security issues. For more information, see <a href="/burp/documentation/desktop/automated-scanning/index.html">Automated scanning</a>.
+    </li>
+    <li>
+        <label class="label-edition is-professional">Professional</label>
+        Live tasks that perform various crawling and auditing operations using the traffic you generate while manually browsing the target website. For more information, see <a href="/burp/documentation/desktop/automated-scanning/live-tasks/index.html">Live tasks</a>.
+    </li>
+    <li>
+        Burp Intruder attacks that repeatedly reissue an HTTP request using variable payloads in predefined insertion points. These are primarily useful for automating repetitive enumeration tasks and fuzzing different inputs. For more information, see <a href="/burp/documentation/desktop/tools/intruder/index.html">Burp Intruder</a>.
+    </li>
+</ul>
+<h2 id="task-list">Task list</h2>
+<p>
+    Each task is represented by an entry in the <strong>Tasks</strong> list. This shows some key information about each task to help you monitor its progress.
+</p>
+<p>
+    For live tasks, you can also toggle whether the task is capturing traffic or not. For more information, see <a href="#disabling-traffic-capturing-for-live-tasks">Disabling traffic capturing for live tasks</a>.
+</p>
+<p>
+    You can also click on an entry to view more detailed information about the task. For more information, see <a href="/burp/documentation/desktop/automated-scanning/results/index.html">Viewing scan and live task results</a>.
+</p>
+<div class="highlightedarea">
+    <h4>Tip</h4>
+    <p>
+        You can rename tasks to help you more easily identify them later. This is especially useful in combination with the search feature.
+    </p>
+</div>
+<h2 id="launching-new-tasks">Launching new tasks</h2>
+<p>
+    You can launch a new scan or live task directly from the <strong>Dashboard</strong> tab. To do this, go to the <strong>Dashboard</strong> tab and click the <strong>New scan</strong> or <strong>New live task</strong> button. For more information, see <a href="/burp/documentation/desktop/automated-scanning/index.html">Launching scans</a> or <a href="/burp/documentation/desktop/automated-scanning/live-tasks/creating-live-tasks.html">Creating live tasks</a>.
+</p>
+<h2 id="pausing-and-resuming-running-tasks">Pausing and resuming running tasks</h2>
+<p>
+    You may want to pause running tasks if, for example, you are experiencing performance issues due to running a large number of concurrent tasks. You can do this from the <strong>Dashboard</strong> tab.
+</p>
+<p>
+    To pause or resume all tasks:
+</p>
+<ol>
+    <li>
+        Go to the <strong>Dashboard</strong> tab.
+    </li>
+    <li>
+        At the top of the <strong>Tasks</strong> list, click the play/pause button.
+    </li>
+</ol>
+<p>
+    To pause or resume individual tasks:
+</p>
+<ol>
+    <li>
+        Go to the <strong>Dashboard</strong> tab.
+    </li>
+    <li>
+        In the <strong>Tasks</strong> list, find the entry for the relevant task.
+    </li>
+    <li>
+        Click the play/pause button next to the task's header.
+    </li>
+</ol>
+<p>
+    By default, all running tasks are paused when you reopen an existing project file. This is especially useful if you open project files from unknown or untrusted sources. If you prefer, you can change this behavior from the settings menu under <strong>Suite settings &gt; Startup behavior &gt; Pause automated tasks</strong>.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        If you run a large number of concurrent tasks, we recommend configuring resource pools to manage and prioritize use of system resources. For more information, see <a href="/burp/documentation/desktop/automated-scanning/managing-resource-pools.html">Managing resource pools for scans</a>.
+    </p>
+</div>
+<h2 id="disabling-traffic-capturing-for-live-tasks">Disabling traffic capturing for live tasks</h2>
+<p>
+    For live tasks, you can toggle whether the task is currently capturing traffic. When capturing is disabled, the task ignores all traffic until you re-enable it. This is different from pausing the task; while a task is paused, Burp still queues any relevant traffic, then continues processing it once you resume the task.
+</p>
+<p>
+    To enable or disable traffic capturing for a live task, go to the <strong>Dashboard</strong> tab and use the <strong>Capturing</strong> toggle on the relevant task's entry in the <strong>Tasks</strong> list.
+</p>
+<h2 id="bottom-dock">Bottom dock</h2>
+<p>
+    From the bottom dock of the <strong>Dashboard</strong> tab, you can open several panels that display key information taken from all tasks in your project. These include:
+</p>
+<ul>
+    <li>
+        The project-level <strong>Event log</strong>, which contains a log of all events that occurred while executing tasks in your current project. For more information, see <a href="/burp/documentation/desktop/automated-scanning/results/event-log.html">Event log</a>.
+    </li>
+    <li>
+        The <strong>All issues</strong> panel, which contains an interactive table listing all issues found by tasks in your project. For more information, see <a href="/burp/documentation/desktop/automated-scanning/results/issues.html">Issues</a>.
+    </li>
+</ul>
+<p>
+    The dock also displays information about Burp's memory usage and the size of your project file on disk.
+</p>
+</body>
+</html>

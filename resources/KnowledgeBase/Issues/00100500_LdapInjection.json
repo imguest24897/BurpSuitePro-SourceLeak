@@ -1,0 +1,23 @@
+{
+  "typeIndex": 1049856,
+  "name": "LDAP injection",
+  "description": "<p>LDAP injection arises when user-controllable data is copied in an unsafe way into an LDAP query that is performed by the application. If an attacker can inject LDAP metacharacters into the query, then they can interfere with the query's logic. Depending on the function for which the query is used, the attacker may be able to retrieve sensitive data to which they are not authorized, or subvert the application's logic to perform some unauthorized action.</p>\n<p>Note that automated difference-based tests for LDAP injection flaws can often be unreliable and are prone to false positive results. Scanner results should be manually reviewed to confirm whether a vulnerability is actually present. </p>",
+  "remediation": "<p>If possible, applications should avoid copying user-controllable data into LDAP queries. If this is unavoidable, then the data should be strictly validated to prevent LDAP injection attacks. In most situations, it will be appropriate to allow only short alphanumeric strings to be copied into queries, and any other input should be rejected. At a minimum, input containing any LDAP metacharacters should be rejected; characters that should be blocked include ( ) ; , * | & = and whitespace.</p>",
+  "webIntro": null,
+  "typicalSeverity": "HIGH",
+  "references": [],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-90: Improper Neutralization of Special Elements used in an LDAP Query ('LDAP Injection')",
+      "url": "https://cwe.mitre.org/data/definitions/90.html"
+    },
+    {
+      "title": "CWE-116: Improper Encoding or Escaping of Output",
+      "url": "https://cwe.mitre.org/data/definitions/116.html"
+    },
+    {
+      "title": "CAPEC-136: LDAP Injection",
+      "url": "https://capec.mitre.org/data/definitions/136.html"
+    }
+  ]
+}

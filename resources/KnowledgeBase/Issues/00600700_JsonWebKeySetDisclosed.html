@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+Json Web Key Set disclosed
+<h1>Typical severity</h1>
+
+Information
+
+<h1>Issue description</h1>
+
+<p>
+    A JSON Web Key Set is a JSON object that represents a set of JSON Web Keys (JWKs). Authorization servers often publish JWK Sets under well-known URLs to
+    tell clients how they can verify the signature of issued JWTs. Defined in RFC 7517, this data structure contains cryptographic keys for different signature algorithms,
+    such as HMAC or RSA for example. If a server is configured incorrectly, it may accidentally expose private key components as well as public ones.
+    In this case, a malicious user could use any private keys they've obtained to tamper with the signature of JWT tokens and impersonate other users.
+</p>
+
+<p>
+    Even if no secret key components are exposed, the knowledge of public keys may be useful for other attacks, such as algorithm and key confusion for example.
+</p>
+
+<h1>Issue remediation</h1>
+
+<p>
+    If your JWK Set is exposed publicly, make sure to omit any private key components. As long as it only contains public key components, exposing a JWK Set
+    is not a security threat in itself. In fact, its correct use can represent good practice for non-security reasons.
+</p>
+
+<h1>References</h1>
+
+<ul>
+    <li><a href="https://datatracker.ietf.org/doc/html/rfc7517">JSON Web Key (JWK)</a></li>
+</ul>
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+    <li><a href="https://cwe.mitre.org/data/definitions/200.html">CWE-200: Information Exposure</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

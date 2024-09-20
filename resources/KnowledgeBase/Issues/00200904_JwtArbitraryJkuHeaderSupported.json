@@ -1,0 +1,10 @@
+{
+  "typeIndex": 2099460,
+  "name": "JWT arbitrary jku header supported",
+  "description": "<p>\n  The JSON Web Signature specification defines the optional \"jku\" header, which contains a URL pointing to a set of keys used by the server to digitally sign the JWT.\n  This parameter is particularly useful for servers that are configured to use multiple different keys because it can help to determine which key to use when verifying the signature.\n</p>\n\n<p>\n  If the target application implicitly trusts this header, it may verify the signature using an arbitrary public key obtained from the provided URL,\n  essentially relying on data that can be tampered with client-side.\n</p>\n\n<p>\n  A malicious user could insert or modify a \"jku\" header so that it points to an external server containing a JSON Web Key Set that they've generated themselves.\n  They could then re-sign the token using the matching private key and check whether the server still accepts it.\n</p>\n\n<p>\n  If it does, they could exploit this vulnerability by supplying an arbitrary claim in the JWT payload to escalate their privileges or impersonate other users.\n  For example, if the token contains a \"username\": \"joe\" claim, they could change this to  \"username\": \"admin\".\n</p>",
+  "remediation": "<p>\n  Configure the server so that it does not implicitly trust the \"jku\" header parameter.\n  If this is present, the server should verify it against the whitelist of trusted values if possible.\n</p>\n\n<p>\n  We recommend that you only use verification keys obtained from trusted sources, rather than from data that can be modified client-side.\n  Even if the application does not directly use the \"jku\" header, it's important to make sure that it is restricted by the underlying JWT parsing library.\n</p>",
+  "webIntro": null,
+  "typicalSeverity": "HIGH",
+  "references": [],
+  "vulnerabilityClassifications": []
+}

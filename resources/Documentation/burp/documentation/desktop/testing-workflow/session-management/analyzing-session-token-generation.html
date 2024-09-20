@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/session-management/index.html">Testing session management mechanisms</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/session-management/analyzing-session-token-generation.html">Analyzing session token generation</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Analyzing session token generation with Burp Suite</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/Cz97EYymwD4?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    Session tokens must be generated in a way that makes them unpredictable. Predictable session tokens can expose websites to session hijacking attacks, where an attacker accesses another user's active session. If this is an authenticated session, the attacker could access the user's data and potentially perform malicious operations on behalf of the user.
+</p>
+<p>
+    You can use Burp Sequencer to collect a large number of session tokens, and analyze them for predictability.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="before-you-start">Before you start</h2>
+<p>
+    Log in to the target site to generate an authenticated session cookie.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="steps">Steps</h2>
+<p>
+    You can follow along with the process below using <a href="https://ginandjuice.shop">ginandjuice.shop</a>, our deliberately vulnerable demonstration site. Use the credentials <code>carlos:hunter2</code> to log in, then use the post-login response that issued your authenticated session cookie.
+</p>
+<ol>
+    <li>
+        Go to <strong>Proxy &gt; HTTP history</strong> and look for the response that issued your authenticated session cookie.
+    </li>
+    <li>
+        Select the session cookie, right-click it and select <strong>Send to Sequencer</strong>.
+    </li>
+    <li>
+        In the <strong>Sequencer</strong> tab, click <strong>Start live capture</strong> to harvest session tokens from the web application. The live capture dialog opens.
+    </li>
+    <li>
+        When the live capture is complete, click <strong>Analyze now</strong> to analyze the tokens.
+    </li>
+    <li>
+        Review the results of the analysis.
+    </li>
+</ol>
+<p>
+    The <strong>Summary</strong> tab gives you an overall assessment of the randomness of the tokens. You can use the other tabs to perform a deeper analysis. For more information, see <a href="/burp/documentation/desktop/tools/sequencer/index.html">Burp Sequencer</a>.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/tools/sequencer/results/index.html">Burp Sequencer analysis results</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

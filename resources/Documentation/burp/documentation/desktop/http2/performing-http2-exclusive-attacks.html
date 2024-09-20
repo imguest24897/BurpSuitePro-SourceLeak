@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/http2/index.html">HTTP/2</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/http2/performing-http2-exclusive-attacks.html">Performing HTTP/2-exclusive attacks</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Performing HTTP/2-exclusive attacks</h1>
+<p>
+    When you intercept a request in Burp Proxy, or send it to Burp Repeater, the Inspector enables you to work with HTTP/2 headers and pseudo-headers in a way that closely resembles the underlying request.
+</p>
+<p>
+    Each header and pseudo-header has its own entry under <strong>Request Headers</strong>, split into distinct <strong>Name</strong> and <strong>Value</strong> fields. Although we don't show you the actual binary, this is an accurate representation of what will be sent to the server. You can see this in action in the following video demonstration:
+</p>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/vnwxsbmadCo?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<div>
+    <p>
+        As this representation is completely decoupled from HTTP/1, you aren't bound by the limitations of HTTP/1 syntax when constructing malicious requests. This allows you to perform some <a href="https://portswigger.net/research/http2">advanced, HTTP/2-exclusive attacks</a>.
+    </p>
+    <p>
+        For example, you can:
+    </p>
+    <ul>
+        <li>
+            <p>
+                Inject colons into header names.
+            </p>
+        </li>
+        <li>
+            <p>
+                Inject arbitrary spaces or newlines within the method and path.
+            </p>
+        </li>
+        <li>
+            <p>
+                <a href="#injecting-newlines-into-headers">Inject newlines</a> anywhere within a header name or value.
+            </p>
+        </li>
+    </ul>
+    <p>
+        You can make most of these changes by just double-clicking the name or value of a header in the main Inspector view.
+    </p>
+    <p>
+        According to the specification, these kinds of injections should cause the request to be rejected by the server, but some servers tolerate them anyway. Burp is currently the only tool that enables you to take advantage of this behavior.
+    </p>
+    <div class="highlightedarea">
+        <h4>Note</h4>
+        <p>
+            Once you apply these changes, the message editor will be unable to accurately represent the request using HTTP/1 syntax without losing information. In this case, the request is considered "<a href="/burp/documentation/desktop/http2/index.html#kettled-requests">kettled</a>".
+        </p>
+    </div>
+    <h2 id="injecting-newlines-into-headers">Injecting newlines into headers</h2>
+    <p>
+        To inject a newline into an HTTP/2 header or value, drill down into the header by clicking the chevron to the right of its entry in the Inspector. From this view, you can select either the <strong>Name</strong> or <strong>Value</strong> field and press the <code>Shift + Return</code> keys to enter the sequence <code>\r\n</code>.
+    </p>
+</div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "typeIndex": 16778496,
+  "name": "Hidden HTTP 2",
+  "description": "<p>\n    Clients that support HTTP/2 typically default to HTTP/1.1, and only use HTTP/2 if the server advertises support for it via the ALPN field during the TLS handshake.\n</p>\n<p>\n    Some misconfigured servers that do support HTTP/2 fail to advertise this, making it appear as though they only support HTTP/1.1. This can lead to people overlooking viable HTTP/2 attack surface and missing associated vulnerabilities, such as HTTP/2 downgrade-based request smuggling.\n</p>",
+  "remediation": "<p>\n    If you want to use HTTP/2, make sure the server is configured to advertise it correctly. Otherwise, consider fully disabling it server-side to reduce unnecessary attack surface.\n</p>",
+  "webIntro": null,
+  "typicalSeverity": "INFO",
+  "references": [
+    {
+      "title": "HTTP/2: The Sequel is Always Worse",
+      "url": "https://portswigger.net/research/http2"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-912: Hidden Functionality",
+      "url": "https://cwe.mitre.org/data/definitions/912.html"
+    }
+  ]
+}

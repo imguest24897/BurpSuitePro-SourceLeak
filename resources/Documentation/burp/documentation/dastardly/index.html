@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE" ignore-validation="OTHER_PAGE_KEYWORD_TOO_FREQUENT,OFFSITE_LINKS"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/dastardly/index.html">Dastardly</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-dastardly">Dastardly</label>
+</section>
+<h1>Dastardly, from Burp Suite</h1>
+<p>
+    Dastardly is a free, lightweight web application security scanner that uses Docker to run in your CI/CD pipeline. It is designed specifically for web developers, and checks your application for seven security issues that are likely to interest you during software development. Dastardly is based on the same scanner as Burp Suite (Burp Scanner).
+</p>
+<div class="highlightedarea">
+    <h4>Read more</h4>
+    <ul>
+        <li>
+            <a href="/burp/dastardly/index.html">Dastardly overview</a>.
+        </li>
+        <li>
+            <a href="/burp/index.html">The Burp Suite product family</a>.
+        </li>
+        <li>
+            <a href="/burp/vulnerability-scanner/index.html">Burp Scanner</a>.
+        </li>
+    </ul>
+</div>
+<h2 id="scanning">Scanning</h2>
+<p>
+    Dastardly uses a Dynamic Application Security Testing (DAST) methodology to scan your target web application. This means that it scans your target application in a deployed state. This is unlike Static application security testing (SAST) scanning, which looks at application code before it is deployed.
+</p>
+<p>
+    When running a Dastardly scan, provide the seed URL you wish to scan. The seed URL is the point from which Dastardly scans your target web application. From here, Dastardly scans any URLs it finds below the seed URL in the hierarchy.
+</p>
+<div class="highlightedarea">
+    <h4>Read more</h4>
+    <ul>
+        <li>
+            <a href="/burp/application-security-testing/dast/index.html">Dynamic application security testing (DAST)</a>.
+        </li>
+        <li>
+            <a href="/burp/dastardly/scan-checks/index.html">Scan checks performed by Dastardly</a>.
+        </li>
+    </ul>
+</div>
+<h2 id="scan-length-limit">Scan length limit</h2>
+<p>
+    Dastardly scans are capped at a maximum run time of ten minutes. This may not be enough time to scan larger or more complex web applications.
+</p>
+<p>
+    If your application is too large or complex for Dastardly to scan, you might want to try scanning with Burp Suite Enterprise Edition instead.
+</p>
+<h2 id="results">Results</h2>
+<p>
+    When your scan has finished, Dastardly outputs a report of its findings in JUnit XML format. This lists all vulnerabilities found during the scan. To help you pinpoint these issues, it also lists the requests Dastardly sent with the corresponding responses from your application.
+</p>
+<p>
+    Once you have identified and resolved any vulnerabilities, you can redeploy your build to perform another scan.
+</p>
+<h2 id="build-failures">Build failures</h2>
+<p>
+    To help keep your application secure, Dastardly fails your build if it detects any vulnerabilities with a severity level of LOW, MEDIUM, or HIGH.
+</p>
+<p>
+    Vulnerabilities with a severity level of INFO don't trigger a build failure.
+</p>
+<h2 id="integrating-dastardly-with-your-existing-ci-cd-platform">Integrating Dastardly with your existing CI/CD platform</h2>
+<p>
+    We've provided instructions for integrating Dastardly with key CI/CD platforms, as well as a generic <code>docker
+    run</code> command that enables you to integrate Dastardly with any other CI/CD platform:
+</p>
+<ul>
+    <li>
+        <a href="/burp/documentation/dastardly/jenkins.html">Integrating with Jenkins</a>
+    </li>
+    <li>
+        <a href="/burp/documentation/dastardly/github.html">Integrating with GitHub Actions</a>
+    </li>
+    <li>
+        <a href="/burp/documentation/dastardly/teamcity.html">Integrating with TeamCity</a>
+    </li>
+    <li>
+        <a href="/burp/documentation/dastardly/generic.html">Integrating with other CI/CD platforms</a>
+    </li>
+</ul>
+<h2 id="dastardly-system-and-network-requirements">Dastardly system and network requirements</h2>
+<p>
+    To run Dastardly, you need:
+</p>
+<ul>
+    <li>
+        A machine with a minimum of 4 CPU cores and 4 GB of RAM. (Larger or more complex target applications may require more resources.)
+    </li>
+    <li>
+        <p>
+            A CI/CD build agent or node configured to:
+        </p>
+        <ul>
+            <li>
+                Run Docker containers.
+            </li>
+            <li>
+                Access your target application.
+            </li>
+            <li>
+                Access your target URL.
+            </li>
+            <li>
+                Access PortSwigger's public image repository (<code>gallery.ecr.aws/portswigger/dastardly</code>).
+            </li>
+        </ul>
+    </li>
+</ul>
+<p>
+    If you're running Dastardly locally, or within a container, please make sure your network settings are configured correctly. Dastardly does not support any additional environment variables, such as proxies.
+</p>
+<h2 id="troubleshooting-dastardly">Troubleshooting Dastardly</h2>
+<p>
+    PortSwigger provides support for any problems you may encounter when scanning applications using Dastardly. We do not provide support for problems involving your CI/CD platform, or integrating Dastardly with that platform.
+</p>
+<p>
+    If you have a problem with a Dastardly scan, please check our <a href="https://forum.portswigger.net/">user forum</a>, or the <a href="/burp/documentation/dastardly/faqs.html">Dastardly FAQs</a>.
+</p>
+</body>
+</html>

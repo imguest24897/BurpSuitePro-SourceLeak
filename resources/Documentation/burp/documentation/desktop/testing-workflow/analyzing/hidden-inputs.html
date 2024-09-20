@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/analyzing/index.html">Analyzing the attack surface</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/analyzing/hidden-inputs.html">Checking for hidden inputs</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Checking for hidden inputs with Burp Suite</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/Vqv9IETXrwc?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    Hidden inputs are HTTP headers, cookies, or parameters that affect how a site responds to requests but are not used during normal interaction with the site. Identifying hidden inputs can provide you with additional ways to trigger unintended behavior from your target.
+</p>
+<p>
+    You can discover potential hidden inputs in Burp Suite using the Param Miner extension. Param Miner uses a built-in wordlist and information taken from the scope to guess at potential hidden inputs. It then sends a request containing each input, followed by another request with this input omitted. If the responses differ, this suggests that the tested header, cookie, or parameter is supported by the website.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="before-you-start">Before you start</h2>
+<p>
+    We recommend that you complete the following steps before starting this tutorial:
+</p>
+<ul>
+    <li>
+        Install the Param Miner BApp. For more information, see <a href="/burp/documentation/desktop/extensions/installing-extensions.html">Installing extensions</a>.
+    </li>
+    <li>
+        Set a test scope. For more information, see <a href="/burp/documentation/desktop/testing-workflow/test-scope.html">Setting the initial test scope in Burp Suite</a>.
+    </li>
+    <li>
+        Map the visible attack surface of your target site. For more information, see <a href="/burp/documentation/desktop/testing-workflow/mapping/visible-attack-surface.html">Mapping the visible attack surface with Burp Suite</a>.
+    </li>
+</ul>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="steps">Steps</h2>
+<p>
+    You can follow along with the process below using <a href="https://ginandjuice.shop">Gin and Juice Shop</a>, our deliberately vulnerable demonstration site. This site has hidden inputs that Param Miner can discover.
+</p>
+<p>
+    To check for hidden inputs with Param Miner:
+</p>
+<ol>
+    <li>
+        In Burp Suite, open <strong>Target</strong> &gt; <strong>Site map</strong>.
+    </li>
+    <li>
+        Select the request you want to run Param Miner against. You can select multiple requests if required.
+    </li>
+    <li>
+        Select <strong>Extensions</strong> &gt; <strong>Param Miner</strong> &gt; <strong>Guess params</strong>.
+    </li>
+    <li>
+        <p>
+            Select the type of hidden inputs you want to Param Miner to guess:
+        </p>
+        <ul>
+            <li>
+                <strong>Guess GET parameters</strong>
+            </li>
+            <li>
+                <strong>Guess cookie parameters</strong>
+            </li>
+            <li>
+                <strong>Guess headers</strong>
+            </li>
+            <li>
+                <strong>Guess everything!</strong>
+            </li>
+        </ul>
+    </li>
+    <li>
+        On the <strong>Attack Config</strong> dialog, click <strong>OK</strong>. If you selected <strong>Guess everything!</strong> you need to click <strong>OK</strong> a few times to close the dialog. Param Miner sends a series of requests to the target.
+    </li>
+    <li>
+        To view the results of the test, select <strong>Extensions</strong> &gt; <strong>Installed</strong> &gt; <strong>Param Miner</strong> &gt; <strong>Output</strong>. This tab display a log of Param Miner's run, including any hidden inputs identified.
+    </li>
+</ol>
+<p>
+    In Burp Suite Professional, hidden inputs also appear as a <strong>Secret input</strong> issue in the <strong>Dashboard</strong> tab. Select these issues to view the relevant requests and responses.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/tools/burps-browser.html">Burp's browser</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/site-map/index.html">Site map</a>
+        </li>
+        <li>
+            <a href="https://portswigger.net/research/practical-web-cache-poisoning">Practical Web Cache Poisoning</a> - a blog post that explains how to use Param Miner to find web cache poisoning vulnerabilities.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

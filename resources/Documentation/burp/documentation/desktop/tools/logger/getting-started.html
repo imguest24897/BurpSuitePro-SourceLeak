@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/logger/index.html">Logger</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/logger/getting-started.html">Getting started with Logger</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Getting started with Burp Logger</h1>
+<p>
+    The Logger tab displays all the HTTP traffic sent between all of Burp's tools and your target websites. This includes tools or extensions that send requests automatically, such as <a href="/burp/documentation/scanner/index.html">Burp Scanner</a>.
+</p>
+<p>
+    In this tutorial, you'll use Burp Logger to view requests sent by Burp Scanner and the resulting responses from target websites.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="step-1-access-the-lab">Step 1: Access the lab</h2>
+<p>
+    Open Burp's browser and the <strong>Logger</strong> tab side by side.
+</p>
+<p>
+    Use Burp's browser to access the following URL:
+</p>
+<code class="code-scrollable">https://portswigger.net/web-security/sql-injection/lab-retrieve-hidden-data</code><p>
+    Click <strong>Access the lab</strong> and log in to your PortSwigger account if prompted. This opens your own instance of a deliberately vulnerable shopping website.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/getting-started/getting-started-logger-tab-1a-side-by-side.png" alt="Logger tab and Burp's browser open side by side">
+</div>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="step-2-view-requests-on-the-logger-tab">Step 2: View requests on the Logger tab</h2>
+<p>
+    On the shopping site, apply one of the category filters. The <strong>Logger</strong> tab updates in real-time. Click the <strong>#</strong> column header to sort the log so that recent requests are on the top. Notice the new request with a category query parameter.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/getting-started/getting-started-logger-tab-2-query-parameter.png" alt="Selecting a category on the shopping site results in a request with a query parameter">
+</div>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="step-3-audit-a-request-with-burp-scanner">Step 3: Audit a request with Burp Scanner</h2>
+<p>
+    Right-click on the request with the category query parameter, then select <strong>Do active scan</strong>. Burp Scanner performs an audit with this request.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/getting-started/getting-started-logger-tab-3-context-menu.png" alt="Selecting Do active scan from the context-menu">
+</div>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="step-4-examine-the-requests-made-by-burp-scanner">Step 4: Examine the requests made by Burp Scanner</h2>
+<p>
+    Examine the <strong>Tool</strong> column to identify the requests that Burp Scanner makes as it performs the audit. Select a request to see it displayed in the message editor.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/getting-started/getting-started-logger-tab-4-message-editor.png" alt="The tools column and message editor">
+</div>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Burp Scanner requests are not shown in the <strong>HTTP history</strong>, as they are not trafficked through a proxied browser. Only the <strong>Logger</strong> tab shows the requests that Burp Scanner makes as it performs the audit.
+    </p>
+</div>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="step-5-filter-the-log">Step 5: Filter the log</h2>
+<p>
+    To filter which requests are shown, click the <strong>View filter</strong> bar. For more information, see <a href="/burp/documentation/desktop/tools/logger/filter-view.html">Burp Logger view filter</a>.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/logger-v-options-940.png" alt="Logger view settings" class="center-block">
+</div>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You can also control which requests are logged in the first place. To do this, click the <strong>Capture filter</strong> bar. These settings also control how much memory the log is allowed to use, and the maximum size of requests and responses are stored. For more information, see <a href="/burp/documentation/desktop/tools/logger/filter-view.html">Burp Logger capture filter</a>.
+    </p>
+</div>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="step-6-disable-and-clear-the-logger-history">Step 6: Disable and clear the Logger history</h2>
+<p>
+    To disable the logging for all items, click the <strong>Logging: On/Off</strong> button.
+</p>
+<p>
+    To clear the log entirely, click on the trash icon <span class="icon-trash"></span> at the top right of the screen. Once cleared, the log cannot be retrieved.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/getting-started/getting-started-logger-tab-8-logging-on-and-bin.png" alt="Logging: On/Off button and trash can icon">
+</div>
+<h2 id="learn-more-about-logger">Learn more about Logger</h2>
+<p>
+    This tutorial showed you how to use Burp Logger to study requests sent by Burp Suite.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            You can also view the scan results in a task-specific <strong>Logger</strong> tab. For more information, see <a href="/burp/documentation/desktop/tools/logger/task.html">Task Logger</a>.
+        </li>
+        <li>
+            For a tutorial on how to use Logger with a Burp extension, see <a href="/burp/documentation/desktop/extensions/viewing-requests-sent-by-burp-extensions.html">Viewing requests sent by Burp extensions using Logger</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

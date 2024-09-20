@@ -1,0 +1,28 @@
+{
+  "typeIndex": 2097472,
+  "name": "HTTP request smuggling",
+  "description": "<p>\n    HTTP request smuggling vulnerabilities arise when websites route HTTP requests through web servers with inconsistent HTTP parsing.\n</p>\n<p>\n    By supplying a request that different servers interpret as having different lengths, an attacker can poison the back-end TCP/TLS socket and prepend arbitrary data to the next request. Depending on the website's functionality, this can be used to bypass front-end security rules, access internal systems, poison web caches, and launch assorted attacks on users who are actively browsing the site.\n</p>",
+  "remediation": "<p>\n    You can resolve all variants of this vulnerability by configuring the front-end server to exclusively use HTTP/2 when communicating with back-end systems. Alternatively, you could ensure all servers in the chain run the same web server software with the same configuration. Disabling back-end connection reuse is likely to reduce the impact of this vulnerability, but does not mitigate all possible exploits.\n</p><p>\n    Specific instances of this vulnerability can be resolved by reconfiguring the front-end server to normalize ambiguous requests before routing them onward. Alternatively, you could configure the back-end server to reject the message and close the connection when it encounters an ambiguous request.\n</p>",
+  "webIntro": null,
+  "typicalSeverity": "HIGH",
+  "references": [
+    {
+      "title": "HTTP Request Smuggling",
+      "url": "https://portswigger.net/web-security/request-smuggling"
+    },
+    {
+      "title": "HTTP Desync Attacks",
+      "url": "https://portswigger.net/blog/http-desync-attacks"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-444: Inconsistent Interpretation of HTTP Requests ('HTTP Request Smuggling')",
+      "url": "https://cwe.mitre.org/data/definitions/444.html"
+    },
+    {
+      "title": "CAPEC-33: HTTP Request Smuggling",
+      "url": "https://capec.mitre.org/data/definitions/33.html"
+    }
+  ]
+}

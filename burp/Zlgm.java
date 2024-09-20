@@ -1,0 +1,15 @@
+package burp;
+
+public interface Zlgm {
+  default boolean ZB(Zm1n paramZm1n) {
+    return true;
+  }
+  
+  boolean Zh(Zrdu paramZrdu, String paramString);
+}
+
+
+/* Location:              C:\Program Files\BurpSuitePro\burpsuite_pro.jar!\burp\Zlgm.class
+ * Java compiler version: 21 (65.0)
+ * JD-Core Version:       1.1.3
+ */

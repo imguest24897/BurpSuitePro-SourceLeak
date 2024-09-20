@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/logger/index.html">Logger</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/logger/task.html">Task Logger</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Task Logger</h1>
+<p>
+    You can examine traffic generated for a single task. This enables you to investigate a task that behaves unexpectedly, or monitor the progress of a specific task.
+</p>
+<p>
+    To view task-specific log entries:
+</p>
+<ol>
+    <li>
+        Go to <strong>Dashboard</strong>.
+    </li>
+    <li>
+        Select the relevant tasks from the <strong>Tasks</strong> list.
+    </li>
+    <li>
+        In the main panel, go to the <strong>Logger</strong> tab.
+    </li>
+</ol>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/getting-started/getting-started-logger-tab-5-dashboard-logger.png" alt="Logger task view" class="center-block">
+</div>
+<p>
+    The task-specific Logger functions in a similar way to Burp Logger, with a couple of notable differences:
+</p>
+<ul>
+    <li>
+        The default memory allocation for each task is only 10MB, or 20MB if you give Burp Suite access to 1GB or more of memory.
+    </li>
+    <li>
+        You cannot capture or filter by tool, as the task-specific Logger only captures and displays traffic from the tool used for the task.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            For information on how to edit what Logger captures, see <a href="/burp/documentation/desktop/tools/logger/filter-capture.html">Capture filter</a>.
+        </li>
+        <li>
+            For information on how to edit what Logger displays, see <a href="/burp/documentation/desktop/tools/logger/filter-view.html">View filter</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

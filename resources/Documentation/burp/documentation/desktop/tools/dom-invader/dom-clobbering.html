@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE" ignore-validation="KEYWORD_APPEARANCES_MORE_THAN_DEFINING_PAGE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/index.html">DOM Invader</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/dom-clobbering.html">Testing for DOM clobbering</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Testing for DOM clobbering with DOM Invader</h1>
+<p>
+    DOM Invader can automatically test for DOM clobbering vulnerabilities on your behalf. DOM clobbering is a technique in which you inject HTML into a page to manipulate the DOM in a way that enables you to change the behavior of JavaScript on the page.
+</p>
+<div class="highlightedarea">
+    <h4>Web Security Academy</h4>
+    <p>
+        For more information about DOM clobbering, as well as some interactive, deliberately vulnerable labs, check out the related topic on the Web Security Academy.
+    </p>
+    <a href="/web-security/dom-based/dom-clobbering/index.html">DOM clobbering</a>
+</div>
+<h2 id="enabling-dom-clobbering">Enabling DOM clobbering</h2>
+<p>
+    To avoid interfering with your target site's functionality, DOM clobbering is disabled by default. To enable these checks:
+</p>
+<ol>
+    <li>
+        <p>
+            Go to the DOM Invader settings menu.
+        </p>
+    </li>
+    <li>
+        <p>
+            Under <strong>Attack types</strong>, toggle the switch so that <strong>DOM clobbering</strong> is on.
+        </p>
+    </li>
+    <li>
+        <p>
+            Click <strong>Reload</strong> to refresh the browser. This is necessary for your changes to take effect.
+        </p>
+    </li>
+</ol>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/dom-invader-dom-clobbering-enabling.png" alt="Enabling DOM clobbering in DOM Invader">
+</div>
+<p>
+    DOM Invader now scans for DOM clobbering vulnerabilities as you browse.
+</p>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/index.html">Settings</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/tools/sequencer.html">Sequencer</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Sequencer settings</h1>
+<p>
+    The Sequencer page in the <strong>Settings</strong> dialog contains settings for the following:
+</p>
+<ul>
+    <li>
+        <a href="#live-capture">Live capture</a>.
+    </li>
+    <li>
+        <a href="#token-handling">Token handling</a>.
+    </li>
+    <li>
+        <a href="#token-analysis">Token analysis</a>.
+    </li>
+</ul>
+<p>
+    The <strong>Sequencer</strong> settings are all project settings. They apply to the current project only.
+</p>
+<h2 id="live-capture">Live capture</h2>
+<p>
+    These settings control how Sequencer makes HTTP requests and harvests tokens during a live capture:
+</p>
+<ul>
+    <li>
+        <strong>Number of threads</strong> - Specify the maximum number of concurrent requests that the live capture can make.
+    </li>
+    <li>
+        <strong>Throttle between requests</strong> - Specify a delay between each request, in milliseconds. This enables you to avoid overloading the application, or to be more stealthy in your approach.
+    </li>
+    <li>
+        <strong>Ignore token whose length deviates by X characters</strong> - Enable this setting to ignore tokens that deviate by a specified number of characters from the average token length. This setting is useful if the application occasionally returns a different item in the location where a token normally appears.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        For more information on the live capture process, see <a href="/burp/documentation/desktop/tools/sequencer/sample/live-capture.html">Burp Sequencer live capture</a>.
+    </p>
+</div>
+<h2 id="token-handling">Token handling</h2>
+<p>
+    These settings control how tokens are handled during analysis:
+</p>
+<ul>
+    <li>
+        <strong>Pad short tokens at start / end</strong> - The Sequencer statistical tests can only be performed on tokens of identical length. If the application produces tokens with a variable length, then the tokens are padded. You can choose whether padding is applied at the start or end of each token. In most cases, pad tokens at the start.
+    </li>
+    <li>
+        <strong>Pad</strong> - Specify the character that is used for padding. For numeric or ASCII hex-encoded tokens, the 0 character is usually most appropriate.
+    </li>
+    <li>
+        <strong>Base64-decode before analyzing</strong> - Enable this setting to decode any Base-64-encoded tokens before analysis. This generally improves the accuracy of the analysis.
+    </li>
+</ul>
+<h2 id="token-analysis">Token analysis</h2>
+<p>
+    This setting controls the tests that are performed during analysis. You can enable or disable each test individually.
+</p>
+<p>
+    This can be useful after you perform an initial analysis with all tests enabled. You can then disable individual tests to reflect your understanding of the tokens' characteristics, or to isolate the effects of unusual characteristics.
+</p>
+<p>
+    To re-perform an analysis:
+</p>
+<ol>
+    <li>
+        Go to the results window.
+    </li>
+    <li>
+        Modify the settings in the <strong>Analysis settings</strong> tab.
+    </li>
+    <li>
+        Click <strong>Redo analysis</strong>.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            To learn how to obtain a sample of tokens for analysis, see <a href="/burp/documentation/desktop/tools/sequencer/sample/index.html">Obtaining a token sample</a>.
+        </li>
+        <li>
+            For more information on the individual tests performed by Sequencer, see <a href="/burp/documentation/desktop/tools/sequencer/results/tests.html">Burp Sequencer randomness tests</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,389 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/collaborator/index.html">Burp Collaborator</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/collaborator/server/index.html">Server</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/collaborator/server/private/index.html">Deploying a private server</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-enterprise">Enterprise</label>
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Deploying a private Burp Collaborator server</h1>
+<p>
+    Follow the steps on this page to set up your own private instance of the Collaborator server. This may be useful in the following situations:
+</p>
+<ul>
+    <li>
+        For large penetration testing firms and in-house security teams.
+    </li>
+    <li>
+        When working on a closed network with no internet access. This means the public Collaborator server can't be used. The <a href="#basic-setup">basic setup</a> is often sufficient to support a single tester or small team in this situation.
+    </li>
+</ul>
+<h2 id="general-setup">General setup</h2>
+<p>
+    To launch a Collaborator server instance that supports all Collaborator functionality, you need to:
+</p>
+<ul>
+    <li>
+        <a href="#setting-up-the-domain-and-dns-records">Set up a Collaborator domain and DNS records</a>.
+    </li>
+    <li>
+        <a href="#setting-up-the-ports-and-firewall">Set up the ports and firewall for your Collaborator server</a>.
+    </li>
+    <li>
+        <a href="#setting-up-your-server-resources">Set up your host server resources</a>.
+    </li>
+    <li>
+        <a href="#setting-up-the-configuration-file">Write the configuration file</a>.
+    </li>
+    <li>
+        <a href="#launching-the-collaborator-server">Launch the Collaborator server and tell Burp where to find the server</a>.
+    </li>
+</ul>
+<p>
+    <label class="label-edition is-professional">Professional</label>
+    Once you have completed these steps, we recommend that you <a href="#health-check-and-troubleshooting">run the Collaborator health check</a>.
+</p>
+<h2 id="setting-up-the-domain-and-dns-records">Setting up the domain and DNS records</h2>
+<p>
+    To access full Collaborator-related functionality, you need to obtain a domain and configure Collaborator to use the domain. The Collaborator server then runs a DNS service for your domain.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Alternatively, you can configure the Collaborator server to use an IP address instead of a domain. However, this is less effective at detecting vulnerabilities, as any Collaborator-related functionality that relies on DNS resolution is not available.
+    </p>
+</div>
+<p>
+    To obtain the domain or subdomain for the Collaborator server to use, you could:
+</p>
+<ul>
+    <li>
+        Purchase a dedicated domain, such as <code>example.com</code>.
+    </li>
+    <li>
+        Use a subdomain of a domain you already own, such as <code>burpcollaborator.example.com</code>.
+    </li>
+    <li>
+        If your installation is restricted to an internal network, use a dedicated internal domain.
+    </li>
+</ul>
+<p>
+    To configure the Collaborator server to use the domain, you need to:
+</p>
+<ul>
+    <li>
+        Specify the domain in the <code>serverDomain</code> field of your <a href="#setting-up-the-configuration-file">configuration file</a>.
+    </li>
+    <li>
+        Set the Collaborator server as authoritative for the specified domain. This makes sure that queries for the domain are resolved by the server.
+    </li>
+</ul>
+<p>
+    You can generally set the Collaborator server as authoritative on your domain registrar's web interface. Speak to your domain provider for assistance. You also need to:
+</p>
+<ul>
+    <li>
+        <p>
+            Set up the DNS configuration. This is based on your domain registrar, but you must always have the following entries:
+        </p>
+        <ul>
+            <li>
+                An A or AAAA record for the Collaborator subdomain that points to the external IP of the interactions interface.
+            </li>
+            <li>
+                A NS record for the Collaborator subdomain that points to the collaborator name server. For example, <code>ns1.burpcollaborator.example.com</code>.
+            </li>
+            <li>
+                An A or AAAA record for the Collaborator name server.
+            </li>
+        </ul>
+    </li>
+    <li>
+        If your domain registrar requires each configured DNS server to reside on its own IP address, then you might need to configure two public IP addresses. Make sure you specify both of these in your <a href="#setting-up-the-configuration-file">configuration file</a>.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You can't edit the host file of the target server to avoid the use of the Collaborator DNS service. Host files do not support wildcards and so can't be used to route queries with randomly generated subdomains.
+    </p>
+</div>
+<h2 id="setting-up-the-ports-and-firewall">Setting up the ports and firewall</h2>
+<p>
+    By default, Burp Collaborator server listens on the following ports:
+</p>
+<ul>
+    <li>
+        DNS: UDP port 53.
+    </li>
+    <li>
+        HTTP: TCP port 80.
+    </li>
+    <li>
+        HTTPS: TCP port 443.
+    </li>
+    <li>
+        SMTP: TCP ports 25 and 587.
+    </li>
+    <li>
+        SMTPS: TCP port 465.
+    </li>
+</ul>
+<p>
+    To make sure the server operates correctly, you need to:
+</p>
+<ul>
+    <li>
+        Stop any other processes that are using these ports. The server fails to start if it can't bind to the ports it needs to run its services.
+    </li>
+    <li>
+        <p>
+            Configure your firewall to:
+        </p>
+        <ul>
+            <li>
+                Allow inbound communication from any network on these ports.
+            </li>
+            <li>
+                Allow the applications that you are testing, and their DNS servers, to access the Collaborator server.
+            </li>
+        </ul>
+    </li>
+    <li>
+        On Unix-based systems, you may need to run the server with root privileges.
+    </li>
+</ul>
+<h3>Changing the ports</h3>
+<p>
+    You may wish to change the ports from their defaults if you're using a different server, or if you are on a Unix-based system and want to run the Collaborator server as a non-root user.
+</p>
+<p>
+    To change the ports, edit the <code>ports</code> value in the <code>eventCapture</code> and <code>dns</code> fields of your <a href="#setting-up-the-configuration-file">configuration file</a>. You can enter a single port value or multiple values. You can also do this in the <code>polling</code> field if you've <a href="/burp/documentation/collaborator/server/private/configuring.html#add-a-polling-interface">configured a separate polling interface</a>.
+</p>
+<p>
+    You also need to:
+</p>
+<ul>
+    <li>
+        <p>
+            Specify the chosen ports. Use the format <code>example.burpcollaborator.com:9443</code> to add a location for the HTTP or HTTPS port, depending on your polling connection:
+        </p>
+        <ul>
+            <li>
+                <label class="label-edition is-professional">Professional</label>
+                In Burp Suite Professional, do this under <strong>Project</strong> &gt; <strong>Collaborator</strong> in the <strong>Settings</strong> dialog. Select <strong>Use a private Collaborator server</strong>, then add the polling location.
+            </li>
+            <li>
+                <label class="label-edition is-enterprise">Enterprise</label>
+                In Burp Suite Enterprise Edition, do this under the <strong>Burp Collaborator server</strong> settings when you <a href="https://portswigger.net/burp/documentation/enterprise/user-guide/working-with-sites/site-settings/scan-configurations/custom-configs.html#create-a-custom-scan-configuration">create a custom scan configuration</a>. Set the <strong>Collaborator type</strong> to private, then add the polling location.
+            </li>
+        </ul>
+    </li>
+    <li>
+        Configure your operating system to map the original ports to the custom ports.
+    </li>
+    <li>
+        You may also need to configure mappings for TCP and UDP connections.
+    </li>
+</ul>
+<h2 id="setting-up-your-server-resources">Setting up your server resources</h2>
+<p>
+    You need to make two key decisions when you set up the Collaborator server:
+</p>
+<ul>
+    <li>
+        Whether to run the server on a physical or cloud-based machine.
+    </li>
+    <li>
+        The memory size of your server - you need enough memory to store interaction data. For more information on Collaborator data storage, see <a href="/burp/documentation/collaborator/server/index.html">Burp Collaborator server</a>.
+    </li>
+</ul>
+<h3>Controlling memory usage</h3>
+<p>
+    To control how much memory your computer assigns to the Collaborator server, you can configure the JVM's memory handling and garbage collection. To do this, add the <code>--collaborator-server</code> argument to the command line when you launch the Burp Suite JAR. For example:
+</p>
+<ul>
+    <li>
+        <p>
+            On a desktop machine, with a small number of expected users:
+        </p>
+        <p>
+            <code class="code-scrollable">sudo java -Xms10m -Xmx200m -XX:GCTimeRatio=19 -jar /path/to/file.jar --collaborator-server</code>
+        </p>
+        <p>
+            This command allows the heap to fluctuate between 10 and 200MB. The JVM spends 5% of its time in garbage collection, which uses less memory.
+        </p>
+    </li>
+</ul>
+<ul>
+    <li>
+        <p>
+            On a dedicated machine, with a larger number of users:
+        </p>
+        <p>
+            <code class="code-scrollable">sudo java -Xmx3g -Xms3g -jar /path/to/file.jar --collaborator-server</code>
+        </p>
+        <p>
+            This command fixes the size of the heap to the amount of physical memory available. It leaves 1GB for the operating system, JVM, and other running processes.
+        </p>
+    </li>
+</ul>
+<ul>
+    <li>
+        <p>
+            On a dedicated machine with more that 4GB of physical memory, and a large number of users:
+        </p>
+        <p>
+            <code class="code-scrollable">sudo java -Xmx12g -Xms12g -XX:+UseG1GC -jar /path/to/file.jar --collaborator-server</code>
+        </p>
+        <p>
+            This command uses the G1 garbage collector, which significantly reduces the JVM pauses that occur during garbage collection.
+        </p>
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/troubleshooting/launch-from-command-line.html">Launching Burp Suite from the command line</a>.
+        </li>
+        <li>
+            You can also truncate interaction messages to reduce the load on the server. See <a href="/burp/documentation/collaborator/server/private/configuring.html#truncate-interaction-messages">Truncate interaction messages</a>.
+        </li>
+    </ul>
+</div>
+<h2 id="setting-up-the-configuration-file">Setting up the configuration file</h2>
+<p>
+    You need to write a configuration file to set up the Collaborator server. This file enables you to configure all options for the server.
+</p>
+<p>
+    Generally, you need to save the file under the name <code>collaborator.config</code> in the current working directory. By default, the Collaborator server looks for this file. To override this, amend the <code>--collaborator-config</code> argument in the <a href="/burp/documentation/desktop/troubleshooting/launch-from-command-line.html">command line</a>. For example:
+</p>
+<code class="code-scrollable">sudo java -jar /path/to/file.jar --collaborator-server --collaborator-config=myconfig.config</code>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            For an example configuration file and details of the fields that you can include in your configuration file, see <a href="/burp/documentation/collaborator/server/private/example.html">Example configuration file</a>.
+        </li>
+        <li>
+            For information on key options you can configure for your private Collaborator server, see <a href="/burp/documentation/collaborator/server/private/configuring.html">Configuring your private Collaborator server</a>.
+        </li>
+    </ul>
+</div>
+<h2 id="launching-the-collaborator-server">Launching the Collaborator server</h2>
+<p>
+    To launch a Collaborator server with a custom configuration file, add the following argument to the command line:
+</p>
+<code class="code-scrollable">--collaborator-config=myconfig.config</code><p>
+    You don't need a license key to run your own instance of the server. The Collaborator server is included in the same executable file as Burp Suite Professional itself.
+</p>
+<p>
+    Once you've launched your server, you need to tell Burp where to find it:
+</p>
+<ul>
+    <li>
+        <label class="label-edition is-professional">Professional</label>
+        In Burp Suite Professional, do this under <strong>Project</strong> &gt; <strong>Collaborator</strong> in the <strong>Settings</strong> dialog. Select <strong>Use a private Collaborator server</strong>, then add the server location.
+    </li>
+    <li>
+        <label class="label-edition is-enterprise">Enterprise</label>
+        In Burp Suite Enterprise Edition, do this under the <strong>Burp Collaborator server</strong> settings when you <a href="https://portswigger.net/burp/documentation/enterprise/user-guide/working-with-sites/site-settings/scan-configurations/custom-configs.html#create-a-custom-scan-configuration">create a custom scan configuration</a>. Set the <strong>Collaborator type</strong> to private, then add the server location.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/troubleshooting/launch-from-command-line.html">Launching Burp Suite from the command line</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/project/collaborator.html">Collaborator settings</a>.
+        </li>
+    </ul>
+</div>
+<h2 id="health-check-and-troubleshooting">Health check and troubleshooting</h2>
+<p>
+    <label class="label-edition is-professional">Professional</label>
+    Before you start using your server, run the Collaborator health check to determine whether Burp is likely to be able to make use of Collaborator's features. You can find this under <strong>Project</strong> &gt; <strong>Collaborator</strong> in the <strong>Settings</strong> dialog.
+</p>
+<p>
+    Our <a href="/burp/documentation/collaborator/server/private/troubleshooting.html">troubleshooting guide</a> may help you address any issues raised in the health check.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/desktop/settings/project/collaborator.html">Collaborator settings</a>.
+    </p>
+</div>
+<h2 id="basic-setup">Basic setup</h2>
+<p>
+    You can launch a basic Collaborator server instance without a configuration file and dedicated domain. This enables you to use basic Collaborator features to detect issues like external HTTP interactions. This setup may be useful for an individual or small team working on a closed network with no internet access.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        This setup doesn't support custom DNS resolution or valid trusted HTTPS connections.
+    </p>
+</div>
+<p>
+    To launch a basic Collaborator setup:
+</p>
+<ol>
+    <li>
+        Add the --collaborator-server argument to the command line. For example: <code class="code-scrollable">sudo java -jar /path/to/file.jar --collaborator-server</code>
+    </li>
+    <li>
+        <p>
+            Configure Burp to use your machine's IP address as its Collaborator server:
+        </p>
+        <ul>
+            <li>
+                <label class="label-edition is-professional">Professional</label>
+                In Burp Suite Professional, do this under <strong>Project</strong> &gt; <strong>Collaborator</strong> in the <strong>Settings</strong> dialog. Select <strong>Use a private Collaborator server</strong>, then add the server location.
+            </li>
+            <li>
+                <label class="label-edition is-enterprise">Enterprise</label>
+                In Burp Suite Enterprise Edition, do this under the <strong>Burp Collaborator server</strong> settings when you <a href="https://portswigger.net/burp/documentation/enterprise/user-guide/working-with-sites/site-settings/scan-configurations/custom-configs.html#create-a-custom-scan-configuration">create a custom scan configuration</a>. Set the <strong>Collaborator type</strong> to private, then add the server location.
+            </li>
+        </ul>
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/settings/project/collaborator.html">Collaborator settings</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/troubleshooting/launch-from-command-line.html">Launching Burp Suite from the command line</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

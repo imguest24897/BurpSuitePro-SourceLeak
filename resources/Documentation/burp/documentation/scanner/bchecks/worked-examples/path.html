@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE" ignore-validation="OTHER_PAGE_KEYWORD_TOO_FREQUENT"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/index.html">Scanner</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/bchecks/index.html">BCheck definitions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/bchecks/worked-examples/index.html">Worked examples</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/bchecks/worked-examples/path.html">Example path check</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-enterprise">Enterprise</label>
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Example path check</h1>
+<p>
+    This check enables Burp Scanner to see whether the target application contains old backup files. It is an example of a per-path check (that is, a check that runs once for each path scanned).
+</p>
+<p>
+    The example scan check works by attempting to locate files with potential backup file extensions.
+</p>
+<code class="pre-wrap">
+metadata:
+    language: v2-beta
+    name: "Path-level"
+    description: "Tests for exposed backup files"
+    author: "Carlos Montoya"
+
+run for each:
+    # you could add more values to this list to make the check repeat
+    extension =
+        ".bak",
+        ".back",
+        ".backup",
+        ".old"
+given path then
+    if not ({base.response.status_code} is "404") then
+        send request called check:
+            replacing path: {regex_replace ({base.response.url.path}, "(.)/?$", `$1{extension}`)}
+        if {check.response.status_code} is {base.response.status_code} then
+            send request called garbage:
+                replacing path: {regex_replace ({base.response.url.path}, "(.)/?$", `$1.{random_str(10)}`)}
+            if {garbage} differs from {check} then
+                report issue and continue:
+                    severity: info
+                    confidence: firm
+                    detail: `Backup file found at {check.request.url}`
+                    remediation: "Ensure your backup files are not exposed."
+            end if
+        end if
+    end if
+        </code>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-1-add-metadata">Step 1: Add metadata</h2>
+<code class="pre-wrap">
+metadata:
+    language: v2-beta
+    name: "Path-level"
+    description: "Tests for exposed backup files"
+    author: "Carlos Montoya"
+        </code><p>
+    The definition starts with a <code>metadata</code> block. For more information on available metadata properties, see the <a href="/burp/documentation/scanner/bchecks/bcheck-definition-reference.html">reference documentation</a>.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-2-configure-file-extensions">Step 2: Configure file extensions</h2>
+<code class="pre-wrap">
+run for each:
+    # you could add more values to this list to make the check repeat
+    extension =
+        ".bak",
+        ".back",
+        ".backup",
+        ".old"
+        </code><p>
+    This step configures which file extensions that Burp Scanner should look for when trying to locate old backup files.
+</p>
+<p>
+    The example code declares a variable called <code>extension</code>, which contains a list of potential file extensions. Burp Scanner will iterate through this list, performing one full check for each entry before moving on to the next one.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-3-configure-the-request">Step 3: Configure the request</h2>
+<code class="pre-wrap">
+given path then
+    if not ({base.response.status_code} is "404") then
+        send request called check:
+            replacing path: {regex_replace ({base.response.url.path}, "(.)/?$", `$1{extension}`)}
+        if {check.response.status_code} is {base.response.status_code} then
+            send request called garbage:
+                replacing path: {regex_replace ({base.response.url.path}, "(.)/?$", `$1.{random_str(10)}`)}
+        </code><p>
+    Before the request is sent, for each unique path requested, Burp Scanner checks that the status code of the base response isn't <code>404</code>, which indicates that the web page can't be found.
+</p>
+<p>
+    If the status code isn't <code>404</code>, Burp Scanner sends a request that uses the <code>regex_replace</code> function to replace the trailing slash on the end of the URL with one of the extensions named in the <code>extension</code> variable.
+</p>
+<p>
+    Burp also sends an additional request that uses the <code>regex_replace</code> function to replace the trailing slash on the end of the URL with a random string.
+</p>
+<p>
+    Note that both requests are named using the <code>called</code> keyword. The request names are used in the next step to make a comparison between the responses.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-4-report-issues">Step 4: Report issues</h2>
+<code class="pre-wrap">
+if {garbage} differs from {check} then
+    report issue and continue:
+        severity: info
+        confidence: firm
+        detail: `Backup file found at {check.request.url}`
+        remediation: "Ensure your backup files are not exposed."
+        </code><p>
+    The next step is to report issues where appropriate.To reduce false positives, Burp Scanner uses an <code>if</code> statement to look to see if the <code>garbage</code> response differs from the<code>check</code> response.
+</p>
+<p>
+    Burp Scanner then reports an <code>info</code> issue.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <p>
+                <a href="/burp/documentation/scanner/bchecks/bcheck-definition-reference.html">BCheck definition reference</a>.
+            </p>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/index.html">Settings</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/sessions/index.html">Sessions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/sessions/session-handling-rules.html">Session handling rule editor</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Session handling rule editor</h1>
+<p>
+    The session handling rule editor enables you to configure the session handling rules that Burp uses. To open the rule editor, select <strong>Settings &gt; Sessions &gt; Session handling rules</strong> and then either select <strong>Add</strong> to add a new rule, or <strong>Edit</strong> to edit an existing one.
+</p>
+<p>
+    The session handling rule editor has two tabs:
+</p>
+<ul>
+    <li>
+        <strong>Details</strong> enables you to specify the actions that the rule performs when it is applied to a request.
+    </li>
+    <li>
+        <strong>Scope</strong> enables you to specify the tools, URLs and parameters that the rule applies to.
+    </li>
+</ul>
+<h2 id="rule-description">Rule description</h2>
+<p>
+    Access the <strong>Rule Description</strong> setting from the <strong>Details</strong> tab. This setting enables you to describe what the rule does. The description you provide appears on the rule editor's list of active rules.
+</p>
+<h2 id="rule-actions">Rule actions</h2>
+<p>
+    Access the <strong>Rule Actions</strong> setting from the <strong>Details</strong> tab. This setting enables you to configure the actions that the rule performs.
+</p>
+<p>
+    Each rule includes one or more actions that should be carried out when the rule is applied. Burp performs these actions in sequence, unless one of the actions specifies that no further actions should be applied to the request.
+</p>
+<p>
+    Click <strong>Add</strong> to add the following actions to your rules:
+</p>
+<ul>
+    <li>
+        <a href="#use-cookies-from-the-session-handling-cookie-jar">Add cookies from the session handling cookie jar</a>.
+    </li>
+    <li>
+        <a href="#set-a-specific-cookie-or-parameter-value">Set a specific cookie or parameter value</a>.
+    </li>
+    <li>
+        <a href="#check-session-is-valid">Check whether the current session is valid, and perform sub-actions conditionally on the result</a>.
+    </li>
+    <li>
+        <a href="#prompt-for-in-browser-session-recovery">Prompt the user for in-browser session recovery</a>.
+    </li>
+    <li>
+        <a href="#run-a-macro-to-obtain-a-new-valid-session">Run a macro</a>.
+    </li>
+    <li>
+        <a href="#run-a-post-request-macro">Run a post-request macro - this issues the current request, and then executes a further macro</a>.
+    </li>
+    <li>
+        <a href="#invoke-a-burp-extension">Invoke a Burp extension</a>.
+    </li>
+    <li>
+        <a href="#set-a-specific-header-value">Set a specific header value</a>.
+    </li>
+</ul>
+<p>
+    You can combine any of these actions to handle virtually any session handling mechanism. For example, you could configure a rule to run a macro and update specified cookie and parameter values based on the result. You could use this to automatically log back in to an application part way through an automated scan or Intruder attack.
+</p>
+<h3 id="use-cookies-from-the-session-handling-cookie-jar">Use cookies from the session handling cookie jar</h3>
+<p>
+    This action updates the request with cookies from Burp's cookie jar. You can configure the action to update all cookies (optionally, with specific exclusions), or to only update certain specific cookies.
+</p>
+<div class="highlightedarea">
+    <h4>More information</h4>
+    <p>
+        For more information on how Burp's cookie jar works, see <a href="/burp/documentation/desktop/settings/sessions/index.html">Sessions</a>.
+    </p>
+</div>
+<h3 id="set-a-specific-cookie-or-parameter-value">Set a specific cookie or parameter value</h3>
+<p>
+    This action sets a specific value in a named parameter or cookie of the request. If the named parameter or cookie is not already present in the request, you can specify whether it should be added as:
+</p>
+<ul>
+    <li>
+        A URL parameter.
+    </li>
+    <li>
+        A body parameter.
+    </li>
+    <li>
+        A cookie.
+    </li>
+</ul>
+<h3 id="check-session-is-valid">Check session is valid</h3>
+<p>
+    This action checks whether the current session is valid. If it is not, you can choose to perform a further action to obtain a new valid session.
+</p>
+<h3 id="make-requests-to-validate-session">Make requests to validate session</h3>
+<p>
+    Burp issues one or more requests to determine the validity of the current session. When running this action, Burp can:
+</p>
+<ul>
+    <li>
+        Issue the current request that is being processed by the rule.
+    </li>
+    <li>
+        Run a macro.
+    </li>
+</ul>
+<p>
+    If Burp issues the current request and the rule determines that the session is valid, then the system cannot perform any further actions on the current request.
+</p>
+<p>
+    Optionally, you can configure Burp to validate the session after a set number of requests. This helps you to avoid making unnecessary requests in cases where the application rarely invalidates your session.
+</p>
+<h3 id="inspect-responses-to-determine-session-validity">Inspect responses to determine session validity</h3>
+<p>
+    Having made the configured requests, Burp examines the response to determine whether the session is valid. If Burp ran a macro, it examines the response from the final request made by the macro.
+</p>
+<p>
+    To determine whether the session is valid, Burp checks whether or not the response contains a specified expression. You can configure Burp to search for:
+</p>
+<ul>
+    <li>
+        HTTP response headers.
+    </li>
+    <li>
+        Response body.
+    </li>
+    <li>
+        The URL of any redirection target.
+    </li>
+</ul>
+<p>
+    You can search for a literal string or a regular expression. You can make the search case sensitive.
+</p>
+<h3 id="define-behavior-dependent-on-session-validity">Define behavior dependent on session validity</h3>
+<p>
+    This setting enables you to configure how Burp behaves once the validity check is complete.
+</p>
+<p>
+    If the session is valid, you can select whether Burp should process any further rules or actions for the current request.
+</p>
+<p>
+    If the session is invalid, you can configure Burp to perform one of the following actions in order to obtain a new valid session:
+</p>
+<ul>
+    <li>
+        Run a macro.
+    </li>
+    <li>
+        Prompt for in-browser session recovery.
+    </li>
+</ul>
+<h4 id="run-a-macro-to-obtain-a-new-valid-session">Run a macro to obtain a new valid session</h4>
+<p>
+    If you select <strong>Run a macro</strong>, then Burp runs one or more macros to attempt to obtain a new valid session. You can specify the macros to run from the <strong>Select macro</strong> menu.
+</p>
+<div class="highlightedarea">
+    <h4>More information</h4>
+    <p>
+        For information on recording and editing macros, see <a href="/burp/documentation/desktop/settings/sessions/macros.html">Macro editor</a>.
+    </p>
+</div>
+<p>
+    Once the macro has run, you can select whether Burp should update the current request with parameters matched from the final macro response. You can also select whether Burp should update the current request with cookies from the session handling cookie jar. Burp can either update the request using specific parameters and cookies, or update using all parameters and cookies except those specified.
+</p>
+<h4>Tolerate URL mismatch when matching parameters</h4>
+<p>
+    If you select <strong>Tolerate URL mismatch when matching parameters</strong> then Burp tolerates mismatches in the URL.
+</p>
+<p>
+    Normally, when deriving parameters from a prior response, Burp matches the parameter name and URL inferred from the response to the parameter name and URL in the subsequent request. This option is useful if the application employs CSRF tokens that are URL agnostic - that is, tokens that can be obtained from one location in the application and reused in another.
+</p>
+<p>
+    The <strong>Tolerate URL mismatch when matching parameters</strong> option simplifies these rules. It enables you to define a rule that runs on any request containing the CSRF token parameter, and that runs a single macro to obtain a new token from a fixed location.
+</p>
+<h3 id="prompt-for-in-browser-session-recovery">Prompt for in-browser session recovery</h3>
+<p>
+    This action causes Burp to prompt you to recover a valid session using Burp's browser. The cookies set by the application are added to Burp's session handling cookie jar, and can be updated in the current request if required.
+</p>
+<p>
+    You can select to either update all cookies (with specific exclusions if needed), or only certain specific cookies.
+</p>
+<h3 id="run-a-post-request-macro">Run a post-request macro</h3>
+<p>
+    This action issues the request that is currently being processed, and then runs a further macro. No further rules or actions are carried out on the request.
+</p>
+<p>
+    Post-request macros are useful if the request you are testing appears within a multi-stage process, and you need to step through the remaining stages to update the application's state and determine the effects of the targeted request.
+</p>
+<p>
+    You can configure Burp to use the response to the current request to update parameters in the first macro request. If this option is selected, then Burp can update all the parameters in the first macro request (with specific exclusions if required), or only specific parameters.
+</p>
+<p>
+    You can configure the action to pass the following back to the invoking tool:
+</p>
+<ul>
+    <li>
+        The response from the current request, issued prior to executing the macro.
+    </li>
+    <li>
+        The final response from the macro.
+    </li>
+</ul>
+<p>
+    The latter option is useful in cases where you are scanning or fuzzing input at one step in a multi-stage process, but a resulting error message is displayed at a later step in that process.
+</p>
+<h3 id="invoke-a-burp-extension">Invoke a Burp extension</h3>
+<p>
+    This action invokes a Burp extension to process the current request. You can select the required extension from the list. Note that you can only select those extensions that have registered a session handling action handler.
+</p>
+<h3 id="set-a-specific-header-value">Set a specific header value</h3>
+<p>
+    This action replaces the value of a specified header within a request. Select the <strong>Add if not present</strong> checkbox to add the header to requests in which it is not already present.
+</p>
+<h2 id="tools-scope">Tools scope</h2>
+<p>
+    The <strong>Tools scope</strong> settings are on the <strong>Scope</strong> tab of the session handling rule editor. These settings enable you to specify the Burp tools that each rule should apply to. Burp only processes rules for requests made by in-scope tools.
+</p>
+<h2 id="url-scope">URL scope</h2>
+<p>
+    The <strong>URL scope</strong> settings are on the <strong>Scope</strong> tab of the session handling rule editor. They enable you to specify the URLs that each rule should apply to. You can select from the following options:
+</p>
+<ul>
+    <li>
+        <strong>All URLs</strong>. This setting is useful if you are creating a generic rule to use cookies from Burp's cookie jar.
+    </li>
+    <li>
+        <strong>The suite scope</strong>. This setting is useful if you are creating an application-wide rule, such as a rule to validate the current session.
+    </li>
+    <li>
+        A specific <strong>custom scope</strong>. This setting is useful if you are creating a rule affecting a single request.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>More information</h4>
+    <p>
+        For more details on setting URL scope, see <a href="/burp/documentation/desktop/tools/target/scope/index.html#url-matching-rules">URL-matching rules</a>.
+    </p>
+</div>
+<h2 id="parameter-scope">Parameter scope</h2>
+<p>
+    You can specify that rules should only apply to requests containing specific named parameters. This enables you to create a rule that updates a certain parameter across all requests, such as a CSRF token.
+</p>
+</body>
+</html>

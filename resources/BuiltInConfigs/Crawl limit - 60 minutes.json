@@ -1,0 +1,13 @@
+{
+  "description": {
+    "featured": false,
+    "uuid": "c5c307fa-003c-4020-9552-72fc1a82f30d"
+  },
+  "crawler": {
+    "crawl_limits": {
+      "maximum_crawl_time": 60,
+      "maximum_request_count": 0,
+      "maximum_unique_locations": 1500
+    }
+  }
+}

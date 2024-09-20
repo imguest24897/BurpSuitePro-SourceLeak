@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms><cms ignore-validation="STACKED_HEADINGS"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/external-browser-config/index.html">External browser configuration</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/external-browser-config/certificate/index.html">Installing Burp's CA certificate</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Installing Burp's CA certificate</h1>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        These steps are only necessary if you want to use an external browser for manual testing with Burp. If you prefer, you can just use <a href="/burp/documentation/desktop/tools/burps-browser.html">Burp's browser</a>, which is preconfigured to work with Burp Proxy already. To access Burp's browser, go to the <strong>Proxy &gt; Intercept</strong> tab, and click <strong>Open Browser</strong>.
+    </p>
+</div>
+<p>
+    The process for installing Burp's CA certificate varies depending on which browser you are using. Please select the appropriate link below for detailed information about installing the certificate on your chosen browser.
+</p>
+<ul>
+    <li>
+        <a href="/burp/documentation/desktop/external-browser-config/certificate/ca-cert-firefox.html">Installing Burp's CA certificate in Firefox</a>.
+    </li>
+    <li>
+        <p>
+            <a href="/burp/documentation/desktop/external-browser-config/certificate/ca-cert-chrome.html">Installing Burp's CA certificate in Chrome</a>:
+        </p>
+        <ul>
+            <li>
+                <a href="/burp/documentation/desktop/external-browser-config/certificate/ca-cert-chrome-windows.html">Windows</a>.
+            </li>
+            <li>
+                <a href="/burp/documentation/desktop/external-browser-config/certificate/ca-cert-chrome-linux.html">Linux</a>.
+            </li>
+            <li>
+                <a href="/burp/documentation/desktop/external-browser-config/certificate/ca-cert-chrome-macos.html">MacOS</a>.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="/burp/documentation/desktop/external-browser-config/certificate/ca-cert-safari.html">Installing Burp's CA certificate in Safari</a>.
+    </li>
+</ul>
+<p>
+    If you're having trouble downloading Burp's CA certificate, take a look at the <a href="/burp/documentation/desktop/external-browser-config/certificate/proxy-troubleshooting.html">troubleshooting</a> page.
+</p>
+<p>
+    When you have done this, you can confirm things are working properly by closing all your browser windows, opening a new browser session, and visiting any HTTPS URL. The browser should not display any security warnings, and the page should load in the normal way (you will need to turn off interception again in the <strong>Proxy &gt; Intercept</strong> tab if you have re-enabled this).
+</p>
+<h2 id="installing-burp-s-ca-certificate-on-a-mobile-device">Installing Burp's CA certificate on a mobile device</h2>
+<p>
+    Additionally, you may want to install Burp's CA certificate on a mobile device. First, ensure that the <a href="/burp/documentation/desktop/mobile/index.html">mobile device is configured to work with Burp Suite</a>. Use the links below for help on installing the certificate:
+</p>
+<ul>
+    <li>
+        <a href="/burp/documentation/desktop/mobile/config-ios-device.html">iOS device</a>
+    </li>
+    <li>
+        <a href="/burp/documentation/desktop/mobile/config-android-device.html">Android device</a>
+    </li>
+</ul>
+<h2 id="why-do-i-need-to-install-burp-s-ca-certificate">Why do I need to install Burp's CA certificate?</h2>
+<p>
+    One of the key functions of TLS is to authenticate the identity of web servers that your browser communicates with. This authentication process helps to prevent a fraudulent website from masquerading as a legitimate one, for example. It also encrypts the transmitted data and implements integrity checks to protect against man-in-the-middle attacks. In order to intercept the traffic between your browser and destination web server, Burp needs to break this TLS connection. As a result, if you try and access an HTTPS URL while Burp is running, your browser will detect that it is not communicating directly with the authentic web server and will show a security warning.
+</p>
+<p>
+    To prevent this issue, Burp generates its own TLS certificate for each host, signed by its own Certificate Authority (CA). This CA certificate is generated the first time you launch Burp, and stored locally. To use Burp Proxy most effectively with HTTPS websites, you need to install this certificate as a trusted root in your browser's trust store. Burp will then use this CA certificate to create and sign a TLS certificate for each host that you visit, allowing you to browse HTTPS URLs as normal. You can then use Burp to view and edit requests and responses sent over HTTPS, just as you would with any other HTTP messages.
+</p>
+<p>
+    Although this step isn't strictly mandatory, especially if you only want to work with non-HTTPS URLs, we still recommend completing this step. You only need to do it once, and it is required to get the most out of your experience with Burp Suite when using an external browser.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        If you install a trusted root certificate in your browser, then an attacker who has the private key for that certificate may be able to man-in-the-middle your TLS connections without obvious detection, even when you are not using an intercepting proxy. To protect against this, Burp generates a unique CA certificate for each installation, and the private key for this certificate is stored on your computer, in a user-specific location. If untrusted people can read local data on your computer, you may not wish to install Burp's CA certificate.
+    </p>
+</div>
+<h2 id="in-browser-interface">In-browser interface</h2>
+<p>
+    You can access the Burp Proxy in-browser interface by visiting <code>http://burpsuite</code> with the browser, or by entering the URL of your Proxy listener, for example: <code>http://127.0.0.1:8080</code>.
+</p>
+<p>
+    You can download a copy of your Burp CA certificate.
+</p>
+<p>
+    You can disable the in-browser interface if required, in the <a href="/burp/documentation/desktop/settings/tools/proxy.html#miscellaneous">Proxy settings</a>.
+</p>
+</body>
+</html>

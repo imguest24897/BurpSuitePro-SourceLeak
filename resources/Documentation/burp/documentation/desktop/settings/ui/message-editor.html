@@ -1,0 +1,186 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/index.html">Settings</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/ui/index.html">UI</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/ui/message-editor.html">Message editor</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Message editor settings</h1>
+<p>
+    The <strong>Message editor</strong> settings page is located under <strong>User interface</strong> in the <span class="icon-settings"></span><strong>Settings</strong> dialog.
+</p>
+<p>
+    You can edit how the message editor is displayed:
+</p>
+<ul>
+    <li>
+        <a href="#message-editor-request-and-response-views">Message editor request views</a>.
+    </li>
+    <li>
+        <a href="#message-editor-request-and-response-views">Message editor response views</a>.
+    </li>
+    <li>
+        <a href="#http-message-display">HTTP message display</a>.
+    </li>
+    <li>
+        <a href="#character-sets">Character sets</a>.
+    </li>
+    <li>
+        <a href="#html-rendering">HTML rendering</a>.
+    </li>
+    <li>
+        <a href="#http-message-search">HTTP message search</a>.
+    </li>
+    <li>
+        <a href="#uninteresting-headers">Uninteresting headers</a>.
+    </li>
+</ul>
+<p>
+    The <strong>Message editor</strong> settings are user settings. They apply to all installations of Burp on your machine.
+</p>
+<h2 id="message-editor-request-and-response-views">Message editor request and response views</h2>
+<p>
+    The <strong>Message editor request views</strong> and <strong>Message editor response views</strong> settings enable you to adjust the views of the message content in the message editor. Each view is displayed in an individual tab, and provides the same functionality as the widgets in the Inspector.
+</p>
+<p>
+    For each view option, you can:
+</p>
+<ul>
+    <li>
+        <strong>Show</strong> - Enable this setting to display the view in a message editor tab. By default the <strong>Pretty</strong>, <strong>Raw</strong>, <strong>Hex</strong>, and <strong>Render</strong> view tabs are displayed.
+    </li>
+    <li>
+        <strong>Wrap text</strong> - Enable this setting to wrap the text inside the message editor.
+    </li>
+</ul>
+<p>
+    To reorder the list of views, use the <strong>Up</strong> and <strong>Down</strong> buttons.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        In read-only contexts, such as the proxy history, the message editor only displays the selected views if the message contains appropriate content. For example, you won't see the <strong>Cookies</strong> tab unless the request contains one or more cookies.
+    </p>
+    <p>
+        In editable contexts, such as in Burp Repeater, the message editor displays all views. This gives you the option to add items even if none were included in the original request.
+    </p>
+</div>
+<h2 id="http-message-display">HTTP message display</h2>
+<p>
+    These settings enable you to control how HTTP messages are displayed within the HTTP message editor. You can configure the following:
+</p>
+<ul>
+    <li>
+        <strong>Font</strong> - Select the font style and size you want to use. You can also enable font smoothing.
+    </li>
+    <li>
+        <strong>Highlight request syntax</strong> - Enable this setting to color-code request syntax. This includes any JavaScript, JSON, and CSS content.
+    </li>
+    <li>
+        <strong>Highlight response syntax</strong> - Enable this setting to color-code response syntax. This includes any JavaScript, JSON, and CSS content.
+    </li>
+    <li>
+        <strong>Pretty print by default</strong> - Enable this setting to automatically prettify data, markup, and code. Burp adds standardized line breaks and indentation to unformatted text. Pretty printing is supported for JSON, XML, HTML, CSS, and JavaScript.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            For more information on pretty printing, see <a href="/burp/documentation/desktop/tools/message-editor/text-editor.html#pretty-printing">Text editor</a>.
+        </li>
+        <li>
+            For more information on the message editor, see <a href="/burp/documentation/desktop/tools/message-editor/index.html">Burp Suite message editor</a>.
+        </li>
+    </ul>
+</div>
+<h2 id="character-sets">Character sets</h2>
+<p>
+    These settings control how Burp handles character sets when it displays raw HTTP messages. The available settings are:
+</p>
+<ul>
+    <li>
+        <strong>Recognize automatically based on message headers</strong> - By default, Burp automatically recognizes the character set of each message, based on the message headers. This enables you to work concurrently on messages that use different character sets.
+    </li>
+    <li>
+        <strong>Use the platform default</strong> - Select this option to use the default UTF-8 character set for all messages.
+    </li>
+    <li>
+        <strong>Display as raw bytes</strong> - Select this option to display the messages as raw bytes (using ASCII encoding), without processing any extended characters.
+    </li>
+    <li>
+        <strong>Use a specific character set</strong> - Choose a character set from the drop-down list. This character set is used with all messages.
+    </li>
+</ul>
+<p>
+    HTTP headers are always displayed in raw form. The charset encoding options only apply to the message body.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Some of the glyphs required for certain character sets are not supported by all fonts. If you need to use an extended or unusual character set, you should first try a system font such as <code>Courier New</code> or <code>Dialog</code>.
+    </p>
+</div>
+<h2 id="html-rendering">HTML rendering</h2>
+<p>
+    The <strong>Render</strong> view within the HTTP message editor displays HTML content approximately as it would appear in your browser. This setting controls whether Burp can make additional HTTP requests to fully render HTML content (for example, to display embedded images).
+</p>
+<p>
+    Select this setting to increase the quality of Burp's HTML rendering at the expense of some speed. This setting increases the overall number of requests that Burp makes to the target application.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/desktop/tools/message-editor/index.html">Burp Suite message editor</a>.
+    </p>
+</div>
+<h2 id="http-message-search">HTTP message search</h2>
+<p>
+    The <strong>HTTP Message search</strong> settings control the search bar at the bottom of the message editor window. By default, none of these settings are enabled:
+</p>
+<ul>
+    <li>
+        <strong>Case sensitive</strong> - Choose whether the search is case-sensitive.
+    </li>
+    <li>
+        <strong>Regex</strong> - Specify whether the search term is a regular expression or a literal string.
+    </li>
+    <li>
+        <strong>Auto-scroll to match when text changes</strong> - Specify whether the text editor automatically scrolls to the first highlighted match when new text is displayed. This is useful if you want to step through items in the Proxy history, to look for a particular expression in the responses.
+    </li>
+</ul>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="uninteresting-headers">Uninteresting headers</h2>
+<p>
+    By default, Burp shows all headers when you view HTTP requests in the message editor. To change this in the <strong>Pretty</strong> tab for HTTP requests across Burp, select <strong>Hide uninteresting headers by default</strong>. Burp hides a predefined list of headers that typically don't offer much insight into the target application's behavior, or that contain information that can't be exploited, like <code>Sec-Ch-Ua</code>, <code>Accept-Language</code>, and <code>Upgrade-Insecure-Requests</code>. By filtering uninteresting headers out, you can reduce clutter, making it easier for you to focus your analysis on more valuable information.
+</p>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Learn how to see the requests Burp Extensions are making in Burp Suite Professional / Burp Suite Community Edition.">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms><title>Viewing requests sent by Burp extensions using Logger</title>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/extensions/index.html">Extensions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/extensions/viewing-requests-sent-by-burp-extensions.html">Viewing requests sent by Burp extensions using Logger</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1 cms-ignore-validation="DUPLICATE_HEADINGS">Viewing requests sent by Burp extensions using Logger</h1>
+<p>
+    Many extensions modify requests that you've sent, or generate their own. These requests are not logged in the HTTP history, which only displays traffic from a browser that is proxied through Burp.
+</p>
+<p>
+    In this tutorial, you'll learn how to use the Burp Logger to view requests from an extension. This can help you understand how an extension works or troubleshoot unexpected behavior.
+</p>
+<h2 id="step-1-send-requests-using-an-extension" cms-ignore-validation="HEADING_CAPITALIZATION">Step 1: Send requests using an extension</h2>
+<p>
+    Open Burp's browser and go to <code>https://portswigger-labs.net/</code>, a deliberately vulnerable test domain. Always make sure that you use a website that you have permission to test.
+</p>
+<p>
+    Run a scan on the domain with the <a href="https://portswigger.net/bappstore/3123d5b5f25c4128894d97ea1acc4976">ActiveScan++</a> extension.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        We use the ActiveScan++ extension for demonstration purposes. You could use any extension for any Burp tool that sends requests. For more information on how to add an extension, see <a href="/burp/documentation/desktop/extensions/installing-extensions.html">Installing extensions</a>.
+    </p>
+</div>
+<h2 id="step-2-go-to-the-logger-tab" cms-ignore-validation="HEADING_CAPITALIZATION">Step 2: Go to the Logger tab</h2>
+<p>
+    View the scan's HTTP traffic in the <strong>Logger</strong> tab. This is updated in real-time. Notice that the traffic is not displayed in the <strong>HTTP history</strong> tab, which only records requests sent from Burp's browser.
+</p>
+<div class="rounded-dropshadow">
+    <img alt="The Logger tab populating with requests" src="/burp/documentation/desktop/images/viewing-requests/logger-tut-1-window-populating.png">
+</div>
+<p>
+    To show or hide columns, use the drop-down <strong>Columns</strong> menu. Ensure that you can see the <strong>Tool</strong> column, which identifies the tool that sent each request.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You can view a task-specific log for this scan from the <strong>Dashboard</strong> tab. For information on how to view this, see <a href="/burp/documentation/desktop/tools/logger/task.html">Task Logger</a>.
+    </p>
+</div>
+<h2 id="step-3-filter-the-log" cms-ignore-validation="HEADING_CAPITALIZATION">Step 3: Filter the log</h2>
+<p>
+    Click the <strong>View filter</strong> bar. To view only requests sent by the extension, select <strong>Scanner</strong> and <strong>Extensions</strong> in the <strong>Filter by tool</strong> settings. Deselect all other tools.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/viewing-requests/logger-tut-2-filtering-by-tool.png" alt="Filtering the Logger tab by tool">
+</div>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        If an extension generates a request from scratch, it is listed under <strong>Extensions</strong>. However, any requests that are simply modified by an extension are listed under the original tool that made the request. Both <strong>Scanner</strong> and <strong>Extensions</strong> are selected for this tutorial as the ActiveScan++ extension modifies existing requests and also generates its own.
+    </p>
+</div>
+<h2 id="step-4-view-individual-requests" cms-ignore-validation="HEADING_CAPITALIZATION">Step 4: View individual requests</h2>
+<p>
+    To view the request and response in the message editor, click on any entry. You can view potentially interesting features of the message in the <strong>Inspector</strong> panel.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/viewing-requests/logger-tut-5-scanner-and-extender.png" alt="The tools column">
+</div>
+<h2 id="summary" cms-ignore-validation="HEADING_CAPITALIZATION">Summary</h2>
+<p>
+    This tutorial showed you how to use Burp Logger to view requests made by a Burp extension. For more documentation on the <strong>Logger</strong> tab, see <a href="/burp/documentation/desktop/tools/logger/index.html">Burp Logger</a>.
+</p>
+</body>
+</html>

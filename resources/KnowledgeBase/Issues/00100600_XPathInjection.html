@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+XPath injection
+<h1>Typical severity</h1>
+
+High
+
+<h1>Issue description</h1>
+
+<p>XPath injection vulnerabilities arise when user-controllable data is incorporated into XPath queries in an unsafe manner. An attacker can supply crafted input to break out of the data context in which their input appears and interfere with the structure of the surrounding query.</p>
+<p>Depending on the purpose for which the vulnerable query is being used, an attacker may be able to exploit an XPath injection flaw to read sensitive application data or interfere with application logic. </p>
+
+<h1>Issue remediation</h1>
+
+<p>User input should be strictly validated before being 
+  incorporated into XPath queries. 
+  In most cases, it will be appropriate to accept input containing only short 
+  alphanumeric strings. At the very least, input containing any XPath metacharacters 
+  such as " ' / @ = * [ ] ( and ) should be rejected.</p>
+
+<h1>References</h1>
+
+<ul>
+  <li><a href="https://portswigger.net/web-security/dom-based/client-side-xpath-injection">Web Security Academy: Client-side XPath injection (DOM-based)</a></li>
+</ul>
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+<li><a href="https://cwe.mitre.org/data/definitions/94.html">CWE-94: Improper Control of Generation of Code ('Code Injection')
+</a></li>
+<li><a href="https://cwe.mitre.org/data/definitions/116.html">CWE-116: Improper Encoding or Escaping of Output</a></li>
+<li><a href="https://cwe.mitre.org/data/definitions/159.html">CWE-159: Failure to Sanitize Special Element</a></li>
+<li><a href="https://cwe.mitre.org/data/definitions/643.html">CWE-643: Improper Neutralization of Data within XPath Expressions ('XPath Injection')</a></li>
+  <li><a href="https://capec.mitre.org/data/definitions/83.html">CAPEC-83: XPath Injection</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

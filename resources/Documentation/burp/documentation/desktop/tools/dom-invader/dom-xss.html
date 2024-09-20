@@ -1,0 +1,194 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/index.html">DOM Invader</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/dom-xss.html">Testing for DOM XSS</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Testing for DOM XSS</h1>
+<p>
+    Testing for DOM XSS can be tedious as it often involves manually tracking the flow of your input through complex JavaScript, which may stretch to thousands of lines of code. DOM Invader greatly simplifies this process by instantly showing you any sinks that your input flows into, along with the surrounding context.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/dom-invader-innerHTML-sink.png" alt="Testing for DOM XSS with DOM Invader">
+</div>
+<p>
+    You can access most of the related features from the extension's <strong>DOM</strong> view.
+</p>
+<h2 id="injecting-a-canary">Injecting a canary</h2>
+<p>
+    DOM Invader works by automatically parsing the DOM to look for occurrences of a predefined "canary" string. This is an arbitrary but distinct string of alphanumeric characters that you can inject into different sources to see which sinks they flow into.
+</p>
+<p>
+    You can see the current canary that DOM Invader is tracking in the upper-left corner of the <strong>DOM</strong> view. Note that you can <a href="/burp/documentation/desktop/tools/dom-invader/settings/canary.html">change the canary</a> to a custom string if you prefer.
+</p>
+<p>
+    To manually inject the canary into a source:
+</p>
+<ol>
+    <li>
+        <p>
+            Go to the <strong>DOM Invader</strong> tab in the browser's DevTools panel.
+        </p>
+    </li>
+    <li>
+        <p>
+            Make sure that you are in the <strong>DOM</strong> view.
+        </p>
+    </li>
+    <li>
+        <p>
+            Click <strong>Copy canary</strong>. The canary that DOM Invader is tracking is copied to your clipboard.
+        </p>
+    </li>
+    <li>
+        <p>
+            Paste the canary into any inputs that you want to test. This could be query parameters in the URL, form fields, and so on.
+        </p>
+    </li>
+</ol>
+<p>
+    For more information about potential sources, check out our topic on DOM-based vulnerabilities on the Web Security Academy.
+</p>
+<div class="highlightedarea">
+    <h4>Web Security Academy</h4>
+    <p>
+        <a href="/web-security/dom-based/index.html">DOM-based vulnerabilities</a>
+    </p>
+</div>
+<h3 id="injecting-a-canary-into-multiple-sources">Injecting a canary into multiple sources</h3>
+<p>
+    Although you can manually paste the canary into multiple sources at once, you also have the following options for doing this automatically:
+</p>
+<ul>
+    <li>
+        <strong>Inject URL params</strong> - Automatically injects the canary into every query parameter in the URL, using a separate tab for each parameter.
+    </li>
+    <li>
+        <strong>Inject forms</strong> - Automatically injects the canary into any HTML form fields detected on the page. Note that you still need to submit the form manually for the injection to take effect.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Injecting the canary into all URL parameters and form fields at once may prevent the site from working properly. For the best results, we recommend testing one source at a time.
+    </p>
+</div>
+<h2 id="identifying-controllable-sinks">Identifying controllable sinks</h2>
+<p>
+    After you inject a canary, DOM Invader automatically parses the DOM to identify any sinks in which your canary appears. It then displays these sinks in the <strong>DOM</strong> view, sorted in order of how interesting they are.
+</p>
+<h2 id="determining-the-xss-context">Determining the XSS context</h2>
+<p>
+    Once you have identified a controllable sink, the next step is to study the context in which your injected payload appears. This includes determining the following information:
+</p>
+<ul>
+    <li>
+        <p>
+            Whether you're working with an HTML or JavaScript execution sink.
+        </p>
+    </li>
+    <li>
+        <p>
+            Whether your input is surrounded by any special characters that you need to break out of. These include quotes, tags, attributes, and so on.
+        </p>
+    </li>
+    <li>
+        <p>
+            What kind of validation, sanitization, or other processing the website performs on your input before it reaches the sink.
+        </p>
+    </li>
+</ul>
+<p>
+    To help you with this, DOM Invader displays the sink's contents, including both your canary and any surrounding characters that you inject as they appear in the DOM. This means you can append special characters to your canary in order to easily see whether they are being escaped or encoded. In the following example, you can see that we're able to successfully inject a variety of useful characters.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/dom-invader-unescaped-chars.png" alt="Testing for DOM XSS like it's reflected XSS">
+</div>
+<p>
+    You can also see the following details depending on the type of sink DOM Invader has identified:
+</p>
+<ul>
+    <li>
+        <p>
+            <strong>Outer HTML</strong> - The HTML element that surrounds your canary.
+        </p>
+    </li>
+    <li>
+        <p>
+            <strong>Frame path</strong> - The frame in which your canary is passed to the sink.
+        </p>
+    </li>
+    <li>
+        <p>
+            <strong>Event</strong> - The JavaScript event that occurs when your canary is passed to the sink.
+        </p>
+    </li>
+</ul>
+<p>
+    This information enables you to easily see the XSS context and test which characters and events you need to craft an exploit. In the following example, we've successfully broken out of the double-quoted string and surrounding <code>&lt;span&gt;</code> in order to inject our XSS proof-of-concept exploit.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/dom-invader-payload.png" alt="Crafting an exploit">
+</div>
+<h2 id="studying-the-client-side-code">Studying the client-side code</h2>
+<p>
+    When experimenting with different injections, you might find that your input suddenly stops flowing into the sink. This could be because you can only reach the sink via a specific code path, such as one branch of a conditional statement.
+</p>
+<p>
+    DOM Invader enables you to jump straight to the point in the client-side code where your input is passed to the sink. You can then study the preceding code to identify what conditions your input must meet in order to reach the sink.
+</p>
+<p>
+    To view the relevant line in the code:
+</p>
+<ol>
+    <li>
+        Inject a payload that you know will reach the sink.
+    </li>
+    <li>
+        In DOM Invader's <strong>DOM</strong> view, click the link in the <strong>Stack Trace</strong> column. This outputs a stack trace to the browser's console.
+    </li>
+    <li>
+        In the DevTools panel, switch to the <strong>Console</strong> tab.
+    </li>
+    <li>
+        In the stack trace, click the uppermost link (there may only be one). This opens the client-side JavaScript in the <strong>Sources</strong> tab and focuses on the line where your input is passed to the sink.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Read more</h4>
+    <p>
+        DOM Invader is highly configurable. For more information about DOM Invader's advanced features and how you can fine-tune their behavior for a particular site, see <a href="/burp/documentation/desktop/tools/dom-invader/settings/index.html">DOM Invader settings</a>.
+    </p>
+</div>
+</body>
+</html>

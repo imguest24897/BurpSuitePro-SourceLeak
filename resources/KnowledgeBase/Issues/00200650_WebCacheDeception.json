@@ -1,0 +1,10 @@
+{
+  "typeIndex": 2098768,
+  "name": "Web cache deception",
+  "description": "<p>Web cache deception exploits discrepancies between cache proxy and backend parsers, leading web servers to mistakenly cache and serve dynamic content as though it were static.\nThis vulnerability is often exploited by attackers adding fake static file extensions to dynamic URLs, for example, changing \"/path\" to \"/path/WCD.css\".\nWhen users click on these modified links, the caching system erroneously identifies the request as for a static resource and caches the response, making the user's sensitive information public.\nIf subsequent unauthorized users make a request to the same URL then they will be served the cached page, potentially exposing the sensitive information repeatedly.\nThe distributed nature of web caches means that even a single web cache deception attack can have far-reaching effects, extending the potential for sensitive data exposure across various users and sessions.</p>",
+  "remediation": "<p>To mitigate the risk of web cache deception vulnerabilities, web administrators should:</p>\n<ul>\n    <li>Clearly specify which content should be cached. This involves setting up clear caching rules within your application.</li>\n    <li>Implement strong cache management by using Cache-Control headers. For dynamic content, use settings like no-cache to prevent it from being stored.</li>\n    <li>Implement strong URL parameters validation, blocking any unexpected file extensions or paths that could be exploited.</li>\n    <li>Regularly review your cache configuration and audit the content it contains. This can help you identify and address any potential issues quickly.</li>\n    <li>Treat all content as non-cacheable unless it has been explicitly approved for caching. This approach helps minimize the risk of inadvertently caching sensitive information.</li>\n</ul>",
+  "webIntro": null,
+  "typicalSeverity": "MEDIUM",
+  "references": [],
+  "vulnerabilityClassifications": []
+}

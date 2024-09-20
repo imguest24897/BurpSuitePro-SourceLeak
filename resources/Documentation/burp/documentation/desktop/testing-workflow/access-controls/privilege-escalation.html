@@ -1,0 +1,202 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/access-controls/index.html">Testing access controls</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/access-controls/privilege-escalation.html">Testing for privilege escalation</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Testing for privilege escalation</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/uCkx330mOqc?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    When a user logs in to an application, they usually only have access to the parts of the application that they need to perform their specific tasks. If access controls are incorrectly set, a user can gain access to functionality that should only be available to higher-privileged users.
+</p>
+<p>
+    If you have credentials for a high-privileged and a low-privileged account, you can test the effectiveness of an application's access controls by accessing the application using different accounts. You can use Burp to send ad-hoc requests to compare access or automate the steps for sending multiple requests as a different user.
+</p>
+<p>
+    You can follow along with the processes below using the lab <a href="/web-security/access-control/lab-method-based-access-control-can-be-circumvented.html">Method based access control can be circumvented</a> from our Web Security Academy.
+</p>
+<h2 id="before-you-start" cms-ignore-validation="DUPLICATE_HEADINGS">Before you start</h2>
+<p>
+    Get credentials for an admin / high-privileged account and a low-privileged user.
+</p>
+<h2 id="testing-a-specific-endpoint" cms-ignore-validation="DUPLICATE_HEADINGS">Testing a specific endpoint</h2>
+<p>
+    To run a quick test on specific endpoints, you can use Burp Repeater:
+</p>
+<ol>
+    <li>
+        Go to the <strong>Proxy &gt; Intercept</strong> tab and click <strong>Open browser</strong>.
+    </li>
+    <li>
+        Visit the target site and log in as a high-privileged user. If you're following along using the lab, you can use the credentials <code>administrator:admin</code>.
+    </li>
+    <li>
+        Access the admin panel and log out.
+    </li>
+    <li>
+        In Burp's browser, go back to the account page and log in as a low-privileged user. If you're following along using the lab, you can use the credentials <code>wiener:peter</code>.
+    </li>
+    <li>
+        Go to <strong>Proxy &gt; HTTP history</strong>.
+    </li>
+    <li>
+        Right-click the admin panel request sent by the high-privileged user and select <strong>Send to Repeater</strong>.
+    </li>
+    <li>
+        <p>
+            Find the low privileged user's most recent request. Select the request and copy the session cookie.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/tutorials/privilege-escalation-1.png" alt="Session cookie low-privileged individual endpoint" class="center-block">
+        </div>
+    </li>
+    <li>
+        Go to Repeater. Paste the low-privileged user's cookie into the admin panel request, replacing the original session cookie.
+    </li>
+    <li>
+        Click <strong>Send</strong>. Review the response to identify if privilege escalation was possible. In this case, we get a <code>401 Unauthorized</code> response.
+    </li>
+</ol>
+<h2 id="testing-across-the-entire-site" cms-ignore-validation="DUPLICATE_HEADINGS">Testing across the entire site</h2>
+<p>
+    Testing for privilege escalation on a large number of endpoints can be time-consuming. Burp Suite can help you to automate this process across all the requests in the current site map:
+</p>
+<ol>
+    <li>
+        Map the application as a high-privileged user. If you're following along using the lab, you can use the credential <code>administrator:admin</code>. Browse around the application to populate <strong>Target &gt; Site map</strong> making sure you visit the admin panel.
+    </li>
+    <li>
+        Log out, then log back in as a low-privileged user to obtain their session cookie. If you're following along using the lab, you can use the credentials <code>wiener:peter</code>.
+    </li>
+    <li>
+        <p>
+            Go to the <strong>Proxy &gt; HTTP history</strong> tab. Select the low-privileged user's most recent request and copy the session cookie to use later.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/tutorials/privilege-escalation-1.png" alt="Session cookie low-privileged" class="center-block">
+        </div>
+    </li>
+    <li>
+        <p>
+            Create a session handling rule that adds the low-privileged user's session cookie to all requests sent from the Target tool:
+        </p>
+        <ol>
+            <li>
+                From the <strong>Settings</strong> dialog, go to <strong>Sessions &gt; Session handling rules</strong> and click <strong>Add</strong>. The <strong>Session handling rule editor</strong> opens.
+            </li>
+            <li>
+                Go to the <strong>Scope</strong> tab.
+            </li>
+            <li>
+                Under <strong>Tools scope</strong>, select <strong>Target</strong> and deselect all other tools.
+            </li>
+            <li>
+                Under <strong>URL scope</strong>, select <strong>Use custom scope</strong>, click <strong>Add</strong>, then enter the URL of the target site.
+            </li>
+            <li>
+                Go to the <strong>Details</strong> tab to define the rule.
+            </li>
+            <li>
+                Under <strong>Rule actions</strong>, click <strong>Add</strong>, then select <strong>Set a specific cookie or parameter value</strong>. The <strong>Session handling action editor</strong> opens.
+            </li>
+            <li>
+                <p>
+                    Set the following details to add the low-privileged user's session cookie.
+                </p>
+                <p>
+                    <strong>Name</strong>: session
+                </p>
+                <p>
+                    <strong>Value</strong>: The cookie you copied from your low-privileged user's request
+                </p>
+            </li>
+            <li>
+                Keep clicking <strong>OK</strong> to close all open dialogs. The rule is added to the list of session handling rules.
+            </li>
+        </ol>
+    </li>
+    <li>
+        <p>
+            Re-request the entire site map as a low-privileged user:
+        </p>
+        <ol>
+            <li>
+                Go to the <strong>Target &gt; Site map</strong> tab, right-click the target host, then select <strong>Compare site maps</strong>. The <strong>Compare site maps</strong> dialog opens.
+            </li>
+            <li>
+                Select <strong>Use current site map</strong>, then click <strong>Next</strong>.
+            </li>
+            <li>
+                Select <strong>Use only selected branches</strong>.
+            </li>
+            <li>
+                Select <strong>Request map 1 again in a different session context</strong>.
+            </li>
+            <li>
+                Keep the default settings for each of the remaining steps.
+            </li>
+            <li>
+                Review the two site maps. Any differences are highlighted. Pay close attention to the admin panel requests. Notice that the high-privileged user was able to access the admin panel, but the low-privileged user received a <code>401 Unauthorized</code>, confirming that this endpoint is not vulnerable in this case.
+            </li>
+        </ol>
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You can also use the Autorize extension from the BApp Store to compare requests. This lets you browse as a high-privileged and mirrors the requests as a low-privileged user.
+    </p>
+</div>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/tools/repeater/index.html">Burp Repeater</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/mapping/visible-attack-surface.html">Mapping the visible attack surface with Burp Suite</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/site-map/comparing.html">Comparing site maps</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/sessions/session-handling-rules.html">Session handling rule editor</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

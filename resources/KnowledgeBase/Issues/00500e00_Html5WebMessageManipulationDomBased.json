@@ -1,0 +1,24 @@
+{
+  "typeIndex": 5246464,
+  "name": "HTML5 web message manipulation (DOM-based)",
+  "description": "<p>DOM-based vulnerabilities arise when a client-side script reads data from a controllable part of the DOM (for example, the URL) and processes this data in an unsafe way.</p>\n<p>HTML5 web message manipulation arises when a script sends controllable data as a web message to another document within the browser. An attacker may be able to use the vulnerability to construct a URL that, if visited by another application user, will cause the user's browser to send a web message containing data that is under the attacker's control.</p>\n<p>The potential impact of the vulnerability depends on the destination document's handling of the incoming message. If the destination document trusts the sender not to transmit malicious data in the message, and handles the data in an unsafe manner, then the joint behavior of the two documents may allow an attacker to compromise the application user.\n</p>\n\n<p>Burp Suite automatically identifies this issue using dynamic and static code analysis. Static analysis can lead to false positives that are not actually exploitable. If Burp Scanner has not provided any evidence resulting from dynamic analysis, you should review the relevant code and execution paths  to determine whether this vulnerability is indeed present, or whether mitigations are in place that would prevent exploitation.</p>",
+  "remediation": "<p>The most effective way to avoid DOM-based HTML5 web message manipulation vulnerabilities is not to send a web message containing data that originated from any untrusted source. If the desired functionality of the application means that this behavior is unavoidable, then defenses must be implemented within the client-side code to prevent malicious data from compromising the user. This validation can be carried out by the document that sends the message, or by the document that receives the message, or both, depending on the trust relationship between the two documents.</p>",
+  "webIntro": null,
+  "typicalSeverity": "INFO",
+  "references": [
+    {
+      "title": "Web Security Academy: Web message manipulation (DOM-based)",
+      "url": "https://portswigger.net/web-security/dom-based/web-message-manipulation"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-20: Improper Input Validation",
+      "url": "https://cwe.mitre.org/data/definitions/20.html"
+    },
+    {
+      "title": "CAPEC-153: Input Data Manipulation",
+      "url": "https://capec.mitre.org/data/definitions/153.html"
+    }
+  ]
+}

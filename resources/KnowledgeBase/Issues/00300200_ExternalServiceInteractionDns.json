@@ -1,0 +1,32 @@
+{
+  "typeIndex": 3146240,
+  "name": "External service interaction (DNS)",
+  "description": "<p>The ability to induce an application to interact with an arbitrary external service, such as a web or mail server, does not constitute a vulnerability in its own right. This might even be the intended behavior of the application. However, in some cases, it can indicate a vulnerability with serious consequences.</p>\n<p>If you can trigger DNS-based interactions, it is normally possible to trigger interactions using other service types. Burp Scanner reports these as separate issues. You may find that a payload, such as a URL, only triggers a DNS-based interaction, even though you were expecting interactions with a different service as well. This could be due to egress filters on the network layer that prevent the application from connecting to these other services. However, some systems perform DNS lookups without any intention of connecting to the remote host. This behavior is typically harmless.</p>\n<p>The ability to send requests to other systems can allow the vulnerable server to be used as an attack proxy. By submitting suitable payloads, an attacker can cause the application server to attack other systems that it can interact with. This may include public third-party systems, internal systems within the same organization, or services available on the local loopback adapter of the application server itself. Depending on the network architecture, this may expose highly vulnerable internal services that are not otherwise accessible to external attackers.</p>",
+  "remediation": "<p>You should review the purpose and intended use of the relevant application functionality, \n  and determine whether the ability to trigger arbitrary external service interactions is intended behavior. \n  If so, you should be aware of the types of attacks that can be performed via this behavior and take appropriate measures. \n  These measures might include blocking network access from the application server to other internal systems, and hardening the application server itself to remove any services available on the local loopback adapter.</p>\n<p>If the ability to trigger arbitrary external service interactions is not intended behavior, then you should implement a whitelist of permitted services and hosts, and block any interactions that do not appear on this whitelist.</p>\n\n<p>Out-of-Band Application Security Testing (OAST) is highly effective at uncovering high-risk features, to the point where finding the root cause of an interaction can be quite challenging. To find the source of an external service interaction, try to identify whether it is triggered by specific application functionality, or occurs indiscriminately on all requests. If it occurs on all endpoints, a front-end CDN or application firewall may be responsible, or a back-end analytics system parsing server logs. In some cases, interactions may originate from third-party systems; for example, a HTTP request may trigger a poisoned email which passes through a link-scanner on its way to the recipient.</p>",
+  "webIntro": null,
+  "typicalSeverity": "INFO",
+  "references": [
+    {
+      "title": "Burp Collaborator",
+      "url": "https://portswigger.net/blog/introducing-burp-collaborator"
+    },
+    {
+      "title": "Out-of-band application security testing (OAST)",
+      "url": "https://portswigger.net/burp/application-security-testing/oast"
+    },
+    {
+      "title": "PortSwigger Research: Cracking the Lens",
+      "url": "https://portswigger.net/research/cracking-the-lens-targeting-https-hidden-attack-surface"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-918: Server-Side Request Forgery (SSRF)",
+      "url": "https://cwe.mitre.org/data/definitions/918.html"
+    },
+    {
+      "title": "CWE-406: Insufficient Control of Network Message Volume (Network Amplification)",
+      "url": "https://cwe.mitre.org/data/definitions/406.html"
+    }
+  ]
+}

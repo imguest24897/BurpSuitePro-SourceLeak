@@ -1,0 +1,11 @@
+{
+  "description": {
+    "featured": false,
+    "uuid": "2b6e294c-8fd6-4df0-aca1-73eb9b17cac1"
+  },
+  "crawler": {
+    "crawl_optimization": {
+      "crawl_strategy": "faster"
+    }
+  }
+}

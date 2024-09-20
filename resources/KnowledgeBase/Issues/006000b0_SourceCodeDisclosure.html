@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+Source code disclosure
+<h1>Typical severity</h1>
+
+Low
+
+<h1>Issue description</h1>
+
+<p>Source code intended to be kept server-side can sometimes end up being disclosed to users. Such code may contain sensitive information such as database passwords and secret keys, which may help malicious users formulate attacks against the application.</p>
+
+<h1>Issue remediation</h1>
+
+<p>Server-side source code is normally disclosed to clients as a result of typographical errors in scripts or because of misconfiguration, such as failing to grant executable permissions to a script or directory. Review the cause of the code disclosure and prevent it from happening.</p>
+
+<h1>References</h1>
+
+<ul>
+    <li><a href="https://portswigger.net/web-security/information-disclosure">Web Security Academy: Information disclosure</a></li>
+</ul>
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+<li><a href="https://cwe.mitre.org/data/definitions/18.html">CWE-18: Source Code</a></li>
+<li><a href="https://cwe.mitre.org/data/definitions/200.html">CWE-200: Information Exposure</a></li>
+<li><a href="https://cwe.mitre.org/data/definitions/388.html">CWE-388: Error Handling</a></li>
+<li><a href="https://cwe.mitre.org/data/definitions/540.html">CWE-540: Information Exposure Through Source Code</a></li>
+<li><a href="https://cwe.mitre.org/data/definitions/541.html">CWE-541: Information Exposure Through Include Source Code</a></li>
+<li><a href="https://cwe.mitre.org/data/definitions/615.html">CWE-615: Information Exposure Through Comments</a></li>
+    <li><a href="https://capec.mitre.org/data/definitions/37.html">CAPEC-37: Retrieve Embedded Sensitive Data</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/troubleshooting/index.html">Troubleshooting</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/troubleshooting/performance.html">Troubleshooting performance issues</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Troubleshooting performance issues in Burp Suite</h1>
+<p>
+    There are circumstances in which Burp Suite can run slowly. In this section, we'll describe some quick steps you can take to troubleshoot performance issues in Burp Suite and increase the efficiency of your testing.
+</p>
+<h2 id="optimize-memory-usage">Optimize memory usage</h2>
+<p>
+    Optimize your memory usage in the following ways:
+</p>
+<h3 id="disabling-extensions">Disabling extensions</h3>
+<p>
+    Burp Suite extensions are useful, but can increase the load on your system. PortSwigger does not test extensions for resource optimization and some extensions will impact Burp Suite's performance. It is best to be cautious about the extensions you use and remove any that you do not need. If Burp Suite appears to be using an excessive amount of memory, try disabling your extensions one by one to discover if any of them are causing problems.
+</p>
+<h3 id="allocating-less-memory-to-burp">Allocating less memory to Burp</h3>
+<p>
+    Burp runs on Java which enables you to adjust its RAM allocation to balance its performance with efficient system resource management. Lowering the RAM allocated to Burp can decrease its memory usage, helping your system run more efficiently, especially if you're multitasking or have limited memory.
+</p>
+<p>
+    To allocate less memory to Burp:
+</p>
+<ul>
+    <li>
+        From the settings menu <span class="icon-cog"></span>, click <strong>Suite &gt; Startup behavior</strong>.
+    </li>
+    <li>
+        In the <strong>Maximum Java memory usage</strong> section, use the <strong>Set custom value</strong> text field to specify a maximum value.
+    </li>
+</ul>
+<p>
+    This change is applied the next time you restart Burp.
+</p>
+<h3 id="using-a-disk-based-project">Using a disk-based project</h3>
+<p>
+    Temporary projects have more demands on memory than disk-based projects, as all the project data needs to be stored in memory rather than on a disk. If your memory use is maximized, switching to a disk-based project will move some of the load from memory to a hard disk. However, note that RAM is faster than hard drives, and it's possible that doing this will introduce delays, especially if your disks are slow (e.g. hard disk drives rather than solid state drives). You may need to experiment to see whether disk-based or temporary projects are faster for you. You can convert a temporary project to a disk-based project by going to the Project menu and selecting <strong>Save copy</strong>.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Due to the way our persistence framework operates, we recommend using a local drive for saving project files rather than a network drive.
+    </p>
+</div>
+<h2 id="check-the-minimum-system-requirements">Check the minimum system requirements</h2>
+<p>
+    All editions of Burp Suite require 64-bit hardware. For the best experience with Burp Suite Professional, we recommend using a machine with at least 8 GB of memory and 2 CPU cores. If you are performing large amounts of work, or testing large or complex applications, you may need a more powerful machine than this.
+</p>
+<h2 id="identify-potential-bottlenecks-cpu-memory-and-network">Identify potential bottlenecks: CPU, memory, and network</h2>
+<p>
+    Burp Suite places additional load on your machine's CPU and memory, and on the network over which it runs.
+</p>
+<ul>
+    <li>
+        If Burp Scanner is causing high CPU usage, you can <a href="#optimize-cpu-usage">Optimize CPU usage</a>.
+    </li>
+    <li>
+        If your work with Burp Suite is using all available memory, you can <a href="#optimize-memory-usage">Optimize memory usage</a>.
+    </li>
+    <li>
+        If your work is using all available network resources, you can <a href="#optimize-network-usage">Optimize network usage</a>.
+    </li>
+</ul>
+<h2 id="optimize-cpu-usage">Optimize CPU usage</h2>
+<p>
+    Manage Burp's CPU use by disabling certain features and configuring scans in the following ways:
+</p>
+<h3 id="disabling-pretty-printing">Disabling pretty printing</h3>
+<p>
+    Wherever HTTP requests or responses are displayed in Burp Suite, such as in the <strong>Target</strong> tab or in Burp Repeater, you have the option to view a <a href="https://portswigger.net/burp/documentation/desktop/functions/message-editor/text-editor#pretty-printing">prettified version</a> of the message as well as the raw content. Prettifying larger files, especially JavaScript files, can take some time. By default, Burp Suite uses the <strong>Pretty</strong> view for all supported content types. However, if you find that this is causing poor performance, you can disable this option so that the <strong>Raw</strong> view is used instead. To do this:
+</p>
+<ol>
+    <li>
+        Select <strong>Settings &gt; UI &gt; Message editor</strong>.
+    </li>
+    <li>
+        Under the <strong>HTTP Message Display</strong> section, uncheck the <strong>Pretty print by default</strong> box.
+    </li>
+</ol>
+<h3 id="disabling-javascript-analysis">Disabling JavaScript analysis</h3>
+<p>
+    JavaScript analysis is computationally expensive and can slow down the auditing phase of a scan. If you are not interested in the JavaScript running on your target, you can disable the analysis.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You can disable JavaScript analysis by applying one of <a href="/burp/documentation/scanner/scan-configurations/burp-scanner-built-in-configs.html">Burp Scanner's built-in configurations</a>: <strong>Audit checks - all except JavaScript analysis</strong>. Alternatively, you can make your own custom scan configuration by following the steps below.
+    </p>
+</div>
+<ol>
+    <li>
+        From the menu bar at the top of the screen, select <strong>Burp &gt; Configuration library</strong>.
+    </li>
+    <li>
+        Select a new scan configuration or edit an existing one. Select <strong>Auditing</strong>.
+    </li>
+    <li>
+        Expand the <strong>Issues Reported</strong> section.
+    </li>
+    <li>
+        Uncheck the <strong>JavaScript Analysis</strong> box.
+    </li>
+    <li>
+        Save the configuration and select <strong>OK</strong>.
+    </li>
+</ol>
+<h3 id="configuring-your-scans-for-performance">Configuring your scans for performance</h3>
+<p>
+    Burp Scanner has many configurable options for optimizing performance during both the crawl and audit phases. Applying the following <a href="/burp/documentation/scanner/scan-configurations/burp-scanner-built-in-configs.html">built-in scan configurations</a> can help to improve performance:
+</p>
+<ul>
+    <li>
+        <p>
+            Crawl strategy - faster.
+        </p>
+    </li>
+    <li>
+        <p>
+            Crawl strategy - fastest.
+        </p>
+    </li>
+    <li>
+        <p>
+            Crawl limit - 10, 30, or 60 minutes.
+        </p>
+    </li>
+    <li>
+        <p>
+            Audit checks - light active.
+        </p>
+    </li>
+    <li>
+        <p>
+            Audit checks - medium active.
+        </p>
+    </li>
+</ul>
+<p>
+    Alternatively, you can make your own custom configuration by following the steps below.
+</p>
+<ol>
+    <li>
+        From the menu bar at the top of the screen, select <strong>Burp &gt; Configuration library</strong>.
+    </li>
+    <li>
+        Create a new scan configuration or edit an existing one.
+    </li>
+    <li>
+        Alter the configuration as described in the following two sections.
+    </li>
+    <li>
+        Save the edited configuration.
+    </li>
+</ol>
+<p>
+    To optimize performance during crawling:
+</p>
+<ul>
+    <li>
+        In the <strong>Crawl Optimization</strong> area, select the <strong>Faster</strong> or <strong>Fastest</strong> crawl strategies. There is some risk of losing coverage when using either of these strategies, but they may still be suitable for scanning mostly static targets.
+    </li>
+    <li>
+        In the <strong>Crawl Optimization</strong> area, reduce the <strong>Maximum link depth</strong> if the locations relevant to your work are being found early in the scan.
+    </li>
+    <li>
+        Likewise, in the <strong>Crawl Limits</strong> area, reduce the <strong>Maximum crawl time</strong> if you are finding the relevant locations early in the scan.
+    </li>
+</ul>
+<p>
+    To optimize performance during auditing:
+</p>
+<ul>
+    <li>
+        In the <strong>Issues Reported</strong> area, uncheck the <strong>Intrusive active</strong> option. Intrusive auditing is computationally expensive, and some intrusive scans rely on a target timing out, so can take considerable time to complete. Doing this will miss vulnerabilities that are detected only by intrusive techniques, however.
+    </li>
+    <li>
+        Likewise, unchecking the <strong>Medium active</strong> option in the same area will speed up performance, at the cost of missing vulnerabilities that are detected by medium active techniques.
+    </li>
+    <li>
+        In the <strong>Audit Optimization</strong> area, set <strong>Audit speed</strong> to <strong>Fast</strong> to increase performance at the cost of thoroughness. Also, unchecking <strong>Automatically maintain session</strong> in the same area will improve performance, but this should not be done unless the target site is mostly static. A third option, under <strong>Ignored Insertion Points</strong>, is to limit which insertion points are audited if you are not interested in looking for certain vulnerability types or locations.
+    </li>
+</ul>
+<h3 id="narrowing-the-scope-of-your-scans">Narrowing the scope of your scans</h3>
+<p>
+    Ensure that you are only scanning the areas of the target site that you are interested in. Narrowing your scope will improve performance. Fine-tune the scope of a scan from the <strong>Detailed scope configuration</strong> area of the scan launcher.
+</p>
+<h3 id="scanning-a-single-protocol">Scanning a single protocol</h3>
+<p>
+    If your target only supports one of HTTP and HTTPS, ensure that Burp Scanner only sends requests using the supported protocol. In <strong>Scan details</strong>, in the <strong>URLs to scan</strong> section, include the desired protocol in each URL that you want to scan. Then select <strong>Scan using my specified protocols</strong> in the same area.
+</p>
+<h2 id="optimize-network-usage">Optimize network usage</h2>
+<p>
+    Manage network issues in the following ways:
+</p>
+<h3 id="reducing-concurrent-scans">Reducing concurrent scans</h3>
+<p>
+    To reduce the load on your network, reduce the number of scans running together.
+</p>
+<h3 id="configuring-resource-pools">Configuring resource pools</h3>
+<p>
+    Burp Suite can overload target applications by sending requests faster than a target can handle or will allow during active scans. Stop requests hanging or timing out by reducing the number of requests that Burp Suite makes at once:
+</p>
+<ol>
+    <li>
+        Click on the cog icon next to <strong>New Live Task</strong> to bring up the <strong>Settings</strong> dialogue.
+    </li>
+    <li>
+        Create a new resource pool or edit an existing one, and reduce the maximum number of concurrent tasks.
+    </li>
+    <li>
+        Save the resource pool.
+    </li>
+</ol>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "description": {
+    "featured": false,
+    "uuid": "3cb4de99-c078-45b9-8d99-f228a6432e00"
+  },
+  "crawler": {
+    "live_passive_crawl": {
+      "add_links": true,
+      "add_form_submissions": false,
+      "add_all_urls": true
+    }
+  }
+}

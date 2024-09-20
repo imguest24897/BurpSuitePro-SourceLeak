@@ -1,0 +1,235 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/analyzing/index.html">Analyzing the attack surface</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/analyzing/supported-http-methods.html">Identifying supported HTTP methods</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Identifying supported HTTP methods with Burp Suite</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/PPNQr3aKBBs?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    Due to misconfiguration, some websites support additional HTTP methods that may be useful to an attacker in a number of ways. These include:
+</p>
+<ul>
+    <li>
+        Enabling you to perform destructive actions like modifying sensitive data or uploading malicious files.
+    </li>
+    <li>
+        Enabling you to bypass flawed access controls and other weak defenses.
+    </li>
+    <li>
+        Disclosing additional information about the website and its infrastructure.
+    </li>
+</ul>
+<p>
+    Websites may also ignore the method completely and respond in the same way even if you specify an arbitrary, non-standard method. This could enable you to bypass WAFs and weak input filters, as well as some defenses against cross-site attacks.
+</p>
+<p>
+    The most reliable approach for identifying supported HTTP methods is to send a request using each potential method to see how the server responds. Burp Intruder provides several ways to automate this time-consuming process.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Although sending an <code>OPTIONS</code> request sometimes causes the server to tell you which methods it supports, this information is often misleading or incomplete.
+    </p>
+</div>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="before-you-start">Before you start</h2>
+<p>
+    Map the target website. For more information, see <a href="/burp/documentation/desktop/testing-workflow/mapping/index.html">Mapping the target website with Burp Suite</a>.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="enumerating-supported-methods-for-a-single-endpoint">Enumerating supported methods for a single endpoint</h2>
+<p>
+    The simplest approach is to test a single endpoint. Supported methods are often fairly consistent across the website as they are usually the result of server-level configuration and the default configuration of back-end frameworks. That said, there may be some exceptions.
+</p>
+<p>
+    To enumerate supported methods on a single endpoint:
+</p>
+<ol>
+    <li>
+        Identify a relevant request. If you're testing the general configuration, use a <code>GET</code> request for the website's home page.
+    </li>
+    <li>
+        In the request, highlight the request method, then right-click the message and select <strong>Send to Intruder</strong>.
+    </li>
+    <li>
+        <p>
+            In Burp Intruder, go to the <strong>Positions</strong> tab. Notice that the request method has been automatically marked as a payload position.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/tutorials/identifying-supported-http-methods-1.png" alt="Set HTTP method payload position" class="center-block">
+        </div>
+    </li>
+    <li>
+        Go to the <strong>Payloads</strong> tab.
+    </li>
+    <li>
+        Under <strong>Payload sets</strong>, select the payload type <strong>Simple list</strong>.
+    </li>
+    <li>
+        Under <strong>Payload settings</strong>, add a list of HTTP methods that you want to test: <ul>
+            <li>
+                If you're using Burp Suite Professional, open the <strong>Add from list</strong> dropdown menu and select the built-in <strong>HTTP verbs</strong> wordlist.
+            </li>
+            <li>
+                If you're using Burp Suite Community Edition, manually add a list of HTTP methods. Make sure you also include an arbitrary, non-existent method like XYZ to see how the server responds. 
+                <div class="rounded-dropshadow">
+                    <img src="/burp/documentation/desktop/images/tutorials/identifying-supported-http-methods-2.png" alt="Add HTTP verbs wordlist" class="center-block">
+                </div>
+            </li>
+        </ul>
+    </li>
+    <li>
+        Click <strong>Start attack</strong>. The attack starts running in a new dialog.
+    </li>
+    <li>
+        When the attack is finished, study the responses to look for any noteworthy behavior. Don't rely purely on the HTTP status code as this may be misleading.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        In Burp Suite Community Edition, the rate at which Burp Intruder sends requests is restricted, so your attack will take significantly longer to run.
+    </p>
+</div>
+<h2 id="enumerating-supported-methods-for-multiple-endpoints">Enumerating supported methods for multiple endpoints</h2>
+<p>
+    You may encounter inconsistent behavior in response to the same methods on different parts of the site. This often occurs when websites are maintained by multiple teams of developers, who may configure their own custom request handling. You might also find that specific endpoints behave differently.
+</p>
+<p>
+    To enumerate supported methods for multiple endpoints at once in order to identify these inconsistencies:
+</p>
+<ol>
+    <li>
+        In Burp, go to the <strong>Target</strong> &gt; <strong>Site map</strong> tab.
+    </li>
+    <li>
+        From the site map, right-click on the host and select <strong>Copy URLs in this host</strong>.
+    </li>
+    <li>
+        Send a GET request for the target host to Burp Intruder.
+    </li>
+    <li>
+        <p>
+            In Burp Intruder, go to the <strong>Positions</strong> tab and make the following settings:
+        </p>
+        <ol>
+            <li>
+                Under <strong>Choose an attack type</strong>, select <strong>Cluster bomb</strong>.
+            </li>
+            <li>
+                Select the request method, then click <strong>Add §</strong> to mark this as a payload position.
+            </li>
+            <li>
+                Select the request path, then click <strong>Add §</strong> to mark this as a second payload position. 
+                <div class="rounded-dropshadow">
+                    <img src="/burp/documentation/desktop/images/tutorials/identifying-supported-http-methods-3.png" alt="Setting request path and method as payload positions" class="center-block">
+                </div>
+            </li>
+        </ol>
+    </li>
+    <li>
+        Go to the <strong>Payloads</strong> tab.
+    </li>
+    <li>
+        Under <strong>Payload sets</strong>, select the payload type <strong>Simple list</strong>.
+    </li>
+    <li>
+        <p>
+            Under <strong>Payload settings</strong>, add a list of HTTP methods that you want to test:
+        </p>
+        <ul>
+            <li>
+                If you're using Burp Suite Professional, open the <strong>Add from list</strong> dropdown menu and select the built-in <strong>HTTP verbs</strong> wordlist.
+            </li>
+            <li>
+                If you're using Burp Suite Community Edition, manually add a list of HTTP methods. Make sure you also include an arbitrary, non-existent method to see how the server responds.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <p>
+            Under <strong>Payload sets</strong>, use the dropdown menu to switch to payload set 2. Make the following settings:
+        </p>
+        <ol>
+            <li>
+                Under <strong>Payload settings</strong>, click <strong>Paste</strong> to paste the list of URLs you copied from the site map.
+            </li>
+            <li>
+                Under <strong>Payload processing rules</strong>, click <strong>Add</strong>. In the dialog that appears, create a <strong>Match/replace</strong> rule that replaces the scheme and hostname of your URLs with an empty string. 
+                <div class="rounded-dropshadow">
+                    <img src="/burp/documentation/desktop/images/tutorials/identifying-supported-http-methods-4.png" alt="Create a match and replace rule" class="center-block">
+                </div>
+            </li>
+            <li>
+                Under <strong>Payload encoding</strong>, deselect the <strong>URL-encode these characters</strong> checkbox. This prevents the forward-slash characters in the path from being encoded.
+            </li>
+        </ol>
+    </li>
+    <li>
+        Click <strong>Start attack</strong>. The attack starts running in a new dialog. Burp Intruder sends a request using each of the specified methods to each of the endpoints you selected.
+    </li>
+    <li>
+        When the attack is finished, study the responses to look for any noteworthy behavior. Don't rely purely on the HTTP status code as this may be misleading.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        In Burp Suite Community Edition, the rate at which Burp Intruder sends requests is restricted, so your attack will take significantly longer to run.
+    </p>
+</div>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/index.html">Burp Intruder</a>
+        </li>
+        <li>
+            <a href="/web-security/access-control/index.html#broken-access-control-resulting-from-platform-misconfiguration">LAB: Broken access control resulting from platform misconfiguration</a>
+        </li>
+        <li>
+            <a href="/web-security/information-disclosure/exploiting/index.html#information-disclosure-due-to-insecure-configuration">LAB: Information disclosure due to insecure configuration</a>
+        </li>
+        <li>
+            <a href="/web-security/csrf/bypassing-samesite-restrictions/index.html#bypassing-samesite-lax-restrictions-using-get-requests">LAB: Bypass Lax SameSite restrictions using GET requests</a>
+        </li>
+        <li>
+            <a href="/web-security/csrf/bypassing-token-validation/index.html">LAB: CSRF validation depends on request method</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "typeIndex": 2098441,
+  "name": "Content security policy: not enforced",
+  "description": "<p>Content Security Policy (CSP) is a security mechanism designed to mitigate cross-site scripting attacks by disabling dangerous behaviours such as untrusted JavaScript execution.\n    Websites can specify their security policy in a response header or meta tag, enabling fine-grained control over dangerous features like scripts and stylesheets.\n</p>",
+  "remediation": "<p>We recommend transitioning from using the Content-Security-Policy-Report-Only header to the Content-Security-Policy header for CSP deployment, ensuring effective policy enforcement.</p>",
+  "webIntro": null,
+  "typicalSeverity": "INFO",
+  "references": [
+    {
+      "title": "Web Security Academy: What is CSP?",
+      "url": "https://portswigger.net/web-security/cross-site-scripting/content-security-policy"
+    },
+    {
+      "title": "Content Security Policy (CSP)",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP"
+    }
+  ],
+  "vulnerabilityClassifications": []
+}

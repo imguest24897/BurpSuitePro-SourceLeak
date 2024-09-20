@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/index.html">Settings</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/suite/index.html">Suite</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/suite/performance-feedback.html">Performance feedback</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Performance feedback settings</h1>
+<p>
+    You can help to improve Burp by submitting feedback about Burp's performance. To do this, select <strong>Automatically submit feedback about Burp's performance</strong>.
+</p>
+<p>
+    The feedback contains technical information about Burp's internal functioning. It is linked to your debug ID, which identifies the session in which the exception was raised.
+</p>
+<p>
+    You can also report a bug by email. Include your debug ID to help us to diagnose any problems that your instance of Burp has encountered.
+</p>
+<h2 id="logging-exceptions-to-a-local-directory">Logging exceptions to a local directory</h2>
+<p>
+    In some cases, it may not be possible for us to automatically receive data about your performance issues. For example, your security policy might block data from being sent to our support team.
+</p>
+<p>
+    In this case, we might ask you to temporarily select the <strong>Log exceptions to a local directory</strong> setting and attempt to replicate the issue. Burp logs exceptions to a local file in the specified directory. You can then send a copy of the file to our support team.
+</p>
+<p>
+    The log entries contain:
+</p>
+<ul>
+    <li>
+        The time of the exception.
+    </li>
+    <li>
+        A brief description.
+    </li>
+    <li>
+        A stack trace. The stack trace is fully obfuscated, so no personal data can be read from the file.
+    </li>
+</ul>
+<p>
+    The file name is a combination of the current date and your debug ID. Each instance of Burp generates its own log.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        If you change the directory in which the log should be saved, make sure that the user who is replicating the issue has write access to the specified directory. Otherwise, Burp will be unable to generate the file.
+    </p>
+</div>
+<p>
+    The <strong>Performance feedback</strong> settings are user settings. They apply to all installations of Burp on your machine.
+</p>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/projects/index.html">Project files</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/projects/create-project-file.html">Creating project files</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Creating project files</h1>
+<p>
+    Burp Suite project files enable you to manage your work. You can use projects to store work for specific tasks or target applications.
+</p>
+<p>
+    Each time you start Burp, you are prompted to create or open a <a href="/burp/documentation/desktop/projects/index.html">project file</a> by the startup wizard.
+</p>
+<p>
+    You can create two types of Burp project:
+</p>
+<ul>
+    <li>
+        <strong>Temporary projects</strong> are useful for quick tasks where your work doesn't need to be permanently saved. All data is held in memory, and is lost when you exit Burp.
+    </li>
+    <li>
+        <strong>Disk-based projects</strong> enable you to save your work and resume it later. All data is held on disk in a project file.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Due to the way our persistence framework operates, we recommend that you use a local drive to save project files.
+    </p>
+</div>
+<p>
+    When you create a project file, you can select the configuration. This enables you to customize the project for particular tasks or clients.
+</p>
+<p>
+    To create a new disk-based project file:
+</p>
+<ol>
+    <li>
+        Start Burp.
+    </li>
+    <li>
+        Select <strong>New project on disk</strong>.
+    </li>
+    <li>
+        Enter a name and choose a file, and click <strong>Next</strong>.
+    </li>
+    <li>
+        <p>
+            Choose from the following configurations:
+        </p>
+        <ul>
+            <li>
+                <strong>Use Burp defaults</strong> - Open the project using Burp's default settings.
+            </li>
+            <li>
+                <strong>Use settings saved with project</strong> - This is only available when you reopen a project. It opens with the same settings that were selected the last time that you closed the project file.
+            </li>
+            <li>
+                <strong>Load from configuration file</strong> - Use the settings stored in a Burp configuration file. Only the project-level settings are loaded: user-level settings are ignored. For more information, see <a href="/burp/documentation/desktop/settings/library.html#configuration-files">Configuration files</a>.
+            </li>
+        </ul>
+    </li>
+    <li>
+        Click <strong>Start Burp</strong>.
+    </li>
+</ol>
+<h2 id="opening-a-project-file">Opening a project file</h2>
+<p>
+    To reopen a project file when Burp starts, select <strong>Open existing project</strong> in the startup wizard or use <a href="/burp/documentation/desktop/troubleshooting/launch-from-command-line.html#command-line-arguments">command line arguments</a>. Burp reloads the most recent project data and configuration settings.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        If the project file was created in a different instance of Burp, you are asked if you want to take full ownership of the project.
+    </p>
+    <p>
+        If work is likely to continue on the project in another instance of Burp, and the Burp Collaborator identifier was saved with the project file, this means that you will share the identifier. In this situation we recommend that you don't take full ownership. This is because if you share the Burp Collaborator identifier, it can cause errors. For more information, see <a href="/burp/documentation/desktop/projects/manage-project-files.html#saving-the-burp-collaborator-identifier">Saving the Burp Collaborator identifier</a>.
+    </p>
+</div>
+</body>
+</html>

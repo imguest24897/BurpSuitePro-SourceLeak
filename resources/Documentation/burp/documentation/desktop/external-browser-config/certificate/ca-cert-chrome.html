@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/external-browser-config/index.html">External browser configuration</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/external-browser-config/certificate/index.html">Installing Burp's CA certificate</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/external-browser-config/certificate/ca-cert-chrome.html">Chrome</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Installing Burp's CA certificate in Chrome</h1>
+<p>
+    To test applications in your own browser over HTTPS, you need to install Burp Suite's CA certificate.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        These steps are only necessary if you want to use your own external browser for manual testing with Burp. If you prefer, you can just use <a href="/burp/documentation/desktop/tools/burps-browser.html">Burp's browser</a>, which is preconfigured to work with Burp Proxy already. To access Burp's browser, go to the <strong>Proxy &gt; Intercept</strong> tab, and click <strong>Open Browser</strong>.
+    </p>
+</div>
+<p>
+    Before you install Burp's CA certificate:
+</p>
+<ul>
+    <li>
+        Make sure that the <a href="/burp/documentation/desktop/external-browser-config/check-listener.html">proxy listener</a> is active.
+    </li>
+    <li>
+        <a href="/burp/documentation/desktop/external-browser-config/index.html">Configure your browser to work with Burp</a>.
+    </li>
+</ul>
+<p>
+    The process to install Burp's CA certificate for use with Chrome is different for each operating system. Follow the relevant process to install the CA certificate:
+</p>
+<ul>
+    <li>
+        <a href="/burp/documentation/desktop/external-browser-config/certificate/ca-cert-chrome-macos.html">MacOS</a>.
+    </li>
+    <li>
+        <a href="/burp/documentation/desktop/external-browser-config/certificate/ca-cert-chrome-windows.html">Windows</a>.
+    </li>
+    <li>
+        <a href="/burp/documentation/desktop/external-browser-config/certificate/ca-cert-chrome-linux.html">Linux</a>.
+    </li>
+</ul>
+</body>
+</html>

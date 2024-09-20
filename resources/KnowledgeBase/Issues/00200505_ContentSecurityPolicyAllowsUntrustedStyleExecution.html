@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+Content security policy: allows untrusted style execution
+<h1>Typical severity</h1>
+
+Information
+
+<h1>Issue description</h1>
+
+<p>Content Security Policy (CSP) is a security mechanism designed to mitigate cross-site scripting attacks by disabling dangerous behaviours such as untrusted JavaScript execution.
+    Websites can specify their security policy in a response header or meta tag, enabling fine-grained control over dangerous features like scripts and stylesheets.
+</p>
+
+<h1>Issue remediation</h1>
+
+<p>
+    Mitigate style-based data exfiltration by avoiding 'unsafe-inline', data: URLs, and global wildcards in style directives.
+    Use a secure, random nonce of at least 8 characters 'nonce-RANDOM' in the relevant directive.
+</p>
+
+<h1>References</h1>
+
+<ul>
+    <li><a href="https://portswigger.net/web-security/cross-site-scripting/content-security-policy">Web Security Academy: What is CSP?</a></li>
+    <li><a href="https://portswigger.net/research/blind-css-exfiltration">PortSwigger Research: Blind CSS exfiltration</a></li>
+    <li><a href="https://portswigger.net/research/detecting-and-exploiting-path-relative-stylesheet-import-prssi-vulnerabilities#badcss">PortSwigger Research: Offensive CSS research</a></li>
+    <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP">Content Security Policy (CSP)</a></li>
+</ul>
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+    <li><a href="https://cwe.mitre.org/data/definitions/116.html">CWE-116: Improper Encoding or Escaping of Output</a></li>
+    <li><a href="https://cwe.mitre.org/data/definitions/159.html">CWE-159: Failure to Sanitize Special Element</a></li>
+    <li><a href="https://capec.mitre.org/data/definitions/468.html">CAPEC-468: Generic Cross-Browser Cross-Domain Theft</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

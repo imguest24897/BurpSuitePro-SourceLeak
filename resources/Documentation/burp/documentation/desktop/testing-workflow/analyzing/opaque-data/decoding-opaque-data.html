@@ -1,0 +1,157 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/analyzing/index.html">Analyzing the attack surface</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/analyzing/opaque-data/index.html">Analyzing opaque data</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/analyzing/opaque-data/decoding-opaque-data.html">Decoding data</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Decoding opaque data with Burp Suite</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/qxctLqst4DQ?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    Burp Suite includes multiple tools for working with opaque data that isn't human-readable. You can use these while you analyze the attack surface, in order to review the information being transmitted and better understand how the application works. For example, you may be able to see whether the opaque data contains any information such as a username or timestamp, or whether you can edit the opaque data to impact the response.
+</p>
+<p>
+    You can use the following tools to decode and work with opaque data in Burp Suite:
+</p>
+<ul>
+    <li>
+        The Inspector
+    </li>
+    <li>
+        Burp Decoder
+    </li>
+</ul>
+<p>
+    You can follow along with the processes below using the <a href="/web-security/deserialization/exploiting/lab-deserialization-modifying-serialized-data-types.html">Modifying serialized data types</a> lab.
+</p>
+<h2 id="investigate-opaque-data-with-the-inspector" cms-ignore-validation="DUPLICATE_HEADINGS">Investigate opaque data with the Inspector</h2>
+<p>
+    You can use the Inspector to perform URL and Base64-decoding, and to modify decoded data as you work.
+</p>
+<ol>
+    <li>
+        Identify a message that includes opaque data, such as a session token.
+    </li>
+    <li>
+        <p>
+            In <strong>Proxy &gt; HTTP History</strong>, highlight the data that you want to study. Notice that the selected text is shown in the <strong>Inspector</strong> panel. If Burp recognizes an encoding format, it automatically decodes the data. The decoded text is also shown in the <strong>Inspector</strong> panel.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/tutorials/decoding-opaque-data-1.png" alt="Decoding data in the Inspector" class="center-block">
+        </div>
+    </li>
+</ol>
+<p>
+    If the data is decoded in the <strong>Inspector</strong> panel, you can modify the decoded data in the panel to see how this impacts the response:
+</p>
+<ol>
+    <li>
+        Right-click the request and select <strong>Send to Repeater</strong>.
+    </li>
+    <li>
+        Go to the <strong>Repeater</strong> tab. Highlight the data, then edit the data in the <strong>Inspector</strong> panel.
+    </li>
+    <li>
+        <p>
+            Click <strong>Apply changes</strong>. The edited data is re-encoded and updated in the request.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/tutorials/decoding-opaque-data-2.png" alt="Editing data in the Inspector" class="center-block">
+        </div>
+    </li>
+    <li>
+        Send the request.
+    </li>
+    <li>
+        Review the response to determine how the modification impacted the application.
+    </li>
+</ol>
+<h2 id="investigate-opaque-data-with-burp-decoder">Investigate opaque data with Burp Decoder</h2>
+<p>
+    You can use Burp Decoder to apply a wider range of different decoding and encoding functions to opaque data.
+</p>
+<ol>
+    <li>
+        In <strong>Proxy &gt; HTTP History</strong> highlight the data that you want to study. Right-click and select <strong>Send to Decoder</strong>.
+    </li>
+    <li>
+        Go to the <strong>Decoder</strong> tab. Click <strong>Decode as</strong>, then select a decoding function from the drop-down menu. Burp applies the decoding function to the data in a new panel.
+    </li>
+    <li>
+        If required, apply another decoding function. Beside the decoded data panel, click <strong>Decode as</strong>, then select a function from the drop-down menu.
+    </li>
+    <li>
+        <p>
+            Continue to apply decoding functions as required. In this example, URL-decoding is applied, then Base64-decoding.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/tutorials/decoding-opaque-data-3.png" alt="Using Burp Decoder" class="center-block">
+        </div>
+    </li>
+    <li>
+        Edit the decoded data in Burp Decoder.
+    </li>
+    <li>
+        Re-encode the data. Beside the final decoded data panel, click <strong>Encode as</strong>, then select an encoding function from the drop-down menu.
+    </li>
+    <li>
+        <p>
+            Continue to apply encoding functions as required. In this example, the decoded data is edited, then Base-64-decoding and URL-decoding are applied.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/tutorials/decoding-opaque-data-4.png" alt="Applying encoding" class="center-block">
+        </div>
+    </li>
+    <li>
+        Copy the re-encoded data. You can now insert it into the original request.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/tools/inspector/index.html">Inspector</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/decoder.html">Burp Decoder</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

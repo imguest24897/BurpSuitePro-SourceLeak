@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/mapping/index.html">Mapping the website</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/mapping/hidden-content/index.html">Discovering hidden content</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/mapping/hidden-content/automated-discovery.html">Automated discovery</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Automated content discovery with Burp Suite</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/rlcejJVjHHE?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    You can use Burp Suite Professional's automated content discovery tool to discover hidden directories, files, and other endpoints. The tool uses lists of common file and directory names to guess the names of hidden functionality. It also derives a naming scheme from the resources already identified and uses this to search for similarly named items. This enables you to discover additional attack surface.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="before-you-start">Before you start</h2>
+<p>
+    You need to populate the site map with some content before you use the content discovery tool. For a tutorial on how to map the target website, see <a href="/burp/documentation/desktop/testing-workflow/mapping/visible-attack-surface.html">Mapping the visible attack surface</a>.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="steps">Steps</h2>
+<p>
+    You can follow along with the process below using <a href="https://ginandjuice.shop">ginandjuice.shop</a>, our deliberately vulnerable demonstration site. To scan for hidden content:
+</p>
+<ol>
+    <li>
+        Go to <strong>Target</strong> &gt; <strong>Site map</strong>.
+    </li>
+    <li>
+        Right-click on the root node for the domain.
+    </li>
+    <li>
+        Click <strong>Engagement tools</strong> &gt; <strong>Discover content</strong>. The <strong>Content discovery</strong> dialog opens.
+    </li>
+    <li>
+        Click <strong>Session is not running</strong> to start the discovery session with default settings.
+    </li>
+</ol>
+<p>
+    By default, the tool adds discovered content to the Target site map. You can also view the site map that the content discovery tool builds in the dialog's <strong>Site map</strong> tab.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You can alternatively use Burp Intruder to discover hidden directories, files, and other endpoints. This gives you more manual control over the process.
+    </p>
+</div>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/tools/engagement-tools/content-discovery.html">Content discovery</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/site-map/index.html">Site map</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/uses/index.html">Typical uses for Burp Intruder</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

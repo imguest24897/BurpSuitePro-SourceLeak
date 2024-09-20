@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/index.html">Target</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/scope/index.html">Scope</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Scope</h1>
+<p>
+    The <strong>Target &gt; Scope</strong> tab enables you to tell Burp Suite which hosts and URLs you want to test. This has a number of advantages. For example, you can:
+</p>
+<ul>
+    <li>
+        Apply display filters to the site map and proxy history so that they only show in-scope items. For more information, see <a href="/burp/documentation/desktop/tools/target/site-map/site-map-filter.html">Filtering the site map</a> and <a href="/burp/documentation/desktop/tools/proxy/http-history/filter-settings.html">Filtering the HTTP history</a>.
+    </li>
+    <li>
+        Configure Burp Proxy to log or intercept in-scope requests only. In addition to reducing the noise caused by out-of-scope requests, this can help you to avoid accidentally attacking endpoints or hosts that you don't have permission to test. For more information, see <a href="/burp/documentation/desktop/settings/tools/proxy.html#proxy-history-logging">Proxy settings: Proxy history logging</a> and <a href="/burp/documentation/desktop/settings/tools/proxy.html#request-and-response-interception-rules">Proxy settings: Request and responses interception rules</a>
+    </li>
+    <li>
+        Configure Burp Intruder and Burp Repeater to automatically follow redirections to in-scope URLs. For more information, see <a href="/burp/documentation/desktop/tools/intruder/configure-attack/settings.html#redirections">Intruder settings: Redirections</a> and <a href="/burp/documentation/desktop/settings/tools/repeater.html#redirects">Repeater settings: Redirects</a>
+    </li>
+    <li>
+        <label class="label-edition is-professional">Professional</label>
+        Configure a live task so that Burp Scanner automatically audits in-scope requests as you browse. For more information, see <a href="/burp/documentation/desktop/automated-scanning/live-tasks/index.html">Live tasks</a>
+    </li>
+</ul>
+<h2 id="url-matching-rules">URL-matching rules</h2>
+<p>
+    Burp Suite uses URL-matching rules to determine whether a given URL is in scope. You have the following options for configuring these rules:
+</p>
+<ul>
+    <li>
+        <a href="#normal-scope-control">Normal scope control</a>
+    </li>
+    <li>
+        <a href="#advanced-scope-control">Advanced scope control</a>
+    </li>
+</ul>
+<h3 id="normal-scope-control">Normal scope control</h3>
+<p>
+    Normal scope control enables you to quickly specify static prefixes for URLs that are in or out of scope. You can explicitly specify the protocol for each prefix. If you don't include the protocol, the rule applies to both HTTP and HTTPS.
+</p>
+<p>
+    The following are some examples of valid URL prefixes:
+</p>
+<code class="code-scrollable">http://example.com/path
+https://example.com/admin
+example.com
+example.com/myapp/
+http://example.com:8080/login</code>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Wildcard expressions are not supported in URL prefixes for normal scope control. You can include all subdomains of a given host by selecting the <strong>Include subdomains</strong> checkbox. However, note that this is likely to significantly increase the scan duration.
+    </p>
+</div>
+<h3 id="advanced-scope-control">Advanced scope control</h3>
+<p>
+    Advanced scope control uses URL-matching rules rather than static prefixes. For a URL to match the rule, it must match all the specified features:
+</p>
+<ul>
+    <li>
+        <strong>Protocol</strong> - The protocol that the rule must match: HTTP, HTTPS, or any.
+    </li>
+    <li>
+        <strong>Host or IP range</strong> - A regular expression to match the hostname, or an IP range. You can use various standard formats, for example <code>10.1.1.1/24</code> or <code>10.1.1-20.1-127</code>. To match URLs that contain any host, leave this field blank.
+    </li>
+    <li>
+        <strong>Port</strong> - A regular expression to match one or more port numbers. Leave the field blank to match URLs that contain any port.
+    </li>
+    <li>
+        <strong>File</strong> - The file or path portion of the URL for the rule to match. Query strings are ignored. You can enter a regular expression to match the required range of URL files. To match URLs that contain any path or file, leave the file field blank.
+    </li>
+</ul>
+<p>
+    To enable advanced scope control, select the <strong>Use advanced scope control</strong> checkbox. To create a new URL-matching rule, click <strong>Add</strong> and fill in the relevant fields manually.
+</p>
+<p>
+    Burp can also generate rules for you based on URLs that you provide. You have the following options:
+</p>
+<ul>
+    <li>
+        Click <strong>Paste URL</strong> to use a URL from your clipboard.
+    </li>
+    <li>
+        Click <strong>Load</strong> to use a list of URLs or hostnames from a text file.
+    </li>
+    <li>
+        Right-click a request in one of Burp's tools and select <strong>Add to scope</strong> or <strong>Remove from scope</strong>.
+    </li>
+</ul>
+<p>
+    You can fine-tune each rule manually if required.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Regex is not supported when loading port or file information from a text file.
+    </p>
+</div>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/desktop/testing-workflow/test-scope.html">Setting the initial test scope</a>
+    </p>
+</div>
+</body>
+</html>

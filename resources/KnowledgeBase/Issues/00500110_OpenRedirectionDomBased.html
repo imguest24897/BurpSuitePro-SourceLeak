@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+Open redirection (DOM-based)
+<h1>Typical severity</h1>
+
+Low
+
+<h1>Issue description</h1>
+
+
+<p>DOM-based vulnerabilities arise when a client-side script reads data from a controllable part of the DOM (for example, the URL) and processes this data in an unsafe way.</p>
+
+<p>DOM-based open redirection arises when a script  writes controllable data into the target of a redirection in an unsafe way. An attacker may be able to use the vulnerability to  construct a URL that, if visited by another application user, will cause a redirection to an arbitrary external domain. This behavior can be leveraged to facilitate phishing attacks against users of the application. The ability to use an authentic application URL, targeting the correct domain and with a valid SSL certificate (if SSL is used), lends credibility to the phishing attack because many users, even if they verify these features, will not notice the subsequent redirection to a different domain.</p>
+<p><b>Note:</b> If an attacker is able to control the start of the string that is passed to the redirection API, then it may be possible to escalate this vulnerability into a JavaScript injection attack, by using a URL with the javascript: pseudo-protocol to execute arbitrary script code when the URL is processed by the browser.</p>
+
+<p>Burp Suite automatically identifies this issue using dynamic and static code analysis. Static analysis can lead to false positives that are not actually exploitable. If Burp Scanner has not provided any evidence resulting from dynamic analysis, you should review the relevant code and execution paths  to determine whether this vulnerability is indeed present, or whether mitigations are in place that would prevent exploitation.</p>
+
+
+<h1>Issue remediation</h1>
+
+<p>The most effective way to avoid DOM-based open redirection vulnerabilities is not to dynamically set redirection targets using data that originated from any untrusted source. If the desired functionality of the application means that this behavior is unavoidable, then defenses must be implemented within the client-side code to prevent malicious data from introducing an arbitrary URL as a redirection target. In general, this is best achieved by using a whitelist of URLs that are permitted redirection targets, and strictly validating the target against this list before performing the redirection.</p>
+
+<h1>References</h1>
+
+<ul>
+    <li><a href="https://portswigger.net/web-security/dom-based/open-redirection">Web Security Academy: Open redirection (DOM-based)</a></li>
+</ul>
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+<li><a href="https://cwe.mitre.org/data/definitions/601.html">CWE-601: URL Redirection to Untrusted Site ('Open Redirect')</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

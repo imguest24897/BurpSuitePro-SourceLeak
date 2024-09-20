@@ -1,0 +1,15 @@
+{
+  "typeIndex": 4195584,
+  "name": "Cross-domain POST",
+  "description": "<p>Applications sometimes use POST requests to transfer sensitive information from one domain to another. This does not necessarily constitute a security vulnerability, but it creates a trust relationship between the two domains. Data transmitted between domains should be reviewed to determine whether the originating application should be trusting the receiving domain with this information.</p>",
+  "remediation": null,
+  "webIntro": null,
+  "typicalSeverity": "INFO",
+  "references": [],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-16: Configuration",
+      "url": "https://cwe.mitre.org/data/definitions/16.html"
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/repeater/index.html">Repeater</a>
+        </li>
+        <li>
+            <a href="http-messages.html">Working with HTTP messages</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Working with HTTP messages in Burp Repeater</h1>
+<p>
+    You can use Burp Repeater to manipulate and resend individual HTTP requests, and analyze the application's responses. You can also <a href="#adding-notes-for-http-repeater-tabs">add notes to each tab</a>, to help you to manage your work.
+</p>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/_Wifm2g9ugg?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    To send HTTP requests with Burp Repeater:
+</p>
+<ol>
+    <li>
+        Right-click on an HTTP request anywhere in Burp, and click <strong>Send to Repeater</strong>. A new tab is added to Repeater containing the request.
+    </li>
+    <li>
+        Go to <strong>Repeater</strong> and view the HTTP request details in the new tab.
+    </li>
+    <li>
+        Modify the message.
+    </li>
+    <li>
+        Click <strong>Send</strong> to send the request to the target server, and view the response details.
+    </li>
+    <li>
+        Repeat this process as many times as you like to see how modifying the request in different ways changes the server's response.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            You can choose which protocol Burp will use to send the message. For more information, see <a href="/burp/documentation/desktop/http2/index.html#changing-the-protocol-for-a-request">Working with HTTP/2 in Burp Suite</a>.
+        </li>
+        <li>
+            You can send a series of requests in sequence with a single click. For more information, see <a href="/burp/documentation/desktop/tools/repeater/send-group.html">Sending HTTP requests in sequence</a>.
+        </li>
+    </ul>
+</div>
+<h2 id="http-repeater-tab">HTTP Repeater tab</h2>
+<p>
+    For HTTP messages, each Repeater tab contains the following items:
+</p>
+<ul>
+    <li>
+        An HTTP message editor which contains the request to be sent. You can use the <a href="/burp/documentation/desktop/tools/message-editor/index.html">message editor</a> functions to analyze and edit the message.
+    </li>
+    <li>
+        <p>
+            The target server to which the request will be sent. This is set automatically when you send a request to Repeater. To configure the target details, click <span class="icon-edit"></span>:
+        </p>
+        <ul>
+            <li>
+                If you've modified the host header, the <strong>Host</strong> and <strong>Port</strong> fields can be useful to see where your request is being sent.
+            </li>
+            <li>
+                If you want to manually set an SNI value, select <strong>Override SNI</strong>. This can be used to reproduce external service interaction issues detected by Burp Scanner using Burp Collaborator payloads within the SNI.
+            </li>
+        </ul>
+    </li>
+    <li>
+        An HTTP message editor which shows the response that was received from the sent request.
+    </li>
+    <li>
+        The size of the response in bytes, and the response time in milliseconds.
+    </li>
+    <li>
+        <p>
+            Controls to navigate the request history:
+        </p>
+        <ul>
+            <li>
+                Click the <strong>&lt;</strong> and <strong>&gt;</strong> buttons to navigate backwards and forwards through the history.
+            </li>
+            <li>
+                Use the drop-down buttons to show a numbered list of history items, and move quickly to them.
+            </li>
+            <li>
+                At any point in the history, you can edit and resend the currently displayed request.
+            </li>
+        </ul>
+    </li>
+</ul>
+<h3 id="adding-notes-for-http-repeater-tabs">Adding notes for HTTP Repeater tabs</h3>
+<p>
+    If you find something interesting in a request or response, you can add notes to the Repeater tab. This can help you to improve your workflow when you have multiple tabs open.
+</p>
+<p>
+    To add a note to an HTTP Repeater tab:
+</p>
+<ol>
+    <li>
+        In Repeater, select the tab that you want to add notes to.
+    </li>
+    <li>
+        Click <span class="icon-document"></span><strong>Notes</strong>.
+    </li>
+    <li>
+        Type your notes into the <strong>Notes</strong> panel.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        If you added notes in another Burp tool, these are copied into Repeater. In addition, if you send a message from Repeater to a tool that uses notes, your comments are copied across from Repeater.
+    </p>
+</div>
+</body>
+</html>

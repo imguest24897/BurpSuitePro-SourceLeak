@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/index.html">Scanner</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/bchecks/index.html">BCheck definitions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/bchecks/worked-examples/index.html">Worked examples</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/bchecks/worked-examples/collaborator.html">Example Collaborator-based check</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-enterprise">Enterprise</label>
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Example Collaborator-based check</h1>
+<p>
+    This BCheck enables Burp Scanner to use Burp Collaborator to check for SSRF.
+</p>
+<p>
+    The check works by sending a request containing a Burp Collaborator interaction ID in the <code>Referer</code> header. Burp Scanner reports an SSRF issue if Burp Collaborator receives any interactions as a result of this request.
+</p>
+<code class="pre-wrap">
+metadata:
+  language: v2-beta
+  name: "Request-level collaborator-based check"
+  description: "Blind SSRF with out-of-band detection"
+  author: "Carlos Montoya"
+
+given request then
+  send request:
+    headers:
+      "Referer": {generate_collaborator_address()}
+
+    if http interactions then
+      report issue:
+        severity: high
+        confidence: firm
+        detail: "This site fetches arbitrary URLs specified in the Referer header."
+        remediation: "Ensure that the site does not directly request URLS from the Referer header."
+    end if
+        </code>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-1-add-metadata">Step 1: Add metadata</h2>
+<code class="pre-wrap">
+metadata:
+  language: v2-beta
+  name: "Request-level collaborator-based check"
+  description: "Blind SSRF with out-of-band detection"
+  author: "Carlos Montoya"
+        </code><p>
+    The definition starts with a <code>metadata</code> block. For more information on available metadata properties, see the reference documentation.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-2-configure-the-request">Step 2: Configure the request</h2>
+<code class="pre-wrap">
+given request then
+  send request:
+    headers:
+      "Referer": {generate_collaborator_address()}
+        </code><p>
+    The next step is to configure the request that Burp Scanner sends.
+</p>
+<p>
+    The example code means that for each request Burp Scanner audits it sends a second request containing a Burp Collaborator interaction ID in the <code>Referer</code> header. The <code>{generate_collaborator_address()}</code> reserved variable causes Burp Collaborator to generate and insert a new interaction ID into the request.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-3-analyze-the-results">Step 3: Analyze the results</h2>
+<code class="pre-wrap">
+if http interactions then
+  report issue:
+    severity: high
+    confidence: firm
+    detail: "This site fetches arbitrary URLs specified in the Referer header."
+    remediation: "Ensure that the site does not directly request URLS from the Referer header."
+end if
+        </code><p>
+    The final step in the check is to see whether Burp Collaborator has received any interactions as a result of the request.
+</p>
+<p>
+    This <code>if</code> statement uses the <code>http interactions</code> conditional. If the request results in the Collaborator server receiving a HTTP interaction, then the condition is true and Burp Scanner raises an issue with <code>high</code> severity and a confidence level of <code>firm</code>.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="test-this-bcheck">Test this BCheck</h2>
+<p>
+    You can test out this BCheck on the <a href="/web-security/ssrf/blind/lab-out-of-band-detection.html">Blind SSRF with out-of-band detection</a> Web Security Academy lab. The check solves the lab outright.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <p>
+                <a href="/burp/documentation/scanner/bchecks/bcheck-definition-reference.html">BCheck definition reference</a>.
+            </p>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

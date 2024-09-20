@@ -1,0 +1,202 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/index.html">Intruder</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/getting-started.html">Getting started</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Getting started with Burp Intruder</h1>
+<p>
+    Burp Intruder is a powerful tool for performing highly customizable, automated attacks against websites. It enables you to configure attacks that send the same request over and over again, inserting different payloads into predefined positions each time. Among other things, you can use Intruder to:
+</p>
+<ul>
+    <li>
+        Fuzz for input-based vulnerabilities.
+    </li>
+    <li>
+        Perform brute-force attacks.
+    </li>
+    <li>
+        Enumerate valid identifiers and other inputs.
+    </li>
+    <li>
+        Harvest useful data.
+    </li>
+</ul>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/M7uJ70e6CP4?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    The best way to understand how Burp Intruder works is to see it in action. You can follow the tutorial below to launch your first Intruder attack.
+</p>
+<p>
+    For more detailed information about the features and attack types of Burp Intruder, please see <a href="/burp/documentation/desktop/tools/intruder/uses/index.html">Typical uses for Burp Intruder</a>.
+</p>
+<h2 id="tutorial">Tutorial</h2>
+<p>
+    In this tutorial, you'll learn the basics of configuring a simple Intruder attack using one of the deliberately vulnerable labs on the Web Security Academy.
+</p>
+<h3 id="step-1-access-the-lab" cms-ignore-validation="DUPLICATE_HEADINGS,HEADING_CAPITALIZATION">Step 1: Access the lab</h3>
+<p>
+    Open Burp's browser, and use it to access the following URL:
+</p>
+<code class="code-scrollable">https://portswigger.net/web-security/authentication/password-based/lab-username-enumeration-via-different-responses</code><p>
+    Click <strong>Access the lab</strong> and log in to your PortSwigger account if prompted. This opens your own instance of a deliberately vulnerable blog website.
+</p>
+<h3 id="step-2-try-to-log-in" cms-ignore-validation="DUPLICATE_HEADINGS,HEADING_CAPITALIZATION">Step 2: Try to log in</h3>
+<p>
+    Click <strong>My account</strong>, then try to log in using an invalid username and password.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/getting-started/getting-started-with-intruder-1-login-as-anything.png" alt="Logging in with an invalid username and password">
+</div>
+<p>
+    In Burp Suite, go to the <strong>Proxy &gt; HTTP history</strong> tab. This shows the requests you have made in Burp's browser since opening it.
+</p>
+<p>
+    Find the <code>POST /login</code> request. Highlight the value of the username parameter, then right-click the request and select <strong>Send to Intruder</strong>.
+</p>
+<h3 id="step-3-set-the-payload-position" cms-ignore-validation="DUPLICATE_HEADINGS,HEADING_CAPITALIZATION">Step 3: Set the payload position</h3>
+<p>
+    Go to the <strong>Intruder</strong> tab. Observe that there is now a tab displaying the <code>POST /login</code> request. We'll use this as the base request for our attack.
+</p>
+<p>
+    Notice that the value of the <code>username</code> parameter that you previously highlighted is now marked as a payload position. This is indicated by the § characters at the beginning and end of the value. Burp Intruder will insert payloads at this position during the attack.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/getting-started/getting-started-with-intruder-3-request-with-payloads.png" alt="Request with payload marker">
+</div>
+<h3 id="step-4-select-an-attack-type" cms-ignore-validation="DUPLICATE_HEADINGS,HEADING_CAPITALIZATION">Step 4: Select an attack type</h3>
+<p>
+    At the top of the screen, you can select different attack types. For now, just make sure this is set to <strong>Sniper</strong>.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/getting-started/getting-started-with-intruder-4-attack-type.png" alt="The attack type menu with sniper selected">
+</div>
+<p>
+    A <a href="/burp/documentation/desktop/tools/intruder/configure-attack/attack-types.html#sniper">Sniper</a> attack inserts a single set of payloads, one by one, into one or more positions within the request.
+</p>
+<h3 id="step-5-add-the-payloads" cms-ignore-validation="DUPLICATE_HEADINGS,HEADING_CAPITALIZATION">Step 5: Add the payloads</h3>
+<p>
+    You now just need to configure the list of payloads that you want to use. For this demonstration, we'll try sending the request with different usernames to test how the login mechanism behaves.
+</p>
+<p>
+    Copy the following list of candidate usernames:
+</p>
+<ul>
+    <li>
+        <a href="https://portswigger.net/web-security/authentication/auth-lab-usernames">Candidate usernames</a>
+    </li>
+</ul>
+<p>
+    Go to the <strong>Payloads</strong> tab.
+</p>
+<p>
+    Leave the <strong>Payload type</strong> set to <strong>Simple list</strong>.
+</p>
+<p>
+    In the <strong>Payload settings</strong> field, click <strong>Paste</strong> to add the copied usernames to the list.
+</p>
+<p>
+    In the <strong>Payload sets</strong> section, you can see how many payloads you have added, and how many requests this attack will send. For this attack, you should see: <code>Payload count: 101 / Request count: 101</code>.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/getting-started/getting-started-with-intruder-5-usernames-in-list.png" alt="The payload sets loaded with usernames">
+</div>
+<h3 id="step-6-start-the-attack" cms-ignore-validation="DUPLICATE_HEADINGS,HEADING_CAPITALIZATION">Step 6: Start the attack</h3>
+<p>
+    In the upper-right corner, click <strong>Start attack</strong>. This opens a new attack window in which you can see each of the requests that Burp Intruder is making.
+</p>
+<p>
+    If you select one of the entries in the table, you can view the request and response in the message editor. Notice that the <code>username</code> parameter contains a different value from our payload list in each request.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/getting-started/getting-started-with-intruder-6-selected-entry-request.png" alt="Looking at the contents of a request">
+</div>
+<h3 id="step-7-look-for-any-irregular-responses" cms-ignore-validation="DUPLICATE_HEADINGS,HEADING_CAPITALIZATION">Step 7: Look for any irregular responses</h3>
+<p>
+    The attack window contains several columns displaying key information about each response.
+</p>
+<p>
+    Wait for the attack to finish, then click the heading of the <strong>Length</strong> column to sort the results. As you can see, one of the responses is a different length.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/getting-started/getting-started-with-intruder-7-sort-by-length.png" alt="The history table sorted by length">
+</div>
+<p>
+    This difference in response from the server is worth further investigation.
+</p>
+<h3 id="step-8-study-the-response" cms-ignore-validation="DUPLICATE_HEADINGS,HEADING_CAPITALIZATION">Step 8: Study the response</h3>
+<p>
+    Select any request from the list to display it in the message editor.
+</p>
+<p>
+    Studying the responses, notice that most contain an <code>Invalid username</code> error message, but the one with the different length response has an <code>Incorrect password</code> error message.
+</p>
+<p>
+    This different response strongly suggests that this username might be valid in this case.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/getting-started/getting-started-with-intruder-8-comparing-responses.png" alt="Comparing the two different error messages">
+</div>
+<h3 id="what-next" cms-ignore-validation="DUPLICATE_HEADINGS,HEADING_CAPITALIZATION">What next?</h3>
+<p>
+    Now that you have a potentially correct username, the next logical step is to try to brute-force the password.
+</p>
+<p>
+    Try repeating this attack, using the username you have identified and this list of <a href="https://portswigger.net/web-security/authentication/auth-lab-passwords">candidate passwords</a>.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/getting-started/getting-started-with-intruder-9-now-the-password.png" alt="Brute forcing the password">
+</div>
+<p>
+    You can view the complete <a href="https://portswigger.net/web-security/authentication/password-based/lab-username-enumeration-via-different-responses">solution to the lab here</a>.
+</p>
+<h2 id="learn-more-about-burp-intruder" cms-ignore-validation="DUPLICATE_HEADINGS,HEADING_CAPITALIZATION">Learn more about Burp Intruder</h2>
+<p>
+    You have now learned how to use a Sniper attack type against a single parameter.
+</p>
+<ul>
+    <li>
+        To learn how to configure an attack in more detail, see <a href="/burp/documentation/desktop/tools/intruder/configure-attack/index.html">Configuring Burp Intruder attacks</a>.
+    </li>
+    <li>
+        To learn how to use Burp Intruder for a range of attacks, see <a href="/burp/documentation/desktop/tools/intruder/uses/index.html">Typical uses for Burp Intruder</a>.
+    </li>
+    <li>
+        To learn how to use these attacks against realistic targets, see <a href="/web-security/authentication/index.html">Authentication vulnerabilities</a> on the Web Security Academy.
+    </li>
+</ul>
+</body>
+</html>

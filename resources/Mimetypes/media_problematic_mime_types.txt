@@ -1,0 +1,9 @@
+application/ogg
+audio/mp4
+audio/mpeg
+audio/ogg
+audio/webm
+audio/x-wav
+video/mp4
+video/ogg
+video/webm

@@ -1,0 +1,23 @@
+{
+  "typeIndex": 7340544,
+  "name": "Base64-encoded data in parameter",
+  "description": "<p>Applications sometimes Base64-encode parameters in an attempt to obfuscate them from users or facilitate transport of binary data. The presence of Base64-encoded data may indicate security-sensitive information or functionality that is worthy of further investigation. The data should be reviewed to determine whether it contains any interesting information, or provides any additional entry points for malicious input.</p>",
+  "remediation": null,
+  "webIntro": null,
+  "typicalSeverity": "INFO",
+  "references": [],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-310: Cryptographic Issues",
+      "url": "https://cwe.mitre.org/data/definitions/310.html"
+    },
+    {
+      "title": "CWE-311: Missing Encryption of Sensitive Data",
+      "url": "https://cwe.mitre.org/data/definitions/311.html"
+    },
+    {
+      "title": "CAPEC-37: Retrieve Embedded Sensitive Data",
+      "url": "https://capec.mitre.org/data/definitions/37.html"
+    }
+  ]
+}

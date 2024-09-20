@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/index.html">Scanner</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/authenticated-scanning/index.html">Authenticated scanning</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/authenticated-scanning/recorded-login-sequences.html">Recorded login sequences</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-enterprise">Enterprise</label>
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Recorded login sequences</h1>
+<p>
+    When configuring application logins for a scan, you can import a recorded login sequence rather than supplying basic user credentials. A recorded login sequence is a set of instructions that tell Burp Scanner how to log in to the website.
+</p>
+<p>
+    Recorded login sequences enable Burp to handle complex authentication mechanisms, including:
+</p>
+<ul>
+    <li>
+        Single sign-on.
+    </li>
+    <li>
+        Multi-step logins in which the username and password are not entered in the same form.
+    </li>
+    <li>
+        Login forms that contain, for example, extra fields or checkboxes.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        When running a recorded login sequence, Burp Scanner can temporarily follow any out-of-scope links that are necessary to perform the login sequence. However, these locations are not crawled or audited as part of the scan.
+    </p>
+</div>
+<p>
+    Recorded login sequences are especially useful if you are using Burp Suite Enterprise Edition to automate scanning across a large application portfolio. In this case, you may be able to record an application's login sequence once and re-use it multiple times.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="using-recorded-login-sequences">Using recorded login sequences</h2>
+<p>
+    To record your login sequences, use the Burp Suite Navigation Recorder. This Chrome extension captures your interactions with the website while you perform the login sequence manually. It then generates a JSON-based "script" that you can import into Burp Suite Professional or Burp Suite Enterprise Edition.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        We recommend that you read the <a href="/burp/documentation/scanner/authenticated-scanning/recorded-login-best-practice.html">Best practice for recording login sequences</a> documentation before attempting to record a login sequence. This page contains advice that should help you to record login sequences that work first time.
+    </p>
+</div>
+<p>
+    The next time Burp Scanner performs an authenticated crawl, it opens a new browser session and uses this script to perform the full login sequence.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/scanner/authenticated-scanning/recorded-login-best-practice.html">Best practice for recording login sequences</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/authenticated-scanning/using-recorded-logins.html">Recording login sequences</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/authenticated-scanning/troubleshooting-recorded-logins.html">Troubleshooting recorded login sequences</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<svg width="112" height="67" viewBox="0 0 112 67" fill="none" xmlns="http://www.w3.org/2000/svg">
+	<circle r="31.8182" transform="matrix(0.866025 0.5 -0.866025 0.5 56 38.6817)" fill="#CACACD"/>
+	<circle r="30.3182" transform="matrix(0.866025 0.5 -0.866025 0.5 56 32.3182)" fill="#BDD0E1" stroke="#26649D" stroke-width="3"/>
+	<path d="M81.3506 17.6819L30.0976 47.2728" stroke="#26649D"/>
+	<path d="M81.3506 47.2727L30.0976 17.6818" stroke="#26649D"/>
+	<circle opacity="0.5" r="21.9091" transform="matrix(0.866025 0.5 -0.866025 0.5 56 32.3183)" stroke="#26649D" stroke-width="2"/>
+	<circle opacity="0.75" r="13" transform="matrix(0.866025 0.5 -0.866025 0.5 56 32.3181)" stroke="#26649D" stroke-width="2"/>
+	<circle r="3.81818" transform="matrix(0.866025 0.5 -0.866025 0.5 53.7959 17.0455)" fill="#FF7648"/>
+	<circle r="3.81818" transform="matrix(0.866025 0.5 -0.866025 0.5 61.5107 40.5909)" fill="#FF7648"/>
+	<circle r="3.81818" transform="matrix(0.866025 0.5 -0.866025 0.5 20.7295 39.9547)" fill="#FF7648"/>
+	<path d="M89.6175 24.3636L55.4489 31.9999L87.4131 41.5454L89.6175 24.3636Z" fill="url(#paint0_linear_1833_21584)"/>
+	<circle r="2.54545" transform="matrix(0.866025 0.5 -0.866025 0.5 56 32.3182)" fill="#26649D"/>
+	<defs>
+		<linearGradient id="paint0_linear_1833_21584" x1="56.5511" y1="32.6363" x2="87.4917" y2="37.3372" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#7B61FF"/>
+			<stop offset="1" stop-color="#7B61FF" stop-opacity="0"/>
+		</linearGradient>
+	</defs>
+</svg>

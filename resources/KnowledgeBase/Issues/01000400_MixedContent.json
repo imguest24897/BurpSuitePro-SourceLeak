@@ -1,0 +1,28 @@
+{
+  "typeIndex": 16778240,
+  "name": "Mixed content",
+  "description": "<p>The application loads pages over HTTPS that load other resources over unencrypted connections. An attacker suitably positioned to view a legitimate user's network traffic could record and monitor their interactions with these resources, which may indirectly disclose information about the user's activity on the application itself. Furthermore, an attacker able to modify traffic could alter these resources and potentially influence the application's appearance and behavior. Due to these concerns, users' web browsers may automatically display warnings and disable affected components of the page. As a result, this vulnerability currently has more of an impact on usability than security.</p><p>To exploit this vulnerability, an attacker must be suitably positioned to eavesdrop on the victim's network traffic. This scenario typically occurs when a client communicates with the server over an insecure connection such as public Wi-Fi, or a corporate or home network that is shared with a compromised computer. Common defenses such as switched networks are not sufficient to prevent this. An attacker situated in the user's ISP or the application's hosting infrastructure could also perform this attack. Note that an advanced adversary could potentially target any connection made over the Internet's core infrastructure.</p>",
+  "remediation": "<p>Ensure that all external resources the page references are loaded using HTTPS.</p>",
+  "webIntro": null,
+  "typicalSeverity": "INFO",
+  "references": [
+    {
+      "title": "Mixed Content",
+      "url": "https://developer.mozilla.org/en/docs/Security/MixedContent"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-16: Configuration",
+      "url": "https://cwe.mitre.org/data/definitions/16.html"
+    },
+    {
+      "title": "CWE-319: Cleartext Transmission of Sensitive Information",
+      "url": "https://cwe.mitre.org/data/definitions/319.html"
+    },
+    {
+      "title": "CAPEC-117: Interception",
+      "url": "https://capec.mitre.org/data/definitions/117.html"
+    }
+  ]
+}

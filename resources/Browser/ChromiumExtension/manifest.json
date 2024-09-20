@@ -1,0 +1,51 @@
+{
+    "name": "Burp Suite",
+    "version": "1.7.9",
+    "description": "Burp Suite Chromium Extension which contains DOM Invader and the Burp Suite Navigation recorder.",
+    "background": {
+        "page": "./background/background.html",
+        "persistent": true
+    },
+    "content_scripts": [
+        {
+          "run_at": "document_start",
+          "matches": ["http://*/*", "https://*/*"],        
+          "js": [
+            "./dom-invader-extension/content-scripts/read-settings.js",
+            "./dom-invader-extension/content-scripts/connection.js",
+            "./dom-invader-extension/content-scripts/postmessage.js",
+            "./dom-invader-extension/content-scripts/augmented-dom.js",
+            "./navigation-recorder/content-scripts/classes/Recorder.js"
+          ],
+          "all_frames": true,
+          "match_about_blank": true
+        }
+    ],
+    "web_accessible_resources": [
+        "settings.json",
+        "dom-invader-extension/images/domInvader.png"
+    ],
+    "chrome_url_overrides": {
+        "newtab": "./new-tab/newtab.html"
+    },
+    "devtools_page": "./dom-invader-extension/devtools/devtools.html",
+    "browser_action": {        
+        "default_title": "Burp Suite Container extension",   
+        "default_popup": "./popup/popup.html",
+        "default_icon": {
+            "16": "images/BurpSuite-Container-16.png",
+            "32": "images/BurpSuite-Container-32.png",
+            "48": "images/BurpSuite-Container-48.png",
+            "128": "images/BurpSuite-Container-128.png"              
+        }
+      },
+    "permissions": ["activeTab","storage","https://*/*","http://*/*","tabs","clipboardWrite","webNavigation","privacy","notifications","webRequest","webRequestBlocking"],
+    "icons": {
+        "16": "images/BurpSuite-Container-16.png",
+        "32": "images/BurpSuite-Container-32.png",
+        "48": "images/BurpSuite-Container-48.png",
+        "128": "images/BurpSuite-Container-128.png"
+    },
+    "manifest_version": 2,
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; default-src 'self';img-src 'self' data:; style-src 'unsafe-inline' 'self'; font-src data:"
+}

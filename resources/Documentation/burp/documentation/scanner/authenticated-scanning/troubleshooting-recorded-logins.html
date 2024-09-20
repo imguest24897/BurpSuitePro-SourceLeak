@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/index.html">Scanner</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/authenticated-scanning/index.html">Authenticated scanning</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/authenticated-scanning/troubleshooting-recorded-logins.html">Troubleshooting recorded login sequences</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-enterprise">Enterprise</label>
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Troubleshooting recorded login sequences</h1>
+<p>
+    Burp Scanner is sometimes unable to replay a recorded login sequence during the scan. Although this won't cause the scan to fail completely, failing to replay the sequence prevents Burp Scanner from performing an authenticated crawl.
+</p>
+<p>
+    There are several steps you can take to troubleshoot these issues:
+</p>
+<ul>
+    <li>
+        Check the <a href="/burp/documentation/scanner/authenticated-scanning/recorded-login-best-practice.html#limitations-of-recorded-login-sequences">Limitations of recorded login sequences</a> page to make sure that the application's login mechanism is compatible with the recorded logins feature.
+    </li>
+    <li>
+        <p>
+            Check for error messages in the scan's event log. These might tell you whether the issue is the login sequence or whether there is a general issue with the browser. Note that some log entries may only represent temporary failures that were later resolved. For example, if the target site imposes rate limits, you might see many entries saying that Burp Scanner was unable to log in. However, it may have logged in successfully later in the scan.
+        </p>
+        <ul>
+            <li>
+                For more information on accessing the event log in Burp Suite Enterprise Edition, see <a href="https://portswigger.net/burp/documentation/enterprise/user-guide/working-with-scans/generate-logs.html">Downloading logs and debug packs</a>.
+            </li>
+            <li>
+                For more information on accessing the event log in Burp Suite Professional, see <a href="/burp/documentation/desktop/automated-scanning/results/event-log.html">Event log</a>.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <p>
+            From the <strong>Help</strong> menu of Burp's browser, run a health check to make sure there are no issues with the browser. Recorded logins are only compatible with browser-powered scans. Burp Scanner cannot use your recorded login sequence if there is an issue preventing browser-powered scanning.
+        </p>
+        <p>
+            For more information, see <a href="/burp/documentation/desktop/tools/burps-browser.html#health-check-for-burp-s-browser">Burp's browser</a>.
+        </p>
+    </li>
+    <li>
+        <p>
+            Use the <strong>Replay</strong> function to test the recorded login sequence. Make sure that the sequence finishes on the page you would expect it to after logging in. If it does not, you may be able to determine the final action that Burp was able to perform as expected. Try re-recording the login sequence and run another test. If this new recording also fails at the same stage, it may be that the next action in the sequence is not supported by Burp Scanner. For more information on replaying login sequences in Burp Suite Enterprise Edition, see <a href="https://portswigger.net/burp/documentation/enterprise/user-guide/working-with-sites/site-settings/configure-authentication/recorded-logins.html#reviewing-a-recorded-login-sequence">Reviewing a recorded login sequence</a>.
+        </p>
+    </li>
+    <li>
+        Double-check that the login sequence finishes on a page that is in scope for the scan. Although the crawler can follow out-of-scope links during the login process, the login sequence must end on an in-scope page.
+    </li>
+</ul>
+</body>
+</html>

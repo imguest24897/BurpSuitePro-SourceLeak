@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE" ignore-validation="OTHER_PAGE_KEYWORD_TOO_FREQUENT"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/index.html">Testing input validation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/xss/index.html">Cross-site scripting</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/xss/bypassing-filters.html">Bypassing XSS filters</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Bypassing XSS filters by enumerating permitted tags and attributes</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/lSwasvUDR6c?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    Reflected cross-site scripting (XSS) arises when an application receives data in an HTTP request, then includes that data in its response in an unsafe way.
+</p>
+<p>
+    Applications use a range of processing and input validation methods to protect against common XSS payloads. You can use Burp Intruder to enumerate tags and attributes that are permitted by the application. This enables you to craft an XSS payload that will be executed by the application, and is a useful next step if your attempts to test using proof-of-concept payloads were not successful.
+</p>
+<h2 id="before-you-start" cms-ignore-validation="DUPLICATE_HEADINGS">Before you start</h2>
+<p>
+    Identify a request / response pair with reflected input. For more information, see <a href="/burp/documentation/desktop/testing-workflow/input-validation/xss/reflected-input.html">Identifying reflected input</a>.
+</p>
+<h2 id="steps" cms-ignore-validation="DUPLICATE_HEADINGS">Steps</h2>
+<p>
+    You can follow the processes below using the lab <a href="/web-security/cross-site-scripting/contexts/lab-html-context-with-most-tags-and-attributes-blocked.html">Reflected XSS into HTML context with most tags and attributes blocked</a>.
+</p>
+<ol>
+    <li>
+        In <strong>Proxy &gt; HTTP history</strong>, right-click the request with a reflected input that you want to investigate. Select <strong>Send to Intruder</strong>.
+    </li>
+    <li>
+        <p>
+            Identify whether any tags are permitted:
+        </p>
+        <ol>
+            <li>
+                In Intruder, replace the value of the input with: <code>&lt;&gt;</code>.
+            </li>
+            <li>
+                <p>
+                    Click inside the angle brackets, then click <strong>Add §</strong> twice to add a payload position.
+                </p>
+                <div class="rounded-dropshadow">
+                    <img src="/burp/documentation/desktop/images/tutorials/bypassing-filters-1.png" alt="Payload for identifying whether tags are permitted" class="center-block">
+                </div>
+            </li>
+            <li>
+                Go to the <strong>Payloads</strong> tab. Under <strong>Payload settings [simple list]</strong> add a list of tags that you want to test. For example, use the tags in the <a href="/web-security/cross-site-scripting/cheat-sheet.html">XSS cheat sheet</a>.
+            </li>
+            <li>
+                Click <strong>Start attack</strong>. The attack starts running in a new dialog. Intruder sends a request for each tag on the list.
+            </li>
+            <li>
+                When the attack is finished, look for any responses with a <code>200</code> status code. This indicates that the tag is permitted. If a tag is filtered out, it has a <code>400</code> status code instead.
+            </li>
+        </ol>
+    </li>
+    <li>
+        <p>
+            Identify whether any attributes are permitted:
+        </p>
+        <ol>
+            <li>
+                <p>
+                    In <strong>Intruder &gt; Positions</strong>, update the payload position. Add a tag that you enumerated in the previous step, then add payload markers to test different attributes.
+                </p>
+                <div class="rounded-dropshadow">
+                    <img src="/burp/documentation/desktop/images/tutorials/bypassing-filters-2.png" alt="Payload for identifying whether attributes are permitted" class="center-block">
+                </div>
+            </li>
+            <li>
+                Go to <strong>Intruder &gt; Payloads</strong>. Click <strong>Clear</strong> to remove the list of tags that you tested in the previous step.
+            </li>
+            <li>
+                Under <strong>Payload settings [Simple list]</strong> add a list of attributes that you want to test. For example, use the events listed in the <a href="/web-security/cross-site-scripting/cheat-sheet.html">XSS cheat sheet</a>.
+            </li>
+            <li>
+                Click <strong>Start attack</strong>. The attack starts running in a new dialog. Intruder sends a request for each attribute on the list.
+            </li>
+            <li>
+                When the attack is finished, look for any responses with a <code>200</code> status code. This indicates that an attribute is permitted.
+            </li>
+        </ol>
+    </li>
+</ol>
+<p>
+    You can use the permitted tags and attributes that you identified to construct an attack string. For more information, see <a href="/burp/documentation/desktop/testing-workflow/input-validation/xss/testing-for-reflected-xss.html">Testing for reflected XSS manually</a>.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            Academy: <a href="/web-security/cross-site-scripting/reflected/index.html">Reflected XSS</a>
+        </li>
+        <li>
+            <a href="/web-security/cross-site-scripting/cheat-sheet.html">Cross-site scripting (XSS) cheat sheet</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/index.html">Burp Intruder</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/xss/testing-for-reflected-xss.html">Testing for reflected XSS manually with Burp Suite</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/xss/testing-for-stored-xss.html">Testing for stored XSS with Burp Suite</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

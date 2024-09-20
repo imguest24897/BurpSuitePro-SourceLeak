@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE" ignore-validation="OTHER_PAGE_KEYWORD_TOO_FREQUENT"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/testing-for-clickjacking.html">Testing for clickjacking</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Testing for clickjacking</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/OQRYDAG0hGE?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    Clickjacking is a web security vulnerability that allows an attacker to trick users into clicking on hidden web page elements. It's done by overlaying a disguised or invisible UI layer (usually using iframes) on top of a target web page, fooling users into believing they're clicking something totally different. For example, users may think they're entering a draw to win a luxury cruise but, in reality, they're sending money to an attacker.
+</p>
+<h2 id="steps" cms-ignore-validation="DUPLICATE_HEADINGS">Steps</h2>
+<p>
+    You can follow along with the process below using the <a href="https://portswigger.net/web-security/clickjacking/lab-basic-csrf-protected">Basic clickjacking with CSRF token protection lab from our Web Security Academy.</a>
+</p>
+<h3>Scanning for clickjacking vulnerabilities</h3>
+<p>
+    If you're using Burp Suite Professional, you can use Burp Scanner to test for clickjacking vulnerabilities:
+</p>
+<ol>
+    <li>
+        Open your target web page in Burp's browser. In this example, we're going to use the <strong>My account</strong> page of our fictional blog.
+    </li>
+    <li>
+        In <strong>Proxy &gt; HTTP history</strong>, right-click the requests you want to test, then click <strong>Do active scan</strong>.
+    </li>
+    <li>
+        When the scan has finished, go to the <strong>Dashboard</strong> tab and select the scan from the <strong>Tasks</strong> list. In the main panel, go to the <strong>Issues</strong> tab to identify any <code>Frameable response</code> issues that Scanner found. These indicate that your target web page is vulnerable to clickjacking attacks.
+    </li>
+</ol>
+<h3>Exploiting clickjacking vulnerabilities</h3>
+<p>
+    Although you can manually create a clickjacking proof of concept, this can be fairly tedious and time-consuming in practice. When you're testing for clickjacking, we recommend using Burp's Clickbandit tool instead.
+</p>
+<p>
+    Once you've identified a vulnerable web page with an element that an attacker might target:
+</p>
+<ol>
+    <li>
+        Load your target web page in Burp's browser.
+    </li>
+    <li>
+        In Burp Suite, open the top-level <strong>Burp</strong> menu, then click <strong>Burp Clickbandit</strong>. This opens the <strong>Burp Clickbandit</strong> window.
+    </li>
+    <li>
+        Click <strong>Copy Clickbandit to clipboard</strong>. This copies the Clickbandit script.
+    </li>
+    <li>
+        Return to your target web page in Burp's browser, then paste the Clickbandit script into the Developer Tools Console. The Clickbandit banner appears.
+    </li>
+    <li>
+        Click <strong>Start</strong>. This reloads the target web page within a frame, ready for the attack to be performed. Clickbandit is now active in Record mode.
+    </li>
+    <li>
+        Click all the elements you've identified as potential targets for attackers. Clickbandit records each of your clicks. If you don't want a click to register during this stage, you can <strong>Disable click actions</strong> using the checkbox on the Clickbandit banner. This is helpful if a click will result in an action you don't want to happen.
+    </li>
+    <li>
+        Click <strong>Finish</strong> to end Record mode and enter Review mode. In Review mode, Clickbandit replays your click journey around the target site, with an attack UI overlaid, mimicking a real world clickjacking attack.
+    </li>
+    <li>
+        <p>
+            Click the attack UI buttons to verify each step of the clickjacking attack. If you need to adjust the attack layer, you can:
+        </p>
+        <ul>
+            <li>
+                Adjust the zoom using <strong>+</strong> and <strong>-</strong>.
+            </li>
+            <li>
+                <strong>Toggle transparency</strong> (to show or hide the target web page behind the attack layer).
+            </li>
+            <li>
+                Change the iframe position using the arrow keys on your keyboard.
+            </li>
+            <li>
+                <strong>Reset</strong> the attack layer to its original state (removing any changes you've made to its zoom or position).
+            </li>
+        </ul>
+    </li>
+    <li>
+        (Optional) Click <strong>Save</strong> to download the attack script as an HTML file.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/tools/clickbandit.html">Burp Clickbandit</a>
+        </li>
+        <li>
+            <a href="/web-security/clickjacking/index.html">Clickjacking (UI redressing)</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

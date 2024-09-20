@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+Cookie manipulation (DOM-based)
+<h1>Typical severity</h1>
+
+Low
+
+<h1>Issue description</h1>
+
+
+<p>DOM-based vulnerabilities arise when a client-side script reads data from a controllable part of the DOM (for example, the URL) and processes this data in an unsafe way.</p>
+
+<p>DOM-based cookie manipulation arises when a  script writes controllable data into the value of a cookie. An attacker may be able to use the vulnerability to construct a URL that, if visited by another application user, will set an arbitrary value in the user's cookie.</p>
+<p>The potential impact of the vulnerability depends on the role that the cookie plays within the application. If the cookie is used to control the behavior that results from certain user actions (for example, a 'production' versus 'demo' mode setting), then the attacker may be able to cause the user to perform unintended actions by manipulating the cookie's value. If the cookie is used to track the user's session, then the attacker may be able to perform a session fixation attack, in which they set the cookie's value to a valid token that they have obtained from the application, and then hijack the session during the victim user's subsequent interaction with the application.</p>
+
+<p>Burp Suite automatically identifies this issue using dynamic and static code analysis. Static analysis can lead to false positives that are not actually exploitable. If Burp Scanner has not provided any evidence resulting from dynamic analysis, you should review the relevant code and execution paths  to determine whether this vulnerability is indeed present, or whether mitigations are in place that would prevent exploitation.</p>
+
+<h1>Issue remediation</h1>
+
+<p>The most effective way to avoid DOM-based cookie manipulation vulnerabilities is not to dynamically write to cookies using data that originated from any untrusted source. This behavior should never be implemented for cookies that have any role in controlling privileged actions or user sessions within the application.</p>
+
+<h1>References</h1>
+
+<ul>
+    <li><a href="https://portswigger.net/web-security/dom-based/cookie-manipulation">Web Security Academy: Cookie manipulation (DOM-based)</a></li>
+</ul>
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+<li><a href="https://cwe.mitre.org/data/definitions/565.html">CWE-565: Reliance on Cookies without Validation and Integrity Checking</a></li>
+<li><a href="https://cwe.mitre.org/data/definitions/829.html">CWE-829: Inclusion of Functionality from Untrusted Control Sphere</a></li>
+    <li><a href="https://capec.mitre.org/data/definitions/31.html">CAPEC-31: Accessing/Intercepting/Modifying HTTP Cookies</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

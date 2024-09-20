@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/burps-browser.html">Burp's browser</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Burp's browser</h1>
+<p>
+    Burp Suite comes with its own browser, which is ready to use for a variety of manual and automated testing purposes.
+</p>
+<h2 id="manual-testing-with-burp-s-browser">Manual testing with Burp's browser</h2>
+<p>
+    Burp's browser is preconfigured to work with the full functionality of Burp Suite right out of the box. All of the necessary proxy listener settings are automatically adjusted for you. This means you can launch Burp for the first time and immediately start testing, even using HTTPS, without performing any additional configuration.
+</p>
+<p>
+    To launch Burp's browser, go to the <strong>Proxy &gt; Intercept</strong> tab and click <strong>Open browser</strong>. You can then visit and interact with websites just like you would with any other browser. All in-scope traffic is automatically proxied through Burp. This means that as you browse your target website, you can take advantage of Burp Suite's manual testing features. For example, you can intercept and modify requests using <a href="/burp/documentation/desktop/tools/proxy/index.html">Burp Proxy</a> and study the complete HTTP history from the corresponding tabs. You can then send these requests to other tools, such as <a href="/burp/documentation/desktop/tools/repeater/index.html">Burp Repeater</a> and <a href="/burp/documentation/desktop/tools/intruder/index.html">Burp Intruder</a>, to perform additional testing of interesting items that you encounter.
+</p>
+<p>
+    While you browse, Burp's default <a href="/burp/documentation/desktop/automated-scanning/live-tasks/index.html">live tasks</a> will also passively crawl and audit the locations that you visit. This will automatically populate the <a href="/burp/documentation/desktop/tools/target/site-map/index.html">site map</a> and <a href="/burp/documentation/desktop/automated-scanning/results/audit-log.html">report any potential security issues</a> as they are identified.
+</p>
+<div class="highlightedarea">
+    <h4>Read more</h4>
+    <a href="/burp/documentation/desktop/testing-workflow/index.html">Penetration testing workflow</a>
+</div>
+<p>
+    If you prefer, you can still use an external browser for testing. In this case, you just need to perform some <a href="/burp/documentation/desktop/external-browser-config/index.html">additional configuration steps</a>.
+</p>
+<h2 id="scanning-websites-with-burp-s-browser">Scanning websites with Burp's browser</h2>
+<p>
+    Burp's browser offers a convenient way to perform manual testing with minimal setup. However, it's even more powerful when integrated into your automated testing workflow through <a href="/burp/documentation/scanner/browser-powered-scanning.html">browser-powered scanning with Burp Scanner</a>.
+</p>
+<h2 id="health-check-for-burp-s-browser">Health check for Burp's browser</h2>
+<p>
+    If you are experiencing any issues with Burp's browser, you can use the <strong>Health check for Burp's browser</strong> tool to help diagnose the problem. You can access this tool from Burp's <strong>Help</strong> menu. The health check runs a series of tests to check whether the browser is working correctly and provides feedback on any issues that arise.
+</p>
+</body>
+</html>

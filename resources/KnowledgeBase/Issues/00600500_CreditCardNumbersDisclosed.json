@@ -1,0 +1,28 @@
+{
+  "typeIndex": 6292736,
+  "name": "Credit card numbers disclosed",
+  "description": "<p>Applications sometimes disclose sensitive financial information such as credit card numbers. Responses containing credit card numbers may not represent any security vulnerability - for example, a number may belong to the logged-in user to whom it is displayed. If a credit card number is identified during a security assessment it should be verified, then application logic reviewed to identify whether its disclosure within the application is necessary and appropriate.</p>",
+  "remediation": null,
+  "webIntro": null,
+  "typicalSeverity": "INFO",
+  "references": [
+    {
+      "title": "Web Security Academy: Information disclosure",
+      "url": "https://portswigger.net/web-security/information-disclosure"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-200: Information Exposure",
+      "url": "https://cwe.mitre.org/data/definitions/200.html"
+    },
+    {
+      "title": "CWE-388: Error Handling",
+      "url": "https://cwe.mitre.org/data/definitions/312.html"
+    },
+    {
+      "title": "CAPEC-37: Retrieve Embedded Sensitive Data",
+      "url": "https://capec.mitre.org/data/definitions/37.html"
+    }
+  ]
+}

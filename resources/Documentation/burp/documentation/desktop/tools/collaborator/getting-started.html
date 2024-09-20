@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/collaborator/index.html">Collaborator</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/collaborator/getting-started.html">Getting started</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Getting started with Burp Collaborator</h1>
+<p>
+    In this tutorial, you will learn how to manually use Burp Collaborator. You will test whether you can induce a target site to make a request to an arbitrary server that could potentially be controlled by an attacker.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="step-1-access-the-lab">Step 1: Access the lab</h2>
+<p>
+    Open Burp's browser, and use it to access the following URL:
+</p>
+<code>
+			https://portswigger.net/web-security/ssrf/blind/lab-out-of-band-detection
+		</code><p>
+    Click <strong>Access the lab</strong> and log in to your PortSwigger account if prompted. This opens your own instance of a deliberately vulnerable shopping website.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-2-browse-the-target-site">Step 2: Browse the target site</h2>
+<p>
+    In the browser, explore the site by clicking on a couple of the product pages.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="step-3-send-an-interesting-request-to-repeater">Step 3: Send an interesting request to Repeater</h2>
+<p>
+    In Burp, go to the <strong>Proxy &gt; HTTP history</strong> tab.
+</p>
+<p>
+    Right-click a <code>GET /product?productId=[...]</code> request and select <strong>Send to Repeater</strong>.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/getting-started/quick-start-pro-send-to-repeater.png" alt="Send request to repeater">
+</div>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="step-4-inject-a-collaborator-payload-into-the-request">Step 4: Inject a Collaborator payload into the request</h2>
+<p>
+    Go to the <strong>Repeater</strong> tab. Highlight the URL in the <code>Referer</code> header, right-click, and select <strong>Insert Collaborator payload</strong>. This replaces the <code>Referer</code> URL with a URL that points to the Collaborator server, for example:
+</p>
+<code class="code-scrollable">204119i326shak9tnk6k36z8jlahj74r.oastify.com</code><p>
+    Send the request.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/collaborator/burp-collaborator-tut-3-injecting-the-payload.png" alt="Injecting the payload">
+</div>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        The Collaborator server domain name may change, as we periodically add new domain names. For more information, see <a href="/burp/documentation/desktop/tools/collaborator/index.html#generating-payloads">Generating payloads</a>.
+    </p>
+</div>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="step-5-poll-for-interactions">Step 5: Poll for interactions</h2>
+<p>
+    Go to the <strong>Collaborator</strong> tab. Collaborator polls for interactions every 60 seconds, so you may see some interactions listed already. If not, click <strong>Poll now</strong>. Interactions received as a result of your Collaborator payloads are displayed. This confirms that the target site made a request to the arbitrary server.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/collaborator/burp-collaborator-tut-4-polling-for-interactions.png" alt="Polling for interactions in collaborator">
+</div>
+<p>
+    In this case, you see both HTTP and DNS interactions. Click on an interaction to view more details.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="summary">Summary</h2>
+<p>
+    Congratulations, you have now successfully:
+</p>
+<ul>
+    <li>
+        Generated a Collaborator payload.
+    </li>
+    <li>
+        Inserted a Collaborator payload in a request.
+    </li>
+    <li>
+        Induced the application to send a request to your Collaborator subdomain, and identified this by polling the server for interactions.
+    </li>
+</ul>
+<p>
+    You now know how to use Burp Collaborator to manually generate a proof of concept for invisible vulnerabilities, in this case, blind SSRF.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="what-next">What next?</h2>
+<p>
+    This tutorial is just an initial proof of concept. To learn how you can exploit this kind of behavior in the wild, check out the <a href="https://portswigger.net/web-security/">Web Security Academy</a>, in particular:
+</p>
+<ul>
+    <li>
+        <a href="https://portswigger.net/web-security/ssrf/blind">Blind SSRF</a>.
+    </li>
+    <li>
+        <a href="https://portswigger.net/web-security/sql-injection/blind">Blind SQL injection</a>.
+    </li>
+</ul>
+<p>
+    For an overview of some common uses of Burp Collaborator, see <a href="/burp/documentation/collaborator/uses.html">Typical uses for Burp Collaborator</a>.
+</p>
+</body>
+</html>

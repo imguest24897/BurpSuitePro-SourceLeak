@@ -1,0 +1,20 @@
+{
+  "typeIndex": 6293504,
+  "name": "JWT private key disclosed",
+  "description": "<p>\nThe JSON Web Signature specification defines the optional \"jwk\" header, which contains information about the key used to digitally sign the JWT.\nDefined in RFC 7517, this data structure contains cryptographic keys for different signature algorithms, such as HMAC or RSA for example.\nThis parameter is particularly useful for servers that are configured to use multiple different keys because it can help to determine which key to use when verifying the signature.\n</p>\n<p>\nIf a server is configured incorrectly, it may accidentally include private key components into the \"jwk\" header parameter of JWTs that it issues.\nIn this case, a malicious user could use any private keys they've obtained to tamper with the signature of JWT tokens and impersonate other users.\n</p>",
+  "remediation": "<p>\nIf your JWK is embedded into the JWT header, make sure to omit any private key components.\nAs long as it only contains public key components, using the \"jwk\" header is not a security threat in itself.\nIn fact, its correct use can help servers to select a proper key for verification.\n</p>",
+  "webIntro": null,
+  "typicalSeverity": "HIGH",
+  "references": [
+    {
+      "title": "JSON Web Key (JWK)",
+      "url": "https://datatracker.ietf.org/doc/html/rfc7517"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-200: Information Exposure",
+      "url": "https://cwe.mitre.org/data/definitions/200.html"
+    }
+  ]
+}

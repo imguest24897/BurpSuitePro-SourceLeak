@@ -1,0 +1,214 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/engagement-tools/index.html">Engagement tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/engagement-tools/content-discovery.html">Content discovery</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1 cms-ignore-validation="DUPLICATE_HEADINGS">Content discovery</h1>
+<p>
+    Use this function to discover content and functionality that is not linked from visible content that you can browse to or Burp Scanner can crawl.
+</p>
+<p>
+    To use this function:
+</p>
+<ol>
+    <li>
+        Select an HTTP request from anywhere in Burp.
+    </li>
+    <li>
+        Right-click and select <strong>Engagement tools &gt; Discover content</strong>.
+    </li>
+    <li>
+        To start the discovery session, click <strong>Session is not running</strong>.
+    </li>
+</ol>
+<p>
+    Burp uses several techniques to discover content, including:
+</p>
+<ul>
+    <li>
+        Name guessing.
+    </li>
+    <li>
+        Web crawling.
+    </li>
+    <li>
+        Extrapolation from naming conventions that the application uses.
+    </li>
+</ul>
+<p>
+    You can see the discovered content in a site map for the discovery session. You can also add this content to the main <a href="/burp/documentation/desktop/tools/target/site-map/index.html">suite site map</a>.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="control-tab">Control tab</h2>
+<p>
+    The <strong>Control</strong> tab shows you the current status of the discovery session. Use the toggle button to pause and restart the session.
+</p>
+<p>
+    You can see the following information:
+</p>
+<ul>
+    <li>
+        Requests made.
+    </li>
+    <li>
+        Bytes transferred in server responses.
+    </li>
+    <li>
+        Network errors.
+    </li>
+    <li>
+        Discovery tasks queued.
+    </li>
+    <li>
+        Spider requests queued.
+    </li>
+    <li>
+        Responses queued for analysis.
+    </li>
+</ul>
+<p>
+    The <strong>Queued tasks</strong> table shows the discovery tasks that are queued. The discovery engine works recursively. When a new directory or file is discovered, the discovery engine derives further tasks, depending on the configuration. For example:
+</p>
+<ul>
+    <li>
+        When Burp discovers a new directory, it may add tasks to look for sub-directories and files within the directory.
+    </li>
+    <li>
+        When Burp discovers a new file, it may add a task to check for the same base filename with different file extensions.
+    </li>
+</ul>
+<p>
+    New tasks are prioritized by how likely they are to discover new content.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="config-tab">Config tab</h2>
+<p>
+    Use the <strong>Config</strong> tab to configure the content discovery:
+</p>
+<h3 cms-ignore-validation="DUPLICATE_HEADINGS" id="target">Target</h3>
+<p>
+    The <strong>Target</strong> settings enable you to define the start directory for the content discovery session, and to define which files or directories are targeted. The following options are available:
+</p>
+<ul>
+    <li>
+        <strong>Start directory</strong> - Enter the URL where Burp starts to look for content. Items are only requested within this path and its subdirectories.
+    </li>
+    <li>
+        <strong>Discover</strong> - Specify whether the session looks for files, directories, or both. If you look for directories, you can choose whether to look for subdirectories inside any directories that are found. You can also choose how many levels of subdirectory to look for.
+    </li>
+</ul>
+<h3 cms-ignore-validation="DUPLICATE_HEADINGS" id="filenames">Filenames</h3>
+<p>
+    You can configure the sources that Burp uses to generate filenames to test:
+</p>
+<ul>
+    <li>
+        <strong>Built-in short file list</strong>.
+    </li>
+    <li>
+        <strong>Built-in short directory list</strong>.
+    </li>
+    <li>
+        <strong>Built-in long file list</strong>.
+    </li>
+    <li>
+        <strong>Built-in long directory list</strong>.
+    </li>
+    <li>
+        <strong>Custom file list</strong>.
+    </li>
+    <li>
+        <strong>Custom directory list</strong>.
+    </li>
+    <li>
+        <strong>Names observed in use on target site</strong> - Enable this setting to list the directories and filename stems that Burp discovers on the target site. Burp checks for these in each new directory that it tests.
+    </li>
+    <li>
+        <strong>Derivations based on discovered items</strong> - Burp attempts to guess item names based on items that it discovers. For example, if Burp discovers the directory <code>AnnualReport2018</code>, it also checks for <code>AnnualReport2019</code>, <code>AnnualReport2020</code>, and so on.
+    </li>
+</ul>
+<h3 cms-ignore-validation="DUPLICATE_HEADINGS" id="file-extensions">File extensions</h3>
+<p>
+    Use the <strong>File Extensions</strong> settings to configure how the discovery session adds file extensions to file stems. Burp uses the <strong>Filenames</strong> settings to derive the file stems. When Burp tests each file stem, it checks for different file extensions based on these settings:
+</p>
+<ul>
+    <li>
+        <strong>Test these extensions</strong> - Configure a list of extensions that Burp always checks for. You can fine-tune the default list based on the technologies known to be in use on the target application.
+    </li>
+    <li>
+        <strong>Test all extensions observed in use on target site, except for:</strong> - Configure a list of extensions that you don't want to check for, even if they are found to be in use.
+    </li>
+    <li>
+        <strong>Test these variant extensions on discovered files</strong> - Configure a list of extensions that Burp checks for, using the stems of discovered filenames. This is useful if you want to check for backup copies of existing files.
+    </li>
+    <li>
+        <strong>Test file stems with no extension</strong> - Burp checks for each file stem with no extension added.
+    </li>
+</ul>
+<h3 cms-ignore-validation="DUPLICATE_HEADINGS" id="discovery-engine">Discovery engine</h3>
+<p>
+    Use these settings to control the engine that is used to make HTTP requests during the discovery session. You can also control how it interacts with the <a href="/burp/documentation/desktop/tools/target/site-map/index.html">suite site map</a>. The following settings are available:
+</p>
+<ul>
+    <li>
+        <strong>Case sensitivity</strong> - Choose whether Burp handles filenames as case-sensitive. If you select <strong>Auto-detect</strong>, Burp initially treats content as case-sensitive. When it discovers the first new item, it tests the server's treatment of case variations. Burp uses the response to this treatment to decide whether to handle further filenames as case-sensitive.
+    </li>
+    <li>
+        <strong>Add discovered content to suite site map</strong> - Automatically add new items to the main site map as they're discovered.
+    </li>
+    <li>
+        <strong>Copy content from suite site map</strong> - Copy existing content from the main <a href="/burp/documentation/desktop/tools/engagement-tools/index.html">suite site map</a> into the <a href="#site-map-tab">discovery site map</a>. This may provide a stronger starting point for the discovery of new content.
+    </li>
+    <li>
+        <strong>Spider from discovered content</strong> - Configure the discovery session to perform conventional web crawling. The session processes the responses to discovery requests and looks for links to additional new content.
+    </li>
+    <li>
+        <strong>Number of discovery threads</strong> - Control the number of concurrent requests the discovery engine is able to make.
+    </li>
+    <li>
+        <strong>Number of spider threads</strong> - Control the number of concurrent requests the crawling function is able to make.
+    </li>
+</ul>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="site-map-tab">Site map tab</h2>
+<p>
+    The discovery session uses its own site map, which shows all the discovered content within the defined scope. This is shown in the content discovery window <strong>Site map</strong> tab.
+</p>
+<p>
+    You can add the discovered content to the main site map. To do this, select <strong>Add discovered content to suite site map</strong> in the <strong>Discovery Engine</strong> section of the <strong>Config</strong> tab.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        To learn how to use Burp Intruder to carry out customized content discovery, see <a href="/burp/documentation/desktop/tools/intruder/uses/enumerating.html">Enumerating identifiers</a>.
+    </p>
+</div>
+</body>
+</html>

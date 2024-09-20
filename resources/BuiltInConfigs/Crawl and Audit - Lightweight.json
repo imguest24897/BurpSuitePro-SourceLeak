@@ -1,0 +1,55 @@
+{
+  "description": {
+    "featured": true,
+    "default": false,
+    "text": "Gain fast feedback on a site's security - for when speed is a priority. Lightweight mode will complete within 15 minutes.",
+    "icon": "<svg version=\"1.1\" id=\"Layer_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\n\t viewBox=\"0 0 24 24\" style=\"enable-background:new 0 0 24 24;\" xml:space=\"preserve\">\n<g>\n\t<path d=\"M6,12c0-0.6-0.4-1-1-1H1c-0.6,0-1,0.4-1,1s0.4,1,1,1h4C5.6,13,6,12.6,6,12z\"/>\n\t<path d=\"M6,16H3c-0.6,0-1,0.4-1,1s0.4,1,1,1h3c0.6,0,1-0.4,1-1S6.6,16,6,16z\"/>\n\t<path d=\"M3,8h3c0.6,0,1-0.4,1-1S6.6,6,6,6H3C2.4,6,2,6.4,2,7S2.4,8,3,8z\"/>\n\t<path d=\"M18.4,12.1l-2.4-1V8c0-0.6-0.4-1-1-1s-1,0.4-1,1v3.8c0,0.4,0.2,0.8,0.6,0.9l3,1.2c0.5,0.2,1.1,0,1.3-0.5\n\t\tC19.1,12.9,18.9,12.3,18.4,12.1z\"/>\n\t<path d=\"M15.5,3C10.8,3,7,6.8,7,11.5s3.8,8.5,8.5,8.5s8.5-3.8,8.5-8.5S20.2,3,15.5,3z M15.5,18C11.9,18,9,15.1,9,11.5\n\t\tC9,7.9,11.9,5,15.5,5S22,7.9,22,11.5C22,15.1,19.1,18,15.5,18z\"/>\n</g>\n</svg>",
+    "display_order": 1,
+    "uuid": "75411438-739f-4d2e-b52d-a3a535b79f6c"
+  },
+  "crawler": {
+    "crawl_optimization": {
+      "crawl_using_provided_logins_only": true
+    },
+    "crawl_limits": {
+      "maximum_crawl_time": 3
+    },
+    "error_handling": {
+      "number_of_follow_up_passes": 1,
+      "pause_task_requests_timed_out_count": 0,
+      "pause_task_requests_timed_out_percentage": 0
+    },
+    "crawl_project_option_overrides": {
+      "normal_timeout": 10,
+      "connect_timeout": 10
+    }
+  },
+  "scanner": {
+    "audit_optimization": {
+      "scan_speed": "fast",
+      "maximum_crawl_and_audit_time": 15
+    },
+    "error_handling": {
+      "consecutive_audit_check_failures_to_skip_insertion_point": 2,
+      "consecutive_insertion_point_failures_to_fail_audit_item": 2,
+      "pause_task_failed_audit_item_count": 0
+    },
+    "insertion_point_types": {
+      "insert_body_params": true,
+      "insert_cookies": true,
+      "insert_entire_body": false,
+      "insert_http_headers": false,
+      "insert_param_name": false,
+      "insert_url_params": true,
+      "insert_url_path_filename": false,
+      "insert_url_path_folders": false
+    },
+    "audit_project_option_overrides": {
+      "normal_timeout": 10,
+      "connect_timeout": 10
+    },
+    "javascript_analysis": {
+      "max_static_time_per_item": 10
+    }
+  }
+}

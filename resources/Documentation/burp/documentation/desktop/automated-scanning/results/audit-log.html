@@ -1,0 +1,212 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/index.html">Automated scanning</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/results/index.html">Viewing scan and live task results</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/results/audit-log.html">Audit log</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Audit log</h1>
+<p>
+    The audit log is a list of key issue events that occurred during the audit phase of a scan or task. For example, these events could include:
+</p>
+<ul>
+    <li>
+        When Burp finds a new issue.
+    </li>
+    <li>
+        When Burp discovers more evidence for a known issue.
+    </li>
+    <li>
+        When Burp discovers that an issue is no longer present, and removes it from the <strong>Issues</strong> list.
+    </li>
+</ul>
+<p>
+    To view the audit log for a task:
+</p>
+<ol>
+    <li>
+        Go to the <strong>Dashboard</strong> tab.
+    </li>
+    <li>
+        From the <strong>Tasks</strong> list, select the relevant task.
+    </li>
+    <li>
+        In the main panel, go to the <strong>Audit log</strong> tab.
+    </li>
+</ol>
+<h2 id="viewing-audit-activity">Viewing audit activity</h2>
+<p>
+    The audit log enables you to:
+</p>
+<ul>
+    <li>
+        Monitor audit progress.
+    </li>
+    <li>
+        View details of deferred interactions with the Burp Collaborator server.
+    </li>
+    <li>
+        Assign confidence and severity levels to issues.
+    </li>
+    <li>
+        Report issues.
+    </li>
+</ul>
+<p>
+    Each item in the table contains the following details:
+</p>
+<ul>
+    <li>
+        <strong>#</strong> - An index number for the item.
+    </li>
+    <li>
+        <strong>Time</strong> - The time that the issue was found.
+    </li>
+    <li>
+        <strong>Source</strong> - The task that found the issue.
+    </li>
+    <li>
+        <strong>Action</strong> - The action that was performed. For example, finding an issue, removing an issue, or adding evidence.
+    </li>
+    <li>
+        <strong>Issue type</strong> - The issue type.
+    </li>
+    <li>
+        <strong>Host</strong> - The host server for the issue.
+    </li>
+    <li>
+        <strong>Path</strong> - Where applicable, the URL path to the issue location.
+    </li>
+    <li>
+        <strong>Insertion point</strong> - Where applicable, the type of insertion point used in the request that found the issue.
+    </li>
+    <li>
+        <strong>Severity</strong> - High, medium, low, or information.
+    </li>
+    <li>
+        <strong>Confidence</strong> - Tentative, firm, or certain.
+    </li>
+    <li>
+        <strong>Comment</strong> - Any user-applied comment. Double-click this field to add a comment.
+    </li>
+</ul>
+<p>
+    You can customize and sort the table contents. For more information, see <a href="/burp/documentation/desktop/burps-layout/customize-tables.html">Customizing Burp's tables</a>.
+</p>
+<h2 id="analyzing-audit-log-activity">Analyzing audit log activity</h2>
+<p>
+    To filter the <strong>Audit log</strong> table, use the buttons at the top of the tab. You can filter using the following conditions:
+</p>
+<ul>
+    <li>
+        <p>
+            Severity
+        </p>
+    </li>
+    <li>
+        <p>
+            Confidence
+        </p>
+    </li>
+    <li>
+        <p>
+            The type of check used, selected from the following:
+        </p>
+        <ul>
+            <li>
+                BChecks
+            </li>
+            <li>
+                Scan checks
+            </li>
+            <li>
+                Extensions
+            </li>
+        </ul>
+    </li>
+</ul>
+<p>
+    To filter entries by a specific term, use the <strong>Search</strong> bar.
+</p>
+<p>
+    Select a log entry to view further information on it in the panel below the table. The following tabs are available:
+</p>
+<ul>
+    <li>
+        <strong>Advisory</strong> - A summary of the relevant issue. This contains a description of the issue and remediation advice.
+    </li>
+    <li>
+        <strong>Request</strong> - This tab is displayed if the entry was created as a result of a request payload. It highlights the payload that triggered the issue.
+    </li>
+    <li>
+        <strong>Response</strong> - This tab is displayed if the entry was created as a result of a response. It highlights the issue location.
+    </li>
+    <li>
+        <strong>Path to issue</strong> - This tab is displayed if the entry was created as a result of a request payload. It displays the actions taken by Burp Scanner that led to the request being sent.
+    </li>
+</ul>
+<h2 id="managing-audit-log-items">Managing audit log items</h2>
+<p>
+    Right-click a log entry to perform further actions:
+</p>
+<ul>
+    <li>
+        <strong>Add comment</strong> - Add a comment to the item.
+    </li>
+    <li>
+        <strong>Highlight</strong> - Apply a highlight color to the item.
+    </li>
+    <li>
+        <strong>Set severity</strong> - Reassign an issue's severity level. You can flag the issue as a false positive.
+    </li>
+    <li>
+        <strong>Set confidence</strong> - Reassign an issue's confidence level.
+    </li>
+    <li>
+        <strong>Report selected issues</strong> - Generate a report of selected issues. For more information, see <a href="/burp/documentation/desktop/automated-scanning/reporting/index.html">Reporting scan results</a>.
+    </li>
+</ul>
+<p>
+    If you reassign an issue's severity or confidence level, or capture additional evidence for it, then the issue is displayed with its updated details. To restore the original severity or confidence, right-click an issue and select <strong>Restore original value</strong> from the context menu.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/scanner/auditing.html">Auditing</a> - Gives detailed information on the auditing process, including issue types.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/scope/index.html">Target scope</a> - Gives detailed information on how to set a target scope.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

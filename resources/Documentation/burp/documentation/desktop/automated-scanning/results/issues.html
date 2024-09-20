@@ -1,0 +1,237 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/index.html">Automated scanning</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/results/index.html">Viewing scan and live task results</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/results/issues.html">Issues</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Issues</h1>
+<p>
+    Whenever Burp Scanner identifies a potential vulnerability during auditing, it records this in your project file, along with key information to help you resolve or manually investigate the issue.
+</p>
+<p>
+    You can choose to view either a task-specific list of issues, which contains issues found by an individual task, or a project-level list containing entries for all issues found across all tasks in your project.
+</p>
+<p>
+    To view the project-level issues list:
+</p>
+<ol>
+    <li>
+        Go to the <strong>Dashboard</strong> tab.
+    </li>
+    <li>
+        From the bottom dock, select <strong>All issues</strong>.
+    </li>
+</ol>
+<p>
+    To view a task-specific issues list:
+</p>
+<ol>
+    <li>
+        Go to the <strong>Dashboard</strong> tab.
+    </li>
+    <li>
+        From the <strong>Tasks</strong> list, select the relevant task.
+    </li>
+    <li>
+        In the main panel, go to the <strong>Issues</strong> tab.
+    </li>
+</ol>
+<p>
+    From here, you can:
+</p>
+<ul>
+    <li>
+        Monitor scan results.
+    </li>
+    <li>
+        Review new issues as they are reported.
+    </li>
+    <li>
+        Assign confidence and severity levels to issues.
+    </li>
+    <li>
+        Report and delete issues.
+    </li>
+</ul>
+<p>
+    Each item in the <strong>Issues</strong> table contains the following details:
+</p>
+<ul>
+    <li>
+        <strong>Time</strong> - The time that the issue was found.
+    </li>
+    <li>
+        <strong>Source</strong> - The task that found the issue.
+    </li>
+    <li>
+        <strong>Issue type</strong> - The issue type.
+    </li>
+    <li>
+        <strong>Host</strong> - The host server for the issue.
+    </li>
+    <li>
+        <strong>Path</strong> - Where applicable, the URL path to the issue location.
+    </li>
+    <li>
+        <strong>Insertion point</strong> - Where applicable, the type of insertion point used in the request that found the issue.
+    </li>
+    <li>
+        <strong>Severity</strong> - High, medium, low, or information.
+    </li>
+    <li>
+        <strong>Confidence</strong> - Tentative, firm, or certain.
+    </li>
+    <li>
+        <strong>Comment</strong> - Any user-applied comment. Double-click this field to add a comment.
+    </li>
+</ul>
+<p>
+    You can customize and sort the table contents. For more information, see <a href="/burp/documentation/desktop/burps-layout/customize-tables.html">Customizing Burp's tables</a>.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Each issue is only recorded the first time it is found.
+    </p>
+</div>
+<h2 id="analyzing-issue-activity">Analyzing issue activity</h2>
+<p>
+    To filter the <strong>Issues</strong> table, use the buttons at the top of the tab. You can filter using the following conditions:
+</p>
+<ul>
+    <li>
+        <p>
+            Severity.
+        </p>
+    </li>
+    <li>
+        <p>
+            Confidence.
+        </p>
+    </li>
+    <li>
+        <p>
+            Type of check, selected from the following:
+        </p>
+        <ul>
+            <li>
+                BChecks.
+            </li>
+            <li>
+                Scan checks.
+            </li>
+            <li>
+                Extensions.
+            </li>
+        </ul>
+    </li>
+</ul>
+<p>
+    To filter the issues by a specific term, use the <strong>Search</strong> bar.
+</p>
+<p>
+    Select an issue to view further information on it in the panel below the table. The following tabs are available:
+</p>
+<ul>
+    <li>
+        <p>
+            <strong>Advisory</strong> - A summary of the issue. This contains a description of the issue and remediation advice.
+        </p>
+    </li>
+    <li>
+        <p>
+            <strong>Request</strong> - This tab is displayed if the issue was triggered by a request payload. It highlights the payload that triggered the issue.
+        </p>
+    </li>
+    <li>
+        <p>
+            <strong>Response</strong> - This tab is displayed if the issue was reflected in a response. It highlights the issue location.
+        </p>
+    </li>
+    <li>
+        <p>
+            <strong>Path to issue</strong> - This tab is displayed if the issue was triggered by a request payload. It displays the actions taken by Burp Scanner that led to the request being sent.
+        </p>
+    </li>
+</ul>
+<h2 id="managing-issues">Managing issues</h2>
+<p>
+    Right-click an issue to perform further actions:
+</p>
+<ul>
+    <li>
+        <p>
+            <strong>Add comment</strong> - Add a comment to the item.
+        </p>
+    </li>
+    <li>
+        <p>
+            <strong>Highlight</strong> - Apply a highlight color to the item.
+        </p>
+    </li>
+    <li>
+        <p>
+            <strong>Set severity</strong> - Reassign the issue's severity level. You can flag the issue as a false positive.
+        </p>
+    </li>
+    <li>
+        <p>
+            <strong>Set confidence</strong> - Reassign the issue's confidence level.
+        </p>
+    </li>
+    <li>
+        <p>
+            <strong>Delete issue</strong> - Delete selected issues from the table.
+        </p>
+    </li>
+    <li>
+        <p>
+            <strong>Report selected issues</strong> - Generate a report of selected issues. For more information, see <a href="/burp/documentation/desktop/automated-scanning/reporting/index.html">Reporting scan results</a>.
+        </p>
+    </li>
+</ul>
+<p>
+    If you reassign the severity or confidence level, or capture additional evidence for the issue, then the issue is displayed with its updated details. To restore the original details, right-click an issue and select <strong>Restore original value</strong> from the context menu.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/scanner/auditing.html">Auditing</a> - Gives detailed information on the auditing process, including issue types.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/scope/index.html">Target scope</a> - Gives detailed information on how to set a target scope.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

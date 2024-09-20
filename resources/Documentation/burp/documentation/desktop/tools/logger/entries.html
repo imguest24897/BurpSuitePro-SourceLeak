@@ -1,0 +1,203 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/logger/index.html">Logger</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/logger/entries.html">Working with Logger entries</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Working with Burp Logger entries</h1>
+<p>
+    All HTTP traffic is recorded in the <strong>Logger</strong> tab, up to a specified limit of allocated memory.
+</p>
+<p>
+    To disable or enable the logging of all items, click the <strong>Logging: On/Off</strong> button. You can also clear the log: click the <strong>Clear log</strong> trash icon <span class="icon-trash"></span>. Once cleared, the log cannot be retrieved.
+</p>
+<p>
+    Burp Logger has a range of functions to help you view and analyze a large number of results.
+</p>
+<h2 id="viewing-log-entries">Viewing log entries</h2>
+<p>
+    Key details of log entries are displayed in a table. To reorder and resize columns, click and drag the column headers and borders.
+</p>
+<p>
+    To select which columns are displayed, click <span class="icon-more-vertical"></span> and select <strong>Table layout</strong>.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="adding-a-custom-column">Adding a custom column</h2>
+<p>
+    <label class="label-edition is-professional">Professional</label>
+    You can create your own custom columns using Bambdas.
+</p>
+<p>
+    Custom columns enable you to see more detail about the items that have been logged for a more focused analysis of what's important to you.
+</p>
+<p>
+    Two objects of the Montoya API are available to help you write these Bambdas:
+</p>
+<ul>
+    <li>
+        <p>
+            <code>LoggerHttpRequestResponse</code>
+        </p>
+    </li>
+    <li>
+        <p>
+            <code>Utilities</code>
+        </p>
+    </li>
+</ul>
+<p>
+    To create a custom column for your Logger table:
+</p>
+<ol>
+    <li>
+        <p>
+            In <strong>Logger</strong>, click the options menu <strong><span class="icon-more-vertical"></span> &gt; Add custom column</strong>. The <strong>Add custom column</strong> window opens.
+        </p>
+    </li>
+    <li>
+        <p>
+            Enter a name for your custom column in the <strong>Column header</strong> field.
+        </p>
+    </li>
+    <li>
+        <p>
+            Write a Bambda to specify the data that the custom column displays.
+        </p>
+    </li>
+</ol>
+<h3 cms-ignore-validation="DUPLICATE_HEADINGS" id="example-bambda">Example Bambda</h3>
+<p>
+    In the example below, we'll write a Bambda to create a custom column containing the <strong>Server</strong> header value of the response.
+</p>
+<code class="code-scrollable">
+        if (!requestResponse.hasResponse()) {
+        return "";
+        }
+
+        var response = requestResponse.response();
+
+        return response.hasHeader("Server")
+        ? response.headerValue("Server")
+        : "";
+    </code>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/desktop/extensions/bambdas/index.html">Bambdas</a>
+    </p>
+</div>
+<h3>Connection ID</h3>
+<p>
+    The <strong>Connection ID</strong> column identifies which requests were sent over the same connection. Each connection is identified by a different number.
+</p>
+<p>
+    This enables you to detect if a website behaves differently, based on previous requests sent down the same connection.
+</p>
+<h2 id="viewing-requests-and-responses">Viewing requests and responses</h2>
+<p>
+    You can view the request and response for each entry in the <a href="/burp/documentation/desktop/tools/message-editor/index.html">message editor</a> and <a href="/burp/documentation/desktop/tools/inspector/index.html">Inspector</a>. Click on an entry to view these. They are read-only.
+</p>
+<p>
+    You can customize and sort the table contents. For more information, see <a href="/burp/documentation/desktop/burps-layout/customize-tables.html">Customizing Burp's tables</a>.
+</p>
+<h2 id="filtering-logger-entries">Filtering Logger entries</h2>
+<p>
+    You can choose which types of items Logger captures and displays. This enables you to focus your work on interesting messages, and control how much memory Logger uses.
+</p>
+<p>
+    To see how these functions work in practice, follow the tutorial in <a href="/burp/documentation/desktop/tools/logger/getting-started.html">Getting started with Burp Logger</a>.
+</p>
+<p>
+    There are two types of filter in Logger:
+</p>
+<h3 cms-ignore-validation="DUPLICATE_HEADINGS" id="capture-filter">Capture filter</h3>
+<p>
+    Use the capture filter to control which types of items Logger captures. You can set a capture filter using predefined options in <strong>Settings mode</strong>, or create an advanced Java-based capture filter using <strong>Bambda mode</strong>.
+</p>
+<p>
+    Items that are not captured will be discarded from Logger. Burp can't retrieve these items even if the capture filter is removed.
+</p>
+<p>
+    To learn more, see <a href="/burp/documentation/desktop/tools/logger/filter-capture.html">Burp Logger capture filter</a>.
+</p>
+<h3 cms-ignore-validation="DUPLICATE_HEADINGS" id="view-filter">View filter</h3>
+<p>
+    Use the view filter to control which captured items Logger displays. You can set a view filter using predefined options in <strong>Settings mode</strong>, or create an advanced Java-based view filter using <strong>Bambda mode</strong>.
+</p>
+<p>
+    Items that are not displayed because of view filter settings can be viewed by removing the view filter.
+</p>
+<p>
+    To learn more, see <a href="/burp/documentation/desktop/tools/logger/filter-view.html">Burp Logger view filter</a>.
+</p>
+<h2 id="annotating-log-entries">Annotating log entries</h2>
+<p>
+    You can annotate log entries for later attention:
+</p>
+<ul>
+    <li>
+        To highlight an entry, click in the <strong>#</strong> column and choose a color from the drop-down menu.
+    </li>
+    <li>
+        To leave a comment on an entry, double-click on the <strong>Comment</strong> column.
+    </li>
+</ul>
+<h2 id="logger-workflow-tools">Logger workflow tools</h2>
+<p>
+    You can use the context menu to perform further actions on any log entry as part of your workflow. For example, you can send a request to other Burp tools, such as <a href="/burp/documentation/desktop/tools/organizer/index.html">Organizer</a> and <a href="/burp/documentation/desktop/tools/intruder/index.html">Intruder</a>. You can also export log entries as a CSV file, see below for more information.
+</p>
+<h3>Export log entries as CSV</h3>
+<p>
+    To export log entries as a CSV file, select the relevant entries in the table, right-click and select <strong>Export as CSV</strong>. The whole table is exported if you select zero entries or one entry.
+</p>
+<p>
+    When exporting entries in CSV format, Logger encodes certain data as follows:
+</p>
+<ul>
+    <li>
+        Date times are represented in ISO 8601 format with UTC offset: <code>yyyy-MM-dd'T'HH:mm:ss.SSS'Z'</code>.
+    </li>
+    <li>
+        Binary data (for example, HTTP/2 requests and responses) are represented as Base64 encoded strings.
+    </li>
+    <li>
+        Any data that contains a comma is escaped by wrapping the data in double quotes. For example, a,b will become "a,b".
+    </li>
+    <li>
+        Any data containing double quotes is escaped by an additional double quote. For example, "a" will become """a""".
+    </li>
+    <li>
+        Any data starting with -, +, = or @ is escaped for Excel by prefixing a single quote (').
+    </li>
+</ul>
+</body>
+</html>

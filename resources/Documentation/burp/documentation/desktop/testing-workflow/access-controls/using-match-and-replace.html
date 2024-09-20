@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Learn how to  spoof your IP address using match and replace rules when performing manual testing in Burp Suite Professional / Burp Suite Community Edition.">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE" ignore-validation="STACKED_HEADINGS"></cms><title>Spoofing your IP address using match and replace</title>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/access-controls/index.html">Testing access controls</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/access-controls/using-match-and-replace.html">Using match and replace rules</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Spoofing your IP address using Burp Proxy match and replace</h1>
+<p>
+    <a href="/burp/index.html">Burp Proxy</a> allows you to configure <a href="/burp/documentation/desktop/settings/tools/proxy.html#http-and-websocket-match-and-replace-rules">match and replace rules</a> that automatically modify your requests and responses while you explore the target application as normal using Burp's browser. This enables you to add, remove, or modify headers in requests or responses, for example.
+</p>
+<p>
+    There are a number of uses for this, including potentially spoofing your IP address. In some cases, this may allow you to trick a server into believing that you belong to its local network, which could enable you to communicate with internal infrastructure that is otherwise inaccessible.
+</p>
+<p>
+    In this tutorial you'll learn how to:
+</p>
+<ul>
+    <li>
+        Set match and replace rules in Burp Suite.
+    </li>
+    <li>
+        Use match and replace rules to add a header to your requests.
+    </li>
+    <li>
+        Spoof your IP address to compromise a vulnerable server that uses a form of IP-based authentication.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Burp's browser is an easy way to proxy HTTP traffic - even over the encrypted HTTPS protocol. There is no setup required - simply go to the <strong>Proxy</strong> tab, click <strong>Open Browser</strong>, and make sure that the intercept toggle is set to <strong>Intercept off</strong>.
+    </p>
+</div>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS,HEADING_CAPITALIZATION" id="step-1-open-the-lab">Step 1: Open the lab</h2>
+<p>
+    Open Burp's browser and access the following lab:
+</p>
+<code>https://portswigger.net/web-security/information-disclosure/exploiting/lab-infoleak-authentication-bypass</code>
+<h2 id="step-2-attempt-to-access-the-admin-panel" cms-ignore-validation="HEADING_CAPITALIZATION">Step 2: Attempt to access the admin panel</h2>
+<p>
+    Try to access the admin panel at <code>/admin</code>.
+</p>
+<p>
+    Note that you are prevented from doing so as this is only accessible to local users.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/using-match-and-replace/unable-to-access-admin-interface.png" alt="A Web Security Admin page which you are unable to access">
+</div>
+<p>
+    For simplicity, let's assume that you've subsequently identified that the server is using a custom HTTP header, <code>X-Custom-IP-Authorization</code>, to determine your IP address.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        In the wild, the de-facto standard header <code>X-Forwarded-For</code> is often used for this purpose, but you may encounter websites that use different custom headers. These are normally applied to your requests by an intermediary server, such as a load balancer or other reverse proxy belonging to a CDN, for example.
+    </p>
+</div>
+<h2 id="step-3-add-a-custom-match-and-replace-rule" cms-ignore-validation="HEADING_CAPITALIZATION">Step 3: Add a custom match and replace rule</h2>
+<p>
+    To add a custom match and replace rule:
+</p>
+<ol>
+    <li>
+        In Burp Suite, click on <strong>Settings <span class="icon-settings"></span></strong> to open the <strong>Settings</strong> dialog.
+    </li>
+    <li>
+        Go to <strong>Tools</strong> &gt; <strong>Proxy</strong>.
+    </li>
+    <li>
+        Under <strong>Match and Replace</strong>, click <strong>Add</strong>.
+    </li>
+    <li>
+        Leave the <strong>Match</strong> field empty. This ensures that Burp will append a new header to requests rather than replacing an existing one.
+    </li>
+    <li>
+        <p>
+            In the <strong>Replace</strong> field, enter the following:
+        </p>
+        <code>X-Custom-IP-Authorization: 127.0.0.1</code>
+    </li>
+    <li>
+        Click <strong>OK</strong>.
+    </li>
+</ol>
+<p>
+    Burp Proxy will now add this header to every request you make in Burp's browser.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/using-match-and-replace/adding-a-custom-match-and-replace-rule-in-burp-proxy.png" alt="Adding a custom match and replace rule in Burp Proxy to spoof your IP address">
+</div>
+<h2 id="step-4-try-to-access-the-admin-panel-again" cms-ignore-validation="HEADING_CAPITALIZATION">Step 4: Try to access the admin panel again</h2>
+<p>
+    In Burp's browser, try browsing to <code>/admin</code> again. Observe that you can now access the admin page and delete Carlos to solve the lab.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/using-match-and-replace/delete-carlos-to-complete-the-web-security-academy-lab.png" alt="Deleting Carlos from the admin panel">
+</div>
+<p>
+    In Burp, you can confirm that the header was added to your requests by checking them in the <strong>Logger</strong> tab:
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/using-match-and-replace/viewing-the-modified-request-in-logger.png" alt="Viewing the automatically modified request in the Logger tab">
+</div>
+<p>
+    Alternatively, on the <strong>Proxy &gt; HTTP history</strong> tab, you can use the drop-down menu to toggle between the original request that was sent by the browser, and the modified one that Burp Proxy forwarded to the server.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/using-match-and-replace/viewing-a-custom-http-header-in-burp-proxy.png" alt="Viewing the automatically modified request in the HTTP history tab">
+</div>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Although we've manually added a custom header in this case, Burp Suite provides a number of built-in match and replace rules to cover some of the most common use cases. You just need to enable them in the <strong>Settings</strong> dialog, under <strong>Proxy &gt; Tools &gt; Match and replace rules</strong>.
+    </p>
+</div>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="summary-and-next-steps">Summary and next steps</h2>
+<p>
+    Congratulations - now you know how to use Burp Proxy's match and replace rules, and have used them to spoof your IP address.
+</p>
+<p>
+    To learn how you could have discovered the custom header we used to solve the lab, check out the <a href="https://portswigger.net/web-security/information-disclosure/exploiting.html#information-disclosure-due-to-insecure-configuration">learning materials</a> on the Web Security Academy.
+</p>
+<p>
+    For more general information on authentication, as well as other types of attack you can carry out using Burp Suite, see the <a href="https://portswigger.net/web-security/authentication/index.html">Authentication</a> topic in the Web Security Academy.
+</p>
+</body>
+</html>

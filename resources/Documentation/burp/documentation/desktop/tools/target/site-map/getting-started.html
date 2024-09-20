@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/index.html">Target</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/site-map/index.html">Site map</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/site-map/getting-started.html">Getting started</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Getting started with the site map</h1>
+<p>
+    The <strong>Target &gt; Site map</strong> tab displays all the information that Burp gathers about websites. This information comes from a number of sources such as <a href="/burp/documentation/scanner/index.html">Burp Scanner</a>, or URLs that you discover when you browse the target manually. The site map is a hierarchical tree that represents the site's content. This is organized into:
+</p>
+<ul>
+    <li>
+        Domains.
+    </li>
+    <li>
+        Directories.
+    </li>
+    <li>
+        Files.
+    </li>
+    <li>
+        Parameterized requests.
+    </li>
+</ul>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/getting-started/site-map-populated.png" alt="Site map populated from browser" class="center-block">
+</div>
+<p>
+    By default, Burp automatically populates the site map from the sites you visit using Burp's browser. We recommend following the tutorial below to learn how to use the site map as part of your testing workflow.
+</p>
+<p>
+    For more detailed information about the functions of the site map, please see the <a href="/burp/documentation/desktop/tools/target/site-map/index.html">full documentation</a>.
+</p>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/1Vswm0ZhSZA?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="tutorial">Tutorial</h2>
+<p>
+    In this tutorial you'll learn about the main features of the site map, and how to use them in combination with other tools.
+</p>
+<h3 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-1-access-the-lab">Step 1: Access the lab</h3>
+<p>
+    Open Burp's browser, and use it to access the following URL:
+</p>
+<code class="code-scrollable">https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-excessive-trust-in-client-side-controls</code><p>
+    Click <strong>Access the lab</strong> and log in to your PortSwigger account if prompted. This opens your own instance of a deliberately vulnerable website.
+</p>
+<h3 cms-ignore-validation="HEADING_CAPITALIZATION" id="step-2-go-to-the-site-map">Step 2: Go to the site map</h3>
+<p>
+    In Burp, go to the <strong>Target &gt; Site map</strong> tab. Expand the contents of the node that represents the vulnerable lab website.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/getting-started/site-map-lab-node.png" alt="Tree for the lab node" class="center-block">
+</div>
+<p>
+    As you can see, Burp has already started to populate the site map.
+</p>
+<p>
+    Notice that some items are grayed out. Burp predicts that these items exist, but your browser hasn't completed a request-response cycle for them yet. This is probably because the URL appears in another response that you've received already.
+</p>
+<h3 cms-ignore-validation="HEADING_CAPITALIZATION" id="step-3-update-the-site-map">Step 3: Update the site map</h3>
+<p>
+    The site map updates automatically as you browse. If there's a particular grayed out item that you're interested in, you can copy the URL from the site map and paste it into Burp's browser.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/getting-started/site-map-copy-url.png" alt="Copy the URL to paste into Burp's browser" class="center-block">
+</div>
+<h3 cms-ignore-validation="HEADING_CAPITALIZATION" id="step-4-filter-the-displayed-information">Step 4: Filter the displayed information</h3>
+<p>
+    The <strong>Site map</strong> tab contains various panels that show different information, such as the first request and response for each item. If you're using Burp Suite Professional, you'll also see a list of any security issues that Burp Scanner identifies.
+</p>
+<p>
+    Select a node in the site map. Notice that the information in the panels is now filtered based on the selected node.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/getting-started/site-map-filters.png" alt="Filtering the displayed information" class="center-block">
+</div>
+<h3 cms-ignore-validation="HEADING_CAPITALIZATION" id="step-5-set-the-target-scope-using-the-site-map">Step 5: Set the target scope using the site map</h3>
+<p>
+    The site map also makes it easy to set the target scope for Burp. Right-click on the top-level node for the lab and select <strong>Add to scope</strong>. When prompted to stop proxying out-of-scope traffic, click <strong>Yes</strong>.
+</p>
+<p>
+    You might want to exclude specific paths and subdirectories that you're not interested in from the scope. Right-click on the node for <strong>resources &gt; images</strong> and select <strong>Remove from scope</strong>.
+</p>
+<p>
+    Now go to the <strong>Target &gt; Scope</strong> tab. You can see that the entire domain for the lab is in scope, but the <strong>/resources/images</strong> directory is excluded.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/getting-started/site-map-target-scope.png" alt="Using the site map to set the target scope" class="center-block">
+</div>
+<p>
+    You can also delete any items that you're not interested in from the site map. These might be domains that were added before you set the scope. Select the items, right-click, and select <strong>Delete selected items</strong>.
+</p>
+</body>
+</html>

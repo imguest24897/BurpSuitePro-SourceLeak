@@ -1,0 +1,48 @@
+{
+    "crawler": {
+        "crawl_limits": {
+            "maximum_crawl_time": 150,
+            "maximum_unique_locations": 1500,
+            "maximum_request_count": 0
+        },
+        "crawl_optimization": {
+            "crawl_strategy": "normal",
+            "crawl_strategy_customized": false,
+            "crawl_using_provided_logins_only": false,
+            "logging_directory": null,
+            "logging_enabled": false,
+            "maximum_link_depth": 4
+        },
+        "error_handling": {
+            "number_of_follow_up_passes": 1,
+            "pause_task_requests_timed_out_count": 15,
+            "pause_task_requests_timed_out_percentage": 0
+        },
+        "login_functions": {
+            "attempt_to_self_register_a_user": true,
+            "trigger_login_failures": true
+        },
+        "customization": {
+            "allow_all_clickables": true,
+            "allow_out_of_scope_resources":true,
+            "application_uses_fragments_for_routing": "unsure",
+            "browser_based_navigation_mode": "only_if_hardware_supports",
+            "customize_user_agent": false,
+            "maximum_items_from_sitemap": 1000,
+            "maximum_speculative_links": 1000,
+            "parse_api_definitions": true,
+            "perform_graphql_introspection": true,
+            "guess_hidden_graphql_endpoints": false,
+            "request_robots_txt": true,
+            "request_sitemap": true,
+            "request_speculative": true,
+            "submit_forms": true,
+            "timeout_for_in_progress_resource_requests": 10,
+            "user_agent": ""
+        },
+        "crawl_project_option_overrides": {
+            "connect_timeout": -1,
+            "normal_timeout": -1
+        }
+    }
+}

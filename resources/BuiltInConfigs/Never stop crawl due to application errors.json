@@ -1,0 +1,13 @@
+{
+  "description": {
+    "featured": false,
+    "uuid": "bc55817f-b7f5-4411-8729-c2b76a0a2236"
+  },
+  "crawler": {
+    "error_handling": {
+      "number_of_follow_up_passes": 1,
+      "pause_task_requests_timed_out_count": 0,
+      "pause_task_requests_timed_out_percentage": 0
+    }
+  }
+}

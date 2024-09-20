@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Learn how to run a web vulnerability scan and generate a report - using Burp Scanner in Burp Suite Professional.">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE" ignore-validation="STACKED_HEADINGS,ALLOWED_CHARACTERS"></cms><title>Generating your first report with Burp Suite Professional</title>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/getting-started/index.html">Getting started</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/getting-started/generate-reports.html">Generating a report</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1 cms-ignore-validation="HEADING_CAPITALIZATION" no-keyword-injection>Generating a report</h1>
+<div no-keyword-injection>
+    <p>
+        In this section, you'll learn how to generate a report in HTML format, based on your scan results.
+    </p>
+    <h3 cms-ignore-validation="HEADING_CAPITALIZATION">Step 1: Select the relevant issues</h3>
+    <p>
+        Go to the <strong>Target > Site map</strong> tab, right-click on the entry for <code>https://ginandjuice.shop</code>, and select <strong>Issues > Report issues for this host</strong>.
+    </p>
+    <div class="rounded-dropshadow">
+        <img src="/burp/documentation/desktop/images/getting-started/Pro-QSG-7-Report-for-host.png" alt="Select the relevant issues">
+    </div>
+    <h3 cms-ignore-validation="HEADING_CAPITALIZATION">Step 2: Configure the report options</h3>
+    <p>
+        A wizard guides you through the available options, such as how much detail to include. For now, just click <strong>Next</strong> to accept the defaults until you're prompted to enter a filename and location for the report.
+    </p>
+    <div class="rounded-dropshadow">
+        <img src="/burp/documentation/desktop/images/getting-started/Pro-QSG-8-configure-report.png" alt="Configure the report options">
+    </div>
+    <h3 cms-ignore-validation="HEADING_CAPITALIZATION">Step 3: Generate and save the report</h3>
+    <p>
+        Click <strong>Select file</strong> and choose a location where you want to save the report. Enter a name for the file.
+    </p>
+    <div class="highlightedarea">
+        <h4>Note</h4>
+        <p>
+            You must include the appropriate file extension, in this case, <code>.html</code>.
+        </p>
+    </div>
+    <p>
+        Click <strong>Save</strong> and then <strong>Next</strong> to generate the report.
+    </p>
+    <h3 cms-ignore-validation="HEADING_CAPITALIZATION">Step 4: View and share your report</h3>
+    <p>
+        Open the report in Burp's browser to see what it contains. This is useful for reporting the results of your scans to colleagues or clients.
+    </p>
+    <img src="/burp/documentation/desktop/images/getting-started/quick-start-scanner-report.png" alt="Viewing the scan report">
+    <p>
+        You've just generated a report of your findings.
+    </p>
+    <div class="callout theme-community-6">
+        <div class="container-columns-3 align-vertically-center">
+            <p class="heading-navy-1">
+                <strong>Next step -</strong> Continue learning about Burp
+            </p>
+            <a href="/burp/documentation/desktop/getting-started/what-next.html" class="button-orange">CONTINUE</a>
+        </div>
+    </div>
+    <div class="highlightedarea">
+        <h4 cms-ignore-validation="DUPLICATE_HEADINGS">In this tutorial</h4>
+        <ol>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/download-and-install.html">Downloading and installing Burp Suite.</a>
+            </li>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/intercepting-http-traffic.html">Intercepting HTTP traffic with Burp Proxy.</a>
+            </li>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/modifying-http-requests.html">Modifying requests in Burp Proxy.</a>
+            </li>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/setting-target-scope.html">Setting the target scope.</a>
+            </li>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/reissuing-http-requests.html">Manually reissuing requests with Burp Repeater.</a>
+            </li>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/running-your-first-scan.html">Running your first scan.</a>
+            </li>
+            <li>
+                Generating a report.
+            </li>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/what-next.html">What next?</a>
+            </li>
+        </ol>
+    </div>
+</div>
+</body>
+</html>

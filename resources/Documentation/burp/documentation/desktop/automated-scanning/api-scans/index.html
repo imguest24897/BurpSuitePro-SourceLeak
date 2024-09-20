@@ -1,0 +1,228 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/index.html">Automated scanning</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/api-scans/index.html">Scanning APIs</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Scanning APIs</h1>
+<p>
+    Burp Scanner enables you to upload an OpenAPI definition to run a specific API scan.
+</p>
+<p>
+    To run an API scan, click <strong>New scan &gt; API scan</strong> on the Dashboard. The API scan launcher opens. To configure your scan, complete the following steps in the API scan launcher:
+</p>
+<ul>
+    <li>
+        <p>
+            Upload an API definition.
+        </p>
+    </li>
+    <li>
+        <p>
+            Review and configure the API details.
+        </p>
+    </li>
+    <li>
+        <p>
+            Select a scan configuration.
+        </p>
+    </li>
+    <li>
+        <p>
+            Select a resource pool (optional).
+        </p>
+    </li>
+</ul>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="step-1-upload-api-definition">Step 1: Upload API definition</h2>
+<p>
+    To begin configuring your scan, upload a version 2.0 or 3.0.x OpenAPI definition. You can do this in two ways:
+</p>
+<ul>
+    <li>
+        <p>
+            By providing a URL for the API definition. To do this, enter the URL in the <strong>Upload from URL</strong> field, then click <strong>Upload</strong>.
+        </p>
+    </li>
+    <li>
+        <p>
+            By uploading a definition file. To do this, drag and drop the API definition file into the <strong>Upload from file</strong> field.
+        </p>
+    </li>
+</ul>
+<p>
+    Burp uploads the definition and analyzes it to identify the API details that will be used in the scan. To review the API endpoints, click <strong>Continue</strong>.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Burp Scanner must be able to parse and validate definitions in order to upload them. For a full list of criteria that the definition is validated against, see <a href="/burp/documentation/scanner/api-scanning-reqs.html#api-definition-requirements">Requirements for API scanning - API definition requirements</a>.
+    </p>
+</div>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="step-2-review-and-configure-the-api-details">Step 2: Review and configure the API details</h2>
+<p>
+    You can view API endpoints, authentication methods, and parameters in the <strong>API details</strong> tab. These are automatically populated from your API definition.
+</p>
+<h3>Viewing and configuring endpoints</h3>
+<p>
+    API endpoints are listed in a table in the <strong>API details &gt; Endpoints</strong> tab. The table contains the following columns:
+</p>
+<ul>
+    <li>
+        Checkbox - Whether the endpoint is selected for scanning. Burp Scanner only scans selected endpoints.
+    </li>
+    <li>
+        <strong>Method</strong> - The HTTP method used by the endpoint.
+    </li>
+    <li>
+        <strong>Content type</strong> - The format of the data that will be sent to the API server.
+    </li>
+    <li>
+        <strong>Host</strong> - The protocol and server hostname.
+    </li>
+    <li>
+        <strong>URL</strong> - The URL file path and query string.
+    </li>
+</ul>
+<p>
+    By default, all endpoints are selected for scanning. To remove an endpoint from the scan, use the checkbox.
+</p>
+<p>
+    To permanently delete an endpoint, right-click it and select <strong>Delete</strong>.
+</p>
+<p>
+    You can filter the table by HTTP method or a specific term:
+</p>
+<ul>
+    <li>
+        To filter by the HTTP method, use the filter buttons.
+    </li>
+    <li>
+        To filter by a specific term, click <span class="icon-search-right"></span><strong>Search</strong>, then enter your search term.
+    </li>
+</ul>
+<p>
+    Once you've filtered the table, you can deselect or select all filtered endpoints as a bulk action, using the top checkbox.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Endpoints are only listed on the table if they meet the requirements for scanning. For information about the criteria, see <a href="/burp/documentation/scanner/api-scanning-reqs.html#api-endpoint-requirements">Requirements for API scanning - API endpoint requirements</a>.
+    </p>
+</div>
+<h3 id="viewing-and-configuring-authentication">Viewing and configuring authentication</h3>
+<p>
+    Burp lists any endpoint authentication methods that it detects in the API definition in the <strong>API details &gt; Authentication</strong> tab.
+</p>
+<p>
+    To use detected authentication methods, you'll need to add credentials. You can also add authentication methods that aren't included in the API definition.
+</p>
+<p>
+    For more information, see <a href="/burp/documentation/desktop/automated-scanning/api-scans/authentication.html">Configuring authentication for API scans</a>.
+</p>
+<h3>Viewing parameters</h3>
+<p>
+    API parameters for all selected endpoints are listed in a table in the <strong>API details &gt; Parameters</strong> tab. You can review these to better understand the scope of your scan.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        If you deselect or delete an endpoint, Burp automatically removes any corresponding parameters from the <strong>Parameters</strong> tab.
+    </p>
+</div>
+<p>
+    The table contains details of parameters in the following columns:
+</p>
+<ul>
+    <li>
+        <strong>Name</strong> - The name of the parameter as defined in the API definition.
+    </li>
+    <li>
+        <strong>Values</strong> - One or more values for the parameter. This is populated from the example values in the API definition. If the definition doesn't include example values, Burp Scanner creates them.
+    </li>
+    <li>
+        <strong>Description</strong> - A description of the parameter as defined in the API definition.
+    </li>
+    <li>
+        <strong>Location</strong> - Where the API parameter is located in an HTTP request, as defined in the API definition. For example, the request body, or query string.
+    </li>
+</ul>
+<p>
+    Burp Scanner uses the parameter details to create requests when it audits an endpoint.
+</p>
+<p>
+    Once you have finalized the endpoints you want to scan and reviewed the parameters, click <strong>Continue</strong> to select a scan configuration.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="step-3-select-a-scan-configuration">Step 3: Select a scan configuration</h2>
+<p>
+    Scan configurations are groups of settings that define how a scan is performed. Click <strong>Scan</strong> to start the scan with the default configuration, or select a custom scan configuration. You have the following options:
+</p>
+<ul>
+    <li>
+        <strong>Select from library</strong> - Choose an existing configuration from your configuration library.
+    </li>
+    <li>
+        <strong>New</strong> - Create a new configuration.
+    </li>
+    <li>
+        <strong>Import</strong> - Import configurations from other installations of Burp Suite.
+    </li>
+</ul>
+<p>
+    Once you've selected your scan configurations, click <strong>Scan</strong> to start the scan, or click on the <strong>Resource pool</strong> tab to choose a resource pool.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        For more information on how to create and import custom configurations, see <a href="/burp/documentation/desktop/automated-scanning/custom-configs.html">Using custom configurations</a>.
+    </p>
+</div>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="step-4-select-a-resource-pool">Step 4: Select a resource pool</h2>
+<p>
+    A resource pool is a group of tasks that share a quota of network resources. The default resource pool is automatically selected. You can change this in the <strong>Resource pools</strong> tab:
+</p>
+<ul>
+    <li>
+        <p>
+            To use a resource pool that already exists, select <strong>Use existing resource pool</strong>, then choose a pool from the list.
+        </p>
+    </li>
+    <li>
+        <p>
+            To set up a new resource pool, select <strong>Create new resource pool</strong>. For more information on how to configure the pool settings, see <a href="/burp/documentation/desktop/settings/project/tasks.html#resource-pools">Tasks settings - Resource pools</a>.
+        </p>
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/desktop/automated-scanning/managing-resource-pools.html">Managing resource pools for scans</a> - Gives information on the use cases for resource pools and how to configure them.
+    </p>
+</div>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE" ignore-validation="OTHER_PAGE_KEYWORD_TOO_FREQUENT"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/index.html">Scanner</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-enterprise">Enterprise</label>
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Burp Scanner</h1>
+<p>
+    Burp Scanner is an automated dynamic application security testing (DAST) web vulnerability scanner. Designed to replicate the actions and methodologies of a skilled manual tester, Burp Scanner powers scans in Burp Suite's desktop editions and Burp Suite Enterprise Edition.
+</p>
+<h2 id="how-do-scans-work">How do scans work?</h2>
+<p>
+    Burp Scanner handles virtually any target. Advanced features such as state management and automated logins enable it to deal with the challenges that scanning modern web applications can pose. Although the actions taken during a scan vary depending on target and configuration, scans generally comprise two key phases:
+</p>
+<ul>
+    <li>
+        <strong>Crawling</strong> - The scanner catalogs the content of the application and the navigational paths within it. Burp Scanner navigates around the application in largely the same way that a human would. It follows links, submits forms, and logs in where necessary to create a map of the application's content.
+    </li>
+    <li>
+        <strong>Auditing</strong> - The scanner analyzes the application's traffic and behavior to identify security vulnerabilities and other issues. Burp Scanner sends a series of requests to the application and examines the results. It uses the information obtained in the crawl phase to determine the most efficient way to work.
+    </li>
+</ul>
+<p>
+    This section of the site gives more information on Burp Scanner's features and how you can configure scans to best meet your needs.
+</p>
+<div class="container">
+    <div class="highlightedarea">
+        <h4>Read more</h4>
+        <ul>
+            <li>
+                <p>
+                    <a href="/burp/documentation/scanner/crawling.html">Crawling</a>.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a href="/burp/documentation/scanner/auditing.html">Auditing</a>.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a href="/burp/documentation/scanner/scan-configurations/index.html">Scan configurations</a>.
+                </p>
+                <ul>
+                    <li>
+                        <p>
+                            <a href="/burp/documentation/scanner/scan-configurations/preset-scan-modes.html">Preset scan modes</a>.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <a href="/burp/documentation/scanner/scan-configurations/custom-scan-configurations.html">Custom scan configurations</a>.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <a href="/burp/documentation/scanner/scan-configurations/burp-scanner-built-in-configs.html">Burp Scanner built-in configurations</a>.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <a href="/burp/documentation/scanner/scan-configurations/audit-options.html">Audit options</a>.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <a href="/burp/documentation/scanner/scan-configurations/crawl-options.html">Crawl options</a>.
+                        </p>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <p>
+                    <a href="/burp/documentation/scanner/browser-powered-scanning.html">Browser-powered scanning</a>.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a href="/burp/documentation/scanner/authenticated-scanning/index.html">Authenticated scanning</a>.
+                </p>
+                <ul>
+                    <li>
+                        <p>
+                            <a href="/burp/documentation/scanner/authenticated-scanning/login-credentials.html">Login credentials</a>.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <a href="/burp/documentation/scanner/authenticated-scanning/identifying-login-forms.html">Identifying login and registration forms</a>.
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <a href="/burp/documentation/scanner/authenticated-scanning/recorded-login-sequences.html">Recorded login sequences</a>.
+                        </p>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <p>
+                    <a href="/burp/documentation/scanner/api-scanning-reqs.html">Requirements for API scanning</a>.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a href="/burp/documentation/scanner/scanning-spas.html">Scanning single-page apps</a>.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a href="/burp/documentation/scanner/burp-scanner-error-reference.html">Burp Scanner error reference</a>.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a href="/burp/documentation/scanner/vulnerabilities-list.html">Vulnerabilities detected by Burp Scanner</a>.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a href="/burp/documentation/scanner/bchecks/index.html">BChecks</a>
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

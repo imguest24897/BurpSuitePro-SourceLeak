@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/index.html">Intruder</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/uses/index.html">Uses</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/uses/fuzzing.html">Fuzzing</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Fuzzing for vulnerabilities</h1>
+<p>
+    You can use Burp Intruder to identify input-based vulnerabilities by analyzing the attack results for error messages and other exceptions.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        For more information on input-based vulnerabilities, see:
+    </p>
+    <ul>
+        <li>
+            <a href="/web-security/sql-injection/index.html">SQL injection</a>.
+        </li>
+        <li>
+            <a href="/web-security/cross-site-scripting/index.html">Cross-site scripting</a>.
+        </li>
+        <li>
+            <a href="/web-security/file-path-traversal/index.html">Directory traversal</a>.
+        </li>
+    </ul>
+</div>
+<p>
+    Given the size and complexity of today's applications, manually fuzzing for vulnerabilities is a time-consuming process. You can automate the process with Burp Intruder.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-1-set-the-payload-positions">Step 1: Set the payload positions</h2>
+<p>
+    Set payload positions at the values of all request parameters.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-2-set-the-payload-type">Step 2: Set the payload type</h2>
+<p>
+    Select the simple list payload type, then add a list of attack strings under <strong>Payload settings</strong>.
+</p>
+<p>
+    You can use your own list of attack strings, or one of Burp's predefined payload lists of common fuzz strings if you're using Burp Suite Professional. For more information, see <a href="/burp/documentation/desktop/tools/intruder/configure-attack/payload-lists.html">Predefined payload lists</a>.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/intruder-gettingstarted-8-940.png" alt="Setting payloads for fuzzing">
+</div>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-3-set-the-match-grep">Step 3: Set the match grep</h2>
+<p>
+    Configure the <strong>Grep - Match</strong> settings to flag responses that contain various common error message strings. For more information, see <a href="/burp/documentation/desktop/tools/intruder/configure-attack/settings.html#grep-match">Burp Intruder attack settings</a>.
+</p>
+<p>
+    You can use your own expressions, or use the default items.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/intruder-fuzzing-grep-match-940.png" alt="Fuzzing grep match">
+</div>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-4-analyze-the-results">Step 4: Analyze the results</h2>
+<p>
+    Sort the attack results by the match grep expressions to identify any results with the common error message strings.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/intruder-grep-match.png" alt="Intruder grep match fuzzing" class="center-block">
+</div>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        To test a large number of requests with the same payloads and match grep configuration, you can save or copy the tab's configuration. For more information, see <a href="/burp/documentation/desktop/tools/intruder/configure-attack/index.html">Configuring Burp Intruder attacks</a>.
+    </p>
+</div>
+</body>
+</html>

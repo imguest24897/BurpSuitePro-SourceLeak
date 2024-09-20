@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+Private IP addresses disclosed
+<h1>Typical severity</h1>
+
+Information
+
+<h1>Issue description</h1>
+
+<p>RFC 1918 specifies ranges of IP addresses that are reserved for use in private networks and cannot be routed on the public Internet. Although various methods exist by which an attacker can determine the public IP addresses in use by an organization, the private addresses used internally cannot usually be determined in the same ways.</p>
+<p>Discovering the private addresses used within an organization can help an attacker in carrying out network-layer attacks aiming to penetrate the organization's internal infrastructure. </p>
+
+<h1>Issue remediation</h1>
+
+<p>There is not usually any good reason to disclose the internal IP addresses used within an organization's infrastructure. If these are being returned in service banners or debug messages, then the relevant services should be configured to mask the private addresses. If they are being used to track back-end servers for load balancing purposes, then the addresses should be rewritten with innocuous identifiers from which an attacker cannot infer any useful information about the infrastructure.</p>
+
+<h1>References</h1>
+
+<ul>
+    <li><a href="https://portswigger.net/web-security/information-disclosure">Web Security Academy: Information disclosure</a></li>
+</ul>
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+<li><a href="https://cwe.mitre.org/data/definitions/200.html">CWE-200: Information Exposure</a></li>
+    <li><a href="https://capec.mitre.org/data/definitions/37.html">CAPEC-37: Retrieve Embedded Sensitive Data</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

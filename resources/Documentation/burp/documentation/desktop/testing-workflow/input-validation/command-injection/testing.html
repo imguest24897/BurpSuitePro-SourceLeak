@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE" ignore-validation="OTHER_PAGE_KEYWORD_TOO_FREQUENT"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/index.html">Testing input validation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/command-injection/index.html">OS command injection</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/command-injection/testing.html">Testing for command injection vulnerabilities</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Testing for OS command injection vulnerabilities</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/3AyWflTbJ24?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    OS command injection is a vulnerability that enables an attacker to execute arbitrary operating system (OS) commands on the server that is running an application. This can fully compromise the application and its data.
+</p>
+<p>
+    You can use Burp to test for OS command injection vulnerabilities:
+</p>
+<ul>
+    <li>
+        <label class="label-edition is-professional">Professional</label>
+        Use Burp Scanner to automatically flag potential OS command injection vulnerabilities.
+    </li>
+    <li>
+        Use Burp Repeater to manually test for OS command injection vulnerabilities.
+    </li>
+</ul>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="steps">Steps</h2>
+<p>
+    You can follow this process using the lab <a href="/web-security/os-command-injection/lab-simple.html">OS command injection, simple case</a>.
+</p>
+<h3 id="scanning-for-command-injection-vulnerabilities">Scanning for command injection vulnerabilities</h3>
+<p>
+    If you're using Burp Suite Professional, you can use Burp Scanner to test for command injection vulnerabilities:
+</p>
+<ol>
+    <li>
+        Identify a request that you want to investigate.
+    </li>
+    <li>
+        In <strong>Proxy &gt; HTTP history</strong>, right-click the request and select <strong>Do active scan</strong>. Burp Scanner audits the request.
+    </li>
+    <li>
+        <p>
+            Review the <strong>Issues</strong> tab on the <strong>Dashboard</strong> to identify any OS command injection issues that Burp Scanner flags.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/tutorials/testing-for-command-injection-1.png" alt="OS command injection in Issue activity" class="center-block">
+        </div>
+    </li>
+</ol>
+<h3 id="manually-testing-for-command-injection-vulnerabilities">Manually testing for command injection vulnerabilities</h3>
+<p>
+    You can use Burp Repeater to manually test for command injection vulnerabilities. This process also enables you to closely investigate any issues that Burp Scanner has identified:
+</p>
+<ol>
+    <li>
+        In <strong>Proxy &gt; HTTP history</strong>, right-click the request that you want to investigate and select <strong>Send to Repeater</strong>.
+    </li>
+    <li>
+        Go to the <strong>Repeater</strong> tab.
+    </li>
+    <li>
+        Change the parameter that you want to test to an OS command injection proof-of-concept attack. For example, you can use the <code>1|whoami</code> command. If it executes, it determines the name of the current user.
+    </li>
+    <li>
+        Review the response to determine whether the command has been executed.
+    </li>
+    <li>
+        If necessary, modify the command, then resend the request. Repeat this process until your command executes.
+    </li>
+    <li>
+        Repeat Steps 3 to 5 for each parameter in the request.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            Academy: <a href="/web-security/os-command-injection/index.html">OS command injection</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/index.html">Burp Scanner</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/repeater/index.html">Burp Repeater</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

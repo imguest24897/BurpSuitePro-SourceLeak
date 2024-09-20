@@ -1,0 +1,15 @@
+{
+  "typeIndex": 4194592,
+  "name": "User agent-dependent response",
+  "description": "<p>Application responses may depend systematically on the value of the User-Agent header in requests. This behavior does not itself constitute a security vulnerability, but may point towards additional attack surface within the application, which may contain vulnerabilities.</p>\n<p>This behavior often arises because applications provide different user interfaces for desktop and mobile users. Mobile interfaces have often been less thoroughly tested for vulnerabilities such as cross-site scripting, and often have simpler authentication and session handling mechanisms that may contain problems that are not present in the full interface.</p>\n<p>To review the interface provided by the alternate User-Agent header, you can configure a match/replace rule in Burp Proxy to modify the User-Agent header in all requests, and then browse the application in the normal way using your normal browser. </p>",
+  "remediation": null,
+  "webIntro": null,
+  "typicalSeverity": "INFO",
+  "references": [],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-16: Configuration",
+      "url": "https://cwe.mitre.org/data/definitions/16.html"
+    }
+  ]
+}

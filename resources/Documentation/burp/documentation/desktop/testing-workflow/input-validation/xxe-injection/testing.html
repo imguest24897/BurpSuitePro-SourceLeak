@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms ignore-validation="OTHER_PAGE_KEYWORD_TOO_FREQUENT" page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/index.html">Testing input validation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/xxe-injection/index.html">XXE injection</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/xxe-injection/testing.html">Testing for XXE injection vulnerabilities</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Testing for XXE injection vulnerabilities with Burp Suite</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/99_eeZ-x_7E?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    XML external entity injection (also known as XXE) is a web security vulnerability that allows an attacker to interfere with an application's processing of XML data. It occurs when user input that contains a reference to an defined external entity is processed in an unsafe way on the server-side. This may mean that the application returns the value of the defined external entity within its responses.
+</p>
+<p>
+    You can use Burp to test for XXE injection vulnerabilities:
+</p>
+<ul>
+    <li>
+        <label class="label-edition is-professional">Professional</label>
+        Use Burp Scanner to automatically flag potential vulnerabilities.
+    </li>
+    <li>
+        Use Burp Repeater to manually test for vulnerabilities, or investigate any vulnerabilities further.
+    </li>
+</ul>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="steps">Steps</h2>
+<p>
+    You can follow this process using a lab with an XXE injection vulnerability. For example, <a href="/web-security/xxe/lab-exploiting-xxe-to-retrieve-files.html">Exploiting XXE using external entities to retrieve files</a>.
+</p>
+<h3 id="scanning-for-xxe-vulnerabilities">Scanning for XXE vulnerabilities</h3>
+<p>
+    If you're using Burp Suite Professional, you can use Burp Scanner to test for XXE vulnerabilities:
+</p>
+<ol>
+    <li>
+        Identify a request that contains XML that you want to investigate.
+    </li>
+    <li>
+        In <strong>Proxy &gt; HTTP history</strong>, right-click the request and select <strong>Do active scan</strong>. Burp Scanner audits the request.
+    </li>
+    <li>
+        Review the <strong>Issues</strong> tab on the <strong>Dashboard</strong> to identify any XXE issues that Burp Scanner flags.
+    </li>
+</ol>
+<h3 id="manually-testing-for-xxe-vulnerabilities">Manually testing for XXE vulnerabilities</h3>
+<p>
+    You can also use Burp Repeater to test for XXE vulnerabilities. This process also enables you to exploit XXE vulnerabilities, and closely investigate any issues that Burp Scanner has identified:
+</p>
+<ol>
+    <li>
+        In <strong>Proxy &gt; HTTP history</strong> identify a request that contains XML that you want to investigate.
+    </li>
+    <li>
+        Right-click the request and select <strong>Send to Repeater</strong>.
+    </li>
+    <li>
+        Go to the <strong>Repeater</strong> tab.
+    </li>
+    <li>
+        <p>
+            Insert an XXE payload into the XML string. The payload should define an XML entity and contain a system identifier as a value. The system identifier could be, for example, a file path or URL. For example, this payload defines the entity <code>&xxe;</code> with a value of the <code>/etc/passwd</code> file:
+        </p>
+        <code class="code-scrollable">&lt;!DOCTYPE foo [&lt;!ENTITY xxe SYSTEM "file:///etc/passwd"&gt; ]&gt;</code>
+    </li>
+    <li>
+        <p>
+            Replace a data value in the XML with your defined XML entity.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/tutorials/testing-xxe-injection-1.png" alt="Replacing XML data value with defined entity" class="center-block">
+        </div>
+    </li>
+    <li>
+        Click <strong>Send</strong>.
+    </li>
+    <li>
+        Review the response to determine whether any data is returned. For example, look to see whether you can view the file or interact with any back-end systems.
+    </li>
+    <li>
+        Test additional XML data values by replacing a different data value in the XML with your defined XML entity.
+    </li>
+    <li>
+        Target other file paths or URLs by changing the system identifier value in your XXE payload.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/tools/repeater/index.html">Burp Repeater</a>
+        </li>
+        <li>
+            Academy: <a href="/web-security/xxe/index.html">XML external entity (XXE) injection</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

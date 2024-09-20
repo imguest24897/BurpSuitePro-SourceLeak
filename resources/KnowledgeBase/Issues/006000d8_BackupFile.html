@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+Backup file
+<h1>Typical severity</h1>
+
+Information
+
+<h1>Issue description</h1>
+
+<p>Publicly accessible backups and outdated copies of files can provide attackers with extra attack surface. Depending on the server configuration and file type, they may also expose source code, configuration details, and other information intended to remain secret.</p>
+
+<h1>Issue remediation</h1>
+
+<p>Review the file to identify whether it's intended to be publicly accessible, and remove it from the server's web root if it isn't. It may also be worth auditing the server contents to find other outdated files, and taking measures to prevent the problem from reoccurring. </p>
+
+<h1>References</h1>
+
+<ul>
+    <li><a href="https://portswigger.net/web-security/information-disclosure/exploiting#source-code-disclosure-via-backup-files">Web Security Academy: Information disclosure via backup files</a></li>
+</ul>
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+    <li><a href="https://cwe.mitre.org/data/definitions/530.html">CWE-530: Exposure of Backup File to an Unauthorized Control Sphere</a></li>
+    <li><a href="https://capec.mitre.org/data/definitions/37.html">CAPEC-37: Retrieve Embedded Sensitive Data</a></li>
+    <li><a href="https://capec.mitre.org/data/definitions/204.html">CAPEC-204: Lifting Sensitive Data Embedded in Cache</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

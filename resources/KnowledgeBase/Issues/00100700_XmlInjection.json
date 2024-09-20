@@ -1,0 +1,40 @@
+{
+  "typeIndex": 1050368,
+  "name": "XML injection",
+  "description": "<p>XML or SOAP injection vulnerabilities arise when user input is inserted into a server-side XML document or SOAP message in an unsafe way. It may be possible to use XML metacharacters to modify the structure of the resulting XML. Depending on the function in which the XML is used, it may be possible to interfere with the application's logic, to perform unauthorized actions or access sensitive data.</p>\n<p>This kind of vulnerability can be difficult to detect and exploit remotely; you should review the application's response, and the purpose that the relevant input performs within the application's functionality, to determine whether it is indeed vulnerable. </p>",
+  "remediation": "<p>The application should validate or sanitize user input before incorporating it into an XML document or SOAP message. It may be possible to block any input containing XML metacharacters such as &lt; and &gt;. Alternatively, these characters can be replaced with the corresponding entities: &amp;lt; and &amp;gt;.</p>",
+  "webIntro": null,
+  "typicalSeverity": "MEDIUM",
+  "references": [
+    {
+      "title": "Web Security Academy: XXE injection",
+      "url": "https://portswigger.net/web-security/xxe"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-91: XML Injection (aka Blind XPath Injection)",
+      "url": "https://cwe.mitre.org/data/definitions/91.html"
+    },
+    {
+      "title": "CWE-116: Improper Encoding or Escaping of Output",
+      "url": "https://cwe.mitre.org/data/definitions/116.html"
+    },
+    {
+      "title": "CWE-159: Failure to Sanitize Special Element",
+      "url": "https://cwe.mitre.org/data/definitions/159.html"
+    },
+    {
+      "title": "CWE-611: Improper Restriction of XML External Entity Reference ('XXE')",
+      "url": "https://cwe.mitre.org/data/definitions/611.html"
+    },
+    {
+      "title": "CWE-776: Improper Restriction of Recursive Entity References in DTDs ('XML Entity Expansion')",
+      "url": "https://cwe.mitre.org/data/definitions/776.html"
+    },
+    {
+      "title": "CAPEC-250: XML Injection",
+      "url": "https://capec.mitre.org/data/definitions/250.html"
+    }
+  ]
+}

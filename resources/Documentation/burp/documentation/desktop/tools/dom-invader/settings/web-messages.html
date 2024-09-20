@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/index.html">DOM Invader</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/settings/index.html">Settings</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/settings/web-messages.html">Web message settings</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Web message settings</h1>
+<p>
+    You can click the cog icon next to the <strong>Postmessage interception</strong> option to access further settings for fine-tuning DOM Invader's behavior when handling web messages.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/dom-invader-settings-messages.png" alt="DOM Invader web message settings">
+</div>
+<h2 id="postmessage-origin-spoofing">Postmessage origin spoofing</h2>
+<p>
+    When this setting is enabled, DOM Invader automatically replaces the origin of any messages with a fake origin that both starts and ends with the domain name of the true origin. By doing so, DOM Invader can automatically identify event handlers that rely on flawed logic or regular expressions to validate the origin of messages.
+</p>
+<p>
+    For example, some websites use the <code>startsWith()</code> or <code>endsWith()</code> methods to verify the domain name in the origin. This kind of validation can be easily bypassed using these techniques.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        If this setting is disabled, you can still spoof the origin of individual requests by selecting the <strong>Spoof origin</strong> checkbox when replaying the message. Alternatively, you can manually modify the origin using the provided field.
+    </p>
+</div>
+<h2 id="canary-injection-into-intercepted-messages">Canary injection into intercepted messages</h2>
+<p>
+    When this setting is enabled, DOM Invader automatically injects the canary into the <code>data</code> property of any messages that are sent on the page. DOM Invader determines whether the expected data is a JSON string, JSON object, or plain string, then injects the canary using the correct format.
+</p>
+<p>
+    When viewing the message details, you can use the <strong>Show</strong> drop-down to toggle between the original data that was sent by the page, and the one containing the automated injection.
+</p>
+<h2 id="filter-messages-with-duplicate-values">Filter messages with duplicate values</h2>
+<p>
+    When this setting is enabled, DOM Invader groups identical messages together to reduce noise. In some cases, you might want to disable this setting so that you can see every single message. For example, you might want to see individual messages to make sure that they are being sent.
+</p>
+<h2 id="generate-automated-messages">Generate automated messages</h2>
+<p>
+    When this setting is enabled, DOM Invader generates and sends its own messages to any message event listeners that it identifies on the page. This is useful in cases where you want to test a potentially vulnerable event handler but are unable to trigger a message event by interacting with the page as normal.
+</p>
+<p>
+    DOM Invader attempts to infer information about the structure of the data that each event handler is expecting. It then uses this information to generate and send a suitable message.
+</p>
+<p>
+    Based on how the listener handles each message, DOM Invader is able to generate follow-up messages that are tailored to hit additional code paths, which can potentially lead to more dangerous sinks.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You can tell which messages DOM Invader generated because they do not have a numeric ID on the <strong>Messages</strong> view.
+    </p>
+</div>
+<h2 id="detect-cross-domain-leaks">Detect cross-domain leaks</h2>
+<p>
+    When this setting is enabled, DOM Invader reports when the current page sends a web message containing data from the URL to a different origin. In this case, an attacker can potentially steal sensitive data such as OAuth tokens by embedding the affected page in an <code>iframe</code>, along with an event listener that extracts the data.
+</p>
+</body>
+</html>

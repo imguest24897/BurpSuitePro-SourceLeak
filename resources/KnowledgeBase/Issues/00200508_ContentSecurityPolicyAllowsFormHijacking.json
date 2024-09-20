@@ -1,0 +1,28 @@
+{
+  "typeIndex": 2098440,
+  "name": "Content security policy: allows form hijacking",
+  "description": "<p>Content Security Policy (CSP) is a security mechanism designed to mitigate cross-site scripting attacks by disabling dangerous behaviours such as untrusted JavaScript execution.\n    Websites can specify their security policy in a response header or meta tag, enabling fine-grained control over dangerous features like scripts and stylesheets.\n</p>",
+  "remediation": "<p>We recommend using the form-action directive in the CSP response header to control form post destinations. If no form actions are used, set form-action to 'none' to block\n    untrusted forms. For applications without external form URLs, use 'self' to allow only same-origin URLs. If needed, allow list hosts for external URL form submissions, but\n    be aware this lets attackers submit to these external resources.\n</p>",
+  "webIntro": null,
+  "typicalSeverity": "INFO",
+  "references": [
+    {
+      "title": "PortSwigger Research: Stealing passwords from infosec Mastodon - without bypassing CSP",
+      "url": "https://portswigger.net/research/stealing-passwords-from-infosec-mastodon-without-bypassing-csp"
+    },
+    {
+      "title": "Web Security Academy: What is CSP?",
+      "url": "https://portswigger.net/web-security/cross-site-scripting/content-security-policy"
+    },
+    {
+      "title": "Content Security Policy (CSP)",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-116: Improper Encoding or Escaping of Output",
+      "url": "https://cwe.mitre.org/data/definitions/116.html"
+    }
+  ]
+}

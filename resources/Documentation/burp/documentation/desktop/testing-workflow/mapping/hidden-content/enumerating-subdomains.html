@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/mapping/index.html">Mapping the website</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/mapping/hidden-content/index.html">Discovering hidden content</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/mapping/hidden-content/enumerating-subdomains.html">Enumerating subdomains</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Enumerating subdomains with Burp Suite</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/WPvcocXC3M8?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    You can use Burp Intruder to enumerate additional, hidden subdomains that are in scope but aren't explicitly linked from the initial set of domains you're testing. This enables you to discover additional access points and attack surface, including:
+</p>
+<ul>
+    <li>
+        Internal subdomains that shouldn't be publicly accessible.
+    </li>
+    <li>
+        Subdomains that may have been forgotten about and therefore aren't regularly updated.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        The following technique is only possible in cases where the target domain has a wildcard DNS record. Burp Intruder is an extremely versatile tool and can be used for a variety of other purposes. For more information, see <a href="/burp/documentation/desktop/tools/intruder/uses/index.html">Typical uses for Burp Intruder</a>.
+    </p>
+</div>
+<h2 id="steps" cms-ignore-validation="DUPLICATE_HEADINGS">Steps</h2>
+<p>
+    You can follow along with the process below using <a href="https://portswigger-labs.net">portswigger-labs.net</a>, our deliberately vulnerable sandbox domain. To enumerate additional subdomains:
+</p>
+<ol>
+    <li>
+        Send a request for the main domain you want to investigate to Burp Intruder. For example, <code>http://portswigger-labs.net</code>.
+    </li>
+    <li>
+        Go to the <strong>Intruder</strong> tab. The request is displayed in a new attack tab.
+    </li>
+    <li>
+        In the <strong>Target</strong> field, add a placeholder subdomain. For example, <code>http://x.portswigger-labs.net</code>.
+    </li>
+    <li>
+        <p>
+            Highlight the placeholder subdomain and click <strong>Add §</strong> to mark it as a payload position.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/tutorials/enumerating-subdomains-1.png" alt="Set payload position" class="center-block">
+        </div>
+    </li>
+    <li>
+        Go to the <strong>Payloads</strong> tab. Add your list of potential subdomain names under <strong>Payload settings [Simple list]</strong>. If you are using Burp Suite Professional, you can select from a list of built-in wordlists. The <strong>Directories</strong> list is suitable in this case.
+    </li>
+    <li>
+        Click <strong>Start attack</strong>. An attack results window opens. Intruder sends a request for each payload in the list, with the payload in place of the placeholder subdomain.
+    </li>
+    <li>
+        <p>
+            Click the column headers to sort the responses. Identify any inconsistent items. For example, the response for <code>http://staff.portswigger-labs.net</code> has a different length from the other responses.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/tutorials/enumerating-subdomains-2.png" alt="Identifying inconsistent results" class="center-block">
+        </div>
+    </li>
+    <li>
+        Right-click the subdomain you enumerated. Select <strong>Request in browser</strong> &gt; <strong>In original session</strong> to copy a URL for the request.
+    </li>
+    <li>
+        Open Burp's browser and access the URL. For example, <code>http://staff.portswigger-labs.net</code> renders a login form.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/index.html">Burp Intruder</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/configure-attack/payload-lists.html">Predefined payload lists</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

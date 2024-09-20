@@ -1,0 +1,187 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/index.html">Settings</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1 cms-ignore-validation="DUPLICATE_HEADINGS">Settings</h1>
+<p>
+    You can access most of Burp Suite's settings via the <strong>Settings</strong> dialog. To access this dialog, click <strong>Settings</strong> on the top menu.
+</p>
+<h2 id="user-and-project-settings">User and project settings</h2>
+<p>
+    There are two types of setting in Burp:
+</p>
+<ul>
+    <li>
+        <strong>Project settings</strong> only apply to the current project. They are stored within the <a href="/burp/documentation/desktop/projects/index.html">project file</a> itself.
+    </li>
+    <li>
+        <strong>User settings</strong> apply to all installations of Burp on your machine. They affect all disk-based projects and any temporary projects.
+    </li>
+</ul>
+<p>
+    Some settings can be defined as both project and user settings. These settings have an <strong>Override options for this project only</strong> toggle. If this toggle is selected, then Burp applies the specified settings at the project level. Otherwise, the specified settings are treated as user settings and applied globally.
+</p>
+<p>
+    The toggle enables you to configure defaults at the user level, and then override these settings on a project by project basis.
+</p>
+<p>
+    For example, you might configure a corporate LAN proxy to connect to the Internet as a user setting. However, some projects might require you to use a different upstream proxy. You can configure the alternative details in your project settings.
+</p>
+<div class="highlightedarea">
+    <h4>Warning</h4>
+    <p>
+        You can import project and configuration files from other users. However, for security reasons, we recommend only importing project and configuration files from trusted sources.
+    </p>
+</div>
+<h2 id="finding-settings">Finding settings</h2>
+<p>
+    The navigation tree to the side of the <strong>Settings</strong> dialog enables you to find the settings you are looking for.
+</p>
+<p>
+    To filter the content:
+</p>
+<ul>
+    <li>
+        Use the <strong>Search</strong> bar at the top of the panel.
+    </li>
+    <li>
+        Alternatively, use the <strong>All</strong>, <strong>User</strong> or <strong>Project</strong> filter buttons.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        For a guide to some of the most important settings in Burp, see <a href="/burp/documentation/desktop/settings/key-settings.html">Key settings</a>.
+    </p>
+</div>
+<h2 id="managing-settings">Managing settings</h2>
+<p>
+    From the <strong>Settings</strong> dialog, you can:
+</p>
+<ul>
+    <li>
+        Restore default settings.
+    </li>
+    <li>
+        Save settings. The settings are saved as a configuration file in JSON format.
+    </li>
+    <li>
+        Load settings. The configuration file needs to be in JSON format. The easiest way to generate the file is to create the desired configuration in Burp, then save a file from it.
+    </li>
+</ul>
+<p>
+    To manage all user or all project settings:
+</p>
+<ol>
+    <li>
+        Click <strong>Manage global settings</strong>.
+    </li>
+    <li>
+        Choose between <strong>User settings</strong> or <strong>Project settings</strong>.
+    </li>
+    <li>
+        Select <strong>Restore default settings</strong>, <strong>Save settings</strong>, or <strong>Load settings</strong>.
+    </li>
+</ol>
+<p>
+    If you select <strong>Restore default settings</strong> for <strong>Project settings</strong>, you can choose which settings to restore defaults for:
+</p>
+<ul>
+    <li>
+        <strong>All</strong> - All project settings.
+    </li>
+    <li>
+        <strong>Target</strong> - The <a href="/burp/documentation/desktop/settings/project/scope.html#target-scope">target scope</a> and the <a href="/burp/documentation/desktop/tools/target/site-map/site-map-filter.html">site map filter</a>.
+    </li>
+    <li>
+        <strong>Proxy</strong> - All <a href="/burp/documentation/desktop/settings/tools/proxy.html">Proxy settings</a>.
+    </li>
+    <li>
+        <strong>Repeater</strong> - All <a href="/burp/documentation/desktop/settings/tools/repeater.html">Repeater settings</a>.
+    </li>
+    <li>
+        <strong>Sequencer</strong> - All <a href="/burp/documentation/desktop/settings/tools/sequencer.html">Sequencer settings</a>.
+    </li>
+    <li>
+        <strong>Logger</strong> - The <a href="/burp/documentation/desktop/tools/logger/filter-capture.html">capture filter</a> and <a href="/burp/documentation/desktop/tools/logger/filter-view.html">view filter</a> for Burp Logger.
+    </li>
+    <li>
+        <strong>Other project settings</strong> - All project settings that are not Target, Proxy, Repeater, Sequencer, or Logger settings.
+    </li>
+</ul>
+<p>
+    If you manage user settings, your action also applies to extensions and UI related settings, such as the <a href="/burp/documentation/desktop/tools/target/site-map/site-map-layout.html">site map layout</a>.
+</p>
+<p>
+    If you manage all project settings, your action also applies to non-UI-related settings in Burp tools.
+</p>
+<p>
+    To manage an individual setting, click the icon <span class="icon-settings"></span> next to the setting and select an action.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/desktop/settings/library.html#configuration-files">Configuration files</a>.
+    </p>
+</div>
+<h2 id="settings-pages">Settings pages</h2>
+<p>
+    The <strong>Settings</strong> dialog contains the following pages:
+</p>
+<ul>
+    <li>
+        <a href="/burp/documentation/desktop/settings/tools/index.html">Tools</a>.
+    </li>
+    <li>
+        <a href="/burp/documentation/desktop/settings/project/index.html">Project</a>.
+    </li>
+    <li>
+        <a href="/burp/documentation/desktop/settings/sessions/index.html">Sessions</a>.
+    </li>
+    <li>
+        <a href="/burp/documentation/desktop/settings/network/index.html">Network</a>.
+    </li>
+    <li>
+        <a href="/burp/documentation/desktop/settings/ui/index.html">User interface</a>.
+    </li>
+    <li>
+        <a href="/burp/documentation/desktop/settings/suite/index.html">Suite</a>.
+    </li>
+    <li>
+        <a href="/burp/documentation/desktop/settings/extensions.html">Extensions</a>.
+    </li>
+    <li>
+        <a href="/burp/documentation/desktop/settings/library.html">Configuration library</a>.
+    </li>
+</ul>
+<p>
+    The <a href="/burp/documentation/desktop/settings/response-extraction.html">response extraction rules</a> are used in various settings in Burp.
+</p>
+</body>
+</html>

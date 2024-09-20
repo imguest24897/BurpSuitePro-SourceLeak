@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/index.html">Settings</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/library.html">Configuration library</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1 cms-ignore-validation="DUPLICATE_HEADINGS">Configuration library</h1>
+<p>
+    The configuration library contains groups of settings that are configured for particular tasks, such as a crawl or an audit. Burp includes a range of built-in setting configurations for common tasks. You can also add your own custom configurations.
+</p>
+<p>
+    To access the configuration library, go to the <strong>Settings</strong> dialog.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        For a detailed list of Burp's built-in configurations, see <a href="/burp/documentation/scanner/scan-configurations/burp-scanner-built-in-configs.html">Burp Scanner built-in configurations</a>.
+    </p>
+</div>
+<h2 id="adding-a-custom-configuration">Adding a custom configuration</h2>
+<p>
+    Each configuration defines the settings for a particular function, such as crawling or scope. To add a new custom configuration:
+</p>
+<ol>
+    <li>
+        Click <strong>Add</strong> and select the function for the configuration. The <strong>New configuration</strong> dialog opens.
+    </li>
+    <li>
+        Enter a unique name for the configuration.
+    </li>
+    <li>
+        Edit the settings for the configuration. The dialog shows settings relevant to the chosen function.
+    </li>
+    <li>
+        Click <strong>OK</strong>.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You do not need to configure all settings in the <strong>New configuration</strong> dialog. If your configuration does not define a particular area, then default or existing values are used.
+    </p>
+</div>
+<p>
+    To manage the library, you can:
+</p>
+<ul>
+    <li>
+        Filter by <strong>Built-in</strong> and <strong>Custom</strong> configurations.
+    </li>
+    <li>
+        <strong>Edit</strong> and <strong>Duplicate</strong> any configuration.
+    </li>
+    <li>
+        <strong>Delete</strong> custom configurations.
+    </li>
+    <li>
+        <strong>Export</strong><a href="#configuration-files">configuration files</a> in JSON format for specific tasks.
+    </li>
+    <li>
+        <strong>Import</strong><a href="#configuration-files">configuration files</a> in JSON format for specific tasks.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Warning</h4>
+    <p>
+        You can import project and configuration files from other users. However, for security reasons, we recommend only importing project and configuration files from trusted sources.
+    </p>
+</div>
+<p>
+    Many Burp tasks let you select multiple configurations. Configurations are applied in order, so if you load multiple configurations that affect the same settings, the lower configuration in the list takes precedence over configurations above it.
+</p>
+<h2 id="configuration-files">Configuration files</h2>
+<p>
+    Configuration files store setting configurations. These use the JSON format.
+</p>
+<p>
+    To load and create configuration files you can:
+</p>
+<ul>
+    <li>
+        Export or import a file from the configuration library.
+    </li>
+    <li>
+        Load or save separate configuration files for all user or project settings. For more information, see <a href="/burp/documentation/desktop/settings/index.html#managing-settings">Managing settings</a>.
+    </li>
+    <li>
+        Load project settings from a configuration file when you launch Burp. For more information, see <a href="/burp/documentation/desktop/projects/create-project-file.html">Creating project files</a>.
+    </li>
+    <li>
+        Load configuration files when you launch Burp from the command line. For more information, see <a href="/burp/documentation/desktop/troubleshooting/launch-from-command-line.html#command-line-arguments">Launching Burp Suite from the command line</a>.
+    </li>
+</ul>
+<p>
+    Burp extensions can load or save configuration files via the API.
+</p>
+<p>
+    The easiest way to generate a file is to create the desired configuration in Burp, then export a file from it. You can edit any file that you create in Burp, as the contents are human-readable. The structure and naming corresponds to the presentation of the settings in Burp.
+</p>
+</body>
+</html>

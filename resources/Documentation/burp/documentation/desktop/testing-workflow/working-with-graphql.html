@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE" ignore-validation="OTHER_PAGE_KEYWORD_TOO_FREQUENT"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/working-with-graphql.html">Working with GraphQL in Burp Suite</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Working with GraphQL in Burp Suite</h1>
+<p>
+    GraphQL is an API query language that is designed to facilitate efficient communication between clients and servers. It enables the user to specify exactly what data they want in the response, helping to avoid the large response objects and multiple calls that can sometimes be seen with REST APIs.
+</p>
+<p>
+    GraphQL services are commonly used in authentication and data retrieval mechanisms. This means that if an attacker can successfully send malicious requests, they may be able to access vulnerable information or even execute higher-severity exploits such as cross-site request forgery (CSRF).
+</p>
+<p>
+    Burp Suite makes it easy to construct GraphQL requests and learn more about a GraphQL API's schema.
+</p>
+<div class="highlightedarea">
+    <h4>Read more</h4>
+    <p>
+        For a full primer on what GraphQL is and how it works, see <a href="/web-security/graphql/what-is-graphql.html">Web Security Academy: What is GraphQL?</a>.
+    </p>
+</div>
+<h2 id="viewing-and-modifying-graphql-requests">Viewing and modifying GraphQL requests</h2>
+<p>
+    If Burp detects a GraphQL request, it automatically adds a <strong>GraphQL</strong> tab to the message editor for the request. This tab separates the GraphQL query from the rest of the request, and formats it in a way that makes it easy to view and edit the query structure (displayed in the <strong>Query</strong> panel) and its associated variables (displayed in the <strong>Variables</strong> panel).
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/graphql/graphql-request.png" alt="The GraphQL tab appears when Burp detects a GraphQL request. This tab separates the GraphQL request into two separate panels: query and variables." class="center-block">
+</div>
+<h2 id="accessing-graphql-api-schemas-using-introspection">Accessing GraphQL API schemas using introspection</h2>
+<p>
+    Introspection queries can return information about a GraphQL schema, such as the queries and mutations that are supported by the API. This information is extremely useful when planning how to attack an API.
+</p>
+<p>
+    Burp can generate introspection queries for you to send to your target application. The data returned in the response can be used to identify how to test your target application's GraphQL API for vulnerabilities.
+</p>
+<p>
+    To run introspection:
+</p>
+<ol>
+    <li>
+        <p>
+            Browse the target application, looking for requests to a GraphQL endpoint.
+        </p>
+        <p>
+            GraphQL services often use similar endpoint suffixes. Look for queries to the following locations:
+        </p>
+        <ul>
+            <li>
+                <code>/graphql</code>
+            </li>
+            <li>
+                <code>/api</code>
+            </li>
+            <li>
+                <code>/api/graphql</code>
+            </li>
+            <li>
+                <code>/graphql/api</code>
+            </li>
+            <li>
+                <code>/graphql/graphql</code>
+            </li>
+        </ul>
+        <p>
+            These endpoints may also contain a version number as a suffix, for example, <code>/graphql/v1</code>.
+        </p>
+    </li>
+    <li>
+        Right-click the GraphQL request, then select <strong>Send to Repeater</strong>.
+    </li>
+    <li>
+        In Repeater, right-click anywhere within the <strong>Request</strong> panel of the message editor, then select <strong>GraphQL &gt; Set introspection query</strong> to insert an introspection query into the request body.
+    </li>
+    <li>
+        <p>
+            Click <strong>Send</strong>.
+        </p>
+        <p>
+            If introspection is enabled, the server should return the full schema of the GraphQL API in its response to your introspection query.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/graphql/graphql-introspection-results.png" alt="A successful introspection query returns details of the API's underlying schema, providing useful information both to users and attackers." class="center-block">
+        </div>
+        <p>
+            This introspection query works with most GraphQL servers. However, if you are working with an older GraphQL server, it may fail. If that happens, right-click anywhere within the <strong>Request</strong> panel of the message editor, then select <strong>GraphQL &gt; Set legacy introspection query</strong> and try again.
+        </p>
+    </li>
+    <li>
+        <p>
+            Right-click anywhere within the <strong>Response</strong> panel of the message editor, then select <strong>GraphQL &gt; Save GraphQL queries to site map</strong>.
+        </p>
+        <p>
+            Each of the available queries that Burp discovered during introspection is saved as a node on the site map. You can examine these queries to find one that you want to investigate further, and send them to Intruder or Repeater to start your attack.
+        </p>
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/web-security/graphql/what-is-graphql.html">Web Security Academy: What is GraphQL</a>
+        </li>
+        <li>
+            <a href="/web-security/graphql/index.html">Web Security Academy: GraphQL API vulnerabilities</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

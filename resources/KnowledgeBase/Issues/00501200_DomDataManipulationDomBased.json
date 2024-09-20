@@ -1,0 +1,24 @@
+{
+  "typeIndex": 5247488,
+  "name": "DOM data manipulation (DOM-based)",
+  "description": "<p>DOM-based vulnerabilities arise when a client-side script reads data from a controllable part of the DOM (for example, the URL) and processes this data in an unsafe way.</p>\n<p>DOM data manipulation arises when a script writes controllable data to a field within the DOM that is used within the visible UI or client-side application logic. An attacker may be able to use the vulnerability to construct a URL that, if visited by another application user, will modify the appearance or behavior of the client-side UI. An attacker may be able to leverage this to perform virtual defacement of the application, or possibly to induce the user to perform unintended actions. </p>\n\n<p>Burp Suite automatically identifies this issue using dynamic and static code analysis. Static analysis can lead to false positives that are not actually exploitable. If Burp Scanner has not provided any evidence resulting from dynamic analysis, you should review the relevant code and execution paths  to determine whether this vulnerability is indeed present, or whether mitigations are in place that would prevent exploitation.</p>",
+  "remediation": "<p>The most effective way to avoid DOM-based DOM data manipulation vulnerabilities is not to dynamically write to DOM data fields any data that originated from any untrusted source. If the desired functionality of the application means that this behavior is unavoidable, then defenses must be implemented within the client-side code to prevent malicious data from being stored. In general, this is best achieved by using a whitelist of permitted values.</p>",
+  "webIntro": null,
+  "typicalSeverity": "INFO",
+  "references": [
+    {
+      "title": "Web Security Academy: DOM data manipulation",
+      "url": "https://portswigger.net/web-security/dom-based/dom-data-manipulation"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-20: Improper Input Validation",
+      "url": "https://cwe.mitre.org/data/definitions/20.html"
+    },
+    {
+      "title": "CAPEC-153: Input Data Manipulation",
+      "url": "https://capec.mitre.org/data/definitions/153.html"
+    }
+  ]
+}

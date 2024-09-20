@@ -1,0 +1,230 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/index.html">Automated scanning</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/custom-configs.html">Configuring scans</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Using custom scan configurations in Burp Suite Professional</h1>
+<p>
+    Scan configurations are collections of settings that define how a scan is performed. You can create and use custom scan configurations for both web application and API scans, giving you fine-grained control over Burp Scanner's behavior.
+</p>
+<p>
+    You can use custom configurations in several ways:
+</p>
+<ul>
+    <li>
+        Use one of the configurations from the configuration library.
+    </li>
+    <li>
+        Create an entirely new configuration.
+    </li>
+    <li>
+        Import a configuration from another installation of Burp.
+    </li>
+</ul>
+<p>
+    You can select multiple configurations for a single task. Burp applies the selected configurations in order. This enables you to fine-tune scanning behavior. To move the configurations, use the <strong>Up</strong> and <strong>Down</strong> buttons. You can also <strong>Edit</strong> and <strong>Delete</strong> any configuration.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/scanner/scan-configurations/custom-scan-configurations.html">Custom scan configurations</a> - Gives more information about custom configuration structure and how they combine.
+    </p>
+</div>
+<h2 id="using-a-configuration-from-the-library">Using a configuration from the library</h2>
+<p>
+    To load a configuration from the configuration library, click <strong>Select from library</strong> then choose your configuration. You can filter by <strong>Built-in</strong> and <strong>Custom configurations</strong>.
+</p>
+<ul>
+    <li>
+        Built-in configurations - Burp's predefined configurations.
+    </li>
+    <li>
+        Custom configurations - Configurations that you have created from scratch.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/settings/library.html">Configuration library</a> - Gives more information about how to add configurations to the library.
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/scan-configurations/burp-scanner-built-in-configs.html">Built-in configurations</a> - Gives more detail on the configurations that are built into Burp.
+        </li>
+    </ul>
+</div>
+<h2 id="creating-a-new-configuration">Creating a new configuration</h2>
+<p>
+    To create a new scan configuration:
+</p>
+<ol>
+    <li>
+        Click <strong>New</strong> and select either <strong>Crawling</strong> or <strong>Auditing</strong>.
+    </li>
+    <li>
+        Enter a unique <strong>Configuration name</strong>.
+    </li>
+    <li>
+        Expand the sections on the page to edit the settings for the configuration. The dialog shows settings relevant to the chosen function.
+    </li>
+    <li>
+        To add your new configuration to the configuration library, select <strong>Save to library</strong>.
+    </li>
+    <li>
+        Click <strong>Save</strong>.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        For an in-depth explanation of the options available when creating a custom scan configuration, see the <a href="/burp/documentation/scanner/scan-configurations/crawl-options.html">Crawl options</a> and <a href="/burp/documentation/scanner/scan-configurations/audit-options.html">Audit options</a> pages.
+    </p>
+</div>
+<h2 id="importing-a-configuration">Importing a configuration</h2>
+<p>
+    To import a configuration, click <strong>Import</strong> and select a JSON configuration file. This enables you to use scan configurations that you have exported from another installation of Burp.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/desktop/settings/library.html">Configuration library</a> - Gives information about how to export configurations from Burp.
+    </p>
+</div>
+<h2 id="combining-custom-scan-configurations-in-burp-suite-professional">Combining custom scan configurations in Burp Suite Professional</h2>
+<p>
+    Both Burp Suite Enterprise Edition and Burp Suite Professional enable you to combine configurations together. This includes the built-in custom configurations, and any custom configurations that you create. Combining configurations enables you to tune Burp Scanner's behavior for certain sites and use cases.
+</p>
+<p>
+    Your selected configurations are added to a list. Burp Scanner works down the list of configurations, applying settings in list order. Settings at the bottom of the list take precedence.
+</p>
+<p>
+    If you edit one setting in a collapsible section, then all of the settings in that section override all of the settings in the equivalent section from configurations higher in the list.
+</p>
+<p>
+    For example, if your bottom configuration edits the <strong>Audit speed</strong> setting from the <strong>Audit Optimization</strong> section, then Burp Scanner uses all of the <strong>Audit Optimization</strong> settings from that configuration.
+</p>
+<table class="grid-table grid-table-size-2-1-1-1">
+    <tbody><tr>
+            <td>
+                <strong>Config name</strong>
+            </td>
+            <td>
+                <strong>Crawl Optimization</strong>
+            </td>
+            <td>
+                <strong>Crawl Limits</strong>
+            </td>
+            <td>
+                <strong>Login Functions</strong>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Config 1
+            </td>
+            <td>
+                Edited
+            </td>
+            <td>
+                Edited
+            </td>
+            <td>
+                Edited
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Config 2
+            </td>
+            <td>
+                Edited
+            </td>
+            <td>
+                -
+            </td>
+            <td>
+                Edited
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Config 3
+            </td>
+            <td>
+                Edited
+            </td>
+            <td>
+                -
+            </td>
+            <td>
+                -
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Config used</strong>
+            </td>
+            <td>
+                <strong>Config 3</strong>
+            </td>
+            <td>
+                <strong>Config 1</strong>
+            </td>
+            <td>
+                <strong>Config 2</strong>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>
+    This table shows a part of three selected configurations, which combine with each other when the site is scanned. The edited sections are different for each configuration.
+</p>
+<p>
+    The configurations combine as follows:
+</p>
+<ul>
+    <li>
+        All three configurations have edited settings in the <strong>Crawl Optimization</strong> section. Burp Scanner takes its <strong>Crawl Optimization</strong> settings from Config 3, as this is at the bottom of the list.
+    </li>
+    <li>
+        Only Config 1 has edited settings in the <strong>Crawl Limits</strong> section, so Burp Scanner uses these settings.
+    </li>
+    <li>
+        Both Config 1 and Config 2 have edited settings in the <strong>Login Functions</strong> section. Burp Scanner takes its <strong>Login Functions</strong> settings from Config 2, as this is lower in the list.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Scan configurations combine differently in Burp Suite Professional than they do in Burp Suite Enterprise Edition. For more information, see <a href="https://portswigger.net/burp/documentation/enterprise/user-guide/working-with-sites/site-settings/scan-configurations/custom-configs.html">Using custom scan configurations in Burp Suite Enterprise Edition</a>.
+    </p>
+</div>
+</body>
+</html>

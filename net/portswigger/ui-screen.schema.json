@@ -1,0 +1,479 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "definitions": {
+    "widthEnum": {
+      "enum": [
+        "small",
+        "medium",
+        "large",
+        "x-large"
+      ]
+    },
+    "basicField": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path"
+      ],
+      "properties": {
+        "type": {
+          "const": null
+        },
+        "path": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "leadingText": {
+          "type": "string"
+        },
+        "trailingText": {
+          "type": "string"
+        },
+        "treatDefaultAsBlank": {
+          "type": "boolean"
+        },
+        "width": {
+          "$ref": "#/definitions/widthEnum"
+        },
+        "enumDescriptions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "enabledIf": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "type": "object",
+              "required": [
+                "path",
+                "values"
+              ],
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "values": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "disabledIf": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "required": [
+                "path",
+                "values"
+              ],
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "values": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "itemName": {
+          "type": "string"
+        },
+        "arrayConstants": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "path",
+              "value"
+            ],
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "value": {
+                "oneOf": [
+                  {
+                    "type": "boolean"
+                  },
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "columns": {
+          "$ref": "#/definitions/columns"
+        },
+        "extraColumns": {
+          "$ref": "#/definitions/columns"
+        }
+      }
+    },
+    "columns": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "#/definitions/column"
+          },
+          {
+            "$ref": "#/definitions/fileColumn"
+          }
+        ]
+      }
+    },
+    "column": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "label"
+      ],
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "width": {
+          "$ref": "#/definitions/widthEnum"
+        },
+        "path": {
+          "type": "string"
+        },
+        "defaultValue": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "mask": {
+          "type": "boolean"
+        },
+        "validation": {
+          "type": "object",
+          "required": [
+            "type",
+            "message"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "hostname",
+                "hostnameOrWildcard"
+              ]
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        },
+        "enabledIf": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "type": "object",
+              "required": [
+                "path",
+                "values"
+              ],
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "values": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "fileColumn": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "fileName"
+      ],
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "width": {
+          "$ref": "#/definitions/widthEnum"
+        },
+        "path": {
+          "type": "string"
+        },
+        "type": {
+          "const": "file"
+        },
+        "fileName": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "fieldSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "const": "fieldset"
+        },
+        "label": {
+          "type": "string"
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/basicField"
+          }
+        }
+      }
+    },
+    "nested": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "const": "nested"
+        },
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/basicField"
+          }
+        },
+        "nested": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/basicField"
+          }
+        }
+      }
+    },
+    "issueTypeTable": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "issueTypeTable"
+        },
+        "path": {
+          "type": "string"
+        },
+        "enabledPath": {
+          "type": "string"
+        },
+        "typeIndexPath": {
+          "type": "string"
+        }
+      }
+    },
+    "radio": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "true",
+        "false"
+      ],
+      "properties": {
+        "type": {
+          "const": "radio"
+        },
+        "path": {
+          "type": "string"
+        },
+        "false": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "content": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "$ref": "#/definitions/basicField"
+                  },
+                  {
+                    "$ref": "#/definitions/fieldSet"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "true": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "content": {
+              "type": "array",
+              "items": {
+                "oneOf": [
+                  {
+                    "$ref": "#/definitions/basicField"
+                  },
+                  {
+                    "$ref": "#/definitions/fieldSet"
+                  },
+                  {
+                    "$ref": "#/definitions/issueTypeTable"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "required": [
+    "categories",
+    "sections"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "type": "integer"
+    },
+    "categories": {
+      "type": "array",
+      "required": [
+        "key",
+        "title"
+      ],
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "key": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "title",
+          "category",
+          "content"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "category": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string"
+          },
+          "content": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/basicField"
+                },
+                {
+                  "$ref": "#/definitions/fieldSet"
+                },
+                {
+                  "$ref": "#/definitions/nested"
+                },
+                {
+                  "$ref": "#/definitions/radio"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

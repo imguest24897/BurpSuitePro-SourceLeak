@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/index.html">Scanner</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/bchecks/index.html">BCheck definitions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/bchecks/worked-examples/index.html">Worked examples</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/bchecks/worked-examples/passive.html">Example passive check</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-enterprise">Enterprise</label>
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Example passive check</h1>
+<p>
+    This check enables Burp Scanner to identify responses that disclose an AWS Access Key ID. It is an example of a passive check (that is, a check that inspects traffic passing through Burp without sending any additional requests).
+</p>
+<p>
+    Specifically, the check examines each response for the regular expression <code>AKIA[0-9A-Z]{16}</code>. If Burp Scanner finds a matching expression, it returns an issue indicating that the AWS key information has been disclosed.
+</p>
+<code class="pre-wrap">
+metadata:
+    language: v2-beta
+    name: "Response-level (passive) check"
+    description: "Checks responses for leaked AWS Access Key IDs"
+    tags: "passive"
+
+given response then
+    if {latest.response} matches "AKIA[0-9A-Z]{16}" then
+        report issue:
+            severity: high
+            confidence: firm
+            detail: "Leaked AWS Access Key ID."
+            remediation: "Replace your keys and ensure keys are no longer revealed."
+    end if
+        </code>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Although this worked example identifies AWS key IDs, you could create a check that identifies any form of disclosed information by modifying the <code>matches</code> pattern.
+    </p>
+</div>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-1-add-metadata">Step 1: Add metadata</h2>
+<code class="pre-wrap">
+metadata:
+    language: v2-beta
+    name: "Response-level (passive) check"
+    description: "Checks responses for leaked AWS Access Key IDs"
+    tags: "passive"
+        </code><p>
+    The definition starts with a <code>metadata</code> block. For more information on available metadata properties, see the reference documentation.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-2-add-a-string-for-the-check-to-match">Step 2: Add a string for the check to match</h2>
+<code class="pre-wrap">
+given response then
+    if {latest.response} matches "AKIA[0-9A-Z]{16}" then
+        </code><p>
+    This example checks each response received using an if statement. The statement checks for the regex string <code>AKIA[0-9A-Z]{16}</code>. This is the format that AWS key information would likely be presented in in a response.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-3-report-the-issue">Step 3: Report the issue</h2>
+<code class="pre-wrap">
+report issue:
+    severity: high
+    confidence: firm
+    detail: "Leaked AWS Access Key ID."
+    remediation: "Replace your keys and ensure keys are no longer revealed."
+        </code><p>
+    If Burp Scanner finds a response containing AWS key information, then it reports an issue with a confidence level of <code>firm</code> and provides some simple remediation advice.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="test-this-bcheck">Test this BCheck</h2>
+<p>
+    You can use a similar passive scan check to solve the <a href="/web-security/information-disclosure/exploiting/lab-infoleak-in-error-messages.html">Information disclosure in error messages Web Security Academy</a> lab. Can you rewrite this BCheck to find the Apache Struts version number in the lab?
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <p>
+                <a href="/burp/documentation/scanner/bchecks/bcheck-definition-reference.html">BCheck definition reference</a>.
+            </p>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

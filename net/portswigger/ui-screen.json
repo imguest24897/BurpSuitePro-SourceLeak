@@ -1,0 +1,1085 @@
+{
+  "version": 3,
+  "categories": [
+    {
+      "key": "crawl",
+      "title": "Crawling"
+    },
+    {
+      "key": "audit",
+      "title": "Auditing"
+    },
+    {
+      "key": "connections",
+      "title": "Connections"
+    },
+    {
+      "key": "request throttling",
+      "title": "Request Throttling"
+    },
+    {
+      "key": "embedded browser",
+      "title": "Embedded Browser"
+    },
+    {
+      "key": "burp collaborator server",
+      "title": "Burp Collaborator Server"
+    }
+  ],
+  "sections": [
+    {
+      "title": "Crawl Optimization",
+      "category": "crawl",
+      "description": "These settings let you control the behavior of the crawl logic to reflect the objectives of the crawl and the nature of the application. See the detailed documentation for more information about each option.",
+      "content": [
+        {
+          "type": "fieldset",
+          "content": [
+            {
+              "path": "#/properties/crawler/properties/crawl_optimization/properties/maximum_link_depth",
+              "label": "Maximum link depth"
+            },
+            {
+              "path": "#/properties/crawler/properties/crawl_optimization/properties/crawl_using_provided_logins_only",
+              "label": "Crawl using my provided logins only"
+            },
+            {
+              "path": "#/properties/crawler/properties/crawl_optimization/properties/crawl_strategy",
+              "label": "Crawl strategy",
+              "width": "large",
+              "enumDescriptions": {
+                "fastest": "This strategy optimizes as far as possible for the speed of the crawl, at the expense of lower coverage in many applications. It is appropriate for applications with stable and unique URLs, and no stateful functionality (e.g. authentication).",
+                "faster": "This strategy applies some optimizations to the speed of the crawl, with some loss of coverage in some applications. It is appropriate for applications that use mostly stable and unique URLs, and only limited or simple stateful functionality.",
+                "normal": "This strategy represents a trade-off between coverage and speed that is appropriate for typical applications.",
+                "more complete": "This strategy applies some optimizations to the coverage of the crawl, with some loss of speed in some applications. It is appropriate for applications with volatile or overloaded URLs, or more complex stateful functionality than normal.",
+                "most complete": "This strategy optimizes as far as possible for the coverage of the crawl, at the expense of speed in most applications. It is appropriate to achieve strong coverage of applications with highly volatile or overloaded URLs or heavily complex stateful functionality."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Crawl Limits",
+      "category": "crawl",
+      "description": "Crawling modern applications is sometimes an open-ended exercise, due to the amount of stateful functionality, volatile content, and unbounded navigation. Burp's crawler uses various techniques to maximise discovery of unique content early in the crawl. These settings let you impose a limit on the extent of the crawl, as it reaches the point of diminishing returns. You can leave any crawl limit setting blank to disable it.",
+      "content": [
+        {
+          "type": "fieldset",
+          "content": [
+            {
+              "path": "#/properties/crawler/properties/crawl_limits/properties/maximum_crawl_time",
+              "label": "Maximum crawl time",
+              "trailingText": "minutes",
+              "width": "small"
+            },
+            {
+              "path": "#/properties/crawler/properties/crawl_limits/properties/maximum_unique_locations",
+              "label": "Maximum unique locations discovered",
+              "width": "small"
+            },
+            {
+              "path": "#/properties/crawler/properties/crawl_limits/properties/maximum_request_count",
+              "label": "Maximum request count",
+              "treatDefaultAsBlank": true,
+              "width": "small"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Login Functions",
+      "category": "crawl",
+      "description": "These settings control how the crawler will interact with any login functionality, aside from any application logins that are explicitly configured for the crawl. Note that these settings will be ignored if you are using recorded login sequences or if you have selected 'Crawl using my provided logins only'.",
+      "content": [
+        {
+          "path": "#/properties/crawler/properties/login_functions/properties/attempt_to_self_register_a_user",
+          "label": "Attempt to self-register a user",
+          "disabledIf": "#/properties/crawler/properties/crawl_optimization/properties/crawl_using_provided_logins_only"
+        },
+        {
+          "path": "#/properties/crawler/properties/login_functions/properties/trigger_login_failures",
+          "label": "Trigger login failures (using invalid username)",
+          "disabledIf": "#/properties/crawler/properties/crawl_optimization/properties/crawl_using_provided_logins_only"
+        }
+      ]
+    },
+    {
+      "title": "Handling Application Errors During Crawl",
+      "category": "crawl",
+      "description": "These settings control how Burp handles application errors (connection failures and transmission timeouts) that arise during the crawl phase of the scan.",
+      "content": [
+        {
+          "type": "fieldset",
+          "label": "Pause if:",
+          "content": [
+            {
+              "path": "#/properties/crawler/properties/error_handling/properties/pause_task_requests_timed_out_count",
+              "trailingText": "consecutive requests time out",
+              "width": "small"
+            },
+            {
+              "path": "#/properties/crawler/properties/error_handling/properties/pause_task_requests_timed_out_percentage",
+              "trailingText": "% of requests time out",
+              "treatDefaultAsBlank": true
+            }
+          ]
+        },
+        {
+          "path": "#/properties/crawler/properties/error_handling/properties/number_of_follow_up_passes",
+          "leadingText": "On completion of crawl, do",
+          "trailingText": "follow-up passes to retry requests that timed out",
+          "width": "small"
+        }
+      ]
+    },
+    {
+      "title": "Miscellaneous",
+      "category": "crawl",
+      "description": "These settings let you customize some details of the crawl.",
+      "content": [
+        {
+          "path": "#/properties/crawler/properties/customization/properties/browser_based_navigation_mode",
+          "label": "Use embedded browser for crawl and audit",
+          "width": "x-large"
+        },
+        {
+          "path": "#/properties/crawler/properties/customization/properties/allow_out_of_scope_resources",
+          "label": "Fetch required resources and data from out-of-scope hosts",
+          "enabledIf": {
+            "path": "#/properties/crawler/properties/customization/properties/browser_based_navigation_mode",
+            "values": [
+              "yes",
+              "only_if_hardware_supports"
+            ]
+          }
+        },
+        {
+          "path": "#/properties/crawler/properties/customization/properties/timeout_for_in_progress_resource_requests",
+          "label": "Read timeout for site resources",
+          "enabledIf": {
+            "path": "#/properties/crawler/properties/customization/properties/browser_based_navigation_mode",
+            "values": [
+              "yes",
+              "only_if_hardware_supports"
+            ]
+          }
+        },
+        {
+          "path": "#/properties/crawler/properties/customization/properties/submit_forms",
+          "label": "Submit forms"
+        },
+        {
+          "type": "nested",
+          "content": [
+            {
+              "path": "#/properties/crawler/properties/customization/properties/customize_user_agent",
+              "label": "Customize User-Agent"
+            }
+          ],
+          "nested": [
+            {
+              "path": "#/properties/crawler/properties/customization/properties/user_agent",
+              "label": "User-Agent",
+              "enabledIf": "#/properties/crawler/properties/customization/properties/customize_user_agent"
+            }
+          ]
+        },
+        {
+          "path": "#/properties/crawler/properties/customization/properties/request_robots_txt",
+          "label": "Request robots.txt"
+        },
+        {
+          "type": "nested",
+          "content": [
+            {
+              "path": "#/properties/crawler/properties/customization/properties/request_sitemap",
+              "label": "Request site map",
+              "enabledIf": "#/properties/crawler/properties/customization/properties/request_robots_txt"
+            }
+          ],
+          "nested": [
+            {
+              "path": "#/properties/crawler/properties/customization/properties/maximum_items_from_sitemap",
+              "leadingText": "Maximum items to request from site map:",
+              "enabledIf": [
+                "#/properties/crawler/properties/customization/properties/request_sitemap",
+                "#/properties/crawler/properties/customization/properties/request_robots_txt"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "nested",
+          "content": [
+            {
+              "path": "#/properties/crawler/properties/customization/properties/request_speculative",
+              "label": "Follow hidden links in comments and JavaScript"
+            }
+          ],
+          "nested": [
+            {
+              "path": "#/properties/crawler/properties/customization/properties/maximum_speculative_links",
+              "leadingText": "Maximum hidden links to follow",
+              "enabledIf": "#/properties/crawler/properties/customization/properties/request_speculative"
+            }
+          ]
+        },
+        {
+          "path": "#/properties/crawler/properties/customization/properties/parse_api_definitions",
+          "label": "Parse API definitions"
+        },
+        {
+          "type": "nested",
+          "content": [
+            {
+              "path": "#/properties/crawler/properties/customization/properties/perform_graphql_introspection",
+              "label": "Perform GraphQL introspection"
+            }
+          ],
+          "nested": [
+            {
+              "path": "#/properties/crawler/properties/customization/properties/guess_hidden_graphql_endpoints",
+              "label": "Test common GraphQL endpoints",
+              "enabledIf": [
+                "#/properties/crawler/properties/customization/properties/perform_graphql_introspection"
+              ]
+            }
+          ]
+        },
+        {
+          "path": "#/properties/crawler/properties/customization/properties/allow_all_clickables",
+          "label": "Click all clickable elements"
+        },
+        {
+          "path": "#/properties/crawler/properties/customization/properties/application_uses_fragments_for_routing",
+          "label": "Application uses fragments for routing"
+        }
+      ]
+    },
+    {
+      "title": "Crawl Global Option Overrides",
+      "category": "crawl",
+      "description": "These settings let you override Burp's global settings for this crawl task. Any setting that is left blank will be set to the default value used by Burp.",
+      "content": [
+        {
+          "type": "fieldset",
+          "label": "These settings specify the timeouts to be used for various network tasks. Set an option to zero to never timeout that task",
+          "content": [
+            {
+              "path": "#/properties/crawler/properties/crawl_project_option_overrides/properties/connect_timeout",
+              "label": "Connect",
+              "treatDefaultAsBlank": true,
+              "width": "small",
+              "trailingText": "seconds"
+            },
+            {
+              "path": "#/properties/crawler/properties/crawl_project_option_overrides/properties/normal_timeout",
+              "label": "Default",
+              "treatDefaultAsBlank": true,
+              "width": "small",
+              "trailingText": "seconds"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Audit Optimization",
+      "category": "audit",
+      "description": "These settings let you control the behavior of the audit logic to reflect the objectives of the audit and the nature of the target application. See the detailed help for more information about each option.",
+      "content": [
+        {
+          "type": "fieldset",
+          "content": [
+            {
+              "path": "#/properties/scanner/properties/audit_optimization/properties/maximum_crawl_and_audit_time",
+              "label": "Maximum total crawl and audit time",
+              "trailingText": "minutes",
+              "treatDefaultAsBlank": true,
+              "width": "small"
+            },
+            {
+              "path": "#/properties/scanner/properties/audit_optimization/properties/scan_speed",
+              "label": "Audit speed"
+            },
+            {
+              "path": "#/properties/scanner/properties/audit_optimization/properties/scan_accuracy",
+              "label": "Audit accuracy",
+              "width": "large"
+            }
+          ]
+        },
+        {
+          "path": "#/properties/scanner/properties/audit_optimization/properties/skip_ineffective_checks",
+          "label": "Skip checks unlikely to be effective due to insertion point's base value"
+        },
+        {
+          "path": "#/properties/scanner/properties/audit_optimization/properties/consolidate_passive_issues",
+          "label": "Consolidate frequently occurring passive issues"
+        },
+        {
+          "path": "#/properties/scanner/properties/audit_optimization/properties/maintain_session",
+          "label": "Automatically maintain session (only applies to crawl-driven audits)"
+        },
+        {
+          "path": "#/properties/scanner/properties/audit_optimization/properties/follow_redirections",
+          "label": "Follow redirections where necessary"
+        }
+      ]
+    },
+    {
+      "title": "Issues Reported",
+      "category": "audit",
+      "description": "These settings control which issues Burp will check for. You can select issues by scan type or individually. If you select individual issues, you can also select the detection methods that are used for some types of issues.",
+      "content": [
+        {
+          "type": "radio",
+          "path": "#/properties/scanner/properties/issues_reported/properties/select_individual_issues",
+          "false": {
+            "label": "Select by scan type",
+            "content": [
+              {
+                "path": "#/properties/scanner/properties/issues_reported/properties/scan_type_passive",
+                "label": "Passive"
+              },
+              {
+                "path": "#/properties/scanner/properties/issues_reported/properties/scan_type_light_active",
+                "label": "Light active"
+              },
+              {
+                "path": "#/properties/scanner/properties/issues_reported/properties/scan_type_medium_active",
+                "label": "Medium active"
+              },
+              {
+                "path": "#/properties/scanner/properties/issues_reported/properties/scan_type_intrusive_active",
+                "label": "Intrusive active"
+              },
+              {
+                "path": "#/properties/scanner/properties/issues_reported/properties/scan_type_javascript_analysis",
+                "label": "JavaScript analysis"
+              }
+            ]
+          },
+          "true": {
+            "label": "Select individual issues",
+            "content": [
+              {
+                "type": "issueTypeTable",
+                "path": "#/properties/scanner/properties/issues_reported/properties/selected_issues",
+                "enabledPath": "#/properties/scanner/properties/issues_reported/properties/selected_issues/items/properties/enabled",
+                "typeIndexPath": "#/properties/scanner/properties/issues_reported/properties/selected_issues/items/properties/type_index"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "title": "Handling Application Errors During Audit",
+      "category": "audit",
+      "description": "These settings control how Burp handles application errors (connection failures and transmission timeouts) that arise during the audit phase of the scan.",
+      "content": [
+        {
+          "path": "#/properties/scanner/properties/error_handling/properties/consecutive_audit_check_failures_to_skip_insertion_point",
+          "leadingText": "If",
+          "trailingText": "consecutive audit checks fail, skip remaining checks in the current insertion point",
+          "width": "small"
+        },
+        {
+          "path": "#/properties/scanner/properties/error_handling/properties/consecutive_insertion_point_failures_to_fail_audit_item",
+          "leadingText": "If",
+          "trailingText": "consecutive insertion points fail, skip remaining insertion points, and flag audit item as failed",
+          "width": "small"
+        },
+        {
+          "type": "fieldset",
+          "label": "Pause the task if:",
+          "content": [
+            {
+              "path": "#/properties/scanner/properties/error_handling/properties/pause_task_failed_audit_item_count",
+              "trailingText": "consecutive audit items fail",
+              "width": "small"
+            },
+            {
+              "path": "#/properties/scanner/properties/error_handling/properties/pause_task_failed_audit_item_percentage",
+              "trailingText": "% of audit items fail",
+              "treatDefaultAsBlank": true
+            }
+          ]
+        },
+        {
+          "path": "#/properties/scanner/properties/error_handling/properties/number_of_follow_up_passes",
+          "leadingText": "On completion of each audit phase, do",
+          "trailingText": "follow-up passes to retry failed operations"
+        }
+      ]
+    },
+    {
+      "title": "Insertion Point Types",
+      "category": "audit",
+      "description": "Place payloads into the following locations within requests:",
+      "content": [
+        {
+          "path": "#/properties/scanner/properties/insertion_point_types/properties/insert_url_params",
+          "label": "URL parameter values"
+        },
+        {
+          "path": "#/properties/scanner/properties/insertion_point_types/properties/insert_body_params",
+          "label": "Body parameter values"
+        },
+        {
+          "path": "#/properties/scanner/properties/insertion_point_types/properties/insert_cookies",
+          "label": "Cookie parameter values"
+        },
+        {
+          "path": "#/properties/scanner/properties/insertion_point_types/properties/insert_param_name",
+          "label": "Parameter name"
+        },
+        {
+          "path": "#/properties/scanner/properties/insertion_point_types/properties/insert_http_headers",
+          "label": "HTTP headers"
+        },
+        {
+          "path": "#/properties/scanner/properties/insertion_point_types/properties/insert_entire_body",
+          "label": "Entire body"
+        },
+        {
+          "path": "#/properties/scanner/properties/insertion_point_types/properties/insert_url_path_filename",
+          "label": "URL path filename"
+        },
+        {
+          "path": "#/properties/scanner/properties/insertion_point_types/properties/insert_url_path_folders",
+          "label": "URL path folders"
+        }
+      ]
+    },
+    {
+      "title": "Modifying Parameter Locations",
+      "category": "audit",
+      "description": "Select the parameters to relocate within the request. Moving parameters can help to evade some filters, but results in many more scan requests.",
+      "content": [
+        {
+          "path": "#/properties/scanner/properties/modifying_parameter_locations/properties/url_to_body",
+          "label": "URL to body"
+        },
+        {
+          "path": "#/properties/scanner/properties/modifying_parameter_locations/properties/body_to_url",
+          "label": "Body to URL"
+        },
+        {
+          "path": "#/properties/scanner/properties/modifying_parameter_locations/properties/cookie_to_url",
+          "label": "Cookie to URL"
+        },
+        {
+          "path": "#/properties/scanner/properties/modifying_parameter_locations/properties/url_to_cookie",
+          "label": "URL to cookie"
+        },
+        {
+          "path": "#/properties/scanner/properties/modifying_parameter_locations/properties/body_to_cookie",
+          "label": "Body to cookie"
+        },
+        {
+          "path": "#/properties/scanner/properties/modifying_parameter_locations/properties/cookie_to_body",
+          "label": "Cookie to body"
+        }
+      ]
+    },
+    {
+      "title": "Ignored Insertion Points",
+      "category": "audit",
+      "content": [
+        {
+          "label": "Skip server-side injection tests for these parameters",
+          "path": "#/properties/scanner/properties/ignored_insertion_points/properties/skip_server_side_injection_for_parameters",
+          "itemName": "parameter",
+          "columns": [
+            {
+              "path": "#/properties/scanner/properties/ignored_insertion_points/properties/skip_server_side_injection_for_parameters/items/properties/enabled",
+              "label": "Enabled",
+              "defaultValue": true
+            },
+            {
+              "path": "#/properties/scanner/properties/ignored_insertion_points/properties/skip_server_side_injection_for_parameters/items/properties/parameter",
+              "label": "Parameter",
+              "defaultValue": "any_parameter",
+              "width": "large"
+            },
+            {
+              "path": "#/properties/scanner/properties/ignored_insertion_points/properties/skip_server_side_injection_for_parameters/items/properties/item",
+              "label": "Name or value",
+              "defaultValue": "name"
+            },
+            {
+              "path": "#/properties/scanner/properties/ignored_insertion_points/properties/skip_server_side_injection_for_parameters/items/properties/match_type",
+              "label": "Match type",
+              "defaultValue": "is",
+              "width": "large"
+            },
+            {
+              "path": "#/properties/scanner/properties/ignored_insertion_points/properties/skip_server_side_injection_for_parameters/items/properties/expression",
+              "label": "Match expression",
+              "width": "large"
+            }
+          ]
+        },
+        {
+          "label": "Skip all tests for these parameters",
+          "path": "#/properties/scanner/properties/ignored_insertion_points/properties/skip_all_tests_for_parameters",
+          "itemName": "parameter",
+          "columns": [
+            {
+              "path": "#/properties/scanner/properties/ignored_insertion_points/properties/skip_all_tests_for_parameters/items/properties/enabled",
+              "label": "Enabled",
+              "defaultValue": true
+            },
+            {
+              "path": "#/properties/scanner/properties/ignored_insertion_points/properties/skip_all_tests_for_parameters/items/properties/parameter",
+              "label": "Parameter",
+              "defaultValue": "any_parameter",
+              "width": "large"
+            },
+            {
+              "path": "#/properties/scanner/properties/ignored_insertion_points/properties/skip_all_tests_for_parameters/items/properties/item",
+              "label": "Name or value",
+              "defaultValue": "name"
+            },
+            {
+              "path": "#/properties/scanner/properties/ignored_insertion_points/properties/skip_all_tests_for_parameters/items/properties/match_type",
+              "label": "Match type",
+              "defaultValue": "is",
+              "width": "large"
+            },
+            {
+              "path": "#/properties/scanner/properties/ignored_insertion_points/properties/skip_all_tests_for_parameters/items/properties/expression",
+              "label": "Match expression",
+              "width": "large"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Frequently Occurring Insertion Points",
+      "category": "audit",
+      "description": "When the same insertion point is observed in a large number of requests with no variation in results, perform a more efficient quick scan, for the following insertion point types:",
+      "content": [
+        {
+          "path": "#/properties/scanner/properties/frequently_occurring_insertion_points/properties/quick_scan_url_params",
+          "label": "URL parameter values"
+        },
+        {
+          "path": "#/properties/scanner/properties/frequently_occurring_insertion_points/properties/quick_scan_body_params",
+          "label": "Body parameter values"
+        },
+        {
+          "path": "#/properties/scanner/properties/frequently_occurring_insertion_points/properties/quick_scan_cookies",
+          "label": "Cookie parameter values"
+        },
+        {
+          "path": "#/properties/scanner/properties/frequently_occurring_insertion_points/properties/quick_scan_param_name",
+          "label": "Parameter name"
+        },
+        {
+          "path": "#/properties/scanner/properties/frequently_occurring_insertion_points/properties/quick_scan_http_headers",
+          "label": "HTTP headers Schema"
+        },
+        {
+          "path": "#/properties/scanner/properties/frequently_occurring_insertion_points/properties/quick_scan_entire_body",
+          "label": "Entire body (for relevant content types)"
+        },
+        {
+          "path": "#/properties/scanner/properties/frequently_occurring_insertion_points/properties/quick_scan_url_path_filename",
+          "label": "URL path filename"
+        },
+        {
+          "path": "#/properties/scanner/properties/frequently_occurring_insertion_points/properties/quick_scan_url_path_folders",
+          "label": "URL path folders"
+        }
+      ]
+    },
+    {
+      "title": "Misc Insertion Point Options",
+      "category": "audit",
+      "description": "These settings control whether insertion points are created within nested data structures, and the maximum number of insertion points to create per request that is audited.",
+      "content": [
+        {
+          "path": "#/properties/scanner/properties/misc_insertion_point_options/properties/use_nested_insertion_points",
+          "label": "Use nested insertion points"
+        },
+        {
+          "path": "#/properties/scanner/properties/misc_insertion_point_options/properties/max_insertion_points_per_base_request",
+          "label": "Maximum insertion points per base request",
+          "width": "small"
+        }
+      ]
+    },
+    {
+      "title": "JavaScript Analysis",
+      "category": "audit",
+      "description": "These settings control the behavior of Burp Scanner's JavaScript analysis.",
+      "content": [
+        {
+          "type": "nested",
+          "content": [
+            {
+              "path": "#/properties/scanner/properties/javascript_analysis/properties/request_missing_dependencies",
+              "label": "Make requests for missing site resources"
+            }
+          ],
+          "nested": [
+            {
+              "path": "#/properties/scanner/properties/javascript_analysis/properties/fetch_out_of_scope_resources",
+              "label": "Fetch previously undiscovered resources and data from out-of-scope hosts",
+              "enabledIf": "#/properties/scanner/properties/javascript_analysis/properties/request_missing_dependencies",
+              "width": "small"
+            }
+          ]
+        },
+        {
+          "type": "nested",
+          "content": [
+            {
+              "path": "#/properties/scanner/properties/javascript_analysis/properties/use_dynamic_analysis",
+              "label": "Use dynamic analysis techniques"
+            }
+          ],
+          "nested": [
+            {
+              "path": "#/properties/scanner/properties/javascript_analysis/properties/max_dynamic_time_per_item",
+              "label": "Maximum dynamic analysis time per item (in seconds)",
+              "enabledIf": "#/properties/scanner/properties/javascript_analysis/properties/use_dynamic_analysis",
+              "width": "small"
+            }
+          ]
+        },
+        {
+          "type": "nested",
+          "content": [
+            {
+              "path": "#/properties/scanner/properties/javascript_analysis/properties/use_static_analysis",
+              "label": "Use static analysis techniques"
+            }
+          ],
+          "nested": [
+            {
+              "path": "#/properties/scanner/properties/javascript_analysis/properties/max_static_time_per_item",
+              "label": "Maximum static analysis time per item (in seconds)",
+              "enabledIf": "#/properties/scanner/properties/javascript_analysis/properties/use_static_analysis",
+              "width": "small"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Audit Global Option Overrides",
+      "category": "audit",
+      "description": "These settings let you override Burp's global settings for this audit task. Any setting that is left blank will be set to the default value used by Burp.",
+      "content": [
+        {
+          "type": "fieldset",
+          "label": "These settings specify the timeouts to be used for various network tasks. Set an option to zero to never timeout that task",
+          "content": [
+            {
+              "path": "#/properties/scanner/properties/audit_project_option_overrides/properties/connect_timeout",
+              "label": "Connect",
+              "treatDefaultAsBlank": true,
+              "width": "small",
+              "trailingText": "seconds"
+            },
+            {
+              "path": "#/properties/scanner/properties/audit_project_option_overrides/properties/normal_timeout",
+              "label": "Default",
+              "treatDefaultAsBlank": true,
+              "width": "small",
+              "trailingText": "seconds"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Platform Authentication",
+      "category": "connections",
+      "description": "These settings let you configure Burp to automatically carry out platform authentication to destination web servers.",
+      "content": [
+        {
+          "path": "#/properties/project_options/properties/connections/properties/platform_authentication/properties/credentials",
+          "itemName": "credentials",
+          "arrayConstants": [
+            {
+              "path": "#/properties/project_options/properties/connections/properties/platform_authentication/properties/do_platform_authentication",
+              "value": true
+            },
+            {
+              "path": "#/properties/project_options/properties/connections/properties/platform_authentication/properties/prompt_on_authentication_failure",
+              "value": false
+            },
+            {
+              "path": "#/properties/project_options/properties/connections/properties/platform_authentication/properties/use_user_options",
+              "value": false
+            }
+          ],
+          "columns": [
+            {
+              "path": "#/properties/project_options/properties/connections/properties/platform_authentication/properties/credentials/items/properties/destination_host",
+              "label": "Destination Host",
+              "width": "large",
+              "validation": {
+                "type": "hostname",
+                "message": "Valid host required"
+              }
+            },
+            {
+              "path": "#/properties/project_options/properties/connections/properties/platform_authentication/properties/credentials/items/properties/auth_type",
+              "label": "Type",
+              "defaultValue": "basic"
+            },
+            {
+              "path": "#/properties/project_options/properties/connections/properties/platform_authentication/properties/credentials/items/properties/username",
+              "label": "Username"
+            },
+            {
+              "path": "#/properties/project_options/properties/connections/properties/platform_authentication/properties/credentials/items/properties/password",
+              "label": "Password",
+              "mask": true
+            },
+            {
+              "path": "#/properties/project_options/properties/connections/properties/platform_authentication/properties/credentials/items/properties/domain",
+              "label": "Domain",
+              "enabledIf": {
+                "path": "#/properties/project_options/properties/connections/properties/platform_authentication/properties/credentials/items/properties/auth_type",
+                "values": [
+                  "NTLM_V2",
+                  "NTLM_V1"
+                ]
+              }
+            },
+            {
+              "path": "#/properties/project_options/properties/connections/properties/platform_authentication/properties/credentials/items/properties/domain_hostname",
+              "label": "Domain hostname",
+              "enabledIf": {
+                "path": "#/properties/project_options/properties/connections/properties/platform_authentication/properties/credentials/items/properties/auth_type",
+                "values": [
+                  "NTLM_V2",
+                  "NTLM_V1"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Upstream Proxy Servers",
+      "category": "connections",
+      "description": "These settings determine whether Burp sends each outgoing request to a proxy server, or directly to the destination web server. The first rule that matches each destination host will be used. To send all traffic to a single proxy server, create a rule with * as the destination host.",
+      "content": [
+        {
+          "path": "#/properties/project_options/properties/connections/properties/upstream_proxy/properties/servers",
+          "itemName": "upstream proxy server",
+          "arrayConstants": [
+            {
+              "path": "#/properties/project_options/properties/connections/properties/upstream_proxy/properties/use_user_options",
+              "value": false
+            },
+            {
+              "path": "#/properties/project_options/properties/connections/properties/upstream_proxy/properties/servers/items/properties/enabled",
+              "value": true
+            }
+          ],
+          "columns": [
+            {
+              "label": "Destination host",
+              "path": "#/properties/project_options/properties/connections/properties/upstream_proxy/properties/servers/items/properties/destination_host",
+              "width": "large",
+              "validation": {
+                "type": "hostnameOrWildcard",
+                "message": "Valid host or wildcard required"
+              }
+            },
+            {
+              "label": "Proxy host",
+              "path": "#/properties/project_options/properties/connections/properties/upstream_proxy/properties/servers/items/properties/proxy_host",
+              "width": "large",
+              "validation": {
+                "type": "hostname",
+                "message": "Valid proxy host required"
+              }
+            },
+            {
+              "label": "Proxy port",
+              "path": "#/properties/project_options/properties/connections/properties/upstream_proxy/properties/servers/items/properties/proxy_port"
+            },
+            {
+              "label": "Authentication Type",
+              "path": "#/properties/project_options/properties/connections/properties/upstream_proxy/properties/servers/items/properties/auth_type",
+              "defaultValue": "none"
+            },
+            {
+              "label": "Username",
+              "path": "#/properties/project_options/properties/connections/properties/upstream_proxy/properties/servers/items/properties/username",
+              "enabledIf": {
+                "path": "#/properties/project_options/properties/connections/properties/upstream_proxy/properties/servers/items/properties/auth_type",
+                "values": [
+                  "basic",
+                  "NTLM_V2",
+                  "NTLM_V1"
+                ]
+              }
+            }
+          ],
+          "extraColumns": [
+            {
+              "label": "Password",
+              "path": "#/properties/project_options/properties/connections/properties/upstream_proxy/properties/servers/items/properties/password",
+              "mask": true,
+              "enabledIf": {
+                "path": "#/properties/project_options/properties/connections/properties/upstream_proxy/properties/servers/items/properties/auth_type",
+                "values": [
+                  "basic",
+                  "NTLM_V2",
+                  "NTLM_V1"
+                ]
+              }
+            },
+            {
+              "label": "Domain",
+              "path": "#/properties/project_options/properties/connections/properties/upstream_proxy/properties/servers/items/properties/domain",
+              "width": "large",
+              "enabledIf": {
+                "path": "#/properties/project_options/properties/connections/properties/upstream_proxy/properties/servers/items/properties/auth_type",
+                "values": [
+                  "NTLM_V2",
+                  "NTLM_V1"
+                ]
+              }
+            },
+            {
+              "label": "Domain hostname",
+              "path": "#/properties/project_options/properties/connections/properties/upstream_proxy/properties/servers/items/properties/domain_hostname",
+              "width": "large",
+              "enabledIf": {
+                "path": "#/properties/project_options/properties/connections/properties/upstream_proxy/properties/servers/items/properties/auth_type",
+                "values": [
+                  "NTLM_V2",
+                  "NTLM_V1"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Client TLS Certificates",
+      "category": "connections",
+      "description": "These settings let you configure the client TLS certificates that Burp will use when a destination host requests one. Burp will use the first certificate in the list whose host configuration matches the name of the host being contacted. Specify the host(s) for which the certificate should be used. You can use wildcards to specify destination hosts (* matches zero or more characters, ? matches any character except a dot).",
+      "content": [
+        {
+          "path": "#/properties/project_options/properties/ssl/properties/client_certificates/properties/certificates",
+          "itemName": "client TLS certificate",
+          "arrayConstants": [
+            {
+              "path": "#/properties/project_options/properties/ssl/properties/client_certificates/properties/use_user_options",
+              "value": false
+            },
+            {
+              "path": "#/properties/project_options/properties/ssl/properties/client_certificates/properties/certificates/items/properties/enabled",
+              "value": true
+            },
+            {
+              "path": "#/properties/project_options/properties/ssl/properties/client_certificates/properties/certificates/items/properties/type",
+              "value": "PKCS12"
+            }
+          ],
+          "columns": [
+            {
+              "label": "Destination host",
+              "path": "#/properties/project_options/properties/ssl/properties/client_certificates/properties/certificates/items/properties/host",
+              "width": "large",
+              "validation": {
+                "type": "hostnameOrWildcard",
+                "message": "Valid host or wildcard required"
+              }
+            },
+            {
+              "label": "Password",
+              "path": "#/properties/project_options/properties/ssl/properties/client_certificates/properties/certificates/items/properties/password",
+              "mask": true
+            },
+            {
+              "label": "Certificate",
+              "type": "file",
+              "path": "#/properties/project_options/properties/ssl/properties/client_certificates/properties/certificates/items/properties/certificate_content",
+              "fileName": {
+                "path": "#/properties/project_options/properties/ssl/properties/client_certificates/properties/certificates/items/properties/certificate_file"
+              },
+              "width": "large"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "HTTP/2",
+      "category": "connections",
+      "description": "This setting controls the scanner's use of the HTTP/2 protocol for outbound connections over TLS.",
+      "content": [
+        {
+          "path": "#/properties/project_options/properties/http/properties/http2/enable_http2",
+          "label": "Default to HTTP/2 if the server supports it."
+        }
+      ]
+    },
+    {
+      "title": "Request Throttling Configuration",
+      "category": "request throttling",
+      "description": "You can limit the frequency of requests Burp makes, either by only allowing a certain number of concurrent requests or by imposing an interval between requests.",
+      "content": [
+        {
+          "type": "nested",
+          "content": [
+            {
+              "path": "#/properties/project_options/properties/resource_pools/default_resource_pool/concurrent_request_limit_enabled",
+              "label": "Enable concurrent request limiting"
+            }
+          ],
+          "nested": [
+            {
+              "path": "#/properties/project_options/properties/resource_pools/default_resource_pool/concurrent_request_limit",
+              "label": "Maximum concurrent requests",
+              "enabledIf": "#/properties/project_options/properties/resource_pools/default_resource_pool/concurrent_request_limit_enabled",
+              "width": "small"
+            }
+          ]
+        },
+        {
+          "type": "nested",
+          "content": [
+            {
+              "path": "#/properties/project_options/properties/resource_pools/default_resource_pool/throttle_interval_enabled",
+              "label": "Throttle request interval"
+            }
+          ],
+          "nested": [
+            {
+              "path": "#/properties/project_options/properties/resource_pools/default_resource_pool/throttle_interval_millis",
+              "label": "Interval in milliseconds",
+              "enabledIf": "#/properties/project_options/properties/resource_pools/default_resource_pool/throttle_interval_enabled",
+              "width": "small"
+            },
+            {
+              "path": "#/properties/project_options/properties/resource_pools/default_resource_pool/throttle_random_enabled",
+              "label": "Add random variations to interval",
+              "enabledIf": "#/properties/project_options/properties/resource_pools/default_resource_pool/throttle_interval_enabled",
+              "width": "small"
+            }
+          ]
+        },
+        {
+          "type": "nested",
+          "content": [
+            {
+              "path": "#/properties/project_options/properties/resource_pools/default_resource_pool/auto_backoff",
+              "label": "Automatic throttling"
+            }
+          ],
+          "nested": [
+            {
+              "path": "#/properties/project_options/properties/resource_pools/default_resource_pool/auto_backoff_after_429_status_returned",
+              "label": "429",
+              "enabledIf": "#/properties/project_options/properties/resource_pools/default_resource_pool/auto_backoff"
+            },
+            {
+              "path": "#/properties/project_options/properties/resource_pools/default_resource_pool/auto_backoff_after_503_status_returned",
+              "label": "503",
+              "enabledIf": "#/properties/project_options/properties/resource_pools/default_resource_pool/auto_backoff"
+            },
+            {
+              "path": "#/properties/project_options/properties/resource_pools/default_resource_pool/custom_auto_backoff_status_codes_enabled",
+              "label": "Other",
+              "enabledIf": "#/properties/project_options/properties/resource_pools/default_resource_pool/auto_backoff"
+            },
+            {
+              "path": "#/properties/project_options/properties/resource_pools/default_resource_pool/custom_auto_backoff_status_codes",
+              "enabledIf": [
+                "#/properties/project_options/properties/resource_pools/default_resource_pool/auto_backoff",
+                "#/properties/project_options/properties/resource_pools/default_resource_pool/custom_auto_backoff_status_codes_enabled"
+              ],
+              "itemName": "Status Code",
+              "columns": [
+                {
+                  "path": "#/properties/project_options/properties/resource_pools/default_resource_pool/custom_auto_backoff_status_codes/items/properties/status_code",
+                  "label": "Status Code"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Embedded Browser",
+      "category": "embedded browser",
+      "description": "This setting allows you to control the behaviour of Burp Suite's embedded browser.",
+      "content": [
+        {
+          "path": "#/properties/project_options/properties/misc/properties/embedded_browser/properties/disable_gpu",
+          "label": "Stop the embedded browser using the GPU."
+        }
+      ]
+    },
+    {
+      "title": "Burp Collaborator Server",
+      "category": "burp collaborator server",
+      "description": "Burp Collaborator is an external service that Burp Scanner can use to help discover many kinds of vulnerabilities. You can use the default Burp Collaborator server provided by PortSwigger, or deploy your own instance. ",
+      "content": [
+        {
+          "path": "#/properties/project_options/properties/misc/properties/collaborator_server/properties/type",
+          "label": "Collaborator type",
+          "width": "large",
+          "enumDescriptions": {
+            "default": "Use the default Collaborator server",
+            "none": "Don't use Burp Collaborator",
+            "private": "Use a private Collaborator server"
+          }
+        },
+        {
+          "path": "#/properties/project_options/properties/misc/properties/collaborator_server/properties/location",
+          "label": "Server location.",
+          "width": "large",
+          "enabledIf": {
+            "path": "#/properties/project_options/properties/misc/properties/collaborator_server/properties/type",
+            "values": [
+              "private"
+            ]
+          }
+        },
+        {
+          "path": "#/properties/project_options/properties/misc/properties/collaborator_server/properties/poll_over_unencrypted_http",
+          "label": "Poll over unecncrypted HTTP.",
+          "enabledIf": {
+            "path": "#/properties/project_options/properties/misc/properties/collaborator_server/properties/type",
+            "values": [
+              "private"
+            ]
+          }
+        },
+        {
+          "path": "#/properties/project_options/properties/misc/properties/collaborator_server/properties/polling_location",
+          "label": "Polling location (optional)",
+          "width": "large",
+          "enabledIf": {
+            "path": "#/properties/project_options/properties/misc/properties/collaborator_server/properties/type",
+            "values": [
+              "private"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

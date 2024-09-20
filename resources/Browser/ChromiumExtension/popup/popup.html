@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Burp Suite container</title>
+        <link href="../css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+        <link href="../css/styles.css" rel="stylesheet" />
+        <script src="../js/bootstrap/bootstrap.bundle.min.js" type="text/javascript"></script>
+        <script src="../js/popup.js" type="module"></script>
+        <script src="../js/utils.js" type="module"></script>
+    </head>
+    <body>
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">              
+              <button class="nav-link active" id="nav-recorder-tab" data-bs-toggle="tab" data-bs-target="#nav-recorder" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Navigation Recorder</button>
+              <button class="nav-link" id="nav-dom-invader-tab" data-bs-toggle="tab" data-bs-target="#nav-dom-invader" type="button" role="tab" aria-controls="nav-dom-invader" aria-selected="false">DOM Invader</button>
+            </div>
+          </nav>
+          <div class="tab-content" id="nav-tabContent">            
+            <div class="tab-pane fade show active" id="nav-recorder" role="tabpanel" aria-labelledby="nav-recorder-tab"><iframe scrolling="no" src="../navigation-recorder/popup/popup.html"></iframe></div>
+            <div class="tab-pane fade" id="nav-dom-invader" role="tabpanel" aria-labelledby="nav-dom-invader-tab"><iframe scrolling="no" src="../dom-invader-extension/settings/settings.html"></iframe></div>
+          </div>
+    </body>
+</html>

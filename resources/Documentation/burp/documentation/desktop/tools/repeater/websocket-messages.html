@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/repeater/index.html">Repeater</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/repeater/websocket-messages.html">Working with WebSocket messages</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Working with WebSocket messages in Burp Repeater</h1>
+<p>
+    You can use Burp Repeater to manipulate and resend individual WebSocket messages, and analyze the application's responses.
+</p>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/KbaOay1yOH0?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    To send WebSocket requests with Burp Repeater:
+</p>
+<ol>
+    <li>
+        Go to <strong>Proxy &gt; WebSockets history</strong>.
+    </li>
+    <li>
+        Right-click on a WebSocket message, and click <strong>Send to Repeater</strong>. A new tab is added to Repeater containing the request.
+    </li>
+    <li>
+        Go to <strong>Repeater</strong> and view the WebSocket message details in the new tab.
+    </li>
+    <li>
+        Modify the message.
+    </li>
+    <li>
+        Select whether the message should be sent to the server or client.
+    </li>
+    <li>
+        Click <strong>Send</strong> to send the message to the target server or client, and view the response.
+    </li>
+    <li>
+        To resend the message, right-click on it and click <strong>Edit and resend</strong>. Do this as many times as you like to see how modifying the message in different ways changes the response.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        The option to send a message to the client is only available in connections that are still open via Burp Proxy.
+    </p>
+</div>
+<h2 id="websocket-repeater-tab">WebSocket Repeater tab</h2>
+<p>
+    For WebSocket messages, each Repeater tab contains the following items:
+</p>
+<ul>
+    <li>
+        A message editor which contains the WebSocket message to be sent. You can use the <a href="/burp/documentation/desktop/tools/message-editor/index.html">message editor</a> functions to analyze and edit the message.
+    </li>
+    <li>
+        <p>
+            The WebSocket connection via which the message is sent. This is set automatically when you send a message to Repeater.
+        </p>
+        <ul>
+            <li>
+                To disconnect or reconnect to a WebSocket connection, use the toggle in the WebSocket ID header.
+            </li>
+            <li>
+                To edit a connection click on the edit icon <span class="icon-edit"></span> in the WebSocket ID header. You can clone or attach to any open connection, create a new connection, or reconnect a closed connection. You can then manipulate the negotiation request used to create the WebSocket.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <p>
+            A history table that shows all messages that have been sent and received. Manually generated messages are indicated in the table.
+        </p>
+        <ul>
+            <li>
+                To automatically select the next message that is received in the history table, check <strong>Select next message received</strong>.
+            </li>
+        </ul>
+    </li>
+    <li>
+        A message viewer for the message that is currently selected in the history table.
+    </li>
+</ul>
+<p>
+    You can customize and sort the table contents. For more information, see <a href="/burp/documentation/desktop/burps-layout/customize-tables.html">Customizing Burp's tables</a>.
+</p>
+</body>
+</html>

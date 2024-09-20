@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/index.html">Automated scanning</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/live-tasks/index.html">Live tasks</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/live-tasks/creating-live-tasks.html">Creating live tasks</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Creating live tasks</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/Y6p5AhZjmFc?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    Burp Suite's <strong>Live tasks</strong> feature enables you to perform some scanning operations automatically. You can use live tasks to audit for vulnerabilities, or add resources to Burp's <strong>Target</strong> site map.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/desktop/automated-scanning/index.html">Automated scanning</a> - Gives further information around how live tasks work.
+    </p>
+</div>
+<p>
+    To create a new live task:
+</p>
+<ol>
+    <li>
+        <p>
+            From the Dashboard, click <strong>New live task</strong> to display a dialog.
+        </p>
+    </li>
+    <li>
+        <p>
+            Select a <strong>Task type</strong>:
+        </p>
+        <ul>
+            <li>
+                <strong>Live audit</strong>.
+            </li>
+            <li>
+                <strong>Live passive crawl</strong>.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <p>
+            Select the <strong>Tools scope</strong>. You can set the task to inspect the traffic from the following tools:
+        </p>
+        <ul>
+            <li>
+                <strong>Proxy</strong>.
+            </li>
+            <li>
+                <strong>Repeater</strong>.
+            </li>
+            <li>
+                <strong>Intruder</strong>.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <p>
+            Select the <strong>URL scope</strong>. You can set the task to process the following items for the selected tools:
+        </p>
+        <ul>
+            <li>
+                <strong>Everything</strong> - Includes all URLs.
+            </li>
+            <li>
+                <strong>Suite scope</strong> - Includes all URLs covered by the current suite-wide scope.
+            </li>
+            <li>
+                <strong>Custom scope</strong> - Enables you to specify your own URLs for the task to match. Live tasks use Burp Suite's standard URL matching and advanced scope control rules. See <a href="/burp/documentation/desktop/tools/target/scope/index.html#url-matching-rules">URL matching</a> for more details.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <p>
+            If required, select <strong>Ignore duplicate items based on URL and parameter names</strong> to reduce the number of items processed by the task.
+        </p>
+    </li>
+    <li>
+        <p>
+            If required, click the <strong>Scan configuration</strong> tab and select a scan configuration for the task. Note that live tasks must use a custom scan configuration rather than a preset scan mode. For more information, see Scan configurations in the Burp Scanner docs.
+        </p>
+    </li>
+    <li>
+        <p>
+            If required, and if you are creating an audit task, click the <strong>Resource pool</strong> tab and configure the resource pool that the task runs in. For more information on configuring resource pools, see <a href="/burp/documentation/desktop/automated-scanning/managing-resource-pools.html">Managing resource pools for scans</a>.
+        </p>
+    </li>
+    <li>
+        <p>
+            Click <strong>OK</strong> to start the task.
+        </p>
+    </li>
+</ol>
+<p>
+    You can also add a pre-configured live task. Choose a task from the <strong>Choose predefined task</strong> drop-down in the <strong>Scan details</strong> tab. The available options are:
+</p>
+<ul>
+    <li>
+        <strong>Passively scan all traffic through Proxy</strong>.
+    </li>
+    <li>
+        <strong>Actively scan all in-scope traffic through Proxy</strong>.
+    </li>
+    <li>
+        <strong>Add all items requested through Proxy to site map</strong>.
+    </li>
+    <li>
+        <strong>Add all links observed in traffic through Proxy to site map</strong>.
+    </li>
+</ul>
+</body>
+</html>

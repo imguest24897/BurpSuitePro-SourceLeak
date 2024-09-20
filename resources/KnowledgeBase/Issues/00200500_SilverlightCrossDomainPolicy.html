@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+Silverlight cross-domain policy
+<h1>Typical severity</h1>
+
+High
+
+<h1>Issue description</h1>
+
+<p>The Silverlight cross-domain policy controls whether Silverlight client components running on other domains can perform two-way interaction with the domain that publishes the policy. If another domain is allowed by the policy, then that domain can potentially attack users of the application. If a user is logged in to the application, and visits a domain allowed by the policy, then any malicious content running on that domain can potentially gain full access to the application within the security context of the logged in user.</p>
+<p>Even if an allowed domain is not overtly malicious in itself, security vulnerabilities within that domain could potentially be leveraged by a third-party attacker to exploit the trust relationship and attack the application that allows access. Any domains that are allowed by the Silverlight cross-domain policy should be reviewed to determine whether it is appropriate for the application to fully trust both their intentions and security posture. </p>
+
+<h1>Issue remediation</h1>
+
+<p>Any inappropriate entries in the Silverlight cross-domain policy file should be removed.</p>
+
+<h1>References</h1>
+
+
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+<li><a href="https://cwe.mitre.org/data/definitions/942.html">CWE-942: Overly Permissive Cross-domain Whitelist</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

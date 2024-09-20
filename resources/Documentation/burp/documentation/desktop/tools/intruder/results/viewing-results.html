@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/index.html">Intruder</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/results/index.html">Results</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/results/viewing-results.html">Viewing results</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Viewing attack results</h1>
+<p>
+    You can view details of every request and response issued in the attack in the results window. Results are displayed in a table in the <strong>Results</strong> tab. The following information is available:
+</p>
+<ul>
+    <li>
+        <strong>Request</strong> - The request index number. If the attack was <a href="/burp/documentation/desktop/tools/intruder/configure-attack/settings.html#attack-results">configured</a> to make an unmodified baseline request, this appears as item number 0 in the table.
+    </li>
+    <li>
+        <strong>Position</strong> - The position number for the current payload (for <a href="/burp/documentation/desktop/tools/intruder/configure-attack/attack-types.html">sniper attacks</a>).
+    </li>
+    <li>
+        <strong>Payload</strong> - The payload(s) used in the request.
+    </li>
+    <li>
+        <strong>Status</strong> - The HTTP status code.
+    </li>
+    <li>
+        <strong>Time of day</strong> - The time of day the request was made.
+    </li>
+    <li>
+        <strong>Response received</strong> - The time taken to begin receiving a response (in milliseconds).
+    </li>
+    <li>
+        <strong>Response completed</strong> - The time taken for the response to complete (in milliseconds).
+    </li>
+    <li>
+        <strong>Error</strong> - Whether a network error occurred when issuing the request.
+    </li>
+    <li>
+        <strong>Timeout</strong> - Whether a timeout occurred when waiting for or processing the response.
+    </li>
+    <li>
+        <strong>Length</strong> - The length of the response in bytes.
+    </li>
+    <li>
+        <strong>Cookies</strong> - Any cookies received in the response.
+    </li>
+    <li>
+        <strong>Comment</strong> - Any user-applied <a href="/burp/documentation/desktop/tools/intruder/results/analyzing-results.html">comment</a>.
+    </li>
+</ul>
+<p>
+    The following details are also available if the appropriate settings are configured:
+</p>
+<ul>
+    <li>
+        The results of any match grep items.
+    </li>
+    <li>
+        The data extracted from any extract grep items.
+    </li>
+    <li>
+        Whether or not the payload was echoed in the response, if payload grep was configured.
+    </li>
+    <li>
+        <strong>Redirects followed</strong> - The number of redirections that were followed.
+    </li>
+    <li>
+        <strong>Interactions</strong> - The number of interactions made with the Collaborator server as a result of the Collaborator payloads. This is only present for an attack that uses the <strong>Collaborator payloads</strong> payload type.
+    </li>
+</ul>
+<p>
+    You can customize and sort the table contents. For more information, see <a href="/burp/documentation/desktop/burps-layout/customize-tables.html">Customizing Burp's tables</a>.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            For more information on redirections and the grep configuration settings, see <a href="/burp/documentation/desktop/tools/intruder/configure-attack/settings.html">Burp Intruder settings</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/configure-attack/payload-types.html#collaborator-payloads">Payload types - Collaborator payloads</a>.
+        </li>
+    </ul>
+</div>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="viewing-a-request">Viewing a request</h2>
+<p>
+    Select any item in the table to view the request and response.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/intruder-viewing-requests.png" alt="Intruder viewing requests" class="center-block">
+</div>
+<p>
+    If an attack is configured to follow redirections, Burp also displays all intermediate responses and requests.
+</p>
+<p>
+    If the attack resulted in an interaction with the Collaborator server, Burp displays the interaction details. This is only relevant for an attack that uses the <strong>Collaborator payloads</strong> payload type.
+</p>
+<p>
+    Double-click an item to open the request and response in a new window.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        Burp Intruder has a range of functions to help you analyze the results, for more information see <a href="/burp/documentation/desktop/tools/intruder/results/analyzing-results.html">Analyzing attack results</a>.
+    </p>
+</div>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/index.html">Scanner</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/scan-configurations/index.html">Scan configurations</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/scan-configurations/custom-scan-configurations.html">Custom scan configurations</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-enterprise">Enterprise</label>
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Custom scan configurations</h1>
+<p>
+    Both Burp Suite Enterprise Edition and Burp Suite Professional enable you to use custom scan configurations, giving you fine-grained control over Burp Scanner's behavior. You can use custom configurations in several ways:
+</p>
+<ul>
+    <li>
+        Use one of the configurations from the configuration library.
+    </li>
+    <li>
+        Create an entirely new configuration.
+    </li>
+    <li>
+        You can import a configuration from another installation of Burp Suite Enterprise Edition or Burp Suite Professional.
+    </li>
+</ul>
+<h2 id="scan-configuration-structure">Scan configuration structure</h2>
+<p>
+    There are two options that can feature in a custom scan configuration:
+</p>
+<ul>
+    <li>
+        <strong>Crawl options</strong> control Burp Scanner's behavior during the crawl phase of the scan. This enables you to specify details such as the maximum crawl length and how errors are handled when crawling.
+    </li>
+    <li>
+        <strong>Audit options</strong> control Burp Scanner's behavior during the audit phase of the scan. This enables you to specify details such as the types of issues reported and the insertion point types used.
+    </li>
+</ul>
+<p>
+    The crawl and audit options are virtually identical for both Burp Suite Professional and Burp Suite Enterprise Edition. The scan configurations themselves vary slightly in structure between the two products:
+</p>
+<ul>
+    <li>
+        Burp Suite Professional scan configurations can either contain crawl or audit options, but not both. To specify both crawl and audit options in Burp Suite Professional, you need to create and select separate configurations.
+    </li>
+    <li>
+        Burp Suite Enterprise Edition scan configurations can contain both crawl and audit options. These configurations have additional options, some of which are unique to Burp Suite Enterprise Edition.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/scanner/scan-configurations/audit-options.html">Audit options</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/scan-configurations/crawl-options.html">Crawl options</a>.
+        </li>
+        <li>
+            <a href="https://portswigger.net/burp/documentation/enterprise/user-guide/reference/custom-scan-config-settings.html">Custom scan configuration settings (Burp Suite Enterprise Edition)</a>.
+        </li>
+    </ul>
+</div>
+<h2 id="combining-custom-configurations">Combining custom configurations</h2>
+<p>
+    Both Burp Suite Enterprise Edition and Burp Suite Professional enable you to combine custom configurations together in a list. This includes built-in configurations, and any custom configurations that you create. Combining scan configurations enables you to tune Burp Scanner's behavior for certain sites and use cases.
+</p>
+<h2 id="setting-scan-configurations-for-folders">Setting scan configurations for folders</h2>
+<p>
+    In Burp Suite Enterprise Edition, you can set scan configurations for folders, subfolders, and sites. Subfolders and sites inherit the scan configurations from their parent folders. To learn how these scan configurations are combined by Burp Scanner, see <a href="https://portswigger.net/burp/documentation/enterprise/user-guide/working-with-sites/site-settings/scan-configurations/folder-configs.html">Defining the scan configuration for a folder</a>.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/custom-configs.html">Using custom scan configurations (Burp Suite Professional)</a>.
+        </li>
+        <li>
+            <a href="https://portswigger.net/burp/documentation/enterprise/user-guide/working-with-sites/site-settings/scan-configurations/custom-configs.html">Using custom scan configurations (Burp Suite Enterprise Edition)</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

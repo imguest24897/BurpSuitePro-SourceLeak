@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/index.html">Intruder</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/configure-attack/index.html">Configure attack</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/configure-attack/resource-pool.html">Resource pools</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Burp Intruder resource pools</h1>
+<p>
+    A resource pool is a group of tasks that share a quota of resources. Resource pools make it easier for you to:
+</p>
+<ul>
+    <li>
+        Manage and prioritize the usage of system resources, particularly across multiple attacks.
+    </li>
+    <li>
+        Test applications that tolerate automated requests at different rates.
+    </li>
+</ul>
+<h2 id="creating-resource-pools">Creating resource pools</h2>
+<p>
+    New tasks are assigned to a default resource pool. You can create a custom pool at any point before you start the attack. To create a resource pool:
+</p>
+<ol>
+    <li>
+        Go to <strong>Intruder &gt; Resource pool</strong>.
+    </li>
+    <li>
+        Select <strong>Create new resource pool</strong>.
+    </li>
+    <li>
+        Enter a name for the pool and configure the pool settings.
+    </li>
+    <li>
+        The pool is created when you start the attack.
+    </li>
+</ol>
+<p>
+    If you want to create a new pool after the attack has started, you need to do so in a different task or in the <strong>Settings</strong> dialog under <strong>Project</strong> &gt; <strong>Tasks</strong>.
+</p>
+<h2 id="resource-pool-settings">Resource pool settings</h2>
+<p>
+    Each resource pool can be configured with its own throttling settings:
+</p>
+<ul>
+    <li>
+        <strong>Maximum concurrent requests</strong> - Limit the number of requests that the attack sends simultaneously. This is useful so you don't overload the target server or exceed the configured rate limit.
+    </li>
+    <li>
+        <p>
+            <strong>Delay between requests</strong> - This is in milliseconds. You can choose from three delay types:
+        </p>
+        <ul>
+            <li>
+                <strong>Fixed</strong>.
+            </li>
+            <li>
+                <strong>With random variations</strong>.
+            </li>
+            <li>
+                <strong>Increase delay in increments</strong> - This enables you to determine the time taken for a session to expire if no requests are sent.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <strong>Automatic throttling</strong> - Automatically add a short delay between requests when the server responds with one of the specified codes. You can enable and configure this setting in the default resource pool.
+    </li>
+</ul>
+<h2 id="moving-tasks-between-resource-pools">Moving tasks between resource pools</h2>
+<p>
+    To move a task before you start an attack, go to <strong>Intruder &gt; Resource pool</strong>, and select the pool.
+</p>
+<p>
+    To move a task during an attack, select the pool from the <strong>Resource pool</strong> tab in the attack window. This enables you to manage the use of system resources in real time.
+</p>
+</body>
+</html>

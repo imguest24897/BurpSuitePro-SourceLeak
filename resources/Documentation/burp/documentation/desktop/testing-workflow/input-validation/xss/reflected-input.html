@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE" ignore-validation="OTHER_PAGE_KEYWORD_TOO_FREQUENT"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/index.html">Testing input validation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/xss/index.html">Cross-site scripting</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/xss/reflected-input.html">Identifying reflected input</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Identifying reflected input with Burp Suite</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/iNlSVClLoHA?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    Reflected input is when data is copied from a request and echoed into the application's immediate response. This is a prerequisite for a range of vulnerabilities, including reflected cross-site scripting (XSS). You can use Burp to test for reflected input:
+</p>
+<ul>
+    <li>
+        <label class="label-edition is-professional">Professional</label>
+        Use Burp Scanner to automatically flag reflected input.
+    </li>
+    <li>
+        Use Burp Repeater to manually identify reflected input.
+    </li>
+</ul>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="steps">Steps</h2>
+<p>
+    You can follow the processes below using the lab <a href="/web-security/cross-site-scripting/reflected/lab-html-context-nothing-encoded.html">Reflected XSS into HTML context with nothing encoded</a>.
+</p>
+<h3 id="scanning-for-reflected-inputs">Scanning for reflected inputs</h3>
+<p>
+    If you're using Burp Suite Professional, you can use Burp Scanner to test for reflected input:
+</p>
+<ol>
+    <li>
+        Identify a request that you want to investigate.
+    </li>
+    <li>
+        In <strong>Proxy &gt; HTTP history</strong>, right-click the request and select <strong>Do active scan</strong>. Burp Scanner audits the request.
+    </li>
+    <li>
+        <p>
+            Review the <strong>Issues</strong> tab on the <strong>Dashboard</strong> to identify any reflected input that Burp Scanner flags.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/tutorials/reflected-input-1.png" alt="Identify reflected input that Burp Scanner flags" class="center-block">
+        </div>
+    </li>
+</ol>
+<h3 id="identifying-reflected-input-manually">Identifying reflected input manually</h3>
+<ol>
+    <li>
+        In <strong>Proxy &gt; HTTP history</strong>, right-click the message you want to investigate and select <strong>Send to Repeater</strong>.
+    </li>
+    <li>
+        Replace the value of a parameter with an easily identifiable unique string. For example, <code>xsstest</code>.
+    </li>
+    <li>
+        Click <strong>Send</strong>.
+    </li>
+    <li>
+        <p>
+            Review the response. Use the text editor search function to identify whether the unique string is reflected in the response.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/tutorials/reflected-input-2.png" alt="Use text editor search function" class="center-block">
+        </div>
+    </li>
+    <li>
+        Repeat Steps 2 to 4 to test each parameter in the request.
+    </li>
+</ol>
+<h2 id="next-steps">Next steps</h2>
+<p>
+    Once you have identified reflected input, you can investigate the request further to test for vulnerabilities, such as:
+</p>
+<ul>
+    <li>
+        Cross-site scripting
+    </li>
+    <li>
+        Client-side template injection
+    </li>
+    <li>
+        Server-side template injection
+    </li>
+    <li>
+        Input transformations
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/scanner/index.html">Burp Scanner</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/repeater/index.html">Burp Repeater</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

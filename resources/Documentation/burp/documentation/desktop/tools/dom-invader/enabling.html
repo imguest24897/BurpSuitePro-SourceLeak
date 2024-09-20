@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/index.html">DOM Invader</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/enabling.html">Enabling DOM Invader</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Enabling DOM Invader</h1>
+<p>
+    DOM Invader is preinstalled in Burp's browser, but is disabled by default as some of its features may interfere with your other testing activities.
+</p>
+<p>
+    To enable DOM Invader:
+</p>
+<ol>
+    <li>
+        <p>
+            Go to the <strong>Proxy &gt; Intercept</strong> tab and open Burp's browser.
+        </p>
+    </li>
+    <li>
+        <p>
+            In the upper-right corner of the browser window, click the Burp Suite logo. If you can't see this logo, click the jigsaw icon first. A panel opens containing tabs for the Burp Suite Navigation Recorder and DOM Invader settings menu.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/dom-invader-settings-main.png" alt="Enabling DOM invader">
+        </div>
+    </li>
+    <li>
+        <p>
+            From the DOM Invader settings, toggle the switch so that <strong>DOM Invader is on</strong>.
+        </p>
+    </li>
+    <li>
+        <p>
+            Click <strong>Reload</strong> to refresh the browser. This is necessary for your changes to take effect.
+        </p>
+    </li>
+    <li>
+        <p>
+            Right-click anywhere in the main browser window and select <strong>Inspect</strong> to open the browser's DevTools panel. Note that this now contains the <strong>DOM Invader</strong> tab. For the best experience, we recommend docking the panel to the bottom of the browser window.
+        </p>
+    </li>
+</ol>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/dom-invader-innerHTML-sink.png" alt="Docking the DevTools panel to the bottom of the browser window">
+</div>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        By default, DOM Invader remembers your previous settings, including whether it was on or off. Keep this in mind if you close Burp's browser while DOM Invader is still enabled. To disable this behavior, go to <strong>Settings &gt; Tools &gt; Burp's browser</strong> and deselect <strong>Store settings and history after closing</strong>.
+    </p>
+</div>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/external-browser-config/index.html">External browser configuration</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/external-browser-config/browser-config-safari.html">Safari</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Configuring Safari to work with Burp Suite</h1>
+<p>
+    You need to configure Safari so that you can use it for testing with Burp Suite.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        These steps are only necessary if you want to use an external browser for manual testing with Burp. If you prefer, you can just use <a href="/burp/documentation/desktop/tools/burps-browser.html">Burp's browser</a>, which is preconfigured to work with Burp Proxy already. To access Burp's browser, go to the <strong>Proxy &gt; Intercept</strong> tab, and click <strong>Open Browser</strong>.
+    </p>
+</div>
+<p>
+    To configure Safari, follow these steps:
+</p>
+<ol>
+    <li>
+        <p>
+            In Safari, go to the <strong>Safari</strong> menu and click <strong>Preferences</strong>.
+        </p>
+        <div class="section-small">
+            <img src="/burp/documentation/desktop/images/support/InstallingandConfiguring_ConfiguringyourBrowser_Safari_1.jpg" alt="Safari preferences" class="center-block">
+        </div>
+    </li>
+    <li>
+        <p>
+            Click the <strong>Advanced</strong> tab and, under <strong>Proxies</strong>, click the <strong>Change Settings</strong> button. This will open the network configuration settings for your current network adapter.
+        </p>
+        <div class="section-small">
+            <img src="/burp/documentation/desktop/images/support/InstallingandConfiguring_ConfiguringyourBrowser_Safari_1.5.jpg" alt="Safari advanced settings" class="center-block">
+        </div>
+    </li>
+    <li>
+        In the <strong>Proxies</strong> tab, check the <strong>Web Proxy (HTTP)</strong> box and enter your Burp Proxy listener address in the <strong>Web Proxy Server</strong> field (by default, <code>127.0.0.1</code>), and your Burp Proxy listener port in the (unlabelled) port field (by default, <code>8080</code>).
+    </li>
+    <li>
+        <p>
+            Repeat these steps for the <strong>Secure Web Proxy (HTTPS)</strong> checkbox.
+        </p>
+        <div class="section-small">
+            <img src="/burp/documentation/desktop/images/support/InstallingandConfiguring_ConfiguringyourBrowser_Safari_2.jpg" alt="Safari Proxy settings" class="center-block">
+        </div>
+    </li>
+    <li>
+        Ensure the <strong>Bypass proxy settings for these Hosts &amp; Domains</strong> box is empty.
+    </li>
+    <li>
+        <p>
+            Click <strong>OK</strong> and <strong>Apply</strong> and close the open dialogs.
+        </p>
+        <div class="section-small">
+            <img src="/burp/documentation/desktop/images/support/InstallingandConfiguring_ConfiguringyourBrowser_Safari_3.jpg" alt="Safari clear bypass settings" class="center-block">
+        </div>
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Next step</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/external-browser-config/check-browser-configuration.html">Check your browser proxy configuration</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

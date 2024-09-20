@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/index.html">Scanner</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/bchecks/index.html">BCheck definitions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/bchecks/worked-examples/index.html">Worked examples</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/bchecks/worked-examples/insertion-point.html">Example insertion point check</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-enterprise">Enterprise</label>
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Example insertion point check</h1>
+<p>
+    This BCheck checks for suspicious input transformation. It is an example of a check that runs once for each insertion point found during the crawl.
+</p>
+<p>
+    The check works by adding a simple mathematical calculation to the end of a request payload. If the answer to the calculation is returned in the response, then it is possible that the application is vulnerable to some form of server-side code injection.
+</p>
+<code class="pre-wrap">
+metadata:
+    language: v2-beta
+    name: "Insertion-point-level"
+    description: "Inserts a calculation into each parameter to detect suspicious input transformation"
+    author: "Carlos Montoya"
+
+define:
+    calculation="{{1337*1337}}"
+    answer="1787569"
+
+given insertion point then
+
+    if not({answer} in {base.response}) then
+        send payload:
+            appending: {calculation}
+
+        if {answer} in {latest.response} then
+            report issue:
+                severity: high
+                confidence: tentative
+                detail: "The application transforms input in a way that suggests it might be vulnerable to some kind of server-side code injection."
+                remediation: "Manual investigation is advised."
+        end if
+    end if
+        </code>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-1-add-metadata">Step 1: Add metadata</h2>
+<code class="pre-wrap">
+metadata:
+    language: v2-beta
+    name: "Insertion-point-level"
+    description: "Inserts a calculation into each parameter to detect suspicious input transformation"
+    author: "Carlos Montoya"
+        </code><p>
+    The definition starts with a <code>metadata</code> block. For more information on available metadata properties, see the reference documentation.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-2-define-the-calculation">Step 2: Define the calculation</h2>
+<code class="pre-wrap">
+define:
+    calculation="{{1337*1337}}"
+    answer="1787569"
+        </code><p>
+    The next step is to define variables containing the mathematical calculation to be used in the check and the answer to that calculation.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-3-send-the-request">Step 3: Send the request</h2>
+<code class="pre-wrap">
+given insertion point then
+    if not({answer} in {base.response}) then
+        send payload:
+            appending: {calculation}
+        </code><p>
+    The next step is to send the request.
+</p>
+<p>
+    Before the request is sent, Burp Scanner reduces false positives by checking that the answer to the calculation does not already appear in the base response. If it does not find a string matching the answer, Burp Scanner sends a request with the calculation appended to its payload.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-4-report-issues">Step 4: Report issues</h2>
+<code class="pre-wrap">
+if {answer} in {latest.response} then
+    report issue:
+        severity: high
+        confidence: tentative
+        detail: "The application transforms input in a way that suggests it might be vulnerable to some kind of server-side code injection."
+        remediation: "Manual investigation is advised."
+        </code><p>
+    The final step is to report an issue where appropriate. If the response contains the answer to the calculation then Burp Scanner knows that the application can transform input (in this case, by solving the calculation) and reports an issue with <code>tentative</code> confidence.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <p>
+                <a href="/burp/documentation/scanner/bchecks/bcheck-definition-reference.html">BCheck definition reference</a>.
+            </p>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

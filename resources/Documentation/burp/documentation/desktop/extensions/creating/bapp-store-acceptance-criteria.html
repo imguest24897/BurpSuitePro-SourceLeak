@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/extensions/index.html">Extensions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/extensions/creating/index.html">Creating</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/extensions/creating/bapp-store-acceptance-criteria.html">BApp Store acceptance criteria</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>BApp Store acceptance criteria</h1>
+<p>
+    You can share your extensions with the community by submitting them to the BApp Store. We review all submitted BApps for security and quality, before we make a decision on whether to include them in the BApp Store.
+</p>
+<p>
+    Before you submit your extension, make sure that it meets the following acceptance criteria:
+</p>
+<ol>
+    <li>
+        <h4>It performs a unique function.</h4>
+        <p>
+            Make sure that your extension doesn't duplicate the function of an existing extension in the BApp Store.
+        </p>
+        <p>
+            If your idea isn't entirely new, you might be better off tailoring an existing BApp to suit your purposes. You can find the source code for every extension in the BApp Store on our <a href="https://github.com/PortSwigger">GitHub repository</a>.
+        </p>
+    </li>
+    <li>
+        <h4>It has a clear, descriptive name.</h4>
+        <p>
+            Make sure that the name clearly describes what the extension does.
+        </p>
+        <p>
+            You can also provide a one-line summary that appears in the list (web only), as well as a more detailed description.
+        </p>
+    </li>
+    <li>
+        <h4>It operates securely.</h4>
+        <p>
+            Users may be testing sites that they don't trust, so it's important that extensions don't expose users to attack. Treat the content of HTTP messages as untrusted. Extensions should operate securely in expected usage. Data entered by a user into the GUI can generally be trusted, but if there is auto-fill from untrusted sources, don't assume the user will check the contents.
+        </p>
+    </li>
+    <li>
+        <h4>It includes all dependencies.</h4>
+        <p>
+            A major benefit of the BApp Store is one-click installation. If your extension includes all dependencies, it is much easier for users to get started. This also avoids version mismatches, where an underlying tool is updated but the BApp is not.
+        </p>
+    </li>
+    <li>
+        <h4>It uses threads to maintain responsiveness.</h4>
+        <p>
+            To maintain responsiveness, perform slow operations in a background thread:
+        </p>
+        <ul>
+            <li>
+                Don't perform slow operations - such as HTTP requests - in the Swing Event Dispatch Thread. This causes Burp to appear unresponsive, as the whole GUI must wait until the slow operation completes.
+            </li>
+            <li>
+                Avoid slow operations when using <code>ProxyHttpRequestHandler</code>, <code>ProxyHttpResponseHandler</code> and <code>HttpHandler</code>.
+            </li>
+            <li>
+                To avoid concurrency issues, protect shared data structures with locks, and take care to avoid deadlocks.
+            </li>
+        </ul>
+        <div class="highlightedarea">
+            <h4>Note</h4>
+            <p>
+                Burp does not catch and report exceptions in background threads. To report background exceptions, surround the full thread operation with a try/catch block and write any stack traces to the extension error stream.
+            </p>
+        </div>
+    </li>
+    <li>
+        <h4>It unloads cleanly.</h4>
+        <p>
+            When an extension unloads, make sure that it releases all resources. The extension needs to register an unload handler, via <code>Extension.registerUnloadingHandler()</code>. The most common example of resources to be unloaded is background threads; it's important that background threads are terminated in <code>ExtensionUnloadingHandler.extensionUnloaded()</code>.
+        </p>
+    </li>
+    <li>
+        <h4>It uses Burp networking.</h4>
+        <p>
+            When making an HTTP request - to the target, or otherwise - it's preferable to use Burp's <code>Http.issueHttpRequest()</code>, instead of libraries like <code>java.net.URL</code>. This sends the request through the Burp core, so settings like upstream proxies and session handling rules will be obeyed. Many users are on a corporate network that only allows Internet access through a proxy. In addition, avoid performing any communication to the target from within <code>ScanCheck.passiveAudit()</code>.
+        </p>
+    </li>
+    <li>
+        <h4>It supports offline working.</h4>
+        <p>
+            Some Burp users need to operate from high-security networks without Internet access. To support these users, extensions that contact an online service to receive vulnerability definitions or other data should include a copy of recent definitions.
+        </p>
+    </li>
+    <li>
+        <h4>It can cope with large projects.</h4>
+        <p>
+            Some users work with very large projects. To support such users, avoid keeping long-term references to objects passed to functions like <code>HttpHandler.handleHttpRequest()</code> or <code>ScanCheck.activeAudit()</code>. If you need to keep a long-term reference to an HTTP message, use <code>Persistence.temporaryFileContext()</code>. Also, take care with <code>SiteMap.requestResponses()</code> and <code>Proxy.history()</code> as these can return huge results.
+        </p>
+    </li>
+    <li>
+        <h4>It provides a parent for GUI elements.</h4>
+        <p>
+            Make sure that any GUI elements that the extension creates, such as popup windows or messages, are children of the main Burp Frame. This is particularly important when users have multiple monitors, so that popups appear on the correct one.
+        </p>
+        <p>
+            To get the Burp Frame, use <code>SwingUtils.suiteFrame()</code>.
+        </p>
+    </li>
+    <li>
+        <h4>It uses the Montoya API artifact.</h4>
+        <p>
+            You should reference the <code>montoya-api</code> artifact using a build tool like Gradle or Maven. If you're starting a new project, we recommend using Gradle. For more information, see <a href="/burp/documentation/desktop/extensions/creating/index.html">Creating Burp extensions</a>.
+        </p>
+    </li>
+</ol>
+</body>
+</html>

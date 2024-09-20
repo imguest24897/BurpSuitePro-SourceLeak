@@ -1,0 +1,18 @@
+{
+    "crawler": {
+        "live_passive_crawl": {
+            "add_all_urls": false,
+            "add_form_submissions": false,
+            "add_item_itself": true,
+            "add_links": true,
+            "add_same_domain": true,
+            "add_urls_in_scope": true,
+            "custom_scope":{
+                "advanced_mode":false,
+                "exclude":[],
+                "include":[]
+            },
+            "scope_type": "suite"
+        }
+    }
+}

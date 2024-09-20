@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/sequencer/index.html">Sequencer</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/sequencer/sample/index.html">Token sample</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Obtaining a token sample</h1>
+<p>
+    You need to obtain a sample of tokens to run a Burp Sequencer analysis. You can do this in two ways:
+</p>
+<ul>
+    <li>
+        Perform an automatic live capture of tokens directly from the target.
+    </li>
+    <li>
+        Manually load a sample of tokens that you have already acquired.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Sequencer lets you perform an analysis with a sample of only 100 tokens, but this should not be considered reliable for any serious purpose. A sample of 5,000 tokens is usually sufficient, although this may depend on the sample's characteristics. Sequencer supports a maximum sample size of 20,000 tokens, for compliance with the FIPS standards.
+    </p>
+</div>
+<h2 id="configuring-a-live-capture-of-tokens">Configuring a live capture of tokens</h2>
+<p>
+    To automatically capture tokens from the target response:
+</p>
+<ol>
+    <li>
+        Locate a request that returns a token that you want to analyze.
+    </li>
+    <li>
+        Right-click the request and choose <strong>Send to Sequencer</strong> from the context menu. You can send a request from anywhere in Burp.
+    </li>
+    <li>
+        Select the token in the <strong>Token location within response</strong> panel.
+    </li>
+    <li>
+        Click <strong>Start live capture</strong>.
+    </li>
+</ol>
+<p>
+    A new results window opens, in which Sequencer repeatedly issues the request and extracts the relevant token from the application's responses. To learn about the live capture process, see <a href="/burp/documentation/desktop/tools/sequencer/sample/live-capture.html">Burp Sequencer live capture</a>.
+</p>
+<h3 id="selecting-a-token-location">Selecting a token location</h3>
+<p>
+    You can specify the token you want to analyze in the <strong>Token location within response</strong> panel. The following options are available:
+</p>
+<ul>
+    <li>
+        <strong>Cookie</strong> - Select a cookie from the drop-down list. This is the most common method to pass session tokens to clients.
+    </li>
+    <li>
+        <strong>Form field</strong> - Select an HTML form field value from the drop-down list. You can use this method to transmit anti-CSRF tokens and other per-page tokens to clients.
+    </li>
+    <li>
+        <strong>Custom location</strong> - Specify a custom location within the response that contains the token you want to analyze. This uses the <a href="/burp/documentation/desktop/settings/response-extraction.html">response extraction rule dialog</a>. This is useful when the token doesn't appear in a usual form field.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            For more information on the live capture process, see <a href="/burp/documentation/desktop/tools/sequencer/sample/live-capture.html">Burp Sequencer live capture</a>.
+        </li>
+        <li>
+            You can control how Sequencer makes HTTP requests and harvests tokens during a live capture. For more information, see <a href="/burp/documentation/desktop/settings/tools/sequencer.html#live-capture">Live capture settings</a>.
+        </li>
+    </ul>
+</div>
+<h2 id="manually-loading-tokens">Manually loading tokens</h2>
+<p>
+    You can load Sequencer with a sample of tokens that you have already obtained, for example from an earlier live capture, or an Intruder attack:
+</p>
+<ol>
+    <li>
+        Go to <strong>Sequencer &gt; Manual load</strong>.
+    </li>
+    <li>
+        <p>
+            Insert the tokens:
+        </p>
+        <ul>
+            <li>
+                To paste tokens from the clipboard, click <strong>Paste</strong>.
+            </li>
+            <li>
+                To load tokens from a file, click <strong>Load</strong>.
+            </li>
+        </ul>
+    </li>
+    <li>
+        Use the details of the shortest and longest lengths in the display field to make sure that the sample has loaded correctly.
+    </li>
+    <li>
+        Click <strong>Analyze now</strong>. The analysis begins in a new results window.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Make sure that the tokens are in a simple newline-delimited text format.
+    </p>
+</div>
+</body>
+</html>

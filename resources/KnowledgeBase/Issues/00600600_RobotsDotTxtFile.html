@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+Robots.txt file
+<h1>Typical severity</h1>
+
+Information
+
+<h1>Issue description</h1>
+
+<p>The file robots.txt is used to give instructions to web robots, such as search engine crawlers, about locations within the web site that robots are allowed, or not allowed, to crawl and index.</p>
+<p>The presence of the robots.txt does not in itself present any kind of security vulnerability. However, it is often used to identify restricted or private areas of a site's contents. The information in the file may therefore help an attacker to map out the site's contents, especially if some of the locations identified are not linked from elsewhere in the site. If the application relies on robots.txt to protect access to these areas, and does not enforce proper access control over them, then this presents a serious vulnerability.</p>
+
+<h1>Issue remediation</h1>
+
+<p>The robots.txt file is not itself a security threat, and its correct use can represent good practice for non-security reasons. You should not assume that all web robots will honor the file's instructions. Rather, assume that attackers will pay close attention to any locations identified in the file. Do not rely on robots.txt to provide any kind of protection over unauthorized access.</p>
+
+<h1>References</h1>
+
+
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+<li><a href="https://cwe.mitre.org/data/definitions/200.html">CWE-200: Information Exposure</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

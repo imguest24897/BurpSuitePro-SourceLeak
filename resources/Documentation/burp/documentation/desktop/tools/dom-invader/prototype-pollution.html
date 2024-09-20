@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE" ignore-validation="OTHER_PAGE_KEYWORD_TOO_FREQUENT"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/index.html">DOM Invader</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/prototype-pollution.html">Testing for client-side prototype pollution</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Testing for client-side prototype pollution</h1>
+<p>
+    DOM Invader provides a number of features to help you test for client-side prototype pollution vulnerabilities. These enable you to perform the following key tasks:
+</p>
+<ul>
+    <li>
+        <p>
+            Automatically detect sources for prototype pollution in the URL and any JSON objects sent via web messages. This includes detecting alternative techniques using the same source.
+        </p>
+    </li>
+    <li>
+        <p>
+            Generate a proof of concept by polluting the <code>Object.prototype</code> using any discovered sources. You can then manually verify the vulnerability via the browser console.
+        </p>
+    </li>
+    <li>
+        <p>
+            Scan for potential gadgets that you can use to craft an exploit.
+        </p>
+    </li>
+</ul>
+<h2 id="enabling-prototype-pollution">Enabling prototype pollution</h2>
+<p>
+    To avoid interfering with your target site's functionality, DOM Invader's prototype pollution features are disabled by default. To enable these features:
+</p>
+<ol>
+    <li>
+        <p>
+            Go to the DOM Invader settings menu.
+        </p>
+    </li>
+    <li>
+        <p>
+            Under <strong>Attack types</strong>, toggle the switch so that <strong>Prototype pollution is on</strong>.
+        </p>
+    </li>
+    <li>
+        <p>
+            Click <strong>Reload</strong> to refresh the browser. This is necessary for your changes to take effect.
+        </p>
+    </li>
+</ol>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/dom-invader-prototype-pollution-enabling.png" alt="Enabling prototype pollution in DOM Invader">
+</div>
+<p>
+    DOM Invader now scans for prototype pollution sources as you browse.
+</p>
+<h2 id="detecting-sources-for-prototype-pollution">Detecting sources for prototype pollution</h2>
+<p>
+    Once you enable prototype pollution, DOM Invader automatically checks the page for sources that enable you to add arbitrary properties to the <code>Object.prototype</code>. Any sources it identifies are displayed in the <strong>DOM</strong> view, along with some useful information and features for further testing.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/dom-invader-prototype-pollution-sources.png" alt="Detecting sources for prototype pollution">
+</div>
+<p>
+    In this example, DOM Invader has identified two potential techniques for polluting the <code>Object.prototype</code> using the <code>location.hash</code> source.
+</p>
+<h2 id="manually-confirming-sources-for-prototype-pollution">Manually confirming sources for prototype pollution</h2>
+<p>
+    Once DOM Invader has identified a potential source for prototype pollution, it also helps you to manually confirm this.
+</p>
+<p>
+    To manually test whether prototype pollution is possible via this source:
+</p>
+<ol>
+    <li>
+        <p>
+            From the <strong>DOM</strong> view, click the <strong>Test</strong> button next to the relevant source. DOM Invader opens a new tab in which it uses the selected source to add an arbitrary property to the <code>Object.prototype</code>.
+        </p>
+    </li>
+    <li>
+        <p>
+            In the new tab, go to the browser console. Note that DOM Invader has automatically output the <code>Object.prototype</code>.
+        </p>
+    </li>
+    <li>
+        <p>
+            Expand the nodes to confirm that this object contains a proof-of-concept <code>testproperty</code>.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/dom-invader-prototype-pollution-poc.png" alt="Polluting the Object.prototype with a PoC property">
+        </div>
+    </li>
+    <li>
+        <p>
+            In the console, create a new object:
+        </p>
+        <code class="code-scrollable">let myObject = {};</code>
+    </li>
+    <li>
+        <p>
+            Confirm that your new object has inherited <code>testproperty</code> via the prototype chain:
+        </p>
+        <code class="code-scrollable">console.log(myObject.testproperty);
+// Output: 'DOM_INVADER_PP_POC'</code>
+    </li>
+</ol>
+<h2 id="scanning-for-prototype-pollution-gadgets">Scanning for prototype pollution gadgets</h2>
+<p>
+    A prototype pollution source is of no use unless you also have access to a "gadget" property. This is any user-controllable property that is passed to a sink without being properly sanitized. Finding such a gadget manually is extremely tedious, but DOM Invader can automate this process.
+</p>
+<p>
+    To scan for gadgets using a particular source:
+</p>
+<ol>
+    <li>
+        <p>
+            From the <strong>DOM</strong> view, click the <strong>Scan for gadgets</strong> button next to any prototype pollution source that DOM Invader has found. DOM Invader opens a new tab and starts scanning for suitable gadgets.
+        </p>
+    </li>
+    <li>
+        <p>
+            In the same tab, open the <strong>DOM Invader</strong> tab in the DevTools panel. Once the scan is finished, the <strong>DOM</strong> view displays any sinks that DOM Invader was able to access via the identified gadgets. In the example below, a gadget property called <code>html</code> was passed to the <code>innerHTML</code> sink.
+        </p>
+    </li>
+</ol>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/dom-invader-prototype-pollution-gadget.png" alt="Scanning for prototype pollution gadgets">
+</div>
+<h2 id="generating-a-proof-of-concept-exploit">Generating a proof-of-concept exploit</h2>
+<p>
+    Once DOM Invader finds a gadget for prototype pollution, it is able to automatically generate a proof-of-concept by combining the source, gadget, and sink to confirm the XSS.
+</p>
+<p>
+    Simply click the Exploit button next to the discovered sink. DOM Invader opens a new window in which it successfully calls <code>alert()</code>.
+</p>
+<div class="highlightedarea">
+    <h4>Read more</h4>
+    <p>
+        DOM Invader is highly configurable. For more information about DOM Invader's prototype pollution features and how you can fine-tune their behavior for a particular site, see <a href="/burp/documentation/desktop/tools/dom-invader/settings/prototype-pollution.html">Prototype pollution settings</a>.
+    </p>
+</div>
+</body>
+</html>

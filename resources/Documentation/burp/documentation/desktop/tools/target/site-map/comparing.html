@@ -1,0 +1,184 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/index.html">Target</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/site-map/index.html">Site map</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/site-map/comparing.html">Comparing site maps</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Comparing site maps</h1>
+<p>
+    You can use this function to compare URLs for two site maps. This can help you find access control vulnerabilities, and identify areas to inspect manually. For example:
+</p>
+<ul>
+    <li>
+        You can use accounts with different privilege levels to map the application, and compare the results. This enables you to identify functionality that is visible to one user but not the other.
+    </li>
+    <li>
+        You can use an account with high privileges to map the application, and then re-request the entire site map from a low-privileged account. This enables you to identify whether access to privileged functions is properly controlled.
+    </li>
+    <li>
+        You can use two different accounts of the same type to map the application, and compare the results. This enables you to identify cases where user-specific identifiers are used to access sensitive resources, and determine whether per-user data is properly segregated.
+    </li>
+</ul>
+<p>
+    To access the comparison wizard, right-click the site map and select <strong>Compare site maps</strong> from the context menu. The wizard enables you to configure:
+</p>
+<ul>
+    <li>
+        The <a href="#site-map-sources">sources</a> of the site maps you want to compare.
+    </li>
+    <li>
+        How requests are <a href="#request-matching">matched</a> between the site maps.
+    </li>
+    <li>
+        How to perform the <a href="#response-comparison">response comparison</a>.
+    </li>
+</ul>
+<h2 id="site-map-sources">Site map sources</h2>
+<p>
+    You need to select the sources of the site maps that you want to compare:
+</p>
+<ul>
+    <li>
+        <strong>Use current site map</strong> - Use the site map in Burp's Target tab.
+    </li>
+    <li>
+        <label class="label-edition is-professional">Professional</label>
+        <strong>Load from Burp project file</strong> - Use a site map from a saved Burp project file. This is useful if you have already mapped an application using accounts with different privilege levels.
+    </li>
+    <li>
+        Either of the above, re-requested in a different session context.
+    </li>
+</ul>
+<p>
+    You can use all of the contents of the site map, or you can restrict the comparison to selected or in-scope items.
+</p>
+<p>
+    If you re-request a site map in a different session context, please note:
+</p>
+<ul>
+    <li>
+        <p>
+            You need to create <a href="/burp/documentation/desktop/settings/sessions/session-handling-rules.html">session handling rules</a> so that the requests occur in the correct session context. Configure the rules to apply to requests made by the <a href="/burp/documentation/desktop/tools/target/index.html">Target</a> tool:
+        </p>
+        <ul>
+            <li>
+                In simple cases, you may be able to use a rule that updates requests from the <a href="/burp/documentation/desktop/tools/target/index.html">Target</a> tool with cookies from Burp's <a href="/burp/documentation/desktop/settings/sessions/index.html#cookie-jar">cookie jar</a>. The session uses the browser to acquire the desired session context before the comparison is done.
+            </li>
+            <li>
+                In other cases, you may need to create more complex session handling rules to validate the current session context and log in again. To learn more, see the <a href="/burp/documentation/desktop/settings/sessions/index.html">session handling help</a>.
+            </li>
+        </ul>
+    </li>
+    <li>
+        We recommend that you exclude any requests that could disrupt the session context. These include login, logout, and user impersonation functions. To exclude these requests, restrict the comparison to selected or in-scope items.
+    </li>
+</ul>
+<h2 id="request-matching">Request matching</h2>
+<p>
+    Burp compares the two site maps and matches each request across them, to identify any differences.
+</p>
+<p>
+    Burp matches requests based on the URL file path, HTTP method and the names of parameters in the query string and message body.
+</p>
+<p>
+    For some applications, you may want to customize how Burp performs the matches:
+</p>
+<ul>
+    <li>
+        <strong>URL file path</strong> - You need to include this for each comparison. It identifies that two requests are equivalent.
+    </li>
+    <li>
+        <strong>HTTP method</strong> - We recommend that you include this. In most cases, applications use GET and POST requests to the same URL for different purposes.
+    </li>
+    <li>
+        <p>
+            <strong>URL query string</strong> - In most cases, you need to include this. Requests with different URL parameters are normally used for different application functions. There are two options:
+        </p>
+        <ul>
+            <li>
+                <strong>Match parameter names only</strong> - Match query strings with the same parameter names but different values. This is useful if parameter values contain user-specific or ephemeral data. Deselect this setting if parameter names identify the application function being performed, for example <code>action=CreateUser</code>.
+            </li>
+            <li>
+                <strong>Ignore these parameters</strong> - Specify parameters that are ignored when matching query strings.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <strong>Request body</strong> - We recommend you include this, because requests with different body parameters are normally used for different application functions. You can choose from the same two options as <strong>URL query string</strong>.
+    </li>
+    <li>
+        <strong>Request headers</strong> - Prevents requests with different HTTP headers after the first line from being matched. In most cases, you don't need to select this setting: browsers may modify request headers for reasons that have nothing to do with application-level functionality. Enable this setting if the application uses script-generated requests with custom HTTP headers, to identify the function of requests.
+    </li>
+</ul>
+<h2 id="response-comparison">Response comparison</h2>
+<p>
+    Burp compares the responses to matched requests, to identify any differences. You can customize the response comparison to suit your target application:
+</p>
+<ul>
+    <li>
+        <strong>Response headers</strong> - Include all headers, or restrict the comparison to specific headers. We recommend that you include response headers with values that reflect the application's functionality and state, such as <code>Set-Cookie</code>.
+    </li>
+    <li>
+        <p>
+            <strong>Form field values</strong> - Include all form field values, or restrict the comparison to specific values. Form field values often reflect differences that can identify access control problems. To analyze these:
+        </p>
+        <ul>
+            <li>
+                Highlight the form field values for manual review.
+            </li>
+            <li>
+                Modify the setting to exclude irrelevant fields.
+            </li>
+            <li>
+                Repeat the comparison.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <strong>Whitespace</strong> - Choose to ignore whitespace-only variations in responses. These are not normally relevant to access control issues.
+    </li>
+    <li>
+        <strong>MIME type</strong> - Skip comparisons of non-text content. These comparisons are computationally intensive. Also, the responses are likely to contain static content such as images, which are not relevant to access control issues.
+    </li>
+</ul>
+<p>
+    The default settings work well in most situations. They are designed to reduce noise, by ignoring various common HTTP headers and form fields that have ephemeral values, and whitespace-only variations in responses.
+</p>
+<p>
+    The results are displayed in a table. You can customize and sort the table contents. For more information, see <a href="/burp/documentation/desktop/burps-layout/customize-tables.html">Customizing Burp's tables</a>.
+</p>
+</body>
+</html>

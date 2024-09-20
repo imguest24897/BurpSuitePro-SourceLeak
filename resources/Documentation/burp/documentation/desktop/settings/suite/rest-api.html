@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/index.html">Settings</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/suite/index.html">Suite</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/suite/rest-api.html">REST API</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>REST API settings</h1>
+<p>
+    The REST API enables external tools to integrate with Burp Suite. These settings enable you to:
+</p>
+<ul>
+    <li>
+        Enable the service.
+    </li>
+    <li>
+        Specify the URL on which it should run.
+    </li>
+    <li>
+        Configure API keys.
+    </li>
+</ul>
+<h2 id="enabling-the-rest-api">Enabling the REST API</h2>
+<p>
+    To enable the REST API service, select the <strong>Service running</strong> checkbox.
+</p>
+<h2 id="service-url">Service URL</h2>
+<p>
+    To specify the service URL and port:
+</p>
+<ul>
+    <li>
+        Click <strong>Change</strong> next to the current URL to display the <strong>Configure REST API URL</strong> dialog.
+    </li>
+    <li>
+        Enter the port number that Burp should bind to.
+    </li>
+    <li>
+        Select the address that Burp should bind to. Burp can bind to the loopback address, all interfaces, or a specified address.
+    </li>
+    <li>
+        Click <strong>OK</strong>.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        We strongly recommend that you do not configure Burp to bind to non-loopback interfaces when connected to untrusted networks.
+    </p>
+</div>
+<h2 id="api-key">API key</h2>
+<p>
+    By default, Burp's REST API requires you to use an API key to authenticate when you make calls. To disable this requirement, select <strong>Allow access without API key</strong>.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        The <strong>Allow access without API key</strong> option is not recommended. If API keys are not required then anyone with network access to the service endpoint can trigger actions within Burp and access its data. This includes CSRF requests from untrusted websites that you browse on the same machine as Burp. API keys should always be used even when the service is only listening on the loopback interface.
+    </p>
+</div>
+<p>
+    The API key settings display a list of current API keys. You can create separate API keys for different purposes, and enable or disable them using the checkboxes in the list.
+</p>
+<p>
+    To create a new API key:
+</p>
+<ul>
+    <li>
+        Click <strong>New</strong> next to the list of API users to display the <strong>New API key</strong> dialog.
+    </li>
+    <li>
+        Enter a name for the API key.
+    </li>
+    <li>
+        Click <strong>Copy key to clipboard</strong> and store the key in a safe place.
+    </li>
+    <li>
+        Click <strong>OK</strong>.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        API keys are secret, and should be handled carefully. Note that you can only retrieve the value of an API key at the time that it is created.
+    </p>
+</div>
+<p>
+    You can also click <strong>Edit</strong> to edit the name of a key, or <strong>Delete</strong> to remove it from the list.
+</p>
+<p>
+    Once you have configured the service, you can browse the API documentation and interact with the API at <code>[Service URL]/[API key]</code>.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        The REST API exposes sensitive functionality and data. You should not enable the REST API service on untrusted network interfaces, and you should use separate API keys for each client that you grant access to.
+    </p>
+</div>
+<p>
+    The <strong>REST API</strong> settings are user settings. They apply to all installations of Burp on your machine.
+</p>
+</body>
+</html>

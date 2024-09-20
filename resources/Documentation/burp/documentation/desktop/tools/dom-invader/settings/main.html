@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/index.html">DOM Invader</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/settings/index.html">Settings</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/settings/main.html">Main</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Main DOM Invader settings</h1>
+<p>
+    To access the DOM Invader settings menu, click the Burp Suite logo in the upper-right corner of the browser, then switch to the <strong>DOM Invader</strong> tab.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/dom-invader-settings-main.png" alt="Main DOM Invader settings">
+</div>
+<p>
+    From the <strong>Main settings</strong> section, you have the following options.
+</p>
+<h2 id="enable-dom-invader">Enable DOM Invader</h2>
+<p>
+    This is the global toggle for enabling DOM Invader. DOM Invader is disabled by default as some of its features may interfere with the target website's functionality in a way that impacts your other testing activities. When enabled, you can access DOM Invader from its tab in the browser's DevTools panel.
+</p>
+<h2 id="postmessage-interception">Postmessage interception</h2>
+<p>
+    When this setting is enabled, you can use the <strong>Messages</strong> view in the DevTools panel to test for DOM XSS in the site's web messages. For more information on DOM Invader's web message features, see <a href="/burp/documentation/desktop/tools/dom-invader/web-messages.html">Testing for DOM XSS using web messages</a>.
+</p>
+<p>
+    There are also a few sub-settings that let you fine-tune this behavior. For more information, see <a href="/burp/documentation/desktop/tools/dom-invader/settings/web-messages.html">Web message settings</a>.
+</p>
+<h2 id="customizing-sources-and-sinks">Customizing sources and sinks</h2>
+<p>
+    To open the sources and sink settings, click the cog icon next to the main DOM Invader switch. From here, you can control which sources and sinks DOM Invader instruments. By default, all sources are hidden and only the most interesting sinks are instrumented.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/dom-invader-customize-sources-and-sinks.png" alt="Customizing sources and sinks">
+</div>
+<p>
+    You might want to disable instrumentation of a particular sink if it is preventing the site from working correctly. For example, instrumenting <code>eval()</code> can change its behavior and break the related functionality.
+</p>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="styles/styles.css" />
+    <title>Burp Suite Navigation Recorder Help</title>
+</head>
+<body class="helpPopup">
+
+<div><a href="#" class="close"><img src="../images/close.svg" width="15" height="15" /></a></div>
+
+<h1>Burp Suite Navigation Recorder</h1>
+
+<p>Improve your Burp Suite scan coverage by manually capturing how to perform complex actions on your website.</p>
+
+<p>Burp Suite Navigation Recorder is a Chrome extension that enables you to record complex navigation sequences, such as SSO logins, using your browser. You can then import the recording into Burp Suite Professional and Burp Suite Enterprise so that any future scans of the website can replicate your recorded actions. This can improve your Burp Suite scan coverage by increasing the attack surface that the Scanner is able to audit effectively.</p>
+
+<p>To record an action sequence:</p>
+<ol>
+<li>Click the Burp Suite Navigation Recorder extension icon at the top right.</li>
+<li>Click start recording.</li>
+<li>Load the web page where you want to begin capturing and carry out the action sequence.</li>
+<li>Click the extension icon to stop recording and click copy to clipboard to save the data from the recording to your clipboard in JSON format.</li>
+<li>Paste the JSON from your clipboard into Burp Suite.</li>
+</ol>
+
+<p>Note that this extension works by recording clicks, pasted data, and keystrokes. To ensure that your action sequence is recorded properly, please avoid using any autocomplete functionality.</p>
+
+<p>The recorded data on your clipboard will be automatically cleared when you paste it into Burp Suite.</p>
+
+<script src="js/help.js"></script>
+
+</body>
+</html>

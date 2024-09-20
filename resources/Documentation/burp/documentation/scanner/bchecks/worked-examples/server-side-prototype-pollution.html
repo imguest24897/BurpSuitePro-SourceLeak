@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms ignore-validation="OTHER_PAGE_KEYWORD_TOO_FREQUENT" page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/index.html">Scanner</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/bchecks/index.html">BCheck definitions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/bchecks/worked-examples/index.html">Worked examples</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/bchecks/worked-examples/server-side-prototype-pollution.html">Example server-side prototype pollution check</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-enterprise">Enterprise</label>
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1 cms-ignore-validation="HEADING_CAPITALIZATION">Example server-side prototype pollution check</h1>
+<p>
+    This BCheck tests for server-side prototype pollution. It works by attempting to pollute the status property of <code>Object.prototype</code>, changing the value of that property to a specific value.
+</p>
+<code class="pre-wrap">
+metadata:
+    language: v2-beta
+    name: "Server-side prototype pollution"
+    description: "Server-side prototype pollution using the status technique"
+    author: "Gareth Heyes"
+    tags: "Server-Side Prototype Pollution"
+
+define:
+    payload = `,"__proto__":\{"status\":510\}\}`
+    nullify = `,"__proto__":\{"status\":0\}\}`
+    issueDetail = "Server-Side Prototype Pollution was found on this web site."
+    issueRemediation = "Ensure that property keys, such as __proto__, constructor, and prototype are correctly filtered when merging objects. When creating objects, we recommend using the Object.create(null) API to ensure that your object does not inherit
+from the Object.prototype and therefore won't be vulnerable to prototype pollution."
+
+given request then
+    if {base.request.body} matches "^[{]" then
+        send request called inject_sspp:
+            method: "POST"
+            body: {regex_replace({base.request.body}, "[}]$", {payload})}
+
+        send request called check_sspp:
+            method: "POST"
+            body: "{,}"
+
+        if {latest.response.body} matches "\"statusCode\":510" or {latest.response.status_code} is "510" then
+            send request called clean_sspp:
+                method: "POST"
+                body: {regex_replace({base.request.body}, "[}]$", {nullify})}
+
+            send request called followup_check_sspp:
+                method: "POST"
+                body: "{,}"
+
+            if not({followup_check_sspp.response.body} matches "\"statusCode\":510" or {followup_check_sspp.response.status_code} is "510") then
+                report issue:
+                    severity: high
+                    confidence: firm
+                    detail: `{issueDetail}`
+                    remediation: `{issueRemediation}`
+            end if
+        end if
+    end if
+        </code>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-1-add-metadata">Step 1: Add metadata</h2>
+<code class="pre-wrap">
+metadata:
+    language: v2-beta
+    name: "Server-side prototype pollution"
+    description: "Server-side prototype pollution using the status technique"
+    author: "Gareth Heyes"
+    tags: "Server-Side Prototype Pollution"
+        </code><p>
+    The definition starts with a <code>metadata</code> block. For more information on available metadata properties, see the reference documentation.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-2-declare-variables">Step 2: Declare variables</h2>
+<code class="pre-wrap">
+define:
+    payload = `,"__proto__":\{"status\":510\}\}`
+    nullify = `,"__proto__":\{"status\":0\}\}`
+    issueDetail = "Server-Side Prototype Pollution was found on this web site."
+    issueRemediation = "Ensure that property keys, such as __proto__, constructor, and prototype are correctly filtered when merging objects. When creating objects, we recommend using the Object.create(null) API to ensure that your object does not inherit
+from the Object.prototype and therefore won't be vulnerable to prototype pollution."
+        </code><p>
+    The next step is to declare the following variables:
+</p>
+<ul>
+    <li>
+        <code>payload</code> attempts to pollute the prototype by changing its error status code to <code>510</code>.
+    </li>
+    <li>
+        <code>nullify</code> changes the prototype's error status code to <code>0</code>.
+    </li>
+    <li>
+        <code>issueDetail</code> defines informational text that can be called when required.
+    </li>
+    <li>
+        <code>issueRemediation</code> defines remediation text that can be called when required.
+    </li>
+</ul>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-3-attempt-to-inject-sspp">Step 3: Attempt to inject SSPP</h2>
+<code class="pre-wrap">
+given request then
+    if {base.request.body} matches "^[{]" then
+        send request called inject_sspp:
+            method: "POST"
+            body: {regex_replace({base.request.body}, "[}]$", {payload})}
+        </code><p>
+    The next step is to send the initial polluting request.
+</p>
+<p>
+    Burp Scanner first uses an <code>if</code> statement to check for JSON requests. Where it finds a JSON request (identified by an opening curly brace character), Burp Scanner sends a request that uses the <code>regex_replace</code> function to add the contents of the <code>payload</code> variable to the end of the JSON object.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-4-force-an-error-to-check-for-sspp">Step 4: Force an error to check for SSPP</h2>
+<code class="pre-wrap">
+send request called check_sspp:
+    method: "POST"
+    body: "{,}"
+        </code><p>
+    The next step is to send a second request to test whether the prototype was successfully polluted. Burp Scanner does this by using an invalid JSON object to force an error.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-5-evaluate-results-and-send-follow-up-request">Step 5: Evaluate results and send follow-up request</h2>
+<code class="pre-wrap">
+if {latest.response.body} matches "\"statusCode\":510" or {latest.response.status_code} is "510" then
+    send request called clean_sspp:
+        method: "POST"
+        body: {regex_replace({base.request.body}, "[}]$", {nullify})}
+        </code><p>
+    The next step is to evaluate the error response sent and potentially send a follow-up request.
+</p>
+<p>
+    Burp Scanner uses an <code>if</code> statement to check whether the response's status is now <code>510</code>. If this is the case, then it sends a follow up request using the <code>nullify</code> variable to reset the status code to <code>0</code>.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-6-do-a-second-check-for-sspp">Step 6: Do a second check for SSPP</h2>
+<code class="pre-wrap">
+send request called followup_check_sspp:
+    method: "POST"
+    body: "{,}"
+        </code><p>
+    The next step is to send another request to check the object's status code. Again, Burp Scanner does this by using an invalid JSON object to force an error.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-7-report-issues">Step 7: Report issues</h2>
+<code class="pre-wrap">
+if not({followup_check_sspp.response.body} matches "\"statusCode\":510" or {followup_check_sspp.response.status_code} is "510") then
+    report issue:
+        severity: high
+        confidence: firm
+        detail: `{issueDetail}`
+        remediation: `{issueRemediation}`
+        </code><p>
+    The final step is to report issues where required.
+</p>
+<p>
+    Burp Scanner uses an if statement to check whether the object's status code is still <code>510</code>. If it is not, it is likely that the prototype can be polluted. Burp Scanner reports an issue with <code>firm</code> confidence.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="test-this-bcheck">Test this BCheck</h2>
+<p>
+    You can test this BCheck out on the <a href="/web-security/prototype-pollution/server-side/lab-privilege-escalation-via-server-side-prototype-pollution.html">Privilege escalation via server-side prototype pollution</a> Web Security Academy lab.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <p>
+                <a href="/burp/documentation/scanner/bchecks/bcheck-definition-reference.html">BCheck definition reference</a>.
+            </p>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

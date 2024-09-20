@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/index.html">Automated scanning</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/managing-resource-pools.html">Managing resource pools for scans</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Managing resource pools for scans</h1>
+<p>
+    A resource pool is a quota of resources that can be shared by multiple tasks. Resources pools make it easier for you to:
+</p>
+<ul>
+    <li>
+        Manage and prioritize the use of system resources, particularly across different scans.
+    </li>
+    <li>
+        Test applications that tolerate automated requests at different rates.
+    </li>
+</ul>
+<p>
+    Resource pools are used by scans and live audit tasks. They are not available for passive crawl tasks.
+</p>
+<p>
+    Each scan or live audit task is assigned to a resource pool when it is created. You can define the pool in the <strong>Resource pool</strong> tab in the scan launcher. Select an existing pool from the list, or create a new pool.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        If you do not select a resource pool, the scan uses the default resource pool.
+    </p>
+</div>
+<h2 id="creating-new-resource-pools">Creating new resource pools</h2>
+<p>
+    To create a new resource pool from the <strong>Resource pool</strong> tab in the scan launcher:
+</p>
+<ol>
+    <li>
+        Select <strong>Create new resource pool</strong>.
+    </li>
+    <li>
+        Enter a name for the pool.
+    </li>
+    <li>
+        Configure the pool throttling settings.
+    </li>
+</ol>
+<p>
+    Burp Suite creates the pool when you start the scan or live audit task. The pool is also added to the list of existing pools, for future use.
+</p>
+<div class="highlightedarea">
+    <h4>More information</h4>
+    <p>
+        For more information on the pool throttling settings available, see <a href="/burp/documentation/desktop/settings/project/tasks.html#resource-pools">Task settings - Resource pools</a>.
+    </p>
+</div>
+<h2 id="reassigning-resource-pools">Reassigning resource pools</h2>
+<p>
+    You can move a scan or live audit task to another resource pool during an attack. This enables you to manage the use of system resources in real time.
+</p>
+<p>
+    To reassign a task, click the <span class="icon-settings"></span> icon to edit the task. You can select a new resource pool from the list of existing pools, or create a new resource pool.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            You can also create and manage your resource pools in the <strong>Settings</strong> dialog, under <strong>Tasks &gt; Resource</strong> pools. For more information, see <a href="/burp/documentation/desktop/settings/project/tasks.html#resource-pools">Task settings - Resource pools</a>.
+        </li>
+        <li>
+            Burp Intruder also uses resource pools. For more information, see <a href="/burp/documentation/desktop/tools/intruder/configure-attack/resource-pool.html">Managing Intruder resource pools</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

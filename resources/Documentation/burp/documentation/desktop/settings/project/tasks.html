@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/index.html">Settings</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/project/index.html">Project</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/project/tasks.html">Tasks</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Tasks settings</h1>
+<p>
+    The <strong>Tasks</strong> page contains settings for the following:
+</p>
+<ul>
+    <li>
+        <a href="#resource-pools">Resource pools</a>.
+    </li>
+    <li>
+        <a href="#new-task-auto-start">New task auto-start</a>.
+    </li>
+    <li>
+        <a href="#schedule-tasks">Schedule tasks</a>.
+    </li>
+</ul>
+<h2 id="resource-pools" cms-ignore-validation="DUPLICATE_HEADINGS">Resource pools</h2>
+<p>
+    This setting enables you to create custom resource pools, to manage system resources across multiple tasks. Resource pools are used by both Burp Intruder and Burp Scanner.
+</p>
+<p>
+    Click <strong>New</strong> to create a new resource pool, or <strong>Edit</strong> to modify an existing resource pool. A new dialog opens, in which you name the pool and configure the throttling settings:
+</p>
+<ul>
+    <li>
+        <strong>Maximum concurrent requests</strong> - Specify a limit to the number of requests that are sent simultaneously. This is useful so you don't overload the server or exceed the configured scan limit.
+    </li>
+    <li>
+        <p>
+            <strong>Delay between requests</strong> - Set a delay time in milliseconds. You can choose from three delay types:
+        </p>
+        <ul>
+            <li>
+                <strong>Fixed</strong>.
+            </li>
+            <li>
+                <strong>With random variations</strong>.
+            </li>
+            <li>
+                <strong>Increase delay in increments</strong> - This enables you to determine the time taken for a session to expire if no requests are sent.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <p>
+            <strong>Automatic throttling</strong> - Specify the response codes that you want to trigger automatic throttling. When Burp Scanner receives a response containing one of these codes, it adds a short delay between requests. The available options are:
+        </p>
+        <ul>
+            <li>
+                <strong>429</strong> (Too many requests)
+            </li>
+            <li>
+                <strong>503</strong> (Service unavailable)
+            </li>
+            <li>
+                <strong>Other</strong>. Enter one or more codes into the text box. Use CSV format (e.g. 504, 505, etc.) to enter multiple codes.
+            </li>
+        </ul>
+    </li>
+</ul>
+<p>
+    The <strong>Resource pool</strong> settings are project settings. They apply to the current project only.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        While you can configure Burp Scanner to throttle requests on any code, we recommend that you only throttle error codes. Configuring throttling on standard response codes such as <code>200 (OK)</code> could result in significantly decreased scan performance.
+    </p>
+</div>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/configure-attack/resource-pool.html">Burp Intruder resource pools</a>.
+        </li>
+    </ul>
+</div>
+<h2 id="new-task-auto-start">New task auto-start</h2>
+<p>
+    This setting controls whether newly-created tasks start immediately. The following options are available:
+</p>
+<ul>
+    <li>
+        <strong>Start tasks</strong> - Enable this setting for tasks to automatically start when they are created.
+    </li>
+    <li>
+        <strong>Pause tasks</strong> - Enable this setting for tasks to be paused when they are created. You can manually start paused tasks from the <strong>Dashboard</strong>.
+    </li>
+</ul>
+<p>
+    The <strong>New task auto-start</strong> settings are project settings. They apply to the current project only.
+</p>
+<h2 id="schedule-tasks" cms-ignore-validation="DUPLICATE_HEADINGS">Schedule tasks</h2>
+<p>
+    This setting enables you to create rules to pause and resume automated tasks at specified times. You can set these rules to apply once, or repeat at regular intervals.
+</p>
+<p>
+    To add a rule:
+</p>
+<ol>
+    <li>
+        Click <strong>Add</strong> to display the <strong>Schedule task</strong> dialog.
+    </li>
+    <li>
+        Select the rule type, from <strong>Pause task execution engine</strong> or <strong>Resume task execution engine</strong>.
+    </li>
+    <li>
+        <p>
+            Click <strong>Next</strong> to specify the rule details:
+        </p>
+        <ul>
+            <li>
+                <strong>Start at</strong> - Specify the time that the rule should run from.
+            </li>
+            <li>
+                <strong>On</strong> - Specify the date that the rule should run on.
+            </li>
+            <li>
+                <strong>Repeat every</strong> - Specify how often the rule will repeat, in minutes, hours, or days. If you don't want the rule to repeat, leave this blank.
+            </li>
+        </ul>
+    </li>
+    <li>
+        Click <strong>Finish</strong>.
+    </li>
+</ol>
+<p>
+    You can <strong>Edit</strong> and <strong>Remove</strong> targets from the list.
+</p>
+<p>
+    The <strong>Schedule tasks</strong> settings are project settings. They apply to the current project only.
+</p>
+</body>
+</html>

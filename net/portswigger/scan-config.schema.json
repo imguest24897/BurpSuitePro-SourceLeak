@@ -1,0 +1,1268 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://portswigger.net/scan-config-schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "crawler": {
+      "$id": "#/properties/crawler",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "crawl_optimization": {
+          "$id": "#/properties/crawler/properties/crawl_optimization",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "maximum_link_depth": {
+              "$id": "#/properties/crawler/properties/crawl_optimization/properties/maximum_link_depth",
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 30
+            },
+            "crawl_using_provided_logins_only": {
+              "$id": "#/properties/crawler/properties/crawl_optimization/properties/crawl_using_provided_logins_only",
+              "type": "boolean"
+            },
+            "crawl_strategy": {
+              "$id": "#/properties/crawler/properties/crawl_optimization/properties/crawl_strategy",
+              "type": "string",
+              "oneOf": [
+                {
+                  "const": "fastest",
+                  "title": "Fastest"
+                },
+                {
+                  "const": "faster",
+                  "title": "Faster"
+                },
+                {
+                  "const": "normal",
+                  "title": "Normal"
+                },
+                {
+                  "const": "more complete",
+                  "title": "More complete"
+                },
+                {
+                  "const": "most complete",
+                  "title": "Most complete"
+                }
+              ]
+            },
+            "crawl_strategy_customized": {
+              "$id": "#/properties/crawler/properties/crawl_optimization/properties/crawl_strategy_customized",
+              "type": "boolean"
+            },
+            "logging_directory": {
+              "$id": "#/properties/crawler/properties/crawl_optimization/properties/logging_directory",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "logging_enabled": {
+              "$id": "#/properties/crawler/properties/crawl_optimization/properties/logging_enabled",
+              "type": "boolean"
+            }
+          }
+        },
+        "crawl_limits": {
+          "$id": "#/properties/crawler/properties/crawl_limits",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "maximum_crawl_time": {
+              "$id": "#/properties/crawler/properties/crawl_limits/properties/maximum_crawl_time",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            },
+            "maximum_unique_locations": {
+              "$id": "#/properties/crawler/properties/crawl_limits/properties/maximum_unique_locations",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            },
+            "maximum_request_count": {
+              "$id": "#/properties/crawler/properties/crawl_limits/properties/maximum_request_count",
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            }
+          }
+        },
+        "login_functions": {
+          "$id": "#/properties/crawler/properties/login_functions",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "attempt_to_self_register_a_user": {
+              "$id": "#/properties/crawler/properties/login_functions/properties/attempt_to_self_register_a_user",
+              "type": "boolean"
+            },
+            "trigger_login_failures": {
+              "$id": "#/properties/crawler/properties/login_functions/properties/trigger_login_failures",
+              "type": "boolean"
+            }
+          }
+        },
+        "error_handling": {
+          "$id": "#/properties/crawler/properties/error_handling",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "pause_task_requests_timed_out_count": {
+              "$id": "#/properties/crawler/properties/error_handling/properties/pause_task_requests_timed_out_count",
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            },
+            "pause_task_requests_timed_out_percentage": {
+              "$id": "#/properties/crawler/properties/error_handling/properties/pause_task_requests_timed_out_percentage",
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "number_of_follow_up_passes": {
+              "$id": "#/properties/crawler/properties/error_handling/properties/number_of_follow_up_passes",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          }
+        },
+        "customization": {
+          "$id": "#/properties/crawler/properties/customization",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "submit_forms": {
+              "$id": "#/properties/crawler/properties/customization/properties/submit_forms",
+              "type": "boolean"
+            },
+            "customize_user_agent": {
+              "$id": "#/properties/crawler/properties/customization/properties/customize_user_agent",
+              "type": "boolean"
+            },
+            "user_agent": {
+              "$id": "#/properties/crawler/properties/customization/properties/user_agent",
+              "type": "string"
+            },
+            "request_robots_txt": {
+              "$id": "#/properties/crawler/properties/customization/properties/request_robots_txt",
+              "type": "boolean"
+            },
+            "request_sitemap": {
+              "$id": "#/properties/crawler/properties/customization/properties/request_sitemap",
+              "type": "boolean"
+            },
+            "maximum_items_from_sitemap": {
+              "$id": "#/properties/crawler/properties/customization/properties/maximum_items_from_sitemap",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50000
+            },
+            "request_speculative": {
+              "$id": "#/properties/crawler/properties/customization/properties/request_speculative",
+              "type": "boolean"
+            },
+            "maximum_speculative_links": {
+              "$id": "#/properties/crawler/properties/customization/properties/maximum_speculative_links",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50000
+            },
+            "parse_api_definitions": {
+              "$id": "#/properties/crawler/properties/customization/properties/parse_api_definitions",
+              "type": "boolean"
+            },
+            "perform_graphql_introspection": {
+              "$id": "#/properties/crawler/properties/customization/properties/perform_graphql_introspection",
+              "type": "boolean"
+            },
+            "guess_hidden_graphql_endpoints": {
+              "$id": "#/properties/crawler/properties/customization/properties/guess_hidden_graphql_endpoints",
+              "type": "boolean"
+            },
+            "allow_all_clickables": {
+              "$id": "#/properties/crawler/properties/customization/properties/allow_all_clickables",
+              "type": "boolean"
+            },
+            "application_uses_fragments_for_routing":{
+              "$id": "#/properties/crawler/properties/customization/properties/application_uses_fragments_for_routing",
+              "type": "string",
+              "oneOf": [
+                {
+                  "const": "yes",
+                  "title": "Yes"
+                },
+                {
+                  "const": "unsure",
+                  "title": "Unsure"
+                },
+                {
+                  "const": "no",
+                  "title": "No"
+                }]
+            },
+            "allow_out_of_scope_resources": {
+              "$id": "#/properties/crawler/properties/customization/properties/allow_out_of_scope_resources",
+              "type": "boolean"
+            },
+            "browser_based_navigation": {
+              "$id": "#/properties/crawler/properties/customization/properties/browser_based_navigation",
+              "type": "boolean"
+            },
+            "timeout_for_in_progress_resource_requests": {
+              "$id": "#/properties/crawler/properties/customization/properties/timeout_for_in_progress_resource_requests",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50000
+            },
+            "browser_based_navigation_mode":{
+              "$id": "#/properties/crawler/properties/customization/properties/browser_based_navigation_mode",
+              "type": "string",
+              "oneOf": [
+                {
+                  "const": "yes",
+                  "title": "Yes"
+                },
+                {
+                  "const": "only_if_hardware_supports",
+                  "title": "Only if my hardware appears to support it"
+                },
+                {
+                  "const": "no",
+                  "title": "No"
+                }]
+            },
+            "use_headed_browser_for_crawl": {
+              "$id": "#/properties/crawler/properties/customization/properties/use_headed_browser_for_crawl",
+              "type": "boolean"
+            }
+          }
+        },
+        "crawl_project_option_overrides": {
+          "$id": "#/properties/crawler/properties/crawl_project_option_overrides",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "connect_timeout": {
+              "$id": "#/properties/crawler/properties/crawl_project_option_overrides/properties/connect_timeout",
+              "type": "integer",
+              "minimum": -1,
+              "maximum": 2147483647
+            },
+            "normal_timeout": {
+              "$id": "#/properties/crawler/properties/crawl_project_option_overrides/properties/normal_timeout",
+              "type": "integer",
+              "minimum": -1,
+              "maximum": 2147483647
+            }
+          }
+        }
+      }
+    },
+    "scanner": {
+      "$id": "#/properties/scanner",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "audit_optimization": {
+          "$id": "#/properties/scanner/properties/audit_optimization",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "maximum_crawl_and_audit_time": {
+              "$id": "#/properties/scanner/properties/audit_optimization/properties/maximum_crawl_and_audit_time",
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            },
+            "scan_speed": {
+              "$id": "#/properties/scanner/properties/audit_optimization/properties/scan_speed",
+              "type": "string",
+              "oneOf": [
+                {
+                  "const": "fast",
+                  "title": "Fast"
+                },
+                {
+                  "const": "normal",
+                  "title": "Normal"
+                },
+                {
+                  "const": "thorough",
+                  "title": "Thorough"
+                }
+              ]
+            },
+            "scan_accuracy": {
+              "$id": "#/properties/scanner/properties/audit_optimization/properties/scan_accuracy",
+              "type": "string",
+              "oneOf": [
+                {
+                  "const": "minimise_false_negatives",
+                  "title": "Minimize false negatives"
+                },
+                {
+                  "const": "normal",
+                  "title": "Normal"
+                },
+                {
+                  "const": "minimise_false_positives",
+                  "title": "Minimize false positives"
+                }
+              ]
+            },
+            "skip_ineffective_checks": {
+              "$id": "#/properties/scanner/properties/audit_optimization/properties/skip_ineffective_checks",
+              "type": "boolean"
+            },
+            "consolidate_passive_issues": {
+              "$id": "#/properties/scanner/properties/audit_optimization/properties/consolidate_passive_issues",
+              "type": "boolean"
+            },
+            "maintain_session": {
+              "$id": "#/properties/scanner/properties/audit_optimization/properties/maintain_session",
+              "type": "boolean"
+            },
+            "follow_redirections": {
+              "$id": "#/properties/scanner/properties/audit_optimization/properties/follow_redirections",
+              "type": "boolean"
+            }
+          }
+        },
+        "issues_reported": {
+          "$id": "#/properties/scanner/properties/issues_reported",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "scan_type_passive": {
+              "$id": "#/properties/scanner/properties/issues_reported/properties/scan_type_passive",
+              "type": "boolean"
+            },
+            "scan_type_light_active": {
+              "$id": "#/properties/scanner/properties/issues_reported/properties/scan_type_light_active",
+              "type": "boolean"
+            },
+            "scan_type_medium_active": {
+              "$id": "#/properties/scanner/properties/issues_reported/properties/scan_type_medium_active",
+              "type": "boolean"
+            },
+            "scan_type_intrusive_active": {
+              "$id": "#/properties/scanner/properties/issues_reported/properties/scan_type_intrusive_active",
+              "type": "boolean"
+            },
+            "scan_type_javascript_analysis": {
+              "$id": "#/properties/scanner/properties/issues_reported/properties/scan_type_javascript_analysis",
+              "type": "boolean"
+            },
+            "select_individual_issues": {
+              "$id": "#/properties/scanner/properties/issues_reported/properties/select_individual_issues",
+              "type": "boolean"
+            },
+            "selected_issues": {
+              "$id": "#/properties/scanner/properties/issues_reported/properties/selected_issues",
+              "type": "array",
+              "items": {
+                "$id": "#/properties/scanner/properties/issues_reported/properties/selected_issues/items",
+                "type": "object",
+                "required": [
+                  "enabled",
+                  "type_index"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "enabled": {
+                    "$id": "#/properties/scanner/properties/issues_reported/properties/selected_issues/items/properties/enabled",
+                    "type": "boolean"
+                  },
+                  "type_index": {
+                    "$id": "#/properties/scanner/properties/issues_reported/properties/selected_issues/items/properties/type_index",
+                    "type": "string"
+                  },
+                  "detection_methods": {
+                    "$id": "#/properties/scanner/properties/issues_reported/properties/selected_issues/items/properties/detection_methods",
+                    "type": "array",
+                    "items": {
+                      "$id": "#/properties/scanner/properties/issues_reported/properties/selected_issues/items/properties/detection_methods/items",
+                      "type": "object",
+                      "required": [
+                        "enabled",
+                        "name"
+                      ],
+                      "additionalProperties": false,
+                      "properties": {
+                        "enabled": {
+                          "$id": "#/properties/scanner/properties/issues_reported/properties/selected_issues/items/properties/detection_methods/items/properties/enabled",
+                          "type": "boolean"
+                        },
+                        "name": {
+                          "$id": "#/properties/scanner/properties/issues_reported/properties/selected_issues/items/properties/detection_methods/items/properties/name",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "store_issues_within_queue_items": {
+              "$id": "#/properties/scanner/properties/issues_reported/properties/store_issues_within_queue_items",
+              "type": "boolean"
+            }
+          }
+        },
+        "error_handling": {
+          "$id": "#/properties/scanner/properties/error_handling",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "consecutive_audit_check_failures_to_skip_insertion_point": {
+              "$id": "#/properties/scanner/properties/error_handling/properties/consecutive_audit_check_failures_to_skip_insertion_point",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            },
+            "consecutive_insertion_point_failures_to_fail_audit_item": {
+              "$id": "#/properties/scanner/properties/error_handling/properties/consecutive_insertion_point_failures_to_fail_audit_item",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            },
+            "pause_task_failed_audit_item_count": {
+              "$id": "#/properties/scanner/properties/error_handling/properties/pause_task_failed_audit_item_count",
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 2147483647
+            },
+            "pause_task_failed_audit_item_percentage": {
+              "$id": "#/properties/scanner/properties/error_handling/properties/pause_task_failed_audit_item_percentage",
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "number_of_follow_up_passes": {
+              "$id": "#/properties/scanner/properties/error_handling/properties/number_of_follow_up_passes",
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 15
+            }
+          }
+        },
+        "frequently_occurring_insertion_points": {
+          "$id": "#/properties/scanner/properties/frequently_occurring_insertion_points",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "quick_scan_url_params": {
+              "$id": "#/properties/scanner/properties/frequently_occurring_insertion_points/properties/quick_scan_url_params",
+              "type": "boolean"
+            },
+            "quick_scan_body_params": {
+              "$id": "#/properties/scanner/properties/frequently_occurring_insertion_points/properties/quick_scan_body_params",
+              "type": "boolean"
+            },
+            "quick_scan_cookies": {
+              "$id": "#/properties/scanner/properties/frequently_occurring_insertion_points/properties/quick_scan_cookies",
+              "type": "boolean"
+            },
+            "quick_scan_param_name": {
+              "$id": "#/properties/scanner/properties/frequently_occurring_insertion_points/properties/quick_scan_param_name",
+              "type": "boolean"
+            },
+            "quick_scan_http_headers": {
+              "$id": "#/properties/scanner/properties/frequently_occurring_insertion_points/properties/quick_scan_http_headers",
+              "type": "boolean"
+            },
+            "quick_scan_entire_body": {
+              "$id": "#/properties/scanner/properties/frequently_occurring_insertion_points/properties/quick_scan_entire_body",
+              "type": "boolean"
+            },
+            "quick_scan_url_path_filename": {
+              "$id": "#/properties/scanner/properties/frequently_occurring_insertion_points/properties/quick_scan_url_path_filename",
+              "type": "boolean"
+            },
+            "quick_scan_url_path_folders": {
+              "$id": "#/properties/scanner/properties/frequently_occurring_insertion_points/properties/quick_scan_url_path_folders",
+              "type": "boolean"
+            }
+          }
+        },
+        "modifying_parameter_locations": {
+          "$id": "#/properties/scanner/properties/modifying_parameter_locations",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "url_to_body": {
+              "$id": "#/properties/scanner/properties/modifying_parameter_locations/properties/url_to_body",
+              "type": "boolean"
+            },
+            "body_to_url": {
+              "$id": "#/properties/scanner/properties/modifying_parameter_locations/properties/body_to_url",
+              "type": "boolean"
+            },
+            "cookie_to_url": {
+              "$id": "#/properties/scanner/properties/modifying_parameter_locations/properties/cookie_to_url",
+              "type": "boolean"
+            },
+            "url_to_cookie": {
+              "$id": "#/properties/scanner/properties/modifying_parameter_locations/properties/url_to_cookie",
+              "type": "boolean"
+            },
+            "body_to_cookie": {
+              "$id": "#/properties/scanner/properties/modifying_parameter_locations/properties/body_to_cookie",
+              "type": "boolean"
+            },
+            "cookie_to_body": {
+              "$id": "#/properties/scanner/properties/modifying_parameter_locations/properties/cookie_to_body",
+              "type": "boolean"
+            }
+          }
+        },
+        "ignored_insertion_points": {
+          "$id": "#/properties/scanner/properties/ignored_insertion_points",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "skip_server_side_injection_for_parameters": {
+              "$id": "#/properties/scanner/properties/ignored_insertion_points/properties/skip_server_side_injection_for_parameters",
+              "type": "array",
+              "items": {
+                "$id": "#/properties/scanner/properties/ignored_insertion_points/properties/skip_server_side_injection_for_parameters/items",
+                "type": "object",
+                "required": [
+                  "enabled",
+                  "expression",
+                  "item",
+                  "match_type",
+                  "parameter"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "enabled": {
+                    "$id": "#/properties/scanner/properties/ignored_insertion_points/properties/skip_server_side_injection_for_parameters/items/properties/enabled",
+                    "type": "boolean"
+                  },
+                  "parameter": {
+                    "$id": "#/properties/scanner/properties/ignored_insertion_points/properties/skip_server_side_injection_for_parameters/items/properties/parameter",
+                    "type": "string",
+                    "oneOf": [
+                      {
+                        "const": "any_parameter",
+                        "title": "Any parameter"
+                      },
+                      {
+                        "const": "url_parameter",
+                        "title": "URL parameter"
+                      },
+                      {
+                        "const": "body_parameter",
+                        "title": "Body parameter"
+                      },
+                      {
+                        "const": "cookie",
+                        "title": "Cookie"
+                      },
+                      {
+                        "const": "url_path_folder",
+                        "title": "URL path folder"
+                      },
+                      {
+                        "const": "url_path_filename",
+                        "title": "URL path filename"
+                      },
+                      {
+                        "const": "xml_tag",
+                        "title": "XML tag"
+                      },
+                      {
+                        "const": "xml_attribute",
+                        "title": "XML attribute"
+                      },
+                      {
+                        "const": "json_property",
+                        "title": "JSON property"
+                      },
+                      {
+                        "const": "header",
+                        "title": "Header"
+                      }
+                    ]
+                  },
+                  "item": {
+                    "$id": "#/properties/scanner/properties/ignored_insertion_points/properties/skip_server_side_injection_for_parameters/items/properties/item",
+                    "type": "string",
+                    "oneOf": [
+                      {
+                        "const": "name",
+                        "title": "Name"
+                      },
+                      {
+                        "const": "value",
+                        "title": "Value"
+                      }
+                    ]
+                  },
+                  "match_type": {
+                    "$id": "#/properties/scanner/properties/ignored_insertion_points/properties/skip_server_side_injection_for_parameters/items/properties/match_type",
+                    "type": "string",
+                    "oneOf": [
+                      {
+                        "const": "is",
+                        "title": "Is"
+                      },
+                      {
+                        "const": "matches_regex",
+                        "title": "Matches regex"
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "$id": "#/properties/scanner/properties/ignored_insertion_points/properties/skip_server_side_injection_for_parameters/items/properties/expression",
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            },
+            "skip_all_tests_for_parameters": {
+              "$id": "#/properties/scanner/properties/ignored_insertion_points/properties/skip_all_tests_for_parameters",
+              "type": "array",
+              "items": {
+                "$id": "#/properties/scanner/properties/ignored_insertion_points/properties/skip_all_tests_for_parameters/items",
+                "type": "object",
+                "required": [
+                  "enabled",
+                  "expression",
+                  "item",
+                  "match_type",
+                  "parameter"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "enabled": {
+                    "$id": "#/properties/scanner/properties/ignored_insertion_points/properties/skip_all_tests_for_parameters/items/properties/enabled",
+                    "type": "boolean"
+                  },
+                  "parameter": {
+                    "$id": "#/properties/scanner/properties/ignored_insertion_points/properties/skip_all_tests_for_parameters/items/properties/parameter",
+                    "type": "string",
+                    "oneOf": [
+                      {
+                        "const": "any_parameter",
+                        "title": "Any parameter"
+                      },
+                      {
+                        "const": "url_parameter",
+                        "title": "URL parameter"
+                      },
+                      {
+                        "const": "body_parameter",
+                        "title": "Body parameter"
+                      },
+                      {
+                        "const": "cookie",
+                        "title": "Cookie"
+                      },
+                      {
+                        "const": "url_path_folder",
+                        "title": "URL path folder"
+                      },
+                      {
+                        "const": "url_path_filename",
+                        "title": "URL path filename"
+                      },
+                      {
+                        "const": "xml_tag",
+                        "title": "XML tag"
+                      },
+                      {
+                        "const": "xml_attribute",
+                        "title": "XML attribute"
+                      },
+                      {
+                        "const": "json_property",
+                        "title": "JSON property"
+                      },
+                      {
+                        "const": "header",
+                        "title": "Header"
+                      }
+                    ]
+                  },
+                  "item": {
+                    "$id": "#/properties/scanner/properties/ignored_insertion_points/properties/skip_all_tests_for_parameters/items/properties/item",
+                    "type": "string",
+                    "oneOf": [
+                      {
+                        "const": "name",
+                        "title": "Name"
+                      },
+                      {
+                        "const": "value",
+                        "title": "Value"
+                      }
+                    ]
+                  },
+                  "match_type": {
+                    "$id": "#/properties/scanner/properties/ignored_insertion_points/properties/skip_all_tests_for_parameters/items/properties/match_type",
+                    "type": "string",
+                    "oneOf": [
+                      {
+                        "const": "is",
+                        "title": "Is"
+                      },
+                      {
+                        "const": "matches_regex",
+                        "title": "Matches regex"
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "$id": "#/properties/scanner/properties/ignored_insertion_points/properties/skip_all_tests_for_parameters/items/properties/expression",
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "insertion_point_types": {
+          "$id": "#/properties/scanner/properties/insertion_point_types",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "insert_url_params": {
+              "$id": "#/properties/scanner/properties/insertion_point_types/properties/insert_url_params",
+              "type": "boolean"
+            },
+            "insert_body_params": {
+              "$id": "#/properties/scanner/properties/insertion_point_types/properties/insert_body_params",
+              "type": "boolean"
+            },
+            "insert_cookies": {
+              "$id": "#/properties/scanner/properties/insertion_point_types/properties/insert_cookies",
+              "type": "boolean"
+            },
+            "insert_param_name": {
+              "$id": "#/properties/scanner/properties/insertion_point_types/properties/insert_param_name",
+              "type": "boolean"
+            },
+            "insert_http_headers": {
+              "$id": "#/properties/scanner/properties/insertion_point_types/properties/insert_http_headers",
+              "type": "boolean"
+            },
+            "insert_entire_body": {
+              "$id": "#/properties/scanner/properties/insertion_point_types/properties/insert_entire_body",
+              "type": "boolean"
+            },
+            "insert_url_path_filename": {
+              "$id": "#/properties/scanner/properties/insertion_point_types/properties/insert_url_path_filename",
+              "type": "boolean"
+            },
+            "insert_url_path_folders": {
+              "$id": "#/properties/scanner/properties/insertion_point_types/properties/insert_url_path_folders",
+              "type": "boolean"
+            }
+          }
+        },
+        "misc_insertion_point_options": {
+          "$id": "#/properties/scanner/properties/misc_insertion_point_options",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "use_nested_insertion_points": {
+              "$id": "#/properties/scanner/properties/misc_insertion_point_options/properties/use_nested_insertion_points",
+              "type": "boolean"
+            },
+            "max_insertion_points_per_base_request": {
+              "$id": "#/properties/scanner/properties/misc_insertion_point_options/properties/max_insertion_points_per_base_request",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          }
+        },
+        "javascript_analysis": {
+          "$id": "#/properties/scanner/properties/javascript_analysis",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "request_missing_dependencies": {
+              "$id": "#/properties/scanner/properties/javascript_analysis/properties/request_missing_dependencies",
+              "type": "boolean"
+            },
+            "fetch_out_of_scope_resources": {
+              "$id": "#/properties/scanner/properties/javascript_analysis/properties/fetch_out_of_scope_resources",
+              "type": "boolean"
+            },
+            "use_dynamic_analysis": {
+              "$id": "#/properties/scanner/properties/javascript_analysis/properties/use_dynamic_analysis",
+              "type": "boolean"
+            },
+            "use_static_analysis": {
+              "$id": "#/properties/scanner/properties/javascript_analysis/properties/use_static_analysis",
+              "type": "boolean"
+            },
+            "max_dynamic_time_per_item": {
+              "$id": "#/properties/scanner/properties/javascript_analysis/properties/max_dynamic_time_per_item",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            },
+            "max_static_time_per_item": {
+              "$id": "#/properties/scanner/properties/javascript_analysis/properties/max_static_time_per_item",
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 2147483647
+            }
+          }
+        },
+        "audit_project_option_overrides": {
+          "$id": "#/properties/scanner/properties/audit_project_option_overrides",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "connect_timeout": {
+              "$id": "#/properties/scanner/properties/audit_project_option_overrides/properties/connect_timeout",
+              "type": "integer",
+              "minimum": -1,
+              "maximum": 2147483647
+            },
+            "normal_timeout": {
+              "$id": "#/properties/scanner/properties/audit_project_option_overrides/properties/normal_timeout",
+              "type": "integer",
+              "minimum": -1,
+              "maximum": 2147483647
+            }
+          }
+        }
+      }
+    },
+    "project_options": {
+      "$id": "#/properties/project_options",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "misc": {
+          "$id": "#/properties/project_options/properties/misc",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "embedded_browser": {
+              "$id": "#/properties/project_options/properties/misc/properties/embedded_browser",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "disable_gpu": {
+                  "$id": "#/properties/project_options/properties/misc/properties/embedded_browser/properties/disable_gpu",
+                  "type": "boolean"
+                }
+              }
+            },
+            "collaborator_server": {
+              "$id": "#/properties/project_options/properties/misc/properties/collaborator_server",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "type": {
+                  "$id": "#/properties/project_options/properties/misc/properties/collaborator_server/properties/type",
+                  "type": "string",
+                  "oneOf": [
+                    {
+                      "const": "default",
+                      "title": "Default"
+                    },
+                    {
+                      "const": "none",
+                      "title": "None"
+                    },
+                    {
+                      "const": "private",
+                      "title": "Private"
+                    }
+                  ]
+                },
+                "location": {
+                  "$id": "#/properties/project_options/properties/misc/properties/collaborator_server/properties/location",
+                  "type": "string"
+                },
+                "poll_over_unencrypted_http": {
+                  "$id": "#/properties/project_options/properties/misc/properties/collaborator_server/properties/poll_over_unencrypted_http",
+                  "type": "boolean"
+                },
+                "polling_location": {
+                  "$id": "#/properties/project_options/properties/misc/properties/collaborator_server/properties/polling_location",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "connections": {
+          "$id": "#/properties/project_options/properties/connections",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "platform_authentication": {
+              "$id": "#/properties/project_options/properties/connections/properties/platform_authentication",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "credentials": {
+                  "$id": "#/properties/project_options/properties/connections/properties/platform_authentication/properties/credentials",
+                  "type": "array",
+                  "items": {
+                    "$id": "#/properties/project_options/properties/connections/properties/platform_authentication/properties/credentials/items",
+                    "type": "object",
+                    "required": [
+                      "destination_host",
+                      "auth_type"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                      "destination_host": {
+                        "$id": "#/properties/project_options/properties/connections/properties/platform_authentication/properties/credentials/items/properties/destination_host",
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "auth_type": {
+                        "$id": "#/properties/project_options/properties/connections/properties/platform_authentication/properties/credentials/items/properties/auth_type",
+                        "type": "string",
+                        "oneOf": [
+                          {
+                            "const": "basic",
+                            "title": "Basic"
+                          },
+                          {
+                            "const": "NTLM_V2",
+                            "title": "NTLM v2"
+                          },
+                          {
+                            "const": "NTLM_V1",
+                            "title": "NTLM v1"
+                          }
+                        ]
+                      },
+                      "username": {
+                        "$id": "#/properties/project_options/properties/connections/properties/platform_authentication/properties/credentials/items/properties/username",
+                        "type": "string"
+                      },
+                      "password": {
+                        "$id": "#/properties/project_options/properties/connections/properties/platform_authentication/properties/credentials/items/properties/password",
+                        "type": "string"
+                      },
+                      "domain": {
+                        "$id": "#/properties/project_options/properties/connections/properties/platform_authentication/properties/credentials/items/properties/domain",
+                        "type": "string"
+                      },
+                      "domain_hostname": {
+                        "$id": "#/properties/project_options/properties/connections/properties/platform_authentication/properties/credentials/items/properties/domain_hostname",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "do_platform_authentication": {
+                  "$id": "#/properties/project_options/properties/connections/properties/platform_authentication/properties/do_platform_authentication",
+                  "type": "boolean"
+                },
+                "prompt_on_authentication_failure": {
+                  "$id": "#/properties/project_options/properties/connections/properties/platform_authentication/properties/prompt_on_authentication_failure",
+                  "type": "boolean"
+                },
+                "use_user_options": {
+                  "$id": "#/properties/project_options/properties/connections/properties/platform_authentication/properties/use_user_options",
+                  "type": "boolean"
+                }
+              }
+            },
+            "upstream_proxy": {
+              "$id": "#/properties/project_options/properties/connections/properties/upstream_proxy",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "servers": {
+                  "$id": "#/properties/project_options/properties/connections/properties/upstream_proxy/properties/servers",
+                  "type": "array",
+                  "items": {
+                    "$id": "#/properties/project_options/properties/connections/properties/upstream_proxy/properties/servers/items",
+                    "type": "object",
+                    "required": [
+                      "enabled",
+                      "destination_host",
+                      "auth_type"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                      "enabled": {
+                        "$id": "#/properties/project_options/properties/connections/properties/upstream_proxy/properties/servers/items/properties/enabled",
+                        "type": "boolean"
+                      },
+                      "destination_host": {
+                        "$id": "#/properties/project_options/properties/connections/properties/upstream_proxy/properties/servers/items/properties/destination_host",
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "proxy_host": {
+                        "$id": "#/properties/project_options/properties/connections/properties/upstream_proxy/properties/servers/items/properties/proxy_host",
+                        "type": "string"
+                      },
+                      "proxy_port": {
+                        "$id": "#/properties/project_options/properties/connections/properties/upstream_proxy/properties/servers/items/properties/proxy_port",
+                        "type": "integer",
+                        "minimum": 1,
+                        "maximum": 65535
+                      },
+                      "auth_type": {
+                        "$id": "#/properties/project_options/properties/connections/properties/upstream_proxy/properties/servers/items/properties/auth_type",
+                        "type": "string",
+                        "oneOf": [
+                          {
+                            "const": "none",
+                            "title": "None"
+                          },
+                          {
+                            "const": "basic",
+                            "title": "Basic"
+                          },
+                          {
+                            "const": "NTLM_V2",
+                            "title": "NTLM v2"
+                          },
+                          {
+                            "const": "NTLM_V1",
+                            "title": "NTLM v1"
+                          }
+                        ]
+                      },
+                      "username": {
+                        "$id": "#/properties/project_options/properties/connections/properties/upstream_proxy/properties/servers/items/properties/username",
+                        "type": "string"
+                      },
+                      "password": {
+                        "$id": "#/properties/project_options/properties/connections/properties/upstream_proxy/properties/servers/items/properties/password",
+                        "type": "string"
+                      },
+                      "domain": {
+                        "$id": "#/properties/project_options/properties/connections/properties/upstream_proxy/properties/servers/items/properties/domain",
+                        "type": "string"
+                      },
+                      "domain_hostname": {
+                        "$id": "#/properties/project_options/properties/connections/properties/upstream_proxy/properties/servers/items/properties/domain_hostname",
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "use_user_options": {
+                  "$id": "#/properties/project_options/properties/connections/properties/upstream_proxy/properties/use_user_options",
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        },
+        "resource_pools": {
+          "$id": "#/properties/project_options/properties/resource_pools",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "default_resource_pool": {
+              "$id": "#/properties/project_options/properties/resource_pools/default_resource_pool",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "concurrent_request_limit": {
+                  "$id": "#/properties/project_options/properties/resource_pools/default_resource_pool/concurrent_request_limit",
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 999
+                },
+                "concurrent_request_limit_enabled": {
+                  "$id": "#/properties/project_options/properties/resource_pools/default_resource_pool/concurrent_request_limit_enabled",
+                  "type": "boolean"
+                },
+                "throttle_interval_millis": {
+                  "$id": "#/properties/project_options/properties/resource_pools/default_resource_pool/throttle_interval_millis",
+                  "type": "integer",
+                  "minimum": 100,
+                  "maximum": 600000
+                },
+                "throttle_interval_enabled": {
+                  "$id": "#/properties/project_options/properties/resource_pools/default_resource_pool/throttle_interval_enabled",
+                  "type": "boolean"
+                },
+                "throttle_random_enabled": {
+                  "$id": "#/properties/project_options/properties/resource_pools/default_resource_pool/throttle_random_enabled",
+                  "type": "boolean"
+                },
+                "auto_backoff": {
+                  "$id": "#/properties/project_options/properties/resource_pools/default_resource_pool/auto_backoff",
+                  "type": "boolean"
+                },
+                "auto_backoff_after_429_status_returned": {
+                  "$id": "#/properties/project_options/properties/resource_pools/default_resource_pool/auto_backoff_after_429_status_returned",
+                  "type": "boolean"
+                },
+                "auto_backoff_after_503_status_returned": {
+                  "$id": "#/properties/project_options/properties/resource_pools/default_resource_pool/auto_backoff_after_503_status_returned",
+                  "type": "boolean"
+                },
+                "custom_auto_backoff_status_codes_enabled": {
+                  "$id": "#/properties/project_options/properties/resource_pools/default_resource_pool/custom_auto_backoff_status_codes_enabled",
+                  "type": "boolean"
+                },
+                "custom_auto_backoff_status_codes": {
+                  "$id": "#/properties/project_options/properties/resource_pools/default_resource_pool/custom_auto_backoff_status_codes",
+                  "type": "array",
+                  "items": {
+                    "$id": "#/properties/project_options/properties/resource_pools/default_resource_pool/custom_auto_backoff_status_codes/items",
+                    "type": "object",
+                    "required": [
+                      "status_code"
+                    ],
+                    "properties": {
+                      "enabled": {
+                        "$id": "#/properties/project_options/properties/resource_pools/default_resource_pool/custom_auto_backoff_status_codes/items/properties/status_code",
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 99999999
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "ssl": {
+          "$id": "#/properties/project_options/properties/ssl",
+          "type": "object",
+          "properties": {
+            "client_certificates": {
+              "$id": "#/properties/project_options/properties/ssl/properties/client_certificates",
+              "type": "object",
+              "required": [
+                "certificates",
+                "use_user_options"
+              ],
+              "properties": {
+                "certificates": {
+                  "$id": "#/properties/project_options/properties/ssl/properties/client_certificates/properties/certificates",
+                  "type": "array",
+                  "items": {
+                    "$id": "#/properties/project_options/properties/ssl/properties/client_certificates/properties/certificates/items",
+                    "type": "object",
+                    "required": [
+                      "certificate_content",
+                      "certificate_file",
+                      "enabled",
+                      "password",
+                      "type"
+                    ],
+                    "properties": {
+                      "enabled": {
+                        "$id": "#/properties/project_options/properties/ssl/properties/client_certificates/properties/certificates/items/properties/enabled",
+                        "type": "boolean"
+                      },
+                      "host": {
+                        "$id": "#/properties/project_options/properties/ssl/properties/client_certificates/properties/certificates/items/properties/host",
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "certificate_file": {
+                        "$id": "#/properties/project_options/properties/ssl/properties/client_certificates/properties/certificates/items/properties/certificate_file",
+                        "type": "string"
+                      },
+                      "certificate_content": {
+                        "$id": "#/properties/project_options/properties/ssl/properties/client_certificates/properties/certificates/items/properties/certificate_content",
+                        "type": "string",
+                        "contentEncoding": "base64",
+                        "minLength": 1
+                      },
+                      "password": {
+                        "$id": "#/properties/project_options/properties/ssl/properties/client_certificates/properties/certificates/items/properties/password",
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "type": {
+                        "$id": "#/properties/project_options/properties/ssl/properties/client_certificates/properties/certificates/items/properties/type",
+                        "type": "string",
+                        "oneOf": [
+                          {
+                            "const": "PKCS12"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                "use_user_options": {
+                  "$id": "#/properties/project_options/properties/ssl/properties/client_certificates/properties/use_user_options",
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        },
+        "http": {
+          "$id": "#/properties/project_options/properties/http",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "http2": {
+              "$id": "#/properties/project_options/properties/http/properties/http2",
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "enable_http2": {
+                  "$id": "#/properties/project_options/properties/http/properties/http2/enable_http2",
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "description": {
+      "$id": "#/properties/description",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "featured": {
+          "$id": "#/properties/description/featured",
+          "type": "boolean"
+        },
+        "default": {
+          "$id": "#/properties/description/default",
+          "type": "boolean"
+        },
+        "text": {
+          "$id": "#/properties/description/text",
+          "type": "string"
+        },
+        "uuid": {
+          "$id": "#/properties/description/uuid",
+          "type": "string"
+        },
+        "icon": {
+          "$id": "#/properties/description/icon",
+          "type": "string"
+        },
+        "display_order": {
+          "$id": "#/properties/description/display_order",
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 30
+        }
+      }
+    }
+  }
+}

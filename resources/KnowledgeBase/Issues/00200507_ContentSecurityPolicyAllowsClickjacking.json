@@ -1,0 +1,44 @@
+{
+  "typeIndex": 2098439,
+  "name": "Content security policy: allows clickjacking",
+  "description": "<p>\n    Content Security Policy (CSP) is a security mechanism designed to mitigate cross-site scripting attacks by disabling dangerous behaviours such as untrusted JavaScript execution.\n    Websites can specify their security policy in a response header or meta tag, enabling fine-grained control over dangerous features like scripts and stylesheets.\n</p>",
+  "remediation": "<p>\n    We recommend that you set the frame-ancestors directive to 'none' if you do not want your site to be framed, or 'self' if you want to allow it to frame itself. In addition,\n    use the X-Frame-Options header with DENY or SAMEORIGIN, based on your needs.\n</p>",
+  "webIntro": null,
+  "typicalSeverity": "INFO",
+  "references": [
+    {
+      "title": "Web Security Academy: Clickjacking",
+      "url": "https://portswigger.net/web-security/clickjacking"
+    },
+    {
+      "title": "X-Frame-Options",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options"
+    },
+    {
+      "title": "Web Security Academy: What is CSP?",
+      "url": "https://portswigger.net/web-security/cross-site-scripting/content-security-policy"
+    },
+    {
+      "title": "Web Security Academy: Protecting against clickjacking using CSP",
+      "url": "https://portswigger.net/web-security/cross-site-scripting/content-security-policy#protecting-against-clickjacking-using-csp"
+    },
+    {
+      "title": "Content Security Policy (CSP)",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-693: Protection Mechanism Failure",
+      "url": "https://cwe.mitre.org/data/definitions/693.html"
+    },
+    {
+      "title": "CWE-1021: Improper Restriction of Rendered UI Layers or Frames",
+      "url": "https://cwe.mitre.org/data/definitions/1021.html"
+    },
+    {
+      "title": "CAPEC-103: Clickjacking",
+      "url": "https://capec.mitre.org/data/definitions/103.html"
+    }
+  ]
+}

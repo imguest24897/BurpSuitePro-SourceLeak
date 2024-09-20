@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/external-browser-config/index.html">External browser configuration</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/external-browser-config/certificate/index.html">Installing Burp's CA certificate</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/external-browser-config/certificate/proxy-troubleshooting.html">Troubleshooting</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Having trouble downloading Burp's CA certificate?</h1>
+<p>
+    In order to access <code>http://burpsuite</code> and download the CA certificate, your browser needs to be sending traffic through Burp's proxy listener. If you haven't already done so, you need to complete the steps to <a href="https://portswigger.net/support/configuring-your-browser-to-work-with-burp">configure your browser to work with Burp</a>.
+</p>
+<p>
+    If you did this already and were redirected to this page when you tried to access <code>http://burpsuite</code>, something has gone wrong with your proxy settings. But don't worry, it should be easy to fix. Please try the following common solutions:
+</p>
+<h2 id="check-that-burp-is-running">Check that Burp is running</h2>
+<p>
+    To access <code>http://burpsuite</code>, Burp needs to be running. Either restart Burp completely or open it if you haven't already.
+</p>
+<h2 id="check-your-proxy-listener-is-active">Check your proxy listener is active</h2>
+<p>
+    In Burp, go to the <strong>Tools &gt; Proxy</strong> tab in the <strong>Settings</strong> dialog. In the <strong>Proxy Listeners</strong> panel, you should see an entry for the interface <code>127.0.0.1:8080</code> with the <strong>Running</strong> checkbox selected. If not, click the <span class="icon-settings"></span> icon in the panel and then <strong>Restore defaults</strong>.
+</p>
+<p>
+    If the proxy listener is still not running, you might need to try using a different port.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/proxy-listener-restore-defaults-940.png" alt="Proxy listener" class="center-block">
+</div>
+<h2 id="try-a-different-port">Try a different port</h2>
+<p>
+    By default, Burp's proxy listener uses port 8080. If you tried both of the previous steps and the proxy listener is still not running, port 8080 might not be available, for example, because it is already being used by another application. To try using a different port:
+</p>
+<ol>
+    <li>
+        Identify a different port that you know is free.
+    </li>
+    <li>
+        In Burp, go to the <strong>Tools &gt; Proxy</strong> tab in the <strong>Settings</strong> dialog.
+    </li>
+    <li>
+        In the <strong>Proxy Listeners</strong> panel, select the entry for <code>127.0.0.1:8080</code> and click the <strong>Edit</strong> button. The <strong>Edit proxy listener</strong> dialog opens.
+    </li>
+    <li>
+        In the <strong>Bind to port</strong> field, enter the number for the new port and click <strong>OK</strong>.
+    </li>
+    <li>
+        Try to activate the listener by selecting the <strong>Running</strong> checkbox. If you can activate it, great. You should now be able to access <code>http://burpsuite</code>.
+    </li>
+    <li>
+        If clicking the checkbox doesn't activate the listener, the new port you entered is probably also blocked, so you'll need to try another one.
+    </li>
+</ol>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/proxy-listener-edit-940.png" alt="Edit proxy listener" class="center-block">
+</div>
+<p>
+    For more information, please refer to our documentation on <a href="/burp/documentation/desktop/settings/tools/proxy.html">Burp Proxy settings</a>.
+</p>
+<h2 id="what-next">What next?</h2>
+<p>
+    If you're still being redirected to this page after trying all of the above, please feel free to get in touch with our technical support team. You can contact us in various ways from our <a href="https://portswigger.net/support">Support</a> page.
+</p>
+</body>
+</html>

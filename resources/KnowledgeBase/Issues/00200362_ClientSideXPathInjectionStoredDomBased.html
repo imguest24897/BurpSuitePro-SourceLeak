@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+Client-side XPath injection (stored DOM-based)
+<h1>Typical severity</h1>
+
+Low
+
+<h1>Issue description</h1>
+
+
+<p>Stored DOM-based vulnerabilities arise when user input is stored and later embedded into a response within a part of the DOM that is then processed in an unsafe way by a client-side script. An attacker can leverage the data storage to control a part of the response (for example, a JavaScript string) that can be used to trigger the DOM-based vulnerability.</p>
+
+<p>DOM-based XPath injection  arises when a script incorporates controllable data into an XPath query. An attacker may be able to use this behavior to construct a URL that, if visited by another application user, will cause an arbitrary XPath query to execute, causing different data to be retrieved and processed by the application. Depending on the purpose for which the query results are used, it may be possible to subvert the application's logic, or cause unintended actions on behalf of the user.</p>
+
+<p>Burp Suite automatically identifies this issue using dynamic and static code analysis. Static analysis can lead to false positives that are not actually exploitable. If Burp Scanner has not provided any evidence resulting from dynamic analysis, you should review the relevant code and execution paths  to determine whether this vulnerability is indeed present, or whether mitigations are in place that would prevent exploitation.</p>
+
+<h1>Issue remediation</h1>
+
+<p>The most effective way to avoid DOM-based XPath injection vulnerabilities is not to incorporate into an XPath query any data that originated from an untrusted source. If the desired functionality of the application means that this behavior is unavoidable, then defenses must be implemented within the client-side code to prevent malicious data from modifying the XPath query in inappropriate ways. This may involve strict validation of specific items to ensure they do not contain any characters that may interfere with the structure of the query when it is parsed. </p>
+
+<h1>References</h1>
+
+<ul>
+    <li><a href="https://portswigger.net/web-security/dom-based/client-side-xpath-injection">Web Security Academy: Client-side XPath injection (DOM-based)</a></li>
+</ul>
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+<li><a href="https://cwe.mitre.org/data/definitions/79.html">CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')</a></li>
+<li><a href="https://cwe.mitre.org/data/definitions/116.html">CWE-116: Improper Encoding or Escaping of Output</a></li>
+<li><a href="https://cwe.mitre.org/data/definitions/159.html">CWE-159: Failure to Sanitize Special Element</a></li>
+    <li><a href="https://capec.mitre.org/data/definitions/83.html">CAPEC-83: XPath Injection</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

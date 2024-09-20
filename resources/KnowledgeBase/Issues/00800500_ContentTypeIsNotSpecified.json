@@ -1,0 +1,24 @@
+{
+  "typeIndex": 8389888,
+  "name": "Content type is not specified",
+  "description": "<p>If a  response does not specify a content type, then the browser will usually analyze the response and attempt to determine the MIME type of its content. This can have unexpected results, and if the content contains any user-controllable data may lead to cross-site scripting or other client-side vulnerabilities.</p>\n<p>In most cases, the absence of a content type statement does not constitute a security flaw, particularly if the response contains static content. You should review the contents of affected responses, and the context in which they appear, to determine whether any vulnerability exists. </p>",
+  "remediation": "<p>For every response containing a message body, the application should include a single Content-type header that correctly and unambiguously states the MIME type of the content in the response body.</p>",
+  "webIntro": null,
+  "typicalSeverity": "INFO",
+  "references": [
+    {
+      "title": "Web Security Academy: Cross-site scripting",
+      "url": "https://portswigger.net/web-security/cross-site-scripting"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-16: Configuration",
+      "url": "https://cwe.mitre.org/data/definitions/16.html"
+    },
+    {
+      "title": "CAPEC-63: Cross-Site Scripting (XSS)",
+      "url": "https://capec.mitre.org/data/definitions/63.html"
+    }
+  ]
+}

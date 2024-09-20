@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/sequencer/index.html">Sequencer</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/sequencer/getting-started.html">Getting started</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Getting started with Burp Sequencer</h1>
+<p>
+    In this tutorial, you'll use Burp Sequencer to analyze the quality of randomness in an application's session tokens.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Burp Sequencer may have unexpected results in some applications. Until you are fully familiar with its functionality and settings, only use Burp Sequencer against non-production systems.
+    </p>
+</div>
+<ol>
+    <li>
+        Open Burp's browser and access a deliberately vulnerable test website, such as <code>https://ginandjuice.shop/</code>.
+    </li>
+    <li>
+        Go to <strong>Proxy &gt; HTTP history</strong> and find an entry with a response that issues a session token, for example in a <code>Set-Cookie</code> header. To quickly find issued cookies, you can sort the <strong>Cookies</strong> column in the history.
+    </li>
+    <li>
+        Right-click the entry and click <strong>Send to Sequencer</strong>.
+    </li>
+    <li>
+        Go to the <strong>Sequencer</strong> tab. The entry you just sent to Sequencer is automatically selected in the <strong>Select live capture request</strong> panel.
+    </li>
+    <li>
+        Select a cookie in the <strong>Token location within response</strong> panel.
+    </li>
+    <li>
+        Click <strong>Start live capture</strong>.
+    </li>
+    <li>
+        When Burp has captured a few hundred tokens, click <strong>Pause</strong>.
+    </li>
+    <li>
+        To run randomness tests on the tokens, click <strong>Analyze now</strong>.
+    </li>
+</ol>
+<p>
+    The analysis results are displayed in the <strong>Live capture</strong> window. They show a summary of the quality of randomness in the sample.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/tools/sequencer/sample/index.html">Obtaining a token sample</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/sequencer/sample/live-capture.html">Burp Sequencer live capture</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/sequencer/results/index.html">Burp Sequencer results</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Penetration testing workflow</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

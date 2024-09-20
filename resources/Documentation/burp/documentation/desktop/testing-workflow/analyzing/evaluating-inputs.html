@@ -1,0 +1,231 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/analyzing/index.html">Analyzing the attack surface</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/analyzing/evaluating-inputs.html">Evaluating inputs</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Evaluating inputs with Burp Suite</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/qcWXee-UyWw?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    Once you have discovered functionality that is worth investigating further, you can use a range of Burp's tools to evaluate the user controllable inputs. This enables you to determine which inputs are most important to the application's function. For example, these may be inputs that impact the session or state of the application.
+</p>
+<p>
+    To evaluate inputs with Burp Suite, you can:
+</p>
+<ul>
+    <li>
+        Manually evaluate individual inputs.
+    </li>
+    <li>
+        Scan the inputs.
+    </li>
+    <li>
+        Fuzz the inputs.
+    </li>
+</ul>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="before-you-start">Before you start</h2>
+<p>
+    We recommend that you complete the following steps before starting this tutorial:
+</p>
+<ul>
+    <li>
+        Set the test scope. For more information, see <a href="/burp/documentation/desktop/testing-workflow/test-scope.html">Setting the initial test scope in Burp Suite</a>.
+    </li>
+    <li>
+        Map the target application. For more information, see <a href="/burp/documentation/desktop/testing-workflow/mapping/index.html">Mapping the target website with Burp Suite</a>.
+    </li>
+    <li>
+        Identify requests that you want to investigate further. For more information, see <a href="/burp/documentation/desktop/testing-workflow/analyzing/high-risk-functionality.html">Identifying high-risk functionality</a>.
+    </li>
+</ul>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="steps">Steps</h2>
+<p>
+    You can follow along with the process below using a lab with a SQL injection vulnerability. For example, <a href="/web-security/sql-injection/lab-retrieve-hidden-data.html">SQL injection in WHERE clause allowing retrieval of hidden data</a>.
+</p>
+<h3 cms-ignore-validation="DUPLICATE_HEADINGS" id="manually-evaluating-individual-inputs">Manually evaluating individual inputs</h3>
+<p>
+    You can manually evaluate how individual inputs impact the application:
+</p>
+<ol>
+    <li>
+        Send a request to Burp Repeater.
+    </li>
+    <li>
+        <p>
+            Go to the <strong>Repeater</strong> tab and modify each input in turn. For example, you can:
+        </p>
+        <ol>
+            <li>
+                Remove the input.
+            </li>
+            <li>
+                Give the input an empty value.
+            </li>
+            <li>
+                Insert a Collaborator payload in the input. Highlight the input, then right-click and select <strong>Insert Collaborator payload</strong>.
+            </li>
+        </ol>
+    </li>
+    <li>
+        Click <strong>Send</strong> to send the request.
+    </li>
+    <li>
+        Review the responses for noteworthy behavior, such as input reflections or differences in response times.
+    </li>
+    <li>
+        <p>
+            To identify subtle changes between responses, send the responses to Burp Comparer. In Burp Comparer:
+        </p>
+        <ol>
+            <li>
+                Select the two responses to compare.
+            </li>
+            <li>
+                Click <strong>Words</strong> or <strong>Bytes</strong> to compare the responses. A new window opens with the results. Comparer highlights any differences between the responses.
+            </li>
+        </ol>
+    </li>
+</ol>
+<h3 id="scanning-inputs">Scanning inputs</h3>
+<p>
+    If you're using Burp Suite Professional, you can scan inputs to identify potential vulnerabilities, which Burp Scanner flags as issues.
+</p>
+<p>
+    To scan a single input:
+</p>
+<ol>
+    <li>
+        Highlight the input. You can do this from any message editor in Burp, for example from <strong>Proxy</strong> &gt; <strong>HTTP history</strong>.
+    </li>
+    <li>
+        Right-click and select <strong>Scan selected insertion point</strong>. The scan launcher opens.
+    </li>
+    <li>
+        Click <strong>OK</strong> to start the scan using the default configuration.
+    </li>
+</ol>
+<p>
+    To scan multiple inputs at the same time:
+</p>
+<ol>
+    <li>
+        Send the request to Burp Intruder.
+    </li>
+    <li>
+        Go to <strong>Intruder</strong> &gt; <strong>Positions</strong>.
+    </li>
+    <li>
+        <p>
+            Add a payload position for each input you want to scan:
+        </p>
+        <ol>
+            <li>
+                Select the input.
+            </li>
+            <li>
+                <p>
+                    Click <strong>Add §</strong>.
+                </p>
+            </li>
+        </ol>
+    </li>
+    <li>
+        Right-click the request and select <strong>Scan defined insertion points</strong>. The scan launcher opens.
+    </li>
+    <li>
+        Click <strong>OK</strong> to start the scan using the default configuration.
+    </li>
+</ol>
+<p>
+    Burp Scanner audits the request using only the selected inputs. To view the issues identified by the scan:
+</p>
+<ol>
+    <li>
+        Go to the <strong>Dashboard</strong> tab.
+    </li>
+    <li>
+        From the <strong>Tasks</strong> list, select the relevant scan task.
+    </li>
+    <li>
+        Go to the <strong>Issues</strong> tab. This contains a record of the issues found in the scan.
+    </li>
+</ol>
+<h3 id="fuzzing-inputs">Fuzzing inputs</h3>
+<p>
+    You can fuzz an input to identify potential vulnerabilities:
+</p>
+<ol>
+    <li>
+        Highlight the input in the request, then right-click and select <strong>Send to Intruder</strong>.
+    </li>
+    <li>
+        <p>
+            Go to the <strong>Intruder</strong> &gt; <strong>Positions</strong> tab. Notice that the input is automatically marked as a payload position.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/tutorials/evaluating-inputs-1.png" alt="Set payload position for evaluating inputs" class="center-block">
+        </div>
+    </li>
+    <li>
+        Go to the <strong>Intruder</strong> &gt; <strong>Payloads</strong> tab. Under <strong>Payload settings</strong>, add a list of fuzz strings. If you're using Burp Suite Professional, open the <strong>Add from list</strong> dropdown menu and select the built-in <strong>Fuzzing - full</strong> list. Otherwise, add your own list.
+    </li>
+    <li>
+        Click <strong>Start attack</strong>. The attack starts in a new dialog. Burp Intruder sends a request for each fuzz payload.
+    </li>
+    <li>
+        When the attack is finished, study the responses to look for any noteworthy behavior.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/index.html">Burp Intruder</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/repeater/index.html">Burp Repeater</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/comparer.html">Burp Comparer</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/collaborator/index.html">Burp Collaborator</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

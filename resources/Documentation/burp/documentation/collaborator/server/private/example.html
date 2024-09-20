@@ -1,0 +1,666 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/collaborator/index.html">Burp Collaborator</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/collaborator/server/index.html">Server</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/collaborator/server/private/index.html">Deploying a private server</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/collaborator/server/private/example.html">Example configuration file</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-enterprise">Enterprise</label>
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Example configuration file</h1>
+<p>
+    When you set up a private Collaborator server, you need to write a configuration file. You can refer to this example configuration file for guidance. This page also contains information on the different fields used in the configuration file.
+</p>
+<p>
+    The file uses a JSON format, with support for comments. Where IP addresses are required, you can configure a single address or list of addresses.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            For more information on the setup process, see <a href="/burp/documentation/collaborator/server/private/index.html">Deploying a private Collaborator server</a>.
+        </li>
+        <li>
+            For more information on how to configure options for your private server, see <a href="/burp/documentation/collaborator/server/private/configuring.html">Configuring your private Collaborator server</a>.
+        </li>
+    </ul>
+</div>
+<p>
+    This example file configures:
+</p>
+<ul>
+    <li>
+        Certificates that have been signed by a certificate authority.
+    </li>
+    <li>
+        Custom ports for polling.
+    </li>
+    <li>
+        Custom DNS records for CA signing challenges. See the <code>customDnsRecord</code> section. Restart the Collaborator server for any custom DNS records to take effect.
+    </li>
+</ul>
+<code class="code-scrollable">{
+    "serverDomain": "burpcollaborator.example.com",
+    "workerThreads": 10,
+    "interactionLimits": {
+        "http": 8192,
+        "smtp": 8192
+    },
+    "eventCapture": {
+        "localAddress": ["10.20.0.159", "127.0.0.1"],
+        "publicAddress": "10.20.0.159",
+        "http": {
+            "ports": 80
+        },
+        "https": {
+            "ports": 443
+        },
+        "smtp": {
+            "ports": [25, 587]
+        },
+        "smtps": {
+            "ports": 465
+        },
+        "ssl": {
+            "certificateFiles" : [
+            "keys/burpcollaborator.example.com.key.pkcs8",
+            "keys/burpcollaborator.example.com.crt",
+            "keys/intermediate.crt" ]
+        }
+    },
+    "polling": {
+        "localAddress": "127.0.0.1",
+        "publicAddress": "10.20.0.159",
+        "http": {
+            "port": 9090
+        },
+        "https": {
+            "port": 9443
+        },
+        "ssl": {
+            "certificateFiles": [
+            "keys/burpcollaborator.example.com.key.pkcs8",
+            "keys/burpcollaborator.example.com.crt",
+            "keys/intermediate.crt" ]
+        }
+    },
+    "metrics": {
+        "path": "jnaicmez8",
+        "addressWhitelist": ["10.10.23.0/24"]
+    },
+    "dns": {
+        "interfaces": [{
+                "name": "ns1",
+                "localAddress": "10.20.0.159",
+                "publicAddress": "98.87.76.55"
+            }, {
+                "name": "ns2",
+                "localAddress": "10.20.0.159",
+                "publicAddress": "98.87.11.00"
+            }],
+        "ports": 53
+    },
+    "logLevel": "INFO"
+    "customDnsRecords" : [
+        {
+            "label" : "_acme-challenge",
+            "type" : "TXT",
+            "record" : "jsd3Ew2nign7svGT",
+            "ttl" : 60
+        }
+    ],
+    "customHttpContent": [
+        {
+            "path": "/",
+            "contentType": "text/html",
+            "base64Content": "PCFkb2N0eXBlIGh0bWw+Cgo8aHRtbCBsYW5nPSJlbiI+CjxoZWFkPgogIDxtZXRhIGNoYXJzZXQ9InV0Zi04Ij4KICA8dGl0bGU+RXhhbXBsZSBQYWdlPC90aXRsZT4KCiAgPGxpbmsgcmVsPSJzdHlsZXNoZWV0IiBocmVmPSJjc3MvbXlzdHlsZXNoZWV0LmNzcyI+CjwvaGVhZD4KPGJvZHk+CjxoMT5XZWxjb21lIHRvIG15IGV4YW1wbGUgcGFnZTwvaDE+CjxwPlRoYW5rcyBmb3IgdmlzaXRpbmcgbXkgZXhhbXBsZSBwYWdlLjwvcD4KPC9ib2R5Pgo8L2h0bWw+"
+        },
+        {
+            "path": "/info/readme.txt",
+            "contentType": "text/plain",
+            "base64Content": "VGhpcyBpcyB0aGUgcmVhZG1lIGZpbGUgZm9yIG15IGNvbGxhYm9yYXRvciBzZXJ2ZXIu"
+        }
+    ]
+}</code>
+<h2 id="configuration-file-fields">Configuration file fields</h2>
+<p>
+    The following fields are used in the example configuration file:
+</p>
+<table class="grid-table grid-table-size-1-2">
+    <tbody><tr>
+            <td>
+                <strong>Field</strong>
+            </td>
+            <td>
+                <strong>Meaning</strong>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    serverDomain
+                </code>
+            </td>
+            <td>
+                <p>
+                    The domain or subdomain that the Collaborator server controls DNS for. This is required for DNS functionality.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    workerThreads
+                </code>
+            </td>
+            <td>
+                <p>
+                    The number of threads used by the Collaborator server to process incoming requests. The default is 5.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    eventCapture.localAddress
+                </code>
+            </td>
+            <td>
+                <p>
+                    Specify the interfaces that Collaborator listens on. Otherwise, the Collaborator listens on all local interfaces for capturing interaction events.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    eventCapture.publicAddress
+                </code>
+            </td>
+            <td>
+                <p>
+                    The public IP address for capturing interaction events.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    eventCapture.http.ports
+                </code>
+            </td>
+            <td>
+                <p>
+                    The ports for listening for HTTP interaction events. You can specify multiple ports. The default is 80. Only change this if port 80 is being forwarded and port mappings are configured.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    eventCapture.https.ports
+                </code>
+            </td>
+            <td>
+                <p>
+                    The ports for listening for HTTPS interaction events. You can specify multiple ports. The default is 443. Only change this if port 443 is being forwarded.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    eventCapture.smtp.ports
+                </code>
+            </td>
+            <td>
+                <p>
+                    The ports for listening for SMTP interaction events. The defaults are 25 and 587. Only change these if they are being forwarded.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    eventCapture.smtps.ports
+                </code>
+            </td>
+            <td>
+                <p>
+                    The ports for listening for SMTPS interaction events. You can specify multiple ports. The default is 465. Only change this if port 465 is being forwarded.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    eventCapture.ssl.certificateFiles
+                </code>
+            </td>
+            <td>
+                <p>
+                    Specify certificate files to load.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    polling.localAddress
+                </code>
+            </td>
+            <td>
+                <p>
+                    The interface for polling requests. If you don't specify this, the Collaborator server uses the same network interface to capture interaction events and serve polling requests. You can choose to specify a separate polling interface.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    polling.publicAddress
+                </code>
+            </td>
+            <td>
+                <p>
+                    The public address used to serve polling requests.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    polling.http.port
+                </code>
+            </td>
+            <td>
+                <p>
+                    The port used for polling over HTTP.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    polling.https.port
+                </code>
+            </td>
+            <td>
+                <p>
+                    The port used for polling over HTTPS.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    polling.ssl.certificateFiles
+                </code>
+            </td>
+            <td>
+                <p>
+                    Specify certificate files to load.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    metrics.path
+                </code>
+            </td>
+            <td>
+                <p>
+                    The URL path from which the metrics page can be accessed. If this isn't specified, there is no metrics endpoint. You won't collect any metrics, but the Collaborator server functions as usual.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    metrics.addressWhitelist
+                </code>
+            </td>
+            <td>
+                <p>
+                    The client IP addresses that are allowed to access the metrics page. If no addresses are specified, you won't be able to access the metrics.
+                </p>
+                <p>
+                    If a custom port is used for the polling interface this is also used in the URL for the metrics page. For example <code>https://burpcollaborator.example.com:9443/jnaicmez8/metrics</code>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    dns.interfaces
+                </code>
+            </td>
+            <td>
+                <p>
+                    A list of local interfaces that listen for DNS queries. If your registrar requires that you configure a different IP address for each authoritative name server, you can use multiple network interfaces and configure their locations.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    dns.interfaces.name
+                </code>
+            </td>
+            <td>
+                <p>
+                    The hostname to use for the name server running on this interface. Use a different hostname for each name server.
+                </p>
+                <p>
+                    Do not use the fully qualified domain name. This is generated automatically, by appending the value of <code>serverDomain</code> to this value.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    dns.interfaces.localAddress
+                </code>
+            </td>
+            <td>
+                <p>
+                    The local address to bind to for this name server.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    dns.interfaces.publicAddress
+                </code>
+            </td>
+            <td>
+                <p>
+                    The public IP address that corresponds to the configured local address.
+                </p>
+                <p>
+                    You typically need to use the configured hostname and public IP address in your DNS record for your domain.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    dns.ports
+                </code>
+            </td>
+            <td>
+                <p>
+                    The ports that listen for DNS queries. The default is port 53. Only change this if port 53 is being forwarded.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    logLevel
+                </code>
+            </td>
+            <td>
+                <p>
+                    The level of logging sent to standard output. The default is <code>INFO</code>.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    customDnsRecords.label
+                </code>
+            </td>
+            <td>
+                <p>
+                    The DNS label for the custom content.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    customDnsRecords.record
+                </code>
+            </td>
+            <td>
+                <p>
+                    The custom DNS record for the corresponding label.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    customDnsRecords.type
+                </code>
+            </td>
+            <td>
+                <p>
+                    The type of custom DNS record. You can choose TXT or CNAME.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    customDnsRecords.ttl
+                </code>
+            </td>
+            <td>
+                <p>
+                    The time to live for the record in seconds.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    customHttpContent.path
+                </code>
+            </td>
+            <td>
+                <p>
+                    The path for the custom HTTP content. You can set multiple paths.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    customHttpContent.contentType
+                </code>
+            </td>
+            <td>
+                <p>
+                    The MIME type to add to the response header for the custom content.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    customHttpContent.base64content
+                </code>
+            </td>
+            <td>
+                <p>
+                    The BASE64 encoded content is decoded for use on the HTML page.
+                </p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h2 id="alternative-configuration-fields">Alternative configuration fields:</h2>
+<p>
+    These fields aren't included in the example configuration file, but can be used in your configuration:
+</p>
+<table class="grid-table grid-table-size-1-2">
+    <tbody><tr>
+            <td>
+                <strong>Field</strong>
+            </td>
+            <td>
+                <strong>Meaning and example</strong>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    interactionLimits.http
+                </code>
+            </td>
+            <td>
+                <p>
+                    The maximum number of bytes that are stored for each incoming HTTP interaction message. The default is 10000000.
+                </p>
+                <code>"http" : 8192</code>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    interactionLimits.smtp
+                </code>
+            </td>
+            <td>
+                <p>
+                    The maximum number of bytes that are stored for each incoming SMTP interaction message. There is no limit by default.
+                </p>
+                <code>"smtp" : 8192</code>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    eventCapture.https.hostname
+                </code>
+            </td>
+            <td>
+                <p>
+                    Generate a self-signed certificate. This is not necessary if you have a CA-signed certificate. See <a href="/burp/documentation/collaborator/server/private/configuring.html#configure-tls-certificates">Configure TLS certificates</a> for more details.
+                </p>
+                <code>"hostname" : "burpcollaborator.example.com"</code><p>
+                    This creates a self-signed wildcard certificate for:
+                </p>
+                <code>*.burpcollaborator.example.com</code>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    eventCapture.ssl.keystore.path
+                </code>
+            </td>
+            <td>
+                <p>
+                    Import a certificate into the Java keystore of the server. Use this if the certificate signing request was generated using Java keytool.
+                </p>
+                <code class="code-scrollable">"ssl": {
+    "keystore": {
+        "path": "myKeystore.jks",
+            "password": "myPassword"
+    }</code>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    eventCapture.ssl.keystore.password
+                </code>
+            </td>
+            <td>
+                <p>
+                    The password for the Java keystore.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    eventCapture.canonicalName
+                </code>
+            </td>
+            <td>
+                <p>
+                    The CNAME record for interaction events. Specify this as the fully qualified domain name.
+                </p>
+                <code>"canonicalName": "&lt;FQDN&gt;"</code>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    polling.https.hostname
+                </code>
+            </td>
+            <td>
+                <p>
+                    Generate a self-signed certificate. This is not necessary if you have a CA-signed certificate. See Configure TLS certificates for more details.
+                </p>
+                <code>"hostname" : "polling"</code>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    eventCapture.ssl.keystore.path
+                </code>
+            </td>
+            <td>
+                <p>
+                    Import a certificate into the Java keystore of the server. Use this if the certificate signing request was generated using Java keytool.
+                </p>
+                <code class="code-scrollable">"ssl": {
+    "keystore": {
+        "path": "myKeystore.jks",
+            "password": "myPassword"
+    }</code>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <code>
+                    eventCapture.ssl.keystore.password
+                </code>
+            </td>
+            <td>
+                <p>
+                    The password for the Java keystore.
+                </p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

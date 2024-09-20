@@ -1,0 +1,32 @@
+{
+  "typeIndex": 6292816,
+  "name": "Private key disclosed",
+  "description": "<p>Disclosure of valid private keys may lead to unauthorized access to any systems that use them for authentication. Verify whether any keys disclosed are actually valid, and whether their disclosure within the application is appropriate.</p>",
+  "remediation": null,
+  "webIntro": null,
+  "typicalSeverity": "INFO",
+  "references": [
+    {
+      "title": "Web Security Academy: Information disclosure",
+      "url": "https://portswigger.net/web-security/information-disclosure"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-200: Information Exposure",
+      "url": "https://cwe.mitre.org/data/definitions/200.html"
+    },
+    {
+      "title": "CWE-388: Error Handling",
+      "url": "https://cwe.mitre.org/data/definitions/312.html"
+    },
+    {
+      "title": "CAPEC-37: Retrieve Embedded Sensitive Data",
+      "url": "https://capec.mitre.org/data/definitions/37.html"
+    },
+    {
+      "title": "CAPEC-204: Lifting Sensitive Data Embedded in Cache",
+      "url": "https://capec.mitre.org/data/definitions/204.html"
+    }
+  ]
+}

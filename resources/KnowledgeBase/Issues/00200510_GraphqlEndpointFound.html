@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+GraphQL endpoint found
+<h1>Typical severity</h1>
+Information
+<h1>Issue description</h1>
+
+<p>Unlike REST APIs, GraphQL servers operate on a single endpoint. All messages are sent to this endpoint, with the body of the message determining how the server handles the request.</p>
+<p>A publicly-available endpoint does not necessarily present a security vulnerability in and of itself. However, this information can still be valuable to attackers, as by definition any attacks on the GraphQL server will use the endpoint discovered. For example, an attacker could then attempt to run an introspection query against the endpoint, which could reveal the entire GraphQL schema if successful.</p>
+
+<h1>Issue remediation</h1>
+
+<p>Ensure that you have disabled introspection on your GraphQL server when deploying to production. This will prevent attackers from using introspection queries to discover more about the operations available in your API, and other potentially sensitive information such as field descriptions.</p>
+<p>Also, ensure that your GraphQL endpoint is only available over the POST HTTP method. Having your API available over methods such as GET or OPTIONS presents an additional attack surface and can leave the endpoint open to vulnerabilities such as CSRF.</p>
+
+<h1>References</h1>
+<ul>
+    <li>
+        <a href="https://portswigger.net/web-security/graphql">Web Security Academy: GraphQL API vulnerabilities</a>
+    </li>
+</ul>
+
+<h1>Vulnerability classifications</h1>
+
+
+<h1>Web intro</h1>
+
+</body>
+</html>

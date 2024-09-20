@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/index.html">Intruder</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/uses/index.html">Uses</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/uses/harvesting.html">Harvesting data</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Harvesting useful data</h1>
+<p>
+    You can use Burp Intruder to extract interesting data from an attack. This information enables you to focus on the most critical items, and can feed into future attacks.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-1-find-a-request">Step 1: Find a request</h2>
+<p>
+    Find a request that contains an identifier in a parameter, and that has a response with interesting data about the identifier.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-2-set-a-payload-position">Step 2: Set a payload position</h2>
+<p>
+    Configure a single payload position at the parameter's value.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/intruder-gettingstarted-7-940.png" alt="Setting payload position for harvesting">
+</div>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-3-set-a-payload-type">Step 3: Set a payload type</h2>
+<p>
+    Use a suitable payload type to generate potential identifiers to test, using the correct format or scheme.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/intruder-gettingstarted-8-940.png" alt="Setting payload type for harvesting">
+</div>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-4-set-an-extract-grep">Step 4: Set an extract grep</h2>
+<p>
+    Configure the <strong>Grep - extract</strong> settings to retrieve relevant data from each response. For more information on these settings, see <a href="/burp/documentation/desktop/tools/intruder/configure-attack/settings.html#grep-extract">Burp Intruder attack settings</a>.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/intruder-gettingstarted-9-940.png" alt="Intruder grep extract" class="center-block">
+</div>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-5-analyze-the-results">Step 5: Analyze the results</h2>
+<p>
+    Sort the attack results by the extract grep expressions to identify any interesting information that has been extracted.
+</p>
+<div class="section-small">
+    <img src="/burp/documentation/desktop/images/intruder-results-extract-column-940.png" alt="Extract grep results harvesting" class="center-block">
+</div>
+<p>
+    <label class="label-edition is-professional">Professional</label>
+    To copy and paste the data for further analysis, control-click the header.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="use-cases">Use cases</h2>
+<p>
+    You can configure your attack to harvest a wide range of useful data, for example:
+</p>
+<ul>
+    <li>
+        Extract password hint - Insert a list of common usernames into an application's forgotten password function. Configure an extract grep item to retrieve the password hint for each user. You can then scan these to identify ones that are easily guessed.
+    </li>
+    <li>
+        Identify page title tags - Use the numbers payload type to cycle through page ID numbers. Configure an extract grep item to retrieve the HTML title tag for each page. You can then scan these to identify interesting pages.
+    </li>
+    <li>
+        Identify user roles - Insert a list of known usernames into an application's user profile page. Configure an extract grep item to retrieve the role for each user. You can then identify administrative accounts for further attacks.
+    </li>
+</ul>
+</body>
+</html>

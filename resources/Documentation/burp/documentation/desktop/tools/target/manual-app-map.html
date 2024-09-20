@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/index.html">Target</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/manual-app-map.html">Manual Application mapping</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Manual application mapping</h1>
+<p>
+    You can choose between manual and automated application mapping. Consider the type of application and how you intend to use the results.
+</p>
+<p>
+    For some use cases, Burp's <a href="/burp/documentation/scanner/crawling.html">automated crawler</a> is superior to manual mapping. The crawler captures the navigational paths in a way that lets Burp Scanner automatically maintain session when it <a href="/burp/documentation/scanner/auditing.html">audits</a> the application.
+</p>
+<p>
+    If you map the application manually, you can guide the process and avoid potentially dangerous functionality. You can also make sure that navigational actions work as you expect, and familiarize yourself with the application.
+</p>
+<p>
+    To manually map the application:
+</p>
+<ol>
+    <li>
+        Launch <a href="/burp/documentation/desktop/tools/burps-browser.html">Burp's browser</a>.
+    </li>
+    <li>
+        Browse the entire application manually.
+    </li>
+    <li>
+        Follow every link, submit every form, step through every multi-stage process, and log in to all protected areas.
+    </li>
+</ol>
+<p>
+    This manual mapping process populates the Target site map with the content requested via the Proxy. In addition, you can use <a href="/burp/documentation/desktop/automated-scanning/live-tasks/index.html">live passive crawling</a> to map content that can be inferred from application responses, such as from links or forms. This process builds up a fairly complete record of all the visible application content.
+</p>
+</body>
+</html>

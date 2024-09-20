@@ -1,0 +1,32 @@
+{
+  "typeIndex": 4198144,
+  "name": "Request URL override",
+  "description": "<p>Some applications and frameworks support HTTP headers that can be used to override parts of the request URL, potentially affecting the routing and processing of the request.</p>\n<p>Intermediate systems are often oblivious to these headers. In the case of reverse proxies and web application firewalls, this can lead to security rulesets being bypassed. If a caching system is in place, this may enable cache poisoning attacks. These headers may also enable forging of log entries. </p>\n<p>Even if the application is intended to be accessed directly, some visitors may be using a corporate proxy enabling localised cache poisoning. </p>",
+  "remediation": "<p>To fully resolve this issue, locate the component that processes the affected headers, and disable it entirely.\nIf you are using a framework, applying any pending security updates may do this for you.</p>\n<p>If this isn't practical, an alternative workaround is to configure an intermediate system to automatically strip the affected headers before they are processed.</p>",
+  "webIntro": null,
+  "typicalSeverity": "INFO",
+  "references": [
+    {
+      "title": "Web Security Academy: HTTP Host header attacks",
+      "url": "https://portswigger.net/web-security/host-header"
+    },
+    {
+      "title": "Web Security Academy: Web cache poisoning",
+      "url": "https://portswigger.net/web-security/web-cache-poisoning"
+    },
+    {
+      "title": "Practical Web Cache Poisoning",
+      "url": "https://portswigger.net/blog/practical-web-cache-poisoning"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-436: Interpretation Conflict",
+      "url": "https://cwe.mitre.org/data/definitions/436.html"
+    },
+    {
+      "title": "CAPEC-141: Cache Poisoning",
+      "url": "https://capec.mitre.org/data/definitions/141.html"
+    }
+  ]
+}

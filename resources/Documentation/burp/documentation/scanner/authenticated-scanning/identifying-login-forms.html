@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/index.html">Scanner</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/authenticated-scanning/index.html">Authenticated scanning</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/authenticated-scanning/identifying-login-forms.html">Identifying login and registration forms</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-enterprise">Enterprise</label>
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Identifying login and registration forms</h1>
+<p>
+    Burp Scanner's ability to identify login and registration forms is a key part of what makes authenticated scanning in Burp so effective.
+</p>
+<p>
+    When crawling, Burp Scanner first identifies any forms that it believes to be login or registration forms. Any forms meeting all of the following criteria are added to the list:
+</p>
+<ul>
+    <li>
+        The form is a standard HTML form.
+    </li>
+    <li>
+        The form contains an input field with the attribute <code>type=password</code>.
+    </li>
+    <li>
+        The password field has a non-empty <code>name</code> attribute.
+    </li>
+</ul>
+<p>
+    Burp Scanner then attempts to distinguish registration forms from login forms. To do this, it applies a series of ordered criteria.
+</p>
+<p>
+    The registration form is:
+</p>
+<ol>
+    <li>
+        Whichever form has the most password fields.
+    </li>
+    <li>
+        Whichever form has the most text fields.
+    </li>
+    <li>
+        Whichever form has the most multi-value select fields.
+    </li>
+    <li>
+        Whichever form has the most single-value select fields.
+    </li>
+    <li>
+        Whichever form Burp Scanner found first.
+    </li>
+</ol>
+<p>
+    For example, if two forms have an equal number of password fields, Burp Scanner next compares the number of text fields, and so on.
+</p>
+<h2 id="why-is-burp-scanner-not-filling-in-my-login-forms">Why is Burp Scanner not filling in my login forms?</h2>
+<p>
+    Burp Scanner identifies login and registration forms based on the password field. However, it only enters a username or email address if the related fields:
+</p>
+<ul>
+    <li>
+        Have a <code>type=email</code> or <code>type=text</code> attribute.
+    </li>
+    <li>
+        Have a non-empty <code>name</code> attribute.
+    </li>
+</ul>
+<p>
+    If the username field does not meet these conditions, then Burp Scanner can identify the form but is unable to enter the corresponding data.
+</p>
+<h3>What usernames does Burp Scanner submit?</h3>
+<p>
+    Burp Scanner submits the username as provided in the following situations:
+</p>
+<ul>
+    <li>
+        The field has a <code>type=text</code> attribute.
+    </li>
+    <li>
+        The field has a <code>type=email</code> attribute and the username provided ends in an email domain.
+    </li>
+</ul>
+<p>
+    If the field has a <code>type=email</code> attribute but the username provided does not end in an email domain, then Burp Scanner submits the provided username with <code>@burpcollaborator.net</code> appended.
+</p>
+</body>
+</html>

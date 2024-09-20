@@ -1,0 +1,22 @@
+package com.fasterxml;
+
+import com.fasterxml.Zb.Zf;
+import com.fasterxml.Zor.Zyi;
+import java.io.IOException;
+import java.util.concurrent.atomic.AtomicInteger;
+
+public class Zsp extends Zzg<AtomicInteger> {
+  public Zsp() {
+    super(AtomicInteger.class, false);
+  }
+  
+  public void ZW(AtomicInteger paramAtomicInteger, Zf paramZf, Zyi paramZyi) throws IOException {
+    paramZf.Zd(paramAtomicInteger.get());
+  }
+}
+
+
+/* Location:              C:\Program Files\BurpSuitePro\burpsuite_pro.jar!\com\fasterxml\Zsp.class
+ * Java compiler version: 8 (52.0)
+ * JD-Core Version:       1.1.3
+ */

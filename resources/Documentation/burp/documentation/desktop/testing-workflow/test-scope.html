@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/test-scope.html">Setting a test scope</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Setting the initial test scope in Burp Suite</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/OkOtROgAp9Q?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    By default, as you use Burp's browser, Burp logs all HTTP or WebSocket messages for further analysis. By setting a scope, you can tell Burp which URLs you want to test and which you don't want to test. For example, you may want to exclude URLs that:
+</p>
+<ul>
+    <li>
+        You don't have permission to test.
+    </li>
+    <li>
+        Aren't safe to test. For example, URLs that contain potentially dangerous functionality.
+    </li>
+    <li>
+        Aren't relevant. Once you have set the scope, you can use the filters in the Target site map and Proxy history to screen out some of the noise.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        In Burp Suite Community Edition, your scope settings are lost when you close Burp, along with any other data. You can save the scope settings as part of a project file in Burp Suite Professional. For more information, see <a href="/burp/documentation/desktop/projects/index.html">Project files</a>.
+    </p>
+</div>
+<h2 id="adding-urls-to-the-scope">Adding URLs to the scope</h2>
+<p>
+    To add a URL to your scope:
+</p>
+<ol>
+    <li>
+        Click <span class="icon-settings"></span><strong>Scope settings</strong> on the lower toolbar to open the <strong>Settings</strong> dialog.
+    </li>
+    <li>
+        Scroll to the <strong>Target scope</strong> setting.
+    </li>
+    <li>
+        Under <strong>Include in scope</strong>, click <strong>Add</strong>. The <strong>Add</strong> prefix for in-scope URLs dialog opens.
+    </li>
+    <li>
+        Enter the prefix for the URLs that you want to match, then click <strong>OK</strong>.
+    </li>
+    <li>
+        When prompted, choose whether to stop logging out-of-scope traffic. This can provide performance benefits.
+    </li>
+</ol>
+<p>
+    The prefix is added to the <strong>Include in scope</strong> list. Any URL that starts with this exact prefix is now in scope. Any URL that doesn't start with a prefix from the list is out of scope. For example, if you add <code>https://example.com</code>, requests to any path on this domain are in scope if they're accessed over HTTPS.
+</p>
+<h2 id="excluding-urls-from-the-scope">Excluding URLs from the scope</h2>
+<p>
+    After you add a URL to your scope, you may want to exclude specific paths that are a subset of the in-scope prefixes, such as <code>https://example.com/admin</code>. To exclude a URL from your scope:
+</p>
+<ol>
+    <li>
+        Click <span class="icon-settings"></span><strong>Scope settings</strong> on the lower toolbar to open the <strong>Settings</strong> dialog.
+    </li>
+    <li>
+        Scroll to the <strong>Target scope</strong> setting.
+    </li>
+    <li>
+        Under <strong>Exclude from scope</strong>, click <strong>Add</strong>. The <strong>Add prefix for out-of-scope URLs</strong> dialog opens.
+    </li>
+    <li>
+        Enter a prefix for the URLs that you want to exclude, then click <strong>OK</strong>.
+    </li>
+</ol>
+<p>
+    The prefix is added to the <strong>Exclude from scope</strong> list. A URL is now in scope if it starts with an in-scope prefix, but does not start with an out-of-scope prefix.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/scope/index.html">Target scope</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/project/scope.html#target-scope">Scope settings - Target scope</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/scope/index.html#advanced-scope-control">URL-matching rules - Advanced scope control</a>.
+        </li>
+        <li>
+            You can directly add URLs to scope from the Target site map, Proxy history, and Logger. For a tutorial on this function, see <a href="/burp/documentation/desktop/getting-started/setting-target-scope.html">Setting the target scope</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

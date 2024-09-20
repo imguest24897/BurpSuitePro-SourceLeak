@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+HTML uses unrecognized charset
+<h1>Typical severity</h1>
+
+Information
+
+<h1>Issue description</h1>
+
+<p>Applications may specify a non-standard character set as a result of typographical errors within the code base, or because of intentional usage of an unusual character set that is not universally recognized by browsers. If the browser does not recognize the character set specified by the application, then the browser may analyze the HTML and attempt to determine which character set it appears to be using. Even if the majority of the HTML actually employs a standard character set such as UTF-8, the presence of non-standard characters anywhere in the response may cause the browser to interpret the content using a different character set. This can have unexpected results, and can lead to cross-site scripting vulnerabilities in which non-standard encodings like UTF-7 can be used to bypass the application's defensive filters.</p>
+<p>In most cases, the absence of a valid charset directive does not constitute a security flaw, particularly if the response contains static content. You should review the contents of affected responses, and the context in which they appear, to determine whether any vulnerability exists. </p>
+
+<h1>Issue remediation</h1>
+
+<p>For every response containing HTML content, the application should include within the Content-type header a directive specifying a standard recognized character set, for example <b>charset=ISO-8859-1</b>.
+</p>
+
+<h1>References</h1>
+
+
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+<li><a href="https://cwe.mitre.org/data/definitions/16.html">CWE-16: Configuration</a></li>
+<li><a href="https://cwe.mitre.org/data/definitions/436.html">CWE-436: Interpretation Conflict</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

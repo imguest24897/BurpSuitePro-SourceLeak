@@ -1,0 +1,28 @@
+{
+    "project_options": {
+        "resource_pools":{
+            "default_resource_pool":{
+                "concurrent_request_limit":10,
+                "concurrent_request_limit_enabled":true,
+                "throttle_interval_millis":500,
+                "throttle_interval_enabled":false,
+                "throttle_random_enabled":false,
+                "auto_backoff":true,
+                "auto_backoff_after_429_status_returned":true,
+                "auto_backoff_after_503_status_returned":false,
+                "custom_auto_backoff_status_codes_enabled":false,
+                "custom_auto_backoff_status_codes":[]
+            }
+        },
+        "misc": {
+            "embedded_browser": {
+                "maximum_browsers": 5
+            }
+        }
+    },
+    "scanner": {
+        "issues_reported": {
+            "store_issues_within_queue_items": true
+        }
+    }
+}

@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/websockets/index.html">Testing for WebSocket vulnerabilities</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/websockets/manipulating-websocket-handshakes.html">Manipulating WebSocket handshakes</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Manipulating WebSocket handshakes with Burp Suite</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/NJ2TM4-id2w?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    A WebSocket handshake is an HTTP message that establishes a WebSocket connection. You can often access additional attack surface by manipulating these messages.
+</p>
+<p>
+    This tutorial explains how to clone, modify, and resend WebSocket handshakes in Burp Repeater. You can follow along with the steps below using the <a href="https://portswigger.net/web-security/websockets/lab-manipulating-messages-to-exploit-vulnerabilities.html">Manipulating WebSocket messages to exploit vulnerabilities</a> Web Security Academy lab.
+</p>
+<h2 id="steps" cms-ignore-validation="DUPLICATE_HEADINGS">Steps</h2>
+<p>
+    To manipulate WebSocket handshakes:
+</p>
+<ol>
+    <li>
+        <p>
+            Browse around your target application to map its attack surface.
+        </p>
+    </li>
+    <li>
+        <p>
+            Go to <strong>Proxy &gt; WebSockets</strong> history. This tab displays a table of any WebSocket messages that Burp's browser has exchanged with the target host.
+        </p>
+    </li>
+    <li>
+        <p>
+            Right-click on a message and select <strong>Send to Repeater</strong>. Burp opens a new WebSockets tab in Repeater.
+        </p>
+    </li>
+    <li>
+        <p>
+            Click the edit <span class="icon-edit"></span> icon to view a list of WebSocket connections that have been used in your current Burp session.
+        </p>
+    </li>
+    <li>
+        <p>
+            Select the connection you want to base your new connection on and click <strong>Clone</strong>.
+        </p>
+    </li>
+    <li>
+        <p>
+            If required, amend the <strong>Host</strong>, <strong>Port</strong>, and <strong>Use HTTPS</strong> settings.
+        </p>
+    </li>
+    <li>
+        <p>
+            In the <strong>Request</strong> panel, amend the body of the message.
+        </p>
+        <p>
+            There are a wide range of exploits you could perform here, depending on the application's logic and how it uses WebSockets. For example, you could add an <code>X-Forwarded-For</code> header to spoof your IP address, enabling you to get around restrictions on your actual IP.
+        </p>
+    </li>
+    <li>
+        <p>
+            Click <strong>Connect</strong> to create the modified connection.
+        </p>
+    </li>
+    <li>
+        <p>
+            Click the edit <span class="icon-edit"></span> icon to view the list of WebSocket connections.
+        </p>
+    </li>
+    <li>
+        <p>
+            Select the new connection from the list and click <strong>Attach</strong>. Repeater will now use the new connection for all messages sent from the open tab.
+        </p>
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="https://portswigger.net/web-security/websockets/index.html">Web Security Academy: Testing for WebSockets security vulnerabilities</a>
+        </li>
+        <li>
+            <a href="https://portswigger.net/burp/documentation/desktop/tools/repeater/websocket-messages.html">Working with WebSocket messages in Burp Repeater</a>
+        </li>
+        <li>
+            <a href="https://portswigger.net/burp/documentation/desktop/tools/proxy/websockets-history/index.html">WebSockets history</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+{
+  "typeIndex": 5245344,
+  "name": "Frameable response (potential Clickjacking)",
+  "description": "<p>If a page fails to set an appropriate X-Frame-Options or Content-Security-Policy HTTP header, it might be possible for a page controlled by an attacker to load it within an iframe. This may enable a clickjacking attack, in which the attacker's page overlays the target application's interface with a different interface provided by the attacker. By inducing victim users to perform actions such as mouse clicks and keystrokes, the attacker can cause them to unwittingly carry out actions within the application that is being targeted. This technique allows the attacker to circumvent defenses against cross-site request forgery, and may result in unauthorized actions.</p>\n<p>Note that some applications attempt to prevent these attacks from within the HTML page itself, using \"framebusting\" code. However, this type of defense is normally ineffective and can usually be circumvented by a skilled attacker.</p>\n<p>You should determine whether any functions accessible within frameable pages can be used by application users to perform any sensitive actions within the application. </p>",
+  "remediation": "<p>To effectively prevent framing attacks, the application should return a response header with the name <b>X-Frame-Options</b> and the value <b>DENY</b> to prevent framing altogether, or the value <b>SAMEORIGIN</b> to allow framing only by pages on the same origin as the response itself. Note that the SAMEORIGIN header can be partially bypassed if the application itself can be made to frame untrusted websites.</p>",
+  "webIntro": null,
+  "typicalSeverity": "INFO",
+  "references": [
+    {
+      "title": "Web Security Academy: Clickjacking",
+      "url": "https://portswigger.net/web-security/clickjacking"
+    },
+    {
+      "title": "X-Frame-Options",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/X-Frame-Options"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-693: Protection Mechanism Failure",
+      "url": "https://cwe.mitre.org/data/definitions/693.html"
+    },
+    {
+      "title": "CWE-1021: Improper Restriction of Rendered UI Layers or Frames",
+      "url": "https://cwe.mitre.org/data/definitions/1021.html"
+    },
+    {
+      "title": "CAPEC-103: Clickjacking",
+      "url": "https://capec.mitre.org/data/definitions/103.html"
+    }
+  ]
+}

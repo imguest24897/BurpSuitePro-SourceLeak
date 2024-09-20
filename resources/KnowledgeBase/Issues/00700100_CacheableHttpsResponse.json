@@ -1,0 +1,28 @@
+{
+  "typeIndex": 7340288,
+  "name": "Cacheable HTTPS response",
+  "description": "<p>Unless directed otherwise, browsers may store a local cached copy of content received from web servers. Some browsers, including Internet Explorer, cache content accessed via HTTPS. If sensitive information in application responses is stored in the local cache, then this may be retrieved by other users who have access to the same computer at a future time.</p>",
+  "remediation": "<p>Applications should return caching directives instructing browsers not to store local copies of any sensitive data. Often, this can be achieved by configuring the web server to prevent caching for relevant paths within the web root. Alternatively, most web development platforms allow you to control the server's caching directives from within individual scripts. Ideally, the web server should return the following HTTP headers in all responses containing sensitive content:</p>\n<ul>\n<li>Cache-control: no-store</li><li>Pragma: no-cache</li></ul>",
+  "webIntro": null,
+  "typicalSeverity": "INFO",
+  "references": [
+    {
+      "title": "Web Security Academy: Information disclosure",
+      "url": "https://portswigger.net/web-security/information-disclosure"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-524: Information Exposure Through Caching",
+      "url": "https://cwe.mitre.org/data/definitions/524.html"
+    },
+    {
+      "title": "CWE-525: Information Exposure Through Browser Caching",
+      "url": "https://cwe.mitre.org/data/definitions/525.html"
+    },
+    {
+      "title": "CAPEC-37: Retrieve Embedded Sensitive Data",
+      "url": "https://capec.mitre.org/data/definitions/37.html"
+    }
+  ]
+}

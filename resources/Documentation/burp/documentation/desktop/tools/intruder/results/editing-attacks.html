@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/index.html">Intruder</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/results/index.html">Results</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/results/editing-attacks.html">Editing attacks</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Editing attacks</h1>
+<p>
+    You can control the attack and modify the attack configuration while it is running. Do this from the results window.
+</p>
+<h2 id="controlling-an-attack">Controlling an attack</h2>
+<p>
+    With the results window open, you can control the attack from the top-level <strong>Attack</strong> menu. This enables you to carry out the following actions:
+</p>
+<ul>
+    <li>
+        Pause the attack.
+    </li>
+    <li>
+        Resume the attack.
+    </li>
+    <li>
+        Restart the attack.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            For information on how to save and close an attack, see <a href="/burp/documentation/desktop/tools/intruder/results/saving-attacks.html">Saving attacks</a>.
+        </li>
+    </ul>
+</div>
+<h2 id="configuring-an-attack">Configuring an attack</h2>
+<p>
+    The results window includes clones of the original configuration tabs. You can use these to review and modify most aspects of the attack configuration while the attack is in progress.
+</p>
+<p>
+    You cannot modify aspects of the attack configuration that are fundamental to the structure of the attack. This includes:
+</p>
+<ul>
+    <li>
+        The attack type.
+    </li>
+    <li>
+        The payload positions.
+    </li>
+    <li>
+        The payload type.
+    </li>
+</ul>
+<p>
+    If you want to change these values, edit them in the original attack tab, then start a new attack.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        We recommend that you pause attacks before you modify your configuration. Changing the configuration while the attack is running may have unanticipated impacts, as changes will execute as each key is pressed.
+    </p>
+    <p>
+        For example, if you are using the <strong><a href="/burp/documentation/desktop/tools/intruder/configure-attack/payload-types.html#numbers">Numbers</a></strong> payload type and delete a digit from the <strong>To</strong> field, the attack may abruptly complete because the <strong>To</strong> field now contains a smaller number.
+    </p>
+</div>
+</body>
+</html>

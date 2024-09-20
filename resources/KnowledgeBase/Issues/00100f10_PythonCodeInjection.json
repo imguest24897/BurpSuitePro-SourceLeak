@@ -1,0 +1,27 @@
+{
+  "typeIndex": 1052432,
+  "name": "Python code injection",
+  "description": "<p>Server-side code injection vulnerabilities arise when an application \n  incorporates user-controllable data into a string that is dynamically evaluated by \n  a code interpreter. If the user data is not strictly validated, an attacker \n  can use crafted input to modify the code to be executed, and inject \n  arbitrary code that will be executed by the server.</p>\n<p>Server-side code injection vulnerabilities are usually very serious and lead to \n  complete compromise of the application's \n  data and functionality, and often of the server that is hosting the application.\n  It may also be possible to use the server as a platform for further attacks against other systems.</p>",
+  "remediation": "<p>Whenever possible, applications should avoid incorporating user-controllable data into \n  dynamically evaluated code. In almost every situation, there are safer alternative \n  methods of implementing application functions, which cannot be \n  manipulated to inject arbitrary code into the server's processing.</p>\n<p>If it is considered unavoidable to incorporate user-supplied data into \n  dynamically evaluated code, then the data should be strictly validated. Ideally, a whitelist of specific accepted \n  values should be used. Otherwise, only short alphanumeric strings should be accepted. \n  Input containing any other data, including any conceivable code metacharacters, should be rejected. </p>",
+  "webIntro": null,
+  "typicalSeverity": "HIGH",
+  "references": [],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-94: Improper Control of Generation of Code ('Code Injection')",
+      "url": "https://cwe.mitre.org/data/definitions/94.html"
+    },
+    {
+      "title": "CWE-95: Improper Neutralization of Directives in Dynamically Evaluated Code ('Eval Injection')",
+      "url": "https://cwe.mitre.org/data/definitions/95.html"
+    },
+    {
+      "title": "CWE-116: Improper Encoding or Escaping of Output",
+      "url": "https://cwe.mitre.org/data/definitions/116.html"
+    },
+    {
+      "title": "CAPEC-242: Code Injection",
+      "url": "https://capec.mitre.org/data/definitions/242.html"
+    }
+  ]
+}

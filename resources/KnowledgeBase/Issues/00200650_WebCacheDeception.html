@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+Web cache deception
+<h1>Typical severity</h1>
+Medium
+<h1>Issue description</h1>
+<p>Web cache deception exploits discrepancies between cache proxy and backend parsers, leading web servers to mistakenly cache and serve dynamic content as though it were static.
+This vulnerability is often exploited by attackers adding fake static file extensions to dynamic URLs, for example, changing "/path" to "/path/WCD.css".
+When users click on these modified links, the caching system erroneously identifies the request as for a static resource and caches the response, making the user's sensitive information public.
+If subsequent unauthorized users make a request to the same URL then they will be served the cached page, potentially exposing the sensitive information repeatedly.
+The distributed nature of web caches means that even a single web cache deception attack can have far-reaching effects, extending the potential for sensitive data exposure across various users and sessions.</p>
+<h1>Issue remediation</h1>
+<p>To mitigate the risk of web cache deception vulnerabilities, web administrators should:</p>
+<ul>
+    <li>Clearly specify which content should be cached. This involves setting up clear caching rules within your application.</li>
+    <li>Implement strong cache management by using Cache-Control headers. For dynamic content, use settings like no-cache to prevent it from being stored.</li>
+    <li>Implement strong URL parameters validation, blocking any unexpected file extensions or paths that could be exploited.</li>
+    <li>Regularly review your cache configuration and audit the content it contains. This can help you identify and address any potential issues quickly.</li>
+    <li>Treat all content as non-cacheable unless it has been explicitly approved for caching. This approach helps minimize the risk of inadvertently caching sensitive information.</li>
+</ul>
+<h1>References</h1>
+
+<h1>Vulnerability classifications</h1>
+
+<h1>Web intro</h1>
+</body>
+</html>

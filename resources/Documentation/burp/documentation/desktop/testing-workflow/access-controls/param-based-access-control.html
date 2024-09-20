@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/access-controls/index.html">Testing access controls</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/access-controls/param-based-access-control.html">Testing for parameter-based access control</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Testing for parameter-based access control</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/2s5bBx2sbNY?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    Some sites use insecure access controls based on request parameters. For example, a site might use a <code>role_id</code> parameter to denote whether the user should be treated as having admin privileges in the associated response.
+</p>
+<p>
+    Even if these parameters don't enable you to bypass server-side access controls, they might still be able to get past some client-side controls. For example, they might reveal additional attack surface, such as an admin page that you can view but not necessarily interact with.
+</p>
+<p>
+    You can test the effect that these parameters have by using Burp Suite's match and replace rules to swap out values and analyze the results.
+</p>
+<h2 id="before-you-start" cms-ignore-validation="DUPLICATE_HEADINGS">Before you start</h2>
+<p>
+    Before you start, you should map out the application's visible attack surface. See <a href="/burp/documentation/desktop/testing-workflow/mapping/visible-attack-surface.html">Mapping the visible attack surface with Burp Suite</a> for more information.
+</p>
+<h2 id="steps" cms-ignore-validation="DUPLICATE_HEADINGS">Steps</h2>
+<ol>
+    <li>
+        <p>
+            Select <strong>Burp &gt; Search</strong> from the top-level menu to open the <strong>Burp Suite search</strong> dialog.
+        </p>
+    </li>
+    <li>
+        <p>
+            Use the <strong>Search</strong> bar to search for any potentially-insecure parameter values such as <code>false</code> and <code>read</code>. Note any values that return results.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/testing-workflow/images/param-based-access-control/pbac-search.png" alt="Parameter based access control search" class="center-block">
+        </div>
+    </li>
+    <li>
+        <p>
+            Select the <strong>Proxy</strong> tab and click <strong>Proxy settings</strong>.
+        </p>
+    </li>
+    <li>
+        <p>
+            Under <strong>Match and replace</strong> rules, click <strong>Add</strong>.
+        </p>
+    </li>
+    <li>
+        <p>
+            Configure a new match and replace rule:
+        </p>
+        <ol>
+            <li>
+                <p>
+                    Select <strong>Request header</strong> from the <strong>Type</strong> drop-down list.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Enter one of the parameter values that returned results during the search into the <strong>Match</strong> field.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Enter the value that Burp should replace the selected parameter with into the <strong>Replace</strong> field. For example, replace the parameter value <code>false</code> with the value <code>true</code>.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Click <strong>OK</strong> to save your rule.
+                </p>
+                <div class="rounded-dropshadow">
+                    <img src="/burp/documentation/desktop/testing-workflow/images/param-based-access-control/pbac-rule.png" alt="Parameter based access control rule" class="center-block">
+                </div>
+            </li>
+        </ol>
+    </li>
+    <li>
+        <p>
+            Repeat step 4 to set up rules for <strong>Request body</strong> and <strong>Request param value</strong>.
+        </p>
+    </li>
+    <li>
+        <p>
+            Set up rules for any other parameter values found in the search that you want to test.
+        </p>
+    </li>
+    <li>
+        <p>
+            Use the process described in <a href="/burp/documentation/desktop/testing-workflow/mapping/visible-attack-surface.html">Mapping the visible attack surface with Burp Suite</a> to re-map the site. Note whether the attack surface has changed as a result of the new match and replace rules.
+        </p>
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/settings/tools/proxy.html#http-and-websocket-match-and-replace-rules">Proxy settings - Match and replace rules</a>
+        </li>
+        <li>
+            <a href="/web-security/access-control/lab-user-role-controlled-by-request-parameter.html">Lab: User role controlled by request parameter</a> - This lab shows an example of an access control vulnerability in which admin status is denoted by a request header.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

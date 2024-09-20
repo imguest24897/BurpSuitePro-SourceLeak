@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+Client-side SQL injection (reflected DOM-based)
+<h1>Typical severity</h1>
+
+High
+
+<h1>Issue description</h1>
+
+<p>Reflected DOM-based vulnerabilities arise when data is copied from a request and echoed into the application's immediate response within a part of the DOM that is then processed in an unsafe way by a client-side script. An attacker can leverage the reflection to control a part of the response (for example, a JavaScript string) that can be used to trigger the DOM-based vulnerability.</p>
+
+<p>Client-side SQL injection arises when a script incorporates controllable  data into a client-side SQL query in an unsafe way. An attacker may be able to use the vulnerability to construct a URL that, if visited by another application user, will execute an arbitrary SQL query within the local SQL database of the user's browser.</p>
+<p>The potential impact of the vulnerability depends on the application's usage of the SQL database. If the database is used to store sensitive data (such as messages in a social networking application), then the attacker may be able to retrieve this data. If the database is used to store pending user actions (such as outgoing messages in an email application), then the attacker may be able to modify this data and carry out actions on the user's behalf.</p>
+
+<p>Burp Suite automatically identifies this issue using dynamic and static code analysis. Static analysis can lead to false positives that are not actually exploitable. If Burp Scanner has not provided any evidence resulting from dynamic analysis, you should review the relevant code and execution paths  to determine whether this vulnerability is indeed present, or whether mitigations are in place that would prevent exploitation.</p>
+<h1>Issue remediation</h1>
+
+<p>The most effective way to avoid DOM-based client-side SQL injection vulnerabilities is to use parameterized queries (also known as prepared statements) for all database access. This method uses two steps to incorporate potentially tainted data into SQL queries: first, the application specifies the structure of the query, leaving placeholders for each item of user input; second, the application specifies the contents of each placeholder. Because the structure of the query has already been defined in the first step, it is not possible for malformed data in the second step to interfere with the query structure. In the JavaScript executeSql() API, parameterized items can be designated within the query string using the query character (?), and for each parameterized item, an additional parameter is passed to the API containing the item's value. It is strongly recommended that you parameterize <i>every</i> variable data item that is incorporated into database queries, even if it is not obviously tainted, to prevent oversights occurring and avoid vulnerabilities being introduced by changes elsewhere within the code base of the application.</p>
+
+<h1>References</h1>
+
+<ul>
+    <li><a href="https://portswigger.net/web-security/sql-injection">Web Security Academy: SQL injection</a></li>
+    <li><a href="https://portswigger.net/web-security/dom-based/client-side-sql-injection">Web Security Academy: Client-side SQL injection (DOM-based)</a></li>
+</ul>
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+<li><a href="https://cwe.mitre.org/data/definitions/89.html">CWE-89: Improper Neutralization of Special Elements used in an SQL Command ('SQL Injection')</a></li>
+<li><a href="https://cwe.mitre.org/data/definitions/116.html">CWE-116: Improper Encoding or Escaping of Output</a></li>
+<li><a href="https://cwe.mitre.org/data/definitions/159.html">CWE-159: Failure to Sanitize Special Element</a></li>
+    <li><a href="https://capec.mitre.org/data/definitions/66.html">CAPEC-66: SQL Injection</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

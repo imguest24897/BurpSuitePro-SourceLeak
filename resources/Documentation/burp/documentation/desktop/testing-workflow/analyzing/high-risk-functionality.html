@@ -1,0 +1,153 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/analyzing/index.html">Analyzing the attack surface</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/analyzing/high-risk-functionality.html">Identifying high-risk functionality</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Identifying high-risk functionality with Burp Suite</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/FejENMre0pw?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    You can use the Target site map and the Proxy history to identify high-risk functionality as you browse your target website. This enables you to plan how you will audit the application. Some key areas to investigate include:
+</p>
+<ul>
+    <li>
+        The application's core functionality.
+    </li>
+    <li>
+        Security mechanisms such as authentication functions.
+    </li>
+    <li>
+        Application behavior such as error messages, administrative functions, and off-site links.
+    </li>
+</ul>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="before-you-start">Before you start</h2>
+<p>
+    Start mapping the target website. For more information, see <a href="/burp/documentation/desktop/testing-workflow/mapping/visible-attack-surface.html">Mapping the visible attack surface</a>.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="steps">Steps</h2>
+<p>
+    You can follow along with the process below using <a href="https://ginandjuice.shop">ginandjuice.shop</a>, our deliberately vulnerable demonstration site. To identify high-risk functionality:
+</p>
+<ol>
+    <li>
+        Open Burp's browser and browse your target website.
+    </li>
+    <li>
+        <p>
+            As you browse, use either or both the Target site map or HTTP history to help you identify high-risk functionality:
+        </p>
+        <ul>
+            <li>
+                Review the <strong>URL view</strong> in the <strong>Target</strong> &gt; <strong>Site map</strong> tab. For example, look for the colored circles on the nodes. Burp Scanner adds these when it detects an issue. By default, Burp Scanner passively audits traffic as you browse.
+            </li>
+            <li>
+                Review a list of the HTTP traffic in the <strong>Proxy</strong> &gt; <strong>HTTP history</strong> tab.
+            </li>
+        </ul>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/tutorials/high-risk-functionality-1.png" alt="Using site map and browser" class="center-block">
+        </div>
+    </li>
+    <li>
+        When you identify functionality that you want to investigate further, keep the browser open and go to <strong>Proxy</strong> &gt; <strong>Intercept</strong> in Burp.
+    </li>
+    <li>
+        <p>
+            Configure your interception settings to intercept responses as well as requests:
+        </p>
+        <ol>
+            <li>
+                Click on <span class="icon-settings"></span><strong>Settings</strong> in the top toolbar to open the <strong>Settings</strong> dialog.
+            </li>
+            <li>
+                Go to <strong>Tools</strong> &gt; <strong>Proxy</strong>.
+            </li>
+            <li>
+                Under <strong>Response interception rules</strong>, select <strong>Intercept responses based on the following rules</strong>. By default, responses with a text content type header will now be intercepted.
+            </li>
+            <li>
+                Close the <strong>Settings</strong> dialog.
+            </li>
+        </ol>
+    </li>
+    <li>
+        In the <strong>Intercept</strong> tab, set the intercept toggle to <strong>Intercept on</strong>.
+    </li>
+    <li>
+        In Burp's browser, click through the function. Burp intercepts all requests and responses. The message details are shown in the <strong>Intercept</strong> tab.
+    </li>
+    <li>
+        Review each intercepted message for interesting content. You can also modify and send messages to see how this impacts the website.
+    </li>
+    <li>
+        To flag and store a message for further investigation, send it to Burp Organizer. Right-click the message and select <strong>Send to Organizer</strong>.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You can also use the Proxy HTTP history to investigate high-risk functionality. Click on any item in the HTTP history to view the request and response. You can't directly modify the message, but you can still send it to Burp Repeater to modify and investigate further.
+    </p>
+</div>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/tools/burps-browser.html">Burp's browser</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/proxy/http-history/index.html">HTTP history</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/site-map/index.html">Target site map</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/site-map/index.html#url-view-icons">Site map - URL view icons</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/proxy/intercept-messages.html">Proxy intercept</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/tools/proxy.html#request-and-response-interception-rules">Proxy settings - Request and response interception rules</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/organizer/index.html">Burp Organizer</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/index.html">Settings</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/extensions.html">Extensions</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1 cms-ignore-validation="DUPLICATE_HEADINGS">Extensions settings</h1>
+<p>
+    The <strong>Extensions</strong> page in the <strong>Settings</strong> dialog contains settings for the following:
+</p>
+<ul>
+    <li>
+        <a href="#startup-behavior">Startup behavior</a>.
+    </li>
+    <li>
+        <a href="#java-environment">Java environment</a>.
+    </li>
+    <li>
+        <a href="#python-environment">Python environment</a>.
+    </li>
+    <li>
+        <a href="#ruby-environment">Ruby environment</a>.
+    </li>
+</ul>
+<h2 id="startup-behavior">Startup behavior</h2>
+<p>
+    These settings determine how Burp Suite handles extensions on startup:
+</p>
+<ul>
+    <li>
+        <strong>Automatically reload extensions on startup</strong> - Enable this setting to reload all extensions when you restart Burp. Note that even with this setting enabled, you can restart Burp without reloading extensions. Launch Burp from the command line, and use the <code>--disable-extensions</code> command line flag.
+    </li>
+    <li>
+        <strong>Automatically update installed BApps on startup</strong> - If you enable this setting, Burp automatically checks for updates to your installed extensions in the BApp Store.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/desktop/troubleshooting/launch-from-command-line.html">Launching Burp Suite from the command line</a>.
+    </p>
+</div>
+<h2 id="java-environment">Java environment</h2>
+<p>
+    This setting enables you to specify a folder from which Burp can load Java libraries. Burp searches the specified folder and any subfolders for JAR files. It includes them in the classpath of the classloader that loads Java extensions.
+</p>
+<h2 id="python-environment">Python environment</h2>
+<p>
+    These settings enable you to configure the environment in which Python-based extensions are executed:
+</p>
+<ul>
+    <li>
+        <strong>Location of the Jython standalone JAR file</strong> - Specify the location of a Jython standalone JAR file. When loaded, it shows the file location. Jython is a Python interpreter that runs on the Java platform. It enables extensions written in Python to interact with Burp's legacy Java-based Extender API.
+    </li>
+    <li>
+        <strong>Folder for loading modules</strong> - Specify the location of a folder containing Python modules. Burp updates the Python <code>sys.path</code> variable with the specified location. This is useful if you create your own set of Python modules for use with multiple separate extensions.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            You need to install Jython if you see a <strong>Download Jython</strong> button next to the extension in the BApp Store. For instructions on how to do this, see <a href="/burp/documentation/desktop/extensions/installing-extensions.html#installing-jython-or-jruby">Installing extensions</a>.
+        </li>
+        <li>
+            You may encounter memory problems if you load several Python extensions. For more information, see <a href="/burp/documentation/desktop/extensions/monitoring-system-impact.html">Monitoring the system impact of extensions</a>.
+        </li>
+    </ul>
+</div>
+<h2 id="ruby-environment">Ruby environment</h2>
+<p>
+    This setting enables you to specify the location of JRuby standalone JAR file. When loaded, it shows the file location.
+</p>
+<p>
+    JRuby is a Ruby interpreter that runs on the Java platform. It enables extensions written in Ruby to interact with Burp's legacy Java-based Extender API.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            You need to install JRuby if you see a <strong>Download JRuby</strong> button next to the extension in the BApp Store. For instructions on how to do this, see <a href="/burp/documentation/desktop/extensions/installing-extensions.html#installing-jython-or-jruby">Installing extensions</a>.
+        </li>
+        <li>
+            You may encounter memory problems if you load several Ruby extensions. For more information, see <a href="/burp/documentation/desktop/extensions/monitoring-system-impact.html">Monitoring the system impact of extensions</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

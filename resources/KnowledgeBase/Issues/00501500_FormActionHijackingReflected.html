@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+Form action hijacking (reflected)
+<h1>Typical severity</h1>
+
+Medium
+
+<h1>Issue description</h1>
+
+
+<p>Form action hijacking vulnerabilities arise when an application places user-supplied input into the action URL of an HTML form. An attacker can use this vulnerability to construct a URL that, if visited by another application user, will modify the action URL of a form to point to the attacker's server. If a user submits the form then its contents, including any input from the victim user, will be delivered directly to the attacker.</p>
+<p> Even if the user doesn't enter any sensitive information, the form may still deliver a valid CSRF token to the attacker, enabling them to perform CSRF attacks. In some cases web browsers may help exacerbate this issue by autocompleting forms with previously entered user input. </p>
+
+<h1>Issue remediation</h1>
+
+
+<p>Consider hard-coding the form action URL, or implementing a whitelist of allowed values.</p>
+
+<h1>References</h1>
+
+
+<h1>Vulnerability classifications</h1>
+
+
+<ul>
+  <li><a href="https://cwe.mitre.org/data/definitions/73.html">CWE-73: External Control of File Name or Path</a></li>
+  <li><a href="https://cwe.mitre.org/data/definitions/20.html">CWE-20: Improper Input Validation</a></li>
+  <li><a href="https://capec.mitre.org/data/definitions/153.html">CAPEC-153: Input Data Manipulation</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

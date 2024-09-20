@@ -1,0 +1,28 @@
+{
+  "typeIndex": 5248001,
+  "name": "Client-side HTTP parameter pollution (stored)",
+  "description": "<p>Client-side HTTP parameter pollution (HPP) vulnerabilities arise when an application embeds user input in URLs in an unsafe manner.  An attacker can use this vulnerability to construct a URL that, if visited by another application user, will modify URLs within the response by inserting additional query string parameters and sometimes overriding existing ones. This may result in links and forms having unexpected side effects. For example, it may be possible to modify an invitation form using HPP so that the invitation is delivered to an unexpected recipient. </p>\n<p>The security impact of this issue depends largely on the nature of the application functionality. Even if it has no direct impact on its own, an attacker may use it in conjunction with other vulnerabilities to escalate their overall severity.</p>\n\n<p>Stored client-side HTTP parameter pollution vulnerabilities arise when the applicable input was submitted in an previous request and stored by the application.</p>",
+  "remediation": "<p>Ensure that user input is URL-encoded before it is embedded in a URL.</p>",
+  "webIntro": null,
+  "typicalSeverity": "LOW",
+  "references": [
+    {
+      "title": "HTTP Parameter Pollution",
+      "url": "https://www.owasp.org/images/b/ba/AppsecEU09_CarettoniDiPaola_v0.8.pdf"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-233: Improper Handling of Parameters",
+      "url": "https://cwe.mitre.org/data/definitions/233.html"
+    },
+    {
+      "title": "CWE-20: Improper Input Validation",
+      "url": "https://cwe.mitre.org/data/definitions/20.html"
+    },
+    {
+      "title": "CAPEC-460: HTTP Parameter Pollution (HPP)",
+      "url": "https://capec.mitre.org/data/definitions/460.html"
+    }
+  ]
+}

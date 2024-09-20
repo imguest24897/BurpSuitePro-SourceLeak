@@ -1,0 +1,218 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms ignore-validation="OTHER_PAGE_KEYWORD_TOO_FREQUENT" page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/index.html">Settings</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/network/index.html">Network</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/network/connections.html">Connections</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Connections settings</h1>
+<p>
+    The <strong>Connections</strong> settings enable you to define how Burp handles network traffic. You can configure:
+</p>
+<ul>
+    <li>
+        <a href="#platform-authentication">Platform authentication</a>.
+    </li>
+    <li>
+        <a href="#timeouts">Timeouts</a>.
+    </li>
+    <li>
+        <a href="#upstream-proxy-servers">Upstream proxy servers</a>.
+    </li>
+    <li>
+        <a href="#hostname-resolution-overrides">Hostname resolution overrides</a>.
+    </li>
+    <li>
+        <a href="#socks-proxy">SOCKS proxy</a>.
+    </li>
+</ul>
+<h2 id="platform-authentication">Platform authentication</h2>
+<p>
+    These settings enable Burp to carry out automatic platform authentication to destination web servers. You can configure authentication types and credentials for individual hosts, and disable platform authentication on a per-host basis.
+</p>
+<p>
+    To add platform authentication credentials, select <strong>Do platform authentication</strong> and select <strong>Add</strong> to display the <strong>Add platform authentication credentials</strong> dialog. From here, you can add the following information:
+</p>
+<ul>
+    <li>
+        Destination host.
+    </li>
+    <li>
+        Authentication type - This can be either Basic, NTLMv1, or NTLMv2.
+    </li>
+    <li>
+        Username.
+    </li>
+    <li>
+        Password.
+    </li>
+    <li>
+        Domain.
+    </li>
+    <li>
+        Domain hostname.
+    </li>
+</ul>
+<p>
+    You can also <strong>Edit</strong> and <strong>Remove</strong> credentials from the list if required.
+</p>
+<p>
+    If you select <strong>Prompt for credentials on platform authentication failure</strong>, then Burp displays an interactive popup whenever it encounters an authentication failure.
+</p>
+<p>
+    The <strong>Platform authentication</strong> settings can apply at both user and project level. If you select <strong>Override options for this project only</strong>, the selected settings only apply to the current project.
+</p>
+<h2 id="timeouts">Timeouts</h2>
+<p>
+    You can specify the timeout thresholds that Burp uses when performing various network tasks:
+</p>
+<ul>
+    <li>
+        <strong>Connect</strong> - Used when connecting to a server. This setting determines how long Burp waits for a response after opening a socket, before deciding that the server is unreachable.
+    </li>
+    <li>
+        <strong>Normal</strong> - Used for most network communications. This setting determines how long Burp waits before abandoning a request and recording a timeout.
+    </li>
+    <li>
+        <strong>Open-ended responses</strong> - Used where a response that does not contain a Content-Length or Transfer-Encoding HTTP header is being processed. Burp waits for the specified interval before determining that the transmission is complete.
+    </li>
+    <li>
+        <strong>Domain name resolution</strong> - This setting determines how often Burp re-performs successful domain name look-ups. This should be set to a low value if target host addresses change frequently.
+    </li>
+    <li>
+        <strong>Failed domain name resolution</strong> - This setting determines how often Burp reattempts unsuccessful domain name look-ups.
+    </li>
+</ul>
+<p>
+    Values are in seconds. If you set any of these settings to zero or leave them blank, Burp will never time out when performing that function.
+</p>
+<p>
+    The <strong>Timeouts</strong> settings are project settings. They apply to the current project only.
+</p>
+<h2 id="upstream-proxy-servers">Upstream proxy servers</h2>
+<p>
+    These settings control whether Burp sends outgoing requests to an upstream proxy server, rather than sending them directly to the destination web server.
+</p>
+<p>
+    You can define rules that specify different proxy settings for different destination hosts. Burp uses the first rule in the table that matches the destination web server. If it cannot find an applicable upstream proxy rule, Burp uses a direct, non-proxied connection.
+</p>
+<p>
+    To add a new rule, click <strong>Add</strong> to display the <strong>Add upstream proxy rule</strong> dialog. You can specify the following information:
+</p>
+<ul>
+    <li>
+        <strong>Destination host</strong> - The destination host address. You can use wildcards: <code>*</code> matches zero or more characters, and <code>?</code> matches any character except a dot.
+    </li>
+    <li>
+        <strong>Proxy host</strong> - The address of the proxy host. If this is left blank, Burp connects directly.
+    </li>
+    <li>
+        <strong>Proxy port</strong>.
+    </li>
+    <li>
+        <strong>Authentication type</strong> - This can be either Basic, NTLMv1, or NTLMv2.
+    </li>
+    <li>
+        <strong>Username</strong>.
+    </li>
+    <li>
+        <strong>Password</strong>.
+    </li>
+    <li>
+        <strong>Domain</strong> - This is only used for NTLM authentication.
+    </li>
+    <li>
+        <strong>Domain hostname</strong> - This is only used for NTLM authentication.
+    </li>
+</ul>
+<p>
+    To send all traffic to a single proxy server, create a rule with <code>*</code> as the destination host. To create an exception to this rule, create a destination host and leave the proxy host field empty.
+</p>
+<p>
+    You can also <strong>Edit</strong> individual rules, move them <strong>Up</strong> and <strong>Down</strong> the list, or <strong>Remove</strong> them altogether using the buttons to the side of the list.
+</p>
+<p>
+    The <strong>Upstream proxy servers</strong> settings can apply at both user and project level. If you select <strong>Override options for this project only</strong>, the selected settings only apply to the current project.
+</p>
+<h2 id="hostname-resolution-overrides">Hostname resolution overrides</h2>
+<p>
+    These settings enable you to override your computer's DNS resolution by mapping hostnames to IP addresses. This can help you to make sure that requests are forwarded correctly when the Hosts file has been modified to invisibly proxy traffic from non-proxy-aware thick client components.
+</p>
+<p>
+    Each mapping comprises:
+</p>
+<ul>
+    <li>
+        A hostname.
+    </li>
+    <li>
+        The IP address that should be associated with that hostname.
+    </li>
+</ul>
+<p>
+    You can enable or disable rules individually using the checkbox on the list, and <strong>Edit</strong> or <strong>Remove</strong> rules using the buttons to the side.
+</p>
+<p>
+    The <strong>Hostname resolution overrides</strong> settings are project settings. They apply to the current project only.
+</p>
+<h2 id="socks-proxy">SOCKS proxy</h2>
+<p>
+    You can configure Burp to use a SOCKS proxy for all outgoing communications. This setting is applied at the TCP level, and all outbound requests are sent by the configured proxy.
+</p>
+<p>
+    To configure a SOCKs proxy, select <strong>Use SOCKS proxy</strong> and enter the following information into the field below:
+</p>
+<ul>
+    <li>
+        SOCKS proxy host.
+    </li>
+    <li>
+        SOCKS proxy port.
+    </li>
+    <li>
+        Username.
+    </li>
+    <li>
+        Password.
+    </li>
+</ul>
+<p>
+    If you configure rules for upstream HTTP proxy servers, any requests to upstream proxies are sent via the configured SOCKS proxy.
+</p>
+<p>
+    If you select <strong>Do DNS lookups over SOCKS proxy</strong>, all domain names are resolved by the proxy. Burp does not perform any local lookups if you select this setting.
+</p>
+<p>
+    The <strong>SOCKS proxy</strong> settings can apply at both user and project level. If you select <strong>Override options for this project only</strong> then the settings only apply to the current project.
+</p>
+</body>
+</html>

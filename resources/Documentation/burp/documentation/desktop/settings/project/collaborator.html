@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/index.html">Settings</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/project/index.html">Project</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/project/collaborator.html">Collaborator</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Collaborator settings</h1>
+<p>
+    Burp Collaborator is an external service that Burp can use to help discover many kinds of vulnerabilities, such as external service interaction and out-of-band XSS.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        For more details about how Burp Collaborator works, see <a href="/burp/documentation/collaborator/index.html">Burp Collaborator</a>.
+    </p>
+</div>
+<p>
+    The Burp Collaborator server settings enable you to choose which Collaborator server you want to use:
+</p>
+<ul>
+    <li>
+        <strong>Use the default Collaborator server</strong> - Select this setting to use a public, shared Collaborator server provided by PortSwigger. PortSwigger makes no warranty about the availability or performance of this server. If the public Collaborator server suffers from any service outage or degradation, then Collaborator-related functionality within Burp may be affected.
+    </li>
+    <li>
+        <strong>Don't use Burp Collaborator</strong> - Select this setting to disable all of Burp's Collaborator-related capabilities.
+    </li>
+    <li>
+        <strong>Use a private Collaborator server</strong> - Select this setting to use your own instance of the Collaborator server. For more information on this process, see <a href="/burp/documentation/collaborator/server/private/index.html">Deploying a private Collaborator server</a>.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        We periodically add new domain names for the public Collaborator server to reduce the chance of WAF blacklisting, which results in false negatives. By default, Burp Collaborator uses the domain in use when your version of Burp Suite Professional was released.
+    </p>
+    <p>
+        Currently, the domains in use are <code>*.burpcollaborator.net</code> or <code>*.oastify.com</code>. Make sure that your machine and target application can access both these domains on ports 80 and 443.
+    </p>
+</div>
+<p>
+    If you choose to use a private Collaborator server then you need to configure its location. You can provide the following information:
+</p>
+<ul>
+    <li>
+        <strong>Server location</strong> - This is the domain name or IP address of your server. If you specify an IP address then any Collaborator-related functionality that relies on DNS resolution will not be available. For more details, see <a href="/burp/documentation/collaborator/server/private/index.html#setting-up-the-domain-and-dns-records">Setting up the domain and DNS records</a>.
+    </li>
+    <li>
+        <strong>Polling location (optional)</strong> - You can specify the location in which your private Collaborator server answers polling requests. Collaborator servers can be configured to receive interactions and answer polling requests on different network interfaces, if required. You can specify the polling location by hostname or IP address, with an optional port number separated by a colon. For example, <strong>10.20.30.40:8008</strong>.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        If you have configured your Collaborator Server to use non-standard ports, then you must specify those ports here.
+    </p>
+    <p>
+        For more information on configuring non-standard ports, see <a href="/burp/documentation/collaborator/server/private/index.html#setting-up-the-ports-and-firewall">Setting up the ports and firewall</a>.
+    </p>
+</div>
+<p>
+    The following options are also available:
+</p>
+<ul>
+    <li>
+        <strong>Poll over unencrypted HTTP</strong> - By default, Burp polls the Collaborator server over HTTPS, and enforces TLS trust to prevent man-in-the-middle attacks. If your instance of Burp is unable to poll directly over HTTPS (for example, due to your network configuration), you can opt to poll over unencrypted HTTP.
+    </li>
+    <li>
+        <strong>Run health check</strong> - Select this setting to perform a quick health check of your configured Collaborator server. Burp verifies whether it is possible to interact with the server using various network services, and whether it can retrieve the details of these interactions via polling. Based on these tests, you can determine whether Burp is likely to be able to make use of the Collaborator's features.
+    </li>
+</ul>
+<p>
+    By default, <strong>Burp Collaborator server</strong> settings are user settings, affecting all Burp installations on your machine.
+</p>
+<p>
+    To make settings specific to the current project, switch the <strong>Override options for this project only</strong> toggle to <strong>On</strong>. Existing project file settings won't be affected as they will automatically have this setting enabled by default.
+</p>
+</body>
+</html>

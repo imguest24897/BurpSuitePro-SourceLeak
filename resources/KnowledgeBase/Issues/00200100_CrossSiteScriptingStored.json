@@ -1,0 +1,44 @@
+{
+  "typeIndex": 2097408,
+  "name": "Cross-site scripting (stored)",
+  "description": "<p>Stored cross-site scripting vulnerabilities arise when user input is stored and later embedded into the application's responses in an unsafe way. An attacker can use the vulnerability to inject malicious JavaScript code into the application, which will execute within the browser of any user who views the relevant application content.</p>\n<p>The attacker-supplied code can perform a wide variety of actions, such as stealing victims' session tokens or login credentials, performing arbitrary actions on their behalf, and logging their keystrokes.</p>\n<p>Methods for introducing malicious content include any function where request parameters or headers are processed and stored by the application, and any out-of-band channel whereby data can be introduced into the application's processing space (for example, email messages sent over SMTP that are ultimately rendered within a web mail application).</p>\n<p>Stored cross-site scripting flaws are typically more serious than reflected vulnerabilities because they do not require a separate delivery mechanism in order to reach target users, and are not hindered by web browsers' XSS filters. Depending on the affected page, ordinary users may be exploited during normal use of the application. In some situations this can be used to create web application worms that spread exponentially and ultimately exploit all active users.</p>\n<p>Note that automated detection of stored cross-site scripting vulnerabilities cannot reliably determine whether attacks that are persisted within the application can be accessed by any other user, only by authenticated users, or only by the attacker themselves. You should review the functionality in which the vulnerability appears to determine whether the application's behavior can feasibly be used to compromise other application users. </p>",
+  "remediation": "<p>In most situations where user-controllable data is copied into application responses, cross-site scripting \n  attacks can be prevented using two layers of defenses:</p>\n<ul>\n  <li>Input should be validated as strictly as possible on arrival, given the kind of content that \nit is expected to contain. For example, personal names should consist of alphabetical \nand a small range of typographical characters, and be relatively short; a year of birth \nshould consist of exactly four numerals; email addresses should match a well-defined \nregular expression. Input which fails the validation should be rejected, not sanitized.</li>\n<li>User input should be HTML-encoded at any point where it is copied into \napplication responses. All HTML metacharacters, including &lt; &gt; \" ' and =, should be \nreplaced with the corresponding HTML entities (&amp;lt; &amp;gt; etc).</li></ul>\n<p>In cases where the application's functionality allows users to author content using \n  a restricted subset of HTML tags and attributes (for example, blog comments which \n  allow limited formatting and linking), it is necessary to parse the supplied HTML to \n  validate that it does not use any dangerous syntax; this is a non-trivial task.</p>",
+  "webIntro": null,
+  "typicalSeverity": "HIGH",
+  "references": [
+    {
+      "title": "Web Security Academy: Cross-site scripting",
+      "url": "https://portswigger.net/web-security/cross-site-scripting"
+    },
+    {
+      "title": "Web Security Academy: Stored cross-site scripting",
+      "url": "https://portswigger.net/web-security/cross-site-scripting/stored"
+    },
+    {
+      "title": "Using Burp to Find XSS issues",
+      "url": "https://support.portswigger.net/customer/portal/articles/1965737-Methodology_XSS.html"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')",
+      "url": "https://cwe.mitre.org/data/definitions/79.html"
+    },
+    {
+      "title": "CWE-80: Improper Neutralization of Script-Related HTML Tags in a Web Page (Basic XSS)",
+      "url": "https://cwe.mitre.org/data/definitions/80.html"
+    },
+    {
+      "title": "CWE-116: Improper Encoding or Escaping of Output",
+      "url": "https://cwe.mitre.org/data/definitions/116.html"
+    },
+    {
+      "title": "CWE-159: Failure to Sanitize Special Element",
+      "url": "https://cwe.mitre.org/data/definitions/159.html"
+    },
+    {
+      "title": "CAPEC-592: Stored XSS",
+      "url": "https://capec.mitre.org/data/definitions/592.html"
+    }
+  ]
+}

@@ -1,0 +1,172 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE" ignore-validation="STACKED_HEADINGS,OTHER_PAGE_KEYWORD_TOO_FREQUENT"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/dastardly/index.html">Dastardly</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/dastardly/jenkins.html">Jenkins</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-dastardly">Dastardly</label>
+</section>
+<h1>Integrating Dastardly with Jenkins</h1>
+<p>
+    You can integrate Dastardly with Jenkins. This enables you to run Dastardly web vulnerability scans as a stage in your existing CI/CD pipeline.
+</p>
+<p>
+    This page contains instructions on how to integrate Dastardly with a simple (example) Jenkins CI/CD pipeline. These instructions have been tested with Jenkins 2.361.2.
+</p>
+<h2 id="jenkins-server-requirements" cms-ignore-validation="DUPLICATE_HEADINGS">Jenkins server requirements</h2>
+<p>
+    Your Jenkins server or build node must have Docker installed.
+</p>
+<p>
+    No plugins beyond the Jenkins defaults are required to run Dastardly in a Jenkins CI/CD pipeline.
+</p>
+<p>
+    For information on the machine specification required to run Dastardly scans, see the <a href="/burp/documentation/dastardly/index.html#dastardly-system-and-network-requirements">Dastardly system requirements</a>.
+</p>
+<h2 id="configuring-the-jenkins-pipeline" cms-ignore-validation="DUPLICATE_HEADINGS">Configuring the Jenkins pipeline</h2>
+<ol>
+    <li>
+        <p>
+            From the Jenkins <strong>Dashboard</strong>, click <strong>New Item</strong>.
+        </p>
+    </li>
+    <li>
+        <p>
+            Enter an item name for your pipeline, click <strong>Pipeline</strong>, then click <strong>OK</strong>.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/dastardly/images/jenkins/creating-jenkins-pipeline.jpg" alt="Creating a new pipeline in Jenkins.">
+        </div>
+    </li>
+    <li>
+        <p>
+            You can give your pipeline a <strong>Description</strong>.
+        </p>
+    </li>
+    <li>
+        <p>
+            From the side menu, click <strong>Pipeline</strong>.
+        </p>
+    </li>
+    <li>
+        <p>
+            From the <strong>Definition</strong> drop down, select <strong>Pipeline script from SCM</strong>.
+        </p>
+    </li>
+    <li>
+        <p>
+            Configure the <strong>Pipeline</strong> section to point to a <code>Jenkinsfile</code> in your code repository. You must include any credentials used to access the repository.
+        </p>
+    </li>
+    <li>
+        <p>
+            Click <strong>Save</strong>.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/dastardly/images/jenkins/jenkins-pipeline-config.jpg" alt="Configuring a pipeline in Jenkins.">
+        </div>
+    </li>
+</ol>
+<h2 id="creating-the-jenkinsfile" cms-ignore-validation="DUPLICATE_HEADINGS">Creating the Jenkinsfile</h2>
+<p>
+    Create a <code>Jenkinsfile</code> in the corresponding location in your code repository. Add the following content to the file:
+</p>
+<code class="code-scrollable">// Jenkinsfile (Declarative Pipeline) for integration of Dastardly, from Burp Suite.
+
+pipeline {
+    agent any
+    stages {
+        stage ("Docker Pull Dastardly from Burp Suite container image") {
+            steps {
+                sh 'docker pull public.ecr.aws/portswigger/dastardly:latest'
+            }
+        }
+        stage ("Docker run Dastardly from Burp Suite Scan") {
+            steps {
+                cleanWs()
+                sh '''
+                    docker run --user $(id -u) -v ${WORKSPACE}:${WORKSPACE}:rw \
+                    -e BURP_START_URL=https://ginandjuice.shop/ \
+                    -e BURP_REPORT_FILE_PATH=${WORKSPACE}/dastardly-report.xml \
+                    public.ecr.aws/portswigger/dastardly:latest
+                '''
+            }
+        }
+    }
+    post {
+        always {
+            junit testResults: 'dastardly-report.xml', skipPublishingChecks: true
+        }
+    }
+}</code>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You can set <code>BURP_START_URL</code> to a <a href="/burp/documentation/dastardly/index.html#scanning">seed URL</a> for any application you want to scan.
+    </p>
+    <p>
+        In this example, <code>BURP_START_URL</code> is set to <code>https://ginandjuice.shop/</code> - this is a deliberately vulnerable web application designed for testing web vulnerability scanners.
+    </p>
+    <p>
+        The next time your pipeline runs, Dastardly will scan the application you have set under <code>BURP_START_URL</code>.
+    </p>
+</div>
+<h2 id="viewing-dastardly-scan-results-in-jenkins">Viewing Dastardly scan results in Jenkins</h2>
+<ol>
+    <li>
+        <p>
+            Run your Jenkins pipeline containing Dastardly, and allow the scan to complete. Scans run for a maximum of ten minutes.
+        </p>
+    </li>
+    <li>
+        <p>
+            Access the scan results by clicking the most recent build under <strong>Build History</strong>.
+        </p>
+    </li>
+    <li>
+        <p>
+            Click <strong>Test Result</strong>. Here you can see any failed tests. See more details of a failed test by clicking it.
+        </p>
+    </li>
+</ol>
+<h3 cms-ignore-validation="DUPLICATE_HEADINGS">Remediation advice</h3>
+<p>
+    You can see remediation advice for security issues that Dastardly finds under <strong>Stacktrace</strong>. This includes links to relevant sections of the free Web Security Academy resource, which provide further detail on web security vulnerabilities.
+</p>
+<div class="rounded-dropshadow">
+    <figure>
+        <img src="/burp/documentation/dastardly/images/jenkins/dastardly-failed-test-jenkins.jpg" alt="Dastardly security issue remediation advice, shown in Jenkins.">
+        <figcaption>Remediation advice for a security issue found by Dastardly.</figcaption></figure>
+</div>
+<h3 cms-ignore-validation="DUPLICATE_HEADINGS">Evidence</h3>
+<p>
+    You can see evidence for security issues that Dastardly finds under <strong>Stacktrace</strong>. This evidence includes the request sent by Dastardly to produce the issue, as well as the response sent by the application.
+</p>
+<div class="rounded-dropshadow">
+    <figure>
+        <img src="/burp/documentation/dastardly/images/jenkins/dastardly-evidence-jenkins.jpg" alt="Dastardly security issue evidence, shown in Jenkins.">
+        <figcaption>Evidence for a security issue found by Dastardly.</figcaption></figure>
+</div>
+</body>
+</html>

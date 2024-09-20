@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/collaborator/index.html">Burp Collaborator</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/collaborator/server/index.html">Server</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/collaborator/server/security.html">Data security</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-enterprise">Enterprise</label>
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Burp Collaborator data security</h1>
+<p>
+    Burp Collaborator is designed with a strong emphasis on data security:
+</p>
+<ul>
+    <li>
+        The Collaborator server stores minimal information about each interaction and discards interaction details after they've been retrieved.
+    </li>
+    <li>
+        Only the instance of Burp that generated a payload can receive its resulting interactions, due to the data retrieval process.
+    </li>
+</ul>
+<h2 id="data-storage">Data storage</h2>
+<p>
+    In most cases, the Collaborator server simply records that an interaction was received. The interaction is given a random identifier.
+</p>
+<p>
+    The Collaborator server doesn't store:
+</p>
+<ul>
+    <li>
+        The HTTP request sent from Burp to the target application.
+    </li>
+    <li>
+        Information that could identify the vulnerability.
+    </li>
+    <li>
+        Data that could be used to identify any individual Burp user. For example, an account name, or license key.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Occasionally, the Collaborator server receives some application-specific data. For example, the contents of an email generated through a user registration form.
+    </p>
+</div>
+<p>
+    The Collaborator server also has the following storage precautions to protect against unauthorized access to its data:
+</p>
+<ul>
+    <li>
+        Details of interactions are typically retrieved shortly after they occur. They are then discarded by the server.
+    </li>
+    <li>
+        Details of old interactions that haven't been retrieved are discarded after a fixed interval.
+    </li>
+    <li>
+        For the private Collaborator server, details of interactions are stored in ephemeral process memory.
+    </li>
+    <li>
+        For the public Collaborator server, details of interactions are encrypted, then stored in a Redis database. A user secret and a master secret are required to decrypt this data.
+    </li>
+</ul>
+<p>
+    There is no function for an administrator to view interaction details.
+</p>
+<h2 id="data-retrieval">Data retrieval</h2>
+<p>
+    Only the instance of Burp that generates a given payload can retrieve the details of resulting interactions. This is implemented in the following process:
+</p>
+<ul>
+    <li>
+        Each instance of Burp generates a random secret.
+    </li>
+    <li>
+        Each Collaborator payload includes a random identifier that is derived from a one-way hash (cryptographic checksum) of the secret.
+    </li>
+    <li>
+        Any interactions with the Collaborator server include the identifier. For example, in the subdomain of a DNS lookup, or the Host header of an HTTP request.
+    </li>
+    <li>
+        The secret is only ever sent by Burp to the Collaborator server, to poll for details of the resulting interactions. This is done using HTTPS, unless you override this in the Collaborator settings.
+    </li>
+    <li>
+        When the Collaborator server receives a polling request, it performs the one-way hash of the submitted secret. It then retrieves the details of any interactions with identifiers that are derived from that hash.
+    </li>
+</ul>
+<h2 id="collaborator-based-email-addresses">Collaborator-based email addresses</h2>
+<p>
+    If you're using the public Collaborator server, we do not recommend registering for websites using a Collaborator-based email address.
+</p>
+<p>
+    If the Collaborator server receives a single message containing identifiers from two clients, this message is available to both clients. This means that if you register on a website using an email address on the public Collaborator server, and the website places attacker-controlled data in an email to you, the attacker may be able to retrieve that email via their own client.
+</p>
+<p>
+    You can prevent this by using a private Collaborator server with a secured polling interface.
+</p>
+</body>
+</html>

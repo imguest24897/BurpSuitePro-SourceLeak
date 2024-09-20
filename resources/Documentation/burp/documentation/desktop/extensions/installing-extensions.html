@@ -1,0 +1,204 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/extensions/index.html">Extensions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/extensions/installing-extensions.html">Installing extensions</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Installing extensions</h1>
+<p>
+    This section explains how to install extensions from the BApp Store, or from a file.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="installing-extensions-from-the-bapp-store">Installing extensions from the BApp Store</h2>
+<p>
+    The BApp Store contains community-created extensions, or BApps, that we have reviewed for security and quality. Every extension in the BApp Store is listed with the following information:
+</p>
+<ul>
+    <li>
+        A description of the extension's function.
+    </li>
+    <li>
+        An estimate of the extension's impact on your system resources.
+    </li>
+    <li>
+        Summary information, including a community rating and an indication of the extension's popularity.
+    </li>
+</ul>
+<h3 id="requirements">Requirements</h3>
+<p>
+    Please note the following requirements before you install an extension:
+</p>
+<ul>
+    <li>
+        Some extensions require you to upgrade from Burp Suite Community Edition to Burp Suite Professional.
+    </li>
+    <li>
+        Some extensions may require you to update your version of Burp Suite.
+    </li>
+    <li>
+        Some extensions require you to install Jython or JRuby.
+    </li>
+    <li>
+        Your device must be able to access <code>portswigger.net</code>.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        If your device has no internet access, you can <a href="#installing-an-extension-from-a-file">install an extension from a file</a>.
+    </p>
+</div>
+<p>
+    To install an extension from the BApp Store:
+</p>
+<ol>
+    <li>
+        To view the BApp Store in Burp Suite, go to <strong>Extensions &gt; BApp Store</strong>.
+    </li>
+    <li>
+        Select an extension from the list. Notice the summary information for the extension in the right-hand panel.
+    </li>
+    <li>
+        If available, click <strong>Install</strong> to install the extension.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Some BApps that use our <a href="https://portswigger.net/burp/extender/api/" target="_blank">legacy Extender API</a> were written in Python or Ruby. If you want to use these extensions, you may need to install Jython or JRuby.
+    </p>
+    <p>
+        If the extension requires Jython or JRuby, the <strong>Install</strong> button is grayed out. You can install Jython or JRuby as described below.
+    </p>
+</div>
+<h3 id="installing-jython-or-jruby">Installing Jython or JRuby</h3>
+<p>
+    You need to install Jython or JRuby if you see a <strong>Download Jython</strong> or <strong>Download JRuby</strong> button next to the extension in the BApp Store. This enables extensions written in Python or Ruby to interact with Burp's legacy, Java-based Extender API.
+</p>
+<p>
+    To install Jython or JRuby:
+</p>
+<ol>
+    <li>
+        Click the <strong>Download Jython</strong> or <strong>Download JRuby</strong> button.
+    </li>
+    <li>
+        Download the standalone JAR version of Jython or JRuby.
+    </li>
+    <li>
+        In Burp Suite, click on <strong><span class="icon-settings"></span> Settings</strong> to open the <strong>Settings</strong> dialog.
+    </li>
+    <li>
+        Go to the <strong>Extensions</strong> page in the <strong>Settings</strong> dialog.
+    </li>
+    <li>
+        Under <strong>Python Environment</strong> or <strong>Ruby Environment</strong>, click <strong>Select file</strong>.
+    </li>
+    <li>
+        Select the JAR file and click <strong>Open</strong>.
+    </li>
+    <li>
+        Go to <strong>Extensions &gt; BApp Store</strong>. Notice that the <strong>Install</strong> button is now available for your extension.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/desktop/settings/extensions.html">Extensions settings</a>.
+    </p>
+</div>
+<h2 id="installing-an-extension-from-a-file">Installing an extension from a file</h2>
+<p>
+    You can install extensions from a file. This may be useful if you are running Burp Suite on a machine without internet access.
+</p>
+<p>
+    You have two options for installing an extension from a file:
+</p>
+<ul>
+    <li>
+        <p>
+            You can download an extension directly from the BApp Store website <a href="https://portswigger.net/bappstore">https://portswigger.net/bappstore</a>. These are in <code>.bapp</code> format.
+        </p>
+    </li>
+    <li>
+        <p>
+            You can use a custom file. These are typically in JAR format.
+        </p>
+    </li>
+</ul>
+<p>
+    To install an extension from a <code>.bapp</code> file:
+</p>
+<ol>
+    <li>
+        Go to <strong>Extensions &gt; BApp Store</strong> and click <strong>Manual install</strong> at the bottom of the window.
+    </li>
+    <li>
+        Select the file and click <strong>Open</strong>.
+    </li>
+    <li>
+        Wait for the extension to install. Notice that the extension is now listed in the <strong>Installed</strong> tab.
+    </li>
+</ol>
+<p>
+    To install an extension from a JAR file:
+</p>
+<ol>
+    <li>
+        Go to <strong>Extensions &gt; Installed</strong> and click <strong>Add</strong>.
+    </li>
+    <li>
+        Under <strong>Extension Details</strong>, click <strong>Select file</strong> and locate the file.
+    </li>
+    <li>
+        If necessary, set your output and error preferences.
+    </li>
+    <li>
+        Click <strong>Next</strong>.
+    </li>
+    <li>
+        Wait for the extension to install. Notice that the extension is now listed in the <strong>Installed</strong> tab.
+    </li>
+</ol>
+<p>
+    Before you can install extensions written in Python or Ruby, you also need to <a href="#installing-jython-or-jruby">install Jython or JRuby</a>.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/extensions/monitoring-system-impact.html">Monitoring the system impact of extensions</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/extensions/managing-extensions.html">Managing extensions</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

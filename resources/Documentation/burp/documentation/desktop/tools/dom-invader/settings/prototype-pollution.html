@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE" ignore-validation="OTHER_PAGE_KEYWORD_TOO_FREQUENT"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/index.html">DOM Invader</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/settings/index.html">Settings</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/dom-invader/settings/prototype-pollution.html">Prototype pollution settings</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Prototype pollution settings</h1>
+<p>
+    You can click the cog icon next to the <strong>Prototype pollution</strong> option to access further settings for fine-tuning how DOM Invader's tests for prototype pollution vulnerabilities.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/dom-invader-prototype-pollution-settings.png" alt="DOM Invader prototype pollution settings">
+</div>
+<h2 id="scan-for-gadgets">Scan for gadgets</h2>
+<p>
+    When this setting is enabled, DOM Invader automatically scans for gadgets whenever the page loads. Although you can <a href="/burp/documentation/desktop/tools/dom-invader/prototype-pollution.html#scanning-for-prototype-pollution-gadgets">scan for gadgets using specific sources</a>, this setting is a useful alternative in cases where you haven't found any sources. This enables you to ensure that your site doesn't contain any gadgets that could potentially be exploited in future.
+</p>
+<p>
+    DOM Invader automatically adjusts the rest of the prototype pollution settings. You can override these settings manually if required.
+</p>
+<h2 id="auto-scale-amount-of-properties-per-frame">Auto-scale amount of properties per frame</h2>
+<p>
+    By default, DOM Invader automatically scales the number of properties used per frame when scanning for prototype pollution gadgets. This helps to improve performance, but lead to gadgets being missed. For example, an injected property could cause an exception that prevents DOM Invader from testing any other gadgets within the same iframe, resulting in false negatives.
+</p>
+<p>
+    If you prefer, you can disable this setting and use the slider to set a fixed limit instead. Lowering the limit makes the scan take longer, but reduces the chance of you missing gadgets. Increasing the limit has the opposite effect.
+</p>
+<h2 id="scan-nested-properties">Scan nested properties</h2>
+<p>
+    By default, DOM Invader recursively scans properties nested within other properties. If you disable this setting, DOM Invader only scans for gadgets using the top-level properties of each object.
+</p>
+<p>
+    For example, consider the following object:
+</p>
+<code class="code-scrollable">const user = {
+    id: 1337,
+    name: "carlos",
+    contactInfo: {
+        email: "carlos@ginandjuice.shop",
+        phone: 0161133713371
+    }
+}</code><p>
+    By default, DOM Invader will test all properties of this <code>user</code> object. If you disable this setting, both the <code>user.contactInfo.email</code> and <code>user.contactInfo.phone</code> properties will be skipped.
+</p>
+<h2 id="query-string-injection">Query string injection</h2>
+<p>
+    By default, DOM Invader tests for prototype pollution using parameters in the query string. You may need to disable this setting if it is preventing the site from working correctly.
+</p>
+<h2 id="hash-injection">Hash injection</h2>
+<p>
+    By default, DOM Invader tests for prototype pollution using the hash or fragment part of the URL. You may need to disable this setting if it is preventing the site from working correctly.
+</p>
+<h2 id="json-injection">JSON injection</h2>
+<p>
+    By default, DOM Invader tests for prototype pollution by injecting JSON-based web messages. You may need to disable this setting if it is preventing the site from working correctly.
+</p>
+<h2 id="verify-onload">Verify onload</h2>
+<p>
+    By default, DOM Invader waits for the page to finish loading before reporting on prototype pollution. This is to ensure that any identified gadgets are still present in the final DOM.
+</p>
+<p>
+    If you disable this setting, DOM Invader reports on potential gadgets as soon as it finds them. This can reduce the duration of the scan, but may result in false positives. For example, DOM Invader could identify gadgets using the <code>constructor</code> or <code>__proto__</code> properties, which might be sanitized by the time the page has finished loading.
+</p>
+<h2 id="remove-csp-header">Remove CSP header</h2>
+<p>
+    When this setting is enabled, DOM Invader strips the <code>Content-Security-Policy</code> header from all responses. This prevents the CSP from blocking potential XSS vectors, as well as iframes, which are necessary when scanning for gadgets.
+</p>
+<h2 id="remove-x-frame-options-header" cms-ignore-validation="HEADING_CAPITALIZATION">Remove X-Frame-Options header</h2>
+<p>
+    When this setting is enabled, DOM Invader strips the <code>X-Frame-Options</code> header from all responses. This prevents it from blocking iframes, which are necessary when scanning for gadgets.
+</p>
+<h2 id="scan-each-technique-in-separate-frame">Scan each technique in separate frame</h2>
+<p>
+    For performance reasons, DOM Invader scans for prototype pollution in the top frame by default. However, you may encounter situations where the different techniques interfere with each other, which could cause you to miss vulnerabilities. For example, trying both <code>__proto__</code> and <code>constructor</code> at the same time fails on some sites, even though <code>constructor</code> in isolation works.
+</p>
+<p>
+    When this setting is enabled, DOM Invader uses a separate iframe for each technique. Although this may have a minor performance impact, it ensures that each technique is tested independently, reducing the chance of false negatives.
+</p>
+<h2 id="disabling-prototype-pollution-techniques">Disabling prototype pollution techniques</h2>
+<p>
+    DOM Invader uses a number of different techniques for prototype pollution. You may find that using all of these techniques at once prevents the attack from working on certain sites. For this reason, you may prefer to disable some of the techniques or use one technique at a time.
+</p>
+<p>
+    To disable prototype pollution techniques:
+</p>
+<ol>
+    <li>
+        <p>
+            From the DOM Invader settings menu, under <strong>Attack types</strong>, click the cog icon next to the <strong>Prototype pollution</strong> switch.
+        </p>
+    </li>
+    <li>
+        <p>
+            In the dialog, click the <strong>Techniques</strong> button.
+        </p>
+    </li>
+    <li>
+        <p>
+            Use the switches to enable or disable the techniques as required.
+        </p>
+    </li>
+    <li>
+        <p>
+            Click <strong>Save</strong> and then <strong>Reload</strong> to refresh the browser. This is required in order for your changes to take effect.
+        </p>
+    </li>
+</ol>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE" ignore-validation="OTHER_PAGE_KEYWORD_TOO_FREQUENT"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/index.html">Testing input validation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/xss/index.html">Cross-site scripting</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/xss/testing-for-reflected-xss.html">Testing for reflected XSS manually</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Testing for reflected XSS manually with Burp Suite</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/ecuiE83zvqY?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    Reflected cross-site scripting (or XSS) occurs when an application receives data in an HTTP request and includes that data within the immediate response in an unsafe way.
+</p>
+<p>
+    While Burp Scanner can detect reflected XSS, you can also manually test applications for reflected XSS using Burp Repeater. Burp Repeater enables you to manipulate HTTP requests directly, making it easier to test whether reflected input is adequately sanitized or filtered server-side.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="before-you-start">Before you start</h2>
+<p>
+    Identify a request that reflects input. For more information, see <a href="/burp/documentation/desktop/testing-workflow/input-validation/xss/reflected-input.html">Identifying reflected input</a>.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="steps">Steps</h2>
+<p>
+    You can follow along with the steps below using the <a href="/web-security/cross-site-scripting/reflected/lab-html-context-nothing-encoded.html">Reflected XSS into HTML context with nothing encoded</a> Web Security Academy lab.
+</p>
+<p>
+    To test for reflected XSS in Burp Repeater:
+</p>
+<ol>
+    <li>
+        <p>
+            Note the location of the reflected input and the context in which the input is reflected. For example, in the lab the input is reflected inside an HTML &lt;h1&gt; element. This affects the potential XSS vectors you can use to construct an attack.
+        </p>
+    </li>
+    <li>
+        <p>
+            In the response panel, select <strong><span class="icon-settings"></span> &gt; Auto scroll when text changes</strong>.
+        </p>
+    </li>
+    <li>
+        <p>
+            Change the canary to an XSS proof of concept attack. For example, you could use the <code>alert()</code> function by replacing the canary string with <code>&lt;script&gt;alert(1)&lt;/script&gt;</code>.
+        </p>
+    </li>
+    <li>
+        <p>
+            Send the proof of concept request. Burp Repeater highlights any changes between the new and original responses.
+        </p>
+    </li>
+    <li>
+        <p>
+            If necessary, repeat steps 3 and 4 until you find a proof of concept that is returned in the response.
+        </p>
+    </li>
+    <li>
+        Right-click on the request in and select <strong>Show response in browser</strong>. Burp Suite displays a dialog containing a URL.
+    </li>
+    <li>
+        Copy and paste this URL into your browser to see if the proof of concept ran successfully.
+    </li>
+</ol>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="related-pages">Related pages</h2>
+<ul>
+    <li>
+        <a href="/web-security/cross-site-scripting/index.html">Academy: Cross-site scripting</a>
+    </li>
+    <li>
+        <a href="/burp/documentation/desktop/tools/repeater/index.html">Burp Repeater</a>
+    </li>
+    <li>
+        <a href="/burp/documentation/desktop/testing-workflow/input-validation/xss/bypassing-filters.html">Bypassing XSS filters by enumerating permitted tags and attributes</a>
+    </li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/index.html">Intruder</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/configure-attack/index.html">Configure attack</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/configure-attack/payload-lists.html">Payload lists</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Predefined payload lists</h1>
+<p>
+    Burp Intruder includes a range of built-in payload lists. You can use these to quickly and easily generate payloads for various attacks.
+</p>
+<h2 id="using-predefined-payload-lists">Using predefined payload lists</h2>
+<p>
+    You can use a predefined payload list with any payload type that uses a list of strings:
+</p>
+<ol>
+    <li>
+        Go to <strong>Intruder &gt; Payloads</strong>, and select an appropriate payload type.
+    </li>
+    <li>
+        Click <strong>Add from list...</strong> in the <strong>Payload settings</strong> field.
+    </li>
+    <li>
+        Select a list from the drop-down menu. The list loads in the <strong>Payload settings</strong> field.
+    </li>
+    <li>
+        If the list includes placeholders, set up a rule to process them.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You can load your own directory of custom payload lists in the <strong>Settings</strong> dialog. Click on <strong>Settings <span class="icon-settings"></span></strong> to open the dialog. For more information, see <a href="/burp/documentation/desktop/settings/tools/intruder.html#payload-list-location">Intruder settings</a>.
+    </p>
+</div>
+<h2 id="placeholders">Placeholders</h2>
+<p>
+    Some of the predefined payload lists include placeholders that you can replace with your own values:
+</p>
+<table>
+    <tr>
+        <td>
+            <p class="text-left">
+                <strong>Predefined payload list</strong>
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                <strong>Placeholders used in the list</strong>
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                CGI Scripts
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                <code>{file}</code>
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Fuzzing - full
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                <code>{base}</code>, <code>{domain}</code>, <code>foo@{domain}</code>
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Fuzzing - JSON_XML injection
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                <code>{base}</code>
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Fuzzing - out of band
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                <code>{domain}</code>
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Fuzzing - path traversal (single file)
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                <code>{file}</code>
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Fuzzing - path traversal
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                <code>{base}</code>
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Fuzzing - quick
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                <code>{base}</code>
+            </p>
+        </td>
+    </tr>
+</table>
+<h2 id="processing-placeholders">Processing placeholders</h2>
+<p>
+    Before you run an attack with one of the payload lists above, you need to replace placeholders with actual values. The table below details how each of the placeholders can be used:
+</p>
+<table>
+    <tr>
+        <td>
+            <p class="text-left">
+                <strong>Placeholder</strong>
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                <strong>Use</strong>
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                <strong>Example placeholder replacement</strong>
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                <code>{file}</code>
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Specify a filename.
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                <code>/etc/passwd</code>
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                <code>{base}</code>
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Replaces <code>{base}</code> with value marked as payload.
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                <code>1337</code>
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                <code>{domain}</code>
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Specify a web domain.
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                <code>COLLAB_ID.oastify.com</code>
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                <code>foo@{domain}</code>
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Specify a web domain as part of an email address.
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                <code>example.com</code>
+            </p>
+        </td>
+    </tr>
+</table>
+<h3>Processing a placeholder in your attack</h3>
+<p>
+    To add a placeholder to your attack, set up a processing rule:
+</p>
+<ol>
+    <li>
+        Go to <strong>Intruder &gt; Payloads</strong>, and scroll down to the <strong>Payload processing</strong> field.
+    </li>
+    <li>
+        Click <strong>Add</strong>. A window opens with a drop-down list of processing rules.
+    </li>
+    <li>
+        Select <strong>Match/replace</strong>.
+    </li>
+    <li>
+        In the <strong>Match regex</strong> field, type in the placeholder used in the payload. For example, <code>\{file\}</code> or <code>\{domain\}</code>.
+    </li>
+    <li>
+        In the <strong>Replace with</strong> field, type the item you want to replace the placeholder with. For example, <code>application.exe</code> instead of <code>\{file\}</code>, or <code>portswigger.net</code> instead of <code>\{domain\}</code>.
+    </li>
+</ol>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/index.html">Target</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/site-map/index.html">Site map</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/site-map/comparison-results.html">Comparison results</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Site map comparison results</h1>
+<p>
+    The comparison results highlight differences in the tree and table views of both site maps.
+</p>
+<h2 id="viewing-comparison-results">Viewing comparison results</h2>
+<p>
+    Added, deleted, or modified items are color-coded.
+</p>
+<p>
+    You can view the minimum number of text edits required to convert the response in Map 1 to match the response in Map 2. This is shown in the <strong>Diff count</strong> column.
+</p>
+<p>
+    When you select a branch or table item in one map, the other map updates to show the same selection. To change this behavior, deselect <strong>Sync selection</strong>.
+</p>
+<p>
+    You can view the full requests and responses for the selected items in the request / response viewers. Burp highlights relevant differences within the responses.
+</p>
+<p>
+    The <a href="/burp/documentation/desktop/tools/target/site-map/site-map-filter.html">display filter</a> applies to both maps. All items are shown by default.
+</p>
+<h2 id="interpreting-comparison-results">Interpreting comparison results</h2>
+<p>
+    To interpret the results of a site map comparison, you need to understand the meaning and context of specific application functions. For example:
+</p>
+<ul>
+    <li>
+        Some differences between responses are security neutral. For example, the application home page of two different users may contain different display names, links, and other user-specific content. These differences are expected and do not indicate access control issues, as they only concern the user interface.
+    </li>
+    <li>
+        Some differences indicate that access controls are working as designed. For example, an administrative user may be able to access a privileged function, while a low privileged user sees a "Not authorized" message.
+    </li>
+    <li>
+        In some cases, if the same response is returned for two different users it indicates a security issue. For example, an administrator might have a link to a page that contains sensitive user information. A low privileged user who knows the URL may be able to view the same page.
+    </li>
+    <li>
+        In other cases, the same response being returned to two users is security neutral. For example, a public search function in an application might be designed to return the same results for all users.
+    </li>
+    <li>
+        Per-user UI customization, such as display names and links, can cause differences on many pages. In this case, look for other similarities and differences that could be relevant to access control.
+    </li>
+</ul>
+<p>
+    Any combination of these scenarios can occur in the same application. This makes it more difficult to identify genuine access control problems. The only way to do this is to manually review the comparison results. Burp has several ways to make this process easier:
+</p>
+<ul>
+    <li>
+        Use the <a href="/burp/documentation/desktop/tools/target/site-map/site-map-filter.html">display filter</a> to filter items that contain specific expressions. For example, if most admin functions return a "Not authorized" message when requested by a low privileged user, you can hide these responses from the map. This enables you to focus on other items that may reveal oversights in the application's privilege model.
+    </li>
+    <li>
+        Use the Diff count column to identify unusual responses. For example, if per-user UI customization causes most pages of an application to contain two differences, sort the responses by diff count to look for pages with a different value. Also, if you find one access control vulnerability that has a particular diff count, look for other responses with a similar count. This may represent similar vulnerabilities.
+    </li>
+    <li>
+        The results may reveal that some comparisons of response headers or form field values are not relevant. To exclude these from the comparison, change the <a href="/burp/documentation/desktop/tools/target/site-map/comparing.html#response-comparison">response comparison</a> or <a href="/burp/documentation/desktop/tools/target/site-map/comparing.html#request-matching">request matching</a> settings and re-run the comparison. You don't need to re-request the site maps when you change these settings.
+    </li>
+    <li>
+        The results may show that some requests are incorrectly matched, based on query string or body parameters. If this happens, change the <a href="/burp/documentation/desktop/tools/target/site-map/comparing.html#response-comparison">response comparison</a> or <a href="/burp/documentation/desktop/tools/target/site-map/comparing.html#request-matching">request matching</a> settings and re-run the comparison. You don't need to re-request the site maps when you change these settings.
+    </li>
+</ul>
+<p>
+    There are many challenges when you evaluate access controls, which means fully automated tools struggle to find access control vulnerabilities. These automated tools generate lots of noise and are very prone to false positives and negatives. Burp does not attempt to automatically examine the application's functionality, or evaluate how access controls are applied. Instead, the site map automates as much of the process as possible. It presents the information clearly and enables you to apply your knowledge more efficiently, to identify any actual vulnerabilities.
+</p>
+</body>
+</html>

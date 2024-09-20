@@ -1,0 +1,15 @@
+{
+  "description": {
+    "featured": false,
+    "uuid": "19414f93-8181-4e5d-9d48-93d63c98e380"
+  },
+  "scanner": {
+    "error_handling": {
+      "consecutive_audit_check_failures_to_skip_insertion_point": 2,
+      "consecutive_insertion_point_failures_to_fail_audit_item": 2,
+      "number_of_follow_up_passes": 1,
+      "pause_task_failed_audit_item_count": 0,
+      "pause_task_failed_audit_item_percentage": 0
+    }
+  }
+}

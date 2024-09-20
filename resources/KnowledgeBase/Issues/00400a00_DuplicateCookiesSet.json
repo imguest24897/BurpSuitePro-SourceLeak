@@ -1,0 +1,15 @@
+{
+  "typeIndex": 4196864,
+  "name": "Duplicate cookies set",
+  "description": "<p>The response contains two or more Set-Cookie headers that attempt to set the same cookie to different values. Browsers will only accept one of these values, typically the value in the last header. The presence of the duplicate headers may indicate a programming error.</p>",
+  "remediation": null,
+  "webIntro": null,
+  "typicalSeverity": "INFO",
+  "references": [],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-16: Configuration",
+      "url": "https://cwe.mitre.org/data/definitions/16.html"
+    }
+  ]
+}

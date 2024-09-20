@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/index.html">Automated scanning</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/configuring-app-logins/index.html">Configuring application logins</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Configuring application logins</h1>
+<p>
+    Adding application logins to a scan enables Burp Scanner to discover content that is only accessible to authenticated users.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Burp Scanner uses application logins when it crawls an application. You cannot specify application logins for <strong>Audit selected items</strong> scans, because these scans do not crawl the target.
+    </p>
+</div>
+<p>
+    There are two types of application login you can add in Burp Suite:
+</p>
+<ul>
+    <li>
+        Username and password pairs are intended for sites that use a basic, single-step login mechanism.
+    </li>
+    <li>
+        Recorded login sequences are intended for sites that use more complex login mechanisms, such as Single Sign-On.
+    </li>
+</ul>
+<p>
+    You can only use one of the available login mechanisms per scan. If you specify both simple login credentials and a recorded login sequence, Burp Scanner uses the recorded login when scanning.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/configuring-app-logins/adding-usernames-passwords.html">Adding usernames and passwords</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/configuring-app-logins/adding-recorded-logins.html">Adding recorded login sequences</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/configuring-app-logins/application-login-config-library.html">Managing application logins using the configuration library</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

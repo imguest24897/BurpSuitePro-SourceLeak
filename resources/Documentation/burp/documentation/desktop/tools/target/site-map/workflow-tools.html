@@ -1,0 +1,198 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/index.html">Target</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/site-map/index.html">Site map</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/site-map/workflow-tools.html">Workflow tools</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Site map workflow tools</h1>
+<p>
+    Once you populate the <a href="/burp/documentation/desktop/tools/target/site-map/index.html">site map</a> with information about your target, you can use the context menu to drive your workflow. To view the context menu, select an item from anywhere in the site map and right-click it.
+</p>
+<p>
+    The context menu only shows actions that are relevant to the selected item. This section describes all the possible context menu actions.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="add-to-scope-remove-from-scope">Add to scope / Remove from scope</h2>
+<p>
+    You can add or remove URLs from the target scope. Any changes you make also apply to any child branches.
+</p>
+<p>
+    This is useful if you're testing an application that includes some sensitive URLs:
+</p>
+<ol>
+    <li>
+        Select the whole application path (domain or directory).
+    </li>
+    <li>
+        Right-click and select <strong>Add to scope</strong>.
+    </li>
+    <li>
+        Right-click the sensitive items and select <strong>Remove from scope</strong>.
+    </li>
+</ol>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="send-to">Send to</h2>
+<p>
+    You can send items to other Burp tools, such as <a href="/burp/documentation/desktop/tools/intruder/index.html">Intruder</a> or <a href="/burp/documentation/desktop/tools/organizer/index.html">Organizer</a>. This enables you to perform further attacks or analysis and use Burp to drive your workflow.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="scan">Scan</h2>
+<p>
+    You can use the scanner to <a href="/burp/documentation/desktop/automated-scanning/index.html">scan for content or vulnerabilities</a>. You can scan an entire branch of a tree if you select this action from the tree view.
+</p>
+<h2 id="show-response-in-browser">Show response in browser</h2>
+<p>
+    You can render responses in Burp's browser, to avoid the limitations of Burp's built-in HTML renderer. To render the response, paste the unique URL that Burp generates into Burp's browser.
+</p>
+<p>
+    Burp serves the resulting browser request with the exact response that you select: the request is not forwarded to the original web server. Burp's browser processes the response in the context of the originally requested URL. This means that relative links within the response are handled properly.
+</p>
+<p>
+    When Burp's browser renders the response it may make additional requests, for example for images or CSS. These are handled by Burp in the usual way.
+</p>
+<h2 id="request-in-browser">Request in browser</h2>
+<p>
+    You can resend requests in Burp's browser:
+</p>
+<ul>
+    <li>
+        <strong>In original session</strong> - Resend the request using the cookie header that appeared in the original request.
+    </li>
+    <li>
+        <p>
+            <strong>In current browser session</strong> - Resend the request using the cookies supplied by the browser. You can use this feature to test <a href="/web-security/access-control/index.html">access controls</a>:
+        </p>
+        <ul>
+            <li>
+                Select requests within Burp that are generated within one user context (for example, an administrator).
+            </li>
+            <li>
+                Resend the requests when you log in with a different user context (for example, an ordinary user).
+            </li>
+        </ul>
+    </li>
+</ul>
+<p>
+    This method makes it much easier to deal with complex, multi-stage processes. You can simply paste a series of URLs from Burp into Burp's browser. The alternative is to repeat complicated procedures many times, and manually modify cookies with the Proxy.
+</p>
+<h2 id="engagement-tools">Engagement tools</h2>
+<p>
+    <label class="label-edition is-professional">Professional</label>
+    The <strong>Engagement tools</strong> submenu contains useful functions that enable you to perform engagement-related tasks:
+</p>
+<ul>
+    <li>
+        <strong>Search</strong> - Select branches from the site map and use the <a href="/burp/documentation/desktop/tools/search.html">Search function</a> to find items that match a specific expression.
+    </li>
+    <li>
+        <strong>Find notes / Find scripts</strong> - Select branches from the site map and use the <a href="/burp/documentation/desktop/tools/search.html#find-comments-and-scripts">Find comments and scripts</a> functions to find comments or scripts.
+    </li>
+    <li>
+        <strong>Find references</strong> - Use the <a href="/burp/documentation/desktop/tools/search.html#find-references">Find references</a> function to search all of Burp's tools for HTTP responses that link to your selected item.
+    </li>
+    <li>
+        <strong>Analyze target</strong> - The <a href="/burp/documentation/desktop/tools/engagement-tools/target-analyzer.html">Target Analyzer</a> function shows you how many static and dynamic URLs are contained in your selected branch. It also shows you how many parameters each URL takes.
+    </li>
+    <li>
+        <strong>Discover content</strong> - Use the <a href="/burp/documentation/desktop/tools/engagement-tools/content-discovery.html">Discover content</a> function to discover content and functionality that is not linked from visible content. This enables you to browse or analyze this content.
+    </li>
+    <li>
+        <strong>Schedule task</strong> - The <a href="/burp/documentation/desktop/settings/project/tasks.html#schedule-tasks">Schedule task</a> function enables you to create tasks that run automatically at defined times and intervals.
+    </li>
+    <li>
+        <strong>Generate CSRF PoC</strong> - Use the <a href="/burp/documentation/desktop/tools/engagement-tools/generate-csrf-poc.html">Generate CSRF PoC</a> function to create HTML that causes the request to be issued when it's viewed in a browser.
+    </li>
+    <li>
+        <strong>Simulate manual testing</strong> - You can use the <a href="/burp/documentation/desktop/tools/engagement-tools/manual-simulator.html">Manual testing simulator</a> to generate HTTP traffic that's similar to the traffic caused by manual penetration testing.
+    </li>
+</ul>
+<h2 id="compare-site-maps">Compare site maps</h2>
+<p>
+    The <strong>Compare site maps</strong> function enables you to identify differences between two site maps. To learn more, see <a href="/burp/documentation/desktop/tools/target/site-map/comparing.html">Comparing site maps</a>.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="add-notes-highlight">Add notes / Highlight</h2>
+<p>
+    You can use these functions to add notes or highlights to items. To learn more, see <a href="/burp/documentation/desktop/tools/target/site-map/site-map-filter.html#site-map-annotations">Annotations</a>.
+</p>
+<h2 id="expand-collapse-branch-requested-items">Expand / collapse branch / requested items</h2>
+<p>
+    Use these functions in the tree view to quickly expand or collapse whole branches of the tree.
+</p>
+<h2 id="delete-items">Delete items</h2>
+<p>
+    This function removes the selected items permanently. By default, the site map displays all the content that Burp identifies based on HTTP responses. This means that the map often includes a large amount of third-party content that the application links to. You can manage this in two ways:
+</p>
+<ul>
+    <li>
+        Configure a suitable <a href="/burp/documentation/desktop/tools/target/scope/index.html">target scope</a> and <a href="/burp/documentation/desktop/tools/target/site-map/site-map-filter.html">display filter</a>.
+    </li>
+    <li>
+        Manually remove the irrelevant branches of the tree.
+    </li>
+</ul>
+<h2 id="copy-urls">Copy URLs</h2>
+<p>
+    This function copies the URLs of the selected items to the clipboard.
+</p>
+<h2 id="copy-as-curl-command">Copy as curl command</h2>
+<p>
+    This function copies a curl command to the clipboard. You can use it to generate the selected request.
+</p>
+<h2 id="copy-links">Copy links</h2>
+<p>
+    You can use this function to parse items for links and copy the links to the clipboard.
+</p>
+<h2 id="save-items">Save items</h2>
+<p>
+    This function lets you save the details of your selected items as an XML file. The file includes full requests and responses, and relevant metadata such as response length, HTTP status code, and MIME type.
+</p>
+<h2 id="show-new-site-map-window">Show new site map window</h2>
+<p>
+    You can use this function to open another site map window. You can open multiple windows and configure different filters for each window.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/site-map/index.html">Site map</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/site-map/comparing.html">Comparing site maps</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/site-map/site-map-layout.html">Editing the site map layout</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

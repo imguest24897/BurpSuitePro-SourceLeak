@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms ignore-validation="HEADING_CAPITALIZATION" page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/index.html">Automated scanning</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/bchecks/index.html">Adding custom scan checks</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/bchecks/creating.html">Creating BChecks</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1 cms-ignore-validation="HEADING_CAPITALIZATION">Creating BChecks</h1>
+<p>
+    You can define BChecks yourself, using our custom definition language. This enables you to target your scans and make your testing workflow as efficient as possible.
+</p>
+<p>
+    When you create a BCheck in Burp, you can work from a range of example definitions. Each definition describes a functional BCheck. Edit these to create new BChecks that meet your requirements.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You can share your BChecks and download new ones via the <a href="https://github.com/PortSwigger/BChecks">BChecks GitHub repository</a>. This includes example checks created by PortSwigger, as well as BChecks developed by the Burp Suite community.
+    </p>
+    <p>
+        For information on contributing to the BChecks repository, see the <a href="https://github.com/PortSwigger/BChecks/blob/main/CONTRIBUTING.md">Contributing</a> readme page.
+    </p>
+</div>
+<p>
+    To create a BCheck from an example definition:
+</p>
+<ol>
+    <li>
+        Go to <strong>Extensions &gt; BChecks</strong>.
+    </li>
+    <li>
+        Click <span class="icon-add-in-circle"></span><strong>New &gt; From template</strong>. The <strong>New BCheck</strong> dialog opens, which contains various example BCheck definitions.
+    </li>
+    <li>
+        Select an example BCheck definition, then click <span class="icon-add-in-circle"></span><strong>Create using this template</strong>. The <strong>BS Code editor</strong> opens.
+    </li>
+    <li>
+        Edit the BCheck to meet your requirements.
+    </li>
+    <li>
+        Click <strong>Validate</strong>. Burp identifies any errors in the BCheck.
+    </li>
+    <li>
+        Fix any errors in the BCheck.
+    </li>
+    <li>
+        To automatically standardize the indentation and whitespace, right-click the editor and select <strong>Format BCheck</strong>. You can undo the changes with Cmd+Z or Ctrl+Z if you prefer your original layout.
+    </li>
+    <li>
+        <p>
+            Save the BCheck:
+        </p>
+        <ul>
+            <li>
+                To save the BCheck and close the <strong>BS Code editor</strong>, click <strong>Save & close</strong>. The BCheck is added to the table and enabled by default. Burp Scanner will use it when you perform an audit.
+            </li>
+            <li>
+                To save and enable the BCheck without closing the <strong>BS Code editor</strong>, click <span class="icon-add-in-circle"></span><strong>Save</strong>. You can then test the check with Burp Scanner and make changes directly to the definition.
+            </li>
+        </ul>
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You can <strong>Save & close</strong> a BCheck that contains errors. The BCheck is added to the table, but can't be enabled. To enable the BCheck, first fix any errors in the definition.
+    </p>
+</div>
+<h2 id="exporting-bchecks" cms-ignore-validation="HEADING_CAPITALIZATION">Exporting BChecks</h2>
+<p>
+    You can export BChecks so that you can import them into other instances of Burp. To export a BCheck:
+</p>
+<ol>
+    <li>
+        Select the BCheck and click <strong>Export <span class="icon-undock-window"></span></strong>.
+    </li>
+    <li>
+        If necessary, select a directory. Click <strong>Open</strong> to see the contents of the directory.
+    </li>
+    <li>
+        Enter a filename and click <strong>Save</strong>.
+    </li>
+</ol>
+<p>
+    You can select and export more than one BCheck at a time. If you choose this option, the BChecks are exported with their current name.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/bchecks/testing.html">Testing BChecks</a> - For more information on configuring and running BCheck tests.
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/bchecks/worked-examples/index.html">BChecks worked examples</a> - For more information on the example definitions included in the BChecks templates.
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/bchecks/bcheck-definition-reference.html">BCheck definition reference</a> - For more information on the custom definition language used for BChecks.
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/bchecks/contribute-bchecks.html">Submitting BChecks to the community</a> - For contributing your BChecks to the PortSwigger BChecks repository on GitHub.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

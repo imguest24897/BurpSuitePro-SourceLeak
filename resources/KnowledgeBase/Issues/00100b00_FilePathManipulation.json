@@ -1,0 +1,36 @@
+{
+  "typeIndex": 1051392,
+  "name": "File path manipulation",
+  "description": "<p>File path manipulation vulnerabilities arise when user-controllable data is placed into a file or URL path that is used on the server to access local resources, which may be within or outside the web root. If vulnerable, an attacker can modify the file path to access different resources, which may contain sensitive information. Even where an attack is constrained within the web root, it is often possible to retrieve items that are normally protected from direct access, such as application configuration files, the source code for server-executable scripts, or files with extensions that the web server is not configured to serve directly.</p>",
+  "remediation": "<p>Ideally, application functionality should be designed in such a way that user-controllable data does not need to be placed into file or URL paths in order to access local resources on the server. This can normally be achieved by referencing known files via an index number rather than their name.</p>\n<p>If it is considered unavoidable to place user data into file or URL paths, the data should be strictly validated against a whitelist of accepted values. Note that when accessing resources within the web root, simply blocking input containing file path traversal sequences (such as dot-dot-slash) is not always sufficient to prevent retrieval of sensitive information, because some protected items may be accessible at the original path without using any traversal sequences. </p>",
+  "webIntro": null,
+  "typicalSeverity": "HIGH",
+  "references": [
+    {
+      "title": "Web Security Academy: Directory traversal",
+      "url": "https://portswigger.net/web-security/file-path-traversal"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-22: Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')",
+      "url": "https://cwe.mitre.org/data/definitions/22.html"
+    },
+    {
+      "title": "CWE-23: Relative Path Traversal",
+      "url": "https://cwe.mitre.org/data/definitions/23.html"
+    },
+    {
+      "title": "CWE-35: Path Traversal: '.../...//'",
+      "url": "https://cwe.mitre.org/data/definitions/35.html"
+    },
+    {
+      "title": "CWE-36: Absolute Path Traversal",
+      "url": "https://cwe.mitre.org/data/definitions/36.html"
+    },
+    {
+      "title": "CAPEC-126: Path Traversal",
+      "url": "https://capec.mitre.org/data/definitions/126.html"
+    }
+  ]
+}

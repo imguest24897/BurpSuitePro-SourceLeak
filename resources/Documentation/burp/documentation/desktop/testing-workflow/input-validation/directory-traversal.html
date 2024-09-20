@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/index.html">Testing input validation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/directory-traversal.html">Testing for directory traversal vulnerabilities</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Testing for directory traversal vulnerabilities with Burp Suite</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/2jPYLfAmwWA?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    Directory traversal vulnerabilities (also known as file path vulnerabilities) allow an attacker to read arbitrary files on the server that is running an application. This might include application code and data, credentials for back-end systems, and sensitive operating system files.
+</p>
+<p>
+    You can use Burp to test for these vulnerabilities:
+</p>
+<ul>
+    <li>
+        <label class="label-edition is-professional">Professional</label>
+        Use Burp Scanner to automatically flag potential directory traversal vulnerabilities.
+    </li>
+    <li>
+        Use Burp Intruder to insert a list of directory traversal fuzz strings into a request. The strings may enable you to read arbitrary files on the server.
+    </li>
+</ul>
+<h2 id="steps" cms-ignore-validation="DUPLICATE_HEADINGS">Steps</h2>
+<p>
+    You can follow this process using the <a href="/web-security/file-path-traversal/lab-superfluous-url-decode.html">File path traversal, traversal sequences stripped with superfluous URL-decode</a> lab from our Web Security Academy.
+</p>
+<h3 id="scanning-for-directory-traversal-vulnerabilities">Scanning for directory traversal vulnerabilities</h3>
+<p>
+    If you're using Burp Suite Professional, you can use Burp Scanner to test for directory traversal vulnerabilities:
+</p>
+<ol>
+    <li>
+        In <strong>Proxy &gt; HTTP history</strong>, identify a request that you want to investigate.
+    </li>
+    <li>
+        Right-click the request and select <strong>Do active scan</strong>. Burp Scanner audits the request.
+    </li>
+    <li>
+        Review the <strong>Issues</strong> list on the <strong>Dashboard</strong> to identify any directory traversal issues that Burp Scanner flags.
+    </li>
+</ol>
+<h3 id="fuzzing-for-directory-traversal-vulnerabilities">Fuzzing for directory traversal vulnerabilities</h3>
+<p>
+    You can alternatively use Burp Intruder to test for directory traversal vulnerabilities. This process also enables you to closely investigate any issues that Burp Scanner has identified:
+</p>
+<ol>
+    <li>
+        In <strong>Proxy &gt; HTTP history</strong> identify a request you want to investigate.
+    </li>
+    <li>
+        Right-click the request and select <strong>Send to Intruder</strong>.
+    </li>
+    <li>
+        Go to the <strong>Intruder</strong> tab.
+    </li>
+    <li>
+        Highlight the parameter that you want to test and click <strong>Add §</strong> to mark it as a payload position.
+    </li>
+    <li>
+        <p>
+            Go to the <strong>Payloads</strong> tab. Under <strong>Payload Settings [Simple list]</strong> add a list of directory traversal fuzz strings:
+        </p>
+        <ol>
+            <li>
+                If you're using Burp Suite Professional, select the built-in <strong>Fuzzing - path traversal</strong> wordlist.
+            </li>
+            <li>
+                If you're using Burp Suite Community Edition, manually add a list.
+            </li>
+        </ol>
+    </li>
+    <li>
+        Click <strong>Start attack</strong>. The attack starts running in a new dialog. Intruder sends a request for each fuzz string on the list.
+    </li>
+    <li>
+        When the attack is finished, study the responses to look for any noteworthy behavior. For example, look for responses with a longer length. These may contain data that has been returned from the requested file.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            Academy: <a href="/web-security/file-path-traversal/index.html">Directory traversal</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/webapp-scans/scanning-specific-http-messages.html">Scanning specific HTTP messages</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/index.html">Burp Intruder</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

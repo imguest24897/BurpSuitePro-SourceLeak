@@ -1,0 +1,53 @@
+{
+  "description": {
+    "featured": false,
+    "uuid": "ed396351-a690-420e-bd6c-1ff46a8b3925"
+  },
+  "crawler": {
+    "crawl_optimization": {
+      "crawl_using_provided_logins_only": true
+    },
+    "crawl_limits": {
+      "maximum_crawl_time": 3
+    },
+    "error_handling": {
+      "number_of_follow_up_passes": 1,
+      "pause_task_requests_timed_out_count": 0,
+      "pause_task_requests_timed_out_percentage": 0
+    },
+    "crawl_project_option_overrides": {
+      "normal_timeout": 10,
+      "connect_timeout": 10
+    }
+  },
+  "scanner": {
+    "audit_optimization": {
+      "scan_speed": "fast",
+      "maximum_crawl_and_audit_time": 15
+    },
+    "error_handling": {
+      "consecutive_audit_check_failures_to_skip_insertion_point": 2,
+      "consecutive_insertion_point_failures_to_fail_audit_item": 2,
+      "number_of_follow_up_passes": 1,
+      "pause_task_failed_audit_item_count": 0,
+      "pause_task_failed_audit_item_percentage": 0
+    },
+    "insertion_point_types": {
+      "insert_body_params": true,
+      "insert_cookies": true,
+      "insert_entire_body": false,
+      "insert_http_headers": false,
+      "insert_param_name": false,
+      "insert_url_params": true,
+      "insert_url_path_filename": false,
+      "insert_url_path_folders": false
+    },
+    "audit_project_option_overrides": {
+      "normal_timeout": 10,
+      "connect_timeout": 10
+    },
+    "javascript_analysis": {
+      "max_static_time_per_item": 10
+    }
+  }
+}

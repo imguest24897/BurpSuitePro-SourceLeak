@@ -1,0 +1,218 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE" ignore-validation="STACKED_HEADINGS,OTHER_PAGE_KEYWORD_TOO_FREQUENT"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/dastardly/index.html">Dastardly</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/dastardly/teamcity.html">TeamCity</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-dastardly">Dastardly</label>
+</section>
+<h1>Integrating Dastardly with TeamCity</h1>
+<p>
+    You can integrate Dastardly with TeamCity. This enables you to run Dastardly web vulnerability scans as a stage in your existing CI/CD pipeline.
+</p>
+<p>
+    This page contains instructions on how to integrate Dastardly with a simple (example) TeamCity CI/CD pipeline. These instructions have been tested with TeamCity 2022.04.4.
+</p>
+<h2 id="teamcity-agent-requirements">TeamCity agent requirements</h2>
+<p>
+    Your TeamCity agent must have Docker configured to run containers.
+</p>
+<p>
+    No plugins beyond the TeamCity defaults are required to run Dastardly in a TeamCity CI/CD pipeline.
+</p>
+<p>
+    For information on the machine specification required to run Dastardly scans, see the <a href="/burp/documentation/dastardly/index.html#dastardly-system-and-network-requirements">Dastardly system requirements</a>.
+</p>
+<h2 id="creating-the-settings-file">Creating the settings file</h2>
+<ol>
+    <li>
+        <p>
+            Configure access from TeamCity to the repository where your <code>settings.kts</code> file is stored.
+        </p>
+    </li>
+    <li>
+        <p>
+            Add the following content to your <code>settings.kts</code> file:
+        </p>
+        <p>
+            <code class="code-scrollable">import jetbrains.buildServer.configs.kotlin.*
+import jetbrains.buildServer.configs.kotlin.buildSteps.ScriptBuildStep
+import jetbrains.buildServer.configs.kotlin.buildSteps.script
+
+version = "2022.04"
+
+project {
+    description = "Contains all other projects"
+    buildType(DastardlyScan)
+}
+object DastardlyScan : BuildType({
+    name = "Dastardly from Burp Suite Scan"
+    vcs {
+        cleanCheckout = true
+    }
+    features {
+        feature {
+            type = "xml-report-plugin"
+            param("xmlReportParsing.reportType", "junit")
+            param("xmlReportParsing.reportDirs", "+:**/reports/**.xml")
+        }
+    }
+    steps {
+        script {
+            name = "Dastardly from Burp Suite Scan"
+            dockerImage = "public.ecr.aws/portswigger/dastardly:latest"
+            dockerPull = true
+            dockerImagePlatform = ScriptBuildStep.ImagePlatform.Linux
+            dockerRunParameters = """
+                -e BURP_START_URL=https://ginandjuice.shop/
+                -e BURP_REPORT_FILE_PATH=%teamcity.build.checkoutDir%/reports/dastardly-report.xml
+            """.trimIndent()
+            scriptContent = """
+                mkdir -p %system.teamcity.build.workingDir%/reports
+                docker-entrypoint.sh dastardly
+            """.trimIndent()
+        }
+
+    }
+    artifactRules = """
+        reports/** =&gt; reports
+    """.trimIndent()
+})</code>
+        </p>
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You can set <code>BURP_START_URL</code> to a <a href="/burp/documentation/dastardly/index.html#scanning">seed URL</a> for any application you want to scan.
+    </p>
+    <p>
+        In this example, <code>BURP_START_URL</code> is set to <code>https://ginandjuice.shop/</code> - this is a deliberately vulnerable web application designed for testing web vulnerability scanners.
+    </p>
+    <p>
+        The next time your pipeline runs, Dastardly will scan the application you have set under <code>BURP_START_URL</code>.
+    </p>
+</div>
+<h2 id="configuring-the-teamcity-pipeline">Configuring the TeamCity pipeline</h2>
+<ol>
+    <li>
+        <p>
+            From the main TeamCity interface, click <strong>New project...</strong> and choose an appropriate place in your project hierarchy.
+        </p>
+    </li>
+    <li>
+        <p>
+            Ensure that <strong>Manually</strong> is selected.
+        </p>
+    </li>
+    <li>
+        <p>
+            Give your project a <strong>Name</strong>. You can also add a <strong>Description</strong>.
+        </p>
+    </li>
+    <li>
+        <p>
+            Click <strong>Create</strong>.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/dastardly/images/teamcity/creating-teamcity-project.jpg" alt="Creating a new TeamCity project.">
+        </div>
+    </li>
+    <li>
+        <p>
+            Click <strong>Versioned Settings</strong>.
+        </p>
+    </li>
+    <li>
+        <p>
+            Select <strong>Synchronization enabled</strong>.
+        </p>
+    </li>
+    <li>
+        <p>
+            Under <strong>Project settings VCS Root</strong>, click <strong>Create VCS root</strong> or use an existing option from the <strong>Project Settings VCS</strong> root drop down.
+        </p>
+    </li>
+    <li>
+        <p>
+            Ensure <strong>Settings format</strong> is set to <strong>Kotlin</strong>.
+        </p>
+    </li>
+    <li>
+        <p>
+            Click <strong>Apply</strong>.
+        </p>
+    </li>
+    <li>
+        <p>
+            From the <strong>Existing Project Settings Detected</strong> pop-up, click <strong>Import settings from VCS</strong>.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/dastardly/images/teamcity/teamcity-import-settings-from-vcs.jpg" alt="Importing settings from VCS in TeamCity.">
+        </div>
+    </li>
+</ol>
+<h2 id="viewing-dastardly-scan-results-in-teamcity">Viewing Dastardly scan results in TeamCity</h2>
+<ol>
+    <li>
+        <p>
+            Run your TeamCity project containing Dastardly, and allow the scan to complete. Scans run for a maximum of ten minutes.
+        </p>
+    </li>
+    <li>
+        <p>
+            From the main TeamCity interface, click on your project containing Dastardly.
+        </p>
+    </li>
+    <li>
+        <p>
+            Under <strong>Dastardly from Burp Suite Scan</strong>, click on the build containing your scan.
+        </p>
+    </li>
+    <li>
+        <p>
+            Click <strong>Tests</strong>. Here you can see any failed tests. See more details of a failed test by clicking on it.
+        </p>
+    </li>
+</ol>
+<h3 cms-ignore-validation="DUPLICATE_HEADINGS">Remediation advice</h3>
+<p>
+    You can see remediation advice for security issues that Dastardly finds under Stacktrace. This includes links to relevant sections of the free Web Security Academy resource, which provide further detail on web security vulnerabilities.
+</p>
+<div class="rounded-dropshadow">
+    <figure>
+        <img src="/burp/documentation/dastardly/images/teamcity/dastardly-failed-test-teamcity.jpg" alt="Dastardly security issue remediation advice, shown in TeamCity.">
+        <figcaption>Remediation advice for a security issue found by Dastardly.</figcaption></figure>
+</div>
+<h3 cms-ignore-validation="DUPLICATE_HEADINGS">Evidence</h3>
+<p>
+    You can see evidence for security issues that Dastardly finds under Stacktrace. This evidence includes the request sent by Dastardly to produce the issue, as well as the response sent by the application.
+</p>
+<div class="rounded-dropshadow">
+    <figure>
+        <img src="/burp/documentation/dastardly/images/teamcity/dastardly-evidence-teamcity.jpg" alt="Dastardly security issue evidence, shown in TeamCity.">
+        <figcaption>Evidence for a security issue found by Dastardly.</figcaption></figure>
+</div>
+</body>
+</html>

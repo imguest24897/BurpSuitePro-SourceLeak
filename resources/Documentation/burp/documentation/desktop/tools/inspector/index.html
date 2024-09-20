@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/inspector/index.html">Inspector</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Inspector</h1>
+<p>
+    The Inspector enables you to quickly view and edit interesting features of HTTP and WebSocket messages without having to switch between different tabs. You can access the Inspector from the side panel, next to the <a href="/burp/documentation/desktop/tools/message-editor/index.html">message editor</a> throughout Burp Suite. You can use it to:
+</p>
+<ul>
+    <li>
+        View the <a href="#automatic-decoding">fully decoded values</a> of parameters or cookies, or a substring that you've selected in the editor.
+    </li>
+    <li>
+        <a href="/burp/documentation/desktop/tools/inspector/modify-requests.html">Add, remove, and reorder items</a> at the click of a button, so you don't have to work with the raw HTTP syntax.
+    </li>
+    <li>
+        <a href="/burp/documentation/desktop/tools/inspector/modify-requests.html#editing-the-name-or-value-of-an-item">Edit data in its decoded form</a>. When you update the request, the sequence is automatically re-encoded.
+    </li>
+    <li>
+        Toggle the protocol used to send individual requests. Burp automatically performs the transformations to generate an equivalent request for the new protocol.
+    </li>
+    <li>
+        Work with HTTP headers and pseudo-headers without being tied to the message editor's HTTP/1-style syntax. This enables you to use a number of advanced techniques for HTTP/2-specific tests.
+    </li>
+</ul>
+<p>
+    Some of these features are only available for editable requests. You can find these in Burp Repeater or intercepted requests in Burp Proxy, for example.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You can add tabs to the message editor to display the same information. You can enable these in the <strong>Settings</strong> dialog. For more information see <a href="/burp/documentation/desktop/settings/ui/message-editor.html">Message editor settings</a>.
+    </p>
+</div>
+<h2 id="configuring-the-inspector-layout">Configuring the Inspector layout</h2>
+<p>
+    The buttons at the top of the Inspector enable you to adjust the layout of the side panel, including the Inspector:
+</p>
+<ul>
+    <li>
+        <p>
+            To dock the side panel on the left or right of the screen, click <span class="icon-dock-left"></span> or <span class="icon-dock-right"></span>.
+        </p>
+    </li>
+    <li>
+        <p>
+            To expand or collapse all the Inspector widgets simultaneously, click <span class="icon-expand-all"></span> or <span class="icon-minimise"></span>. The expand button <span class="icon-expand-all"></span> only expands widgets that contain data.
+        </p>
+    </li>
+</ul>
+<p>
+    In some Burp tools, you can switch between the <strong>Inspector</strong> and the <strong>Notes</strong> tool. To select the <strong>Notes</strong> tool, click <strong><span class="icon-document"></span> Notes</strong>.
+</p>
+<p>
+    Click on the <span class="icon-settings"></span> settings icon to open the <strong>Settings</strong> dialog. This enables you to adjust how widgets are displayed, and set the default layout for the side panel. For more information, see <a href="/burp/documentation/desktop/settings/ui/side-panel.html">Side panel settings</a>.
+</p>
+<h2 id="request-attributes">Request attributes</h2>
+<p>
+    The <strong>Request attributes</strong> section displays the HTTP method, the path, and the protocol that was used to send the request. For editable messages, it shows the protocol that you want to use when you send the request instead.
+</p>
+<p>
+    When you <a href="/burp/documentation/desktop/http2/index.html#changing-the-protocol-for-a-request">change the protocol</a>, Burp performs the transformations to generate an equivalent request for the new protocol. This enables you to easily upgrade and downgrade individual requests.
+</p>
+<h2 id="viewing-http-message-data-in-the-inspector">Viewing HTTP message data in the Inspector</h2>
+<p>
+    The Inspector displays the headers, parameters, and cookies from the request and response as a series of name-value pairs. The items are grouped by category. The number next to each category shows you how many items of each type were found.
+</p>
+<h3 id="automatic-decoding">Automatic decoding</h3>
+<p>
+    The values shown in the Inspector are automatically decoded from HTML, URL, and Base64. This enables you to read them more easily without having to manually decode them.
+</p>
+<p>
+    In the main Inspector view, you only see the final result of the decoding. To see each decoding step that the Inspector applied, click the arrow to the right of the item.
+</p>
+<p>
+    You can use the <strong>Decoded from</strong> drop-down menus to modify the sequence of decoding steps. Use the plus and minus icons to manually add or remove more steps if necessary.
+</p>
+<h2 id="http-2-headers-and-pseudo-headers">HTTP/2 headers and pseudo-headers</h2>
+<p>
+    The Inspector displays HTTP/2 pseudo-headers alongside any ordinary headers in the request. To identify them, each pseudo-header is prefixed with a colon.
+</p>
+<p>
+    This provides an alternative way to work with HTTP/2 requests that is completely decoupled from HTTP/1 syntax. This more closely resembles the underlying request that is sent to the server. It enables you to use injections that are not possible via the message editor, to test for a number of HTTP/2-specific vulnerabilities.
+</p>
+<p>
+    For more information, see <a href="/burp/documentation/desktop/http2/index.html">working with HTTP/2 in Burp</a>.
+</p>
+<h2 id="selecting-a-substring">Selecting a substring</h2>
+<p>
+    If you highlight a substring in the message editor, you can view it in the Inspector. The Selection widget appears when you select one or more characters. The contents of the widget depends on your selection:
+</p>
+<ul>
+    <li>
+        <p>
+            If you select an individual character, you can see its ASCII code point in either decimal or hexadecimal form.
+        </p>
+    </li>
+    <li>
+        <p>
+            If you select more than one character, the Inspector automatically decodes it. It displays the character count next to the category heading.
+        </p>
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        The <strong>Selection</strong> widget also displays any non-printing characters, regardless of whether you've selected to show them in the message editor. If you highlight multiple lines, you'll see the <code>\r\n</code> characters at the end of each line, for example.
+    </p>
+</div>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/tools/inspector/getting-started-inspector.html">Getting started with the Inspector</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/inspector/modify-requests.html">Modifying requests using the Inspector</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/ui/side-panel.html">Side panel settings</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

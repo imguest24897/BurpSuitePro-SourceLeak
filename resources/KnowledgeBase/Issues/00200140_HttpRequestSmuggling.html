@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+HTTP request smuggling
+<h1>Typical severity</h1>
+High
+<h1>Issue description</h1>
+<p>
+    HTTP request smuggling vulnerabilities arise when websites route HTTP requests through web servers with inconsistent HTTP parsing.
+</p>
+<p>
+    By supplying a request that different servers interpret as having different lengths, an attacker can poison the back-end TCP/TLS socket and prepend arbitrary data to the next request. Depending on the website's functionality, this can be used to bypass front-end security rules, access internal systems, poison web caches, and launch assorted attacks on users who are actively browsing the site.
+</p>
+<h1>Issue remediation</h1>
+<p>
+    You can resolve all variants of this vulnerability by configuring the front-end server to exclusively use HTTP/2 when communicating with back-end systems. Alternatively, you could ensure all servers in the chain run the same web server software with the same configuration. Disabling back-end connection reuse is likely to reduce the impact of this vulnerability, but does not mitigate all possible exploits.
+</p><p>
+    Specific instances of this vulnerability can be resolved by reconfiguring the front-end server to normalize ambiguous requests before routing them onward. Alternatively, you could configure the back-end server to reject the message and close the connection when it encounters an ambiguous request.
+</p>
+<h1>References</h1>
+<ul>
+    <li><a href="https://portswigger.net/web-security/request-smuggling">HTTP Request Smuggling</a></li>
+    <li><a href="https://portswigger.net/blog/http-desync-attacks">HTTP Desync Attacks</a></li>
+</ul>
+<h1>Vulnerability classifications</h1>
+<ul>
+    <li><a href="https://cwe.mitre.org/data/definitions/444.html">CWE-444: Inconsistent Interpretation of HTTP Requests ('HTTP Request Smuggling')</a></li>
+    <li><a href="https://capec.mitre.org/data/definitions/33.html">CAPEC-33: HTTP Request Smuggling</a></li>
+</ul>
+<h1>Web intro</h1>
+
+</body>
+</html>

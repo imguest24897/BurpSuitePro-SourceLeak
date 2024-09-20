@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+Directory listing
+<h1>Typical severity</h1>
+
+Information
+
+<h1>Issue description</h1>
+
+<p>Web servers can be configured to automatically list the contents of directories that do not have an index page present. This can aid an attacker by enabling them to quickly identify the resources at a given path, and proceed directly to analyzing and attacking those resources. It particularly increases the exposure of sensitive files within the directory that are not intended to be accessible to users, such as temporary files and crash dumps.</p>
+<p>Directory listings themselves do not necessarily constitute a security vulnerability. Any sensitive resources within the web root should in any case be properly access-controlled, and should not be accessible by an unauthorized party who happens to know or guess the URL. Even when directory listings are disabled, an attacker may guess the location of sensitive files using automated tools.</p>
+
+<h1>Issue remediation</h1>
+
+<p>There is not usually any good reason to provide directory listings, and disabling them may place additional hurdles in the path of an attacker. This can normally be achieved in two ways:</p>
+<ul>
+<li>Configure your web server to prevent directory listings for all paths beneath the web root; </li>
+<li>Place into each directory a default file (such as index.htm) that the web server will display instead of returning a directory listing.</li></ul>
+
+<h1>References</h1>
+
+<ul>
+    <li><a href="https://portswigger.net/web-security/information-disclosure/exploiting#directory-listings">Web Security Academy: Information disclosure via directory listings</a></li>
+</ul>
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+<li><a href="https://cwe.mitre.org/data/definitions/538.html">CWE-538: File and Directory Information Exposure</a></li>
+<li><a href="https://cwe.mitre.org/data/definitions/548.html">CWE-548: Information Exposure Through Directory Listing</a></li>
+    <li><a href="https://capec.mitre.org/data/definitions/37.html">CAPEC-37: Retrieve Embedded Sensitive Data</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

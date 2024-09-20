@@ -1,0 +1,187 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/message-editor/index.html">Message editor</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/message-editor/text-editor.html">Text editor</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Text editor</h1>
+<p>
+    The <a href="/burp/documentation/desktop/tools/message-editor/index.html">HTTP message editor</a> uses the text editor to display the content of requests and responses. The text editor is also used elsewhere within Burp to display any plain text.
+</p>
+<p>
+    It provides a number of useful features to make it easier to read different kinds of text and help you to analyze the content.
+</p>
+<h2 id="syntax-analysis">Syntax analysis</h2>
+<p>
+    Syntax in HTTP requests and responses is automatically colorized to highlight interesting items, such as parameters in requests and HTML elements in responses. JavaScript, JSON, and CSS content is also fully colorized. You can configure this behavior, and adjust the font, in the <a href="/burp/documentation/desktop/settings/ui/display.html">message display settings</a>.
+</p>
+<p>
+    When syntax colorizing is enabled, the editor also displays mouse-over popups that show the decoded values of syntax items where appropriate. For HTTP requests, the popups perform URL-decoding, and for responses they perform HTML-decoding.
+</p>
+<h2 id="pretty-printing">Pretty printing</h2>
+<p>
+    In the <strong>Pretty</strong> tab, supported text formats are automatically prettified in the text editor. The editor currently supports pretty printing of the following formats:
+</p>
+<ul>
+    <li>
+        JSON.
+    </li>
+    <li>
+        XML (including <code>image/svg+xml</code> content).
+    </li>
+    <li>
+        HTML.
+    </li>
+    <li>
+        CSS.
+    </li>
+    <li>
+        JavaScript.
+    </li>
+</ul>
+<p>
+    This improves the readability of data, markup, and code in HTTP messages, which are displayed with standardized indentation and line breaks. In editable messages, such as in Burp Repeater, supported text formats are dynamically prettified as you type. Otherwise, the text is prettified when you send the request.
+</p>
+<p>
+    By default, messages are displayed in the <strong>Pretty</strong> tab whenever Burp detects a supported format in the content. To manually alternate between the prettified version and the raw content, use the tabs in the message editor.
+</p>
+<p>
+    You can disable pretty printing by default in the <strong>Settings</strong> dialog. Click on the settings icon <span class="icon-settings"></span> to open the dialog. For more information, see <a href="/burp/documentation/desktop/settings/ui/message-editor.html#character-sets">Message editor settings</a>.
+</p>
+<h2 id="uninteresting-headers">Uninteresting headers</h2>
+<p>
+    In the <strong>Pretty</strong> tab, you have the option to hide a predefined list of headers that typically don't offer much insight into the target application's behavior, or that contain information that can't be exploited, like <code>Sec-Ch-Ua</code>, <code>Accept-Language</code>, and <code>Upgrade-Insecure-Requests</code>. By filtering these headers out, you can reduce clutter, making it easier for you to focus your analysis on more valuable information.
+</p>
+<p>
+    You can toggle whether these headers are visible using the eye button <span class="icon-hide-eye"></span> above each message.
+</p>
+<h2 id="line-wrapping">Line-wrapping</h2>
+<p>
+    In both the <strong>Pretty</strong> and <strong>Raw</strong> tabs, lines in requests and responses are automatically wrapped to fit the width of the text editor. This makes it easier to read long, single-line header values, for example.
+</p>
+<p>
+    Line numbers are displayed so that you can still keep track of the original line breaks.
+</p>
+<p>
+    To toggle line-wrapping on and off, use the button above each message.
+</p>
+<h2 id="non-printing-characters">Non-printing characters</h2>
+<p>
+    By default, non-printing characters in HTTP requests and responses are hidden. To display them, click <span class="icon-npc"></span>. This is supported for any bytes with a hexadecimal code point lower than 20, which includes tabs, line feeds, carriage returns, and null bytes. Characters with code points from 7F to FF are also supported.
+</p>
+<p>
+    This feature can help you to:
+</p>
+<ul>
+    <li>
+        Spot subtle differences between byte values in responses.
+    </li>
+    <li>
+        Experiment with HTTP request smuggling vulnerabilities.
+    </li>
+    <li>
+        Study line endings to identify potential HTTP header injection vulnerabilities.
+    </li>
+    <li>
+        Observe how null-byte injections are handled by the server.
+    </li>
+</ul>
+<h2 id="text-editor-hotkeys">Text editor hotkeys</h2>
+<p>
+    The text editor supports hotkeys for common actions. You can configure the hotkeys in the <a href="/burp/documentation/desktop/settings/ui/hotkeys.html">hotkey settings</a>. The default hotkeys for the text editor are:
+</p>
+<ul>
+    <li>
+        Ctrl + A, select all.
+    </li>
+    <li>
+        Ctrl + X, cut selected text.
+    </li>
+    <li>
+        Ctrl + C, copy selected text.
+    </li>
+    <li>
+        Ctrl + V, paste.
+    </li>
+    <li>
+        Ctrl + S, find and highlight the selected text throughout the message.
+    </li>
+    <li>
+        Ctrl + Z, undo last edit.
+    </li>
+    <li>
+        Ctrl + Y, redo last undone edit.
+    </li>
+    <li>
+        Ctrl + U, URL-encode selected text (hold down Shift to decode).
+    </li>
+    <li>
+        Ctrl + H, HTML-encode selected text (hold down Shift to decode).
+    </li>
+    <li>
+        Ctrl + B, Base64-encode selected text (hold down Shift to decode).
+    </li>
+    <li>
+        Ctrl + left, move to previous word.
+    </li>
+    <li>
+        Ctrl + right, move to next word.
+    </li>
+    <li>
+        Ctrl + up, move to previous paragraph.
+    </li>
+    <li>
+        Ctrl + down, move to next paragraph.
+    </li>
+    <li>
+        Ctrl + home, go to start of message.
+    </li>
+    <li>
+        Ctrl + end, go to end of message.
+    </li>
+    <li>
+        Ctrl + backspace, delete previous word.
+    </li>
+    <li>
+        Ctrl + del, delete next word.
+    </li>
+</ul>
+<h2 id="quick-search">Quick search</h2>
+<p>
+    Use the search bar at the bottom of the text editor to quickly find expressions in the text. As you type into the search box, the editor automatically highlights matching items. You can use the arrow buttons <span class="icon-arrow2-left"></span> and <span class="icon-arrow2-right"></span> to move the selection to the previous or next match.
+</p>
+<p>
+    You can control the configuration of the search in the <strong>Settings</strong> dialog. For more information, see <a href="/burp/documentation/desktop/settings/ui/message-editor.html">Message editor settings</a>.
+</p>
+</body>
+</html>

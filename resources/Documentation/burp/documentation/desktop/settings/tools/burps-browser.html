@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/index.html">Settings</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/tools/burps-browser.html">Burp's browser</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Burp's browser settings</h1>
+<p>
+    The <strong>Burp's browser</strong> page in the <strong>Settings</strong> dialog contains settings for:
+</p>
+<ul>
+    <li>
+        <a href="#browser-data">Browser data</a>.
+    </li>
+    <li>
+        <a href="#browser-running">Browser running</a>.
+    </li>
+</ul>
+<h2 id="browser-data">Browser data</h2>
+<p>
+    The <strong>Store browser data</strong> checkbox determines whether Burp's browser stores settings and history in the specified browser data folder. To stop storing browser data, deselect the checkbox.
+</p>
+<p>
+    To delete past data, click <strong>Clear all</strong>.
+</p>
+<p>
+    The <strong>Browser data</strong> settings are user settings. They apply to all installations of Burp on your machine.
+</p>
+<h2 id="browser-running">Browser running</h2>
+<p>
+    Burp's browser is sandboxed by default. In some circumstances, such as when running in Linux as root, you might not be able to launch browser-powered scans using the sandbox.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        To determine whether the browser can launch browser-powered scans using the sandbox, use the <strong>Health check for Burp's browser</strong> tool in the browser's <strong>Help</strong> menu.
+    </p>
+</div>
+<p>
+    The <strong>Allow Burp's browser to run without a sandbox</strong> setting enables you to run Burp's browser without the sandbox. Before you select this setting, please make sure that you are aware of the associated security implications. Scanning hostile websites without the sandbox increases the risk of your local system being compromised.
+</p>
+<p>
+    The <strong>Use the GPU</strong> option enables Burp's browser to access the GPU. Note that crashes can occur if Burp's browser attempts to use a non-existent GPU.
+</p>
+<p>
+    The <strong>Browser running</strong> settings are project settings. They apply to the current project only.
+</p>
+</body>
+</html>

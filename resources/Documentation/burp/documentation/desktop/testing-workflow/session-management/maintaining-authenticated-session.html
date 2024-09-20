@@ -1,0 +1,244 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/session-management/index.html">Testing session management mechanisms</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/session-management/maintaining-authenticated-session.html">Maintaining an authenticated session</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Maintaining an authenticated session</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/EfazeVMo4hQ?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    When testing, some actions may result in an application terminating your session. For example, an application may automatically log you out if you submit suspicious input. This may prevent you from performing actions such as fuzzing with Burp Intruder.
+</p>
+<p>
+    Burp enables you to configure a session handling rule to automatically log back into an application. The session handling rule determines whether a session is valid. If it's invalid, it will run a macro to update the session cookies and log back in.
+</p>
+<p>
+    You can follow along with the process below using <code>ginandjuice.shop</code>, our deliberately vulnerable demonstration site. The process consists of three steps:
+</p>
+<ol>
+    <li>
+        <p>
+            Identifying a valid login expression.
+        </p>
+    </li>
+    <li>
+        <p>
+            Configuring a session handling rule.
+        </p>
+    </li>
+    <li>
+        <p>
+            Checking the session handling rule.
+        </p>
+    </li>
+</ol>
+<h2 id="identifying-an-invalid-login-expression">Identifying an invalid login expression</h2>
+<p>
+    Before you configure a session handling rule, you need to identify how the target site behaves when the session is invalid.
+</p>
+<ol>
+    <li>
+        <p>
+            In Burp's browser, log in to the target site using valid credentials. If you're using <code>ginandjuice.shop</code>, the credentials are <code>carlos:hunter2</code>.
+        </p>
+    </li>
+    <li>
+        <p>
+            Go to a page that requires you to be logged in to access it. If you're using <code>ginandjuice.shop</code>, visit <strong>My Account</strong>.
+        </p>
+    </li>
+    <li>
+        <p>
+            Log out.
+        </p>
+    </li>
+    <li>
+        <p>
+            Try to get back to <strong>My Account</strong> without logging in. If you're using <code>ginandjuice.shop</code>, notice that you are redirected to the login page instead.
+        </p>
+    </li>
+    <li>
+        <p>
+            In Burp, go to the <strong>Proxy &gt; HTTP history</strong> tab to identify the behavior of the target site when an unauthorized user tries to access a restricted page. If you're using <code>ginandjuice.shop</code>, trying to access <strong>My Account</strong> when you're not logged in results in a 302 redirect to <code>/login</code>.
+        </p>
+    </li>
+</ol>
+<h2 id="configuring-a-session-handling-rule">Configuring a session handling rule</h2>
+<p>
+    To configure a session handling rule that enables you to maintain an authenticated session:
+</p>
+<ol>
+    <li>
+        <p>
+            Click <strong>Settings</strong> to open the <strong>Settings</strong> dialog.
+        </p>
+    </li>
+    <li>
+        <p>
+            Under <strong>Sessions &gt; Session handling rules</strong>, click <strong>Add</strong>. The session handling rule editor opens.
+        </p>
+    </li>
+    <li>
+        <p>
+            Go to the <strong>Scope</strong> tab. Select the tools and URLs that you want the rule to apply to. The default tool scope and the suite URL scope are suitable for most use cases.
+        </p>
+    </li>
+    <li>
+        <p>
+            Go to the <strong>Details</strong> tab. Add a unique rule description.
+        </p>
+    </li>
+    <li>
+        <p>
+            Under <strong>Rule actions</strong>, click <strong>Add</strong>, then select <strong>Check session is valid</strong> from the drop-down menu. The session handling action editor opens.
+        </p>
+        <img src="/burp/documentation/desktop/testing-workflow/images/maintain-active-session/active-session-1.png" alt="Open session handling editor" class="center-block">
+    </li>
+    <li>
+        <p>
+            Under <strong>Inspect response to determine session validity</strong>, specify the expression that is found in an invalid login response. This should be the expression you identified earlier. Also, specify the aspects of each in-scope response that Burp should inspect for the expression:
+        </p>
+        <ul>
+            <li>
+                <p>
+                    <strong>Location(s)</strong> - Select the locations in the response that you want Burp to inspect. If you're using <code>ginandjuice.shop</code>, select <strong>URL of redirection target</strong>.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <strong>Look for expression</strong> - Specify the expression that is found in a valid login response. If you're using <code>ginandjuice.shop</code>, enter <code>login</code>.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <strong>Match type</strong> - Select whether the expression is a literal string or regex. If you're using <code>ginandjuice.shop</code>, select <strong>Literal string</strong>.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <strong>Case-sensitivity</strong> - Select whether the expression is case-sensitive or insensitive. If you're using <code>ginandjuice.shop</code>, select <strong>Insensitive</strong>.
+                </p>
+            </li>
+            <li>
+                <p>
+                    <strong>Match indicates</strong> - Select whether a match indicates that the session is valid or invalid. If you're using <code>ginandjuice.shop</code>, select <strong>Invalid session</strong>.
+                </p>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <p>
+            Under <strong>Define behavior dependent on session validity</strong>, select <strong>If session is invalid, perform the action below &gt; Run a macro</strong>.
+        </p>
+    </li>
+    <li>
+        <p>
+            Click <strong>Add</strong>. The <strong>Macro editor</strong> and <strong>Macro recorder</strong> dialogs open.
+        </p>
+    </li>
+    <li>
+        <p>
+            In the <strong>Macro recorder</strong> dialog, select the login requests, then click <strong>OK</strong>. If you're using <code>ginandjuice.shop</code>, select the <code>GET /login</code> and the two <code>POST /login</code> requests.
+        </p>
+        <img src="/burp/documentation/desktop/testing-workflow/images/maintain-active-session/active-session-2.png" alt="Select macro requests" class="center-block">
+    </li>
+    <li>
+        <p>
+            Click <strong>OK</strong> to close all open dialogs. The rule is added to the list of session handling rules.
+        </p>
+    </li>
+</ol>
+<h2 id="checking-the-session-handling-rule">Checking the session handling rule</h2>
+<p>
+    It's a good idea to check that the session handling rule works. To do this:
+</p>
+<ol>
+    <li>
+        <p>
+            In Burp's browser, log out of the website.
+        </p>
+    </li>
+    <li>
+        <p>
+            In <strong>Proxy &gt; HTTP history</strong>, identify a request for a page that you need to be logged in to access. For example, if you're using <code>ginandjuice.shop</code>, you can use a <code>GET /my-account</code> request. The page should contain a session cookie that is now invalid.
+        </p>
+    </li>
+    <li>
+        <p>
+            Right-click the request and select <strong>Send to Repeater</strong>.
+        </p>
+    </li>
+    <li>
+        <p>
+            Go to the <strong>Repeater</strong> tab and send the request. Notice that the session cookies automatically update.
+        </p>
+    </li>
+    <li>
+        <p>
+            Review the response to confirm that you've logged in successfully.
+        </p>
+        <img src="/burp/documentation/desktop/testing-workflow/images/maintain-active-session/active-session-3.png" alt="Review the response to check valid session" class="center-block">
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        If Repeater is set to never follow redirects you will need to click <strong>Follow redirect to complete the login sequence</strong>.
+    </p>
+    <p>
+        For more information on configuring redirects in Repeater, see <a href="/burp/documentation/desktop/settings/tools/repeater.html#redirects">Repeater settings - Redirects</a>.
+    </p>
+</div>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/settings/sessions/index.html">Sessions settings</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/sessions/session-handling-rules.html">Session handling rule editor</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/sessions/macros.html">Macro editor</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/sessions/index.html#session-handling-tracer">Session handling tracer</a> - Use the session handling tracer to troubleshoot your session handling configuration.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

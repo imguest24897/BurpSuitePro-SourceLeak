@@ -1,0 +1,178 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/mobile/index.html">Mobile testing</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/mobile/config-ios-device.html">Configuring an iOS device to work with Burp Suite Professional</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Configuring an iOS device to work with Burp Suite Professional</h1>
+<p>
+    You can test web applications and mobile apps using an iOS device. To do this, you need to do the following:
+</p>
+<ul>
+    <li>
+        Configure your Burp Proxy listener to accept connections on all network interfaces.
+    </li>
+    <li>
+        Connect both your device and your computer to the same wireless network.
+    </li>
+    <li>
+        To interact with HTTPS traffic, you need to install a CA certificate on your iOS device.
+    </li>
+</ul>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="step-1-configure-the-burp-proxy-listener">Step 1: Configure the Burp Proxy listener</h2>
+<p>
+    To configure the proxy settings for Burp Suite Professional:
+</p>
+<ol>
+    <li>
+        Open Burp Suite Professional click Settings <span class="icon-settings"></span> to open the <strong>Settings</strong> dialog.
+    </li>
+    <li>
+        Go to <strong>Tools &gt; Proxy</strong>.
+    </li>
+    <li>
+        In <strong>Proxy listeners</strong>, click <strong>Add</strong>.
+    </li>
+    <li>
+        In the <strong>Binding</strong> tab, set <strong>Bind to port</strong> to <code>8082</code> (or another port that is not in use).
+    </li>
+    <li>
+        <p>
+            Select <strong>All interfaces</strong> and click <strong>OK</strong>.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/add-proxy-listener.png" alt="Add a proxy listener" class="center-block">
+        </div>
+    </li>
+    <li>
+        At the prompt, click <strong>Yes</strong>.
+    </li>
+</ol>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="step-2-configure-your-device-to-use-the-proxy">Step 2: Configure your device to use the proxy</h2>
+<p>
+    To configure the proxy settings for your iOS device:
+</p>
+<ol>
+    <li>
+        In your iOS device, go to <strong>Settings &gt; Wi-Fi</strong>.
+    </li>
+    <li>
+        Make sure that the Wi-Fi button is on and connect to your Wi-Fi network.
+    </li>
+    <li>
+        <p>
+            Select the information icon (<strong>i</strong>) next to your Wi-Fi network.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/ios-wifi.png" alt="iOS Wi-Fi settings" class="center-block">
+        </div>
+    </li>
+    <li>
+        Set <strong>Configure Proxy</strong> to <strong>Manual</strong>.
+    </li>
+    <li>
+        Set <strong>Server</strong> to the IP address of the computer that is running Burp Suite Professional.
+    </li>
+    <li>
+        Set <strong>Port</strong> to the port value that you configured for the Burp Proxy listener, in this example <code>8082</code>.
+    </li>
+    <li>
+        <p>
+            Touch <strong>Save</strong>
+        </p>
+        . 
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/ios-proxy-configuration.png" alt="iOS proxy configuration" class="center-block">
+        </div>
+    </li>
+</ol>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="step-3-install-a-ca-certificate-on-your-ios-device">Step 3: Install a CA certificate on your iOS device</h2>
+<p>
+    In order to interact with HTTPS traffic, you need to install a CA certificate from your Burp Suite Professional installation on your iOS device.
+</p>
+<p>
+    To install the CA certificate to your iOS device:
+</p>
+<ol>
+    <li>
+        Make sure that Burp Suite Professional is running on your computer.
+    </li>
+    <li>
+        Use the browser on your iOS device to go to <code>http://burpsuite</code> and select <strong>CA Certificate</strong>.
+    </li>
+    <li>
+        When the CA certificate downloads, select <strong>Profile downloaded</strong> in the <strong>Settings</strong> menu.
+    </li>
+    <li>
+        <p>
+            On the <strong>Install Profile</strong> screen, select <strong>Install</strong>.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/ios-install-profile.png" alt="iOS Install Profile screen" class="center-block">
+        </div>
+    </li>
+    <li>
+        On the <strong>Installing Profile</strong> screen, select <strong>Install</strong>.
+    </li>
+    <li>
+        When the profile is installed, select <strong>Done</strong>.
+    </li>
+    <li>
+        Go to <strong>Settings &gt; General &gt; About &gt; Certificate Trust Settings</strong>.
+    </li>
+    <li>
+        <p>
+            Activate the toggle switch for <code>Portswigger CA</code>.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/ios-cert-trust.png" alt="iOS Certificate Trust Settings" class="center-block">
+        </div>
+    </li>
+</ol>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION" id="step-4-test-the-configuration">Step 4: Test the configuration</h2>
+<p>
+    To test the configuration:
+</p>
+<ol>
+    <li>
+        Open Burp Suite Professional.
+    </li>
+    <li>
+        Go to <strong>Proxy &gt; Intercept</strong> and click <strong>Intercept is off</strong> to switch intercept on.
+    </li>
+    <li>
+        Open the browser on your iOS device and go to an HTTPS web page.
+    </li>
+</ol>
+<p>
+    The page should load without any security warnings. You should see the corresponding requests within Burp Suite Professional.
+</p>
+</body>
+</html>

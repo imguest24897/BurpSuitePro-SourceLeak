@@ -1,0 +1,172 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE" ignore-validation="OTHER_PAGE_KEYWORD_TOO_FREQUENT"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/index.html">Testing input validation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/sql-injection/index.html">SQL injection</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/input-validation/sql-injection/testing.html">Testing for SQL injection vulnerabilities</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Testing for SQL injection vulnerabilities with Burp Suite</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/JkJLZ4NYISQ?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    SQL injection vulnerabilities occur when an attacker can interfere with the queries that an application makes to its database. You can use Burp to test for these vulnerabilities:
+</p>
+<ul>
+    <li>
+        <label class="label-edition is-professional">Professional</label>
+        Use Burp Scanner to automatically flag potential SQL injection vulnerabilities.
+    </li>
+    <li>
+        Use Burp Intruder to insert a list of SQL fuzz strings into a request. This may enable you to change the way SQL commands are executed.
+    </li>
+</ul>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="steps">Steps</h2>
+<p>
+    You can follow this process using a lab with a SQL injection vulnerability. For example, <a href="/web-security/sql-injection/lab-retrieve-hidden-data.html">SQL injection vulnerability in WHERE clause allowing retrieval of hidden data</a>.
+</p>
+<h3 id="scanning-for-sql-injection-vulnerabilities">Scanning for SQL injection vulnerabilities</h3>
+<p>
+    If you're using Burp Suite Professional, you can use Burp Scanner to test for SQL injection vulnerabilities:
+</p>
+<ol>
+    <li>
+        Identify a request that you want to investigate.
+    </li>
+    <li>
+        In <strong>Proxy &gt; HTTP history</strong>, right-click the request and select <strong>Do active scan</strong>. Burp Scanner audits the application.
+    </li>
+    <li>
+        <p>
+            Review the <strong>Issues</strong> list on the <strong>Dashboard</strong> to identify any SQL injection issues that Burp Scanner flags.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/tutorials/sql-injection-1.png" alt="SQL injection in Issue activity" class="center-block">
+        </div>
+    </li>
+</ol>
+<h3 id="manually-fuzzing-for-sql-injection-vulnerabilities">Manually fuzzing for SQL injection vulnerabilities</h3>
+<p>
+    You can alternatively use Burp Intruder to test for SQL injection vulnerabilities. This process also enables you to closely investigate any issues that Burp Scanner has identified:
+</p>
+<ol>
+    <li>
+        Identify a request that you want to investigate.
+    </li>
+    <li>
+        In the request, highlight the parameter that you want to test and select <strong>Send to Intruder</strong>.
+    </li>
+    <li>
+        Go to the <strong>Intruder &gt; Positions</strong> tab. Notice that the parameter has been automatically marked as a payload position.
+    </li>
+    <li>
+        <p>
+            Go to the <strong>Payloads</strong> tab. Under <strong>Payload settings [Simple list]</strong> add a list of SQL fuzz strings.
+        </p>
+        <ol>
+            <li>
+                If you're using Burp Suite Professional, open the <strong>Add from list</strong> drop-down menu and select the built-in <strong>Fuzzing - SQL wordlist</strong>.
+            </li>
+            <li>
+                If you're using Burp Suite Community Edition, manually add a list.
+            </li>
+        </ol>
+    </li>
+    <li>
+        <p>
+            Under <strong>Payload processing</strong>, click <strong>Add</strong>. Configure payload processing rules to replace any list placeholders with an appropriate value. You need to do this if you're using the built-in wordlist:
+        </p>
+        <ol>
+            <li>
+                To replace the <code>{base}</code> placeholder, select <strong>Replace placeholder with base value</strong>.
+            </li>
+            <li>
+                <p>
+                    To replace other placeholders, select <strong>Match/Replace</strong>, then specify the placeholder and replacement. For example, replace <code>{domain}</code> with the domain name of the site you're testing.
+                </p>
+                <div class="rounded-dropshadow">
+                    <img src="/burp/documentation/desktop/images/tutorials/sql-injection-3.png" alt="SQL injection match/replace rule" class="center-block">
+                </div>
+            </li>
+        </ol>
+    </li>
+    <li>
+        Click <strong>Start attack</strong>. The attack starts running in a new dialog. Intruder sends a request for each SQL fuzz string on the list.
+    </li>
+    <li>
+        <p>
+            When the attack is finished, study the responses to look for any noteworthy behavior. For example, look for:
+        </p>
+        <ul>
+            <li>
+                Responses that include additional data as a result of the query.
+            </li>
+            <li>
+                Responses that include other differences due to the query, such as a "welcome back" message or error message.
+            </li>
+            <li>
+                Responses that had a time delay due to the query.
+            </li>
+        </ul>
+        If you're using the lab, look for responses with a longer length. These may include additional products. 
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/tutorials/sql-injection-4.png" alt="SQL injection results" class="center-block">
+        </div>
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            Academy: <a href="/web-security/sql-injection/index.html">SQL injection</a>
+        </li>
+        <li>
+            Academy: <a href="/web-security/sql-injection/blind/index.html">Blind SQL injection</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/auditing.html">Burp Scanner - Auditing</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/index.html">Burp Intruder</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/configure-attack/processing.html">Burp Intruder payload processing</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

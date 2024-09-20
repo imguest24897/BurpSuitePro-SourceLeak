@@ -1,0 +1,205 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/index.html">Scanner</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/authenticated-scanning/index.html">Authenticated scanning</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/authenticated-scanning/using-recorded-logins.html">Recording login sequences</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-enterprise">Enterprise</label>
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Recording login sequences</h1>
+<p>
+    Recorded login sequences enable Burp Scanner to audit content that only authenticated users can usually see, even on sites that use complex login mechanisms such as Single Sign-On. This section explains how to record a login sequence and then add it to a new or existing site.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        If your site uses a basic username and password-based authentication mechanism, add username and password credentials rather than a recorded login sequence. Using username and password credentials can improve scan times and reduce the likelihood of errors. You cannot use both authentication methods on a single application in either Burp Suite Professional or Burp Suite Enterprise Edition.
+    </p>
+</div>
+<h2 id="preparing-the-burp-suite-navigation-recorder-extension" cms-ignore-validation="HEADING_CAPITALIZATION">Preparing the Burp Suite Navigation Recorder extension</h2>
+<p>
+    Before you can record a login sequence, you may need to install and configure the Burp Suite Navigation Recorder Chrome extension.
+</p>
+<p>
+    This step is required to record logins in Burp Suite Enterprise Edition. It is optional in Burp Suite Professional, as Burp's browser comes with the extension pre-installed. However, you may still want to install the extension so that you can record logins in a standard Chrome installation.
+</p>
+<p>
+    To install and configure the extension:
+</p>
+<ol>
+    <li>
+        Open Chrome and navigate to the <a href="https://chrome.google.com/webstore/detail/burp-suite-navigation-rec/anpapjclbjicacakeoggghfldppbkepg?hl=en-GB">Burp Suite Navigation Recorder</a> extension page.
+    </li>
+    <li>
+        Click <strong>Add to Chrome</strong>.
+    </li>
+    <li>
+        In the dialog box, click <strong>Add extension</strong> to install the extension.
+    </li>
+    <li>
+        Click the extension icon on the Chrome toolbar to open the extension menu.
+    </li>
+    <li>
+        Click <strong>Manage extensions</strong> to display the <strong>Extensions</strong> page.
+    </li>
+    <li>
+        Select <strong>Allow in incognito</strong>.
+    </li>
+</ol>
+<h3 id="using-the-extension-without-incognito-mode">Using the extension without incognito mode</h3>
+<p>
+    You can use the extension without incognito mode in a standard Chrome installation, for example if you have organization restrictions that prohibit the use of incognito mode. However, we strongly recommend using incognito mode whenever possible to avoid issues with stateful behavior. Recording without incognito mode may result in a recorded login that appears to work, but stops working after your session ends.
+</p>
+<p>
+    To install the extension without incognito mode, follow the above steps, but click <strong>Continue without incognito</strong> at Step 6.
+</p>
+<p>
+    If you have already installed the extension, you can set the extension to not use incognito mode:
+</p>
+<ul>
+    <li>
+        Open the browser.
+    </li>
+    <li>
+        Click the extension icon on the Chrome toolbar and select <strong>Manage extensions</strong>.
+    </li>
+    <li>
+        On the <strong>Burp Suite Navigation Recorder</strong> extension tile, click <strong>Details</strong> to display the <strong>Extensions</strong> page.
+    </li>
+    <li>
+        Deselect <strong>Allow in incognito</strong>.
+    </li>
+</ul>
+<h2 id="recording-a-login-sequence">Recording a login sequence</h2>
+<p>
+    Read the <a href="/burp/documentation/scanner/authenticated-scanning/recorded-login-best-practice.html">Best practice for recording login sequences</a> page before attempting to record a login sequence. This page contains advice to help you to avoid some common errors made when recording complex authentication sequences.
+</p>
+<p>
+    To record a login sequence:
+</p>
+<ol>
+    <li>
+        If you are using Burp Suite Enterprise Edition, or want to record logins for Burp Suite Professional in a standard Chrome installation, install the Burp Suite Navigation Recorder Chrome extension. We recommend that you set the extension to run in incognito mode. For more information, see <a href="#preparing-the-burp-suite-navigation-recorder-extension">Preparing the Burp Suite Navigation Recorder extension</a>.
+    </li>
+    <li>
+        Click the extension icon on the Chrome toolbar and select <strong>Burp Suite Navigation Recorder</strong>.
+    </li>
+    <li>
+        At the prompt, click <strong>Start recording</strong>. A new window opens.
+    </li>
+    <li>
+        In the window, browse to the target website.
+    </li>
+    <li>
+        Complete the login sequence that you want to capture.
+    </li>
+    <li>
+        When you're done, click the extension icon, select <strong>Burp Suite Navigation Recorder</strong>, and click <strong>Stop recording</strong>.
+    </li>
+</ol>
+<p>
+    The extension automatically copies the generated script to your clipboard. You can re-copy the script by selecting the extension icon and selecting <strong>Copy to clipboard</strong>.
+</p>
+<p>
+    You can repeat this process for each set of credentials that you want to use for scans of this site. For example, you might record one login sequence in which you log in as a normal user and another sequence in which you log in as an administrator.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Burp Scanner uses Burp's browser to perform recorded login sequences when scanning, even if you have not selected <strong>Use Burp's browser for Crawl and Audit</strong> in your scan configuration.
+    </p>
+</div>
+<h2 id="adding-recorded-login-sequences-to-burp">Adding recorded login sequences to Burp</h2>
+<p>
+    Once you have recorded a login sequence, you're ready to add it to Burp. This process is different depending on whether you're using Burp Suite Professional or Burp Suite Enterprise Edition.
+</p>
+<h3>Add a recorded login sequence to Burp Suite Enterprise Edition</h3>
+<p>
+    To add a recorded login sequence to Burp Suite Enterprise Edition:
+</p>
+<ol>
+    <li>
+        On the top menu, select <strong>Sites</strong> to display the site tree.
+    </li>
+    <li>
+        Select the site you want to set up notifications for.
+    </li>
+    <li>
+        Select the <strong>Details</strong> tab and click <strong>Edit</strong>.
+    </li>
+    <li>
+        In the <strong>Scan settings</strong> section, select the <strong>Application logins</strong> tab.
+    </li>
+    <li>
+        Select the <strong>Upload recorded login sequences</strong> radio button.
+    </li>
+    <li>
+        Click <strong>Add a recorded login</strong>.
+    </li>
+    <li>
+        In the dialog box, enter a unique <strong>Label</strong> to identify this recorded login.
+    </li>
+    <li>
+        Paste the login script into the <strong>Paste script</strong> field.
+    </li>
+    <li>
+        Click <strong>Save</strong> to close the dialog box.
+    </li>
+    <li>
+        Click <strong>Save</strong>. Burp adds the recorded sequence to the list of application logins for the site.
+    </li>
+</ol>
+<h3>Adding login sequences to Burp Suite Professional</h3>
+<p>
+    To add a login sequence to Burp Suite Professional:
+</p>
+<ol>
+    <li>
+        From the dashboard, click <strong>New Scan</strong> to open the scan launcher.
+    </li>
+    <li>
+        Select <strong>Application login</strong>.
+    </li>
+    <li>
+        Select <strong>Use recorded login sequences</strong>.
+    </li>
+    <li>
+        Click <strong>New</strong> to display the <strong>New Recorded Login</strong> dialog.
+    </li>
+    <li>
+        Enter a descriptive <strong>Label</strong> for the login.
+    </li>
+    <li>
+        Paste the data from your clipboard into the <strong>Paste Script</strong> field.
+    </li>
+    <li>
+        Click <strong>OK</strong>. Burp adds the recorded sequence to the list of application logins.
+    </li>
+</ol>
+</body>
+</html>

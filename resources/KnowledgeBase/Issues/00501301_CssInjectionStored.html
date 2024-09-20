@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+CSS injection (stored)
+<h1>Typical severity</h1>
+
+Medium
+
+<h1>Issue description</h1>
+<p>CSS injection vulnerabilities arise when an application imports a style sheet from a user-supplied URL, or embeds user input in CSS blocks without adequate escaping. They are closely related to cross-site scripting (XSS) vulnerabilities but often trickier to exploit. </p>
+<p>Being able to inject arbitrary CSS into the victim's browser may enable various attacks, including:</p>
+<ul>
+  <li>Executing arbitrary JavaScript using IE's expression() function.</li><li>Using CSS selectors to read parts of the HTML source, which may include sensitive data such as anti-CSRF tokens.</li>
+<li>Capturing any sensitive data within the URL query string by making a further style sheet import to a URL on the attacker's domain, and monitoring the incoming Referer header.</li></ul><p>Stored CSS injection vulnerabilities arise when the applicable input was submitted in an previous request and stored by the application.</p>
+
+<h1>Issue remediation</h1>
+
+<p>Ensure that user input is adequately escaped before embedding it in CSS blocks, and consider using a whitelist to prevent loading of arbitrary style sheets.</p>
+
+<h1>References</h1>
+<ul>
+<li><a href="https://portswigger.net/research/detecting-and-exploiting-path-relative-stylesheet-import-prssi-vulnerabilities#badcss">Malicious CSS</a></li>
+<li><a href="http://mksben.l0.cm/2015/10/css-based-attack-abusing-unicode-range.html">Abusing unicode-range of @font-face</a></li>
+</ul>
+<h1>Vulnerability classifications</h1>
+
+<ul>
+  <li><a href="https://cwe.mitre.org/data/definitions/73.html">CWE-73: External Control of File Name or Path</a></li>
+  <li><a href="https://cwe.mitre.org/data/definitions/20.html">CWE-20: Improper Input Validation</a></li>
+  <li><a href="https://capec.mitre.org/data/definitions/468.html">CAPEC-468: Generic Cross-Browser Cross-Domain Theft</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/comparer.html">Comparer</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Burp Comparer</h1>
+<p>
+    Burp Comparer enables you to compare any two items of data. You can use Comparer to quickly and easily identify subtle differences between requests or responses. For example:
+</p>
+<ul>
+    <li>
+        To compare responses to failed logins that use valid and invalid usernames, for <a href="/burp/documentation/desktop/tools/intruder/uses/enumerating.html">username enumeration</a>.
+    </li>
+    <li>
+        To compare large responses with different lengths that you have identified in an Intruder attack.
+    </li>
+    <li>
+        To compare similar requests that give rise to different application behavior.
+    </li>
+    <li>
+        To compare responses when testing for <a href="/web-security/sql-injection/index.html#blind-sql-injection-vulnerabilities">blind SQL injection</a> bugs using Boolean condition injection, to see whether injecting different conditions results in a relevant difference in responses.
+    </li>
+</ul>
+<h2 id="carrying-out-comparisons">Carrying out comparisons</h2>
+<p>
+    To carry out a comparison using Burp Comparer:
+</p>
+<ol>
+    <li>
+        Locate the messages that you want to analyze within Burp Suite.
+    </li>
+    <li>
+        Right-click each message and select <strong>Send to Comparer</strong>. You can send a message from anywhere in Burp.
+    </li>
+    <li>
+        Go to the <strong>Comparer</strong> tab. The messages are listed in the two item tables.
+    </li>
+    <li>
+        Select the two messages you want to compare.
+    </li>
+    <li>
+        Select <strong>Words</strong> or <strong>Bytes</strong> to compare the messages. A new window opens with the results.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        The two item tables each display a list of all the messages that you have sent to Comparer. You need to select an item from each table.
+    </p>
+    <p>
+        To sort the contents of the table, click on any table header.
+    </p>
+</div>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="controls">Controls</h2>
+<p>
+    The <strong>Comparer</strong> tab contains the following controls:
+</p>
+<ul>
+    <li>
+        <strong>Paste</strong> - Add an item from the clipboard.
+    </li>
+    <li>
+        <strong>Load</strong> - Add an item from a file.
+    </li>
+    <li>
+        <strong>Remove</strong> - Delete the highlighted item.
+    </li>
+    <li>
+        <strong>Clear</strong> - Delete all items in the list.
+    </li>
+</ul>
+<p>
+    There are two analysis options available:
+</p>
+<ul>
+    <li>
+        <strong>Words</strong> - Make a word comparison. This tokenizes each item of data based on whitespace delimiters, and identifies the token-level edits required to transform the first item into the second.
+    </li>
+    <li>
+        <strong>Bytes</strong> - Make a byte comparison. This identifies the byte-level edits required to transform the first item into the second.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        The byte-level comparison requires significantly more computing power. You should normally only use this option when a word-level comparison doesn't identify the relevant differences.
+    </p>
+</div>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="results">Results</h2>
+<p>
+    The comparison results open in a new window, which displays the compared items in two panels. The items are color-coded to indicate each modification, deletion, and addition required to transform the first item into the second. Any text that isn't highlighted is found in both items.
+</p>
+<p>
+    The results window also contains a title bar that indicates the total number of differences between the items.
+</p>
+<p>
+    There are various controls in the results window that help you to analyze the results:
+</p>
+<ul>
+    <li>
+        <strong>Sync views</strong> - Select this setting to scroll the two panels simultaneously.
+    </li>
+    <li>
+        <strong>Text</strong> - View both items in text form.
+    </li>
+    <li>
+        <strong>Hex</strong> - View both items in hex form.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        Burp Suite also enables you to compare two site maps. This function is found in the <strong>Target &gt; Site map</strong> tab. For more information, see <a href="/burp/documentation/desktop/tools/target/site-map/comparing.html">Comparing site maps</a>.
+    </p>
+</div>
+</body>
+</html>

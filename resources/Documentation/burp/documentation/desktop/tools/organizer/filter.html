@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/organizer/index.html">Organizer</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/organizer/filter.html">Filtering items</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1 cms-ignore-validation="HEADING_CAPITALIZATION">Filtering Burp Organizer</h1>
+<p>
+    You can use the filter to choose which messages are shown in the table. This enables you to systematically examine a large number of stored messages. You can also search the table contents, using the top search bar.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        The filter and top search bar only control which items are displayed. If you hide items, they are not deleted from Burp: they reappear if you reset the filter.
+    </p>
+</div>
+<p>
+    Click the filter bar to configure the current display filter. This opens the <strong>Organizer filter</strong> window.
+</p>
+<div class="rounded-dropshadow">
+    <img src="/burp/documentation/desktop/images/organizer-filter-settings.png" alt="Organizer filter settings">
+</div>
+<p>
+    In the <strong>Organizer filter</strong> window, you can:
+</p>
+<ul>
+    <li>
+        <p>
+            <strong>Filter by request type</strong> - You can show:
+        </p>
+        <ul>
+            <li>
+                Only the items that are <a href="/burp/documentation/desktop/tools/target/scope/index.html">in-scope</a>.
+            </li>
+            <li>
+                Only items with responses.
+            </li>
+            <li>
+                Only requests with parameters.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <strong>Filter by MIME type</strong> - Show or hide responses containing various different MIME types, such as HTML, CSS, or images.
+    </li>
+    <li>
+        <strong>Filter by status code</strong> - Show or hide responses with various HTTP status codes.
+    </li>
+    <li>
+        <strong>Filter by tool</strong> - Show or hide items that were sent to Organizer from different tools.
+    </li>
+    <li>
+        <p>
+            <strong>Filter by search term</strong> - You can:
+        </p>
+        <ul>
+            <li>
+                Filter responses that contain a specified search term.
+            </li>
+            <li>
+                Use a literal string or a regular expression.
+            </li>
+            <li>
+                Make your search case-sensitive.
+            </li>
+            <li>
+                Select <strong>Negative search</strong>, so only items that don't match the search term are shown.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <strong>Filter by file extension</strong> - Show or hide items based on their file extension.
+    </li>
+    <li>
+        <strong>Filter by annotation</strong> - Show items with notes or highlights.
+    </li>
+    <li>
+        <strong>Filter by status</strong> - Show or hide messages with different user-applied statuses.
+    </li>
+</ul>
+<p>
+    You can use the following functions to manage the filter settings:
+</p>
+<ul>
+    <li>
+        <p>
+            <span class="icon-settings"></span> - Click on this icon in the <strong>Organizer filter</strong> window to:
+        </p>
+        <ul>
+            <li>
+                Restore Burp's default filter settings.
+            </li>
+            <li>
+                Load filter settings.
+            </li>
+            <li>
+                Save your current filter settings.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <strong>Show all</strong> - Automatically configure the filter settings to show all messages.
+    </li>
+    <li>
+        <strong>Hide all</strong> - Automatically configure the filter settings to hide all messages.
+    </li>
+    <li>
+        <strong>Revert changes</strong> - Undo any changes you made in the current <strong>Organizer filter</strong> window.
+    </li>
+</ul>
+</body>
+</html>

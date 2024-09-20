@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/authentication-mechanisms/index.html">Testing authentication mechanisms</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/authentication-mechanisms/guessing-usernames-for-known-users.html">Guessing usernames for known users</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Guessing usernames for known users</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/P56WmnzgqEw?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    Burp Intruder has a built-in username generator that takes an input and produces a list of potential usernames using common patterns. For example, if you were to provide the input <code>Carlos Montoya</code> the generator would return <code>carlos.montoya</code>, <code>mcarlos</code>, and similar combinations.
+</p>
+<p>
+    This is useful in circumstances where you know details of a specific user (for example, their name or email address) but don't know their exact username. It provides a more targeted way of enumerating usernames than a generic name list.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You can test this process out in the <a href="/web-security/authentication/password-based/lab-username-enumeration-via-different-responses.html">Username enumeration via different responses</a> Web Security Academy lab.
+    </p>
+</div>
+<h2 id="steps" cms-ignore-validation="DUPLICATE_HEADINGS">Steps</h2>
+<ol>
+    <li>
+        In Burp's HTTP history, identify a failure message for a username-based authentication mechanism.
+    </li>
+    <li>
+        In the message, highlight the username value, right-click, and select <strong>Send to Intruder</strong>.
+    </li>
+    <li>
+        Go to <strong>Intruder &gt; Positions</strong>. Notice that Burp has automatically added the username as a payload position.
+    </li>
+    <li>
+        Select <strong>Sniper</strong> from the <strong>Attack type</strong> drop-down menu.
+    </li>
+    <li>
+        Go to the <strong>Payloads</strong> tab.
+    </li>
+    <li>
+        Select <strong>Username generator</strong> from the <strong>Payload type</strong> drop-down.
+    </li>
+    <li>
+        Enter an input that you want to base the generated usernames on into the <strong>Enter a new item field</strong> of the <strong>Payload settings</strong> section and click <strong>Add</strong>. You can add multiple inputs per attack if required.
+    </li>
+    <li>
+        Enter the number of usernames you want Burp to generate into the <strong>Maximum payloads per item</strong> field. Burp generates this number of usernames for every input added.
+    </li>
+    <li>
+        Click <strong>Start attack</strong>. Intruder generates its list of potential usernames and runs an attack testing each username in turn.
+    </li>
+    <li>
+        Analyze the attack results to check for interesting patterns, such as usernames that results in anomalous error messages, response times, or a different HTTP response code.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/index.html">Burp Intruder</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/authentication-mechanisms/enumerating-usernames.html">Enumerating usernames with Burp Suite</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

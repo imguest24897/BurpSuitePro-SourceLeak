@@ -1,0 +1,147 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/authentication-mechanisms/index.html">Testing authentication mechanisms</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/authentication-mechanisms/enumerating-usernames.html">Enumerating usernames</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Enumerating usernames with Burp Suite</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/nH9O9bSG5oE?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    You can use Burp Intruder to insert a list of possible usernames into an authentication mechanism, such as a login form or registration form. This enables you to identify valid usernames that can be used in other attacks. For example, using a list of enumerated usernames greatly reduces the time and effort required to force a login in a password-guessing attack. It can also be used for attacks on user data or sessions.
+</p>
+<h2 id="steps" cms-ignore-validation="DUPLICATE_HEADINGS">Steps</h2>
+<p>
+    You can follow along with the process below using our <a href="/web-security/authentication/password-based/lab-username-enumeration-via-subtly-different-responses.html">Username enumeration via subtly different responses</a> lab. If you're using the lab, make sure you use the <a href="/web-security/authentication/auth-lab-usernames.html">list of usernames</a> included in the lab instructions.
+</p>
+<p>
+    You can use Burp Intruder to enumerate usernames:
+</p>
+<ol>
+    <li>
+        Identify a failure message for a username-based authentication mechanism. In the message, highlight the username value, right-click and select <strong>Send to Intruder</strong>.
+    </li>
+    <li>
+        <p>
+            Go to <strong>Intruder &gt; Positions</strong>. Notice that the username value has been automatically added as a payload position.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/tutorials/enumerating-usernames-1.png" alt="Set username payload position" class="center-block">
+        </div>
+    </li>
+    <li>
+        <p>
+            Go to the <strong>Payloads</strong> tab. Under <strong>Payload settings [Simple list]</strong> add a list of usernames that you want to test.
+        </p>
+        <ul>
+            <li>
+                If you're using Burp Suite Professional, you can open the <strong>Add from list</strong> drop-down menu and select the <strong>Usernames</strong> list.
+            </li>
+            <li>
+                If you're using Burp Suite Community Edition, manually add a list of usernames.
+            </li>
+        </ul>
+    </li>
+    <li>
+        Go to the <strong>Settings</strong> tab. Under <strong>Grep - Match</strong>, select <strong>Flag result items with responses matching these expressions</strong>. When you start the attack, Intruder identifies messages that include the expressions in the list. You can use the default list of expressions or add your own.
+    </li>
+    <li>
+        <p>
+            Add an extract grep for sections of interest in the response.
+        </p>
+        <ol>
+            <li>
+                Under <strong>Grep - Extract</strong>, select <strong>Add</strong>. The <strong>Define extract grep item</strong> dialog opens.
+            </li>
+            <li>
+                Highlight the section in the response that you want to extract, such as an error message.
+            </li>
+            <li>
+                Press <strong>OK</strong>. The item is added to the list. When you start the attack, Intruder extracts the text at this location in each response and display it on the results table.
+            </li>
+        </ol>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/tutorials/enumerating-usernames-2.png" alt="Define extract grep" class="center-block">
+        </div>
+    </li>
+    <li>
+        Click <strong>Start attack</strong>. The attack starts running in the new dialog. Intruder sends a request for each username in the list.
+    </li>
+    <li>
+        <p>
+            When the attack is finished, study the responses to look for any behavior that may indicate a valid username. For example, look for any anomalous error messages, response times, or status codes. In the example below, one error message is missing a full stop.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/tutorials/enumerating-usernames-3.png" alt="Subtle change in error message" class="center-block">
+        </div>
+    </li>
+    <li>
+        To investigate the contents of a response in detail, right-click and select <strong>Send to Comparer (response)</strong>. Do the same for the original response.
+    </li>
+    <li>
+        <p>
+            Go to the <strong>Comparer</strong> tab. Select the two responses and click <strong>Words</strong> or <strong>Bytes</strong> to compare the responses. Any differences are highlighted.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/tutorials/enumerating-usernames-4.png" alt="Comparing responses" class="center-block">
+        </div>
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/index.html">Burp Intruder</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/configure-attack/payload-lists.html">Predefined payload lists</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/configure-attack/settings.html#grep-match">Grep - match</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/intruder/configure-attack/settings.html#grep-extract">Grep - extract</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/comparer.html">Burp Comparer</a>
+        </li>
+        <li>
+            Academy: <a href="/web-security/authentication/password-based/index.html">Vulnerabilities in password-based login</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

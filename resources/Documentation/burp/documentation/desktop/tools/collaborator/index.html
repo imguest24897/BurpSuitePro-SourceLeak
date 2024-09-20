@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/collaborator/index.html">Collaborator</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Burp Collaborator</h1>
+<p>
+    You can manually use Burp Collaborator to induce your target application to interact with the external Collaborator server, and then identify that the interaction has occurred. This enables you to search for invisible vulnerabilities, which don't otherwise send a noticeably different response to a successful test attack.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Automated Burp Collaborator functionality is used by Burp Scanner and some BApps in both Burp Suite Enterprise and Burp Suite Professional. For more information, see the <a href="/burp/documentation/collaborator/index.html">Burp Collaborator documentation</a> for both Burp Suite Professional and Burp Suite Enterprise. This documentation also covers:
+    </p>
+    <ul>
+        <li>
+            <a href="/burp/documentation/collaborator/server/index.html">Burp Collaborator server</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/collaborator/server/private/index.html">Deploying a private Burp Collaborator server</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/collaborator/uses.html">Typical uses for Burp Collaborator</a>.
+        </li>
+    </ul>
+</div>
+<p>
+    The general process for manual use of Burp Collaborator is:
+</p>
+<ol>
+    <li>
+        Generate Collaborator payloads, which are subdomains of the Collaborator server's domain.
+    </li>
+    <li>
+        Insert the payloads into a request and send the request to the target application.
+    </li>
+    <li>
+        Poll the Collaborator server, to see whether the application uses the injected payload to interact with any network services.
+    </li>
+</ol>
+<img src="/burp/documentation/images/collaborator/collaborator1.png" alt="Burp Collaborator">
+<h2 id="generating-payloads">Generating payloads</h2>
+<p>
+    You can directly insert Collaborator payloads into any request that is open in Burp Repeater. Right-click on the request and select <strong>Insert Collaborator payload</strong>.
+</p>
+<p>
+    You can automatically insert Collaborator payloads into a Burp Intruder attack. For more information, see <a href="/burp/documentation/desktop/tools/intruder/configure-attack/payload-types.html#collaborator-payloads">Payload types - Collaborator payloads</a>.
+</p>
+<p>
+    You can also generate multiple payloads at once in the <strong>Collaborator</strong> tab:
+</p>
+<ol>
+    <li>
+        Enter the number of Collaborator payloads that you want to generate in the <strong>Payloads to generate</strong> field.
+    </li>
+    <li>
+        To include the full Collaborator server address in your payloads, select <strong>Include Collaborator server location</strong>. If this is not selected, only the Collaborator ID is included in your payloads.
+    </li>
+    <li>
+        Click <strong>Copy to clipboard</strong> to copy the specified number of payloads.
+    </li>
+    <li>
+        To access the payloads, paste them into a document.
+    </li>
+</ol>
+<p>
+    When you send the payloads in a request, the application may perform a DNS lookup on the payload subdomain. It may then initiate another network connection, such as a HTTP or SMTP request. The interactions are received by the Collaborator server: they may indicate that the application is vulnerable.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        We periodically add new domain names for the public Collaborator server to reduce the chance of WAF blacklisting, which results in false negatives. By default, Burp Collaborator uses the domain in use when your version of Burp Suite Professional was released.
+    </p>
+    <p>
+        Currently, the domains in use are <code>*.burpcollaborator.net</code> or <code>*.oastify.com</code>. Make sure that your machine and target application can access both these domains on ports 80 and 443.
+    </p>
+</div>
+<h2 id="viewing-results">Viewing results</h2>
+<p>
+    You can view whether any interactions were received by the Collaborator server in the <strong>Collaborator</strong> tab. Burp automatically polls the Collaborator server for results every 60 seconds. To poll manually, click the <strong>Poll now</strong> button. The number of unread interactions is also displayed on the <strong>Collaborator</strong> tab label, making it easy for you to see interaction counts at a glance.
+</p>
+<p>
+    Results are displayed in the table:
+</p>
+<ul>
+    <li>
+        You can customize and sort the table contents. For more information, see <a href="/burp/documentation/desktop/burps-layout/customize-tables.html">Customizing Burp's tables</a>.
+    </li>
+    <li>
+        You can add comments and highlights to results. Right-click any result and select <strong>Comment</strong> or <strong>Highlight</strong>.
+    </li>
+</ul>
+<p>
+    You can track interactions from different payloads in separate tables. To do this, generate Collaborator payloads in different result tabs. Each tab only displays the results of payloads that it generated. All tabs share the same polling schedule, so the load on the server doesn't increase.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        If you insert Collaborator payloads into a request with Burp Intruder, the results are only shown in the <a href="/burp/documentation/desktop/tools/intruder/results/index.html">attack results window</a>. You won't be able to view the results in the <strong>Collaborator</strong> tab. <a href="/burp/documentation/desktop/tools/intruder/results/saving-attacks.html">Save the attack</a> to view the results in the future.
+    </p>
+</div>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/desktop/tools/collaborator/getting-started.html">Getting started with Burp Collaborator</a>.
+    </p>
+</div>
+</body>
+</html>

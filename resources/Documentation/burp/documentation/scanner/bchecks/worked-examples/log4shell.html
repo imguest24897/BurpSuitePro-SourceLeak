@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/index.html">Scanner</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/bchecks/index.html">BCheck definitions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/bchecks/worked-examples/index.html">Worked examples</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/scanner/bchecks/worked-examples/log4shell.html">Example Log4Shell check</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-enterprise">Enterprise</label>
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1 cms-ignore-validation="HEADING_CAPITALIZATION">Example Log4Shell check</h1>
+<p>
+    This BCheck enables Burp Scanner to check for Log4Shell vulnerabilities.
+</p>
+<p>
+    The check works by adding Burp Collaborator payloads to a query body and various headers as an LDAP URL. If any of these trigger a DNS interaction with Burp Collaborator, then Burp Scanner performs a follow-up check with a second, invalid LDAP URL to reduce false positives. If this second check does not result in a DNS interaction, then Burp Scanner reports an issue.
+</p>
+<code class="pre-wrap">
+metadata:
+    language: v2-beta
+    name: "Log4Shell check"
+    description: "Checks forLog4Shell vulnerabilities using Burp Collaborator"
+    author: "Carlos Montoya"
+    tags: "log4Shell", "CVE-2021-44228", "cve"
+
+define:
+    log4shell = `$\{jndi:ldap://{generate_collaborator_address()}/a}`
+    not4shell = `$\{jmdi:lxap://{generate_collaborator_address()}/a}`
+    issueDetail = `The collaborator payload {log4shell} was added to a query parameter and several headers. This resulted in an interaction with the Burp collaborator.`
+    issueRemediation = "Make sure you are up to date with patches and follow the remediation for CVE-2021-44228."
+
+given request then
+    send request:
+        method: "GET"
+        appending queries: `x={log4shell}`
+        replacing headers:
+              "Cookie": `{log4shell}={log4shell}`,
+              "Location": `{log4shell}`,
+              "Origin": `{log4shell}`,
+              "Referer": `{log4shell}`
+
+    if dns interactions then
+        send request:
+            method: "GET"
+            appending queries: `x={not4shell}`
+            replacing headers:
+                  "Cookie": `{not4shell}={not4shell}`,
+                  "Location": {not4shell},
+                  "Origin": {not4shell},
+                  "Referer": {not4shell}
+
+        if not(dns interactions) then
+            report issue:
+                severity: high
+                confidence: firm
+                detail: {issueDetail}
+                remediation: {issueRemediation}
+        end if
+    end if
+        </code>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-1-add-metadata">Step 1: Add metadata</h2>
+<code class="pre-wrap">
+metadata:
+    language: v2-beta
+    name: "Log4Shell check"
+    description: "Checks forLog4Shell vulnerabilities using Burp Collaborator"
+    author: "Carlos Montoya"
+    tags: "log4Shell", "CVE-2021-44228", "cve"
+        </code><p>
+    The definition starts with a <code>metadata</code> block. For more information on available metadata properties, see the reference documentation.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-2-declare-variables">Step 2: Declare variables</h2>
+<code class="pre-wrap">
+define:
+    log4shell = `$\{jndi:ldap://{generate_collaborator_address()}/a}`
+    not4shell = `$\{jmdi:lxap://{generate_collaborator_address()}/a}`
+    issueDetail = `The collaborator payload {log4shell} was added to a query parameter and several headers. This resulted in an interaction with the Burp collaborator.`
+    issueRemediation = "Make sure you are up to date with patches and follow the remediation for CVE-2021-44228."
+        </code><p>
+    The next step is to set up the Burp Collaborator payloads that Burp Scanner will use. The given example defines the following variables:
+</p>
+<ul>
+    <li>
+        <code>log4shell</code> uses the <code>{generate_collaborator_address()}</code> function to generate a Burp Collaborator payload and then inserts that payload into a JNDI LDAP query.
+    </li>
+    <li>
+        <code>not4shell</code> inserts a Burp Collaborator payload into an invalid LDAP URL.
+    </li>
+    <li>
+        <code>issueDetail</code> defines informational text that can be called when required.
+    </li>
+    <li>
+        <code>issueRemediation</code> defines remediation text that can be called when required.
+    </li>
+</ul>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-3-send-the-request">Step 3: Send the request</h2>
+<code class="pre-wrap">
+given request then
+    send request:
+        method: "GET"
+        appending queries: `x={log4shell}`
+        replacing headers:
+              "Cookie": `{log4shell}={log4shell}`,
+              "Location": `{log4shell}`,
+              "Origin": `{log4shell}`,
+              "Referer": `{log4shell}`
+        </code><p>
+    The next step is to configure the request that Burp Scanner sends.
+</p>
+<p>
+    In this example, Burp Scanner sends a request with the <code>log4shell</code> LDAP URL inserted into a query parameter and some common headers.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-4-send-a-follow-up-request">Step 4: Send a follow-up request</h2>
+<code class="pre-wrap">
+if dns interactions then
+    send request:
+        method: "GET"
+        appending queries: `x={not4shell}`
+        replacing headers:
+              "Cookie": `{not4shell}={not4shell}`,
+              "Location": {not4shell},
+              "Origin": {not4shell},
+              "Referer": {not4shell}
+        </code><p>
+    The next step is to send a conditional follow-up request to reduce false positives.
+</p>
+<p>
+    If the previous request results in DNS interactions with the Collaborator, Burp Scanner sends a second request using an invalid LDAP URL. This request should not result in any DNS interactions.
+</p>
+<h2 cms-ignore-validation="HEADING_CAPITALIZATION,DUPLICATE_HEADINGS" id="step-5-report-issues">Step 5: Report issues</h2>
+<code class="pre-wrap">
+if not(dns interactions) then
+    report issue:
+        severity: high
+        confidence: firm
+        detail: {issueDetail}
+        remediation: {issueRemediation}
+        </code><p>
+    The final step in the check is to report issues.
+</p>
+<p>
+    If the follow-up check did not result in any interactions, Burp Scanner knows that the interactions generated by the first request are unlikely to be false positives. It reports a <code>high</code> severity issue, using the detail and remediation text defined in step 2.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <p>
+                <a href="/burp/documentation/scanner/bchecks/bcheck-definition-reference.html">BCheck definition reference</a>.
+            </p>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

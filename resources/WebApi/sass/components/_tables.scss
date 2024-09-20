@@ -1,0 +1,46 @@
+table {
+  width: 100%;
+  font-size: 14px;
+  border-spacing: 0;
+  border-bottom: 1px solid $x_light_grey;
+
+  th {
+    text-align:left;
+    height: 25px;
+    padding-left: 8px;
+  }
+
+  tbody {
+    tr {
+          td {
+            vertical-align: middle;
+            height: 25px;
+            white-space: nowrap;
+            padding-left: 8px;
+            border-left: 1px solid $x_light_grey;
+            border-top: 1px solid $x_light_grey;
+
+          &:last-child {
+            border-right: 1px solid $x_light_grey;
+          }
+        }
+     }
+  }
+  &.table-hover {
+      tbody {
+        tr {
+          &:hover {
+           background: $x_light_grey;
+          }
+        }
+     }
+  }
+}
+
+.tk-nested {
+    border-left-style: solid;
+    border-left-width: 2px;
+    border-left-color: $x_light_grey;
+    margin-left: 10px;
+    padding-left: 10px;
+}

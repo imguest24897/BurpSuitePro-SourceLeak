@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/mapping/index.html">Mapping the website</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/mapping/visible-attack-surface.html">Mapping the visible surface</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Mapping the visible attack surface with Burp Suite</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/dRDtMqXo5ng?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    To discover locations that are available to audit, you need to map the target application's visible attack surface. This refers to the endpoints that are explicitly used by the domains you're testing. Make sure you map the entire application thoroughly, so that you don't miss anything interesting.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="before-you-start">Before you start</h2>
+<p>
+    We recommend that you set an initial test scope before you start mapping the application. For more information, see <a href="/burp/documentation/desktop/testing-workflow/test-scope.html">Setting the initial test scope</a>.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="steps">Steps</h2>
+<p>
+    You can follow along with the process below using <a href="https://ginandjuice.shop">ginandjuice.shop</a>, our deliberately vulnerable demonstration site. To map the visible attack surface:
+</p>
+<ol>
+    <li>
+        Open Burp's browser and go to your target application.
+    </li>
+    <li>
+        Without closing the browser, go to <strong>Target</strong> &gt; <strong>Site map</strong>. Notice that a node has been automatically added to represent the target domain. If no node is present, go to the <strong>Dashboard</strong> and make sure that the default <strong>Live passive crawl from Proxy</strong> task is running. This task adds items to the site map as traffic is proxied through Burp.
+    </li>
+    <li>
+        <p>
+            If you're using Burp Suite Professional, start an automated crawl of the website. Right-click the root node for the domain, then select <strong>Scan</strong>. The <strong>New scan</strong> dialog opens:
+        </p>
+        <ol>
+            <li>
+                If you have any application login credentials, select <strong>Application login</strong> and enter the credentials. For more information, see <a href="/burp/documentation/desktop/automated-scanning/configuring-app-logins/index.html">Application login options</a>.
+            </li>
+            <li>
+                Under <strong>Scan type</strong>, select <strong>Crawl</strong>.
+            </li>
+            <li>
+                Click <strong>OK</strong> to start the scan. Burp Scanner crawls the application. Notice that the site map automatically populates as Burp Scanner discovers content.
+            </li>
+        </ol>
+    </li>
+    <li>
+        While the scan runs, go back to Burp's browser. Explore the website to familiarize yourself with it and identify high-risk functionality.
+    </li>
+    <li>
+        <p>
+            If you're using Burp Suite Community Edition, make sure you fully explore the application:
+        </p>
+        <ul>
+            <li>
+                If you have any application login credentials, or are able to create your own user, log in and explore the authenticated areas of the site.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <p>
+            In the site map, notice that some endpoints that are grayed out. These are locations that are explicitly referenced in a response, but have not been requested.
+        </p>
+        <ol>
+            <li>
+                To discover additional content, select any interesting grayed out endpoint. Right-click and select <strong>Request in browser</strong> &gt; <strong>In original session</strong>. A dialog opens with a URL for the request.
+            </li>
+            <li>
+                To open the request, copy the URL, then paste it into Burp's browser.
+            </li>
+            <li>
+                Continue to browse the application.
+            </li>
+        </ol>
+    </li>
+</ol>
+<p>
+    Continue to populate the site map until you have requested all visible locations that are interesting and within your scope.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            <a href="/burp/documentation/desktop/tools/burps-browser.html">Burp's browser</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/site-map/index.html">Site map</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/automated-scanning/webapp-scans/index.html">Scanning web applications</a>.
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/target/site-map/workflow-tools.html#request-in-browser">Site map workflow tools - Request in browser</a>.
+        </li>
+        <li>
+            After identifying the visible attack surface, it's a good idea to browse for hidden content. For more information, see the <a href="/burp/documentation/desktop/testing-workflow/mapping/hidden-content/index.html">Discovering hidden content</a> tutorials.
+        </li>
+        <li>
+            For a tutorial on using Burp to identify high-risk functionality as you browse the website, see <a href="/burp/documentation/desktop/testing-workflow/analyzing/high-risk-functionality.html">Identifying high-risk functionality with Burp Suite</a>.
+        </li>
+    </ul>
+</div>
+</body>
+</html>

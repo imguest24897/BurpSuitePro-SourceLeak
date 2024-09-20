@@ -1,0 +1,11 @@
+package burp;
+
+public interface Zehu {
+  void Zf(Zrmw paramZrmw);
+}
+
+
+/* Location:              C:\Program Files\BurpSuitePro\burpsuite_pro.jar!\burp\Zehu.class
+ * Java compiler version: 21 (65.0)
+ * JD-Core Version:       1.1.3
+ */

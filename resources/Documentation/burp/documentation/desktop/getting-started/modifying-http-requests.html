@@ -1,0 +1,156 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Learn how to use Burp Proxy to intercept and modify web traffic in Burp Suite Professional / Burp Suite Community Edition.">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE" ignore-validation="OFFSITE_LINKS,STACKED_HEADINGS,ALLOWED_CHARACTERS"></cms><title>Modifying requests in Burp Proxy</title>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/getting-started/index.html">Getting started</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/getting-started/modifying-http-requests.html">Modifying requests in Burp Proxy</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1 cms-ignore-validation="HEADING_CAPITALIZATION" no-keyword-injection>Modifying HTTP requests with Burp Proxy</h1>
+<div no-keyword-injection>
+    <p>
+        In this tutorial, you'll learn how to modify intercepted requests in Burp Proxy. This enables you to manipulate these requests in ways that the website isn't expecting, in order to see how it responds. Using one of our deliberately vulnerable websites, known as "labs", you'll see how this can help you identify and exploit real vulnerabilities.
+    </p>
+    <div class="highlightedarea">
+        <h4>Web Security Academy</h4>
+        <p>
+            To follow along, you'll need an account on <code>portswigger.net</code>. If you don't have one already, <a href="https://portswigger.net/users/register">registration is free</a> and it grants you full access to the Web Security Academy.
+        </p>
+    </div>
+    <div class="container">
+        <div class="youtube-wrapper">
+            <iframe src="https://www.youtube.com/embed/TNcUrFyZrKs?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+        </div>
+    </div>
+    <h2 id="step-1-access-the-vulnerable-website-in-burp-s-browser" cms-ignore-validation="HEADING_CAPITALIZATION">Step 1: Access the vulnerable website in Burp's browser</h2>
+    <p>
+        In Burp, go to the <strong>Proxy &gt; Intercept</strong> tab and make sure <a href="/burp/documentation/desktop/tools/proxy/intercept-messages.html#controls">interception is switched off</a>.
+    </p>
+    <p>
+        Launch Burp's browser and use it to visit the following URL:
+    </p>
+    <code class="code-scrollable">https://portswigger.net/web-security/logic-flaws/examples/lab-logic-flaws-excessive-trust-in-client-side-controls</code><p>
+        When the page loads, click <strong>Access the lab</strong>. If prompted, log in to your portswigger.net account. After a few seconds, you will see your own instance of a fake shopping website.
+    </p>
+    <img src="/burp/documentation/desktop/images/getting-started/quick-start-pro-logic-lab-home.png" alt="Lab home page">
+    <h2 id="step-2-log-in-to-your-shopping-account" cms-ignore-validation="HEADING_CAPITALIZATION">Step 2: Log in to your shopping account</h2>
+    <p>
+        On the shopping website, click <strong>My account</strong> and log in using the following credentials:
+    </p>
+    <p>
+        <strong>Username: </strong><code>wiener</code>
+    </p>
+    <p>
+        <strong>Password: </strong><code>peter</code>
+    </p>
+    <p>
+        Notice that you have just $100 of store credit.
+    </p>
+    <h2 id="step-3-find-something-to-buy" cms-ignore-validation="HEADING_CAPITALIZATION">Step 3: Find something to buy</h2>
+    <p>
+        Click <strong>Home</strong> to go back to the home page. Select the option to view the product details for the <strong>Lightweight "l33t" leather jacket</strong>.
+    </p>
+    <h2 id="step-4-study-the-add-to-cart-function" cms-ignore-validation="HEADING_CAPITALIZATION">Step 4: Study the add to cart function</h2>
+    <p>
+        In Burp, go to the <strong>Proxy > Intercept</strong> tab and switch interception on. In the browser, add the leather jacket to your cart to intercept the resulting <code>POST /cart</code> request.
+    </p>
+    <img src="/burp/documentation/desktop/images/getting-started/quick-start-pro-add-to-cart.png" alt="Study the add to cart function">
+    <div class="highlightedarea">
+        <h4>Note</h4>
+        <p>
+            You may see more than one request on the <strong>Proxy &gt; Intercept</strong> tab if the browser is doing something else in the background. In this case, select the <code>POST /cart</code> request.
+        </p>
+    </div>
+    <p>
+        Study the intercepted request and notice that there is a parameter in the body called <code>price</code>, which matches the price of the item in cents.
+    </p>
+    <h2 id="step-5-modify-the-request" cms-ignore-validation="HEADING_CAPITALIZATION">Step 5: Modify the request</h2>
+    <p>
+        Change the value of the <code>price</code> parameter to 1 and click <strong>Forward &gt; Forward all</strong> to send the modified request to the server, along with any other intercepted requests.
+    </p>
+    <img src="/burp/documentation/desktop/images/getting-started/quick-start-pro-change-price.png" alt="Changing the price parameter">
+    <p>
+        Switch interception off again so that any subsequent requests can pass through Burp Proxy uninterrupted.
+    </p>
+    <h2 id="step-6-exploit-the-vulnerability" cms-ignore-validation="HEADING_CAPITALIZATION">Step 6: Exploit the vulnerability</h2>
+    <p>
+        In Burp's browser, click the basket icon in the upper-right corner to view your cart. Notice that the jacket has been added for just one cent.
+    </p>
+    <div class="highlightedarea">
+        <h4>Note</h4>
+        <p>
+            There is no way to modify the price via the web interface. You were only able to make this change thanks to Burp Proxy.
+        </p>
+    </div>
+    <p>
+        Click the <strong>Place order</strong> button to purchase the jacket for an extremely reasonable price.
+    </p>
+    <p>
+        Congratulations, you've also just solved your first Web Security Academy lab! You've also learned how to intercept, review, and manipulate HTTP traffic using Burp Proxy.
+    </p>
+    <div class="callout theme-community-6">
+        <div class="container-columns-3 align-vertically-center">
+            <p class="heading-navy-1">
+                <strong>Next step - </strong>Setting the target scope
+            </p>
+            <a href="/burp/documentation/desktop/getting-started/setting-target-scope.html" class="button-orange">CONTINUE</a>
+        </div>
+    </div>
+    <div class="highlightedarea">
+        <h4 cms-ignore-validation="DUPLICATE_HEADINGS">In this tutorial</h4>
+        <ol>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/download-and-install.html">Downloading and installing Burp Suite.</a>
+            </li>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/intercepting-http-traffic.html">Intercepting HTTP traffic with Burp Proxy.</a>
+            </li>
+            <li>
+                Modifying requests in Burp Proxy.
+            </li>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/setting-target-scope.html">Setting the target scope.</a>
+            </li>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/reissuing-http-requests.html">Manually reissuing requests with Burp Repeater.</a>
+            </li>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/running-your-first-scan.html">Running your first scan.</a>
+            </li>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/generate-reports.html">Generating a report.</a>
+            </li>
+            <li>
+                <a href="/burp/documentation/desktop/getting-started/what-next.html">What next?</a>
+            </li>
+        </ol>
+    </div>
+</div>
+</body>
+</html>

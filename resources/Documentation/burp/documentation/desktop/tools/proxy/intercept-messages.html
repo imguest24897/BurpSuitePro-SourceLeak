@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/proxy/index.html">Burp Proxy</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/proxy/intercept-messages.html">Proxy intercept</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Proxy intercept</h1>
+<p>
+    From the <strong>Proxy &gt; Intercept</strong> tab, you can intercept HTTP requests and responses sent between the browser and the target server. This enables you to study how the website behaves when you interact with it.
+</p>
+<p>
+    The intercept feature enables you to perform the following useful actions:
+</p>
+<ul>
+    <li>
+        Intercept requests and modify them before forwarding them to the server.
+    </li>
+    <li>
+        Release a selection of requests at once.
+    </li>
+    <li>
+        Send interesting requests to Burp's other tools, such as Repeater or Intruder, for further testing.
+    </li>
+    <li>
+        Drop one or more requests to prevent them from reaching the server.
+    </li>
+</ul>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/v5rWTgBrckc?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<h2 id="getting-started" cms-ignore-validation="DUPLICATE_HEADINGS">Getting started</h2>
+<p>
+    If you want a quick introduction to intercepting messages, you can follow the tutorials in the <a href="/burp/documentation/desktop/getting-started/index.html">Getting started</a> section:
+</p>
+<ul>
+    <li>
+        <a href="/burp/documentation/desktop/getting-started/intercepting-http-traffic.html">Intercepting HTTP traffic</a>.
+    </li>
+    <li>
+        <a href="/burp/documentation/desktop/getting-started/modifying-http-requests.html">Modifying HTTP traffic</a>.
+    </li>
+</ul>
+<h2 id="controls">Controls</h2>
+<p>
+    When you intercept messages, the request details are populated in the <strong>Proxy &gt; Intercept</strong> tab. You can see details of the target server at the top of the panel. For HTTP requests you can manually edit the target server. Select the <strong>Edit target</strong> menu <span class="icon-edit"></span>.
+</p>
+<p>
+    The panel contains the following controls:
+</p>
+<ul>
+    <li>
+        <strong>Forward</strong> - After you review or edit the message, click <strong>Forward</strong> to send all the selected messages to the target.
+    </li>
+    <li>
+        <strong>Forward all</strong> - Click the <strong>Forward</strong> dropdown menu and select <strong>Forward all</strong> to forward all the intercepted messages.
+    </li>
+    <li>
+        <strong>Drop</strong> - To cancel the selected requests so that they never reach the target server, click <strong>Drop</strong>.
+    </li>
+    <li>
+        <p>
+            <strong>Intercept on/off</strong> - Use this button to toggle all interception on and off:
+        </p>
+        <ul>
+            <li>
+                If the button shows <strong>Intercept on</strong>, messages are intercepted. You can also configure messages to be forwarded automatically using the settings for interception of <a href="/burp/documentation/desktop/settings/tools/proxy.html#request-and-response-interception-rules">HTTP</a> and <a href="/burp/documentation/desktop/settings/tools/proxy.html#websocket-interception-rules">WebSocket messages</a>.
+            </li>
+            <li>
+                If the button shows <strong>Intercept off</strong>, Burp forwards all messages automatically.
+            </li>
+        </ul>
+    </li>
+</ul>
+<p>
+    You can also right-click to access different context menus in the message editor, or the list of intercepted messages.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        You can use hotkeys to forward or drop intercepted messages. By default, Ctrl+F forwards the selected messages. You can also set a hotkey to forward all intercepted messages.
+    </p>
+    <p>
+        For more information, see <a href="/burp/documentation/desktop/settings/ui/hotkeys.html">hotkey settings</a>.
+    </p>
+</div>
+<h2 id="intercepted-messages-table">Intercepted messages table</h2>
+<p>
+    The table in the top half of the panel shows you the intercepted messages. Right-click the table to access the context menu. The available options if you only have one message selected, or multiple messages.
+</p>
+<p>
+    You can select multiple messages from the table:
+</p>
+<ul>
+    <li>
+        Click a message to select it.
+    </li>
+    <li>
+        Hold <strong>Shift</strong> to select a block of messages.
+    </li>
+    <li>
+        Hold <strong>Command</strong> (Mac) or <strong>Ctrl</strong> (Windows or Linux) to select multiple messages one at a time.
+    </li>
+</ul>
+<h2 id="adding-annotations">Adding annotations</h2>
+<p>
+    You can add notes and highlights to intercepted messages. This enables you to describe the purpose of different messages, and to flag interesting messages for further investigation.
+</p>
+<p>
+    Any annotations that you make also appear against the item in the HTTP history. If you apply an annotation to an HTTP request, the annotation appears again if the corresponding response is also intercepted.
+</p>
+<p>
+    To highlight an intercepted message, right-click the message in the table and selection <strong>Highlight</strong>. Then select a color from the list.
+</p>
+<p>
+    To add a note, right-click the message in the table and select <strong>Add Notes</strong>. Enter your comment in the <strong>Notes</strong> panel.
+</p>
+<h2 id="message-display">Message display</h2>
+<p>
+    The <a href="/burp/documentation/desktop/tools/message-editor/index.html">message editor</a> in the main panel shows the most recently selected intercepted message. From here you can analyze the message and perform actions on it.
+</p>
+<p>
+    Right-click the message editor to see the context menu and access the <a href="/burp/documentation/desktop/tools/message-editor/index.html#context-specific-actions">standard functions</a>. You can also perform the following actions for HTTP messages:
+</p>
+<ul>
+    <li>
+        <strong>Don't intercept requests/responses</strong> - You can add an interception rule so that Burp automatically forwards messages that share a specific feature, such as host, file extension, or HTTP status code. Use this feature if you're seeing a lot of uninteresting requests or responses of a particular type.
+    </li>
+    <li>
+        <strong>Do intercept</strong> - Select this function to intercept the response to the currently displayed request. This is only available for requests.
+    </li>
+</ul>
+<h2 id="protocol">Protocol</h2>
+<p>
+    You can use the <a href="/burp/documentation/desktop/tools/inspector/getting-started-inspector.html">Inspector</a> to edit the protocol for the request. For more information, see the <a href="/burp/documentation/desktop/http2/index.html#changing-the-protocol-for-a-request">HTTP/2 documentation</a>.
+</p>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/index.html">Testing workflow</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/session-management/index.html">Testing session management mechanisms</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/testing-workflow/session-management/csrf-poc.html">Generating a CSRF proof-of-concept</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Generating a CSRF proof-of-concept with Burp Suite</h1>
+<div class="container">
+    <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/DASNBf4SoOw?origin=https://portswigger.net&rel=0" allowfullscreen></iframe>
+    </div>
+</div>
+<p>
+    Cross-site request forgery (CSRF) attacks force a victim user to perform unintended actions on a website. If a website is vulnerable to CSRF, an attacker can bypass the same-origin policy, which usually prevents websites from interfering with each other. This means the attacker can create a web page that causes the victim user's browser to submit a request directly to the vulnerable website.
+</p>
+<p>
+    You can use Burp Suite Professional to automatically generate HTML for a proof-of-concept (PoC) CSRF attack. This is much quicker and easier than manually creating the HTML, which can be particularly cumbersome when the request contains a larger number of parameters.
+</p>
+<h2 cms-ignore-validation="DUPLICATE_HEADINGS" id="steps">Steps</h2>
+<p>
+    You can follow along with the process below using our lab: <a href="/web-security/csrf/lab-no-defenses.html">CSRF vulnerability with no defenses</a>.
+</p>
+<p>
+    To generate a CSRF proof-of-concept:
+</p>
+<ol>
+    <li>
+        <p>
+            Identify a request that you think may be vulnerable to CSRF. You can use Burp Scanner to identify requests that are potentially vulnerable.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/tutorials/csrf-poc-1.png" alt="Identify a potentially vulnerable request" class="center-block">
+        </div>
+    </li>
+    <li>
+        Right-click the request and select <strong>Engagement tools &gt; Generate CSRF PoC</strong>. A dialog opens with HTML based on the selected request.
+    </li>
+    <li>
+        <p>
+            In the HTML, edit the value in the fields you want to change in the PoC attack. For example, the email value in the change email request.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/tutorials/csrf-poc-2.png" alt="Edit the email field" class="center-block">
+        </div>
+    </li>
+    <li>
+        Click <strong>Copy HTML</strong> to copy the HTML to your clipboard.
+    </li>
+    <li>
+        Paste the HTML into a web page. If you're using the lab, paste the HTML into the exploit server instead.
+    </li>
+    <li>
+        View the web page in a browser that is logged into the vulnerable website.
+    </li>
+    <li>
+        <p>
+            Review the response in your browser and Burp's HTTP history to see whether the desired action occurred. In this example, the user's email address is successfully updated.
+        </p>
+        <div class="rounded-dropshadow">
+            <img src="/burp/documentation/desktop/images/tutorials/csrf-poc-3.png" alt="Review the response" class="center-block">
+        </div>
+    </li>
+    <li>
+        To verify the vulnerability, log into the application with a different account. Repeat the attack with the same HTML. A successful attack confirms that the application is vulnerable to CSRF.
+    </li>
+</ol>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <ul>
+        <li>
+            Academy: <a href="/web-security/csrf/index.html">Cross-site request forgery (CSRF)</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/engagement-tools/generate-csrf-poc.html">Generate CSRF PoC</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

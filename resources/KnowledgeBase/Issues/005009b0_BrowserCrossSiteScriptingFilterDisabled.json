@@ -1,0 +1,28 @@
+{
+  "typeIndex": 5245360,
+  "name": "Browser cross-site scripting filter disabled",
+  "description": "<p>Some browsers, including Internet Explorer, contain built-in filters designed to protect against cross-site scripting (XSS) attacks. Applications can instruct browsers to disable this filter by setting the following response header:</p>\n<p><b>X-XSS-Protection: 0</b></p>\n<p>This behavior does not in itself constitute a vulnerability; in some cases XSS filters may themselves be leveraged to perform attacks against application users. However, in typical situations XSS filters do provide basic protection for application users against some XSS vulnerabilities in applications. The presence of this header should be reviewed to establish whether it affects the application's security posture. </p>",
+  "remediation": "<p>Review whether the application needs to disable XSS filters. In most cases you can gain the protection provided by XSS filters without the associated risks by using the following response header:</p>\n<p><b>X-XSS-Protection: 1; mode=block</b></p>\n<p>When this header is set, browsers that detect an XSS attack will simply render a blank page instead of attempting to sanitize the injected script. This behavior is considerably less likely to introduce new security issues. </p>",
+  "webIntro": null,
+  "typicalSeverity": "INFO",
+  "references": [
+    {
+      "title": "Web Security Academy: Cross-site scripting",
+      "url": "https://portswigger.net/web-security/cross-site-scripting"
+    },
+    {
+      "title": "Controlling the XSS Filter",
+      "url": "http://blogs.msdn.com/b/ieinternals/archive/2011/01/31/controlling-the-internet-explorer-xss-filter-with-the-x-xss-protection-http-header.aspx"
+    }
+  ],
+  "vulnerabilityClassifications": [
+    {
+      "title": "CWE-16: Configuration",
+      "url": "https://cwe.mitre.org/data/definitions/16.html"
+    },
+    {
+      "title": "CAPEC-63: Cross-Site Scripting (XSS)",
+      "url": "https://capec.mitre.org/data/definitions/63.html"
+    }
+  ]
+}

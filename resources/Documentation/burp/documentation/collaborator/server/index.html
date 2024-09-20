@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/collaborator/index.html">Burp Collaborator</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/collaborator/server/index.html">Server</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-enterprise">Enterprise</label>
+    <label class="label-edition is-professional">Professional</label>
+</section>
+<h1>Burp Collaborator server</h1>
+<p>
+    Burp Collaborator provides custom implementations of various network services on a single server. The server listens for requests that are induced by Collaborator payloads.
+</p>
+<p>
+    The server has the following functionality:
+</p>
+<ul>
+    <li>
+        It is the authoritative DNS server for its registered domains and subdomains. It answers any DNS queries for these domains with its own IP address.
+    </li>
+    <li>
+        It uses a valid wildcard TLS certificate for its domain names.
+    </li>
+    <li>
+        It provides an HTTP/HTTPS service.
+    </li>
+    <li>
+        It provides an SMTP/SMTPS service.
+    </li>
+</ul>
+<h2 id="private-or-public-server">Private or public server</h2>
+<p>
+    You can choose to use a private or public Collaborator server. The public server is enabled by default.
+</p>
+<p>
+    You can also configure Burp to not use a Collaborator server. With this option, none of the Collaborator capabilities are available. To do this:
+</p>
+<ul>
+    <li>
+        <label class="label-edition is-professional">Professional</label>
+        In Burp Suite Professional, go to the <strong>Settings</strong> dialog, under <strong>Project &gt; Collaborator</strong>. Select <strong>Don't use Burp Collaborator</strong>. For more information, see <a href="/burp/documentation/desktop/settings/project/collaborator.html">Collaborator settings</a>.
+    </li>
+    <li>
+        <label class="label-edition is-enterprise">Enterprise</label>
+        In Burp Suite Enterprise Edition, do this under <strong>Burp Collaborator server</strong> when you create a custom scan configuration. Select <strong>None</strong> under <strong>Collaborator type</strong>. For more information, see <a href="https://portswigger.net/burp/documentation/enterprise/user-guide/working-with-sites/site-settings/scan-configurations/custom-configs.html#create-a-custom-scan-configuration">Create a custom scan configuration</a>.
+    </li>
+</ul>
+<h3 cms-ignore-validation="DUPLICATE_HEADINGS">Public collaborator server</h3>
+<p>
+    You can use the server provided by PortSwigger, which is shared between all users. The server is already configured - you can simply start testing.
+</p>
+<p>
+    If the public Collaborator server suffers from a service outage or degradation, then the efficacy of Collaborator-related functionality within Burp may be impaired. For this reason, PortSwigger makes no warranty about the availability or performance of this server.
+</p>
+<h3>Private Collaborator server</h3>
+<p>
+    You can choose to run your own instance of the Collaborator server. This requires you to configure the server, but gives you total ownership of your data.
+</p>
+<p>
+    This is likely to appeal to penetration testing firms and in-house security teams. It's also necessary when working on a closed network with no internet access.
+</p>
+<p>
+    For information on how to set up a private Collaborator server, see <a href="/burp/documentation/collaborator/server/private/index.html">Deploying a private Burp Collaborator server</a>.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/collaborator/server/security.html">Burp Collaborator data security</a>.
+    </p>
+</div>
+</body>
+</html>

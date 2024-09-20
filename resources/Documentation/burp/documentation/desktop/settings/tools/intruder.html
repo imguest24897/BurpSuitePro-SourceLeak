@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/index.html">Settings</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/settings/tools/intruder.html">Intruder</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Intruder settings</h1>
+<p>
+    The <strong>Intruder</strong> page in the <strong>Settings</strong> dialog contains settings for the following:
+</p>
+<ul>
+    <li>
+        <a href="#automatic-payload-placement">Automatic payload placement</a>.
+    </li>
+    <li>
+        <a href="#new-tab-configuration">New tab configuration</a>.
+    </li>
+    <li>
+        <a href="#behavior-when-closing-result-windows">Behavior when closing result windows</a>.
+    </li>
+    <li>
+        <a href="#payload-list-location">Payload list location</a>.
+    </li>
+</ul>
+<p>
+    The <strong>Intruder</strong> settings are all user settings. They apply to all installations of Burp on your machine.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        To configure a Burp Intruder attack, you can modify the attack configuration settings in the <strong>Intruder</strong> tab. For more information, see <a href="/burp/documentation/desktop/tools/intruder/configure-attack/settings.html">Burp Intruder attack settings</a>.
+    </p>
+</div>
+<h2 id="automatic-payload-placement">Automatic payload placement</h2>
+<p>
+    These settings control how Burp Intruder places automatic payload markers. The available options are:
+</p>
+<ul>
+    <li>
+        <strong>Replace base parameter value</strong>.
+    </li>
+    <li>
+        <strong>Append to base parameter value</strong>.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/desktop/tools/intruder/configure-attack/positions.html">Burp Intruder payload positions</a>.
+    </p>
+</div>
+<h2 id="new-tab-configuration">New tab configuration</h2>
+<p>
+    This setting controls the attack configuration used when you open a new tab. The available options are:
+</p>
+<ul>
+    <li>
+        <strong>Use default attack configuration</strong>.
+    </li>
+    <li>
+        <strong>Copy configuration from first tab</strong>.
+    </li>
+    <li>
+        <strong>Copy configuration from last tab</strong>.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/desktop/tools/intruder/configure-attack/managing-tabs.html">Managing Burp Intruder attack tabs</a>.
+    </p>
+</div>
+<h2 id="behavior-when-closing-result-windows">Behavior when closing result windows</h2>
+<p>
+    These settings control what happens to an attack when you close a results window.
+</p>
+<p>
+    You can select what happens when you close an attack that is in progress. The available options are:
+</p>
+<ul>
+    <li>
+        <strong>Continue my attack in the background</strong>.
+    </li>
+    <li>
+        <strong>Delete my attack</strong>.
+    </li>
+    <li>
+        <strong>Ask me what to do each time</strong>.
+    </li>
+</ul>
+<p>
+    You can also select what happens to your attack data if you select to close a finished attack. The available options are:
+</p>
+<ul>
+    <li>
+        <strong>Save my attack to the project file</strong>.
+    </li>
+    <li>
+        <strong>Keep in memory</strong>.
+    </li>
+    <li>
+        <strong>Delete my attack</strong>.
+    </li>
+    <li>
+        <strong>Ask me what to do each time</strong>.
+    </li>
+</ul>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/desktop/tools/intruder/results/saving-attacks.html">Saving attacks</a>.
+    </p>
+</div>
+<h2 id="payload-list-location">Payload list location</h2>
+<p>
+    These settings enable you to specify whether you use Burp's built-in payload lists or add your own custom payload lists:
+</p>
+<ul>
+    <li>
+        <strong>Use built-in lists</strong> - Use Burp's built-in payload lists.
+    </li>
+    <li>
+        <strong>Load custom lists from directory</strong> - Click <strong>Select directory</strong> and select the folder with your custom lists.
+    </li>
+</ul>
+<p>
+    To copy all of Burp's preconfigured payload lists into your custom directory, load a custom directory and select <strong>Copy</strong>.
+</p>
+<div class="highlightedarea">
+    <h4>Related pages</h4>
+    <p>
+        <a href="/burp/documentation/desktop/tools/intruder/configure-attack/payload-lists.html">Predefined payload lists</a>.
+    </p>
+</div>
+</body>
+</html>

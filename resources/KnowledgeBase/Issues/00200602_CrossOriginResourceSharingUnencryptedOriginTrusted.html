@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+
+Cross-origin resource sharing: unencrypted origin trusted
+
+<h1>Typical severity</h1>
+
+Low
+
+<h1>Issue description</h1>
+
+<p>An HTML5 cross-origin resource sharing (CORS) policy controls whether and how content running on other domains can perform two-way interaction with the domain that publishes the policy. The policy is fine-grained and can apply access controls per-request based on the URL and other features of the request.</p>
+<p>If a site allows interaction from an origin that uses unencrypted HTTP communications, then it is vulnerable to an attacker who is in a position to view and modify a user's unencrypted network traffic. The attacker can control the responses from unencrypted origins, thereby injecting content that is able to interact with the application that publishes the policy. This means that the application is effectively extending trust to all such attackers, thereby undoing much of the benefit of using HTTPS communications. </p>
+
+<h1>Issue remediation</h1>
+
+<p>Only trust origins that use encrypted HTTPS communications.</p>
+
+<h1>References</h1>
+
+<ul>
+  <li><a href="https://portswigger.net/web-security/cors">Web Security Academy: Cross-origin resource sharing (CORS)</a></li>
+  <li> <a href="https://portswigger.net/research/exploiting-cors-misconfigurations-for-bitcoins-and-bounties">Exploiting CORS Misconfigurations</a> </li>
+</ul>
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+<li><a href="https://cwe.mitre.org/data/definitions/942.html">CWE-942: Overly Permissive Cross-domain Whitelist</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>

@@ -1,0 +1,575 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/assets/ps/styles/psselfservice.css">
+<cms page-layout="FREESTYLE"></cms><cms ignore-validation="STACKED_HEADINGS"></cms>
+</head>
+<body class="section theme-white wrapper-themed">
+<section class="container ps-breadcrumbs">
+    <ol class="breadcrumb-list">
+        <li>
+            <a href="https://portswigger.net/support">Support Center</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/index.html">Documentation</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/index.html">Desktop editions</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/index.html">Tools</a>
+        </li>
+        <li>
+            <a href="/burp/documentation/desktop/tools/context-menu.html">Context menu</a>
+        </li>
+    </ol>
+</section>
+<section class="container labels-editions-wrapper">
+    <label class="label-edition is-professional">Professional</label>
+    <label class="label-edition is-community">Community</label>
+</section>
+<h1>Context menu</h1>
+<p>
+    The context menu provides quick access to a variety of tools and functions throughout Burp Suite. To view the context menu, right-click an item or group of items. Most Burp Suite tools support this functionality.
+</p>
+<p>
+    The list below details common context menu options that can be found in multiple Burp Suite tools.
+</p>
+<div class="highlightedarea">
+    <h4>Note</h4>
+    <p>
+        Some tools also have context menu options that are specific to that particular tool. These are not listed here. For information on these options, see the documentation for the relevant tool.
+    </p>
+</div>
+<h2 id="menu-options">Menu options</h2>
+<table class="grid-table grid-table-size-1-3">
+    <tr>
+        <th>
+            Option
+        </th>
+        <th>
+            Description
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Add comment
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Enables you to add text comments to the selected items
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Add notes
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Enables you to record text notes for the selected items
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Add to scope
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Adds the selected items to the project scope
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Add to site map
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Adds the selected items to the site map
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Audit again
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Duplicates the selected items and adds them to the end of the audit list
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Change body encoding
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Switches the encoding of any message body between standard URL-encoded and multipart-encoding
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Change request method
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Switches the request method between <code>GET</code> and <code>POST</code>, with all relevant request parameters relocated accordingly
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Clear (tool)
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Removes all items from the open tool
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Compare site maps
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Compares site maps, helping you to find access control vulnerabilities and identify areas to inspect manually
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Convert selection
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Converts the selected text to an alternative format (for example <code>URL</code>, <code>HTML</code>, or <code>Base64</code>)
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Copy
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Copies the selected items to the clipboard
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Copy as curl command
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Generates a curl command that replicates the selected items and copies them to the clipboard
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Copy links
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Parses the selected items for links and copies them to the clipboard
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Copy to file
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Enables you to select a file and copy the contents of the current message to that file
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Copy URL
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Copies the selected item's URL to the clipboard
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Cut
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Removes and copies the selected items to the clipboard
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Delete issue
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Removes the selected issue from the project
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Delete items
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Deletes the selected items from Burp
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Do active scan
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Burp Scanner scans the selected items by sending its own requests to the target to probe for vulnerabilities
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Do passive scan
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Burp Scanner tests the selected items for vulnerabilities but does not send any additional requests
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Documentation
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Opens the relevant documentation
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Engagement tools
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Contains useful functions to perform engagement-related tasks. For more information, see Engagement tools
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Export as CSV
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Exports the selected data or items as a CSV file. You can select where the file is saved.
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Go to issue
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Opens the relevant issue in the <strong>Issues</strong> tab
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Highlight
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Marks the selected items with a color label for easy identification
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Insert Collaborator payload
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Generates and inserts a Collaborator payload
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Paste
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Pastes content from the clipboard
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Paste from file
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Pastes content from a specified file
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Paste URL as request
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Creates an HTTP request from a URL in the clipboard
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Report issue
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Creates an issue from the selected items
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Request in browser
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Executes the selected HTTP request in the user's default browser
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Save entire history
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Saves the change history for the selected request to a file. You can select where the file is saved.
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Save items
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Saves the selected items in the specified format
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Scan
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Runs a scan against the selected items
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Scan defined insertion points
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Scans all user-defined insertion points in the selected request
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Send to...
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Sends the selected items to the specified Burp tool
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Set confidence
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Sets or adjusts the confidence level of an issue
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Set severity
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Sets or changes the severity level of an issue
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Show details in new window
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Opens detailed information about the selected item in a new window
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Show insertion points
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Displays insertion points for the selected item
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                Show response in browser
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Displays a URL that you can use to view the selected response. This works with any browser that is configured to use Burp as its proxy
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                URL-encode as you type
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Automatically URL-encodes special characters as you type
+            </p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="text-left">
+                View
+            </p>
+        </td>
+        <td>
+            <p class="text-left">
+                Modifies view settings or displays additional item views
+            </p>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

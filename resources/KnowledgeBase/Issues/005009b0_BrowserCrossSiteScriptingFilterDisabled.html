@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<body>
+<h1>Issue name</h1>
+Browser cross-site scripting filter disabled
+<h1>Typical severity</h1>
+
+Information
+
+<h1>Issue description</h1>
+
+<p>Some browsers, including Internet Explorer, contain built-in filters designed to protect against cross-site scripting (XSS) attacks. Applications can instruct browsers to disable this filter by setting the following response header:</p>
+<p><b>X-XSS-Protection: 0</b></p>
+<p>This behavior does not in itself constitute a vulnerability; in some cases XSS filters may themselves be leveraged to perform attacks against application users. However, in typical situations XSS filters do provide basic protection for application users against some XSS vulnerabilities in applications. The presence of this header should be reviewed to establish whether it affects the application's security posture. </p>
+
+<h1>Issue remediation</h1>
+
+<p>Review whether the application needs to disable XSS filters. In most cases you can gain the protection provided by XSS filters without the associated risks by using the following response header:</p>
+<p><b>X-XSS-Protection: 1; mode=block</b></p>
+<p>When this header is set, browsers that detect an XSS attack will simply render a blank page instead of attempting to sanitize the injected script. This behavior is considerably less likely to introduce new security issues. </p>
+
+<h1>References</h1>
+
+<ul>
+	<li><a href="https://portswigger.net/web-security/cross-site-scripting">Web Security Academy: Cross-site scripting</a></li>
+	<li><a href="http://blogs.msdn.com/b/ieinternals/archive/2011/01/31/controlling-the-internet-explorer-xss-filter-with-the-x-xss-protection-http-header.aspx">Controlling the XSS Filter</a></li>
+</ul>
+
+<h1>Vulnerability classifications</h1>
+
+<ul>
+<li><a href="https://cwe.mitre.org/data/definitions/16.html">CWE-16: Configuration</a></li>
+	<li><a href="https://capec.mitre.org/data/definitions/63.html">CAPEC-63: Cross-Site Scripting (XSS)</a></li>
+</ul>
+
+<h1>Web intro</h1>
+
+
+
+</body>
+</html>
